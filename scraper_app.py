@@ -5,6 +5,8 @@ import first_page_scraper
 BASE_URL = "https://www.amazon.com/dp/"
 limit_to_5= True
 
+IS_PRODUCTION = True
+
 def get_product_infos(asin, product_count, found_asins_count):
     """
     Holt Produktinformationen für eine bestimmte ASIN.
@@ -21,6 +23,9 @@ def get_product_infos(asin, product_count, found_asins_count):
     if title is not None:
         print("🏷️  Title:", title)
     else:
+        if IS_PRODUCTION:
+            print("❌ No title found")
+            return
         raise ValueError("❌ No title found")  
 
 
@@ -28,6 +33,9 @@ def get_product_infos(asin, product_count, found_asins_count):
     if price is not None:
         print("💲 Price:", price)
     else:
+        if IS_PRODUCTION:
+            print("❌ No price found")
+            return
         raise ValueError("❌ No price found")  
 
 
@@ -35,6 +43,9 @@ def get_product_infos(asin, product_count, found_asins_count):
     if blm is not None:
         print("📊 Bought last month:", blm)
     else:
+        if IS_PRODUCTION:
+            print("❌ No BLM found")
+            return
         raise ValueError("❌ No BLM found")  
 
     # category (optional)
@@ -60,8 +71,10 @@ def get_results(searchterm):
     # **Produkte durchgehen und Infos abrufen**
     try:
         for asin in found_asins:
-            product_count += 1
             result = get_product_infos(asin, product_count, len(found_asins))
+            if result != None:
+                product_count += 1
+
             results.append(result)
             
             if limit_to_5 and product_count >= 5:
