@@ -9,9 +9,13 @@ def home():
 
 @app.route("/details", methods=["POST"] )
 def details():
+    check_only_five = False
     searchterm = request.form.get("searchterm")
+    only_five = request.form.get("only_five")
+    if only_five == "on":
+        check_only_five = True
 
-    results = scraper_app.get_results(searchterm)
+    results = scraper_app.get_results(searchterm, check_only_five)
 
     total = 0
     for product in results:

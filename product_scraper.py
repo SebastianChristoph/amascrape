@@ -53,12 +53,12 @@ def get_price(soup):
     #     all_spans = soup.find_all("span", class_="a-color-base")
 
 
-
-
-
 def get_bought_last_month(soup):
     target_span = soup.find("span", string=lambda text: text and "in past month" in text)
     if target_span:
-        return target_span.get_text(strip=True)[:-22] 
+        blm = target_span.get_text(strip=True)[:-22] 
+        blm = blm.replace("k", "000")
+        blm = blm.replace("K", "000")
+        return blm
     else:
         print("no target span")

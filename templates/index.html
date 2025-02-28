@@ -1,21 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AmaScrape</title>
-    <script>
-        function showLoadingMessage() {
-            document.getElementById("loadingMessage").style.display = "block";
-        }
-    </script>
-</head>
-<body>
-    <form action="/details" method="post" onsubmit="showLoadingMessage()">
-        <input type="text" name="searchterm" placeholder="searchterm">
-        <input type="submit" value="Ab dafür">
-    </form>
+{% extends "base.html" %} {% block content %}
 
-    <p id="loadingMessage" style="display: none; font-weight: bold;">Lade Ergebnisse...</p>
-</body>
-</html>
+<form action="/details" method="post" onsubmit="showLoadingMessage()">
+    <input type="text" name="searchterm" placeholder="searchterm">
+    <br>
+    <input type="checkbox" name="only_five" checked >
+    Check only first 5 products (safe time) 
+    <br>
+    <input type="submit" value="Analyze market">
+</form>
+
+<div>
+
+<div id="loadingMessage" style="display: none;padding: 1rem;">
+    <div class="spinner-grow text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+    <p>Analyzing market</p>
+</div>
+
+
+{% endblock content %}

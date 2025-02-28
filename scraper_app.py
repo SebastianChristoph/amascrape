@@ -3,7 +3,6 @@ import scraping_services
 import first_page_scraper
 
 BASE_URL = "https://www.amazon.com/dp/"
-limit_to_5= True
 
 IS_PRODUCTION = True
 
@@ -20,7 +19,7 @@ def get_product_infos(asin, product_count, found_asins_count):
 
 
     title = product_scraper.get_product_title(soup)
-    if title is not None:
+    if title is not None and not IS_PRODUCTION:
         print("🏷️  Title:", title)
     else:
         if IS_PRODUCTION:
@@ -30,7 +29,7 @@ def get_product_infos(asin, product_count, found_asins_count):
 
 
     price = product_scraper.get_price(soup)
-    if price is not None:
+    if price is not None and not IS_PRODUCTION:
         print("💲 Price:", price)
     else:
         if IS_PRODUCTION:
@@ -40,7 +39,7 @@ def get_product_infos(asin, product_count, found_asins_count):
 
 
     blm = product_scraper.get_bought_last_month(soup)
-    if blm is not None:
+    if blm is not None and not IS_PRODUCTION:
         print("📊 Bought last month:", blm)
     else:
         if IS_PRODUCTION:
@@ -60,10 +59,10 @@ def get_product_infos(asin, product_count, found_asins_count):
 
     return product
 
-def get_results(searchterm):
+def get_results(searchterm, check_only_five):
     found_asins = first_page_scraper.get_asins_in_first_page(searchterm)
     results = []
-    if limit_to_5:
+    if check_only_five:
         print("\n############# SHOWING ONLY 10 PRODUCTS #############")
 
     product_count = 0
@@ -75,9 +74,9 @@ def get_results(searchterm):
             if result != None:
                 product_count += 1
 
-            results.append(result)
+                results.append(result)
             
-            if limit_to_5 and product_count >= 5:
+            if check_only_five and product_count >= 5:
                 break  
     except ValueError as e:
         print(f"\n🚨 ERROR: {e}") 
