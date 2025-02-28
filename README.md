@@ -1,13 +1,13 @@
 # Amascraper
 
-## Start-Anleiung
+## Start-Anleitung
 
 - Docker Desktop starten
-- in einer cmd ausführen:
+- in das Terminal gehen und zum Projekt navigieren 
+- dort ausführen:
+-  `git pull`
+- nur ausführen, wenn es bei `git pull`Änderungen gab: `docker build -t amascrape .`
+- immer ausführen: `docker run -d -p 5000:5000 amascrape`
 
-`docker build -t amascrape .`
-<br>
-`docker run -d -p 5000:5000 amascrape`
-
-WebApp aufrufbar unter:
+WebApp danach aufrufbar unter:
 `http://localhost:5000/`
