@@ -66,17 +66,17 @@ def get_results(searchterm, check_only_five):
         print("\n############# SHOWING ONLY 10 PRODUCTS #############")
 
     product_count = 0
-
+    limiter = 0
     # **Produkte durchgehen und Infos abrufen**
     try:
         for asin in found_asins:
+            product_count += 1
             result = get_product_infos(asin, product_count, len(found_asins))
             if result != None:
-                product_count += 1
-
+                limiter += 1
                 results.append(result)
             
-            if check_only_five and product_count >= 5:
+            if check_only_five and limiter >= 5:
                 break  
     except ValueError as e:
         print(f"\n🚨 ERROR: {e}") 
