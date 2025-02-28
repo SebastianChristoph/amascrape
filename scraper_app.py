@@ -52,11 +52,22 @@ def get_product_infos(asin, product_count, found_asins_count):
     # category (optional)
     # image_path (optional)
 
+    image_path = product_scraper.get_image_url(soup)
+    if image_path is not None:
+        print("🖼️ Image:", image_path)
+    else:
+        if IS_PRODUCTION:
+            print("❌ No image found")
+            return
+        raise ValueError("❌ No image found")  
+
+
     product = {
         "title" : title,
         "price" : price,
         "blm" : blm,
-        "asin" : asin
+        "asin" : asin,
+        "image_path" : image_path
     }
 
     return product

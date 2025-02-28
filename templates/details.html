@@ -6,6 +6,7 @@
 <table class="table table-striped">
   <thead>
     <tr>
+      <th> </th>
       <th>ASIN</th>
       <th>Title</th>
       <th>Price USD</th>
@@ -14,8 +15,9 @@
   </thead>
     {% for product in results %}
     <tr>
+        <td><img src="{{product['image_path']}}" alt="{{product['asin']}}"></td>
         <td>{{product["asin"]}}</td>
-        <td>{{product["title"][:50]}}...</td>
+        <td><a href="https://www.amazon.com/dp/{{product['asin']}}" target="_blank">{{product["title"]}}...</a></td>
         <td>{{product["price"]}}</td>
         <td>{{product["blm"]}}</td>
     </tr>

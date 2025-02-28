@@ -58,3 +58,20 @@ def get_bought_last_month(soup):
         return blm
     else:
         print("no target span")
+
+def get_image_url(soup):
+    image_div = soup.find("div", class_ ="a-section aok-relative s-image-tall-aspect")
+    div_container = soup.find('div', class_='s-product-image-container')
+
+    # Falls das div gefunden wurde
+    if div_container:
+        img_tag = div_container.find('img')  # Suche das <img> Tag innerhalb des divs
+        if img_tag and 'src' in img_tag.attrs:
+            jpg_url = img_tag['src']
+            return jpg_url
+        else:
+            print("Kein <img>-Tag gefunden.")
+    else:
+        print("Kein <div> mit der Klasse 's-product-image-container' gefunden.")
+
+
