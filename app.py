@@ -19,7 +19,5 @@ def details():
 
     return render_template("details.html", searchterm = searchterm, results=results, total=round(total,2))
 
-
-
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0', port=5000)
