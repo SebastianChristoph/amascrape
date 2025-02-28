@@ -1,10 +1,12 @@
 import product_scraper
 import scraping_services
 import first_page_scraper
+import time
 
 BASE_URL = "https://www.amazon.com/dp/"
 
 IS_PRODUCTION = True
+WAITING_TIME= 2
 
 def get_product_infos(asin, product_count, found_asins_count):
     """
@@ -19,7 +21,7 @@ def get_product_infos(asin, product_count, found_asins_count):
 
 
     title = product_scraper.get_product_title(soup)
-    if title is not None and not IS_PRODUCTION:
+    if title is not None:
         print("🏷️  Title:", title)
     else:
         if IS_PRODUCTION:
@@ -29,7 +31,7 @@ def get_product_infos(asin, product_count, found_asins_count):
 
 
     price = product_scraper.get_price(soup)
-    if price is not None and not IS_PRODUCTION:
+    if price is not None:
         print("💲 Price:", price)
     else:
         if IS_PRODUCTION:
@@ -39,7 +41,7 @@ def get_product_infos(asin, product_count, found_asins_count):
 
 
     blm = product_scraper.get_bought_last_month(soup)
-    if blm is not None and not IS_PRODUCTION:
+    if blm is not None:
         print("📊 Bought last month:", blm)
     else:
         if IS_PRODUCTION:
@@ -75,6 +77,9 @@ def get_results(searchterm, check_only_five):
             if result != None:
                 limiter += 1
                 results.append(result)
+            else:
+                print(f"\n WAITING FOR {WAITING_TIME}s....")
+                time.sleep(WAITING_TIME)
             
             if check_only_five and limiter >= 5:
                 break  

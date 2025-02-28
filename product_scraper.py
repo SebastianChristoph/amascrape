@@ -1,8 +1,4 @@
-import json
 import re
-
-from bs4 import BeautifulSoup
-
 
 def get_product_title(soup):
     h2 = soup.find("h2", class_="a-size-base-plus a-spacing-none a-color-base a-text-normal")
