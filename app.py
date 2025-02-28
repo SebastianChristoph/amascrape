@@ -21,7 +21,7 @@ def details():
     for product in results:
         total += float(product["price"]) * float(product["blm"])
 
-    return render_template("details.html", searchterm = searchterm, results=results, total=round(total,2))
+    return render_template("details.html", searchterm = searchterm, results=results, total=round(total,2), only_five=only_five)
 
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0', port=5000)

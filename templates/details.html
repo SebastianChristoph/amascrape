@@ -2,7 +2,11 @@
 <h2>Details</h2>
 <h3>searched for: {{searchterm}}</h3>
 <h4>market volume: ${{ "{:,.2f}".format(total).replace(",", "X").replace(".", ",").replace("X", ".") }}</h4>
-
+{% if only_five %}
+<div class="alert alert-warning" role="alert">
+  Only analyzed first 5 results to save time...
+</div>
+{% endif %}
 
 <table class="table table-striped">
   <thead>

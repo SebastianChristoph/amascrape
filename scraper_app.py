@@ -54,7 +54,7 @@ def get_product_infos(asin, product_count, found_asins_count):
 
     image_path = product_scraper.get_image_url(soup)
     if image_path is not None:
-        print("🖼️ Image:", image_path)
+        print("🖼️  Image:", image_path)
     else:
         if IS_PRODUCTION:
             print("❌ No image found")
