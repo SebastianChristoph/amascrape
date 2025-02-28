@@ -3,8 +3,7 @@ import scraping_services
 import first_page_scraper
 
 BASE_URL = "https://www.amazon.com/dp/"
-limit_to_10 = True
-searchtermn = input("Please enter searchterm: ")
+limit_to_5= True
 
 def get_product_infos(asin, product_count, found_asins_count):
     """
@@ -41,24 +40,34 @@ def get_product_infos(asin, product_count, found_asins_count):
     # category (optional)
     # image_path (optional)
 
-found_asins = first_page_scraper.get_asins_in_first_page(searchtermn)
+    product = {
+        "title" : title,
+        "price" : price,
+        "blm" : blm,
+        "asin" : asin
+    }
 
-if limit_to_10:
-    print("\n############# SHOWING ONLY 10 PRODUCTS #############")
+    return product
 
-product_count = 0
+def get_results(searchterm):
+    found_asins = first_page_scraper.get_asins_in_first_page(searchterm)
+    results = []
+    if limit_to_5:
+        print("\n############# SHOWING ONLY 10 PRODUCTS #############")
 
-# **Produkte durchgehen und Infos abrufen**
-try:
-    for asin in found_asins:
-        product_count += 1
-        get_product_infos(asin, product_count, len(found_asins))
-        
-        if limit_to_10 and product_count >= 10:
-            break  
-except ValueError as e:
-    print(f"\n🚨 ERROR: {e}") 
-    print("⛔ Script stopped due to missing data! Check product_debug.html")
+    product_count = 0
 
-print("###########################################################")
-print("\n\n✅ Script finished")
+    # **Produkte durchgehen und Infos abrufen**
+    try:
+        for asin in found_asins:
+            product_count += 1
+            result = get_product_infos(asin, product_count, len(found_asins))
+            results.append(result)
+            
+            if limit_to_5 and product_count >= 5:
+                break  
+    except ValueError as e:
+        print(f"\n🚨 ERROR: {e}") 
+        print("⛔ Script stopped due to missing data! Check product_debug.html")
+
+    return results

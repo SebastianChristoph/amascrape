@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AmaScraper - Details</title>
+</head>
+<body>
+    <h1>Details</h1>
+    <h2>Suchbegriff: {{searchterm}}, market: {{total}} USD</h2>
+    
+    <table>
+        <tr>
+          <th>ASIN</th>
+          <th>Title</th>
+          <th>Price USD</th>
+          <th>BLM</th>
+        </tr>
+        {% for product in results %}
+        <tr>
+            <td>{{product["asin"]}}</td>
+            <td>{{product["title"][:50]}}...</td>
+            <td>{{product["price"]}}</td>
+            <td>{{product["blm"]}}</td>
+        </tr>
+        {% endfor %}
+        
+      </table>
+
+    
+    {% for product in results %}
+    {% endfor %}
+
+    <a href="/">Zurück zur Suche</a>
+</body>
+</html>
