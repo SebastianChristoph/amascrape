@@ -80,28 +80,13 @@ class AmazonProductScraper:
         if self.show_details: print("📝 Getting price", end = " ")
 
         xpath = selenium_config.price_categories["default"]
-
-        # if selenium_config.price_categories.get(self.bs_and_rank_data["main_category"]) != None:
-
-        #     xpath = selenium_config.price_categories.get(self.bs_and_rank_data["main_category"])
-        #     if self.show_details: print(f"(using xpath for {self.bs_and_rank_data["main_category"]})")
-        # else:
-        #     if self.show_details: print(" (using default xpath)")
-            
+    
         try:
             price_element = self.driver.find_element(By.XPATH, xpath)
             price_str = price_element.text
             print("\t", price_str.replace("\n", " "))
-            #print("✅")
-            # clean_price = re.sub(r"[^\d\n]", "", price_str)  # Entfernt alles außer Zahlen & Zeilenumbrüche
-            # parts = clean_price.split("\n")  # Trenne anhand des Zeilenumbruchs
-            
-            # if len(parts) == 2:  # Wenn es zwei Teile gibt (Dollar & Cents)
-            #     formatted_price = f"{parts[0]}.{parts[1]}"  # Setze einen Punkt für die Dezimaltrennung
-            # else:
-            #     formatted_price = clean_price  # Falls kein Zeilenumbruch, nehme den bereinigten String
-            
-            # return float(formatted_price)
+            price_str = price_str.replace(",", "")
+           
             match = re.search(r'\$(\d+)[\s\n]*(\d+)', price_str)
             if match:
                 dollars, cents = match.groups()
@@ -109,6 +94,8 @@ class AmazonProductScraper:
                 return float(f"{dollars}.{cents}")
         except Exception as e:
             print("   ❌ Error finding price!", e)
+
+       
  
 
     def get_product_infos_box_content(self) -> dict:

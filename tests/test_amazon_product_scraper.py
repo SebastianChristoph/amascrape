@@ -15,18 +15,18 @@ def print_product_info(product):
         print(f"\t{key.ljust(max_key_length)} : {value}")
 
 
-@pytest.mark.parametrize("asin", selenium_config.health_and_household_asins)
+@pytest.mark.parametrize("asin", selenium_config.electronics_asins)
 def test_all_asins(asin, request):
     """ Tests the AmazonProductScraper with multiple ASINs from the list.
-        Run with: python -m pytest test_amazon_scraper.py -s -k test_all_asins
+        Run with: python -m pytest  tests/test_amazon_product_scraper.py -s -k test_all_asins
     """
     global total_duration  # Use global variable to track cumulative time
 
     # Testnummer berechnen
     test_index = request.node.callspec.indices["asin"] + 1  # 1-basiert
-    total_tests = len(selenium_config.health_and_household_asins)
+    total_tests = len(selenium_config.electronics_asins)
 
-    print(f"\n🔍 Testing ASIN {test_index}/{total_tests}: {asin}")
+    print(f"\n🧪 Testing ASIN {test_index}/{total_tests}: {asin}")
 
     scraper = AmazonProductScraper(show_details=False)
     start_time = timeit.default_timer()
@@ -41,12 +41,32 @@ def test_all_asins(asin, request):
         
         #print_product_info(product)
         
-        print(f"\n✅ Test {test_index}/{total_tests} passed! Product is valid. Scraping took {scrape_duration} seconds.\n")
+        print(f"✅ Test {test_index}/{total_tests} passed! Product is valid. Scraping took {scrape_duration} seconds.\n")
     
     except Exception as e:
         pytest.fail(f"❌ Test {test_index}/{total_tests} failed for ASIN {asin}: {e}")
     finally:
         scraper.driver.quit()
+
+@pytest.mark.parametrize("asin", selenium_config.no_blms)
+def test_not_working_asins(asin, request):
+    """ Tests that ASINs in the 'not_working' list return None. 
+     Run with: python -m pytest tests/test_amazon_product_scraper.py .py -s -k test_not_working_asins"""
+    test_index = request.node.callspec.indices["asin"] + 1  # 1-basiert
+    total_tests = len(selenium_config.not_working)
+    
+    print(f"\n🧪 Testing non-working ASIN {test_index}/{total_tests}: {asin}")
+    scraper = AmazonProductScraper(show_details=False)
+    
+    try:
+        product = scraper.get_product_infos(asin)
+        assert product is None, f"❌ Error: Expected None for ASIN {asin}, but got {product}!"
+        print(f"✅ Test {test_index}/{total_tests} passed! ASIN {asin} correctly returned None.\n")
+    except Exception as e:
+        pytest.fail(f"❌ Test {test_index}/{total_tests} failed for ASIN {asin}: {e}")
+    finally:
+        scraper.driver.quit()
+
 
 @pytest.hookimpl(tryfirst=True)
 def pytest_sessionfinish(session, exitstatus):
@@ -61,9 +81,9 @@ def pytest_sessionfinish(session, exitstatus):
 @pytest.mark.parametrize("asin", [random.choice(selenium_config.health_and_household_asins)])
 def test_random_asin(asin):
     """ Tests the AmazonProductScraper with a random ASIN.
-        Run with: python -m pytest test_amazon_scraper.py -s -k test_random_asin
+        Run with: python -m pytest  tests/test_amazon_product_scraper.py -s -k test_random_asin
     """
-    print(f"\n🔍 Testing RANDOM ASIN: {asin}")
+    print(f"\n🧪 Testing RANDOM ASIN: {asin}")
     scraper = AmazonProductScraper(show_details=False)
     start_time = timeit.default_timer()
     
@@ -85,12 +105,12 @@ def test_random_asin(asin):
 
 def test_specific_asin(asin_param):
     """ Tests the AmazonProductScraper with a specific ASIN passed as a parameter.
-        Run with: python -m pytest test_amazon_scraper.py -s -k test_specific_asin --asin B08WM3LMJF
+        Run with: python -m pytest tests/test_amazon_product_scraper.py -s -k test_specific_asin --asin B0CRDCXRK2
     """
     if not asin_param:
         pytest.fail("❌ Error: No ASIN provided! Use --asin <ASIN> to pass an ASIN.")
     
-    print(f"\n🔍 Testing SPECIFIC ASIN: {asin_param}")
+    print(f"\n🧪 Testing SPECIFIC ASIN: {asin_param}")
     scraper = AmazonProductScraper(show_details=False)
     start_time = timeit.default_timer()
     
