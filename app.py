@@ -24,4 +24,4 @@ def details():
     return render_template("details.html", searchterm = searchterm, results=results, total=round(total,2), only_five=only_five)
 
 if __name__ == "__main__":
-    app.run(debug=True, host='0.0.0.0', port=8000)
+    app.run(debug=True, host='0.0.0.0', port=7000)
