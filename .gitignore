@@ -2,3 +2,4 @@ debug.html
 listitem.html
 product_debug.html
 templates/details.html
+backend/.env
