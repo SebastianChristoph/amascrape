@@ -1,11 +1,9 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.firefox.options import Options
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 import random
 import time
-import timeit
+from selenium.common.exceptions import NoSuchElementException
 import re
 import selenium_config
 
@@ -34,22 +32,7 @@ class AmazonProductScraper:
 
     def retry_request(self, url, retries=3, wait=10) -> None:
             if self.show_details: print(f"🌍 Requesting {url}",  end = " ")
-            # attempt = 0
-            # while attempt < max_retries:
-            #     try:
-            #         self.driver.get(url)
-            #         if self.show_details: print("✅")
-            #         return 
-            #     except Exception as e:
-            #         if self.show_details: print(f"⚠️  Error loadig {url}")
-            #         attempt += 1
-            #         if attempt < max_retries:
-            #             if self.show_details: print(f"🔄 Retry {attempt}/{max_retries} in {wait_time} seconds...", end = " ")
-            #             time.sleep(wait_time)
-            #         else:
-            #             print("❌ Maximale Anzahl an Versuchen erreicht. Abbruch.")
-            #             raise
-
+        
             for attempt in range(retries):
                 try:
                     self.driver.get(url)
@@ -75,108 +58,198 @@ class AmazonProductScraper:
             return title
         except Exception as e:
             print("   ❌ Error finding title!", e)
+    
+    def get_image_path(self) ->str:
+        if self.show_details: print("📝  Getting image path")
+        try:
+            img_wrapper = self.driver.find_element(By.XPATH, '//*[@id="imgTagWrapperId"]')
+            img_element = img_wrapper.find_element(By.TAG_NAME, "img")
+            img_src = img_element.get_attribute("src")
+            return img_src
+        except Exception as e:
+            print("   ❌ Error finding image path, returning none")
+            return None
 
     def get_price(self) -> float:
-        if self.show_details: print("📝 Getting price", end = " ")
+        if self.show_details: print("📝 Getting price")
 
         xpath = selenium_config.price_categories["default"]
     
         try:
             price_element = self.driver.find_element(By.XPATH, xpath)
             price_str = price_element.text
-            print("\t", price_str.replace("\n", " "))
             price_str = price_str.replace(",", "")
            
             match = re.search(r'\$(\d+)[\s\n]*(\d+)', price_str)
             if match:
                 dollars, cents = match.groups()
-                print((f"\t{dollars}.{cents}"))
                 return float(f"{dollars}.{cents}")
         except Exception as e:
-            print("   ❌ Error finding price!", e)
-
-       
- 
+            print("   ❌ Error finding price!")
 
     def get_product_infos_box_content(self) -> dict:
-        if self.show_details: print("📝 Getting product info box content", end = " ")
+       
+        if self.show_details: print("📝 Extracting product info box content...")
+    
+        # Try extracting from unordered list (ul)
         try:
             product_info_list = self.driver.find_element(By.XPATH, self.web_elements["product_infos_ul"])
-
-            if product_info_list:
-                if self.show_details: print("✅")
-                items = product_info_list.find_elements(By.TAG_NAME, 'li')
-    
-                data_dict = {}
-                for item in items:
-                    text = item.text.strip()
-                    match = re.match(r"(.*?):\s*(.*)", text, re.DOTALL)
-                    if match:
-                        key = match.group(1).strip()
-                        value = match.group(2).strip()
-                        data_dict[key] = value
-                
-                return data_dict
-        except:
-            if self.show_details: print(" ⚠️  Can't find product info box (ul), try another one", end = " ")
-            try:
-                product_info_table = self.driver.find_element(By.XPATH, self.web_elements["product_infos_table"])
-
-                if product_info_table:
-                    if self.show_details: print("✅")
-                    rows = product_info_table.find_elements(By.TAG_NAME, 'tr')
-                    data_dict = {}
-                    for row in rows:
-                        try:
-                            th = row.find_element(By.TAG_NAME, 'th').text.strip()
-                            td = row.find_element(By.TAG_NAME, 'td').text.strip()
-                            data_dict[th] = td
-                        except:
-                            continue  # Falls eine Zeile kein <th> oder <td> enthält, überspringen
-
-                    return data_dict
-            except Exception as e:
-                print("   ❌ Error finding product infos!")
-                            
-    def getting_bs_and_rank_data(self) -> dict:
-        if self.show_details:
-                print("📝 Getting best seller ranks and ranking data")
-        try:
-            match = re.search(r"#(\d+)[^#]+in ([^(]+) \(See Top 100 in [^)]+\)(?:\s+#(\d+) in (.+))?", self.product_info_box_content["Best Sellers Rank"])
+            items = product_info_list.find_elements(By.TAG_NAME, 'li')
             
-            if match:
-                return {
-                    "rank_main_category": int(match.group(1)),
-                    "main_category": match.group(2).strip(),
-                    "rank_second_category": int(match.group(3)) if match.group(3) else "n/A",
-                    "second_category": match.group(4).strip() if match.group(4) else "n/A"
-                }
+            data_dict = {}
+            for item in items:
+                text = item.text.strip()
+                match = re.match(r"(.*?):\s*(.*)", text, re.DOTALL)
+                if match:
+                    key, value = match.groups()
+                    data_dict[key.strip()] = value.strip()
+            
+            if self.show_details:
+                print("✅ Product info extracted from list")
+            return data_dict
+            
+        except NoSuchElementException:
+            if self.show_details:
+                if self.show_details: print("   🔹  List not found, trying table...")
         
-        except Exception as e:
-            print("   ❌ Error finding best seller rank and ranking data!", e)
-        
-        if self.show_details: print("   ℹ️  No second category")
-        return {"rank_main_category": "n/A", "main_category": "n/A", "rank_second_category": "n/A", "second_category": "n/A"}
-    
-    def get_rating(self) -> int:
-        if self.show_details: print("📝 Getting rating count")
+        # Try extracting from table
         try:
-            match = re.search(r"(\d+\.\d+)\s+([\d,]+) ratings", self.product_info_box_content["Customer Reviews"])
-            if match:
-                return int(match.group(2).replace(',', ''))
-                           
-        except Exception as e:
-            print("   ❌ Error finding rating!", e)
+            product_info_table = self.driver.find_element(By.XPATH, self.web_elements["product_infos_table"])
+            rows = product_info_table.find_elements(By.TAG_NAME, 'tr')
+            
+            data_dict = {}
+            for row in rows:
+                try:
+                    th = row.find_element(By.TAG_NAME, 'th').text.strip()
+                    td = row.find_element(By.TAG_NAME, 'td').text.strip()
+                    data_dict[th] = td
+                except NoSuchElementException:
+                    continue  # Skip rows without both th and td
+            
+            if self.show_details:
+                if self.show_details: print("   ✅ Product info extracted from table")
+            return data_dict
+            
+        except NoSuchElementException:
+            if self.show_details:
+                print("   ⚠️  No product info found in list or table. Returning None")
         
+        return None
+    
+    def getting_bs_and_rank_data(self) -> dict:
+        
+        if self.show_details: print("📝 Extracting best seller rank and category data...")
+    
+        if not self.product_info_box_content or "Best Sellers Rank" not in self.product_info_box_content:
+            if self.show_details:
+                print("   ⚠️  No product info available or missing Best Sellers Rank in data. Return None")
+            return None
+    
+        try:
+            rank_text = self.product_info_box_content["Best Sellers Rank"]
+            rank_items = rank_text.split("#")[1:]
+            
+            if not rank_items:
+                if self.show_details:
+                    print("   ⚠️ No rank data found. Returning None")
+                return None
+            
+            main_rank_text, main_category = rank_items[0].split(" in ", 1)
+            main_rank = int(main_rank_text.replace(",", "").strip())
+            
+            second_rank, second_category = (None, None)
+            if len(rank_items) > 1:
+                second_rank_text, second_category = rank_items[1].split(" in ", 1)
+                second_rank = int(second_rank_text.replace(",", "").strip())
+                second_category = second_category.strip()
+            
+            data = {
+                "rank_main_category": main_rank,
+                "main_category": main_category.strip(),
+                "rank_second_category": second_rank,
+                "second_category": second_category
+            }
+
+            if self.show_details:
+                if self.show_details: print("   ✅ Successfully extracted rank data.")
+            return data
+            
+        except Exception as e:
+            print(f"   ❌ Error extracting best seller rank data: {e}")
+            
+        return None
+            
+    def get_rating(self) -> float | None:
+        if self.show_details: print("📝 Getting rating")
+
+        if self.product_info_box_content != None:
+            try:
+                match = re.search(r"(\d+\.\d+)\s+([\d,]+) ratings", self.product_info_box_content["Customer Reviews"])
+                if match:
+                    # print("1", match.group(1))
+                    # print("2", match.group(2))
+                    return float(match.group(1).replace(',', ''))
+            except KeyError as e:
+                print("   🔹  KeyError: 'Customer Reviews'  not found in Prodcut Info Box!, trying to get it from UI")
+            except Exception as e:
+                print("   ⚠️  Error parsing rating")
+        else:
+            if self.show_details: print("   🔹  No product info available, try to get data in UI")
+
+        try:
+            rating_element = self.driver.find_element(By.XPATH, self.web_elements["rating"])
+            if self.show_details: print("   ✅ Found rating in UI")
+            #print("\t before slicing", rating_element.text)
+            rating_text = rating_element.text.strip()[:3]
+            #print("\t after slicing", rating_text)
+            return float(rating_text)
+        except NoSuchElementException as e:
+            print("   ⚠️  No rating element found, returning None")
+        except ValueError as e:
+            print("   ⚠️  Error parsing rating, returning None")
+        except Exception as e:
+            print("   ⚠️  Error getting rating, returning None", e)
+
+        return None
+  
     def get_review_count(self) -> int:
-        if self.show_details: print("📝 Getting review count")
+        if self.show_details: print("📝 Getting reviews count")
+
+        if self.product_info_box_content != None:
+
+            try:
+                match = re.search(r"(\d+\.\d+)\s+([\d,]+) ratings", self.product_info_box_content["Customer Reviews"])
+                if match:
+                    # print(match.group(1))
+                    # print(match.group(2))
+                    return int(match.group(2).replace(',', ''))
+            except KeyError as e:
+                print("   🔹  KeyError: 'Customer Reviews' not found in Prodcut Info Box!, trying to get it from UI")
+            except Exception as e:
+                print("   ⚠️  Error parsing review count")
+        else:
+            if self.show_details: print("   🔹  No product info available, try to get data in UI")
+
         try:
-            match = re.search(r"(\d+\.\d+)\s+([\d,]+) ratings", self.product_info_box_content["Customer Reviews"])
+            review_count_element = self.driver.find_element(By.XPATH, self.web_elements["review_count"])
+            if self.show_details: print("   ✅ Found review count in UI")
+            review_count_text = review_count_element.text.strip()
+            #print("\ttext:", review_count_text)
+            match = re.search(r"(\d[\d,]*)", review_count_text)
+        
             if match:
-                return float(match.group(1))
-    
+                # print("\tgroup1:", match.group(1))
+                # print("\tgroup2:", match.group(2))
+                review_count = int(match.group(1).replace(",", ""))
+                return review_count
+        except NoSuchElementException as e:
+            print("   ⚠️  No review count element found, returning None")
+        except ValueError as e:
+            print("   ⚠️  Error parsing review count, returning None")
         except Exception as e:
-            print("   ❌ Error finding review count!", e)
+            print("   ⚠️  Error getting review count, returning None: ", e)
+
+        return None 
     
     def get_blm(self) -> int:
         if self.show_details: print("📝 Getting bought last month")
@@ -187,18 +260,17 @@ class AmazonProductScraper:
             return int(blm_str)
 
         except Exception as e:
-            print("   ❌ Error finding blm!")
-           
+            print("   ⚠️  Error finding blm! Return None")
+            return None
+       
     def get_store(self) ->str:
         try:
             store_element = self.driver.find_element(By.XPATH, self.web_elements["store"])
-            store = store_element.text if store_element.text else "Kein store"
+            store = store_element.text if store_element.text else None
+            return store.replace("Visit the ", "").replace("Store", "")
         except Exception as e:
-            store = "Kein store gefunden"
-            print("Error finding store")
-
-        print("Store:", store)
-        return store
+            print("   ⚠️  Error getting store, returning None"  )
+            return None
 
     def get_variants(self) -> list:
         variants = []
@@ -212,7 +284,7 @@ class AmazonProductScraper:
 
             variants.pop(0)
         except Exception as e:
-            if self.show_details: print("   ℹ️  No variants")
+            if self.show_details: print("  🔹 No variants")
         
         return variants
 
@@ -227,7 +299,7 @@ class AmazonProductScraper:
         self.retry_request(self.url)
         self.scroll_down() 
         self.product_info_box_content = self.get_product_infos_box_content()
-        if self.show_details:
+        if self.show_details and self.product_info_box_content:
             max_key_length = max(len(key) for key in self.product_info_box_content.keys())
             for key, value in self.product_info_box_content.items():
                 print(f"\t{key.ljust(max_key_length)} : {value.replace('\n', '')}")
@@ -239,57 +311,62 @@ class AmazonProductScraper:
     def get_product_infos(self, asin) -> dict:
         self.asin = asin
         self.url = f"https://www.amazon.com/dp/{self.asin}?language=en_US"
-
+        
         try:
             self.open_page()
+            
             bought_last_month = self.get_blm()
-
+            price = self.get_price()
+            
             if bought_last_month is None:
-                print("\n❌❌❌ No BLM info available, returning None")
-                return None
-
-            self.bs_and_rank_data = self.getting_bs_and_rank_data()
-
-            if self.show_details:
-                max_key_length = max(len(key) for key in self.bs_and_rank_data.keys())
+                total = 0
+            else:
+                total = round(bought_last_month * price, 2) if price is not None else None
+            
+            self.bs_and_rank_data = self.getting_bs_and_rank_data() or {}
+            
+            if self.show_details and self.bs_and_rank_data:
+                max_key_length = max(len(key) for key in self.bs_and_rank_data.keys()) if self.bs_and_rank_data else 0
                 for key, value in self.bs_and_rank_data.items():
                     print(f"\t{key.ljust(max_key_length)} : {value}")
-
+            
             title = self.get_title()
-            price = self.get_price()
             reviews = self.get_review_count()
             rating = self.get_rating()
             variants = self.get_variants()
-            total = round(bought_last_month * price, 2)
-            manufacturer = self.product_info_box_content.get("Manufacturer", "n/A")
-
+            manufacturer = self.product_info_box_content.get("Manufacturer", None) if self.product_info_box_content else None
+            store = self.get_store()
+            image_path = self.get_image_path()
+            
+            if title is None or price is None:
+                print("⚠️  Warning: Missing essential product data, returning None")
+                return None
+            
             product = {
                 "asin": self.asin,
                 "title": title,
                 "price": price,
                 "manufacturer": manufacturer,
-                "rank_main_category": self.bs_and_rank_data["rank_main_category"],
-                "rank_second_category": self.bs_and_rank_data["rank_second_category"],
+                "rank_main_category": self.bs_and_rank_data.get("rank_main_category", None),
+                "rank_second_category": self.bs_and_rank_data.get("rank_second_category", None),
                 "review_count": reviews,
                 "rating": rating,
-                "main_category": self.bs_and_rank_data["main_category"],
-                "second_category": self.bs_and_rank_data["second_category"],
+                "main_category": self.bs_and_rank_data.get("main_category", None),
+                "second_category": self.bs_and_rank_data.get("second_category",None),
                 "blm": bought_last_month,
                 "total": total,
                 "variants": variants,
-                "variants_count": len(variants),
+                "variants_count": len(variants) if variants else 0,
+                "store" : store,
+                "image_url" : image_path,
             }
-
-            if any(value is None for value in product.values()):
-                print("⚠️ Warning: Invalid product data, returning None")
-                return None
-
+            
             self.end_time = time.time()
             return product
-
+            
         except Exception as e:
-            print("❌❌❌ Error getting product info!\n", e)
+            print("❌❌❌ Error getting product info!", e)
             return None
-
+        
         finally:
             self.close_driver()
