@@ -52,7 +52,8 @@ export default function ClusterDetails() {
   }, [clusterId]);
 
   if (loading) return <CircularProgress />;
-  if (!marketCluster) return <Typography>Market-Cluster nicht gefunden.</Typography>;
+  if (!marketCluster || !marketCluster.markets || marketCluster.markets.length === 0)
+    return <Typography>Market-Cluster nicht gefunden oder keine Märkte enthalten.</Typography>;
 
   const handleTabChange = (event: React.SyntheticEvent, newIndex: number) => {
     setTabIndex(newIndex);
@@ -60,13 +61,18 @@ export default function ClusterDetails() {
 
   const columns: GridColDef[] = [
     { field: "id", headerName: "ASIN", width: 150 },
-    { field: "title", headerName: "Product Name", width: 250 },
-    { field: "price", headerName: "Price (€)", type: "number", width: 120 },
-    { field: "mainCategory", headerName: "Category", width: 180 },
+    { field: "title", headerName: "Produktname", width: 250 },
+    { field: "price", headerName: "Preis (€)", type: "number", width: 120 },
+    { field: "mainCategory", headerName: "Main Category", width: 180 },
+    { field: "mainCategoryRank", headerName: "Rank #1", width: 180 },
+    { field: "secondCategory", headerName: "Category #2", width: 180 },
+    { field: "secondCategoryRank", headerName: "Rank #2", width: 180 },
+    { field: "blm", headerName: "BLM", width: 180 },
+    { field: "total", headerName: "Total", width: 180 },
   ];
 
   return (
-    <Container>
+    <div>
       <Typography variant="h4" sx={{ marginBottom: 2 }}>
         {marketCluster.title}
       </Typography>
@@ -84,42 +90,44 @@ export default function ClusterDetails() {
             </Tabs>
           </Box>
 
-          {/* Tab Panels mit DataGrid für die neuesten Produkte aus dem MarketChange */}
-          {marketCluster.markets.map((market: any, index: number) => {
-            const latestMarketChange = market.market_changes?.[0] || null;
-
-            return (
-              <TabPanel key={index} value={tabIndex} index={index}>
-                <Box sx={{ height: 500, width: "100%", marginTop: 2 }}>
-                  {latestMarketChange ? (
-                    <DataGrid
-                      rows={latestMarketChange.products.map((product: any) => ({
-                        id: product.asin,
-                        title: product.title,
-                        price: product.price,
-                        mainCategory: product.main_category || "N/A",
-                      }))}
-                      columns={columns}
-                      initialState={{
-                        pagination: {
-                          paginationModel: {
-                            pageSize: 10,
-                          },
+          {/* Tab Panels mit DataGrid für die neuesten Produkte */}
+          {marketCluster.markets.map((market: any, index: number) => (
+            <TabPanel key={index} value={tabIndex} index={index}>
+              <p>Total: $123455678</p>
+              <Box sx={{ height: 500, width: "100%", marginTop: 2 }}>
+                {market.products && market.products.length > 0 ? (
+                  <DataGrid
+                    rows={market.products.map((product: any) => ({
+                      id: product.asin,
+                      title: product.title || "Kein Titel",
+                      price: product.price || "N/A",
+                      mainCategory: product.main_category || "N/A",
+                      mainCategoryRank: product.main_category_rank || "N/A",
+                      secondCategory: product.second_category || "N/A",
+                      secondCategoryRank: product.second_category_rank || "N/A",
+                      blm: product.blm || "N/A",
+                      total: product.total || "N/A",
+                    }))}
+                    columns={columns}
+                    initialState={{
+                      pagination: {
+                        paginationModel: {
+                          pageSize: 10,
                         },
-                      }}
-                      pageSizeOptions={[10, 25, 50]}
-                      checkboxSelection
-                      disableRowSelectionOnClick
-                    />
-                  ) : (
-                    <Typography>Keine aktuellen Produktänderungen für diesen Markt.</Typography>
-                  )}
-                </Box>
-              </TabPanel>
-            );
-          })}
+                      },
+                    }}
+                    pageSizeOptions={[10, 25, 50]}
+                    checkboxSelection
+                    disableRowSelectionOnClick
+                  />
+                ) : (
+                  <Typography>Keine aktuellen Produktänderungen für diesen Markt.</Typography>
+                )}
+              </Box>
+            </TabPanel>
+          ))}
         </CardContent>
       </Card>
-    </Container>
+    </div>
   );
 }

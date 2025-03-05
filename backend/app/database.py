@@ -47,7 +47,9 @@ def init_test_users():
 
     db.close()
 
-# 📌 Märkte und MarketChanges erstellen
+
+# 📌 Märkte, MarketChanges & ProductChanges erstellen
+# 📌 Märkte, MarketChanges & ProductChanges erstellen
 def init_products_and_markets():
     db = SessionLocal()
 
@@ -57,7 +59,7 @@ def init_products_and_markets():
 
     # Falls bereits Produkte existieren, überspringen
     if not db.query(Product).first():
-        products = [Product(asin=generate_asin()) for _ in range(10)]
+        products = [Product(asin=generate_asin()) for _ in range(50)]  # 🔥 Mehr Produkte hinzufügen
         db.add_all(products)
         db.commit()
 
@@ -74,21 +76,54 @@ def init_products_and_markets():
     # Märkte abrufen
     markets = db.query(Market).all()
 
-   # Falls Market-Cluster schon existieren, abbrechen
+    # 📌 **Mehr Produkte zu den Märkten hinzufügen**
+    for market in markets:
+        market.products = random.sample(all_products, k=random.randint(10, 15))  # 🔥 10-15 Produkte pro Markt
+    db.commit()
+    print(f"✅ Jeder Markt hat nun mindestens 10 Produkte!")
+
+    # Falls Market-Cluster schon existieren, abbrechen
     if not db.query(MarketCluster).first():
         tester1 = db.query(User).filter(User.username == "Tester1").first()
         tester2 = db.query(User).filter(User.username == "Tester2").first()
         market_creatine = db.query(Market).filter(Market.keyword == "creatine").first()
+        market_turf_grass = db.query(Market).filter(Market.keyword == "turf grass").first()
 
-        if tester1 and markets:
-            cluster1 = MarketCluster(user_id=tester1.id, title="Fitness Products", markets=markets)
+        if tester1 and market_creatine and market_turf_grass:
+            cluster1 = MarketCluster(user_id=tester1.id, title="Fitness Products", markets=[market_creatine, market_turf_grass])
             db.add(cluster1)
 
         if tester2 and market_creatine:
-            cluster2 = MarketCluster(user_id=tester2.id, title="Health Markets", markets=[market_creatine])  # ✅ Hier sicherstellen, dass Märkte verknüpft sind!
+            cluster2 = MarketCluster(user_id=tester2.id, title="Health Markets", markets=[market_creatine])
             db.add(cluster2)
 
         db.commit()
+
+    # 📌 **ProductChanges für jedes Produkt erstellen (3-4 Einträge pro Produkt)**
+    for product in all_products:
+        existing_changes = db.query(ProductChange).filter(ProductChange.asin == product.asin).count()
+        if existing_changes == 0:  # Verhindert doppelte Einträge
+            num_changes = random.randint(3, 4)  # 3 bis 4 Änderungen pro Produkt
+            changes = []
+            for _ in range(num_changes):
+                change_date = datetime.now() - timedelta(days=random.randint(1, 30))  # Zufällig 1-30 Tage zurück
+                changes.append(ProductChange(
+                    asin=product.asin,
+                    title=f"Product {product.asin}",
+                    price=round(random.uniform(10.0, 100.0), 2),
+                    main_category="Electronics" if random.random() > 0.5 else None,
+                    second_category="Gadgets" if random.random() > 0.5 else None,
+                    main_category_rank=random.randint(1, 100) if random.random() > 0.5 else None,
+                    second_category_rank=random.randint(1, 200) if random.random() > 0.5 else None,
+                    change_date=change_date,
+                    changes="Price updated",
+                    blm=random.randint(1, 5) if random.random() > 0.5 else None,
+                    total=round(random.uniform(500.0, 2000.0), 2) if random.random() > 0.5 else None,
+                ))
+
+            db.add_all(changes)
+            db.commit()
+            print(f"✅ {num_changes} ProductChanges für Produkt {product.asin} erstellt!")
 
     # MarketChanges für jeden Markt erstellen (3-4 pro Markt)
     for market in markets:
@@ -99,9 +134,9 @@ def init_products_and_markets():
             for _ in range(num_changes):
                 change_date = datetime.now() - timedelta(days=random.randint(1, 30))
 
-                # Zufällige neue und entfernte Produkte
-                new_products = random.sample(all_products, k=random.randint(1, 3))
-                removed_products = random.sample(all_products, k=random.randint(1, 2))
+                # 🔥 Mehr Produkte für MarketChange (jetzt 5-10 neue Produkte)
+                new_products = random.sample(all_products, k=random.randint(5, 10))
+                removed_products = random.sample(all_products, k=random.randint(1, 4))
 
                 changes.append(MarketChange(
                     market_id=market.id,
@@ -113,5 +148,8 @@ def init_products_and_markets():
 
             db.add_all(changes)
             db.commit()
+            print(f"✅ {num_changes} MarketChanges für Markt {market.keyword} erstellt!")
 
     db.close()
+
+

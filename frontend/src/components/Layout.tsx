@@ -2,6 +2,7 @@ import { AppBar, Toolbar, Button, Box, Typography, Container } from "@mui/materi
 import { Outlet, Link, useLocation, useNavigate } from "react-router-dom";
 import UserService from "../services/UserService";
 import { useSnackbar } from "../providers/SnackbarProvider";
+import { useTheme } from "@mui/material/styles";
 
 export default function Layout() {
     const navigate = useNavigate();
@@ -9,6 +10,7 @@ export default function Layout() {
   const location = useLocation();
   const isLoggedIn = UserService.isAuthenticated();
   const user = UserService.getUser();
+  
 
   const handleLogout = () => {
       UserService.logout();
@@ -23,7 +25,7 @@ export default function Layout() {
   return (
     <>
       {/* 🔹 Navbar */}
-      <AppBar position="static" color="primary">
+      <AppBar position="static"  sx={{ backgroundColor: (theme) => theme.palette.primary.main }}>
         <Container>
           <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
             {/* Logo & App Name */}
@@ -37,18 +39,18 @@ export default function Layout() {
             {isLoggedIn && (
               <Box sx={{ display: "flex", gap: 2 }}>
                 <Button color="inherit" component={Link} to="/dashboard">
-                  Navpunkt1
+                  Dashboard
                 </Button>
-                <Button color="inherit" component={Link} to="/dashboard">
+                {/* <Button color="inherit" component={Link} to="/dashboard">
                   Navpunkt2
-                </Button>
+                </Button> */}
               </Box>
             )}
 
             {/* Benutzerinfo & Logout (nur für eingeloggte Nutzer) */}
             {isLoggedIn && (
-              <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-                <Typography variant="body1">👤 {user?.sub}</Typography>
+              <Box sx={{ display: "flex", alignItems: "center", gap: 2, color: "white" }}>
+                <Typography color="inherit" variant="body1">👤 {user?.sub}</Typography>
                 <Button color="inherit" onClick={handleLogout}>
                   Logout
                 </Button>
@@ -59,9 +61,9 @@ export default function Layout() {
       </AppBar>
 
       {/* 🔹 Seiteninhalt */}
-      <Container sx={{ minHeight: "80vh", paddingY: 4 }}>
+      <div className="main-content">
         <Outlet />
-      </Container>
+      </div>
 
       {/* 🔹 Footer */}
       <Box sx={{ textAlign: "center", padding: 2, backgroundColor: "#f5f5f5" }}>

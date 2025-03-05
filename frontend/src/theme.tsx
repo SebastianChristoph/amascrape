@@ -15,8 +15,8 @@ declare module '@mui/material/styles' {
 export const lightTheme = createTheme({
   palette: {
     mode: "light",
-    primary: { main: "#1565C0" }, // Seriöses Blau
-    secondary: { main: "#FF6F00" }, // Professionelles Orange für Akzente
+    primary: { main: "#1470CC" }, // Seriöses Blau
+    secondary: { main: "#70C7FF" }, // Professionelles Orange für Akzente
     tertiary: { main: "#455A64" }, // Dezentes Grau-Blau für zusätzliche Elemente
     background: { default: "#F5F5F5", paper: "#FFFFFF" }, // Helles Grau & Weiß für Professionalität
     text: { primary: "#212121", secondary: "#757575" }, // Dunkles Grau für Lesbarkeit

@@ -18,7 +18,7 @@ function App() {
             <Route path="/" element={<Login />} />
             <Route element={<Layout />}>
               <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/cluster/:clusterId" element={<ClusterDetails />} /> {/* 🆕 Neue Route für Cluster Details */}
+              <Route path="/cluster/:clusterId" element={<ClusterDetails />} /> 
             </Route>
           </Routes>
         </Router>
