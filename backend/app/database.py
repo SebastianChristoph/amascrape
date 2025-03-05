@@ -74,17 +74,18 @@ def init_products_and_markets():
     # Märkte abrufen
     markets = db.query(Market).all()
 
-    # Falls Market-Cluster schon existieren, abbrechen
+   # Falls Market-Cluster schon existieren, abbrechen
     if not db.query(MarketCluster).first():
         tester1 = db.query(User).filter(User.username == "Tester1").first()
         tester2 = db.query(User).filter(User.username == "Tester2").first()
+        market_creatine = db.query(Market).filter(Market.keyword == "creatine").first()
 
         if tester1 and markets:
             cluster1 = MarketCluster(user_id=tester1.id, title="Fitness Products", markets=markets)
             db.add(cluster1)
 
-        if tester2 and markets:
-            cluster2 = MarketCluster(user_id=tester2.id, title="Health Markets", markets=[markets[0]])
+        if tester2 and market_creatine:
+            cluster2 = MarketCluster(user_id=tester2.id, title="Health Markets", markets=[market_creatine])  # ✅ Hier sicherstellen, dass Märkte verknüpft sind!
             db.add(cluster2)
 
         db.commit()

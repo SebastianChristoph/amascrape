@@ -58,7 +58,9 @@ def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depend
 # 📌 GET: MarketClusters des eingeloggten Users abrufen
 @router.get("/market-clusters", response_model=List[MarketClusterResponse])
 def get_user_market_clusters(db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
-    market_clusters = db.query(MarketCluster).filter(MarketCluster.user_id == current_user.id).all()
+    market_clusters = db.query(MarketCluster).filter(
+        MarketCluster.user_id == current_user.id
+    ).options(joinedload(MarketCluster.markets)).all()  # 🔥 Fix: Märkte werden jetzt mitgeladen!
 
     if not market_clusters:
         return []
@@ -67,7 +69,7 @@ def get_user_market_clusters(db: Session = Depends(get_db), current_user: User =
         MarketClusterResponse(
             id=cluster.id,
             title=cluster.title,
-            markets=[market.keyword for market in cluster.markets]
+            markets=[market.keyword for market in cluster.markets]  # 🔥 Jetzt sollten Märkte korrekt erscheinen
         )
         for cluster in market_clusters
     ]

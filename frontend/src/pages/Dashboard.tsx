@@ -40,13 +40,13 @@ export default function Dashboard() {
       <List>
         {marketClusters.map((cluster) => (
           <ListItem key={cluster.id} component={Link} to={`/cluster/${cluster.id}`} sx={{ cursor: "pointer" }}>
-          <ListItemText
-              primary={`${cluster.title} - Märkte: ${
-                cluster.markets && cluster.markets.length > 0
-                  ? cluster.markets.map((market: { keyword: string }) => market.keyword).join(", ")
-                  : "Keine Märkte"
-              }`}
-            />
+         <ListItemText
+          primary={`${cluster.title} - Märkte: ${
+            Array.isArray(cluster.markets) && cluster.markets.length > 0
+              ? cluster.markets.map((market: { keyword: string }) => market.keyword).join(", ")
+              : "Keine Märkte"
+          }`}
+        />
 
           </ListItem>
         ))}
