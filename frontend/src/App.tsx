@@ -6,6 +6,7 @@ import { SnackbarProvider } from "./providers/SnackbarProvider";
 import Layout from "./components/Layout";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
+import ClusterDetails from "./pages/ClusterDetails"; // 🆕 Import der neuen Seite
 
 function App() {
   return (
@@ -14,12 +15,10 @@ function App() {
       <SnackbarProvider>
         <Router>
           <Routes>
-            {/* Login hat kein Layout */}
             <Route path="/" element={<Login />} />
-            
-            {/* Alle anderen Seiten haben das Layout */}
             <Route element={<Layout />}>
               <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/cluster/:clusterId" element={<ClusterDetails />} /> {/* 🆕 Neue Route für Cluster Details */}
             </Route>
           </Routes>
         </Router>

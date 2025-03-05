@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import UserService from "../services/UserService";
-import { Typography, Container } from "@mui/material";
+import MarketService from "../services/MarketService";
+import { useSnackbar } from "../providers/SnackbarProvider";
+import { Typography, Container, List, ListItem, ListItemText } from "@mui/material";
 
 export default function Dashboard() {
   const navigate = useNavigate();
+  const { showSnackbar } = useSnackbar();
+  const [marketClusters, setMarketClusters] = useState<any[]>([]);
   const [username, setUsername] = useState<string | null>(null);
 
   useEffect(() => {
@@ -16,9 +20,37 @@ export default function Dashboard() {
     }
   }, [navigate]);
 
+  useEffect(() => {
+    async function fetchMarketClusters() {
+      const data = await MarketService.get_market_cluster();
+      if (data) {
+        setMarketClusters(data);
+      } else {
+        showSnackbar("Fehler beim Laden der Market-Cluster.");
+      }
+    }
+
+    fetchMarketClusters();
+  }, []);
+
   return (
-    <Container sx={{ display: "flex", alignItems: "center", justifyContent: "center", minHeight: "100vh" }}>
+    <Container>
       <Typography variant="h4">Willkommen, {username}!</Typography>
+      <h2>Meine Market-Cluster</h2>
+      <List>
+        {marketClusters.map((cluster) => (
+          <ListItem key={cluster.id} component={Link} to={`/cluster/${cluster.id}`} sx={{ cursor: "pointer" }}>
+          <ListItemText
+              primary={`${cluster.title} - Märkte: ${
+                cluster.markets && cluster.markets.length > 0
+                  ? cluster.markets.map((market: { keyword: string }) => market.keyword).join(", ")
+                  : "Keine Märkte"
+              }`}
+            />
+
+          </ListItem>
+        ))}
+      </List>
     </Container>
   );
 }

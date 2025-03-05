@@ -9,5 +9,5 @@ services:
     env_file:
       - .env
     volumes:
-      - ./users.db:/app/users.db
+      - ./marketdata:/app/marketdata
     restart: always

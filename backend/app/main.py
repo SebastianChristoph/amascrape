@@ -1,26 +1,28 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.routes import users
-
-from database import init_db
+from app.database import init_db
 
 app = FastAPI()
+
+# start with
+# python -m uvicorn app.main:app --host 0.0.0.0 --port 9000 --reload
+
 
 # Datenbank initialisieren
 init_db()
 
-# start with python -m uvicorn app.main:app --reload
-
 # ✅ CORS Middleware aktivieren
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Erlaubt Anfragen von allen Domains (Frontend & API)
+    allow_origins=["*"],
     allow_credentials=True,
-    allow_methods=["*"],  # Erlaubt alle HTTP-Methoden (GET, POST, PUT, DELETE)
-    allow_headers=["*"],  # Erlaubt alle HTTP-Header
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
-# Routen registrieren
+
+# 📌 Router registrieren
 app.include_router(users.router, prefix="/users", tags=["Users"])
 
 @app.get("/")
