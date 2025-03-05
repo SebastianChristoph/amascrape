@@ -1,52 +1,42 @@
-import sqlite3
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker, Session
+from app.models import Base, User
+from app.auth import get_password_hash
 import os
-from dotenv import load_dotenv
-from passlib.context import CryptContext
 
-# .env Datei laden
-load_dotenv()
+# Lade Umgebungsvariablen
+DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///users.db")
 
-# Passwort-Hashing Setup
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+# Datenbank-Engine erstellen
+engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
 
-def get_password_hash(password):
-    return pwd_context.hash(password)
+# SessionFactory erstellen
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
-database_url = os.getenv("DATABASE_URL", "users.db")
+# 📌 Dependency für FastAPI → Stellt eine DB-Session bereit
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
 
-# Falls eine SQLAlchemy-URL (`sqlite:///./users.db`) gesetzt ist, extrahiere den Dateipfad
-if database_url.startswith("sqlite:///"):
-    db_path = database_url.replace("sqlite:///", "")
-else:
-    db_path = database_url
+# 📌 Datenbank und Tabellen initialisieren
+def init_db():
+    Base.metadata.create_all(bind=engine)
+    init_admin_user()  # Admin-User erstellen
 
-# Sicherstellen, dass die Datenbankdatei existiert
-if not os.path.exists(db_path):
-    open(db_path, 'w').close()  # Leere Datei erstellen
+# 📌 Prüft, ob Admin existiert, und erstellt ihn falls nötig
+def init_admin_user():
+    db = SessionLocal()
+    admin_user = db.query(User).filter(User.username == "admin").first()
 
-# Verbindung zur Datenbank herstellen
-def get_db_connection():
-    conn = sqlite3.connect(db_path)
-    conn.row_factory = sqlite3.Row  # Ermöglicht den Zugriff auf Spalten per Namen
-    return conn
+    if not admin_user:
+        hashed_password = get_password_hash("admin123")
+        new_admin = User(username="admin", hashed_password=hashed_password)
+        db.add(new_admin)
+        db.commit()
+        db.refresh(new_admin)
+        print("✅ Admin-Benutzer wurde erstellt!")
 
-# Datenbank und Tabellen initialisieren
-conn = get_db_connection()
-c = conn.cursor()
-c.execute('''
-    CREATE TABLE IF NOT EXISTS users (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        username TEXT UNIQUE,
-        hashed_password TEXT
-    )
-''')
-
-# Überprüfen, ob der Admin-Benutzer existiert, sonst erstellen
-c.execute("SELECT * FROM users WHERE username = ?", ("admin",))
-if not c.fetchone():
-    admin_hashed_password = get_password_hash("admin123")
-    c.execute("INSERT INTO users (username, hashed_password) VALUES (?, ?)", ("admin", admin_hashed_password))
-    print("Admin-Benutzer wurde erstellt!")
-
-conn.commit()
-conn.close()
+    db.close()
