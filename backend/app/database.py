@@ -137,11 +137,13 @@ def init_products_and_markets():
                 # 🔥 Mehr Produkte für MarketChange (jetzt 5-10 neue Produkte)
                 new_products = random.sample(all_products, k=random.randint(5, 10))
                 removed_products = random.sample(all_products, k=random.randint(1, 4))
+                random_revenue = round(random.uniform(1000.0, 5000.0), 2) 
 
                 changes.append(MarketChange(
                     market_id=market.id,
                     change_date=change_date,
                     products=new_products,
+                    total_revenue=random_revenue,
                     new_products=",".join([p.asin for p in new_products]),
                     removed_products=",".join([p.asin for p in removed_products])
                 ))

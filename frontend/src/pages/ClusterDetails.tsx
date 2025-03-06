@@ -44,6 +44,7 @@ export default function ClusterDetails() {
       if (!clusterId) return;
       setLoading(true);
       const data = await MarketService.get_market_cluster_details(Number(clusterId));
+      console.log(data);
       setMarketCluster(data);
       setLoading(false);
     }
@@ -93,7 +94,10 @@ export default function ClusterDetails() {
           {/* Tab Panels mit DataGrid für die neuesten Produkte */}
           {marketCluster.markets.map((market: any, index: number) => (
             <TabPanel key={index} value={tabIndex} index={index}>
-              <p>Total: $123455678</p>
+              <p>
+                Total revenue of market: {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(market.revenue_total)}
+              </p>
+
               <Box sx={{ height: 500, width: "100%", marginTop: 2 }}>
                 {market.products && market.products.length > 0 ? (
                   <DataGrid

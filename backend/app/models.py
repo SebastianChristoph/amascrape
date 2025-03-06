@@ -95,6 +95,7 @@ class MarketChange(Base):
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     market_id = Column(Integer, ForeignKey("markets.id"), nullable=False)
+    total_revenue = Column(Float, nullable=True)
     change_date = Column(DateTime, default=lambda: datetime.now(timezone.utc))
 
     # Verknüpfte Produkte

@@ -22,7 +22,7 @@ export const lightTheme = createTheme({
     text: { primary: "#212121", secondary: "#757575" }, // Dunkles Grau für Lesbarkeit
   },
   typography: {
-    fontFamily: '"Poppins", sans-serif',
+    fontFamily: 'sans-serif',
     h1: {
       fontSize: "2.5rem",
       fontWeight: 700,

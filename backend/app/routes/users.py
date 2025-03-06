@@ -104,6 +104,7 @@ def get_market_cluster_details(cluster_id: int, db: Session = Depends(get_db), c
         }
 
         if latest_market_change:
+            market_data["revenue_total"] = latest_market_change.total_revenue
             for product in latest_market_change.products:
                 # 🔥 Den neuesten ProductChange für jedes Produkt abrufen
                 latest_product_change = db.query(ProductChange).filter(
@@ -144,10 +145,12 @@ def get_market(market_id: int, db: Session = Depends(get_db), current_user: User
     market_data = {
         "id": market.id,
         "keyword": market.keyword,
-        "products": []
+        "products": [],
     }
 
     if latest_market_change:
+        market_data["revenue_total"] = latest_market_change.total_revenue
+
         for product in latest_market_change.products:
             latest_product_change = db.query(ProductChange).filter(
                 ProductChange.asin == product.asin
@@ -157,7 +160,13 @@ def get_market(market_id: int, db: Session = Depends(get_db), current_user: User
                 "asin": product.asin,
                 "title": latest_product_change.title if latest_product_change else "Unknown",
                 "price": latest_product_change.price if latest_product_change else None,
-                "main_category": latest_product_change.main_category if latest_product_change else "N/A"
+                "main_category": latest_product_change.main_category if latest_product_change else "N/A",
+                "main_category_rank": latest_product_change.main_category_rank if latest_product_change else "N/A",
+                "second_category": latest_product_change.second_category if latest_product_change else "N/A",
+                "second_category_rank": latest_product_change.second_category_rank if latest_product_change else "N/A",
+                "blm": latest_product_change.blm if latest_product_change else "N/A",
+                "total": latest_product_change.total if latest_product_change else "N/A",
+                
             }
             market_data["products"].append(product_data)
 
