@@ -1,45 +1,29 @@
 import { useEffect, useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import UserService from "../services/UserService";
 import MarketService from "../services/MarketService";
 import { useSnackbar } from "../providers/SnackbarProvider";
-import { Typography, Container, Grid, Card, CardContent, Chip, Stack, Paper, Box } from "@mui/material";
-import { startAsinScraping, checkScrapingStatus  } from "../services/FirstPageAsinScraperService";
-
+import { Typography, Container, Paper, Box, Card, CardContent, CardHeader, IconButton, Chip, Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from "@mui/material";
+import Grid from "@mui/material/Grid2";
+import { startAsinScraping, checkScrapingStatus } from "../services/FirstPageAsinScraperService";
+import { GrCluster } from "react-icons/gr";
+import { MdAdd, MdDelete } from "react-icons/md";
+import { motion } from "framer-motion"; // ✅ Framer Motion für Animation
 
 export default function Dashboard() {
   const navigate = useNavigate();
   const { showSnackbar } = useSnackbar();
   const [marketClusters, setMarketClusters] = useState<any[]>([]);
   const [username, setUsername] = useState<string | null>(null);
-  
   const [loading, setLoading] = useState(false);
   const [asins, setAsins] = useState<{ asin: string; title: string; price: number | null; image: string }[]>([]);
-
-
-  const handleSearch = async () => {
-    setLoading(true);
-    setAsins([]); // Vorherige Ergebnisse leeren
-    const taskId = await startAsinScraping("creatine");
-  
-    // Status alle 3 Sekunden abfragen
-    const interval = setInterval(async () => {
-      const status = await checkScrapingStatus(taskId);
-      console.log("📡 API Status:", status); // DEBUGGING: API Antwort anzeigen
-      
-      if (status.status === "completed") {
-        setAsins(status.data.first_page_products); // Hier das richtige Array speichern
-        setLoading(false);
-        clearInterval(interval); // **Stoppe das Polling, wenn fertig!**
-      }
-    }, 3000);
-  };
-  
-
+  const [openConfirmDialog, setOpenConfirmDialog] = useState(false);
+  const [selectedClusterId, setSelectedClusterId] = useState<number | null>(null);
+  const [deletingCluster, setDeletingCluster] = useState<number | null>(null); // ✅ State für Animation
 
   useEffect(() => {
     if (!UserService.isAuthenticated()) {
-      navigate("/"); // Weiterleitung zum Login, falls kein Token vorhanden ist
+      navigate("/"); // Redirect to login
     } else {
       const user = UserService.getUser();
       setUsername(user?.sub || "Unbekannter Benutzer");
@@ -55,82 +39,146 @@ export default function Dashboard() {
         showSnackbar("Fehler beim Laden der Market-Cluster.");
       }
     }
-
     fetchMarketClusters();
   }, []);
 
+  // 📌 ASIN Scraping-Handler
+  const handleSearch = async () => {
+    setLoading(true);
+    setAsins([]);
+    const taskId = await startAsinScraping("creatine");
 
+    const interval = setInterval(async () => {
+      const status = await checkScrapingStatus(taskId);
+      console.log("📡 API Status:", status);
+      if (status.status === "completed") {
+        setAsins(status.data.first_page_products);
+        setLoading(false);
+        clearInterval(interval);
+      }
+    }, 3000);
+  };
 
-  return (<>
-    <Paper sx={{ paddingY: 4, paddingX: 2, mt: 2 }}>
-      <Box>
-        <Typography variant="h2" sx={{ mb: 2 }}>
-          My market clusters
+  // ✅ Löschen-Dialog öffnen
+  const handleDeleteClick = (event: React.MouseEvent, clusterId: number) => {
+    event.stopPropagation();
+    setSelectedClusterId(clusterId);
+    setOpenConfirmDialog(true);
+  };
+
+  // ✅ Cluster wirklich löschen mit Animation
+  const handleConfirmDelete = async () => {
+    if (selectedClusterId === null) return;
+
+    setDeletingCluster(selectedClusterId); // ✅ Startet Animation
+
+    setTimeout(async () => {
+      const success = await MarketService.deleteMarketCluster(selectedClusterId);
+      if (success) {
+        setMarketClusters((prevClusters) => prevClusters.filter((c) => c.id !== selectedClusterId));
+        showSnackbar("Market Cluster erfolgreich gelöscht.");
+      } else {
+        showSnackbar("Fehler beim Löschen des Market Clusters.", "error");
+      }
+      setDeletingCluster(null);
+    }, 500); // ✅ Animation dauert 500ms
+
+    setOpenConfirmDialog(false);
+  };
+
+  return (
+    <Container maxWidth="xl">
+      {/* 📌 My Market Clusters */}
+      <Paper sx={{ paddingY: 4, paddingX: 4, mt: 2 }}>
+        <Typography variant="h4" sx={{ mb: 3 }}>
+          My Market Clusters
         </Typography>
 
-        <Grid container spacing={3}>
-          {marketClusters.map((cluster) => (
-            <Grid item xs={12} sm={6} md={4} key={cluster.id}>
-              <Card
-                sx={{
-                        cursor: "pointer",
-                  "&:hover": { boxShadow: 6 },
-                }}
-                onClick={() => navigate(`/cluster/${cluster.id}`)}
-              >
-                <CardContent>
-                  <Typography variant="h3" gutterBottom>
-                    {cluster.title}
-                  </Typography>
+        <Box sx={{ flexGrow: 1 }}>
+          <Grid container spacing={3}>
+            {marketClusters.map((cluster, index) => (
+              <Grid key={cluster.id} size={4}>
+                {/* 🔥 Framer Motion für Fade-Out Animation */}
+                <motion.div
+                  initial={{ opacity: 1, scale: 1 }}
+                  animate={deletingCluster === cluster.id ? { opacity: 0, scale: 0.8 } : { opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <Card
+                    elevation={5}
+                    sx={{ cursor: "pointer", "&:hover": { boxShadow: 6 }, borderRadius: 3, overflow: "hidden" }}
+                    onClick={() => navigate(`/cluster/${cluster.id}`)}
+                  >
+                    {/* 📌 Card Header mit Cluster-Icon */}
+                    <CardHeader
+                      sx={{ alignItems: "flex-start" }}
+                      avatar={<GrCluster size={28} color="#000010" />} // ✅ Icon für Cluster
+                      title={
+                        <Typography variant="h6">
+                          Market Cluster #{index + 1}
+                        </Typography>
+                      }
+                      action={
+                        <IconButton color="error" onClick={(event) => handleDeleteClick(event, cluster.id)}>
+                          <MdDelete size={24} />
+                        </IconButton>
+                      }
+                    />
 
-                  <p>included markets:</p>
-                    
-                  
-                  <Stack direction="row" spacing={1} sx={{ flexWrap: "wrap", mt: 2 }}>
-                    {Array.isArray(cluster.markets) && cluster.markets.length > 0 ? (
-                      cluster.markets.map((market: string, index: number) => (
-                        <Chip key={index} label={market} variant="outlined" />
-                      ))
-                    ) : (
-                      <Chip label="Keine Märkte" color="default" />
-                    )}
-                  </Stack>
-                </CardContent>
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
+                    {/* 📌 Card Body - Enthält die Market Chips */}
+                    <CardContent sx={{minHeight: 200}}>
+                      <Typography variant="h5" gutterBottom>
+                        {cluster.title}
+                      </Typography>
+
+                      <Typography variant="body2" color="textSecondary">
+                        Included markets:
+                      </Typography>
+
+                      <Box sx={{ mt: 2, display: "flex", flexWrap: "wrap", gap: 1 }}>
+                        {Array.isArray(cluster.markets) && cluster.markets.length > 0 ? (
+                          cluster.markets.map((market: string, index: number) => (
+                            <Chip key={index} label={market} variant="outlined" />
+                          ))
+                        ) : (
+                          <Chip label="Keine Märkte" color="default" />
+                        )}
+                      </Box>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              </Grid>
+            ))}
+          </Grid>
         </Box>
-    </Paper>
 
-    <Paper sx={{ paddingY: 4, paddingX: 2, mt: 2 }}>
-      <Box>
-        <Typography variant="h2" sx={{ mb: 2 }}>
-          Other important stuff
-        </Typography>
+        <Button
+          sx={{ mt: 2 }}
+          variant="contained"
+          startIcon={<MdAdd />}
+          onClick={() => navigate("/add-market-cluster")}
+        >
+          Add Market Cluster
+        </Button>
 
-        <button onClick={handleSearch} disabled={loading}>
-        {loading ? "Lädt..." : "ASINs abrufen"}
-      </button>
-
-      {loading && <p>⏳ Scraping läuft... Bitte warten...</p>}
-
-      <h3>Gefundene ASINs:</h3>
-      <ul>
-        {asins.map((product, index) => (
-          <li key={`${product.asin}-${index}`}> {/* ✅ Kombination von ASIN & Index */}
-            <strong>{product.title || "Kein Titel verfügbar"}</strong> - ASIN: {product.asin} - Preis: {product.price ? `$${product.price}` : "N/A"}
-            <br />
-            <img src={product.image} alt={product.title || "Kein Bild"} width="100" />
-          </li>
-        ))}
-      </ul>
-
-
-        </Box>
-    </Paper>
-    </>
-    
-    
+        {/* 🔥 Bestätigungsdialog für das Löschen */}
+        <Dialog open={openConfirmDialog} onClose={() => setOpenConfirmDialog(false)}>
+          <DialogTitle>Market Cluster löschen?</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              Bist du sicher, dass du dieses Market Cluster löschen möchtest? Diese Aktion kann nicht rückgängig gemacht werden.
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={() => setOpenConfirmDialog(false)} color="primary">
+              Abbrechen
+            </Button>
+            <Button onClick={handleConfirmDelete} color="error">
+              Löschen
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </Paper>
+    </Container>
   );
 }

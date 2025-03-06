@@ -1,6 +1,6 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from app.routes import users
+from app.routes import users, markets, market_clusters
 from app.database import init_db
 from typing import List
 from scraper.first_page_amazon_scraper import AmazonFirstPageScraper
@@ -15,19 +15,20 @@ app = FastAPI()
 # Datenbank initialisieren
 init_db()
 
-# ✅ CORS Middleware aktivieren
+# ✅ CORS aktivieren
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["http://localhost:5173"],  # 🔥 React-Frontend erlauben
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+    allow_methods=["*"],  # GET, POST, DELETE, usw. erlauben
+    allow_headers=["*"],  # Alle Header erlauben
+    )
 
 
 # 📌 Router registrieren
 app.include_router(users.router, prefix="/users", tags=["Users"])
-
+app.include_router(markets.router, prefix="/markets", tags=["Markets"])
+app.include_router(market_clusters.router, prefix="/market-clusters", tags=["Market Clusters"])  # 📌 Neue Route
 @app.get("/")
 def root():
     return {"message": "Welcome to the FastAPI Auth System"}

@@ -49,7 +49,6 @@ def init_test_users():
 
 
 # 📌 Märkte, MarketChanges & ProductChanges erstellen
-# 📌 Märkte, MarketChanges & ProductChanges erstellen
 def init_products_and_markets():
     db = SessionLocal()
 
@@ -59,7 +58,7 @@ def init_products_and_markets():
 
     # Falls bereits Produkte existieren, überspringen
     if not db.query(Product).first():
-        products = [Product(asin=generate_asin()) for _ in range(50)]  # 🔥 Mehr Produkte hinzufügen
+        products = [Product(asin=generate_asin()) for _ in range(50)]
         db.add_all(products)
         db.commit()
 
@@ -76,9 +75,9 @@ def init_products_and_markets():
     # Märkte abrufen
     markets = db.query(Market).all()
 
-    # 📌 **Mehr Produkte zu den Märkten hinzufügen**
+    # Produkte den Märkten zuweisen
     for market in markets:
-        market.products = random.sample(all_products, k=random.randint(10, 15))  # 🔥 10-15 Produkte pro Markt
+        market.products = random.sample(all_products, k=random.randint(10, 15))
     db.commit()
     print(f"✅ Jeder Markt hat nun mindestens 10 Produkte!")
 
@@ -99,14 +98,14 @@ def init_products_and_markets():
 
         db.commit()
 
-    # 📌 **ProductChanges für jedes Produkt erstellen (3-4 Einträge pro Produkt)**
+    # 📌 ProductChanges für jedes Produkt erstellen
     for product in all_products:
         existing_changes = db.query(ProductChange).filter(ProductChange.asin == product.asin).count()
-        if existing_changes == 0:  # Verhindert doppelte Einträge
-            num_changes = random.randint(3, 4)  # 3 bis 4 Änderungen pro Produkt
+        if existing_changes == 0:
+            num_changes = random.randint(3, 4)
             changes = []
             for _ in range(num_changes):
-                change_date = datetime.now() - timedelta(days=random.randint(1, 30))  # Zufällig 1-30 Tage zurück
+                change_date = datetime.now() - timedelta(days=random.randint(1, 30))
                 changes.append(ProductChange(
                     asin=product.asin,
                     title=f"Product {product.asin}",
@@ -125,7 +124,9 @@ def init_products_and_markets():
             db.commit()
             print(f"✅ {num_changes} ProductChanges für Produkt {product.asin} erstellt!")
 
-    # MarketChanges für jeden Markt erstellen (3-4 pro Markt)
+    # 📌 MarketChanges für jeden Markt erstellen (inkl. Top Suggestions)
+    possible_suggestions = ["tomato", "salad", "cherry", "pills", "vitamins", "protein", "yoga", "dumbbells", "kettlebell", "tea", "coffee"]
+
     for market in markets:
         existing_changes = db.query(MarketChange).filter(MarketChange.market_id == market.id).count()
         if existing_changes == 0:
@@ -134,10 +135,13 @@ def init_products_and_markets():
             for _ in range(num_changes):
                 change_date = datetime.now() - timedelta(days=random.randint(1, 30))
 
-                # 🔥 Mehr Produkte für MarketChange (jetzt 5-10 neue Produkte)
+                # Mehr Produkte für MarketChange
                 new_products = random.sample(all_products, k=random.randint(5, 10))
                 removed_products = random.sample(all_products, k=random.randint(1, 4))
-                random_revenue = round(random.uniform(1000.0, 5000.0), 2) 
+                random_revenue = round(random.uniform(1000.0, 5000.0), 2)
+
+                # 📌 Neue Top-Suggestions (mind. 5 Begriffe)
+                top_suggestions = random.sample(possible_suggestions, k=random.randint(5, 7))
 
                 changes.append(MarketChange(
                     market_id=market.id,
@@ -145,7 +149,8 @@ def init_products_and_markets():
                     products=new_products,
                     total_revenue=random_revenue,
                     new_products=",".join([p.asin for p in new_products]),
-                    removed_products=",".join([p.asin for p in removed_products])
+                    removed_products=",".join([p.asin for p in removed_products]),
+                    top_suggestions=",".join(top_suggestions)  # 🔥 NEU: Liste direkt speichern
                 ))
 
             db.add_all(changes)

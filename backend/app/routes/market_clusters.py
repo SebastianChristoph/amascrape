@@ -1,0 +1,162 @@
+from fastapi import APIRouter, Depends, HTTPException
+from sqlalchemy.orm import Session, joinedload
+from app.database import get_db
+from app.auth import get_current_user
+from app.models import MarketCluster, Market, MarketChange, ProductChange, market_cluster_markets, User
+from pydantic import BaseModel
+from typing import List
+from sqlalchemy import delete  # ✅ Richtig importieren!
+
+from sqlalchemy.exc import IntegrityError
+
+
+router = APIRouter()
+
+# 📌 MarketCluster Response Schema
+class MarketClusterResponse(BaseModel):
+    id: int
+    title: str
+    markets: List[str]
+
+# 📌 Request-Body für neues Market Cluster mit mehreren Keywords
+class MarketClusterCreate(BaseModel):
+    title: str
+    keywords: List[str]  # ✅ Mehrere Keywords erlaubt!
+
+# 📌 Route zum Erstellen eines Market Clusters + mehreren Märkten
+@router.post("/create", response_model=dict)
+def create_market_cluster(
+    cluster_data: MarketClusterCreate,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
+    # 📌 Neues Market Cluster erstellen
+    new_cluster = MarketCluster(title=cluster_data.title, user_id=current_user.id)
+    db.add(new_cluster)
+    db.commit()
+    db.refresh(new_cluster)
+
+    # 📌 Keywords verarbeiten
+    for keyword in cluster_data.keywords:
+        keyword = keyword.strip().lower()  # ✅ Normalisieren
+
+        # Prüfen, ob Market bereits existiert
+        existing_market = db.query(Market).filter(Market.keyword == keyword).first()
+        
+        if not existing_market:
+            new_market = Market(keyword=keyword)
+            db.add(new_market)
+            db.commit()
+            db.refresh(new_market)
+        else:
+            new_market = existing_market
+
+        # Market mit Market Cluster verknüpfen
+        db.execute(
+            market_cluster_markets.insert().values(
+                market_id=new_market.id,
+                market_cluster_id=new_cluster.id
+            )
+        )
+
+    db.commit()
+
+    return {"message": "Market Cluster erfolgreich erstellt", "id": new_cluster.id}
+
+# 📌 Route zum Löschen eines Market Clusters
+@router.delete("/delete/{cluster_id}", response_model=dict)
+def delete_market_cluster(
+    cluster_id: int,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
+    # ✅ Prüfen, ob das Market Cluster existiert und dem Nutzer gehört
+    cluster = db.query(MarketCluster).filter(
+        MarketCluster.id == cluster_id,
+        MarketCluster.user_id == current_user.id
+    ).first()
+
+    if not cluster:
+        raise HTTPException(status_code=404, detail="Market Cluster nicht gefunden oder nicht autorisiert")
+
+    # ✅ Lösche Verknüpfung in market_cluster_markets
+    db.execute(delete(market_cluster_markets).where(market_cluster_markets.c.market_cluster_id == cluster_id))
+
+    # ✅ Lösche das Market Cluster
+    db.delete(cluster)
+    db.commit()
+
+    return {"message": "Market Cluster erfolgreich gelöscht"}
+
+
+# 📌 GET: MarketClusters des eingeloggten Users abrufen
+@router.get("/", response_model=List[MarketClusterResponse])
+def get_user_market_clusters(db: Session = Depends(get_db), current_user=Depends(get_current_user)):
+    market_clusters = db.query(MarketCluster).filter(
+        MarketCluster.user_id == current_user.id
+    ).options(joinedload(MarketCluster.markets)).all()
+
+    if not market_clusters:
+        return []
+
+    return [
+        MarketClusterResponse(
+            id=cluster.id,
+            title=cluster.title,
+            markets=[market.keyword for market in cluster.markets] if cluster.markets else ["Keine Märkte"]
+        )
+        for cluster in market_clusters
+    ]
+
+# 📌 GET: Detaillierte Market-Cluster-Informationen mit MarketChanges
+@router.get("/{cluster_id}")
+def get_market_cluster_details(cluster_id: int, db: Session = Depends(get_db), current_user=Depends(get_current_user)):
+    market_cluster = db.query(MarketCluster).filter(
+        MarketCluster.id == cluster_id,
+        MarketCluster.user_id == current_user.id
+    ).options(joinedload(MarketCluster.markets)).first()
+
+    if not market_cluster:
+        raise HTTPException(status_code=404, detail="MarketCluster not found")
+
+    response_data = {
+        "id": market_cluster.id,
+        "title": market_cluster.title,
+        "markets": []
+    }
+
+    for market in market_cluster.markets:
+        latest_market_change = db.query(MarketChange).filter(
+            MarketChange.market_id == market.id
+        ).order_by(MarketChange.change_date.desc()).first()
+
+        market_data = {
+            "id": market.id,
+            "keyword": market.keyword,
+            "products": []
+        }
+
+        if latest_market_change:
+            market_data["revenue_total"] = latest_market_change.total_revenue
+            market_data["top_suggestions"] = latest_market_change.top_suggestions
+            for product in latest_market_change.products:
+                latest_product_change = db.query(ProductChange).filter(
+                    ProductChange.asin == product.asin
+                ).order_by(ProductChange.change_date.desc()).first()
+
+                product_data = {
+                    "asin": product.asin,
+                    "title": latest_product_change.title if latest_product_change else "Unknown",
+                    "price": latest_product_change.price if latest_product_change else None,
+                    "main_category": latest_product_change.main_category if latest_product_change else "N/A",
+                    "main_category_rank": latest_product_change.main_category_rank if latest_product_change else "N/A",
+                    "second_category": latest_product_change.second_category if latest_product_change else "N/A",
+                    "second_category_rank": latest_product_change.second_category_rank if latest_product_change else "N/A",
+                    "total": latest_product_change.total if latest_product_change else "N/A",
+                    "blm": latest_product_change.blm if latest_product_change else "N/A"
+                }
+                market_data["products"].append(product_data)
+
+        response_data["markets"].append(market_data)
+
+    return response_data

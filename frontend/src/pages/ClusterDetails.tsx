@@ -60,7 +60,16 @@ export default function ClusterDetails() {
     setTabIndex(newIndex);
   };
 
+  // 📌 Spalten für DataGrid mit Bild hinzugefügt
   const columns: GridColDef[] = [
+    {
+      field: "image",
+      headerName: "Image",
+      width: 80,
+      renderCell: (params) => (
+        <img src={params.value} alt="Product" style={{ width: "100%", objectFit: "fill", marginTop: 20 }} />
+      ),
+    },
     { field: "id", headerName: "ASIN", width: 150 },
     { field: "title", headerName: "Produktname", width: 250 },
     { field: "price", headerName: "Preis (€)", type: "number", width: 120 },
@@ -98,11 +107,22 @@ export default function ClusterDetails() {
                 Total revenue of market: {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(market.revenue_total)}
               </p>
 
-              <Box sx={{ height: 500, width: "100%", marginTop: 2 }}>
+              <div>
+                <h3>Top suggestions for market:</h3>
+                {market.top_suggestions
+                  ? market.top_suggestions.split(",").map((suggestion: string, index: number) => (
+                      <p key={index}>{suggestion.trim()}</p>
+                    ))
+                  : <p>No suggestions available</p>
+                }
+              </div>
+
+              <Box sx={{ width: "100%", marginTop: 2 }}>
                 {market.products && market.products.length > 0 ? (
                   <DataGrid
                     rows={market.products.map((product: any) => ({
                       id: product.asin,
+                      image: `https://m.media-amazon.com/images/I/71jXsC613vL._AC_UL320_.jpg`, 
                       title: product.title || "Kein Titel",
                       price: product.price || "N/A",
                       mainCategory: product.main_category || "N/A",
@@ -113,6 +133,7 @@ export default function ClusterDetails() {
                       total: product.total || "N/A",
                     }))}
                     columns={columns}
+                    rowHeight={100}
                     initialState={{
                       pagination: {
                         paginationModel: {

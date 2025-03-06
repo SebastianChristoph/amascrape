@@ -105,7 +105,19 @@ class MarketChange(Base):
     new_products = Column(String, nullable=True)  # Kommagetrennte ASINs
     removed_products = Column(String, nullable=True)  # Kommagetrennte ASINs
 
+    # 📌 NEUE SPALTE: Top-Suggestions als kommagetrennter String
+    top_suggestions = Column(String, nullable=True, default="")  
+
     market = relationship("Market", back_populates="market_changes")
+
+    def get_top_suggestions(self):
+        """ Gibt die Liste der Top-Suggestions zurück """
+        return self.top_suggestions.split(",") if self.top_suggestions else []
+
+    def set_top_suggestions(self, suggestions: list):
+        """ Speichert eine Liste von Top-Suggestions als kommagetrennten String """
+        self.top_suggestions = ",".join(suggestions)
+
 
 # 6️⃣ MarketCluster Table (Verknüpft User mit bis zu 5 Märkten)
 class MarketCluster(Base):
