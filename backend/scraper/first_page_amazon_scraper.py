@@ -6,7 +6,7 @@ import time
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.support.ui import WebDriverWait
 import re
-import selenium_config
+import scraper.selenium_config as selenium_config
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 
@@ -51,7 +51,7 @@ class AmazonFirstPageScraper:
     
     def open_page(self, searchterm) -> None:
         self.searchterm = searchterm
-        print("🔍 Start scraping:", self.searchterm)
+        if self.show_details: print("🔍 Start scraping:", self.searchterm)
         self.retry_request("https://www.amazon.com/gp/bestsellers/?ref_=nav_em_cs_bestsellers_0_1_1_2")
         
         if self.show_details: print("🍪 Setting cookies")
@@ -63,22 +63,9 @@ class AmazonFirstPageScraper:
     def get_top_search_suggestions(self):
         if self.show_details: print("⌨️  Get Top Suggestions")
         try:
-            wait = WebDriverWait(self.driver, 10)
-            search_container = None
-            
-            # Try first XPath
-            try:
-                search_container = wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="nav-search-bar-form"]/div[2]/div[1]')))
-            except:
-                # Try second XPath if first one fails
-                try:
-                    search_container = wait.until(EC.visibility_of_element_located((By.XPATH, '/html/body/div[1]/div[1]/div/div[2]/form/div/div')))
-                except Exception as e:
-                    print("   ❌ Could not find search container with either XPath!", e)
-                    return ""
-            
-            # Find the input element inside the container if a valid container was found
-            search_box = search_container.find_element(By.TAG_NAME, "input")
+            wait = WebDriverWait(self.driver, 15)
+    
+            search_box = self.driver.find_element(By.XPATH, '//input[@role="searchbox"]')
             search_box.clear()
             search_box.send_keys(self.searchterm)
             time.sleep(2)
@@ -88,7 +75,7 @@ class AmazonFirstPageScraper:
             autocomplete_text = autocomplete.text
             autocomplete_list = autocomplete_text.split("\n")
             autocomplete_list = [item for item in autocomplete_list if self.searchterm in item]
-            print("\t", autocomplete_list)
+            if self.show_details: print("\t", autocomplete_list)
             search_box.send_keys(Keys.RETURN)
             self.scroll_down()
             return autocomplete_list
@@ -99,9 +86,9 @@ class AmazonFirstPageScraper:
             print("   ❌ Error entering text in search box or fetching autocomplete results!", e)
             return ""
 
-    def get_first_page_products(self):
+    def get_first_page_products(self) -> list:
         if self.show_details:
-            print("📋 Collecting list items")
+            if self.show_details: print("📋 Collecting list items")
         try:
             self.scroll_down()
             wait = WebDriverWait(self.driver, 10)
@@ -136,14 +123,14 @@ class AmazonFirstPageScraper:
                     # Store in results list
                     results.append({"asin": asin, "price": price, "title" : title, "image": image_src})
                 except Exception as e:
-                    print("   ❌ Skipping item due to missing element!", e)
+                    print(f"   ❌ Skipping item ({asin}) due to missing element!", e)
                     continue
             
-                print("Extracted items:")
-                for item in results:
-                    print("\n")
-                    print(60 *"-")
-                    print(f"ASIN: {item['asin']}, \nTitle: {item['title'][:30]}..., \nPrice: {item['price']}, \nImage: {item['image']}")
+                #print("Extracted items:")
+                # for item in results:
+                #     print("\n")
+                #     print(60 *"-")
+                #     print(f"ASIN: {item['asin']}, \nTitle: {item['title'][:30]}..., \nPrice: {item['price']}, \nImage: {item['image']}")
             return results
         except Exception as e:
             print("   ❌ Error finding list items!", e)
@@ -154,12 +141,13 @@ class AmazonFirstPageScraper:
         self.driver.quit()
 
 
-    def get_first_page_data(self, searchterm):
+    def get_first_page_data(self, searchterm) -> list:
         try:
             self.open_page(searchterm)
-            self.get_top_search_suggestions()
-            self.get_first_page_products()
-            print("\n✅ Done")
+            top_search_suggestions = self.get_top_search_suggestions()
+            first_page_products = self.get_first_page_products()
+            if self.show_details: print("\n✅ Done")
+            return {"top_search_suggestions": top_search_suggestions, "first_page_products": first_page_products}   
         except Exception as e:
             print("❌❌❌ Error getting first page data!", e)
             return None
@@ -167,6 +155,7 @@ class AmazonFirstPageScraper:
         finally:
             self.close_driver()
 
-scraper = AmazonFirstPageScraper(headless=False, show_details=True)
-scraper.get_first_page_data("creatine")
+# scraper = AmazonFirstPageScraper(headless=True, show_details=False)
+# results = scraper.get_first_page_data("creatine")
+
 

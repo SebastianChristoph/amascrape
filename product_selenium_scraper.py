@@ -5,7 +5,7 @@ import random
 import time
 from selenium.common.exceptions import NoSuchElementException
 import re
-import selenium_config
+import backend.scraper.selenium_config as selenium_config
 
 class AmazonProductScraper:
     def __init__(self, headless = True, show_details = True):

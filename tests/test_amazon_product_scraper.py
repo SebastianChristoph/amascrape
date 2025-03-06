@@ -2,7 +2,7 @@ import random
 import pytest
 import timeit
 from product_selenium_scraper import AmazonProductScraper
-import selenium_config
+import backend.scraper.selenium_config as selenium_config
 
 total_duration = 0  # Global variable to track total duration
 total_duration_combined = 0  # Separate tracking for this tes
