@@ -3,6 +3,8 @@ import { Outlet, Link, useLocation, useNavigate } from "react-router-dom";
 import UserService from "../services/UserService";
 import { useSnackbar } from "../providers/SnackbarProvider";
 import { useTheme } from "@mui/material/styles";
+import { AiFillAmazonCircle } from "react-icons/ai";
+import { MdLogout } from "react-icons/md";
 
 export default function Layout() {
     const navigate = useNavigate();
@@ -26,38 +28,41 @@ export default function Layout() {
     <>
       {/* 🔹 Navbar */}
       <AppBar position="static"  sx={{ backgroundColor: "(theme) => theme.palette.primary.main "}}>
-        <Container>
-          <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+        
+          <Toolbar sx={{ display: "flex", justifyContent: "space-between"}}>
             {/* Logo & App Name */}
-            <Box sx={{ display: "flex", alignItems: "center" }}>
-              <Typography variant="h6" sx={{ fontWeight: "bold", marginRight: 2 }}>
-                🌍 My WebApp
-              </Typography>
+          <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+                <AiFillAmazonCircle size={40} />
+                <Typography variant="h6" sx={{fontWeight: "bold", marginRight: 2 }}>
+                 AmaScraper
+                </Typography>
+                
+                {/* Menü (nur für eingeloggte Nutzer) */}
+                {isLoggedIn && (
+                  <Box sx={{ display: "flex", alignItems: "center",  gap: 2, mt: 0.2 }}>
+                <Button color="inherit" component={Link} to="/dashboard">
+                      Dashboard
+                    </Button>
+                    {/* <Button color="inherit" component={Link} to="/dashboard">
+                      Navpunkt2
+                    </Button> */}
+              </Box>
+              
+                )}
             </Box>
 
-            {/* Menü (nur für eingeloggte Nutzer) */}
-            {isLoggedIn && (
-              <Box sx={{ display: "flex", gap: 2 }}>
-                <Button color="inherit" component={Link} to="/dashboard">
-                  Dashboard
-                </Button>
-                {/* <Button color="inherit" component={Link} to="/dashboard">
-                  Navpunkt2
-                </Button> */}
-              </Box>
-            )}
-
+           
             {/* Benutzerinfo & Logout (nur für eingeloggte Nutzer) */}
             {isLoggedIn && (
-              <Box sx={{ display: "flex", alignItems: "center", gap: 2, color: "white" }}>
-                <Typography color="inherit" variant="body1">👤 {user?.sub}</Typography>
+            <Box sx={{ display: "flex",  alignItems: "center", gap: 4, color: "white"}}>
+                <Typography sx={{mt: 0.3  }} color="white" variant="body2">{user?.sub}</Typography>
                 <Button color="inherit" onClick={handleLogout}>
-                  Logout
+                <MdLogout size={25} />
                 </Button>
               </Box>
             )}
           </Toolbar>
-        </Container>
+       
       </AppBar>
 
       {/* 🔹 Seiteninhalt */}

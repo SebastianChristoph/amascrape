@@ -128,7 +128,6 @@ export default function Dashboard() {
   };
 
   const handleStartSimulateProcess = async (taskId : string) => {
-    console.log("Button clicked");
     const response = await MarketService.startSimulatedProcess(taskId);
     if (response.success) {
       console.log(taskId, "✅ Simulated Process started");
@@ -137,7 +136,7 @@ export default function Dashboard() {
   }
 
   const startCheckingSimulatedProcess = (taskId : string) => {
-    console.log("Start checking simulated process");
+    console.log(taskId, "Start checking simulated process");
     const interval = setInterval(async () => {
       const status = await MarketService.checkSimulatedProcessStatus(taskId);
       console.log(taskId, status)
@@ -146,7 +145,7 @@ export default function Dashboard() {
         console.log(status.data);
         clearInterval(interval);
       } else {
-        console.log("❌ Simulated Process not finished");
+        console.log(taskId, "📌 Simulated Process not finished");
       }
     }, 1000); 
   }
