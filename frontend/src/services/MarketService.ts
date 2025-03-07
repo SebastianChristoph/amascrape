@@ -171,6 +171,39 @@ class MarketService {
     }
   }
   
+  static async startSimulatedProcess(taskId: string): Promise<{ success: boolean }> {
+    try {
+      const response = await fetch(`${API_URL}/api/start-process?&task_id=${taskId}`, {
+        method: "GET",
+      });
+  
+      if (!response.ok) throw new Error("Fehler beim Starten des Scraping-Tasks.");
+      
+      // ✅ Server-Antwort als JSON parsen
+      const data = await response.json();
+      return { success: data.success ?? false }; 
+    } catch (error) {
+      console.error("Fehler beim Starten des Scraping-Tasks:", error);
+      return { success: false }; // Fehlerfall sicher abfangen
+    }
+  }
+
+  static async checkSimulatedProcessStatus(taskId: string): Promise<{ status: string; data?: { words: any[] } }> {
+    try {
+      const response = await fetch(`http://127.0.0.1:9000/api/get-status?task_id=${taskId}`);
+      const data = await response.json();
+  
+      // console.log(`🔍 [SimulatedProcess Status] Task ${taskId}:`, data); // ✅ DEBUG LOG
+  
+      return data;
+    } catch (error) {
+      console.error("❌ Fehler beim Abrufen des SimulatedProcess-Status:", error);
+      return { status: "error" };
+    }
+  }
+  
 }
+
+
 
 export default MarketService;

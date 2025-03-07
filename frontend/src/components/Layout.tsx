@@ -25,7 +25,7 @@ export default function Layout() {
   return (
     <>
       {/* 🔹 Navbar */}
-      <AppBar position="static"  sx={{ backgroundColor: (theme) => theme.palette.primary.main }}>
+      <AppBar position="static"  sx={{ backgroundColor: "(theme) => theme.palette.primary.main "}}>
         <Container>
           <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
             {/* Logo & App Name */}

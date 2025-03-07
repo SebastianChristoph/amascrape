@@ -22,10 +22,6 @@ import {
   TextField,
 } from "@mui/material";
 import Grid from "@mui/material/Grid2";
-import {
-  startAsinScraping,
-  checkScrapingStatus,
-} from "../services/FirstPageAsinScraperService";
 import { GrCluster } from "react-icons/gr";
 import { MdAdd, MdDelete, MdEdit } from "react-icons/md";
 import { motion } from "framer-motion"; // ✅ Framer Motion für Animation
@@ -69,22 +65,6 @@ export default function Dashboard() {
     fetchMarketClusters();
   }, []);
 
-  // 📌 ASIN Scraping-Handler
-  const handleSearch = async () => {
-    setLoading(true);
-    setAsins([]);
-    const taskId = await startAsinScraping("creatine");
-
-    const interval = setInterval(async () => {
-      const status = await checkScrapingStatus(taskId);
-      console.log("📡 API Status:", status);
-      if (status.status === "completed") {
-        setAsins(status.data.first_page_products);
-        setLoading(false);
-        clearInterval(interval);
-      }
-    }, 3000);
-  };
 
   // ✅ Bearbeiten-Dialog öffnen
   const handleEditClick = (event: React.MouseEvent, clusterId: number, clusterTitle: string) => {
@@ -105,24 +85,24 @@ export default function Dashboard() {
   // ✅ Market Cluster aktualisieren
   const handleUpdateCluster = async () => {
     if (selectedClusterId === null) return;
-
-    const response = await MarketService.updateMarketCluster(
-      selectedClusterId,
-      { title: selectedClusterTitle }
-    );
-
+  
+    const response = await MarketService.updateMarketCluster(selectedClusterId, { title: newTitle });
+  
     if (response.success) {
+      // ✅ State direkt aktualisieren, um das UI sofort zu reflektieren
       setMarketClusters((prevClusters) =>
         prevClusters.map((c) =>
-          c.id === selectedClusterId ? { ...c, title: selectedClusterTitle } : c
+          c.id === selectedClusterId ? { ...c, title: newTitle } : c // Hier newTitle verwenden!
         )
       );
+  
       showSnackbar("Market Cluster erfolgreich aktualisiert.");
       setOpenEditDialog(false);
     } else {
       showSnackbar("Fehler beim Aktualisieren des Market Clusters.", "error");
     }
   };
+  
 
   // ✅ Cluster wirklich löschen mit Animation
   const handleConfirmDelete = async () => {
@@ -146,6 +126,31 @@ export default function Dashboard() {
 
     setOpenConfirmDialog(false);
   };
+
+  const handleStartSimulateProcess = async (taskId : string) => {
+    console.log("Button clicked");
+    const response = await MarketService.startSimulatedProcess(taskId);
+    if (response.success) {
+      console.log(taskId, "✅ Simulated Process started");
+      startCheckingSimulatedProcess(taskId)
+    }
+  }
+
+  const startCheckingSimulatedProcess = (taskId : string) => {
+    console.log("Start checking simulated process");
+    const interval = setInterval(async () => {
+      const status = await MarketService.checkSimulatedProcessStatus(taskId);
+      console.log(taskId, status)
+      if (status.status ==="done") {
+        console.log("✅ Simulated Process finished");
+        console.log(status.data);
+        clearInterval(interval);
+      } else {
+        console.log("❌ Simulated Process not finished");
+      }
+    }, 1000); 
+  }
+
 
   return (
     <Container maxWidth="xl">
@@ -259,6 +264,27 @@ export default function Dashboard() {
         >
           Add Market Cluster
         </Button>
+
+
+        <Button
+          sx={{ mt: 2 }}
+          variant="contained"
+          startIcon={<MdAdd />}
+          onClick={() => handleStartSimulateProcess("99")}
+        >
+          Start Simulated Process 99
+        </Button>
+
+        <Button
+          sx={{ mt: 2 }}
+          variant="contained"
+          startIcon={<MdAdd />}
+          onClick={() => handleStartSimulateProcess("111")}
+        >
+          Start Simulated Process 111
+        </Button>
+
+
 
         {/* 🔥 Bestätigungsdialog für das Löschen */}
         <Dialog

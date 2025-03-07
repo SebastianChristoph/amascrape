@@ -6,6 +6,13 @@ import random
 import string
 from datetime import datetime, timedelta
 
+from dotenv import load_dotenv
+
+# Lade die .env-Datei
+load_dotenv()
+
+
+
 DATABASE_URL = os.getenv("DATABASE_URL")
 if not DATABASE_URL:
     raise ValueError("❌ DATABASE_URL is not set in environment variables!")

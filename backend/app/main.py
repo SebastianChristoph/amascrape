@@ -37,6 +37,35 @@ def root():
 
 
 asin_results = {}
+simulated_proccesses = {}
+
+@app.get("/api/start-process")
+async def get_data(task_id: str, background_tasks: BackgroundTasks):
+    print(f"🔥 Registrierung des Prozess - Beginns mit Task-Id {task_id}")
+    background_tasks.add_task(simulate_process, task_id)
+    print("background tasks:", background_tasks)
+
+    # ✅ Erfolgreiche Antwort mit `success`
+    return {"success": True, "message": "Test started"}
+
+def simulate_process(task_id: str):
+    delay = random.randint(3, 6)
+    simulated_proccesses[task_id] = {"status": "processing", "delay": delay}
+    print(f"⏳ Beginn mit Task ({task_id})! Wartezeit: {delay} Sekunden")
+    time.sleep(delay)
+    simulated_proccesses[task_id] = {"status": "done", "data" : {"words" : ["hallo", "welt"]}}
+    print(f"✅ Ende Task ({task_id})!")
+
+@app.get("/api/get-status")
+async def get_status(task_id: str):
+    print(f"🔄 Checking for Status of Task {task_id}")
+    print(simulated_proccesses)
+    if task_id not in simulated_proccesses:
+        print(f"❌ Task {task_id} not found!")
+        return {"status": "not found"}
+    return simulated_proccesses[task_id]
+
+
 
 @app.get("/api/get-asins")
 async def fetch_asins(search_term: str, task_id: str, background_tasks: BackgroundTasks):
@@ -67,7 +96,7 @@ def run_scraping_task_test(search_term: str, task_id: str):
     print(f"🚀 [Scraping gestartet] Task {task_id} für '{search_term}'")  
     asin_results[task_id] = {"status": "processing", "asins": []}
 
-    delay = random.randint(3, 8)
+    delay = random.randint(4, 10)
     print(f"⏳ [Scraping läuft] Task {task_id}, Wartezeit: {delay} Sekunden")
     time.sleep(delay)
 

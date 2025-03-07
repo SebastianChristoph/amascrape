@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { TextField, Button, Container, Typography, Box, Chip, Drawer, List, ListItem, CircularProgress } from "@mui/material";
 import MarketService from "../services/MarketService";
@@ -10,8 +10,9 @@ export default function AddMarketCluster() {
   const [newKeyword, setNewKeyword] = useState("");
   const [scrapingStatus, setScrapingStatus] = useState<{ [key: string]: string }>({});
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const [taskMap, setTaskMap] = useState<{ [keyword: string]: string }>({}); // 🔥 Verknüpft Keywords mit Task-IDs
+  const [taskMap, setTaskMap] = useState<{ [keyword: string]: string }>({});
   const [clusterId, setClusterId] = useState<number | null>(null);
+  const [allCompleted, setAllCompleted] = useState(false);
 
   // ✅ Keyword zur Liste hinzufügen
   const handleAddKeyword = () => {
@@ -19,6 +20,12 @@ export default function AddMarketCluster() {
       setKeywords([...keywords, newKeyword.trim()]);
       setNewKeyword("");
     }
+  };
+
+  const handleRemoveKeyword = (keywordToRemove: string) => {
+    setKeywords((prevKeywords) =>
+      prevKeywords.filter((keyword) => keyword !== keywordToRemove)
+    );
   };
 
   // ✅ Market Cluster mit mehreren Keywords erstellen
@@ -30,59 +37,82 @@ export default function AddMarketCluster() {
     if (response.success) {
       console.log("✅ Cluster erfolgreich erstellt, Task-IDs:", response.data.task_ids);
 
-      // 🔥 Task-IDs den jeweiligen Keywords zuordnen
       const newTaskMap: { [keyword: string]: string } = {};
       keywords.forEach((keyword, index) => {
         newTaskMap[keyword] = response.data.task_ids[index];
       });
       setTaskMap(newTaskMap);
 
-      // 🔥 Scraping-Status initialisieren (jedes Keyword bekommt "loading")
       const initialStatus = keywords.reduce((acc: any, keyword: string) => {
         acc[keyword] = "loading";
         return acc;
       }, {});
       setScrapingStatus(initialStatus);
 
-      // 🔥 Cluster-ID speichern
       setClusterId(response.data.id);
-
-      // 🔥 Drawer öffnen!
       setDrawerOpen(true);
 
-      // 🔥 Starte das Polling
       startPolling(newTaskMap);
     } else {
       alert("Fehler beim Erstellen des Market Clusters");
     }
   };
 
-  // ✅ Starte das Polling für alle Tasks parallel
+  // ✅ Starte Polling mit Retry-Mechanismus
   const startPolling = (taskMap: { [keyword: string]: string }) => {
     console.log("⏳ [Starte Polling für Scraping-Tasks...]");
 
     Object.entries(taskMap).forEach(([keyword, taskId]) => {
-      const interval = setInterval(async () => {
+      let retries = 0;
+      const maxRetries = 10; // Maximal 10 Versuche
+      const checkExistence = setInterval(async () => {
         const status = await MarketService.checkScrapingStatus(taskId);
         console.log(`📡 [Polling] Task: ${taskId}, Status: ${status.status}`);
 
-        setScrapingStatus((prev) => ({
-          ...prev,
-          [keyword]: status.status === "completed" ? "completed" : "loading",
-        }));
-
-        if (status.status === "completed") {
-          console.log(`✅ [Task abgeschlossen] Task: ${taskId}`);
-          clearInterval(interval);
+        if (status.status !== "not found") {
+          console.log(`✅ [Task gefunden] Starte Polling für: ${taskId}`);
+          clearInterval(checkExistence);
+          pollTaskStatus(keyword, taskId);
+        } else {
+          retries++;
+          console.log(`❌ [Task nicht gefunden] Warte auf Registrierung: ${taskId} (Versuch ${retries}/${maxRetries})`);
+          if (retries >= maxRetries) {
+            console.warn(`⚠️ [Abbruch] Task ${taskId} wurde nach ${maxRetries} Versuchen nicht gefunden.`);
+            clearInterval(checkExistence);
+          }
         }
-
-        // 🔥 Prüfen, ob ALLE Tasks fertig sind
-        if (Object.values(scrapingStatus).every((status) => status === "completed")) {
-          console.log("✅ [ALLE TASKS COMPLETED] Link wird sichtbar!");
-        }
-      }, 3000);
+      }, 2000);
     });
   };
+
+  // ✅ Überwacht einzelne Tasks
+  const pollTaskStatus = (keyword: string, taskId: string) => {
+    const interval = setInterval(async () => {
+      const status = await MarketService.checkScrapingStatus(taskId);
+      console.log(`📡 [Polling] Task: ${taskId}, Status: ${status.status}`);
+
+      setScrapingStatus((prev) => ({
+        ...prev,
+        [keyword]: status.status === "completed" ? "completed" : "loading",
+      }));
+
+      if (status.status === "completed") {
+        console.log(`✅ [Task abgeschlossen] Task: ${taskId}`);
+        clearInterval(interval);
+      }
+    }, 3000);
+  };
+
+  // 🔥 **Überwache, ob ALLE Tasks abgeschlossen sind**
+  useEffect(() => {
+    if (
+      Object.keys(scrapingStatus).length > 0 &&
+      Object.values(scrapingStatus).every((status) => status === "completed")
+    ) {
+      console.log("✅ [ALLE TASKS COMPLETED] Link wird sichtbar!");
+      setAllCompleted(true);
+    }
+  }, [scrapingStatus]);
 
   return (
     <Container maxWidth="sm">
@@ -115,11 +145,15 @@ export default function AddMarketCluster() {
         </Box>
 
         <Box sx={{ mb: 2 }}>
-          {keywords.map((keyword, index) => (
-            <Chip key={index} label={keyword} sx={{ mr: 1 }} />
-          ))}
-        </Box>
-
+  {keywords.map((keyword, index) => (
+    <Chip
+      key={index}
+      label={keyword}
+      onDelete={() => handleRemoveKeyword(keyword)} // ✅ Löschen ermöglichen
+      sx={{ mr: 1 }}
+    />
+  ))}
+</Box>
         <Button type="submit" variant="contained" color="primary" fullWidth>
           Create Market Cluster
         </Button>
@@ -138,7 +172,7 @@ export default function AddMarketCluster() {
           </List>
 
           {/* ✅ Wenn alle Tasks fertig sind, zeige den Link */}
-          {keywords.length > 0 && keywords.every((keyword) => scrapingStatus[keyword] === "completed") && clusterId && (
+          {allCompleted && clusterId && (
             <Box sx={{ mt: 2, textAlign: "center" }}>
               <Button
                 variant="contained"
