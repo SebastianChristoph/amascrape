@@ -6,7 +6,12 @@ import random
 import string
 from datetime import datetime, timedelta
 
-DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///marketdata.db")
+DATABASE_URL = os.getenv("DATABASE_URL")
+if not DATABASE_URL:
+    raise ValueError("❌ DATABASE_URL is not set in environment variables!")
+
+print(f"✅ Loaded DATABASE_URL: {DATABASE_URL}")
+
 engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)

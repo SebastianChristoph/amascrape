@@ -6,3 +6,4 @@ pydantic
 dotenv
 python-multipart
 SQLAlchemy
+selenium

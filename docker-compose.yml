@@ -1,7 +1,7 @@
 version: "3.8"
 
 services:
-  backend:
+  fastapi-backend:
     build: ./backend
     container_name: fastapi-backend
     ports:
@@ -11,15 +11,19 @@ services:
     volumes:
       - ./backend/marketdata:/app/marketdata
     restart: always
+    command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "9000"]
+    environment:
+      - DATABASE_URL=sqlite:///marketdata.db
 
-  frontend:
+  react-frontend:
     build: ./frontend
     container_name: react-frontend
     ports:
       - "5173:5173"
+    command: ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
     volumes:
       - ./frontend:/app
       - /app/node_modules
     depends_on:
-      - backend
+      - fastapi-backend
     restart: always
