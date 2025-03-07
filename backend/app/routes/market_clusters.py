@@ -23,6 +23,10 @@ class MarketClusterCreate(BaseModel):
     title: str
     keywords: List[str]  # ✅ Mehrere Keywords erlaubt!
 
+# 📌 Request-Body für das Update
+class MarketClusterUpdate(BaseModel):
+    title: str
+
 # 📌 Route zum Erstellen eines Market Clusters + mehreren Märkten
 @router.post("/create", response_model=dict)
 def create_market_cluster(
@@ -62,6 +66,29 @@ def create_market_cluster(
     db.commit()
 
     return {"message": "Market Cluster erfolgreich erstellt", "id": new_cluster.id}
+
+# 📌 Route zum Aktualisieren eines Market Cluster-Titels
+@router.put("/update/{cluster_id}", response_model=dict)
+def update_market_cluster(
+    cluster_id: int,
+    cluster_data: MarketClusterUpdate,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
+    # 🔹 Cluster suchen und prüfen, ob es dem User gehört
+    cluster = db.query(MarketCluster).filter(
+        MarketCluster.id == cluster_id,
+        MarketCluster.user_id == current_user.id
+    ).first()
+
+    if not cluster:
+        raise HTTPException(status_code=404, detail="Market Cluster nicht gefunden oder nicht autorisiert")
+
+    # 🔹 Titel aktualisieren
+    cluster.title = cluster_data.title
+    db.commit()
+
+    return {"message": "Market Cluster erfolgreich aktualisiert"}
 
 # 📌 Route zum Löschen eines Market Clusters
 @router.delete("/delete/{cluster_id}", response_model=dict)

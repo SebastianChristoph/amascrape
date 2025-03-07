@@ -22,7 +22,26 @@ class MarketService {
         console.error("Fehler beim Erstellen des Market Clusters:", error);
         return { success: false };
       }
+  }
+  
+  static async updateMarketCluster(clusterId: number, updatedData: { title: string }) {
+    try {
+      const response = await fetch(`http://127.0.0.1:9000/market-clusters/update/${clusterId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem(this.TOKEN_KEY)}`,
+        },
+        body: JSON.stringify(updatedData),
+      });
+  
+      if (!response.ok) throw new Error("Fehler beim Aktualisieren des Market Clusters.");
+      return { success: true, data: await response.json() };
+    } catch (error) {
+      console.error("Fehler beim Aktualisieren des Market Clusters:", error);
+      return { success: false };
     }
+  }
 
    // 📌 Cluster löschen
    static async deleteMarketCluster(clusterId: number): Promise<boolean> {
