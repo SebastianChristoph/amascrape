@@ -1,3 +1,5 @@
+import random
+import time
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from app.routes import users, markets, market_clusters
@@ -38,33 +40,56 @@ asin_results = {}
 
 @app.get("/api/get-asins")
 async def fetch_asins(search_term: str, task_id: str, background_tasks: BackgroundTasks):
-    """Startet das Scraping im Hintergrund und gibt den Status zurück"""
+    """Startet das Scraping und speichert den Task als 'processing'"""
+    
+    # 🔥 Stelle sicher, dass die Task-ID gespeichert wird, bevor Scraping startet
     asin_results[task_id] = {"status": "processing", "asins": []}
-    
-    # Scraping als Hintergrund-Task starten
-    background_tasks.add_task(run_scraping_task, search_term, task_id)
-    
+
+    # Starte Scraping im Hintergrund
+    background_tasks.add_task(run_scraping_task_test, search_term, task_id)
+
     return {"message": "Scraping started", "task_id": task_id}
+
 
 
 @app.get("/api/get-asins/status")
 async def get_scraping_status(task_id: str):
     """Gibt den aktuellen Status des Scraping-Tasks zurück"""
     if task_id not in asin_results:
+        print(f"❌ [Backend] Task {task_id} nicht gefunden!")  # ✅ DEBUG LOG
         return {"status": "not found"}
+    
+    print(f"🔄 [Backend] Task {task_id} Status: {asin_results[task_id]['status']}")  # ✅ DEBUG LOG
     return asin_results[task_id]
 
 
-def run_scraping_task(search_term: str, task_id: str):
-    """Führt das Scraping aus und speichert das Ergebnis"""
+def run_scraping_task_test(search_term: str, task_id: str):
+    print(f"🚀 [Scraping gestartet] Task {task_id} für '{search_term}'")  
+    asin_results[task_id] = {"status": "processing", "asins": []}
+
+    delay = random.randint(3, 8)
+    print(f"⏳ [Scraping läuft] Task {task_id}, Wartezeit: {delay} Sekunden")
+    time.sleep(delay)
+
+    fake_asins = [
+        {"asin": f"TEST-{i}", "title": f"Produkt {i}", "price": round(random.uniform(5, 100), 2)}
+        for i in range(random.randint(3, 10))
+    ]
+
+    asin_results[task_id] = {"status": "completed", "data": {"first_page_products": fake_asins}}
+    print(f"✅ [Scraping abgeschlossen] Task {task_id} hat {len(fake_asins)} Produkte gefunden.")
+
+
+# def run_scraping_task(search_term: str, task_id: str):
+#     """Führt das Scraping aus und speichert das Ergebnis"""
     
-    # Sicherstellen, dass eine Instanz verwendet wird
-    amazon_scraper = AmazonFirstPageScraper(headless=True,show_details=False)
-    first_page_data = amazon_scraper.get_first_page_data(search_term)
+#     # Sicherstellen, dass eine Instanz verwendet wird
+#     amazon_scraper = AmazonFirstPageScraper(headless=True,show_details=False)
+#     first_page_data = amazon_scraper.get_first_page_data(search_term)
 
-    # DEBUG: Zeige gefundene ASINs in der Konsole
-    # print(f"✅ Scraping für Task {task_id} abgeschlossen. Gefundene ASINs: {asins}")
+#     # DEBUG: Zeige gefundene ASINs in der Konsole
+#     # print(f"✅ Scraping für Task {task_id} abgeschlossen. Gefundene ASINs: {asins}")
 
-    # **Hier den Status auf "completed" setzen**
-    asin_results[task_id] = {"status": "completed", "data": first_page_data}
+#     # **Hier den Status auf "completed" setzen**
+#     asin_results[task_id] = {"status": "completed", "data": first_page_data}
 

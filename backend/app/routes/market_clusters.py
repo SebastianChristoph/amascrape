@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException
 from sqlalchemy.orm import Session, joinedload
 from app.database import get_db
 from app.auth import get_current_user
@@ -10,6 +10,7 @@ from sqlalchemy import delete  # ✅ Richtig importieren!
 from sqlalchemy.exc import IntegrityError
 
 
+
 router = APIRouter()
 
 # 📌 MarketCluster Response Schema
@@ -18,7 +19,6 @@ class MarketClusterResponse(BaseModel):
     title: str
     markets: List[str]
 
-# 📌 Request-Body für neues Market Cluster mit mehreren Keywords
 class MarketClusterCreate(BaseModel):
     title: str
     keywords: List[str]  # ✅ Mehrere Keywords erlaubt!
@@ -27,45 +27,58 @@ class MarketClusterCreate(BaseModel):
 class MarketClusterUpdate(BaseModel):
     title: str
 
-# 📌 Route zum Erstellen eines Market Clusters + mehreren Märkten
+
+
+
 @router.post("/create", response_model=dict)
 def create_market_cluster(
     cluster_data: MarketClusterCreate,
+    background_tasks: BackgroundTasks,
     db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user)
+    current_user: dict = Depends(get_current_user)
 ):
+    from app.main import run_scraping_task_test  # ✅ Import erst hier
     # 📌 Neues Market Cluster erstellen
     new_cluster = MarketCluster(title=cluster_data.title, user_id=current_user.id)
     db.add(new_cluster)
     db.commit()
     db.refresh(new_cluster)
 
-    # 📌 Keywords verarbeiten
-    for keyword in cluster_data.keywords:
-        keyword = keyword.strip().lower()  # ✅ Normalisieren
+    task_ids = []  # 🔥 Liste für Task-IDs
 
-        # Prüfen, ob Market bereits existiert
+    print(f"🚀 [Cluster-Erstellung] Neues Cluster '{new_cluster.title}' mit {len(cluster_data.keywords)} Keywords.")
+
+    for keyword in cluster_data.keywords:
+        # 🔍 Prüfen, ob Market bereits existiert
         existing_market = db.query(Market).filter(Market.keyword == keyword).first()
-        
-        if not existing_market:
+
+        if existing_market:
+            print(f"✅ [Bestehender Markt] '{keyword}' existiert bereits. Kein Scraping nötig.")
+        else:
+            # 📌 Neuen Markt erstellen
             new_market = Market(keyword=keyword)
             db.add(new_market)
             db.commit()
             db.refresh(new_market)
+            existing_market = new_market
+            print(f"🆕 [Neuer Markt] '{keyword}' wurde angelegt.")
+
+        # 📌 Market mit Cluster verknüpfen (nur falls nicht schon verknüpft)
+        db.execute(market_cluster_markets.insert().values(market_id=existing_market.id, market_cluster_id=new_cluster.id))
+        db.commit()
+
+        # 📌 Falls Market neu ist, Scraping starten
+        if existing_market.id not in task_ids:
+            task_id = f"{existing_market.id}-{keyword}"
+            task_ids.append(task_id)
+            background_tasks.add_task(run_scraping_task_test, keyword, task_id)
+            print(f"🚀 [Scraping gestartet] Task {task_id} für '{keyword}'")
         else:
-            new_market = existing_market
+            print(f"⏩ [Kein Scraping] '{keyword}' existiert bereits.")
 
-        # Market mit Market Cluster verknüpfen
-        db.execute(
-            market_cluster_markets.insert().values(
-                market_id=new_market.id,
-                market_cluster_id=new_cluster.id
-            )
-        )
+    return {"message": "Market Cluster erstellt", "id": new_cluster.id, "task_ids": task_ids} 
 
-    db.commit()
 
-    return {"message": "Market Cluster erfolgreich erstellt", "id": new_cluster.id}
 
 # 📌 Route zum Aktualisieren eines Market Cluster-Titels
 @router.put("/update/{cluster_id}", response_model=dict)

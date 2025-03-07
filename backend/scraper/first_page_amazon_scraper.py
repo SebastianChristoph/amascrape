@@ -140,7 +140,6 @@ class AmazonFirstPageScraper:
         if self.show_details: print("\nClosing WebDriver\n")
         self.driver.quit()
 
-
     def get_first_page_data(self, searchterm) -> list:
         try:
             self.open_page(searchterm)
