@@ -24,11 +24,13 @@ const Dashboard: React.FC = () => {
   const { showSnackbar } = useSnackbar();
   const [marketClusters, setMarketClusters] = useState<any[]>([]);
   const [deletingCluster, setDeletingCluster] = useState<number | null>(null);
-  const [activeClusters, setActiveClusters] = useState<{ cluster_name: string; keywords: { keyword: string; status: string }[] }[]>([]);
+  const [activeClusters, setActiveClusters] = useState<
+    { cluster_name: string; keywords: { [key: string]: { status: string } } }[]
+  >([]);
 
   // ✅ Filtert nur Cluster mit mindestens einem "processing" Keyword
-  const runningScrapingClusters = activeClusters.filter(cluster => 
-    cluster.keywords.some(kw => kw.status !== "done")
+  const runningScrapingClusters = activeClusters.filter((cluster) =>
+    cluster.keywords && Object.values(cluster.keywords).some((kw) => kw.status !== "done")
   );
 
   // ✅ Holt alle Market-Cluster des Users
@@ -46,7 +48,12 @@ const Dashboard: React.FC = () => {
     }
   };
 
-  const startCheckingScrapingProcess = async (clustername: string) => {
+  const startCheckingScrapingProcess = async (clustername: string | undefined) => {
+    if (!clustername) {
+      console.error("❌ Fehler: `clustername` ist undefined!");
+      return;
+    }
+
     let isDone = false;
 
     const checkStatus = async () => {
@@ -58,57 +65,66 @@ const Dashboard: React.FC = () => {
         return;
       }
 
-      const keywordEntries: [string, { status: string }][] = Object.entries(data.keywords)
-        .filter(([_, value]) => typeof value === "object" && value !== null && "status" in value) as unknown as [string, { status: string }][];
-
-      // ✅ Prüfen, ob ALLE Keywords "done" sind
-      const allKeywordsDone = keywordEntries.every(([_, kwData]) => kwData.status === "done");
+      const allKeywordsDone = Object.values(data.keywords).every((kwData) => kwData.status === "done");
 
       if (allKeywordsDone) {
         isDone = true;
-
-        // ✅ Entferne Cluster aus `activeClusters`
-        setActiveClusters(prevClusters => prevClusters.filter(c => c.cluster_name !== clustername));
-
-        // ✅ Aktualisiere Market-Cluster-Übersicht
+        setActiveClusters((prevClusters) => prevClusters.filter((c) => c.cluster_name !== clustername));
         fetchMarketClusters();
       }
     };
 
     await checkStatus();
-    if (isDone) return; // ✅ Falls sofort fertig, kein Polling starten
+    if (isDone) return;
 
     const interval = setInterval(async () => {
       await checkStatus();
       if (isDone) {
-        clearInterval(interval); // ✅ Polling wird hier korrekt gestoppt
+        clearInterval(interval);
       }
     }, 3000);
 
-    return () => clearInterval(interval); // ✅ Cleanup-Funktion zum Stoppen des Timers
+    return () => clearInterval(interval);
   };
 
-  // ✅ Prüft, ob aktive Scraping-Prozesse laufen und lädt die Daten
-  useEffect(() => {
-    const fetchActiveScrapingClusters = async () => {
-      try {
-        const active = await MarketService.getActiveScrapingClusters();
-        console.log("🔍 Aktive Scraping-Prozesse:", active);
-        setActiveClusters(active);
+  // ✅ Holt aktive Scraping-Prozesse und lädt die Keywords nach
+  const fetchActiveScrapingClusters = async () => {
+    try {
+      const active = await MarketService.getActiveScrapingClusters();
+      console.log("🔍 Aktive Scraping-Prozesse:", active);
 
-        // Starte das Polling für alle aktiven Cluster
-        active.forEach((cluster) => startCheckingScrapingProcess(cluster.cluster_name));
-      } catch (error) {
-        console.error("Fehler beim Abrufen aktiver Scraping-Prozesse:", error);
-      }
-    };
+      // **Alle Cluster mit Status holen**
+      const clustersWithKeywords = await Promise.all(
+        active.map(async (cluster) => {
+          const statusData = await MarketService.checkScrapingProcessStatus(cluster.cluster_name);
 
-    fetchActiveScrapingClusters();
-  }, []);
+          if (!statusData.keywords) {
+            console.warn(`⚠️ Keine Keywords für Cluster ${cluster.cluster_name}`, statusData);
+            return { ...cluster, keywords: {} };
+          }
+
+          return { ...cluster, keywords: statusData.keywords };
+        })
+      );
+
+      setActiveClusters(clustersWithKeywords);
+      console.log("✅ Aktualisierte activeClusters:", clustersWithKeywords);
+
+      // Starte das Polling für jedes aktive Cluster
+      clustersWithKeywords.forEach((cluster) => startCheckingScrapingProcess(cluster.cluster_name));
+    } catch (error) {
+      console.error("Fehler beim Abrufen aktiver Scraping-Prozesse:", error);
+    }
+  };
 
   // ✅ Holt die Market-Cluster beim Laden
   useEffect(() => {
     fetchMarketClusters();
+  }, []);
+
+  // ✅ Prüft auf aktive Scraping-Prozesse
+  useEffect(() => {
+    fetchActiveScrapingClusters();
   }, []);
 
   return (
@@ -137,15 +153,15 @@ const Dashboard: React.FC = () => {
                         <Box key={cluster.cluster_name} sx={{ mb: 2 }}>
                           <Typography variant="h6">{cluster.cluster_name}</Typography>
                           <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
-                            {cluster.keywords.map((kw) => (
-                              <Box key={kw.keyword} sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                            {Object.entries(cluster.keywords).map(([keyword, kwData]) => (
+                              <Box key={keyword} sx={{ display: "flex", alignItems: "center", gap: 1 }}>
                                 {/* ✅ Zeigt grünen Haken für "done" Keywords, sonst Spinner */}
-                                {kw.status === "done" ? (
+                                {kwData.status === "done" ? (
                                   <AiOutlineCheckCircle size={18} color="green" />
                                 ) : (
                                   <CircularProgress size={16} sx={{ color: "primary.main" }} />
                                 )}
-                                <Typography variant="body2">{kw.keyword}</Typography>
+                                <Typography variant="body2">{keyword}</Typography>
                               </Box>
                             ))}
                           </Box>

@@ -85,23 +85,24 @@ async def post_scraping(newClusterData: NewClusterData, db: Session = Depends(ge
 
     return {"success": True, "message": f"Scraping für {cluster_name} gestartet"}
 
+
 @app.get("/api/get-loading-clusters")
 async def get_loading_clusters(current_user: User = Depends(get_current_user)):
     user_id = current_user.id
+    print("user id: ", user_id)
 
-    # Prüfen, ob der Benutzer überhaupt Scraping-Prozesse hat
     if user_id not in scraping_processes:
+        print("keine user id in scrapin processes")
         return {"active_clusters": []}  # ✅ Keine aktiven Scraping-Prozesse
 
-    # Finde alle Cluster-Namen mit Status "processing"
     active_clusters = [
-        cluster_name
+        {"cluster_name": cluster_name}  # ✅ Stellt sicher, dass `cluster_name` existiert
         for cluster_name, cluster_data in scraping_processes[user_id].items()
         if cluster_data["status"] == "processing"
     ]
 
-    return {"active_clusters": active_clusters}  # ✅ Liste der aktiven Cluster
-
+    print("return active clusters:", active_clusters)
+    return {"active_clusters": active_clusters}
 
 
 @app.get("/api/get-status-of-firstpage-scraping-process")
@@ -190,7 +191,7 @@ async def get_status(clustername: str, db: Session = Depends(get_db), current_us
                     second_category=product_data.get("second_category", "Unknown"),
                     main_category_rank=product_data.get("main_category_rank", -1),
                     second_category_rank=product_data.get("second_category_rank", -1),
-                    img_path=product_data.get("image", "https://via.placeholder.com/150"),
+                    img_path=product_data.get("image", "no image"),
                     change_date=datetime.now(timezone.utc),
                     changes="Initial creation",
                     blm=-1,

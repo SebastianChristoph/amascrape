@@ -26,10 +26,17 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 def init_db():
     """Erstellt die Datenbank & löscht alte Daten"""
     print("🔄 Lösche und erstelle alle Tabellen neu...")
+    
     Base.metadata.drop_all(bind=engine)
     Base.metadata.create_all(bind=engine)
+    
     print("✅ Datenbanktabellen erfolgreich erstellt!")
     
+    # 🔥 Benutzer anlegen, bevor weitere Daten erzeugt werden!
+    init_test_users()
+    init_products_and_markets()
+
+
 def get_db():
     from app.database import SessionLocal
     db = SessionLocal()
@@ -70,7 +77,6 @@ def generate_asin():
     return "".join(random.choices(string.ascii_uppercase + string.digits, k=10))
 
 
-# 🏗️ Initialisierung der Datenbank mit `drop_all()`
 # 📌 Märkte, MarketChanges & ProductChanges erstellen
 def init_products_and_markets():
     db = SessionLocal()
@@ -79,16 +85,45 @@ def init_products_and_markets():
 
         # ✅ Produkte erstellen, falls sie noch nicht existieren
         if db.query(Product).count() == 0:
-            all_products = [Product(asin=generate_asin()) for _ in range(50)]
-            db.add_all(all_products)
-            db.commit()
+            all_products = []
+            for _ in range(50):
+                new_asin = generate_asin()
+                new_product = Product(asin=new_asin)
+                db.add(new_product)
+                db.commit()
+                db.refresh(new_product)
+
+                # ✅ Erstelle `ProductChange` direkt beim Produkt
+                new_product_change = ProductChange(
+                    asin=new_product.asin,
+                    title=f"Produkt {new_asin}",
+                    price=round(random.uniform(10.0, 100.0), 2),
+                    main_category="Electronics",
+                    second_category="Gadgets",
+                    main_category_rank=random.randint(1, 100),
+                    second_category_rank=random.randint(1, 200),
+                    img_path="no image",
+                    change_date=datetime.now(),
+                    changes="Initial product creation",
+                    blm=random.randint(1, 5),
+                    total=round(random.uniform(500.0, 2000.0), 2)
+                )
+                db.add(new_product_change)
+                db.commit()
+                db.refresh(new_product_change)
+
+                # ✅ Verknüpfe ProductChange mit Product
+                new_product.product_changes.append(new_product_change)
+                db.commit()
+
+                all_products.append(new_product)
+                print(f"✅ `Product` {new_product.asin} mit `ProductChange` erstellt!")
+
         else:
             all_products = db.query(Product).all()
 
-        # ✅ FIX: Stelle sicher, dass `markets` immer existiert
-        markets = []
-
         # ✅ Märkte erstellen, falls sie noch nicht existieren
+        markets = []
         if db.query(Market).count() == 0:
             market1 = Market(keyword="creatine")
             market2 = Market(keyword="turf grass")
@@ -96,7 +131,7 @@ def init_products_and_markets():
             db.commit()
             markets = [market1, market2]  # ✅ Nach dem Erstellen zuweisen
         else:
-            markets = db.query(Market).all()  # ✅ Falls sie existieren, abrufen
+            markets = db.query(Market).all()
 
         # ✅ Produkte den Märkten zuweisen
         for market in markets:
@@ -104,7 +139,7 @@ def init_products_and_markets():
         db.commit()
         print("✅ Produkte wurden Märkten zugewiesen!")
 
-        # ✅ FIX: Einen MarketCluster erstellen und mit Benutzer + Märkten verknüpfen
+        # ✅ MarketClusters mit Benutzer und Märkten verknüpfen
         tester1 = db.query(User).filter(User.username == "Tester1").first()
         tester2 = db.query(User).filter(User.username == "Tester2").first()
 
@@ -112,13 +147,13 @@ def init_products_and_markets():
             cluster1 = MarketCluster(user_id=tester1.id, title="Fitness & Health Markets", markets=markets)
             db.add(cluster1)
             db.commit()
-            print(f"✅ MarketCluster '{cluster1.title}' für Tester1 mit {len(markets)} Märkten erstellt!")
+            print(f"✅ MarketCluster '{cluster1.title}' für Tester1 erstellt!")
 
         if tester2 and markets:
             cluster2 = MarketCluster(user_id=tester2.id, title="General Markets", markets=markets)
             db.add(cluster2)
             db.commit()
-            print(f"✅ MarketCluster '{cluster2.title}' für Tester2 mit {len(markets)} Märkten erstellt!")
+            print(f"✅ MarketCluster '{cluster2.title}' für Tester2 erstellt!")
 
         # ✅ MarketChanges für jeden Markt erstellen
         possible_suggestions = ["protein", "vitamins", "creatine", "energy drink", "running shoes", "gym bag", "supplements"]
