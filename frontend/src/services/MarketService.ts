@@ -215,7 +215,7 @@ class MarketService {
     }
   }
   
-  static async getActiveScrapingClusters(): Promise<string[]> {
+  static async getActiveScrapingClusters(): Promise<{ cluster_name: string; keywords: { keyword: string; status: string }[] }[]> {
     try {
       const token = localStorage.getItem(this.TOKEN_KEY);
       if (!token) throw new Error("Kein Token vorhanden. Bitte einloggen.");
@@ -230,7 +230,14 @@ class MarketService {
       if (!response.ok) throw new Error("Fehler beim Abrufen aktiver Scraping-Prozesse.");
       
       const data = await response.json();
-      return data.active_clusters || []; // ✅ Gibt Liste der Cluster-Namen zurück
+  
+      // Sicherstellen, dass die API das erwartete Format liefert
+      if (!data.active_clusters || !Array.isArray(data.active_clusters)) {
+        console.error("Unerwartetes API-Format für aktive Scraping-Prozesse:", data);
+        return [];
+      }
+  
+      return data.active_clusters; // ✅ Gibt die vollständige Cluster-Objekt-Liste zurück
     } catch (error) {
       console.error("Fehler beim Abrufen aktiver Scraping-Prozesse:", error);
       return [];

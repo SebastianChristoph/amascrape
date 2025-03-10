@@ -169,7 +169,7 @@ const columns: GridColDef[] = [
     headerName: "Total",
     width: 200,
     renderCell: (params) =>
-      params.value === 0.0 || params.value === "N/A" ?  <Alert sx={{ mt: 2 }}  severity="info"> Scraping needed</Alert> : params.value,
+      params.value === -1 || params.value === "N/A" ?  <Alert sx={{ mt: 2 }}  severity="info"> Scraping needed</Alert> : params.value,
   },
 ];
 

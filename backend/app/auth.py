@@ -6,8 +6,7 @@ from passlib.context import CryptContext
 from jose import JWTError, jwt
 from datetime import datetime, timedelta
 from sqlalchemy.orm import Session
-from app.database import SessionLocal
-from app.models import User
+from app.models import User  # ✅ Direktes Importieren der Models, kein Import von database.py hier!
 
 # .env Datei laden
 load_dotenv()
@@ -33,8 +32,9 @@ def create_access_token(data: dict, expires_delta: timedelta | None = None) -> s
     to_encode.update({"exp": expire})
     return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
 
-# Dependency, um eine Session zu erhalten
+# ✅ Fix: Importiere `SessionLocal` erst in `get_db()`, um Circular Import zu vermeiden
 def get_db():
+    from app.database import SessionLocal  # 🔥 Import passiert hier zur Laufzeit
     db = SessionLocal()
     try:
         yield db

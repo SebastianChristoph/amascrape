@@ -40,19 +40,26 @@ class User(Base):
     market_clusters = relationship("MarketCluster", back_populates="user")
 
 # 2️⃣ Products Table
+
 class Product(Base):
     __tablename__ = "products"
 
-    asin = Column(String, primary_key=True)  # Amazon Standard Identification Number (ASIN)
-    
-    # Many-to-Many Beziehung mit Markets
-    markets = relationship("Market", secondary=market_products, back_populates="products")
-    
-    # Beziehung zu ProductChange
-    product_changes = relationship("ProductChange", back_populates="product")
+    asin = Column(String, primary_key=True)
 
-    # Beziehung zu MarketChange
-    market_changes = relationship("MarketChange", secondary=market_change_products, back_populates="products")
+    markets = relationship(
+        "Market",
+        secondary=market_products,
+        back_populates="products",
+        passive_deletes=True
+    )
+
+    product_changes = relationship("ProductChange", back_populates="product", passive_deletes=True)
+    market_changes = relationship(
+        "MarketChange",
+        secondary=market_change_products,
+        back_populates="products",
+        passive_deletes=True
+    )
 
 # 3️⃣ ProductChanges Table
 class ProductChange(Base):
@@ -81,14 +88,21 @@ class Market(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     keyword = Column(String, unique=True, nullable=False)
 
-    # Many-to-Many Beziehung mit Products
-    products = relationship("Product", secondary=market_products, back_populates="markets")
-    
-    # Beziehung zu MarketChange
-    market_changes = relationship("MarketChange", back_populates="market")
+    products = relationship(
+        "Product",
+        secondary=market_products,
+        back_populates="markets",
+        passive_deletes=True
+    )
 
-    # Beziehung zu MarketCluster
-    market_clusters = relationship("MarketCluster", secondary=market_cluster_markets, back_populates="markets")
+    market_changes = relationship("MarketChange", back_populates="market", passive_deletes=True)
+
+    market_clusters = relationship(
+        "MarketCluster",
+        secondary=market_cluster_markets,
+        back_populates="markets",
+        passive_deletes=True
+    )
 
 # 5️⃣ MarketChanges Table
 class MarketChange(Base):
@@ -125,9 +139,13 @@ class MarketCluster(Base):
     __tablename__ = "market_clusters"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
+    user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
     title = Column(String, nullable=False)
 
-    # Beziehung zu User und Märkten
-    user = relationship("User", back_populates="market_clusters")
-    markets = relationship("Market", secondary=market_cluster_markets, back_populates="market_clusters")
+    user = relationship("User", back_populates="market_clusters", passive_deletes=True)
+    markets = relationship(
+        "Market",
+        secondary=market_cluster_markets,
+        back_populates="market_clusters",
+        passive_deletes=True
+    )

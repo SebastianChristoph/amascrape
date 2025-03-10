@@ -14,18 +14,7 @@ import { useEffect, useState } from "react";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(UserService.isAuthenticated());
 
-  const [newClusterData, setNewClusterData] = useState<{
-    keywords: string[];
-    clusterName: string | null;
-    loadingScrapingData: boolean;
-    scrapingData: any;
-  }>({
-    keywords: [],
-    clusterName: null,
-    loadingScrapingData: false,
-    scrapingData: null,
-  });
-  
+
 
   useEffect(() => {
     setIsAuthenticated(UserService.isAuthenticated());
@@ -39,9 +28,9 @@ function App() {
           <Routes>
             <Route path="/" element={isAuthenticated ? <Navigate to="/dashboard" /> : <Login />} />
             <Route element={<Layout setIsAuthenticated={setIsAuthenticated} />}>
-              <Route path="/dashboard" element={<Dashboard newClusterData={newClusterData} setNewClusterData={setNewClusterData} />} />
+              <Route path="/dashboard" element={<Dashboard/>} />
               <Route path="/cluster/:clusterId" element={<ClusterDetails />} />
-              <Route path="/add-market-cluster" element={<AddMarketCluster newClusterData={newClusterData} setNewClusterData={setNewClusterData} />} />
+              <Route path="/add-market-cluster" element={<AddMarketCluster />} />
             </Route>
             <Route path="*" element={<Navigate to={isAuthenticated ? "/dashboard" : "/"} />} />
           </Routes>

@@ -4,36 +4,27 @@ import { TextField, Button, Container, Typography, Box, Chip, Alert } from "@mui
 import MarketService from "../services/MarketService";
 import { useSnackbar } from "../providers/SnackbarProvider";
 
-interface AddMarketClusterProps {
-  newClusterData: {
-    keywords: string[];
-    clusterName: string | null;
-    loadingScrapingData: boolean;
-    scrapingData: any;
-  };
-  setNewClusterData: React.Dispatch<
-    React.SetStateAction<{
-      keywords: string[];
-      clusterName: string | null;
-      loadingScrapingData: boolean;
-      scrapingData: any;
-    }>
-  >;
-}
-
-const AddMarketCluster: React.FC<AddMarketClusterProps> = ({ newClusterData, setNewClusterData }) => {
+const AddMarketCluster: React.FC = () => {
   const navigate = useNavigate();
   const { showSnackbar } = useSnackbar();
-  const [newKeyword, setNewKeyword] = useState("");
+  
+  const [clusterName, setClusterName] = useState<string>("");
+  const [keywords, setKeywords] = useState<string[]>([]);
+  const [newKeyword, setNewKeyword] = useState<string>("");
   const [existingClusters, setExistingClusters] = useState<string[]>([]);
-  const [isScraping, setIsScraping] = useState<boolean>(false); // ✅ Speichert Scraping-Status
+  const [isScraping, setIsScraping] = useState<boolean>(false);
 
-  // ✅ Prüft beim Laden, ob ein Scraping-Prozess läuft
+  // ✅ Prüft, ob ein aktiver Scraping-Prozess läuft
   useEffect(() => {
     const checkActiveScraping = async () => {
-      const activeClusters = await MarketService.getActiveScrapingClusters();
-      console.log("🔍 Läuft aktuell ein Scraping-Prozess?", activeClusters.length > 0);
-      setIsScraping(activeClusters.length > 0);
+      try {
+        const activeClusters = await MarketService.getActiveScrapingClusters();
+        console.log("🔍 Aktive Scraping-Prozesse:", activeClusters);
+
+        setIsScraping(activeClusters.length > 0);
+      } catch (error) {
+        console.error("Fehler beim Abrufen aktiver Scraping-Prozesse:", error);
+      }
     };
 
     checkActiveScraping();
@@ -44,10 +35,11 @@ const AddMarketCluster: React.FC<AddMarketClusterProps> = ({ newClusterData, set
     const fetchMarketClusters = async () => {
       try {
         const data = await MarketService.get_market_cluster();
-        if (data) {
-          setExistingClusters(data.map((cluster: any) => cluster.title.toLowerCase())); // ✅ Cluster-Titel in lowercase speichern
+        if (Array.isArray(data)) {
+          setExistingClusters(data.map((cluster: any) => cluster.title.toLowerCase()));
         }
       } catch (error) {
+        console.error("Fehler beim Laden der Market-Cluster:", error);
         showSnackbar("Fehler beim Laden der Market-Cluster.");
       }
     };
@@ -58,67 +50,54 @@ const AddMarketCluster: React.FC<AddMarketClusterProps> = ({ newClusterData, set
   // ✅ Keyword hinzufügen (immer in lowercase)
   const handleAddKeyword = () => {
     const keywordLower = newKeyword.trim().toLowerCase();
-    if (keywordLower && !newClusterData.keywords.includes(keywordLower)) {
-      setNewClusterData((prevState) => ({
-        ...prevState,
-        keywords: [...prevState.keywords, keywordLower],
-      }));
+    if (keywordLower && !keywords.includes(keywordLower)) {
+      setKeywords([...keywords, keywordLower]);
       setNewKeyword("");
     }
   };
 
   // ✅ Keyword entfernen
   const handleRemoveKeyword = (keywordToRemove: string) => {
-    setNewClusterData((prevState) => ({
-      ...prevState,
-      keywords: prevState.keywords.filter((keyword) => keyword !== keywordToRemove),
-    }));
+    setKeywords(keywords.filter((keyword) => keyword !== keywordToRemove));
   };
 
-  // ✅ Cluster-Titel aktualisieren (nicht lowercase!)
+  // ✅ Cluster-Titel aktualisieren
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNewClusterData((prevState) => ({
-      ...prevState,
-      clusterName: e.target.value,
-    }));
+    setClusterName(e.target.value);
   };
 
   // ✅ Market Cluster erstellen
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
-    if (!newClusterData.clusterName) {
+    if (!clusterName.trim()) {
       showSnackbar("Bitte gib einen Cluster-Titel ein.");
       return;
     }
 
-    const titleLower = newClusterData.clusterName.toLowerCase();
+    const titleLower = clusterName.trim().toLowerCase();
 
     if (existingClusters.includes(titleLower)) {
       showSnackbar("❌ Ein Market Cluster mit diesem Titel existiert bereits!");
       return;
     }
 
-    if (newClusterData.keywords.length === 0) {
+    if (keywords.length === 0) {
       showSnackbar("❌ Cluster braucht mindestens 1 Keyword");
       return;
     }
 
-    // ✅ Keywords in lowercase umwandeln
-    const lowercaseKeywords = newClusterData.keywords.map((kw) => kw.toLowerCase());
+    try {
+      await MarketService.startScrapingProcess({
+        clusterName: clusterName.trim(),
+        keywords: keywords.map((kw) => kw.toLowerCase()),
+      });
 
-    await MarketService.startScrapingProcess({
-      ...newClusterData,
-      clusterName: newClusterData.clusterName, // ✅ Originaler Clustername (nicht lowercase!)
-      keywords: lowercaseKeywords,
-    });
-
-    setNewClusterData((prevState) => ({
-      ...prevState,
-      loadingScrapingData: true,
-    }));
-
-    navigate("/dashboard");
+      navigate("/dashboard");
+    } catch (error) {
+      console.error("Fehler beim Starten des Scraping-Prozesses:", error);
+      showSnackbar("❌ Fehler beim Starten des Scraping-Prozesses.");
+    }
   };
 
   return (
@@ -138,7 +117,7 @@ const AddMarketCluster: React.FC<AddMarketClusterProps> = ({ newClusterData, set
             fullWidth
             label="Cluster Title"
             variant="outlined"
-            value={newClusterData.clusterName || ""}
+            value={clusterName}
             onChange={handleTitleChange}
             required
             sx={{ mb: 2 }}
@@ -158,7 +137,7 @@ const AddMarketCluster: React.FC<AddMarketClusterProps> = ({ newClusterData, set
           </Box>
 
           <Box sx={{ mb: 2 }}>
-            {newClusterData.keywords.map((keyword, index) => (
+            {keywords.map((keyword, index) => (
               <Chip key={index} label={keyword} onDelete={() => handleRemoveKeyword(keyword)} sx={{ mr: 1 }} />
             ))}
           </Box>

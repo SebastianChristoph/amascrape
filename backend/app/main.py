@@ -29,8 +29,11 @@ app = FastAPI()
 # python -m uvicorn app.main:app --host 0.0.0.0 --port 9000 --reload
 
 # Datenbank initialisieren
-init_db()
-
+def initialize_database():
+    from app.database import init_db  # 🔥 Import passiert erst zur Laufzeit!
+    init_db()
+    
+initialize_database()
 # ✅ CORS aktivieren
 app.add_middleware(
     CORSMiddleware,
