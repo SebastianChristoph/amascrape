@@ -154,8 +154,18 @@ class AmazonFirstPageScraper:
         
         finally:
             self.close_driver()
+if __name__ == "__main__":
+    scraper = AmazonFirstPageScraper(headless=True, show_details=True)
+    results = scraper.get_first_page_data("turf grass")
 
-# scraper = AmazonFirstPageScraper(headless=True, show_details=False)
-# results = scraper.get_first_page_data("creatine")
+    print(results['top_search_suggestions'])
+    print("----------------")
+
+    for product in results['first_page_products']:
+        print(product['asin'])
+        print(product['price'])
+        print(product['title'])
+        print(product['image'])
+        print("\n")
 
 

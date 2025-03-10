@@ -1,10 +1,20 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import MarketService from "../services/MarketService";
-import { Typography, Container, CircularProgress, Box, Card, CardContent, Tabs, Tab } from "@mui/material";
+import {
+  Typography,
+  Container,
+  CircularProgress,
+  Box,
+  Card,
+  CardContent,
+  Tabs,
+  Tab,
+  Alert,
+  Chip,
+  LinearProgress,
+} from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import LinearProgress from '@mui/material/LinearProgress';
-
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -40,109 +50,130 @@ export default function ClusterDetails() {
   const [marketCluster, setMarketCluster] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [tabIndex, setTabIndex] = useState(0);
+  const [isNotScrapedYet, setIsNotScrapedYet] = useState<boolean>(false); // ✅ Neuer Zustand für Preis -1
 
   useEffect(() => {
     async function fetchClusterDetails() {
       if (!clusterId) return;
       setLoading(true);
-      const data = await MarketService.get_market_cluster_details(Number(clusterId));
+      const data = await MarketService.get_market_cluster_details(
+        Number(clusterId)
+      );
       console.log(data);
       setMarketCluster(data);
       setLoading(false);
+
+      // ✅ Überprüfung, ob irgendein Produkt price === -1 hat
+      if (data?.markets) {
+        const invalidBLMFound = data.markets.some((market: any) =>
+          market.products.some((product: any) => product.blm === -1)
+        );
+        setIsNotScrapedYet(invalidBLMFound);
+      }
     }
 
     fetchClusterDetails();
   }, [clusterId]);
 
   if (loading) return <CircularProgress />;
-  if (!marketCluster || !marketCluster.markets || marketCluster.markets.length === 0)
-    return <Typography>Market-Cluster nicht gefunden oder keine Märkte enthalten.</Typography>;
+  if (
+    !marketCluster ||
+    !marketCluster.markets ||
+    marketCluster.markets.length === 0
+  )
+    return (
+      <Typography>
+        Market-Cluster nicht gefunden oder keine Märkte enthalten.
+      </Typography>
+    );
 
   const handleTabChange = (event: React.SyntheticEvent, newIndex: number) => {
     setTabIndex(newIndex);
   };
 
   // 📌 Spalten für DataGrid mit Bild hinzugefügt
-  const columns: GridColDef[] = [
-    {
-      field: "image",
-      headerName: "Image",
-      width: 80,
-      renderCell: (params) => {
-        const imageUrl =
-          !params.value || params.value === "no image"
-            ? "https://i0.wp.com/sogiecenter.org/wp-content/uploads/2023/10/placeholder.png?fit=1200%2C800&ssl=1" // ✅ Platzhalter-Bild
-            : params.value;
-  
-        return (
-          <img
-            src={imageUrl}
-            alt="Product"
-            style={{ width: "100%", objectFit: "fill", marginTop: 20 }}
-          />
-        );
-      },
+// 📌 Spalten für DataGrid mit Bild hinzugefügt
+const columns: GridColDef[] = [
+  {
+    field: "image",
+    headerName: "Image",
+    width: 80,
+    renderCell: (params) => {
+      const imageUrl =
+        !params.value || params.value === "no image"
+          ? "https://i0.wp.com/sogiecenter.org/wp-content/uploads/2023/10/placeholder.png?fit=1200%2C800&ssl=1" // ✅ Platzhalter-Bild
+          : params.value;
+
+      return (
+        <img
+          src={imageUrl}
+          alt="Product"
+          style={{ width: "100%", objectFit: "fill", marginTop: 20 }}
+        />
+      );
     },
-    { field: "id", headerName: "ASIN", width: 150 },
-    {
-      field: "title",
-      headerName: "Titel",
-      width: 120,
-      renderCell: (params) =>
-        params.value === "Kein Titel" ? <CircularProgress size={20} /> : params.value,
-    },
-    {
-      field: "price",
-      headerName: "Preis (€)",
-      type: "number",
-      width: 120,
-      renderCell: (params) =>
-        params.value === -1 || params.value === "N/A" ?  <Box sx={{mt:5}}><LinearProgress /></Box> : params.value,
-    },
-    {
-      field: "mainCategory",
-      headerName: "Main Category",
-      width: 180,
-      renderCell: (params) =>
-        params.value === "Unknown" ? <Box sx={{mt:5}}><LinearProgress /></Box> : params.value,
-    },
-    {
-      field: "mainCategoryRank",
-      headerName: "Rank #1",
-      width: 180,
-      renderCell: (params) =>
-        params.value === -1 ?  <Box sx={{mt:5}}><LinearProgress /></Box> : params.value,
-    },
-    {
-      field: "secondCategory",
-      headerName: "Category #2",
-      width: 180,
-      renderCell: (params) =>
-        params.value === "Unknown" ?  <Box sx={{mt:5}}><LinearProgress /></Box> : params.value,
-    },
-    {
-      field: "secondCategoryRank",
-      headerName: "Rank #2",
-      width: 180,
-      renderCell: (params) =>
-        params.value === -1 ?  <Box sx={{mt:5}}><LinearProgress /></Box> : params.value,
-    },
-    {
-      field: "blm",
-      headerName: "BLM",
-      width: 180,
-      renderCell: (params) =>
-        params.value === -1 ?  <Box sx={{mt:5}}><LinearProgress /></Box> : params.value,
-    },
-    {
-      field: "total",
-      headerName: "Total",
-      width: 180,
-      renderCell: (params) =>
-        params.value === 0.0 || params.value === "N/A" ?  <Box sx={{mt:5}}><LinearProgress /></Box> : params.value,
-    },
-  ];
-  
+  },
+  { field: "id", headerName: "ASIN", width: 150 },
+  {
+    field: "title",
+    headerName: "Titel",
+    width: 400,
+    renderCell: (params) =>
+      params.value === "Kein Titel" ? <Alert sx={{ mt: 2 }}  severity="info"> Scraping needed</Alert>  : params.value,
+  },
+  {
+    field: "price",
+    headerName: "Preis (€)",
+    type: "number",
+    width: 100,
+    renderCell: (params) =>
+      params.value === -1 || params.value === "N/A" ?  <Alert sx={{ mt: 2 }}  severity="info"></Alert> : params.value,
+  },
+  {
+    field: "mainCategory",
+    headerName: "Main Category",
+    width: 200,
+    renderCell: (params) =>
+      params.value === "Unknown" ? <Alert sx={{ mt: 2 }}  severity="info"> Scraping needed</Alert> : params.value,
+  },
+  {
+    field: "mainCategoryRank",
+    headerName: "Rank #1",
+    width: 100,
+    renderCell: (params) =>
+      params.value === -1 ?  <Alert sx={{ mt: 2 }}  severity="info"></Alert> : params.value,
+  },
+  {
+    field: "secondCategory",
+    headerName: "Category #2",
+    width: 200,
+    renderCell: (params) =>
+      params.value === "Unknown" ?  <Alert sx={{ mt: 2 }}  severity="info"> Scraping needed</Alert> : params.value,
+  },
+  {
+    field: "secondCategoryRank",
+    headerName: "Rank #2",
+    width: 100,
+    renderCell: (params) =>
+      params.value === -1 ?  <Alert sx={{ mt: 2 }}  severity="info"></Alert> : params.value,
+  },
+  {
+    field: "blm",
+    headerName: "BLM",
+    width: 100,
+    renderCell: (params) =>
+      params.value === -1 ?  <Alert sx={{ mt: 2 }}  severity="info"></Alert> : params.value,
+  },
+  {
+    field: "total",
+    headerName: "Total",
+    width: 200,
+    renderCell: (params) =>
+      params.value === 0.0 || params.value === "N/A" ?  <Alert sx={{ mt: 2 }}  severity="info"> Scraping needed</Alert> : params.value,
+  },
+];
+
+
   return (
     <div>
       <Typography variant="h4" sx={{ marginBottom: 2 }}>
@@ -155,7 +186,11 @@ export default function ClusterDetails() {
 
           {/* Tabs für jeden Market */}
           <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-            <Tabs value={tabIndex} onChange={handleTabChange} aria-label="Market Tabs">
+            <Tabs
+              value={tabIndex}
+              onChange={handleTabChange}
+              aria-label="Market Tabs"
+            >
               {marketCluster.markets.map((market: any, index: number) => (
                 <Tab key={index} label={market.keyword} {...a11yProps(index)} />
               ))}
@@ -165,26 +200,64 @@ export default function ClusterDetails() {
           {/* Tab Panels mit DataGrid für die neuesten Produkte */}
           {marketCluster.markets.map((market: any, index: number) => (
             <TabPanel key={index} value={tabIndex} index={index}>
-              <p>
-                Total revenue of market: {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(market.revenue_total)}
-              </p>
+              {isNotScrapedYet && (
+                <Box>
+                  <Alert severity="info">
+                    This is just an impression of your market. It needs to be
+                    scraped to get better data.
+                  </Alert>
+                </Box>
+              )}
 
-              <div>
-                <h3>Top suggestions for market:</h3>
-                {market.top_suggestions
-                  ? market.top_suggestions.split(",").map((suggestion: string, index: number) => (
-                      <p key={index}>{suggestion.trim()}</p>
-                    ))
-                  : <p>No suggestions available</p>
-                }
-              </div>
+              {!isNotScrapedYet && (
+                <p>
+                  Total revenue of market:{" "}
+                  {new Intl.NumberFormat("en-US", {
+                    style: "currency",
+                    currency: "USD",
+                  }).format(market.revenue_total)}
+                </p>
+              )}
+
+              <Box
+                sx={{
+                  backgroundColor: "#f5f5f5",
+                  padding: 2,
+                  borderRadius: 2,
+                  mt: 2,
+                  boxShadow: 1,
+                }}
+              >
+                <Typography variant="h6" sx={{ mb: 1 }}>
+                  🔍 Top search term suggestions from Amazon Search Bar
+                </Typography>
+
+                {market.top_suggestions ? (
+                  <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
+                    {market.top_suggestions
+                      .split(",")
+                      .map((suggestion: string, index: number) => (
+                        <Chip
+                          key={index}
+                          label={suggestion.trim()}
+                          variant="outlined"
+                          sx={{ mr: 1, mb: 1 }}
+                        />
+                      ))}
+                  </Box>
+                ) : (
+                  <Typography sx={{ color: "gray", fontStyle: "italic" }}>
+                    Keine Vorschläge verfügbar
+                  </Typography>
+                )}
+              </Box>
 
               <Box sx={{ width: "100%", marginTop: 2 }}>
                 {market.products && market.products.length > 0 ? (
                   <DataGrid
                     rows={market.products.map((product: any) => ({
                       id: product.asin,
-                      image: product.image, 
+                      image: product.image,
                       title: product.title || "Kein Titel",
                       price: product.price || "N/A",
                       mainCategory: product.main_category || "N/A",
@@ -208,7 +281,9 @@ export default function ClusterDetails() {
                     disableRowSelectionOnClick
                   />
                 ) : (
-                  <Typography>Keine aktuellen Produktänderungen für diesen Markt.</Typography>
+                  <Typography>
+                    Keine aktuellen Produktänderungen für diesen Markt.
+                  </Typography>
                 )}
               </Box>
             </TabPanel>
