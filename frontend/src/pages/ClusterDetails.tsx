@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import MarketService from "../services/MarketService";
 import { Typography, Container, CircularProgress, Box, Card, CardContent, Tabs, Tab } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import LinearProgress from '@mui/material/LinearProgress';
+
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -66,21 +68,81 @@ export default function ClusterDetails() {
       field: "image",
       headerName: "Image",
       width: 80,
-      renderCell: (params) => (
-        <img src={params.value} alt="Product" style={{ width: "100%", objectFit: "fill", marginTop: 20 }} />
-      ),
+      renderCell: (params) => {
+        const imageUrl =
+          !params.value || params.value === "no image"
+            ? "https://i0.wp.com/sogiecenter.org/wp-content/uploads/2023/10/placeholder.png?fit=1200%2C800&ssl=1" // ✅ Platzhalter-Bild
+            : params.value;
+  
+        return (
+          <img
+            src={imageUrl}
+            alt="Product"
+            style={{ width: "100%", objectFit: "fill", marginTop: 20 }}
+          />
+        );
+      },
     },
     { field: "id", headerName: "ASIN", width: 150 },
-    { field: "title", headerName: "Produktname", width: 250 },
-    { field: "price", headerName: "Preis (€)", type: "number", width: 120 },
-    { field: "mainCategory", headerName: "Main Category", width: 180 },
-    { field: "mainCategoryRank", headerName: "Rank #1", width: 180 },
-    { field: "secondCategory", headerName: "Category #2", width: 180 },
-    { field: "secondCategoryRank", headerName: "Rank #2", width: 180 },
-    { field: "blm", headerName: "BLM", width: 180 },
-    { field: "total", headerName: "Total", width: 180 },
+    {
+      field: "title",
+      headerName: "Titel",
+      width: 120,
+      renderCell: (params) =>
+        params.value === "Kein Titel" ? <CircularProgress size={20} /> : params.value,
+    },
+    {
+      field: "price",
+      headerName: "Preis (€)",
+      type: "number",
+      width: 120,
+      renderCell: (params) =>
+        params.value === -1 || params.value === "N/A" ?  <Box sx={{mt:5}}><LinearProgress /></Box> : params.value,
+    },
+    {
+      field: "mainCategory",
+      headerName: "Main Category",
+      width: 180,
+      renderCell: (params) =>
+        params.value === "Unknown" ? <Box sx={{mt:5}}><LinearProgress /></Box> : params.value,
+    },
+    {
+      field: "mainCategoryRank",
+      headerName: "Rank #1",
+      width: 180,
+      renderCell: (params) =>
+        params.value === -1 ?  <Box sx={{mt:5}}><LinearProgress /></Box> : params.value,
+    },
+    {
+      field: "secondCategory",
+      headerName: "Category #2",
+      width: 180,
+      renderCell: (params) =>
+        params.value === "Unknown" ?  <Box sx={{mt:5}}><LinearProgress /></Box> : params.value,
+    },
+    {
+      field: "secondCategoryRank",
+      headerName: "Rank #2",
+      width: 180,
+      renderCell: (params) =>
+        params.value === -1 ?  <Box sx={{mt:5}}><LinearProgress /></Box> : params.value,
+    },
+    {
+      field: "blm",
+      headerName: "BLM",
+      width: 180,
+      renderCell: (params) =>
+        params.value === -1 ?  <Box sx={{mt:5}}><LinearProgress /></Box> : params.value,
+    },
+    {
+      field: "total",
+      headerName: "Total",
+      width: 180,
+      renderCell: (params) =>
+        params.value === 0.0 || params.value === "N/A" ?  <Box sx={{mt:5}}><LinearProgress /></Box> : params.value,
+    },
   ];
-
+  
   return (
     <div>
       <Typography variant="h4" sx={{ marginBottom: 2 }}>
@@ -122,7 +184,7 @@ export default function ClusterDetails() {
                   <DataGrid
                     rows={market.products.map((product: any) => ({
                       id: product.asin,
-                      image: `https://m.media-amazon.com/images/I/71jXsC613vL._AC_UL320_.jpg`, 
+                      image: product.image, 
                       title: product.title || "Kein Titel",
                       price: product.price || "N/A",
                       mainCategory: product.main_category || "N/A",

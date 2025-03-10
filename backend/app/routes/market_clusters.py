@@ -185,6 +185,7 @@ def get_market_cluster_details(cluster_id: int, db: Session = Depends(get_db), c
                 ).order_by(ProductChange.change_date.desc()).first()
 
                 product_data = {
+                    "image" : latest_product_change.img_path if (latest_product_change.img_path or latest_product_change.img_path == "") else "no image",
                     "asin": product.asin,
                     "title": latest_product_change.title if latest_product_change else "Unknown",
                     "price": latest_product_change.price if latest_product_change else None,

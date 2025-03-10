@@ -1,13 +1,27 @@
-import random
-import time
-from fastapi import FastAPI, HTTPException
+from datetime import datetime, timezone
+from fastapi import FastAPI, HTTPException, BackgroundTasks, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from app.routes import users, markets, market_clusters
 from app.database import init_db
-from typing import List
+from typing import List, Optional
+from sqlalchemy.orm import Session
+from app.auth import get_current_user
 from scraper.first_page_amazon_scraper import AmazonFirstPageScraper
 from fastapi import FastAPI, BackgroundTasks
+from pydantic import BaseModel
+import asyncio
+from app.routes import users, markets, market_clusters
+from app.database import init_db, get_db
+from app.models import Market, MarketChange, MarketCluster, Product, ProductChange, User
 
+
+from concurrent.futures import ThreadPoolExecutor
+
+executor = ThreadPoolExecutor()
+
+class NewClusterData(BaseModel):
+    keywords: List[str]
+    clusterName: Optional[str] = None
 
 app = FastAPI()
 
@@ -26,99 +40,189 @@ app.add_middleware(
     allow_headers=["*"],  # Alle Header erlauben
     )
 
-
-# 📌 Router registrieren
 app.include_router(users.router, prefix="/users", tags=["Users"])
 app.include_router(markets.router, prefix="/markets", tags=["Markets"])
-app.include_router(market_clusters.router, prefix="/market-clusters", tags=["Market Clusters"])  # 📌 Neue Route
+app.include_router(market_clusters.router, prefix="/market-clusters", tags=["Market Clusters"]) 
 @app.get("/")
 def root():
     return {"message": "Welcome to the FastAPI Auth System"}
 
-
-asin_results = {}
-simulated_proccesses = {}
-
-@app.get("/api/start-process")
-async def get_data(task_id: str, background_tasks: BackgroundTasks):
-    print(f"🔥 Registrierung des Prozess - Beginns mit Task-Id {task_id}")
-    background_tasks.add_task(simulate_process, task_id)
-    print("background tasks:", background_tasks)
-
-    # ✅ Erfolgreiche Antwort mit `success`
-    return {"success": True, "message": "Test started"}
-
-def simulate_process(task_id: str):
-    delay = random.randint(3, 6)
-    simulated_proccesses[task_id] = {"status": "processing", "delay": delay}
-    print(f"⏳ Beginn mit Task ({task_id})! Wartezeit: {delay} Sekunden")
-    time.sleep(delay)
-    simulated_proccesses[task_id] = {"status": "done", "data" : {"words" : ["hallo", "welt"]}}
-    print(f"✅ Ende Task ({task_id})!")
-
-@app.get("/api/get-status")
-async def get_status(task_id: str):
-    print(f"🔄 Checking for Status of Task {task_id}")
-    print(simulated_proccesses)
-    if task_id not in simulated_proccesses:
-        print(f"❌ Task {task_id} not found!")
-        return {"status": "not found"}
-    return simulated_proccesses[task_id]
+scraping_processes = {}  # Struktur: { user_id: { cluster_name: { status, keywords: {...} } } }
 
 
+class NewClusterData(BaseModel):
+    keywords: List[str]
+    clusterName: Optional[str] = None
 
-@app.get("/api/get-asins")
-async def fetch_asins(search_term: str, task_id: str, background_tasks: BackgroundTasks):
-    """Startet das Scraping und speichert den Task als 'processing'"""
+
+@app.post("/api/start-firstpage-scraping-process")
+async def post_scraping(newClusterData: NewClusterData, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
+    """Startet den Scraping-Prozess für einen Nutzer"""
+    user_id = current_user.id
+    cluster_name = newClusterData.clusterName
+    print(f"🔥 Start Scraping für Nutzer {user_id}, Cluster: {cluster_name}")
+
+    # ✅ Falls Nutzer noch keinen Prozess laufen hat, erstelle Speicherplatz
+    if user_id not in scraping_processes:
+        scraping_processes[user_id] = {}
     
-    # 🔥 Stelle sicher, dass die Task-ID gespeichert wird, bevor Scraping startet
-    asin_results[task_id] = {"status": "processing", "asins": []}
+    # ✅ Cluster für diesen Nutzer speichern
+    scraping_processes[user_id][cluster_name] = {"status": "processing", "keywords": {}}
 
-    # Starte Scraping im Hintergrund
-    background_tasks.add_task(run_scraping_task_test, search_term, task_id)
+    for keyword in newClusterData.keywords:
+        market_exists = db.query(Market).filter(Market.keyword == keyword).first()
 
-    return {"message": "Scraping started", "task_id": task_id}
+        if market_exists:
+            print(f"✅ Market '{keyword}' existiert bereits.")
+            scraping_processes[user_id][cluster_name]["keywords"][keyword] = {"status": "done", "data": {}}
+        else:
+            print(f"🔍 Scraping für neues Keyword: {keyword}")
+            scraping_processes[user_id][cluster_name]["keywords"][keyword] = {"status": "processing", "data": {}}
+            asyncio.create_task(scraping_process(keyword, cluster_name, user_id))  
 
+    return {"success": True, "message": f"Scraping für {cluster_name} gestartet"}
 
+@app.get("/api/get-loading-clusters")
+async def get_loading_clusters(current_user: User = Depends(get_current_user)):
+    user_id = current_user.id
 
-@app.get("/api/get-asins/status")
-async def get_scraping_status(task_id: str):
-    """Gibt den aktuellen Status des Scraping-Tasks zurück"""
-    if task_id not in asin_results:
-        print(f"❌ [Backend] Task {task_id} nicht gefunden!")  # ✅ DEBUG LOG
-        return {"status": "not found"}
-    
-    print(f"🔄 [Backend] Task {task_id} Status: {asin_results[task_id]['status']}")  # ✅ DEBUG LOG
-    return asin_results[task_id]
+    # Prüfen, ob der Benutzer überhaupt Scraping-Prozesse hat
+    if user_id not in scraping_processes:
+        return {"active_clusters": []}  # ✅ Keine aktiven Scraping-Prozesse
 
-
-def run_scraping_task_test(search_term: str, task_id: str):
-    print(f"🚀 [Scraping gestartet] Task {task_id} für '{search_term}'")  
-    asin_results[task_id] = {"status": "processing", "asins": []}
-
-    delay = random.randint(4, 10)
-    print(f"⏳ [Scraping läuft] Task {task_id}, Wartezeit: {delay} Sekunden")
-    time.sleep(delay)
-
-    fake_asins = [
-        {"asin": f"TEST-{i}", "title": f"Produkt {i}", "price": round(random.uniform(5, 100), 2)}
-        for i in range(random.randint(3, 10))
+    # Finde alle Cluster-Namen mit Status "processing"
+    active_clusters = [
+        cluster_name
+        for cluster_name, cluster_data in scraping_processes[user_id].items()
+        if cluster_data["status"] == "processing"
     ]
 
-    asin_results[task_id] = {"status": "completed", "data": {"first_page_products": fake_asins}}
-    print(f"✅ [Scraping abgeschlossen] Task {task_id} hat {len(fake_asins)} Produkte gefunden.")
+    return {"active_clusters": active_clusters}  # ✅ Liste der aktiven Cluster
 
 
-# def run_scraping_task(search_term: str, task_id: str):
-#     """Führt das Scraping aus und speichert das Ergebnis"""
+
+@app.get("/api/get-status-of-firstpage-scraping-process")
+async def get_status(clustername: str, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
+    """Überprüft den Scraping-Status für einen Nutzer"""
+
+    user_id = current_user.id
+
+    # ✅ Prüfen, ob der Cluster für den Nutzer existiert
+    if user_id not in scraping_processes or clustername not in scraping_processes[user_id]:
+        print(f"❌ Cluster '{clustername}' nicht gefunden für Nutzer {user_id}")
+        return {"status": "not found"}
+
+    # ✅ Prüfen, ob noch ein Keyword im Status "processing" ist
+    if any(k_data["status"] == "processing" for k_data in scraping_processes[user_id][clustername]["keywords"].values()):
+        return scraping_processes[user_id][clustername]
+
+    # ✅ Falls alles fertig ist, setze Status auf "done"
+    scraping_processes[user_id][clustername]["status"] = "done"
+    print(f"✅ Alle Keywords für '{clustername}' fertig! -> Datenbank schreiben")
+
+    # 🔍 **CHECK: Gibt es das MarketCluster bereits für diesen Nutzer?**
+    existing_cluster = db.query(MarketCluster).filter(
+        MarketCluster.title == clustername,
+        MarketCluster.user_id == user_id
+    ).first()
+
+    if existing_cluster:
+        print(f"🔗 MarketCluster '{clustername}' existiert bereits -> Keine doppelte Anlage.")
+        return scraping_processes[user_id][clustername]
+
+    # 📌 Neues MarketCluster anlegen
+    new_cluster = MarketCluster(title=clustername, user_id=user_id)
+    db.add(new_cluster)
+
+    for keyword, keyword_data in scraping_processes[user_id][clustername]["keywords"].items():
+        existing_market = db.query(Market).filter(Market.keyword == keyword).first()
+
+        if existing_market:
+            print(f"🔗 Markt '{keyword}' existiert bereits -> Verknüpfung mit Cluster.")
+            new_cluster.markets.append(existing_market)
+            continue  # Weiter zum nächsten Keyword
+
+        print(f"🆕 Neuer Markt '{keyword}' wird angelegt.")
+        new_market = Market(keyword=keyword)
+        db.add(new_market)
+        db.commit()
+        db.refresh(new_market)
+        new_cluster.markets.append(new_market)
+
+        # ✅ MarketChange für neuen Markt erstellen
+        product_data_list = keyword_data["data"].get("first_page_products", [])
+        new_asins = [p["asin"] for p in product_data_list] if product_data_list else []
+        top_suggestions = keyword_data["data"].get("top_search_suggestions", [])
+
+        new_market_change = MarketChange(
+            market_id=new_market.id,
+            change_date=datetime.now(timezone.utc),
+            new_products=",".join(new_asins),
+        )
+        new_market_change.set_top_suggestions(top_suggestions)
+        db.add(new_market_change)
+
+        # ✅ Produkte & ProductChanges verknüpfen
+        for product_data in product_data_list:
+            existing_product = db.query(Product).filter(Product.asin == product_data["asin"]).first()
+
+            if existing_product:
+                new_market.products.append(existing_product)
+                new_market_change.products.append(existing_product)
+            else:
+                new_product = Product(asin=product_data["asin"])
+                db.add(new_product)
+                db.commit()
+                db.refresh(new_product)
+
+                new_market.products.append(new_product)
+                new_market_change.products.append(new_product)
+
+                # ✅ `ProductChange` sicher erstellen (Fallbacks für fehlende Daten)
+                new_product_change = ProductChange(
+                    asin=new_product.asin,
+                    title=product_data.get("title", "Unknown Product"),
+                    price=product_data.get("price") if isinstance(product_data.get("price"), (int, float)) else 0.0,
+                    main_category=product_data.get("main_category", "Unknown"),
+                    second_category=product_data.get("second_category", "Unknown"),
+                    main_category_rank=product_data.get("main_category_rank", -1),
+                    second_category_rank=product_data.get("second_category_rank", -1),
+                    img_path=product_data.get("image", "https://via.placeholder.com/150"),
+                    change_date=datetime.now(timezone.utc),
+                    changes="Initial creation",
+                    blm=-1,
+                    total=0.0,
+                )
+                db.add(new_product_change)
+                db.commit()
+                db.refresh(new_product_change)
+
+                new_product.product_changes.append(new_product_change)
+
+    db.commit()
+    db.refresh(new_cluster)
+
+    return scraping_processes[user_id][clustername]
+
+
+async def scraping_process(keyword: str, clustername: str, user_id: int):
+    """Führt das Scraping für ein Keyword durch"""
+    print(f"⏳ Start Scraping ({keyword}) für Nutzer {user_id}")
+
+    loop = asyncio.get_running_loop()
+    first_page_data = await loop.run_in_executor(executor, fetch_first_page_data, keyword)
+
+    # ✅ Falls der Scraper keine Daten zurückgibt, setze Standardwerte
+    if not first_page_data:
+        first_page_data = {"first_page_products": [], "top_search_suggestions": []}
     
-#     # Sicherstellen, dass eine Instanz verwendet wird
-#     amazon_scraper = AmazonFirstPageScraper(headless=True,show_details=False)
-#     first_page_data = amazon_scraper.get_first_page_data(search_term)
+    scraping_processes[user_id][clustername]["keywords"][keyword]["data"] = first_page_data
+    scraping_processes[user_id][clustername]["keywords"][keyword]["status"] = "done"
+    
+    print(f"✅ Scraping für '{keyword}' abgeschlossen! (Nutzer {user_id})")
 
-#     # DEBUG: Zeige gefundene ASINs in der Konsole
-#     # print(f"✅ Scraping für Task {task_id} abgeschlossen. Gefundene ASINs: {asins}")
 
-#     # **Hier den Status auf "completed" setzen**
-#     asin_results[task_id] = {"status": "completed", "data": first_page_data}
-
+def fetch_first_page_data(keyword: str):
+    """Scraper-Logik"""
+    amazon_scraper = AmazonFirstPageScraper(headless=True, show_details=True)
+    return amazon_scraper.get_first_page_data(keyword)

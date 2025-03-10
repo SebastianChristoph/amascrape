@@ -38,7 +38,7 @@ class AmazonFirstPageScraper:
                     if self.show_details: print("✅ Page loaded successfully")
                     return
                 except Exception as e:
-                    self.log(f"⚠️ Error loading {url} (Attempt {attempt + 1}/{retries}): {e}")
+                    if self.show_details: print(f"⚠️ Error loading {url} (Attempt {attempt + 1}/{retries}): {e}")
                     time.sleep(wait)
             raise Exception(f"❌ Failed to load {url} after {retries} attempts")
 
@@ -103,14 +103,15 @@ class AmazonFirstPageScraper:
                     # Extract price
                     price_link = next((a for a in item.find_elements(By.TAG_NAME, "a") if a.get_attribute("aria-describedby") == "price-link"), None)
                     if not price_link:
-                        raise Exception("Price link not found")
-                  
-                    price_text = price_link.text.replace("$", "").strip()
-                    price_numbers = re.findall(r'\d+', price_text)
-                    if len(price_numbers) >= 2:
-                        price =  float(f"{price_numbers[0]}.{price_numbers[1]}")
+                        #raise Exception("Price link not found")
+                        price = -1
                     else:
-                        price = float(price_numbers[0]) if price_numbers else None
+                        price_text = price_link.text.replace("$", "").strip()
+                        price_numbers = re.findall(r'\d+', price_text)
+                        if len(price_numbers) >= 2:
+                            price =  float(f"{price_numbers[0]}.{price_numbers[1]}")
+                        else:
+                            price = float(price_numbers[0]) if price_numbers else None
 
                     # Extract title
                     title_element = item.find_element(By.TAG_NAME, "h2")

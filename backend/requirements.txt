@@ -7,3 +7,4 @@ dotenv
 python-multipart
 SQLAlchemy
 selenium
+asynco

@@ -130,6 +130,7 @@ def init_products_and_markets():
                     changes="Price updated",
                     blm=random.randint(1, 5) if random.random() > 0.5 else None,
                     total=round(random.uniform(500.0, 2000.0), 2) if random.random() > 0.5 else None,
+                    img_path = ""
                 ))
 
             db.add_all(changes)

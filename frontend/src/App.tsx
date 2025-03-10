@@ -8,10 +8,28 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import ClusterDetails from "./pages/ClusterDetails";
 import AddMarketCluster from "./pages/AddMarketCluster";
-import UserService from "./services/UserService"; // ✅ Prüft Auth-Status
+import UserService from "./services/UserService";
+import { useEffect, useState } from "react";
 
 function App() {
-  const isAuthenticated = UserService.isAuthenticated(); // ✅ Prüft, ob der Benutzer eingeloggt ist
+  const [isAuthenticated, setIsAuthenticated] = useState(UserService.isAuthenticated());
+
+  const [newClusterData, setNewClusterData] = useState<{
+    keywords: string[];
+    clusterName: string | null;
+    loadingScrapingData: boolean;
+    scrapingData: any;
+  }>({
+    keywords: [],
+    clusterName: null,
+    loadingScrapingData: false,
+    scrapingData: null,
+  });
+  
+
+  useEffect(() => {
+    setIsAuthenticated(UserService.isAuthenticated());
+  }, []);
 
   return (
     <ThemeProvider theme={lightTheme}>
@@ -19,16 +37,12 @@ function App() {
       <SnackbarProvider>
         <Router>
           <Routes>
-            {/* 🔄 Falls eingeloggt → Weiterleitung zum Dashboard */}
             <Route path="/" element={isAuthenticated ? <Navigate to="/dashboard" /> : <Login />} />
-            
-            <Route element={<Layout />}>
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/cluster/:clusterId" element={<ClusterDetails />} /> 
-              <Route path="/add-market-cluster" element={<AddMarketCluster />} />
+            <Route element={<Layout setIsAuthenticated={setIsAuthenticated} />}>
+              <Route path="/dashboard" element={<Dashboard newClusterData={newClusterData} setNewClusterData={setNewClusterData} />} />
+              <Route path="/cluster/:clusterId" element={<ClusterDetails />} />
+              <Route path="/add-market-cluster" element={<AddMarketCluster newClusterData={newClusterData} setNewClusterData={setNewClusterData} />} />
             </Route>
-
-            {/* 🔄 Fallback: Unbekannte URLs immer zum Dashboard */}
             <Route path="*" element={<Navigate to={isAuthenticated ? "/dashboard" : "/"} />} />
           </Routes>
         </Router>

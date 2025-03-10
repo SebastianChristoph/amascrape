@@ -70,6 +70,7 @@ class ProductChange(Base):
     changes = Column(String, nullable=False)
     blm = Column(Integer, nullable=True)
     total = Column(Float, nullable=True)
+    img_path = Column(String, nullable=False)
 
     product = relationship("Product", back_populates="product_changes")
 

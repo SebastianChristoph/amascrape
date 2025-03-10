@@ -1,159 +1,169 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import UserService from "../services/UserService";
-import MarketService from "../services/MarketService";
-import { useSnackbar } from "../providers/SnackbarProvider";
 import {
-  Typography,
-  Container,
-  Paper,
   Box,
+  Button,
   Card,
   CardContent,
   CardHeader,
-  IconButton,
-  Chip,
-  Button,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogContentText,
-  DialogActions,
-  TextField,
+  CircularProgress,
+  Container,
+  Paper,
+  Typography,
 } from "@mui/material";
 import Grid from "@mui/material/Grid2";
+import { useEffect, useState } from "react";
 import { GrCluster } from "react-icons/gr";
-import { MdAdd, MdDelete, MdEdit } from "react-icons/md";
-import { motion } from "framer-motion"; // ✅ Framer Motion für Animation
+import { MdAdd } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
+import ClusterCard from "../components/ClusterCard";
+import { useSnackbar } from "../providers/SnackbarProvider";
+import MarketService from "../services/MarketService";
 
-export default function Dashboard() {
+interface DashboardProps {
+  newClusterData: {
+    keywords: string[];
+    clusterName: string | null;
+    loadingScrapingData: boolean;
+    scrapingData: any;
+  };
+  setNewClusterData: React.Dispatch<
+    React.SetStateAction<{
+      keywords: string[];
+      clusterName: string | null;
+      loadingScrapingData: boolean;
+      scrapingData: any;
+    }>
+  >;
+}
+
+const Dashboard: React.FC<DashboardProps> = ({
+  newClusterData,
+  setNewClusterData,
+}) => {
   const navigate = useNavigate();
   const { showSnackbar } = useSnackbar();
   const [marketClusters, setMarketClusters] = useState<any[]>([]);
-  const [username, setUsername] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
-  const [asins, setAsins] = useState<
-    { asin: string; title: string; price: number | null; image: string }[]
-  >([]);
-  const [openConfirmDialog, setOpenConfirmDialog] = useState(false);
-  const [selectedClusterId, setSelectedClusterId] = useState<number | null>(
-    null
-  );
-  const [selectedClusterTitle, setSelectedClusterTitle] = useState<string>("");
-  const [deletingCluster, setDeletingCluster] = useState<number | null>(null); // ✅ State für Animation
-  const [openEditDialog, setOpenEditDialog] = useState(false);
-  const [newTitle, setNewTitle] = useState("");
+  const [deletingCluster, setDeletingCluster] = useState<number | null>(null);
+  const [activeClusters, setActiveClusters] = useState<string[]>([]);
 
-  useEffect(() => {
-    if (!UserService.isAuthenticated()) {
-      navigate("/"); // Redirect to login
+  // ✅ Holt alle Market-Cluster des Users
+  const fetchMarketClusters = async () => {
+    const data = await MarketService.get_market_cluster();
+    if (data) {
+      setMarketClusters(data);
     } else {
-      const user = UserService.getUser();
-      setUsername(user?.sub || "Unbekannter Benutzer");
+      showSnackbar("Fehler beim Laden der Market-Cluster.");
     }
-  }, [navigate]);
+  };
 
-  useEffect(() => {
-    async function fetchMarketClusters() {
-      const data = await MarketService.get_market_cluster();
-      if (data) {
-        setMarketClusters(data);
-      } else {
-        showSnackbar("Fehler beim Laden der Market-Cluster.");
+  // ✅ Startet das Polling für einen Cluster
+  const startCheckingScrapingProcess = async (clustername: string) => {
+    let isDone = false;
+
+    const checkStatus = async () => {
+      const data = await MarketService.checkScrapingProcessStatus(clustername);
+      console.log(`🔍 Status für ${clustername}:`, data);
+
+      setNewClusterData((prevState) => ({
+        ...prevState,
+        scrapingData: { ...data, title: clustername },
+      }));
+
+      if (data.status === "done") {
+        isDone = true;
+        setNewClusterData((prevState) => ({
+          ...prevState,
+          loadingScrapingData: false,
+          keywords: [],
+          clusterName: null,
+          scrapingData: null,
+        }));
+        fetchMarketClusters(); // ✅ Cluster-Liste aktualisieren
       }
-    }
+    };
+
+    await checkStatus();
+    if (isDone) return;
+
+    const interval = setInterval(async () => {
+      await checkStatus();
+      if (isDone) clearInterval(interval);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  };
+
+  // ✅ Prüft beim Laden, ob aktive Scraping-Prozesse laufen
+  useEffect(() => {
+    const checkActiveScraping = async () => {
+      const active = await MarketService.getActiveScrapingClusters();
+      console.log("🔍 Aktive Scraping-Prozesse:", active);
+
+      setActiveClusters(active);
+      setNewClusterData((prevState) => ({
+        ...prevState,
+        loadingScrapingData: true,
+      }));
+
+      // Starte das Polling für alle aktiven Cluster
+      active.forEach((cluster) => startCheckingScrapingProcess(cluster));
+    };
+
+    checkActiveScraping();
+  }, []);
+
+  // ✅ Holt die Market-Cluster beim Laden
+  useEffect(() => {
     fetchMarketClusters();
   }, []);
 
-
-  // ✅ Bearbeiten-Dialog öffnen
-  const handleEditClick = (event: React.MouseEvent, clusterId: number, clusterTitle: string) => {
-    event.stopPropagation();
-    setSelectedClusterId(clusterId);
-    setSelectedClusterTitle(clusterTitle);
-    setNewTitle(clusterTitle); // ✅ Alter Titel wird als Default-Wert gesetzt
-    setOpenEditDialog(true);
-  };
-
-  // ✅ Löschen-Dialog öffnen
-  const handleDeleteClick = (event: React.MouseEvent, clusterId: number) => {
-    event.stopPropagation();
-    setSelectedClusterId(clusterId);
-    setOpenConfirmDialog(true);
-  };
-
-  // ✅ Market Cluster aktualisieren
-  const handleUpdateCluster = async () => {
-    if (selectedClusterId === null) return;
-  
-    const response = await MarketService.updateMarketCluster(selectedClusterId, { title: newTitle });
-  
-    if (response.success) {
-      // ✅ State direkt aktualisieren, um das UI sofort zu reflektieren
-      setMarketClusters((prevClusters) =>
-        prevClusters.map((c) =>
-          c.id === selectedClusterId ? { ...c, title: newTitle } : c // Hier newTitle verwenden!
-        )
-      );
-  
-      showSnackbar("Market Cluster erfolgreich aktualisiert.");
-      setOpenEditDialog(false);
-    } else {
-      showSnackbar("Fehler beim Aktualisieren des Market Clusters.", "error");
-    }
-  };
-  
-
-  // ✅ Cluster wirklich löschen mit Animation
-  const handleConfirmDelete = async () => {
-    if (selectedClusterId === null) return;
-
-    setDeletingCluster(selectedClusterId); // ✅ Startet Animation
-
-    setTimeout(async () => {
-      const success =
-        await MarketService.deleteMarketCluster(selectedClusterId);
-      if (success) {
-        setMarketClusters((prevClusters) =>
-          prevClusters.filter((c) => c.id !== selectedClusterId)
-        );
-        showSnackbar("Market Cluster erfolgreich gelöscht.");
-      } else {
-        showSnackbar("Fehler beim Löschen des Market Clusters.", "error");
-      }
-      setDeletingCluster(null);
-    }, 500); // ✅ Animation dauert 500ms
-
-    setOpenConfirmDialog(false);
-  };
-
-  const handleStartSimulateProcess = async (taskId : string) => {
-    const response = await MarketService.startSimulatedProcess(taskId);
-    if (response.success) {
-      console.log(taskId, "✅ Simulated Process started");
-      startCheckingSimulatedProcess(taskId)
-    }
-  }
-
-  const startCheckingSimulatedProcess = (taskId : string) => {
-    console.log(taskId, "Start checking simulated process");
-    const interval = setInterval(async () => {
-      const status = await MarketService.checkSimulatedProcessStatus(taskId);
-      console.log(taskId, status)
-      if (status.status ==="done") {
-        console.log("✅ Simulated Process finished");
-        console.log(status.data);
-        clearInterval(interval);
-      } else {
-        console.log(taskId, "📌 Simulated Process not finished");
-      }
-    }, 1000); 
-  }
-
-
   return (
     <Container maxWidth="xl">
-      {/* 📌 My Market Clusters */}
+      {/* ✅ Zeigt aktiven Scraping-Prozess an */}
+      {activeClusters.length > 0 && (
+        <Paper sx={{ paddingY: 4, paddingX: 4, mt: 2, borderRadius: 3 }}>
+          <Box sx={{ flexGrow: 1 }}>
+            <Grid container spacing={3}>
+              <Card elevation={5} sx={{ cursor: "pointer", borderRadius: 3 }}>
+                <CardHeader
+                  sx={{ alignItems: "flex-start" }}
+                  avatar={<GrCluster size={28} color="#000010" />}
+                  title={
+                    <Typography
+                      variant="h6"
+                      sx={{ display: "flex", alignItems: "center", gap: 1 }}
+                    >
+                      <CircularProgress size={24} sx={{ color: "primary.main" }} />
+                      Aktive Scraping-Prozesse laufen...
+                    </Typography>
+                  }
+                />
+                <CardContent sx={{ minHeight: 200 }}>
+                  <Box sx={{ mt: 2 }}>
+                    <Typography variant="body1">Scraping für folgende Cluster:</Typography>
+                    <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
+                      {activeClusters.map((cluster) => (
+                        <Box
+                          key={cluster}
+                          sx={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: 1,
+                          }}
+                        >
+                          <CircularProgress size={16} sx={{ color: "primary.main" }} />
+                          <Typography variant="body2">{cluster}</Typography>
+                        </Box>
+                      ))}
+                    </Box>
+                  </Box>
+                </CardContent>
+              </Card>
+            </Grid>
+          </Box>
+        </Paper>
+      )}
+
+      {/* ✅ Zeigt alle Market-Cluster an */}
       <Paper sx={{ paddingY: 4, paddingX: 4, mt: 2 }}>
         <Typography variant="h4" sx={{ mb: 3 }}>
           My Market Clusters
@@ -161,175 +171,33 @@ export default function Dashboard() {
 
         <Box sx={{ flexGrow: 1 }}>
           <Grid container spacing={3}>
-            {marketClusters.map((cluster, index) => (
+            {marketClusters.map((cluster) => (
               <Grid key={cluster.id} size={4}>
-                {/* 🔥 Framer Motion für Fade-Out Animation */}
-                <motion.div
-                  initial={{ opacity: 1, scale: 1 }}
-                  animate={
-                    deletingCluster === cluster.id
-                      ? { opacity: 0, scale: 0.8 }
-                      : { opacity: 1, scale: 1 }
-                  }
-                  transition={{ duration: 0.5 }}
-                >
-                  <Card
-                    elevation={5}
-                    sx={{
-                      cursor: "pointer",
-                      "&:hover": { boxShadow: 6 },
-                      borderRadius: 3,
-                      overflow: "hidden",
-                    }}
-                    onClick={() => navigate(`/cluster/${cluster.id}`)}
-                  >
-                    {/* 📌 Card Header mit Cluster-Icon */}
-                    <CardHeader
-                      sx={{ alignItems: "flex-start" }}
-                      avatar={<GrCluster size={28} color="#000010" />} // ✅ Icon für Cluster
-                      title={
-                        <Typography variant="h6">
-                          Market Cluster #{index + 1}
-                        </Typography>
-                      }
-                      action={
-                        <>
-                          <IconButton
-                            color="primary"
-                            onClick={(event) =>
-                              handleEditClick(event, cluster.id, cluster.title)
-                            }
-                          >
-                            <MdEdit size={24} />
-                          </IconButton>
-                          <IconButton
-                            color="error"
-                            onClick={(event) =>
-                              handleDeleteClick(event, cluster.id)
-                            }
-                          >
-                            <MdDelete size={24} />
-                          </IconButton>
-                        </>
-                      }
-                    />
-
-                    {/* 📌 Card Body - Enthält die Market Chips */}
-                    <CardContent sx={{ minHeight: 200 }}>
-                      <Typography variant="h5" gutterBottom>
-                        {cluster.title}
-                      </Typography>
-
-                      <Typography variant="body2" color="textSecondary">
-                        Included markets:
-                      </Typography>
-
-                      <Box
-                        sx={{
-                          mt: 2,
-                          display: "flex",
-                          flexWrap: "wrap",
-                          gap: 1,
-                        }}
-                      >
-                        {Array.isArray(cluster.markets) &&
-                        cluster.markets.length > 0 ? (
-                          cluster.markets.map(
-                            (market: string, index: number) => (
-                              <Chip
-                                key={index}
-                                label={market}
-                                variant="outlined"
-                              />
-                            )
-                          )
-                        ) : (
-                          <Chip label="Keine Märkte" color="default" />
-                        )}
-                      </Box>
-                    </CardContent>
-                  </Card>
-                </motion.div>
+                <ClusterCard
+                  cluster={cluster}
+                  onClick={() => navigate(`/cluster/${cluster.id}`)}
+                  deletingCluster={deletingCluster}
+                  setMarketClusters={setMarketClusters}
+                  setDeletingCluster={setDeletingCluster}
+                />
               </Grid>
             ))}
           </Grid>
         </Box>
 
+        {/* ✅ Button ist deaktiviert, wenn Scraping läuft */}
         <Button
           sx={{ mt: 2 }}
           variant="contained"
           startIcon={<MdAdd />}
           onClick={() => navigate("/add-market-cluster")}
+          disabled={activeClusters.length > 0}
         >
           Add Market Cluster
         </Button>
-
-
-        <Button
-          sx={{ mt: 2 }}
-          variant="contained"
-          startIcon={<MdAdd />}
-          onClick={() => handleStartSimulateProcess("99")}
-        >
-          Start Simulated Process 99
-        </Button>
-
-        <Button
-          sx={{ mt: 2 }}
-          variant="contained"
-          startIcon={<MdAdd />}
-          onClick={() => handleStartSimulateProcess("111")}
-        >
-          Start Simulated Process 111
-        </Button>
-
-
-
-        {/* 🔥 Bestätigungsdialog für das Löschen */}
-        <Dialog
-          open={openConfirmDialog}
-          onClose={() => setOpenConfirmDialog(false)}
-        >
-          <DialogTitle>Market Cluster löschen?</DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              Bist du sicher, dass du dieses Market Cluster löschen möchtest?
-              Diese Aktion kann nicht rückgängig gemacht werden.
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={() => setOpenConfirmDialog(false)} color="primary">
-              Abbrechen
-            </Button>
-            <Button onClick={handleConfirmDelete} color="error">
-              Löschen
-            </Button>
-          </DialogActions>
-        </Dialog>
-
-        <Dialog open={openEditDialog} onClose={() => setOpenEditDialog(false)}>
-          <DialogTitle>Market Cluster bearbeiten</DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              Gib einen neuen Namen für das Market Cluster ein.
-            </DialogContentText>
-            <TextField
-  fullWidth
-  label="Neuer Name"
-  variant="outlined"
-  value={newTitle}
-  onChange={(e) => setNewTitle(e.target.value)}
-  sx={{ mt: 2 }}
-/>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={() => setOpenEditDialog(false)}>Abbrechen</Button>
-            <Button onClick={handleUpdateCluster} color="primary">
-              Speichern
-            </Button>
-          </DialogActions>
-        </Dialog>
       </Paper>
     </Container>
   );
-}
+};
+
+export default Dashboard;

@@ -1,118 +1,125 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { TextField, Button, Container, Typography, Box, Chip, Drawer, List, ListItem, CircularProgress } from "@mui/material";
+import { TextField, Button, Container, Typography, Box, Chip, Alert } from "@mui/material";
 import MarketService from "../services/MarketService";
+import { useSnackbar } from "../providers/SnackbarProvider";
 
-export default function AddMarketCluster() {
+interface AddMarketClusterProps {
+  newClusterData: {
+    keywords: string[];
+    clusterName: string | null;
+    loadingScrapingData: boolean;
+    scrapingData: any;
+  };
+  setNewClusterData: React.Dispatch<
+    React.SetStateAction<{
+      keywords: string[];
+      clusterName: string | null;
+      loadingScrapingData: boolean;
+      scrapingData: any;
+    }>
+  >;
+}
+
+const AddMarketCluster: React.FC<AddMarketClusterProps> = ({ newClusterData, setNewClusterData }) => {
   const navigate = useNavigate();
-  const [title, setTitle] = useState("");
-  const [keywords, setKeywords] = useState<string[]>([]);
+  const { showSnackbar } = useSnackbar();
   const [newKeyword, setNewKeyword] = useState("");
-  const [scrapingStatus, setScrapingStatus] = useState<{ [key: string]: string }>({});
-  const [drawerOpen, setDrawerOpen] = useState(false);
-  const [taskMap, setTaskMap] = useState<{ [keyword: string]: string }>({});
-  const [clusterId, setClusterId] = useState<number | null>(null);
-  const [allCompleted, setAllCompleted] = useState(false);
+  const [existingClusters, setExistingClusters] = useState<string[]>([]);
+  const [isScraping, setIsScraping] = useState<boolean>(false); // ✅ Speichert Scraping-Status
 
-  // ✅ Keyword zur Liste hinzufügen
+  // ✅ Prüft beim Laden, ob ein Scraping-Prozess läuft
+  useEffect(() => {
+    const checkActiveScraping = async () => {
+      const activeClusters = await MarketService.getActiveScrapingClusters();
+      console.log("🔍 Läuft aktuell ein Scraping-Prozess?", activeClusters.length > 0);
+      setIsScraping(activeClusters.length > 0);
+    };
+
+    checkActiveScraping();
+  }, []);
+
+  // ✅ Lädt existierende Market-Cluster
+  useEffect(() => {
+    const fetchMarketClusters = async () => {
+      try {
+        const data = await MarketService.get_market_cluster();
+        if (data) {
+          setExistingClusters(data.map((cluster: any) => cluster.title.toLowerCase())); // ✅ Cluster-Titel in lowercase speichern
+        }
+      } catch (error) {
+        showSnackbar("Fehler beim Laden der Market-Cluster.");
+      }
+    };
+
+    fetchMarketClusters();
+  }, []);
+
+  // ✅ Keyword hinzufügen (immer in lowercase)
   const handleAddKeyword = () => {
-    if (newKeyword.trim() && !keywords.includes(newKeyword.trim())) {
-      setKeywords([...keywords, newKeyword.trim()]);
+    const keywordLower = newKeyword.trim().toLowerCase();
+    if (keywordLower && !newClusterData.keywords.includes(keywordLower)) {
+      setNewClusterData((prevState) => ({
+        ...prevState,
+        keywords: [...prevState.keywords, keywordLower],
+      }));
       setNewKeyword("");
     }
   };
 
+  // ✅ Keyword entfernen
   const handleRemoveKeyword = (keywordToRemove: string) => {
-    setKeywords((prevKeywords) =>
-      prevKeywords.filter((keyword) => keyword !== keywordToRemove)
-    );
+    setNewClusterData((prevState) => ({
+      ...prevState,
+      keywords: prevState.keywords.filter((keyword) => keyword !== keywordToRemove),
+    }));
   };
 
-  // ✅ Market Cluster mit mehreren Keywords erstellen
+  // ✅ Cluster-Titel aktualisieren (nicht lowercase!)
+  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNewClusterData((prevState) => ({
+      ...prevState,
+      clusterName: e.target.value,
+    }));
+  };
+
+  // ✅ Market Cluster erstellen
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
-    const response = await MarketService.createMarketCluster({ title, keywords });
-
-    if (response.success) {
-      console.log("✅ Cluster erfolgreich erstellt, Task-IDs:", response.data.task_ids);
-
-      const newTaskMap: { [keyword: string]: string } = {};
-      keywords.forEach((keyword, index) => {
-        newTaskMap[keyword] = response.data.task_ids[index];
-      });
-      setTaskMap(newTaskMap);
-
-      const initialStatus = keywords.reduce((acc: any, keyword: string) => {
-        acc[keyword] = "loading";
-        return acc;
-      }, {});
-      setScrapingStatus(initialStatus);
-
-      setClusterId(response.data.id);
-      setDrawerOpen(true);
-
-      startPolling(newTaskMap);
-    } else {
-      alert("Fehler beim Erstellen des Market Clusters");
+    if (!newClusterData.clusterName) {
+      showSnackbar("Bitte gib einen Cluster-Titel ein.");
+      return;
     }
-  };
 
-  // ✅ Starte Polling mit Retry-Mechanismus
-  const startPolling = (taskMap: { [keyword: string]: string }) => {
-    console.log("⏳ [Starte Polling für Scraping-Tasks...]");
+    const titleLower = newClusterData.clusterName.toLowerCase();
 
-    Object.entries(taskMap).forEach(([keyword, taskId]) => {
-      let retries = 0;
-      const maxRetries = 10; // Maximal 10 Versuche
-      const checkExistence = setInterval(async () => {
-        const status = await MarketService.checkScrapingStatus(taskId);
-        console.log(`📡 [Polling] Task: ${taskId}, Status: ${status.status}`);
+    if (existingClusters.includes(titleLower)) {
+      showSnackbar("❌ Ein Market Cluster mit diesem Titel existiert bereits!");
+      return;
+    }
 
-        if (status.status !== "not found") {
-          console.log(`✅ [Task gefunden] Starte Polling für: ${taskId}`);
-          clearInterval(checkExistence);
-          pollTaskStatus(keyword, taskId);
-        } else {
-          retries++;
-          console.log(`❌ [Task nicht gefunden] Warte auf Registrierung: ${taskId} (Versuch ${retries}/${maxRetries})`);
-          if (retries >= maxRetries) {
-            console.warn(`⚠️ [Abbruch] Task ${taskId} wurde nach ${maxRetries} Versuchen nicht gefunden.`);
-            clearInterval(checkExistence);
-          }
-        }
-      }, 2000);
+    if (newClusterData.keywords.length === 0) {
+      showSnackbar("❌ Cluster braucht mindestens 1 Keyword");
+      return;
+    }
+
+    // ✅ Keywords in lowercase umwandeln
+    const lowercaseKeywords = newClusterData.keywords.map((kw) => kw.toLowerCase());
+
+    await MarketService.startScrapingProcess({
+      ...newClusterData,
+      clusterName: newClusterData.clusterName, // ✅ Originaler Clustername (nicht lowercase!)
+      keywords: lowercaseKeywords,
     });
+
+    setNewClusterData((prevState) => ({
+      ...prevState,
+      loadingScrapingData: true,
+    }));
+
+    navigate("/dashboard");
   };
-
-  // ✅ Überwacht einzelne Tasks
-  const pollTaskStatus = (keyword: string, taskId: string) => {
-    const interval = setInterval(async () => {
-      const status = await MarketService.checkScrapingStatus(taskId);
-      console.log(`📡 [Polling] Task: ${taskId}, Status: ${status.status}`);
-
-      setScrapingStatus((prev) => ({
-        ...prev,
-        [keyword]: status.status === "completed" ? "completed" : "loading",
-      }));
-
-      if (status.status === "completed") {
-        console.log(`✅ [Task abgeschlossen] Task: ${taskId}`);
-        clearInterval(interval);
-      }
-    }, 3000);
-  };
-
-  // 🔥 **Überwache, ob ALLE Tasks abgeschlossen sind**
-  useEffect(() => {
-    if (
-      Object.keys(scrapingStatus).length > 0 &&
-      Object.values(scrapingStatus).every((status) => status === "completed")
-    ) {
-      console.log("✅ [ALLE TASKS COMPLETED] Link wird sichtbar!");
-      setAllCompleted(true);
-    }
-  }, [scrapingStatus]);
 
   return (
     <Container maxWidth="sm">
@@ -120,71 +127,49 @@ export default function AddMarketCluster() {
         Add Market Cluster
       </Typography>
 
-      <form onSubmit={handleSubmit}>
-        <TextField
-          fullWidth
-          label="Cluster Title"
-          variant="outlined"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          required
-          sx={{ mb: 2 }}
-        />
-
-        <Box sx={{ display: "flex", gap: 2, mb: 2 }}>
+      {/* ✅ Falls Scraping läuft, zeige eine Warnung an */}
+      {isScraping ? (
+        <Alert severity="warning">
+          🚧 Ein Scraping-Prozess läuft bereits. Warte, bis dieser abgeschlossen ist, bevor du einen neuen Cluster erstellst.
+        </Alert>
+      ) : (
+        <form onSubmit={handleSubmit}>
           <TextField
             fullWidth
-            label="Market Keyword"
+            label="Cluster Title"
             variant="outlined"
-            value={newKeyword}
-            onChange={(e) => setNewKeyword(e.target.value)}
+            value={newClusterData.clusterName || ""}
+            onChange={handleTitleChange}
+            required
+            sx={{ mb: 2 }}
           />
-          <Button onClick={handleAddKeyword} variant="contained">
-            Add
-          </Button>
-        </Box>
 
-        <Box sx={{ mb: 2 }}>
-  {keywords.map((keyword, index) => (
-    <Chip
-      key={index}
-      label={keyword}
-      onDelete={() => handleRemoveKeyword(keyword)} // ✅ Löschen ermöglichen
-      sx={{ mr: 1 }}
-    />
-  ))}
-</Box>
-        <Button type="submit" variant="contained" color="primary" fullWidth>
-          Create Market Cluster
-        </Button>
-      </form>
+          <Box sx={{ display: "flex", gap: 2, mb: 2 }}>
+            <TextField
+              fullWidth
+              label="Market Keyword"
+              variant="outlined"
+              value={newKeyword}
+              onChange={(e) => setNewKeyword(e.target.value)}
+            />
+            <Button onClick={handleAddKeyword} variant="contained">
+              Add
+            </Button>
+          </Box>
 
-      {/* 📌 Drawer für Scraping */}
-      <Drawer anchor="right" open={drawerOpen} onClose={() => setDrawerOpen(false)}>
-        <Box sx={{ width: 300, p: 2 }}>
-          <Typography variant="h6">Scraping Status</Typography>
-          <List>
-            {keywords.map((keyword, index) => (
-              <ListItem key={index}>
-                {scrapingStatus[keyword] === "loading" ? <CircularProgress size={20} /> : "✅ Completed"} {keyword}
-              </ListItem>
+          <Box sx={{ mb: 2 }}>
+            {newClusterData.keywords.map((keyword, index) => (
+              <Chip key={index} label={keyword} onDelete={() => handleRemoveKeyword(keyword)} sx={{ mr: 1 }} />
             ))}
-          </List>
+          </Box>
 
-          {/* ✅ Wenn alle Tasks fertig sind, zeige den Link */}
-          {allCompleted && clusterId && (
-            <Box sx={{ mt: 2, textAlign: "center" }}>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={() => navigate(`/cluster/${clusterId}`)}
-              >
-                📊 Zum Market Cluster
-              </Button>
-            </Box>
-          )}
-        </Box>
-      </Drawer>
+          <Button type="submit" variant="contained" color="primary" fullWidth>
+            Create Market Cluster
+          </Button>
+        </form>
+      )}
     </Container>
   );
-}
+};
+
+export default AddMarketCluster;
