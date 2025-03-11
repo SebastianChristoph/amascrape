@@ -7,28 +7,40 @@ import { useSnackbar } from "../providers/SnackbarProvider";
 const AddMarketCluster: React.FC = () => {
   const navigate = useNavigate();
   const { showSnackbar } = useSnackbar();
-  
+
   const [clusterName, setClusterName] = useState<string>("");
   const [keywords, setKeywords] = useState<string[]>([]);
   const [newKeyword, setNewKeyword] = useState<string>("");
   const [existingClusters, setExistingClusters] = useState<string[]>([]);
   const [isScraping, setIsScraping] = useState<boolean>(false);
 
-  // ✅ Prüft, ob ein aktiver Scraping-Prozess läuft
+  // ✅ Automatisches Fetching für aktive Scraping-Prozesse
   useEffect(() => {
-    const checkActiveScraping = async () => {
+    const fetchActiveScrapingClusters = async () => {
       try {
-        const activeClusters = await MarketService.getActiveScrapingClusters();
-        console.log("🔍 Aktive Scraping-Prozesse:", activeClusters);
+        const activeCluster = await MarketService.getActiveScrapingCluster(); // Holt den einzelnen aktiven Cluster
+        console.log("[AddMarketCluster] Aktiver Scraping-Prozess:", activeCluster);
 
-        setIsScraping(activeClusters.length > 0);
+        if (activeCluster) {
+          setIsScraping(true); // Scraping ist aktiv, weiter fetchen
+        } else {
+          if (isScraping) {
+            showSnackbar("✅ Active cluster available");
+          }
+          setIsScraping(false); // Kein aktives Scraping mehr → Form anzeigen
+        }
       } catch (error) {
         console.error("Fehler beim Abrufen aktiver Scraping-Prozesse:", error);
       }
     };
 
-    checkActiveScraping();
-  }, []);
+    fetchActiveScrapingClusters(); // Initiales Laden
+
+    if (isScraping) {
+      const interval = setInterval(fetchActiveScrapingClusters, 3000);
+      return () => clearInterval(interval); // Cleanup Interval
+    }
+  }, [isScraping, showSnackbar]);
 
   // ✅ Lädt existierende Market-Cluster
   useEffect(() => {

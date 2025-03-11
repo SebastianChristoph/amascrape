@@ -24,19 +24,21 @@ const Dashboard: React.FC = () => {
   const { showSnackbar } = useSnackbar();
   const [marketClusters, setMarketClusters] = useState<any[]>([]);
   const [deletingCluster, setDeletingCluster] = useState<number | null>(null);
-  const [activeClusters, setActiveClusters] = useState<
-    { cluster_name: string; keywords: { [key: string]: { status: string } } }[]
-  >([]);
-
-  // ✅ Filtert nur Cluster mit mindestens einem "processing" Keyword
-  const runningScrapingClusters = activeClusters.filter((cluster) =>
-    cluster.keywords && Object.values(cluster.keywords).some((kw) => kw.status !== "done")
-  );
+ 
+  
+    const [activeCluster, setActiveCluster] = useState<{
+      clustername: string;
+      status: string;
+      keywords: { [keyword: string]: string };
+    } | null>(null);
+  
+   const [isFetching, setIsFetching] = useState<boolean>(true);
 
   // ✅ Holt alle Market-Cluster des Users
   const fetchMarketClusters = async () => {
     try {
       const data = await MarketService.get_market_cluster();
+
       if (data) {
         setMarketClusters(data);
       } else {
@@ -48,72 +50,23 @@ const Dashboard: React.FC = () => {
     }
   };
 
-  const startCheckingScrapingProcess = async (clustername: string | undefined) => {
-    if (!clustername) {
-      console.error("❌ Fehler: `clustername` ist undefined!");
-      return;
-    }
-
-    let isDone = false;
-
-    const checkStatus = async () => {
-      const data = await MarketService.checkScrapingProcessStatus(clustername);
-      console.log(`🔍 Status für ${clustername}:`, data);
-
-      if (!data.keywords || typeof data.keywords !== "object") {
-        console.error(`❌ Fehler: Keine Keywords in Cluster ${clustername}`);
-        return;
-      }
-
-      const allKeywordsDone = Object.values(data.keywords).every((kwData) => kwData.status === "done");
-
-      if (allKeywordsDone) {
-        isDone = true;
-        setActiveClusters((prevClusters) => prevClusters.filter((c) => c.cluster_name !== clustername));
-        fetchMarketClusters();
-      }
-    };
-
-    await checkStatus();
-    if (isDone) return;
-
-    const interval = setInterval(async () => {
-      await checkStatus();
-      if (isDone) {
-        clearInterval(interval);
-      }
-    }, 3000);
-
-    return () => clearInterval(interval);
-  };
-
   // ✅ Holt aktive Scraping-Prozesse und lädt die Keywords nach
-  const fetchActiveScrapingClusters = async () => {
+  const fetchActiveScrapingCluster = async () => {
     try {
-      const active = await MarketService.getActiveScrapingClusters();
-      console.log("🔍 Aktive Scraping-Prozesse:", active);
-
-      // **Alle Cluster mit Status holen**
-      const clustersWithKeywords = await Promise.all(
-        active.map(async (cluster) => {
-          const statusData = await MarketService.checkScrapingProcessStatus(cluster.cluster_name);
-
-          if (!statusData.keywords) {
-            console.warn(`⚠️ Keine Keywords für Cluster ${cluster.cluster_name}`, statusData);
-            return { ...cluster, keywords: {} };
-          }
-
-          return { ...cluster, keywords: statusData.keywords };
-        })
-      );
-
-      setActiveClusters(clustersWithKeywords);
-      console.log("✅ Aktualisierte activeClusters:", clustersWithKeywords);
-
-      // Starte das Polling für jedes aktive Cluster
-      clustersWithKeywords.forEach((cluster) => startCheckingScrapingProcess(cluster.cluster_name));
+      const data = await MarketService.getActiveScrapingCluster();
+      console.log("[DASHBOARD] FETCHED:", data)
+      if (!data || data.status === "done") {
+        setActiveCluster(null);
+        setIsFetching(false); // Stoppt das Refetching
+        fetchMarketClusters();
+        
+      } else {
+        setActiveCluster(data);
+        setIsFetching(true); // Falls der Status "processing" bleibt, weiter fetchen
+      }
     } catch (error) {
-      console.error("Fehler beim Abrufen aktiver Scraping-Prozesse:", error);
+      console.error("Fehler beim Laden des aktiven Scraping-Clusters:", error);
+      setIsFetching(false); // Stoppt das Refetching bei Fehlern
     }
   };
 
@@ -124,57 +77,60 @@ const Dashboard: React.FC = () => {
 
   // ✅ Prüft auf aktive Scraping-Prozesse
   useEffect(() => {
-    fetchActiveScrapingClusters();
-  }, []);
+    fetchActiveScrapingCluster(); // Initialer Fetch
+
+    if (isFetching) {
+      const interval = setInterval(fetchActiveScrapingCluster, 3000);
+      return () => clearInterval(interval); // Cleanup, um Memory Leaks zu vermeiden
+    }
+  }, [isFetching]); // Refetch hängt vom isFetching-Status ab;
 
   return (
     <Container maxWidth="xl">
-      {/* ✅ Zeigt aktive Scraping-Prozesse mit Keywords & Status an */}
-      {runningScrapingClusters.length > 0 && (
-        <Paper sx={{ paddingY: 4, paddingX: 4, mt: 2, borderRadius: 3 }}>
-          <Box sx={{ flexGrow: 1 }}>
-            <Grid container spacing={3}>
-              <Card elevation={5} sx={{ cursor: "pointer", borderRadius: 3 }}>
-                <CardHeader
-                  sx={{ alignItems: "flex-start" }}
-                  avatar={<GrCluster size={28} color="#000010" />}
-                  title={
-                    <Typography variant="h6" sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                      <CircularProgress size={24} sx={{ color: "primary.main" }} />
-                      Aktive Scraping-Prozesse laufen...
-                    </Typography>
-                  }
-                />
-                <CardContent sx={{ minHeight: 200 }}>
-                  <Box sx={{ mt: 2 }}>
-                    <Typography variant="body1">Scraping für folgende Cluster:</Typography>
-                    <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-                      {runningScrapingClusters.map((cluster) => (
-                        <Box key={cluster.cluster_name} sx={{ mb: 2 }}>
-                          <Typography variant="h6">{cluster.cluster_name}</Typography>
-                          <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
-                            {Object.entries(cluster.keywords).map(([keyword, kwData]) => (
-                              <Box key={keyword} sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                                {/* ✅ Zeigt grünen Haken für "done" Keywords, sonst Spinner */}
-                                {kwData.status === "done" ? (
-                                  <AiOutlineCheckCircle size={18} color="green" />
-                                ) : (
-                                  <CircularProgress size={16} sx={{ color: "primary.main" }} />
-                                )}
-                                <Typography variant="body2">{keyword}</Typography>
-                              </Box>
-                            ))}
-                          </Box>
-                        </Box>
-                      ))}
+{/* ✅ Zeigt aktive Scraping-Prozesse mit Keywords & Status an */}
+{activeCluster && activeCluster.status === "processing" && (
+  <Paper sx={{ paddingY: 4, paddingX: 4, mt: 2, borderRadius: 3 }}>
+    <Typography variant="h5" sx={{ mb: 2, display: "flex", alignItems: "center", gap: 1 }}>
+      <CircularProgress size={24} sx={{ color: "primary.main" }} />
+      Aktive Scraping-Prozesse laufen...
+    </Typography>
+    
+    <Box sx={{ flexGrow: 1 }}>
+      <Grid container spacing={3}>
+        <Card elevation={5} sx={{ cursor: "pointer", borderRadius: 3 }}>
+          <CardHeader
+            sx={{ alignItems: "flex-start" }}
+            avatar={<GrCluster size={28} color="#000010" />}
+            title={
+              <Typography variant="h6">{activeCluster.clustername}</Typography>
+            }
+          />
+          <CardContent sx={{ minHeight: 200 }}>
+            <Box sx={{ mt: 2 }}>
+              <Typography variant="body1">Scraping für folgende Keywords:</Typography>
+              <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+                <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
+                  {Object.entries(activeCluster.keywords).map(([keyword, status]) => (
+                    <Box key={keyword} sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                      {/* ✅ Zeigt grünen Haken für "done", sonst Spinner */}
+                      {status === "done" ? (
+                        <AiOutlineCheckCircle size={18} color="green" />
+                      ) : (
+                        <CircularProgress size={16} sx={{ color: "primary.main" }} />
+                      )}
+                      <Typography variant="body2">{keyword}</Typography>
                     </Box>
-                  </Box>
-                </CardContent>
-              </Card>
-            </Grid>
-          </Box>
-        </Paper>
-      )}
+                  ))}
+                </Box>
+              </Box>
+            </Box>
+          </CardContent>
+        </Card>
+      </Grid>
+    </Box>
+  </Paper>
+)}
+
 
       {/* ✅ Zeigt alle Market-Cluster an */}
       <Paper sx={{ paddingY: 4, paddingX: 4, mt: 2 }}>
@@ -204,7 +160,7 @@ const Dashboard: React.FC = () => {
           variant="contained"
           startIcon={<MdAdd />}
           onClick={() => navigate("/add-market-cluster")}
-          disabled={activeClusters.length > 0}
+          disabled={isFetching}
         >
           Add Market Cluster
         </Button>

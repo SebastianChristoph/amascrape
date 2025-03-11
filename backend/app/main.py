@@ -65,9 +65,8 @@ async def post_scraping(newClusterData: NewClusterData, db: Session = Depends(ge
     cluster_name = newClusterData.clusterName
     print(f"🔥 Start Scraping für Nutzer {user_id}, Cluster: {cluster_name}")
 
-    # ✅ Falls Nutzer noch keinen Prozess laufen hat, erstelle Speicherplatz
-    if user_id not in scraping_processes:
-        scraping_processes[user_id] = {}
+    # ✅ Stellt sicher, dass es nur eine Cluster-Erstellung haben kann, nicht mehrere gleichzeitig
+    scraping_processes[user_id] = {}
     
     # ✅ Cluster für diesen Nutzer speichern
     scraping_processes[user_id][cluster_name] = {"status": "processing", "keywords": {}}
@@ -85,129 +84,122 @@ async def post_scraping(newClusterData: NewClusterData, db: Session = Depends(ge
 
     return {"success": True, "message": f"Scraping für {cluster_name} gestartet"}
 
-
 @app.get("/api/get-loading-clusters")
-async def get_loading_clusters(current_user: User = Depends(get_current_user)):
+async def get_loading_clusters(current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
     user_id = current_user.id
     print("user id: ", user_id)
 
-    if user_id not in scraping_processes:
-        print("keine user id in scrapin processes")
+    if user_id not in scraping_processes or not scraping_processes[user_id]:
+        print("keine user id in scraping processes")
         return {"active_clusters": []}  # ✅ Keine aktiven Scraping-Prozesse
 
-    active_clusters = [
-        {"cluster_name": cluster_name}  # ✅ Stellt sicher, dass `cluster_name` existiert
-        for cluster_name, cluster_data in scraping_processes[user_id].items()
-        if cluster_data["status"] == "processing"
-    ]
-
-    print("return active clusters:", active_clusters)
-    return {"active_clusters": active_clusters}
-
-
-@app.get("/api/get-status-of-firstpage-scraping-process")
-async def get_status(clustername: str, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
-    """Überprüft den Scraping-Status für einen Nutzer"""
-
-    user_id = current_user.id
-
-    # ✅ Prüfen, ob der Cluster für den Nutzer existiert
-    if user_id not in scraping_processes or clustername not in scraping_processes[user_id]:
-        print(f"❌ Cluster '{clustername}' nicht gefunden für Nutzer {user_id}")
-        return {"status": "not found"}
+    clustername, cluster_data = next(iter(scraping_processes[user_id].items()))
 
     # ✅ Prüfen, ob noch ein Keyword im Status "processing" ist
-    if any(k_data["status"] == "processing" for k_data in scraping_processes[user_id][clustername]["keywords"].values()):
-        return scraping_processes[user_id][clustername]
+    all_done = all(status["status"] == "done" for status in cluster_data["keywords"].values())
 
-    # ✅ Falls alles fertig ist, setze Status auf "done"
-    scraping_processes[user_id][clustername]["status"] = "done"
-    print(f"✅ Alle Keywords für '{clustername}' fertig! -> Datenbank schreiben")
+    if all_done:
+        # ✅ Falls alles fertig ist, setze Status auf "done"
+        scraping_processes[user_id][clustername]["status"] = "done"
+        print(f"✅ Alle Keywords für '{clustername}' fertig! -> Datenbank schreiben")
 
-    # 🔍 **CHECK: Gibt es das MarketCluster bereits für diesen Nutzer?**
-    existing_cluster = db.query(MarketCluster).filter(
-        MarketCluster.title == clustername,
-        MarketCluster.user_id == user_id
-    ).first()
+        # 🔍 **CHECK: Gibt es das MarketCluster bereits für diesen Nutzer?**
+        existing_cluster = db.query(MarketCluster).filter(
+            MarketCluster.title == clustername,
+            MarketCluster.user_id == user_id
+        ).first()
 
-    if existing_cluster:
-        print(f"🔗 MarketCluster '{clustername}' existiert bereits -> Keine doppelte Anlage.")
-        return scraping_processes[user_id][clustername]
+        if existing_cluster:
+            print(f"🔗 MarketCluster '{clustername}' existiert bereits -> Keine doppelte Anlage.")
+        else:
+            # 📌 Neues MarketCluster anlegen
+            new_cluster = MarketCluster(title=clustername, user_id=user_id)
+            db.add(new_cluster)
 
-    # 📌 Neues MarketCluster anlegen
-    new_cluster = MarketCluster(title=clustername, user_id=user_id)
-    db.add(new_cluster)
+            for keyword, keyword_data in scraping_processes[user_id][clustername]["keywords"].items():
+                existing_market = db.query(Market).filter(Market.keyword == keyword).first()
 
-    for keyword, keyword_data in scraping_processes[user_id][clustername]["keywords"].items():
-        existing_market = db.query(Market).filter(Market.keyword == keyword).first()
+                if existing_market:
+                    print(f"🔗 Markt '{keyword}' existiert bereits -> Verknüpfung mit Cluster.")
+                    new_cluster.markets.append(existing_market)
+                    continue  # Weiter zum nächsten Keyword
 
-        if existing_market:
-            print(f"🔗 Markt '{keyword}' existiert bereits -> Verknüpfung mit Cluster.")
-            new_cluster.markets.append(existing_market)
-            continue  # Weiter zum nächsten Keyword
-
-        print(f"🆕 Neuer Markt '{keyword}' wird angelegt.")
-        new_market = Market(keyword=keyword)
-        db.add(new_market)
-        db.commit()
-        db.refresh(new_market)
-        new_cluster.markets.append(new_market)
-
-        # ✅ MarketChange für neuen Markt erstellen
-        product_data_list = keyword_data["data"].get("first_page_products", [])
-        new_asins = [p["asin"] for p in product_data_list] if product_data_list else []
-        top_suggestions = keyword_data["data"].get("top_search_suggestions", [])
-
-        new_market_change = MarketChange(
-            market_id=new_market.id,
-            change_date=datetime.now(timezone.utc),
-            new_products=",".join(new_asins),
-        )
-        new_market_change.set_top_suggestions(top_suggestions)
-        db.add(new_market_change)
-
-        # ✅ Produkte & ProductChanges verknüpfen
-        for product_data in product_data_list:
-            existing_product = db.query(Product).filter(Product.asin == product_data["asin"]).first()
-
-            if existing_product:
-                new_market.products.append(existing_product)
-                new_market_change.products.append(existing_product)
-            else:
-                new_product = Product(asin=product_data["asin"])
-                db.add(new_product)
+                print(f"🆕 Neuer Markt '{keyword}' wird angelegt.")
+                new_market = Market(keyword=keyword)
+                db.add(new_market)
                 db.commit()
-                db.refresh(new_product)
+                db.refresh(new_market)
+                new_cluster.markets.append(new_market)
 
-                new_market.products.append(new_product)
-                new_market_change.products.append(new_product)
+                # ✅ MarketChange für neuen Markt erstellen
+                product_data_list = keyword_data["data"].get("first_page_products", [])
+                new_asins = [p["asin"] for p in product_data_list] if product_data_list else []
+                top_suggestions = keyword_data["data"].get("top_search_suggestions", [])
 
-                # ✅ `ProductChange` sicher erstellen (Fallbacks für fehlende Daten)
-                new_product_change = ProductChange(
-                    asin=new_product.asin,
-                    title=product_data.get("title", "Unknown Product"),
-                    price=product_data.get("price") if isinstance(product_data.get("price"), (int, float)) else 0.0,
-                    main_category=product_data.get("main_category", "Unknown"),
-                    second_category=product_data.get("second_category", "Unknown"),
-                    main_category_rank=product_data.get("main_category_rank", -1),
-                    second_category_rank=product_data.get("second_category_rank", -1),
-                    img_path=product_data.get("image", "no image"),
+                new_market_change = MarketChange(
+                    market_id=new_market.id,
                     change_date=datetime.now(timezone.utc),
-                    changes="Initial creation",
-                    blm=-1,
-                    total=0.0,
+                    new_products=",".join(new_asins),
                 )
-                db.add(new_product_change)
-                db.commit()
-                db.refresh(new_product_change)
+                new_market_change.set_top_suggestions(top_suggestions)
+                db.add(new_market_change)
 
-                new_product.product_changes.append(new_product_change)
+                # ✅ Produkte & ProductChanges verknüpfen
+                for product_data in product_data_list:
+                    existing_product = db.query(Product).filter(Product.asin == product_data["asin"]).first()
 
-    db.commit()
-    db.refresh(new_cluster)
+                    if existing_product:
+                        new_market.products.append(existing_product)
+                        new_market_change.products.append(existing_product)
+                    else:
+                        new_product = Product(asin=product_data["asin"])
+                        db.add(new_product)
+                        db.commit()
+                        db.refresh(new_product)
 
-    return scraping_processes[user_id][clustername]
+                        new_market.products.append(new_product)
+                        new_market_change.products.append(new_product)
 
+                        # ✅ `ProductChange` sicher erstellen (Fallbacks für fehlende Daten)
+                        new_product_change = ProductChange(
+                            asin=new_product.asin,
+                            title=product_data.get("title", "Unknown Product"),
+                            price=product_data.get("price") if isinstance(product_data.get("price"), (int, float)) else 0.0,
+                            main_category=product_data.get("main_category", "Unknown"),
+                            second_category=product_data.get("second_category", "Unknown"),
+                            main_category_rank=product_data.get("main_category_rank", -1),
+                            second_category_rank=product_data.get("second_category_rank", -1),
+                            img_path=product_data.get("image", "no image"),
+                            change_date=datetime.now(timezone.utc),
+                            changes="Initial creation",
+                            blm=-1,
+                            total=0.0,
+                        )
+                        db.add(new_product_change)
+                        db.commit()
+                        db.refresh(new_product_change)
+
+                        new_product.product_changes.append(new_product_change)
+
+            db.commit()
+            db.refresh(new_cluster)
+
+        # ✅ Alle Prozesse abgeschlossen, leeres Array zurückgeben
+        del scraping_processes[user_id]
+        return {"active_clusters": []}
+    
+    else:
+        if cluster_data["status"] == "processing":
+            keywords_status = {
+                keyword: data["status"] for keyword, data in cluster_data["keywords"].items()
+            }
+            active_cluster = {
+                "clustername": clustername,
+                "status": cluster_data["status"],
+                "keywords": keywords_status
+            }
+            print("return active cluster:", active_cluster)
+            return active_cluster
 
 async def scraping_process(keyword: str, clustername: str, user_id: int):
     """Führt das Scraping für ein Keyword durch"""

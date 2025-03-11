@@ -4,7 +4,10 @@ class MarketService {
   private static TOKEN_KEY = "token";
 
   // 📌 Neues Market Cluster erstellen mit mehreren Keywords
-  static async createMarketCluster(clusterData: { title: string; keywords: string[] }) {
+  static async createMarketCluster(clusterData: {
+    title: string;
+    keywords: string[];
+  }) {
     try {
       const response = await fetch(`${API_URL}/market-clusters/create`, {
         method: "POST",
@@ -15,7 +18,8 @@ class MarketService {
         body: JSON.stringify(clusterData),
       });
 
-      if (!response.ok) throw new Error("Fehler beim Erstellen des Market Clusters.");
+      if (!response.ok)
+        throw new Error("Fehler beim Erstellen des Market Clusters.");
       return { success: true, data: await response.json() };
     } catch (error) {
       console.error("Fehler beim Erstellen des Market Clusters:", error);
@@ -24,18 +28,25 @@ class MarketService {
   }
 
   // 📌 Market Cluster aktualisieren (nur Titel)
-  static async updateMarketCluster(clusterId: number, updatedData: { title: string }) {
+  static async updateMarketCluster(
+    clusterId: number,
+    updatedData: { title: string }
+  ) {
     try {
-      const response = await fetch(`${API_URL}/market-clusters/update/${clusterId}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem(this.TOKEN_KEY)}`,
-        },
-        body: JSON.stringify(updatedData),
-      });
+      const response = await fetch(
+        `${API_URL}/market-clusters/update/${clusterId}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem(this.TOKEN_KEY)}`,
+          },
+          body: JSON.stringify(updatedData),
+        }
+      );
 
-      if (!response.ok) throw new Error("Fehler beim Aktualisieren des Market Clusters.");
+      if (!response.ok)
+        throw new Error("Fehler beim Aktualisieren des Market Clusters.");
       return { success: true, data: await response.json() };
     } catch (error) {
       console.error("Fehler beim Aktualisieren des Market Clusters:", error);
@@ -46,14 +57,18 @@ class MarketService {
   // 📌 Market Cluster löschen
   static async deleteMarketCluster(clusterId: number): Promise<boolean> {
     try {
-      const response = await fetch(`${API_URL}/market-clusters/delete/${clusterId}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem(this.TOKEN_KEY)}`,
-        },
-      });
+      const response = await fetch(
+        `${API_URL}/market-clusters/delete/${clusterId}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem(this.TOKEN_KEY)}`,
+          },
+        }
+      );
 
-      if (!response.ok) throw new Error("Fehler beim Löschen des Market Clusters.");
+      if (!response.ok)
+        throw new Error("Fehler beim Löschen des Market Clusters.");
       return true;
     } catch (error) {
       console.error("Fehler beim Löschen des Market Clusters:", error);
@@ -105,7 +120,9 @@ class MarketService {
       });
 
       if (!response.ok) {
-        throw new Error(`Fehler beim Abrufen der Details für Market-Cluster ${clusterId}.`);
+        throw new Error(
+          `Fehler beim Abrufen der Details für Market-Cluster ${clusterId}.`
+        );
       }
 
       return await response.json();
@@ -157,35 +174,46 @@ class MarketService {
   //   }
   // }
 
-  static async checkScrapingStatus(taskId: string): Promise<{ status: string; data?: { first_page_products: any[] } }> {
+  static async checkScrapingStatus(
+    taskId: string
+  ): Promise<{ status: string; data?: { first_page_products: any[] } }> {
     try {
-      const response = await fetch(`http://127.0.0.1:9000/api/get-asins/status?task_id=${taskId}`);
+      const response = await fetch(
+        `http://127.0.0.1:9000/api/get-asins/status?task_id=${taskId}`
+      );
       const data = await response.json();
-  
+
       console.log(`🔍 [Scraping Status] Task ${taskId}:`, data); // ✅ DEBUG LOG
-  
+
       return data;
     } catch (error) {
       console.error("❌ Fehler beim Abrufen des Scraping-Status:", error);
       return { status: "error" };
     }
   }
-  static async startScrapingProcess(newClusterData: { keywords: string[], clusterName: string | null }): Promise<{ success: boolean }> {
+  static async startScrapingProcess(newClusterData: {
+    keywords: string[];
+    clusterName: string | null;
+  }): Promise<{ success: boolean }> {
     try {
       const token = localStorage.getItem(this.TOKEN_KEY);
       if (!token) throw new Error("Kein Token vorhanden. Bitte einloggen.");
-  
-      const response = await fetch(`${API_URL}/api/start-firstpage-scraping-process`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(newClusterData),
-      });
-  
-      if (!response.ok) throw new Error("Fehler beim Starten des Scraping-Prozesses.");
-  
+
+      const response = await fetch(
+        `${API_URL}/api/start-firstpage-scraping-process`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(newClusterData),
+        }
+      );
+
+      if (!response.ok)
+        throw new Error("Fehler beim Starten des Scraping-Prozesses.");
+
       const data = await response.json();
       return { success: data.success ?? false };
     } catch (error) {
@@ -193,29 +221,39 @@ class MarketService {
       return { success: false };
     }
   }
-  
-  static async checkScrapingProcessStatus(clustername: string): Promise<{ status: string; keywords?: { [key: string]: string } }> {
-    try {
-      const token = localStorage.getItem(this.TOKEN_KEY);
-      if (!token) throw new Error("Kein Token vorhanden. Bitte einloggen.");
-  
-      const response = await fetch(`${API_URL}/api/get-status-of-firstpage-scraping-process?clustername=${clustername}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      });
-  
-      if (!response.ok) throw new Error("Fehler beim Abrufen des Scraping-Prozesses.");
-      
-      return await response.json();
-    } catch (error) {
-      console.error("Fehler beim Abrufen des Scraping-Prozesses:", error);
-      return { status: "error" };
-    }
-  }
-  
-  static async getActiveScrapingClusters(): Promise<{ cluster_name: string; keywords: { keyword: string; status: string }[] }[]> {
+
+  // static async checkScrapingProcessStatus(
+  //   clustername: string
+  // ): Promise<{ status: string; keywords?: { [key: string]: string } }> {
+  //   try {
+  //     const token = localStorage.getItem(this.TOKEN_KEY);
+  //     if (!token) throw new Error("Kein Token vorhanden. Bitte einloggen.");
+
+  //     const response = await fetch(
+  //       `${API_URL}/api/get-status-of-firstpage-scraping-process?clustername=${clustername}`,
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //           "Content-Type": "application/json",
+  //         },
+  //       }
+  //     );
+
+  //     if (!response.ok)
+  //       throw new Error("Fehler beim Abrufen des Scraping-Prozesses.");
+
+  //     return await response.json();
+  //   } catch (error) {
+  //     console.error("Fehler beim Abrufen des Scraping-Prozesses:", error);
+  //     return { status: "error" };
+  //   }
+  // }
+
+  static async getActiveScrapingCluster(): Promise<{ 
+    clustername: string; 
+    status: string; 
+    keywords: { [keyword: string]: string } 
+  } | null> {
     try {
       const token = localStorage.getItem(this.TOKEN_KEY);
       if (!token) throw new Error("Kein Token vorhanden. Bitte einloggen.");
@@ -227,27 +265,23 @@ class MarketService {
         },
       });
   
-      if (!response.ok) throw new Error("Fehler beim Abrufen aktiver Scraping-Prozesse.");
+      if (!response.ok) throw new Error("Fehler beim Abrufen des aktiven Scraping-Prozesses.");
       
       const data = await response.json();
   
-      // Sicherstellen, dass die API das erwartete Format liefert
-      if (!data.active_clusters || !Array.isArray(data.active_clusters)) {
-        console.error("Unerwartetes API-Format für aktive Scraping-Prozesse:", data);
-        return [];
+      // ✅ Falls kein aktiver Cluster existiert, `null` zurückgeben
+      if (!data || !data.clustername) {
+        console.log("[MarketService] Kein aktiver Scraping-Prozess gefunden.");
+        return null;
       }
   
-      return data.active_clusters; // ✅ Gibt die vollständige Cluster-Objekt-Liste zurück
+      return data; // ✅ Falls ein aktiver Cluster existiert, diesen zurückgeben
     } catch (error) {
-      console.error("Fehler beim Abrufen aktiver Scraping-Prozesse:", error);
-      return [];
+      console.error("Fehler beim Abrufen des aktiven Scraping-Prozesses:", error);
+      return null;
     }
   }
   
-  
-  
 }
-
-
 
 export default MarketService;
