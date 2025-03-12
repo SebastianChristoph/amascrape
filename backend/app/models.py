@@ -67,8 +67,8 @@ class ProductChange(Base):
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     asin = Column(String, ForeignKey("products.asin"), nullable=False)
-    title = Column(String, nullable=False)
-    price = Column(Float, nullable=False)
+    title = Column(String, nullable=True)
+    price = Column(Float, nullable=True)
     main_category = Column(String, nullable=True)
     second_category = Column(String, nullable=True)
     main_category_rank = Column(Integer, nullable=True)
@@ -77,7 +77,7 @@ class ProductChange(Base):
     changes = Column(String, nullable=False)
     blm = Column(Integer, nullable=True)
     total = Column(Float, nullable=True)
-    img_path = Column(String, nullable=False)
+    img_path = Column(String, nullable=True)
 
     product = relationship("Product", back_populates="product_changes")
 

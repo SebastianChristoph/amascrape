@@ -93,20 +93,24 @@ def init_products_and_markets():
                 db.commit()
                 db.refresh(new_product)
 
+                blm_rand = random.randint(1, 5)
+                price_rand = round(random.uniform(10.0, 100.0), 2)
+                total_rand = round(blm_rand * price_rand, 2)
+
                 # ✅ Erstelle `ProductChange` direkt beim Produkt
                 new_product_change = ProductChange(
                     asin=new_product.asin,
                     title=f"Produkt {new_asin}",
-                    price=round(random.uniform(10.0, 100.0), 2),
+                    price=price_rand,
                     main_category="Electronics",
                     second_category="Gadgets",
                     main_category_rank=random.randint(1, 100),
                     second_category_rank=random.randint(1, 200),
-                    img_path="no image",
+                    img_path= None,
                     change_date=datetime.now(),
                     changes="Initial product creation",
-                    blm=random.randint(1, 5),
-                    total=round(random.uniform(500.0, 2000.0), 2)
+                    blm=blm_rand,
+                    total=total_rand
                 )
                 db.add(new_product_change)
                 db.commit()

@@ -26,6 +26,9 @@ class AmazonFirstPageScraper:
             options.add_argument("--headless")
             if self.show_details: print("🚀 Starting browserless")
 
+        options.add_argument("--disable-gpu")
+        options.add_argument("--no-sandbox")
+        options.add_argument("--disable-dev-shm-usage") 
 
         self.driver = webdriver.Firefox(options=options)
 
@@ -104,7 +107,7 @@ class AmazonFirstPageScraper:
                     price_link = next((a for a in item.find_elements(By.TAG_NAME, "a") if a.get_attribute("aria-describedby") == "price-link"), None)
                     if not price_link:
                         #raise Exception("Price link not found")
-                        price = -1
+                        price = None
                     else:
                         price_text = price_link.text.replace("$", "").strip()
                         price_numbers = re.findall(r'\d+', price_text)
@@ -116,6 +119,9 @@ class AmazonFirstPageScraper:
                     # Extract title
                     title_element = item.find_element(By.TAG_NAME, "h2")
                     title = title_element.text.strip()
+
+                    if title == "": 
+                        title = None
                   
                     # Extract img
                     img_element = item.find_element(By.XPATH, ".//img[@class='s-image']")

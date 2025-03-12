@@ -163,17 +163,17 @@ async def get_loading_clusters(current_user: User = Depends(get_current_user), d
                         # ✅ `ProductChange` sicher erstellen (Fallbacks für fehlende Daten)
                         new_product_change = ProductChange(
                             asin=new_product.asin,
-                            title=product_data.get("title", "Unknown Product"),
-                            price=product_data.get("price") if isinstance(product_data.get("price"), (int, float)) else 0.0,
-                            main_category=product_data.get("main_category", "Unknown"),
-                            second_category=product_data.get("second_category", "Unknown"),
-                            main_category_rank=product_data.get("main_category_rank", -1),
-                            second_category_rank=product_data.get("second_category_rank", -1),
-                            img_path=product_data.get("image", "no image"),
+                            title=product_data.get("title", None),
+                            price=product_data.get("price") if isinstance(product_data.get("price"), (int, float)) else None,
+                            main_category=product_data.get("main_category", None),
+                            second_category=product_data.get("second_category", None),
+                            main_category_rank=product_data.get("main_category_rank", None),
+                            second_category_rank=product_data.get("second_category_rank", None),
+                            img_path=product_data.get("image", None),
                             change_date=datetime.now(timezone.utc),
                             changes="Initial creation",
-                            blm=-1,
-                            total=0.0,
+                            blm=None,
+                            total=None,
                         )
                         db.add(new_product_change)
                         db.commit()

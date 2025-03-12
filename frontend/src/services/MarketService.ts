@@ -3,30 +3,6 @@ const API_URL = "http://127.0.0.1:9000";
 class MarketService {
   private static TOKEN_KEY = "token";
 
-  // 📌 Neues Market Cluster erstellen mit mehreren Keywords
-  static async createMarketCluster(clusterData: {
-    title: string;
-    keywords: string[];
-  }) {
-    try {
-      const response = await fetch(`${API_URL}/market-clusters/create`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem(this.TOKEN_KEY)}`,
-        },
-        body: JSON.stringify(clusterData),
-      });
-
-      if (!response.ok)
-        throw new Error("Fehler beim Erstellen des Market Clusters.");
-      return { success: true, data: await response.json() };
-    } catch (error) {
-      console.error("Fehler beim Erstellen des Market Clusters:", error);
-      return { success: false };
-    }
-  }
-
   // 📌 Market Cluster aktualisieren (nur Titel)
   static async updateMarketCluster(
     clusterId: number,
@@ -77,7 +53,7 @@ class MarketService {
   }
 
   // 📌 Alle Market-Cluster des eingeloggten Users abrufen
-  static async get_market_cluster(): Promise<any> {
+  static async GetMarketClusters(): Promise<any> {
     try {
       const token = localStorage.getItem(this.TOKEN_KEY);
       if (!token) {
@@ -104,7 +80,7 @@ class MarketService {
   }
 
   // 📌 Einzelnes Market-Cluster mit MarketChanges abrufen
-  static async get_market_cluster_details(clusterId: number): Promise<any> {
+  static async getMarketClusterDetails(clusterId: number): Promise<any> {
     try {
       const token = localStorage.getItem(this.TOKEN_KEY);
       if (!token) {
@@ -132,65 +108,6 @@ class MarketService {
     }
   }
 
-  // 📌 Einzelnen Markt abrufen
-  // static async get_market(marketId: number): Promise<any> {
-  //   try {
-  //     const token = localStorage.getItem(this.TOKEN_KEY);
-  //     if (!token) {
-  //       throw new Error("Kein Token vorhanden. Bitte einloggen.");
-  //     }
-
-  //     const response = await fetch(`${API_URL}/markets/${marketId}`, {
-  //       method: "GET",
-  //       headers: {
-  //         Authorization: `Bearer ${token}`,
-  //         "Content-Type": "application/json",
-  //       },
-  //     });
-
-  //     if (!response.ok) {
-  //       throw new Error(`Fehler beim Abrufen des Marktes ${marketId}.`);
-  //     }
-
-  //     return await response.json();
-  //   } catch (error) {
-  //     console.error("Fehler beim Abrufen des Marktes:", error);
-  //     return null;
-  //   }
-  // }
-
-  // 📌 Scraping-Task für ein Keyword starten
-  // static async startAsinScraping(searchTerm: string, taskId: string): Promise<string> {
-  //   try {
-  //     const response = await fetch(`${API_URL}/api/get-asins?search_term=${encodeURIComponent(searchTerm)}&task_id=${taskId}`, {
-  //       method: "GET",
-  //     });
-
-  //     if (!response.ok) throw new Error("Fehler beim Starten des Scraping-Tasks.");
-  //     return taskId;
-  //   } catch (error) {
-  //     console.error("Fehler beim Starten des Scraping-Tasks:", error);
-  //     return "";
-  //   }
-  // }
-
-  static async checkScrapingStatus(
-    taskId: string
-  ): Promise<{ status: string; data?: { first_page_products: any[] } }> {
-    try {
-      const response = await fetch(
-        `http://127.0.0.1:9000/api/get-asins/status?task_id=${taskId}`
-      );
-      const data = await response.json();
-
-      console.log(`🔍 [Scraping Status] Task ${taskId}:`, data); // ✅ DEBUG LOG
-
-      return data;
-    } catch (error) {
-      console.error("❌ Fehler beim Abrufen des Scraping-Status:", error);
-      return { status: "error" };
-    }
-  }
   static async startScrapingProcess(newClusterData: {
     keywords: string[];
     clusterName: string | null;
@@ -222,66 +139,42 @@ class MarketService {
     }
   }
 
-  // static async checkScrapingProcessStatus(
-  //   clustername: string
-  // ): Promise<{ status: string; keywords?: { [key: string]: string } }> {
-  //   try {
-  //     const token = localStorage.getItem(this.TOKEN_KEY);
-  //     if (!token) throw new Error("Kein Token vorhanden. Bitte einloggen.");
-
-  //     const response = await fetch(
-  //       `${API_URL}/api/get-status-of-firstpage-scraping-process?clustername=${clustername}`,
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //           "Content-Type": "application/json",
-  //         },
-  //       }
-  //     );
-
-  //     if (!response.ok)
-  //       throw new Error("Fehler beim Abrufen des Scraping-Prozesses.");
-
-  //     return await response.json();
-  //   } catch (error) {
-  //     console.error("Fehler beim Abrufen des Scraping-Prozesses:", error);
-  //     return { status: "error" };
-  //   }
-  // }
-
-  static async getActiveScrapingCluster(): Promise<{ 
-    clustername: string; 
-    status: string; 
-    keywords: { [keyword: string]: string } 
+  static async getActiveScrapingCluster(): Promise<{
+    clustername: string;
+    status: string;
+    keywords: { [keyword: string]: string };
   } | null> {
     try {
       const token = localStorage.getItem(this.TOKEN_KEY);
       if (!token) throw new Error("Kein Token vorhanden. Bitte einloggen.");
-  
+
       const response = await fetch(`${API_URL}/api/get-loading-clusters`, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
       });
-  
-      if (!response.ok) throw new Error("Fehler beim Abrufen des aktiven Scraping-Prozesses.");
-      
+
+      if (!response.ok)
+        throw new Error("Fehler beim Abrufen des aktiven Scraping-Prozesses.");
+
       const data = await response.json();
-  
+
       // ✅ Falls kein aktiver Cluster existiert, `null` zurückgeben
       if (!data || !data.clustername) {
         console.log("[MarketService] Kein aktiver Scraping-Prozess gefunden.");
         return null;
       }
-  
+
       return data; // ✅ Falls ein aktiver Cluster existiert, diesen zurückgeben
     } catch (error) {
-      console.error("Fehler beim Abrufen des aktiven Scraping-Prozesses:", error);
+      console.error(
+        "Fehler beim Abrufen des aktiven Scraping-Prozesses:",
+        error
+      );
       return null;
     }
   }
-  
 }
 
 export default MarketService;

@@ -44,14 +44,14 @@ def get_market(market_id: int, db: Session = Depends(get_db), current_user = Dep
 
             product_data = {
                 "asin": product.asin,
-                "title": latest_product_change.title if latest_product_change else "Unknown",
+                "title": latest_product_change.title if latest_product_change else None,
                 "price": latest_product_change.price if latest_product_change else None,
-                "main_category": latest_product_change.main_category if latest_product_change else "N/A",
-                "main_category_rank": latest_product_change.main_category_rank if latest_product_change else "N/A",
-                "second_category": latest_product_change.second_category if latest_product_change else "N/A",
-                "second_category_rank": latest_product_change.second_category_rank if latest_product_change else "N/A",
-                "blm": latest_product_change.blm if latest_product_change else "N/A",
-                "total": latest_product_change.total if latest_product_change else "N/A",
+                "main_category": latest_product_change.main_category if latest_product_change else None,
+                "main_category_rank": latest_product_change.main_category_rank if latest_product_change else None,
+                "second_category": latest_product_change.second_category if latest_product_change else None,
+                "second_category_rank": latest_product_change.second_category_rank if latest_product_change else None,
+                "blm": latest_product_change.blm if latest_product_change else None,
+                "total": latest_product_change.total if latest_product_change else None,
             }
             market_data["products"].append(product_data)
 

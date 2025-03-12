@@ -20,6 +20,7 @@ import { GrCluster } from "react-icons/gr";
 import { MdEdit, MdDelete } from "react-icons/md";
 import MarketService from "../services/MarketService";
 import { useSnackbar } from "../providers/SnackbarProvider";
+import CustomSparkLine from "./charts/CustomSparkLine";
 
 interface ClusterCardProps {
   cluster: {
@@ -59,11 +60,15 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
 
   // Market Cluster aktualisieren
   const handleUpdateCluster = async () => {
-    const response = await MarketService.updateMarketCluster(cluster.id, { title: newTitle });
+    const response = await MarketService.updateMarketCluster(cluster.id, {
+      title: newTitle,
+    });
 
     if (response.success) {
       setMarketClusters((prevClusters) =>
-        prevClusters.map((c) => (c.id === cluster.id ? { ...c, title: newTitle } : c))
+        prevClusters.map((c) =>
+          c.id === cluster.id ? { ...c, title: newTitle } : c
+        )
       );
       showSnackbar("Market Cluster erfolgreich aktualisiert.");
       setOpenEditDialog(false);
@@ -79,7 +84,9 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
     setTimeout(async () => {
       const success = await MarketService.deleteMarketCluster(cluster.id);
       if (success) {
-        setMarketClusters((prevClusters) => prevClusters.filter((c) => c.id !== cluster.id));
+        setMarketClusters((prevClusters) =>
+          prevClusters.filter((c) => c.id !== cluster.id)
+        );
         showSnackbar("Market Cluster erfolgreich gelöscht.");
       } else {
         showSnackbar("Fehler beim Löschen des Market Clusters.", "error");
@@ -93,7 +100,11 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
   return (
     <motion.div
       initial={{ opacity: 1, scale: 1 }}
-      animate={deletingCluster === cluster.id ? { opacity: 0, scale: 0.8 } : { opacity: 1, scale: 1 }}
+      animate={
+        deletingCluster === cluster.id
+          ? { opacity: 0, scale: 0.8 }
+          : { opacity: 1, scale: 1 }
+      }
       transition={{ duration: 0.5 }}
     >
       <Card
@@ -129,10 +140,16 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
 
           <Box sx={{ mt: 2, display: "flex", flexWrap: "wrap", gap: 1 }}>
             {Array.isArray(cluster.markets) && cluster.markets.length > 0 ? (
-              cluster.markets.map((market, index) => <Chip key={index} label={market} variant="outlined" />)
+              cluster.markets.map((market, index) => (
+                <Chip key={index} label={market} variant="outlined" />
+              ))
             ) : (
               <Chip label="Keine Märkte" color="default" />
             )}
+          </Box>
+
+          <Box sx={{ mt: 4, width: 200 }}>
+            <CustomSparkLine />
           </Box>
         </CardContent>
       </Card>
@@ -141,7 +158,9 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
       <Dialog open={openEditDialog} onClose={() => setOpenEditDialog(false)}>
         <DialogTitle>Market Cluster bearbeiten</DialogTitle>
         <DialogContent>
-          <DialogContentText>Gib einen neuen Namen für das Market Cluster ein.</DialogContentText>
+          <DialogContentText>
+            Gib einen neuen Namen für das Market Cluster ein.
+          </DialogContentText>
           <TextField
             fullWidth
             label="Neuer Name"
@@ -160,11 +179,15 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
       </Dialog>
 
       {/* Dialog für Löschen */}
-      <Dialog open={openConfirmDialog} onClose={() => setOpenConfirmDialog(false)}>
+      <Dialog
+        open={openConfirmDialog}
+        onClose={() => setOpenConfirmDialog(false)}
+      >
         <DialogTitle>Market Cluster löschen?</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Bist du sicher, dass du dieses Market Cluster löschen möchtest? Diese Aktion kann nicht rückgängig gemacht werden.
+            Bist du sicher, dass du dieses Market Cluster löschen möchtest?
+            Diese Aktion kann nicht rückgängig gemacht werden.
           </DialogContentText>
         </DialogContent>
         <DialogActions>

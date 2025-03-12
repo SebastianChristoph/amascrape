@@ -46,7 +46,7 @@ const AddMarketCluster: React.FC = () => {
   useEffect(() => {
     const fetchMarketClusters = async () => {
       try {
-        const data = await MarketService.get_market_cluster();
+        const data = await MarketService.GetMarketClusters();
         if (Array.isArray(data)) {
           setExistingClusters(data.map((cluster: any) => cluster.title.toLowerCase()));
         }
