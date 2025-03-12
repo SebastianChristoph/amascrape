@@ -11,37 +11,49 @@ from sqlalchemy.orm import joinedload
 router = APIRouter()
 
 # 📌 User-Registrierung Schema
+
+
 class UserCreate(BaseModel):
     username: str
     password: str
 
 # 📌 MarketCluster Response Schema
+
+
 class MarketClusterResponse(BaseModel):
     id: int
     title: str
     markets: List[str]
 
 # 📌 Market Response Schema
+
+
 class MarketResponse(BaseModel):
     id: int
     keyword: str
     products: List[dict]
 
 # 📌 User-Registrierung mit SQLAlchemy
+
+
 @router.post("/register")
 def register(user: UserCreate, db: Session = Depends(get_db)):
-    existing_user = db.query(User).filter(User.username == user.username).first()
+    existing_user = db.query(User).filter(
+        User.username == user.username).first()
     if existing_user:
         raise HTTPException(status_code=400, detail="User already exists")
 
-    new_user = User(username=user.username, hashed_password=get_password_hash(user.password))
+    new_user = User(username=user.username,
+                    hashed_password=get_password_hash(user.password))
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
-    
+
     return {"message": "User created successfully"}
 
 # 📌 Token-Generierung (Login)
+
+
 @router.post("/token")
 def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
     user = authenticate_user(db, form_data.username, form_data.password)
@@ -51,6 +63,6 @@ def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depend
             detail="Incorrect username or password",
             headers={"WWW-Authenticate": "Bearer"},
         )
-    
+
     access_token = create_access_token({"sub": user.username})
     return {"access_token": access_token, "token_type": "bearer"}

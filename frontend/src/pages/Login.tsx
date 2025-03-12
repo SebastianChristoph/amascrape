@@ -1,15 +1,15 @@
+import {
+  Box,
+  Button,
+  Container,
+  Paper,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSnackbar } from "../providers/SnackbarProvider";
 import LoginService from "../services/LoginService";
-import {
-  TextField,
-  Button,
-  Paper,
-  Box,
-  Typography,
-  Container,
-} from "@mui/material";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -17,9 +17,8 @@ export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  
-  const handleLogin = async (e: React.FormEvent) => {
 
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
 
@@ -29,7 +28,10 @@ export default function Login() {
     if (success) {
       navigate("/dashboard");
     } else {
-      showSnackbar("Login fehlgeschlagen. Bitte überprüfe deine Anmeldedaten.", "error");
+      showSnackbar(
+        "Login fehlgeschlagen. Bitte überprüfe deine Anmeldedaten.",
+        "error"
+      );
     }
   };
 

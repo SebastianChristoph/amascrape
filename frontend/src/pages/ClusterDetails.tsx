@@ -61,8 +61,6 @@ export default function ClusterDetails() {
   const [loading, setLoading] = useState<boolean>(true);
   const [tabIndex, setTabIndex] = useState(0);
 
-  
-
   const ItemCard = styled(Card)(({ theme }) => ({
     minHeight: 400,
     backgroundColor: "#fff",
@@ -157,10 +155,8 @@ export default function ClusterDetails() {
           />
         );
       },
-      
     },
-   
-    
+
     { field: "id", headerName: "ASIN", width: 150 },
     {
       field: "title",
@@ -193,9 +189,7 @@ export default function ClusterDetails() {
       headerName: "chart",
       width: 80,
       renderCell: () => {
-        return (
-         <CustomSparkLine/>
-        );
+        return <CustomSparkLine />;
       },
     },
     {
@@ -268,8 +262,16 @@ export default function ClusterDetails() {
 
   return (
     <Paper elevation={4} sx={{ marginBottom: 2, padding: 4 }}>
-
-<Typography sx={{ mt: 4, mb: 4, backgroundColor: "primary.main", color: "white", padding: 2}} variant="h5">
+      <Typography
+        sx={{
+          mt: 4,
+          mb: 4,
+          backgroundColor: "primary.main",
+          color: "white",
+          padding: 2,
+        }}
+        variant="h5"
+      >
         Market Cluster Data
       </Typography>
 
@@ -282,7 +284,6 @@ export default function ClusterDetails() {
         {/* MARKET CLUSTER Chart */}
         <Grid size={{ md: 12, lg: 4 }}>
           <Item title="Last 30 days" icon={<GrBarChart />}>
-          
             <CustomBarChart />
           </Item>
         </Grid>
@@ -297,16 +298,25 @@ export default function ClusterDetails() {
         {/* MARKET CLUSTER Other Stuff */}
         <Grid size={{ md: 12, lg: 4 }}>
           <Item title="Other important stuff" icon={<BiAbacus />}>
-            <CustomStackBars/>
+            <CustomStackBars />
           </Item>
         </Grid>
       </Grid>
 
-      <Typography sx={{ mt: 4, mb: 2, backgroundColor: "primary.main", color: "white", padding: 2}} variant="h5">
-        Markets  in {marketCluster.title}
+      <Typography
+        sx={{
+          mt: 4,
+          mb: 2,
+          backgroundColor: "primary.main",
+          color: "white",
+          padding: 2,
+        }}
+        variant="h5"
+      >
+        Markets in {marketCluster.title}
       </Typography>
 
-      <Paper sx={{padding: 2, mb: 8}}>
+      <Paper sx={{ padding: 2, mb: 8 }}>
         Get your data for the markets here and add some cool text!
       </Paper>
 
@@ -344,7 +354,6 @@ export default function ClusterDetails() {
             {/* MARKET Chart */}
             <Grid size={{ md: 12, lg: 4 }}>
               <Item title="Last 30 days" icon={<GrBarChart />}>
-               
                 <CustomLineChart />
               </Item>
             </Grid>
@@ -371,50 +380,42 @@ export default function ClusterDetails() {
               </Item>
             </Grid>
 
-
             {/* MARKET TOP SUGGESTIONS */}
             <Grid size={{ md: 12, lg: 12 }}>
-            
               <Box
-            sx={{
-              backgroundColor: "#f5f5f5",
-              padding: 2,
-              borderRadius: 2,
-              mt: 2,
-              boxShadow: 1,
-            }}
-          >
-            <Typography variant="h6" sx={{ mb: 1 }}>
-              🔍 Top search term suggestions from Amazon Search Bar
-            </Typography>
+                sx={{
+                  backgroundColor: "#f5f5f5",
+                  padding: 2,
+                  borderRadius: 2,
+                  mt: 2,
+                  boxShadow: 1,
+                }}
+              >
+                <Typography variant="h6" sx={{ mb: 1 }}>
+                  🔍 Top search term suggestions from Amazon Search Bar
+                </Typography>
 
-            {market.top_suggestions ? (
-              <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
-                {market.top_suggestions
-                  .split(",")
-                  .map((suggestion: string, index: number) => (
-                    <Chip
-                      key={index}
-                      label={suggestion.trim()}
-                      variant="outlined"
-                      sx={{ mr: 1, mb: 1 }}
-                    />
-                  ))}
+                {market.top_suggestions ? (
+                  <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
+                    {market.top_suggestions
+                      .split(",")
+                      .map((suggestion: string, index: number) => (
+                        <Chip
+                          key={index}
+                          label={suggestion.trim()}
+                          variant="outlined"
+                          sx={{ mr: 1, mb: 1 }}
+                        />
+                      ))}
+                  </Box>
+                ) : (
+                  <Typography sx={{ color: "gray", fontStyle: "italic" }}>
+                    Keine Vorschläge verfügbar
+                  </Typography>
+                )}
               </Box>
-            ) : (
-              <Typography sx={{ color: "gray", fontStyle: "italic" }}>
-                Keine Vorschläge verfügbar
-              </Typography>
-            )}
-          </Box>
-            
             </Grid>
-
-            
-
           </Grid>
-
-          
 
           <Box sx={{ width: "100%", marginTop: 2 }}>
             {market.products && market.products.length > 0 ? (

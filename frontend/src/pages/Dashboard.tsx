@@ -11,13 +11,13 @@ import {
 } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import { useEffect, useState } from "react";
+import { AiOutlineCheckCircle } from "react-icons/ai";
 import { GrCluster } from "react-icons/gr";
 import { MdAdd } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import ClusterCard from "../components/ClusterCard";
 import { useSnackbar } from "../providers/SnackbarProvider";
 import MarketService from "../services/MarketService";
-import { AiOutlineCheckCircle } from "react-icons/ai";
 
 const Dashboard: React.FC = () => {
   const navigate = useNavigate();

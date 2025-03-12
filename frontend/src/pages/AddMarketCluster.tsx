@@ -1,8 +1,16 @@
-import { useState, useEffect } from "react";
+import {
+  Alert,
+  Box,
+  Button,
+  Chip,
+  Container,
+  TextField,
+  Typography,
+} from "@mui/material";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { TextField, Button, Container, Typography, Box, Chip, Alert } from "@mui/material";
-import MarketService from "../services/MarketService";
 import { useSnackbar } from "../providers/SnackbarProvider";
+import MarketService from "../services/MarketService";
 
 const AddMarketCluster: React.FC = () => {
   const navigate = useNavigate();
@@ -19,7 +27,10 @@ const AddMarketCluster: React.FC = () => {
     const fetchActiveScrapingClusters = async () => {
       try {
         const activeCluster = await MarketService.getActiveScrapingCluster(); // Holt den einzelnen aktiven Cluster
-        console.log("[AddMarketCluster] Aktiver Scraping-Prozess:", activeCluster);
+        console.log(
+          "[AddMarketCluster] Aktiver Scraping-Prozess:",
+          activeCluster
+        );
 
         if (activeCluster) {
           setIsScraping(true); // Scraping ist aktiv, weiter fetchen
@@ -48,7 +59,9 @@ const AddMarketCluster: React.FC = () => {
       try {
         const data = await MarketService.GetMarketClusters();
         if (Array.isArray(data)) {
-          setExistingClusters(data.map((cluster: any) => cluster.title.toLowerCase()));
+          setExistingClusters(
+            data.map((cluster: any) => cluster.title.toLowerCase())
+          );
         }
       } catch (error) {
         console.error("Fehler beim Laden der Market-Cluster:", error);
@@ -121,7 +134,8 @@ const AddMarketCluster: React.FC = () => {
       {/* ✅ Falls Scraping läuft, zeige eine Warnung an */}
       {isScraping ? (
         <Alert severity="warning">
-          🚧 Ein Scraping-Prozess läuft bereits. Warte, bis dieser abgeschlossen ist, bevor du einen neuen Cluster erstellst.
+          🚧 Ein Scraping-Prozess läuft bereits. Warte, bis dieser abgeschlossen
+          ist, bevor du einen neuen Cluster erstellst.
         </Alert>
       ) : (
         <form onSubmit={handleSubmit}>
@@ -150,7 +164,12 @@ const AddMarketCluster: React.FC = () => {
 
           <Box sx={{ mb: 2 }}>
             {keywords.map((keyword, index) => (
-              <Chip key={index} label={keyword} onDelete={() => handleRemoveKeyword(keyword)} sx={{ mr: 1 }} />
+              <Chip
+                key={index}
+                label={keyword}
+                onDelete={() => handleRemoveKeyword(keyword)}
+                sx={{ mr: 1 }}
+              />
             ))}
           </Box>
 

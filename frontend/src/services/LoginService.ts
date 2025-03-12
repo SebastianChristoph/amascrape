@@ -4,9 +4,12 @@ class LoginService {
   private static TOKEN_KEY = "token";
 
   // 📌 Login-Funktion mit API-Request
-  static async authenticate(username: string, password: string): Promise<boolean> {
-      try {
-        console.log("try to authenticate with", username   , password);
+  static async authenticate(
+    username: string,
+    password: string
+  ): Promise<boolean> {
+    try {
+      console.log("try to authenticate with", username, password);
       const response = await fetch(`${API_URL}/users/token`, {
         method: "POST",
         headers: {

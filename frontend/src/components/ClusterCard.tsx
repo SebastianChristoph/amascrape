@@ -1,25 +1,25 @@
-import React, { useState } from "react";
 import {
+  Box,
+  Button,
   Card,
   CardContent,
   CardHeader,
-  IconButton,
-  Typography,
-  Box,
   Chip,
   Dialog,
-  DialogTitle,
+  DialogActions,
   DialogContent,
   DialogContentText,
-  DialogActions,
-  Button,
+  DialogTitle,
+  IconButton,
   TextField,
+  Typography,
 } from "@mui/material";
 import { motion } from "framer-motion";
+import React, { useState } from "react";
 import { GrCluster } from "react-icons/gr";
-import { MdEdit, MdDelete } from "react-icons/md";
-import MarketService from "../services/MarketService";
+import { MdDelete, MdEdit } from "react-icons/md";
 import { useSnackbar } from "../providers/SnackbarProvider";
+import MarketService from "../services/MarketService";
 import CustomSparkLine from "./charts/CustomSparkLine";
 
 interface ClusterCardProps {
