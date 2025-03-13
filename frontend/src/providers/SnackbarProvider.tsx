@@ -36,7 +36,7 @@ export function SnackbarProvider({ children }: { children: ReactNode }) {
       {children}
       <Snackbar
         open={snackbarOpen}
-        autoHideDuration={3000}
+        autoHideDuration={6000}
         onClose={() => setSnackbarOpen(false)}
         anchorOrigin={{ vertical: "top", horizontal: "right" }} // 📌 Hier Position ändern
       >

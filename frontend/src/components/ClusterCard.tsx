@@ -32,6 +32,7 @@ interface ClusterCardProps {
   deletingCluster: number | null;
   setMarketClusters: React.Dispatch<React.SetStateAction<any[]>>;
   setDeletingCluster: React.Dispatch<React.SetStateAction<number | null>>;
+  totalRevenue: Float32Array | 0; 
 }
 
 const ClusterCard: React.FC<ClusterCardProps> = ({
@@ -40,6 +41,7 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
   deletingCluster,
   setMarketClusters,
   setDeletingCluster,
+  totalRevenue,
 }) => {
   const { showSnackbar } = useSnackbar();
   const [openEditDialog, setOpenEditDialog] = useState(false);
@@ -126,7 +128,7 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
               <IconButton color="primary" onClick={handleEditClick}>
                 <MdEdit size={24} />
               </IconButton>
-              <IconButton color="error" onClick={handleDeleteClick}>
+              <IconButton color="info" onClick={handleDeleteClick}>
                 <MdDelete size={24} />
               </IconButton>
             </>
@@ -148,6 +150,14 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
             )}
           </Box>
 
+     
+
+          <Typography sx={{mt: 4}} variant="h3">
+          Total Revenue: {new Intl.NumberFormat("en-US", {
+                    style: "currency",
+                    currency: "USD",
+                  }).format(Number(totalRevenue))}
+          </Typography>
           <Box sx={{ mt: 4, width: 200 }}>
             <CustomSparkLine />
           </Box>

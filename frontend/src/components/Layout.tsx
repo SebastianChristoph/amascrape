@@ -1,4 +1,4 @@
-import { AppBar, Toolbar, Button, Box, Typography } from "@mui/material";
+import { AppBar, Toolbar, Button, Box, Typography, Tooltip } from "@mui/material";
 import { Outlet, Link, useLocation, useNavigate } from "react-router-dom";
 import UserService from "../services/UserService";
 import { useState } from "react";
@@ -45,9 +45,12 @@ export default function Layout({ setIsAuthenticated }: { setIsAuthenticated: (au
               <Typography sx={{ mt: 0.3 }} color="white" variant="body2">
                 {user?.sub}
               </Typography>
+              <Tooltip title="Logout">
               <Button color="inherit" onClick={handleLogout}>
-                <MdLogout size={25} />
+                  <MdLogout size={25} />
+                  
               </Button>
+              </Tooltip>
             </Box>
           )}
         </Toolbar>

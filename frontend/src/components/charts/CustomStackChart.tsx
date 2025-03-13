@@ -16,8 +16,8 @@ export default function CustomStackBars() {
       ])}
       xAxis={[{ scaleType: 'band', dataKey: 'year' }]}
       slotProps={{ legend: { hidden: true } }}
-      width={600}
-      height={350}
+      
+      height={300}
     />
   );
 }

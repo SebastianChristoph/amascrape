@@ -45,6 +45,7 @@ class Product(Base):
     __tablename__ = "products"
 
     asin = Column(String, primary_key=True)
+    last_time_scraped = Column(DateTime, nullable=True )
 
     markets = relationship(
         "Market",
@@ -119,6 +120,7 @@ class MarketChange(Base):
     # Neue und entfernte Produkte als Listen
     new_products = Column(String, nullable=True)  # Kommagetrennte ASINs
     removed_products = Column(String, nullable=True)  # Kommagetrennte ASINs
+    changes = Column(String, nullable = True)
 
     # 📌 NEUE SPALTE: Top-Suggestions als kommagetrennter String
     top_suggestions = Column(String, nullable=True, default="")  
@@ -141,6 +143,7 @@ class MarketCluster(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
     title = Column(String, nullable=False)
+    total_revenue = Column(Float, nullable=True, default=0.0)
 
     user = relationship("User", back_populates="market_clusters", passive_deletes=True)
     markets = relationship(

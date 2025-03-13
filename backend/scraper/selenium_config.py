@@ -40,3 +40,5 @@ no_price_box = ["B07K2TLL6F"]
 no_product_info = ["B0C1Y5VL8D", "B0C5QRZ47P", "B08FCX19C9"]
 no_ranking = ["B0BLMW5F3Y", "B09Z6JRQ2Y"]
 no_reviews = ["B09WG31GRR", "B096QYTJT8"]
+
+asins_from_live_scenarios = ["B009EO0FSU", "B0043MV5VO"]

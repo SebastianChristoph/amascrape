@@ -5,7 +5,7 @@ import random
 import time
 from selenium.common.exceptions import NoSuchElementException
 import re
-import backend.scraper.selenium_config as selenium_config
+import scraper.selenium_config as selenium_config
 
 class AmazonProductScraper:
     def __init__(self, headless = True, show_details = True):
@@ -39,7 +39,7 @@ class AmazonProductScraper:
                     if self.show_details: print("✅ Page loaded successfully")
                     return
                 except Exception as e:
-                    self.log(f"⚠️ Error loading {url} (Attempt {attempt + 1}/{retries}): {e}")
+                    if self.show_details: (f"⚠️ Error loading {url} (Attempt {attempt + 1}/{retries}): {e}")
                     time.sleep(wait)
             raise Exception(f"❌ Failed to load {url} after {retries} attempts")
 
@@ -60,7 +60,7 @@ class AmazonProductScraper:
             print("   ❌ Error finding title!", e)
     
     def get_image_path(self) ->str:
-        if self.show_details: print("📝  Getting image path")
+        if self.show_details: print("📝 Getting image path")
         try:
             img_wrapper = self.driver.find_element(By.XPATH, '//*[@id="imgTagWrapperId"]')
             img_element = img_wrapper.find_element(By.TAG_NAME, "img")

@@ -1,4 +1,5 @@
 import {
+  Alert,
   Box,
   Button,
   Card,
@@ -40,6 +41,8 @@ const Dashboard: React.FC = () => {
 
       if (data) {
         setMarketClusters(data);
+        console.log("[DASHBOARD]", data)
+        console.log(marketClusters)
       } else {
         showSnackbar("Fehler beim Laden der Market-Cluster.");
       }
@@ -54,11 +57,37 @@ const Dashboard: React.FC = () => {
     try {
       const data = await MarketService.getActiveScrapingCluster();
       console.log("[DASHBOARD] FETCHED:", data);
-      if (!data || data.status === "done") {
+      if (!data) {
+        console.log("✅ NO ACTIVE CLUSTER / NO DATA");
         setActiveCluster(null);
         setIsFetching(false); // Stoppt das Refetching
         fetchMarketClusters();
-      } else {
+      }
+      else if (data.status === "done") {
+        console.log("✅ DONE SCRAPING");
+        showSnackbar("Your cluster is ready to go");
+        setActiveCluster(null);
+        setIsFetching(false); // Stoppt das Refetching
+        fetchMarketClusters();
+      }    
+      else if (data.status === "error") {
+        console.error("❌ Error scraping data");
+        console.log(activeCluster?.clustername);
+        showSnackbar(`Error scraping your new cluster '${activeCluster?.clustername}' ! Please contact the support team!`, "error")
+        setIsFetching(false);
+
+        setTimeout(async () => { 
+          console.log("waited 6 sconds!");
+          setActiveCluster(null);
+           // Stoppt das Refetching bei Fehlern
+          console.log(activeCluster?.clustername);
+          fetchMarketClusters();
+        }, 6000);
+      
+        console.log(activeCluster?.clustername);
+       
+      }
+      else {
         setActiveCluster(data);
         setIsFetching(true); // Falls der Status "processing" bleibt, weiter fetchen
       }
@@ -93,8 +122,14 @@ const Dashboard: React.FC = () => {
             sx={{ mb: 2, display: "flex", alignItems: "center", gap: 1 }}
           >
             <CircularProgress size={24} sx={{ color: "primary.main" }} />
-            Aktive Scraping-Prozesse laufen...
+            Our robots are scraping for you...
           </Typography>
+
+          <Alert sx={{ mb: 2 }}  severity="info">
+                      We are scraping your markets to get a first impression of your cluster. This usually takes some
+                      minutes. You can come back later, inspect your other
+                      clusters or have a coffee.
+                    </Alert>
 
           <Box sx={{ flexGrow: 1 }}>
             <Grid container spacing={3}>
@@ -108,10 +143,11 @@ const Dashboard: React.FC = () => {
                     </Typography>
                   }
                 />
-                <CardContent sx={{ minHeight: 200 }}>
-                  <Box sx={{ mt: 2 }}>
-                    <Typography variant="body1">
-                      Scraping für folgende Keywords:
+                <CardContent>
+                  <Box>
+                    
+                  <Typography variant="body1">
+                     Scraping status:
                     </Typography>
                     <Box
                       sx={{ display: "flex", flexDirection: "column", gap: 2 }}
@@ -158,20 +194,21 @@ const Dashboard: React.FC = () => {
 
       {/* ✅ Zeigt alle Market-Cluster an */}
       <Paper sx={{ paddingY: 4, paddingX: 4, mt: 2 }}>
-        <Typography variant="h4" sx={{ mb: 3 }}>
+        <Typography variant="h5" sx={{ mb: 3, backgroundColor: "primary.main", p: 2, color: "white" }}>
           My Market Clusters
         </Typography>
 
         <Box sx={{ flexGrow: 1 }}>
           <Grid container spacing={3}>
             {marketClusters.map((cluster) => (
-              <Grid key={cluster.id} size={4}>
+              <Grid key={cluster.id} size={{lg: 6, xs: 12}}>
                 <ClusterCard
                   cluster={cluster}
                   onClick={() => navigate(`/cluster/${cluster.id}`)}
                   deletingCluster={deletingCluster}
                   setMarketClusters={setMarketClusters}
                   setDeletingCluster={setDeletingCluster}
+                  totalRevenue={cluster.total_revenue}
                 />
               </Grid>
             ))}
@@ -179,15 +216,17 @@ const Dashboard: React.FC = () => {
         </Box>
 
         {/* ✅ Button ist deaktiviert, wenn Scraping läuft */}
+        <Box sx={{display: "flex", justifyContent: "flex-end"}}>
         <Button
-          sx={{ mt: 2 }}
+          sx={{ mt: 2, backgroundColor: "primary.main" }}
           variant="contained"
           startIcon={<MdAdd />}
           onClick={() => navigate("/add-market-cluster")}
           disabled={isFetching}
         >
           Add Market Cluster
-        </Button>
+          </Button>
+          </Box>
       </Paper>
     </Container>
   );

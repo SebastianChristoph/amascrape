@@ -4,6 +4,7 @@ import {
   Button,
   Chip,
   Container,
+  Paper,
   TextField,
   Typography,
 } from "@mui/material";
@@ -94,6 +95,7 @@ const AddMarketCluster: React.FC = () => {
   // ✅ Market Cluster erstellen
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+    console.clear();
 
     if (!clusterName.trim()) {
       showSnackbar("Bitte gib einen Cluster-Titel ein.");
@@ -126,11 +128,13 @@ const AddMarketCluster: React.FC = () => {
   };
 
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth="md">
+      <Paper elevation={6} sx={{p: 4}}>
+      
       <Typography variant="h4" sx={{ mb: 3 }}>
         Add Market Cluster
       </Typography>
-
+     
       {/* ✅ Falls Scraping läuft, zeige eine Warnung an */}
       {isScraping ? (
         <Alert severity="warning">
@@ -148,15 +152,19 @@ const AddMarketCluster: React.FC = () => {
             required
             sx={{ mb: 2 }}
           />
-
+ <Typography sx={{mt: 2, mb: 2}}>
+                  Add up to five keywords for your cluster. Each keyword acts as a market in your cluster. Our robots will get all the products for this searchterm on amazon
+                </Typography>
           <Box sx={{ display: "flex", gap: 2, mb: 2 }}>
             <TextField
               fullWidth
               label="Market Keyword"
               variant="outlined"
               value={newKeyword}
-              onChange={(e) => setNewKeyword(e.target.value)}
-            />
+                  onChange={(e) => setNewKeyword(e.target.value)}
+                 
+                />
+               
             <Button onClick={handleAddKeyword} variant="contained">
               Add
             </Button>
@@ -177,7 +185,8 @@ const AddMarketCluster: React.FC = () => {
             Create Market Cluster
           </Button>
         </form>
-      )}
+        )}
+        </Paper>
     </Container>
   );
 };

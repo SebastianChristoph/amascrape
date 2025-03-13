@@ -83,7 +83,7 @@ export default function ClusterDetails() {
     children: React.ReactNode;
   }) => {
     return (
-      <ItemCard sx={{ minHeight: 500 }}>
+      <ItemCard sx={{ height: 400 }}>
         <CardHeader
           avatar={
             <Avatar
@@ -99,7 +99,7 @@ export default function ClusterDetails() {
           }
           title={<Typography variant="body2">{title}</Typography>}
         />
-        <CardContent>{children}</CardContent>
+        <CardContent sx={{ paddingBottom: 2,  display: "flex" , flexDirection:"row", alignItems:"flex-end"}}>{children}</CardContent>
       </ItemCard>
     );
   };
@@ -111,7 +111,7 @@ export default function ClusterDetails() {
       const data = await MarketService.getMarketClusterDetails(
         Number(clusterId)
       );
-      console.log(data);
+      console.log("[DETAILS]", data);
       setMarketCluster(data);
       setLoading(false);
     }
@@ -126,9 +126,20 @@ export default function ClusterDetails() {
     marketCluster.markets.length === 0
   )
     return (
-      <Typography>
-        Market-Cluster nicht gefunden oder keine Märkte enthalten.
-      </Typography>
+      <Paper
+        sx={{
+          p: 2,
+          minHeight: "70vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+        elevation={6}
+      >
+        <Alert severity="warning">
+          Market Cluster not found or restricted for you.
+        </Alert>
+      </Paper>
     );
 
   const handleTabChange = (event: React.SyntheticEvent, newIndex: number) => {
@@ -282,21 +293,26 @@ export default function ClusterDetails() {
       {/* GRID MARKET CLUSTER */}
       <Grid container spacing={2}>
         {/* MARKET CLUSTER Chart */}
-        <Grid size={{ md: 12, lg: 4 }}>
+        <Grid size={{ sm: 12, lg: 4 }}>
           <Item title="Last 30 days" icon={<GrBarChart />}>
             <CustomBarChart />
           </Item>
         </Grid>
 
         {/* MARKET CLUSTER KPIs */}
-        <Grid size={{ md: 12, lg: 4 }}>
+        <Grid size={{ sm: 12, lg: 4 }}>
           <Item title="KPIs" icon={<TbListNumbers />}>
-            Cool data
+            <Typography variant="h3">
+          Total Revenue: {new Intl.NumberFormat("en-US", {
+                    style: "currency",
+                    currency: "USD",
+                  }).format(marketCluster.total_revenue)}
+          </Typography>
           </Item>
         </Grid>
 
         {/* MARKET CLUSTER Other Stuff */}
-        <Grid size={{ md: 12, lg: 4 }}>
+        <Grid size={{ sm: 12, lg: 4 }}>
           <Item title="Other important stuff" icon={<BiAbacus />}>
             <CustomStackBars />
           </Item>

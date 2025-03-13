@@ -1,21 +1,20 @@
 from datetime import datetime, timezone
 from fastapi import FastAPI, HTTPException, BackgroundTasks, Depends
 from fastapi.middleware.cors import CORSMiddleware
+from sqlalchemy import text
 from app.routes import users, markets, market_clusters
-from app.database import init_db
+from app.database import SessionLocal, ensure_test_users, init_db, engine, get_db
 from typing import List, Optional
 from sqlalchemy.orm import Session
 from app.auth import get_current_user
 from scraper.first_page_amazon_scraper import AmazonFirstPageScraper
-from fastapi import FastAPI, BackgroundTasks
+from fastapi import BackgroundTasks
 from pydantic import BaseModel
 import asyncio
-from app.routes import users, markets, market_clusters
-from app.database import init_db, get_db
-from app.models import Market, MarketChange, MarketCluster, Product, ProductChange, User
-
-
+from app.models import Base, Market, MarketChange, MarketCluster, Product, ProductChange, User
+from sqlalchemy.exc import OperationalError
 from concurrent.futures import ThreadPoolExecutor
+
 
 executor = ThreadPoolExecutor()
 
@@ -25,15 +24,27 @@ class NewClusterData(BaseModel):
 
 app = FastAPI()
 
-# start with
-# python -m uvicorn app.main:app --host 0.0.0.0 --port 9000 --reload
-
-# Datenbank initialisieren
+# ✅ Datenbank initialisieren (nur wenn notwendig)
 def initialize_database():
-    from app.database import init_db  # 🔥 Import passiert erst zur Laufzeit!
-    init_db()
-    
+    db = SessionLocal()
+    try:
+        try:
+            db.execute(text("SELECT 1 FROM users LIMIT 1"))
+            print("✅ Users-Tabelle existiert bereits.")
+            ensure_test_users()  # ✅ Stellt sicher, dass die Testbenutzer eingefügt werden!
+        except OperationalError:
+            print("📌 Keine users-Tabelle gefunden. Erstelle alle Tabellen...")
+            Base.metadata.create_all(bind=engine)  # ✅ Erstellt alle Tabellen
+            init_db()  # Initialisiert die DB mit Testdaten
+            return  
+
+        print("✅ Datenbank ist bereits initialisiert.")
+
+    finally:
+        db.close()
+
 initialize_database()
+
 # ✅ CORS aktivieren
 app.add_middleware(
     CORSMiddleware,
@@ -41,22 +52,17 @@ app.add_middleware(
     allow_credentials=True,
     allow_methods=["*"],  # GET, POST, DELETE, usw. erlauben
     allow_headers=["*"],  # Alle Header erlauben
-    )
+)
 
 app.include_router(users.router, prefix="/users", tags=["Users"])
 app.include_router(markets.router, prefix="/markets", tags=["Markets"])
-app.include_router(market_clusters.router, prefix="/market-clusters", tags=["Market Clusters"]) 
+app.include_router(market_clusters.router, prefix="/market-clusters", tags=["Market Clusters"])
+
 @app.get("/")
 def root():
     return {"message": "Welcome to the FastAPI Auth System"}
 
 scraping_processes = {}  # Struktur: { user_id: { cluster_name: { status, keywords: {...} } } }
-
-
-class NewClusterData(BaseModel):
-    keywords: List[str]
-    clusterName: Optional[str] = None
-
 
 @app.post("/api/start-firstpage-scraping-process")
 async def post_scraping(newClusterData: NewClusterData, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
@@ -65,10 +71,7 @@ async def post_scraping(newClusterData: NewClusterData, db: Session = Depends(ge
     cluster_name = newClusterData.clusterName
     print(f"🔥 Start Scraping für Nutzer {user_id}, Cluster: {cluster_name}")
 
-    # ✅ Stellt sicher, dass es nur eine Cluster-Erstellung haben kann, nicht mehrere gleichzeitig
     scraping_processes[user_id] = {}
-    
-    # ✅ Cluster für diesen Nutzer speichern
     scraping_processes[user_id][cluster_name] = {"status": "processing", "keywords": {}}
 
     for keyword in newClusterData.keywords:
@@ -87,23 +90,32 @@ async def post_scraping(newClusterData: NewClusterData, db: Session = Depends(ge
 @app.get("/api/get-loading-clusters")
 async def get_loading_clusters(current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
     user_id = current_user.id
-    print("user id: ", user_id)
-
     if user_id not in scraping_processes or not scraping_processes[user_id]:
-        print("keine user id in scraping processes")
+        print("[get-loading-clusters] Keine aktiven Scraping-Prozesse")
         return {"active_clusters": []}  # ✅ Keine aktiven Scraping-Prozesse
 
     clustername, cluster_data = next(iter(scraping_processes[user_id].items()))
 
-    # ✅ Prüfen, ob noch ein Keyword im Status "processing" ist
+    has_errors = any(value["status"] == "error" for keyword, value in cluster_data["keywords"].items())
+
+    if has_errors:
+        print("### FOUND ERROR")
+        cluster_data["status"] = "error"
+        keywords_status = {keyword: data["status"] for keyword, data in cluster_data["keywords"].items()}
+        active_cluster = {
+            "clustername": clustername,
+            "status": "error",
+            "keywords": keywords_status
+        }
+        scraping_processes[user_id] = {}
+        return active_cluster
+
     all_done = all(status["status"] == "done" for status in cluster_data["keywords"].values())
 
     if all_done:
-        # ✅ Falls alles fertig ist, setze Status auf "done"
         scraping_processes[user_id][clustername]["status"] = "done"
         print(f"✅ Alle Keywords für '{clustername}' fertig! -> Datenbank schreiben")
 
-        # 🔍 **CHECK: Gibt es das MarketCluster bereits für diesen Nutzer?**
         existing_cluster = db.query(MarketCluster).filter(
             MarketCluster.title == clustername,
             MarketCluster.user_id == user_id
@@ -112,7 +124,6 @@ async def get_loading_clusters(current_user: User = Depends(get_current_user), d
         if existing_cluster:
             print(f"🔗 MarketCluster '{clustername}' existiert bereits -> Keine doppelte Anlage.")
         else:
-            # 📌 Neues MarketCluster anlegen
             new_cluster = MarketCluster(title=clustername, user_id=user_id)
             db.add(new_cluster)
 
@@ -120,18 +131,15 @@ async def get_loading_clusters(current_user: User = Depends(get_current_user), d
                 existing_market = db.query(Market).filter(Market.keyword == keyword).first()
 
                 if existing_market:
-                    print(f"🔗 Markt '{keyword}' existiert bereits -> Verknüpfung mit Cluster.")
                     new_cluster.markets.append(existing_market)
-                    continue  # Weiter zum nächsten Keyword
+                    continue  
 
-                print(f"🆕 Neuer Markt '{keyword}' wird angelegt.")
                 new_market = Market(keyword=keyword)
                 db.add(new_market)
                 db.commit()
                 db.refresh(new_market)
                 new_cluster.markets.append(new_market)
 
-                # ✅ MarketChange für neuen Markt erstellen
                 product_data_list = keyword_data["data"].get("first_page_products", [])
                 new_asins = [p["asin"] for p in product_data_list] if product_data_list else []
                 top_suggestions = keyword_data["data"].get("top_search_suggestions", [])
@@ -144,7 +152,6 @@ async def get_loading_clusters(current_user: User = Depends(get_current_user), d
                 new_market_change.set_top_suggestions(top_suggestions)
                 db.add(new_market_change)
 
-                # ✅ Produkte & ProductChanges verknüpfen
                 for product_data in product_data_list:
                     existing_product = db.query(Product).filter(Product.asin == product_data["asin"]).first()
 
@@ -160,65 +167,36 @@ async def get_loading_clusters(current_user: User = Depends(get_current_user), d
                         new_market.products.append(new_product)
                         new_market_change.products.append(new_product)
 
-                        # ✅ `ProductChange` sicher erstellen (Fallbacks für fehlende Daten)
                         new_product_change = ProductChange(
                             asin=new_product.asin,
-                            title=product_data.get("title", None),
+                            title=product_data.get("title"),
                             price=product_data.get("price") if isinstance(product_data.get("price"), (int, float)) else None,
-                            main_category=product_data.get("main_category", None),
-                            second_category=product_data.get("second_category", None),
-                            main_category_rank=product_data.get("main_category_rank", None),
-                            second_category_rank=product_data.get("second_category_rank", None),
-                            img_path=product_data.get("image", None),
+                            main_category=product_data.get("main_category"),
+                            second_category=product_data.get("second_category"),
+                            main_category_rank=product_data.get("main_category_rank"),
+                            second_category_rank=product_data.get("second_category_rank"),
+                            img_path=product_data.get("image"),
                             change_date=datetime.now(timezone.utc),
                             changes="Initial creation",
-                            blm=None,
-                            total=None,
                         )
                         db.add(new_product_change)
                         db.commit()
                         db.refresh(new_product_change)
-
                         new_product.product_changes.append(new_product_change)
 
             db.commit()
             db.refresh(new_cluster)
 
-        # ✅ Alle Prozesse abgeschlossen, leeres Array zurückgeben
         del scraping_processes[user_id]
         return {"active_clusters": []}
-    
-    else:
-        if cluster_data["status"] == "processing":
-            keywords_status = {
-                keyword: data["status"] for keyword, data in cluster_data["keywords"].items()
-            }
-            active_cluster = {
-                "clustername": clustername,
-                "status": cluster_data["status"],
-                "keywords": keywords_status
-            }
-            print("return active cluster:", active_cluster)
-            return active_cluster
 
 async def scraping_process(keyword: str, clustername: str, user_id: int):
-    """Führt das Scraping für ein Keyword durch"""
     print(f"⏳ Start Scraping ({keyword}) für Nutzer {user_id}")
-
     loop = asyncio.get_running_loop()
     first_page_data = await loop.run_in_executor(executor, fetch_first_page_data, keyword)
-
-    # ✅ Falls der Scraper keine Daten zurückgibt, setze Standardwerte
-    if not first_page_data:
-        first_page_data = {"first_page_products": [], "top_search_suggestions": []}
-    
-    scraping_processes[user_id][clustername]["keywords"][keyword]["data"] = first_page_data
     scraping_processes[user_id][clustername]["keywords"][keyword]["status"] = "done"
-    
-    print(f"✅ Scraping für '{keyword}' abgeschlossen! (Nutzer {user_id})")
-
+    scraping_processes[user_id][clustername]["keywords"][keyword]["data"] = first_page_data
 
 def fetch_first_page_data(keyword: str):
-    """Scraper-Logik"""
     amazon_scraper = AmazonFirstPageScraper(headless=True, show_details=True)
     return amazon_scraper.get_first_page_data(keyword)

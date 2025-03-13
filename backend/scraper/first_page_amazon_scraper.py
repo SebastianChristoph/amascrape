@@ -14,23 +14,24 @@ class AmazonFirstPageScraper:
     def __init__(self, headless = True, show_details = True):
         self.user_agent = selenium_config.user_agent
         self.cookies = selenium_config.cookies
-        options = Options()
-        options.set_preference("general.useragent.override",selenium_config.user_agent)
+        self.options = Options()
+        self.options.set_preference("general.useragent.override",selenium_config.user_agent)
         self.web_elements = selenium_config.web_elements_product_page
         self.show_details = show_details
         self.start_time = 0
         self.end_time = 0
         self.searchterm = ""
+        self.top_search_suggestions = []
+        self.first_page_products = []
         
         if headless:
-            options.add_argument("--headless")
-            if self.show_details: print("🚀 Starting browserless")
+            self.options.add_argument("--headless")
 
-        options.add_argument("--disable-gpu")
-        options.add_argument("--no-sandbox")
-        options.add_argument("--disable-dev-shm-usage") 
+        self.options.add_argument("--disable-gpu")
+        self.options.add_argument("--no-sandbox")
+        self.options.add_argument("--disable-dev-shm-usage") 
 
-        self.driver = webdriver.Firefox(options=options)
+        
 
     def retry_request(self, url, retries=3, wait=10) -> None:
             if self.show_details: print(f"🌍 Requesting {url}",  end = " ")
@@ -43,7 +44,7 @@ class AmazonFirstPageScraper:
                 except Exception as e:
                     if self.show_details: print(f"⚠️ Error loading {url} (Attempt {attempt + 1}/{retries}): {e}")
                     time.sleep(wait)
-            raise Exception(f"❌ Failed to load {url} after {retries} attempts")
+            raise Exception(f"❌ [retry_request] Failed to load {url} after {retries} attempts")
 
     def scroll_down(self, duration=5) -> None:
         if self.show_details: print("📜 Scrolling down")
@@ -149,17 +150,26 @@ class AmazonFirstPageScraper:
 
     def get_first_page_data(self, searchterm) -> list:
         try:
+            self.driver = webdriver.Firefox(options=self.options)
             self.open_page(searchterm)
             top_search_suggestions = self.get_top_search_suggestions()
             first_page_products = self.get_first_page_products()
             if self.show_details: print("\n✅ Done")
-            return {"top_search_suggestions": top_search_suggestions, "first_page_products": first_page_products}   
+            self.top_search_suggestions = top_search_suggestions
+            self.first_page_products = first_page_products
+            # return {"top_search_suggestions": top_search_suggestions, "first_page_products": first_page_products}   
+
+            return {"top_search_suggestions": self.top_search_suggestions, "first_page_products": self.first_page_products} 
         except Exception as e:
-            print("❌❌❌ Error getting first page data!", e)
+            print("❌❌❌ [get_first_page_data] Error getting first page data!", e)
             return None
         
         finally:
             self.close_driver()
+            
+
+
+
 if __name__ == "__main__":
     scraper = AmazonFirstPageScraper(headless=True, show_details=True)
     results = scraper.get_first_page_data("turf grass")

@@ -4,7 +4,7 @@ from app.database import get_db
 from app.auth import get_current_user
 from app.models import MarketCluster, Market, MarketChange, ProductChange, market_cluster_markets, User
 from pydantic import BaseModel
-from typing import List
+from typing import List, Optional
 from sqlalchemy import delete  # ✅ Richtig importieren!
 
 from sqlalchemy.exc import IntegrityError
@@ -19,6 +19,10 @@ class MarketClusterResponse(BaseModel):
     id: int
     title: str
     markets: List[str]
+    total_revenue: Optional[float]
+    
+    class Config:
+        orm_mode = True
 
 
 class MarketClusterCreate(BaseModel):
@@ -57,8 +61,6 @@ def update_market_cluster(
     return {"message": "Market Cluster erfolgreich aktualisiert"}
 
 # 📌 Route zum Löschen eines Market Clusters
-
-
 @router.delete("/delete/{cluster_id}", response_model=dict)
 def delete_market_cluster(
     cluster_id: int,
@@ -100,11 +102,12 @@ def get_user_market_clusters(db: Session = Depends(get_db), current_user=Depends
         MarketClusterResponse(
             id=cluster.id,
             title=cluster.title,
-            markets=[market.keyword for market in cluster.markets] if cluster.markets else [
-                "Keine Märkte"]
+            markets=[market.keyword for market in cluster.markets] if cluster.markets else ["Keine Märkte"],
+            total_revenue=cluster.total_revenue  # ✅ total_revenue in Response aufnehmen
         )
         for cluster in market_clusters
     ]
+
 
 # 📌 GET: Detaillierte Market-Cluster-Informationen mit MarketChanges
 @router.get("/{cluster_id}")
@@ -120,7 +123,8 @@ def get_market_cluster_details(cluster_id: int, db: Session = Depends(get_db), c
     response_data = {
         "id": market_cluster.id,
         "title": market_cluster.title,
-        "markets": []
+        "markets": [],
+        "total_revenue" : market_cluster.total_revenue
     }
 
     for market in market_cluster.markets:

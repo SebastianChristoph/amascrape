@@ -1,8 +1,8 @@
 import random
 import pytest
 import timeit
-from product_selenium_scraper import AmazonProductScraper
-import backend.scraper.selenium_config as selenium_config
+from scraper.product_selenium_scraper import AmazonProductScraper
+import scraper.selenium_config as selenium_config
 
 total_duration = 0  # Global variable to track total duration
 total_duration_combined = 0  # Separate tracking for this tes
@@ -107,8 +107,6 @@ def test_no_blms_asins(asin, request):
     finally:
         scraper.driver.quit()
 
-
-
 @pytest.hookimpl(tryfirst=True)
 def pytest_sessionfinish(session, exitstatus):
     """ Hook that runs after all tests are completed to print total scrape time. """
@@ -146,13 +144,13 @@ def test_random_asin(asin):
 
 def test_specific_asin(asin_param):
     """ Tests the AmazonProductScraper with a specific ASIN passed as a parameter.
-        Run with: python -m pytest tests/test_amazon_product_scraper.py -s -k test_specific_asin --asin B08FCX19C9
+        Run with: python -m pytest test_amazon_product_scraper.py -s -k test_specific_asin --asin B009EO0FSU
     """
     if not asin_param:
         pytest.fail("❌ Error: No ASIN provided! Use --asin <ASIN> to pass an ASIN.")
     
     print(f"\n🧪 Testing SPECIFIC ASIN: {asin_param}")
-    scraper = AmazonProductScraper(show_details=True)
+    scraper = AmazonProductScraper(show_details=True, headless=False)
     start_time = timeit.default_timer()
     
     try:
