@@ -93,8 +93,13 @@ class Market_Orchestrator():
                         db.commit()
                         db.refresh(product)
 
-                    market.products.append(product)
-                    new_market_change.products.append(product)
+                    # Verknüpfe das Produkt mit dem Markt (falls nicht bereits vorhanden)
+                    if product not in market.products:
+                        market.products.append(product)
+
+                    # Verknüpfe das Produkt mit dem neuen MarketChange
+                    if product not in new_market_change.products:
+                        new_market_change.products.append(product)
 
                     # ProductChange speichern
                     new_product_change = ProductChange(
@@ -112,6 +117,19 @@ class Market_Orchestrator():
                     db.add(new_product_change)
                     product.product_changes.append(new_product_change)
 
+                # **ENTFERNTE PRODUKTE AUS DER MARKET-VERKNÜPFUNG LÖSCHEN**
+                if removed_asins:
+                    removed_products = db.query(Product).filter(Product.asin.in_(removed_asins)).all()
+
+                    for product in removed_products:
+                        if product in market.products:
+                            market.products.remove(product)  # Entferne Produkt aus dem Markt
+                            print(f"❌ Produkt {product.asin} aus Markt '{market.keyword}' entfernt.")
+
+                        if product in new_market_change.products:
+                            new_market_change.products.remove(product)  # Entferne Produkt auch aus MarketChange
+                            print(f"❌ Produkt {product.asin} aus MarketChange entfernt.")
+
                 db.commit()
                 print(f"✅ Neuer MarketChange für {market.keyword} gespeichert.")
 
@@ -121,6 +139,7 @@ class Market_Orchestrator():
 
         finally:
             db.close()
+
 
     def update_total_revenue(self):
         """ Berechnet und aktualisiert den total_revenue für den letzten MarketChange jedes Markets. """
@@ -220,6 +239,9 @@ class Market_Orchestrator():
 
 
 if __name__ == "__main__":
+    # eigentlich: rechne alles von gestern zusammen, wenn neues revenue: neuer market_change mit dem neuen revenue
+    # dann markt scrapen, neuigkeiten eintragen, neue Produkte anlegen etc
+
     orchestrator = Market_Orchestrator()
     #orchestrator.update_market_changes()
     orchestrator.update_total_revenue()

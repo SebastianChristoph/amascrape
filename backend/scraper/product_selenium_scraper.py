@@ -1,184 +1,96 @@
-from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.firefox.options import Options
 import random
 import time
-from selenium.common.exceptions import NoSuchElementException
 import re
-import scraper.selenium_config as selenium_config
+from selenium.common.exceptions import NoSuchElementException
+
+from scraper import selenium_config
 
 class AmazonProductScraper:
-    def __init__(self, headless = True, show_details = True):
-        self.user_agent = selenium_config.user_agent
-        self.cookies = selenium_config.cookies
-        options = Options()
-        options.set_preference("general.useragent.override",selenium_config.user_agent)
-        self.web_elements = selenium_config.web_elements_product_page
+    def __init__(self, driver, show_details=True):
+        """Nimmt einen existierenden WebDriver und nutzt ihn für das Scraping."""
+        self.driver = driver
         self.show_details = show_details
+        self.web_elements = selenium_config.web_elements_product_page
         self.asin = ""
         self.url = ""
         self.product_info_box_content = {}
         self.bs_and_rank_data = {}
 
-        self.start_time = 0
-        self.end_time = 0
-        
-        if headless:
-            options.add_argument("--headless")
-            if self.show_details: print("🚀 Starting browserless")
-
-
-        self.driver = webdriver.Firefox(options=options)
-
-    def retry_request(self, url, retries=3, wait=10) -> None:
-            if self.show_details: print(f"🌍 Requesting {url}",  end = " ")
-        
-            for attempt in range(retries):
-                try:
-                    self.driver.get(url)
-                    if self.show_details: print("✅ Page loaded successfully")
-                    return
-                except Exception as e:
-                    if self.show_details: (f"⚠️ Error loading {url} (Attempt {attempt + 1}/{retries}): {e}")
-                    time.sleep(wait)
-            raise Exception(f"❌ Failed to load {url} after {retries} attempts")
-
-    def scroll_down(self, duration=5) -> None:
-        if self.show_details: print("📜 Scrolling down")
+    def scroll_down(self, duration=5):
+        """Simuliert das Scrollen auf der Seite, um Inhalte zu laden."""
+        if self.show_details:
+            print("📜 Scrolling down")
         start = time.time()
         while time.time() - start < duration:
             self.driver.execute_script(f"window.scrollBy(0, {random.randint(900, 1400)});")
             time.sleep(random.uniform(0.5, 1.5))
-    
-    def get_title(self) -> str: 
-        if self.show_details: print("📝 Getting title")
-        try:
-            title_element = self.driver.find_element(By.XPATH, self.web_elements["title"])
-            title = title_element.text
-            return title
-        except Exception as e:
-            print("   ❌ Error finding title!", e)
-    
-    def get_image_path(self) ->str:
-        if self.show_details: print("📝 Getting image path")
-        try:
-            img_wrapper = self.driver.find_element(By.XPATH, '//*[@id="imgTagWrapperId"]')
-            img_element = img_wrapper.find_element(By.TAG_NAME, "img")
-            img_src = img_element.get_attribute("src")
-            return img_src
-        except Exception as e:
-            print("   ❌ Error finding image path, returning none")
-            return None
 
-    def get_price(self) -> float:
-        if self.show_details: print("📝 Getting price")
-
-        xpath = selenium_config.price_categories["default"]
-    
-        try:
-            price_element = self.driver.find_element(By.XPATH, xpath)
-            price_str = price_element.text
-            price_str = price_str.replace(",", "")
-           
-            match = re.search(r'\$(\d+)[\s\n]*(\d+)', price_str)
-            if match:
-                dollars, cents = match.groups()
-                return float(f"{dollars}.{cents}")
-        except Exception as e:
-            print("   ❌ Error finding price!")
-
-    def get_product_infos_box_content(self) -> dict:
-       
-        if self.show_details: print("📝 Extracting product info box content...")
-    
-        # Try extracting from unordered list (ul)
-        try:
-            product_info_list = self.driver.find_element(By.XPATH, self.web_elements["product_infos_ul"])
-            items = product_info_list.find_elements(By.TAG_NAME, 'li')
-            
-            data_dict = {}
-            for item in items:
-                text = item.text.strip()
-                match = re.match(r"(.*?):\s*(.*)", text, re.DOTALL)
-                if match:
-                    key, value = match.groups()
-                    data_dict[key.strip()] = value.strip()
-            
-            if self.show_details:
-                print("✅ Product info extracted from list")
-            return data_dict
-            
-        except NoSuchElementException:
-            if self.show_details:
-                if self.show_details: print("   🔹  List not found, trying table...")
+    def open_page(self):
+        if self.show_details:
+            print("🔍 Starte Scraping:", self.asin, self.url)
         
-        # Try extracting from table
-        try:
-            product_info_table = self.driver.find_element(By.XPATH, self.web_elements["product_infos_table"])
-            rows = product_info_table.find_elements(By.TAG_NAME, 'tr')
-            
-            data_dict = {}
-            for row in rows:
-                try:
-                    th = row.find_element(By.TAG_NAME, 'th').text.strip()
-                    td = row.find_element(By.TAG_NAME, 'td').text.strip()
-                    data_dict[th] = td
-                except NoSuchElementException:
-                    continue  # Skip rows without both th and td
-            
-            if self.show_details:
-                if self.show_details: print("   ✅ Product info extracted from table")
-            return data_dict
-            
-        except NoSuchElementException:
-            if self.show_details:
-                print("   ⚠️  No product info found in list or table. Returning None")
+        # Amazon Startseite aufrufen, um Cookies zu setzen
+        #self.driver.get("https://www.amazon.com")
         
-        return None
-    
+        # Jetzt die Produktseite aufrufen
+        self.driver.get(self.url)
+        
+        # Scrollen, um Inhalte zu laden
+        self.scroll_down()
+        
+        # Produkt-Infos extrahieren
+        self.product_info_box_content = self.get_product_infos_box_content()
+        
+        # Debug-Ausgabe für Product Info Box Content
+        if self.show_details and self.product_info_box_content:
+            max_key_length = max(len(key) for key in self.product_info_box_content.keys())
+            for key, value in self.product_info_box_content.items():
+                print(f"\t{key.ljust(max_key_length)} : {value.replace('\n', '')}")
+
     def getting_bs_and_rank_data(self) -> dict:
+            
+            if self.show_details: print("📝 Extracting best seller rank and category data...")
         
-        if self.show_details: print("📝 Extracting best seller rank and category data...")
-    
-        if not self.product_info_box_content or "Best Sellers Rank" not in self.product_info_box_content:
-            if self.show_details:
-                print("   ⚠️  No product info available or missing Best Sellers Rank in data. Return None")
-            return None
-    
-        try:
-            rank_text = self.product_info_box_content["Best Sellers Rank"]
-            rank_items = rank_text.split("#")[1:]
-            
-            if not rank_items:
+            if not self.product_info_box_content or "Best Sellers Rank" not in self.product_info_box_content:
                 if self.show_details:
-                    print("   ⚠️ No rank data found. Returning None")
+                    print("   ⚠️  No product info available or missing Best Sellers Rank in data. Return None")
                 return None
-            
-            main_rank_text, main_category = rank_items[0].split(" in ", 1)
-            main_rank = int(main_rank_text.replace(",", "").strip())
-            
-            second_rank, second_category = (None, None)
-            if len(rank_items) > 1:
-                second_rank_text, second_category = rank_items[1].split(" in ", 1)
-                second_rank = int(second_rank_text.replace(",", "").strip())
-                second_category = second_category.strip()
-            
-            data = {
-                "rank_main_category": main_rank,
-                "main_category": main_category.strip(),
-                "rank_second_category": second_rank,
-                "second_category": second_category
-            }
+        
+            try:
+                rank_text = self.product_info_box_content["Best Sellers Rank"]
+                rank_items = rank_text.split("#")[1:]
+                
+                if not rank_items:
+                    if self.show_details:
+                        print("   ⚠️ No rank data found. Returning None")
+                    return None
+                
+                main_rank_text, main_category = rank_items[0].split(" in ", 1)
+                main_rank = int(main_rank_text.replace(",", "").strip())
+                
+                second_rank, second_category = (None, None)
+                if len(rank_items) > 1:
+                    second_rank_text, second_category = rank_items[1].split(" in ", 1)
+                    second_rank = int(second_rank_text.replace(",", "").strip())
+                    second_category = second_category.strip()
+                
+                data = {
+                    "rank_main_category": main_rank,
+                    "main_category": main_category.strip(),
+                    "rank_second_category": second_rank,
+                    "second_category": second_category
+                }
 
-            if self.show_details:
-                if self.show_details: print("   ✅ Successfully extracted rank data.")
-            return data
-            
-        except Exception as e:
-            print(f"   ❌ Error extracting best seller rank data: {e}")
-            
-        return None
-            
+                if self.show_details:
+                    if self.show_details: print("   ✅ Successfully extracted rank data.")
+                return data
+                
+            except Exception as e:
+                print(f"   ❌ Error extracting best seller rank data: {e}")
+                
+            return None
+
     def get_rating(self) -> float | None:
         if self.show_details: print("📝 Getting rating")
 
@@ -288,33 +200,99 @@ class AmazonProductScraper:
         
         return variants
 
-    def open_page(self) -> None:
-        print("🔍 Start scraping:",self.asin, self.url)
-        self.retry_request("https://www.amazon.com")
-        
-        if self.show_details: print("🍪 Setting cookies")
-        for cookie in selenium_config.cookies:
-            self.driver.add_cookie(cookie)
-        
-        self.retry_request(self.url)
-        self.scroll_down() 
-        self.product_info_box_content = self.get_product_infos_box_content()
-        if self.show_details and self.product_info_box_content:
-            max_key_length = max(len(key) for key in self.product_info_box_content.keys())
-            for key, value in self.product_info_box_content.items():
-                print(f"\t{key.ljust(max_key_length)} : {value.replace('\n', '')}")
-            
-    def close_driver(self):
-        if self.show_details: print("\nClosing WebDriver\n")
-        self.driver.quit()
+    def get_title(self):
+        """Extrahiert den Produkttitel."""
+        try:
+            title_element = self.driver.find_element(By.XPATH, self.web_elements["title"])
+            return title_element.text
+        except Exception:
+            print("   ❌ Error finding title!")
+            return None
 
-    def get_product_infos(self, asin) -> dict:
+    def get_image_path(self):
+        """Extrahiert den Bildpfad des Produkts."""
+        try:
+            img_element = self.driver.find_element(By.XPATH, '//*[@id="imgTagWrapperId"]//img')
+            return img_element.get_attribute("src")
+        except Exception:
+            print("   ❌ Error finding image path!")
+            return None
+
+    def get_price(self):
+        """Extrahiert den Preis des Produkts."""
+        try:
+            price_element = self.driver.find_element(By.XPATH, selenium_config.price_categories["default"])
+            price_str = price_element.text.replace(",", "")
+            match = re.search(r'\$(\d+)[\s\n]*(\d+)', price_str)
+            if match:
+                dollars, cents = match.groups()
+                return float(f"{dollars}.{cents}")
+        except Exception:
+            print("   ❌ Error finding price!")
+            return None
+
+    def get_product_infos_box_content(self):
+        """Extrahiert Produktinformationen aus der Tabelle oder Liste."""
+        try:
+            items = self.driver.find_elements(By.XPATH, self.web_elements["product_infos_ul"] + "//li")
+            return {item.text.split(":")[0].strip(): item.text.split(":")[1].strip() for item in items if ":" in item.text}
+        except NoSuchElementException:
+            pass
+
+        try:
+            rows = self.driver.find_elements(By.XPATH, self.web_elements["product_infos_table"] + "//tr")
+            return {row.find_element(By.TAG_NAME, 'th').text.strip(): row.find_element(By.TAG_NAME, 'td').text.strip() for row in rows}
+        except NoSuchElementException:
+            return {}
+
+    def get_review_count(self) -> int:
+            if self.show_details: print("📝 Getting reviews count")
+
+            if self.product_info_box_content != None:
+
+                try:
+                    match = re.search(r"(\d+\.\d+)\s+([\d,]+) ratings", self.product_info_box_content["Customer Reviews"])
+                    if match:
+                        # print(match.group(1))
+                        # print(match.group(2))
+                        return int(match.group(2).replace(',', ''))
+                except KeyError as e:
+                    print("   🔹  KeyError: 'Customer Reviews' not found in Prodcut Info Box!, trying to get it from UI")
+                except Exception as e:
+                    print("   ⚠️  Error parsing review count")
+            else:
+                if self.show_details: print("   🔹  No product info available, try to get data in UI")
+
+            try:
+                review_count_element = self.driver.find_element(By.XPATH, self.web_elements["review_count"])
+                if self.show_details: print("   ✅ Found review count in UI")
+                review_count_text = review_count_element.text.strip()
+                #print("\ttext:", review_count_text)
+                match = re.search(r"(\d[\d,]*)", review_count_text)
+            
+                if match:
+                    # print("\tgroup1:", match.group(1))
+                    # print("\tgroup2:", match.group(2))
+                    review_count = int(match.group(1).replace(",", ""))
+                    return review_count
+            except NoSuchElementException as e:
+                print("   ⚠️  No review count element found, returning None")
+            except ValueError as e:
+                print("   ⚠️  Error parsing review count, returning None")
+            except Exception as e:
+                print("   ⚠️  Error getting review count, returning None: ", e)
+
+            return None 
+    
+    def get_product_infos(self, asin):
+        """Scraped Produktdaten für eine gegebene ASIN."""
         self.asin = asin
         self.url = f"https://www.amazon.com/dp/{self.asin}?language=en_US"
-        
+
         try:
-            self.open_page()
+            self.open_page()  # Hier wieder hinzufügen!
             
+             
             bought_last_month = self.get_blm()
             price = self.get_price()
             
@@ -342,8 +320,9 @@ class AmazonProductScraper:
                 print("⚠️  Warning: Missing essential product data, returning None")
                 return None
             
-            product = {
-                "asin": self.asin,
+
+            product_dict = {
+               "asin": self.asin,
                 "title": title,
                 "price": price,
                 "manufacturer": manufacturer,
@@ -360,13 +339,23 @@ class AmazonProductScraper:
                 "store" : store,
                 "image_url" : image_path,
             }
+
             
-            self.end_time = time.time()
-            return product
-            
+            max_key_length = max(len(key) for key in product_dict.keys())
+            for key, value in product_dict.items():
+                if isinstance(value, str):
+                    value = value[:60] + "..." if len(value) > 60 else value
+                print(f"\t{key.ljust(max_key_length)} : {value}")
+
+            return product_dict
         except Exception as e:
-            print("❌❌❌ Error getting product info!", e)
+            print(f"❌ Fehler beim Scrapen von {asin}: {e}")
             return None
-        
-        finally:
-            self.close_driver()
+
+
+
+#  max_key_length = max(len(key) for key in product_dict.keys())
+#             for key, value in product_dict.items():
+#                 if isinstance(value, str):
+#                     value = value[:60] + "..." if len(value) > 60 else value
+#                 print(f"\t{key.ljust(max_key_length)} : {value}")

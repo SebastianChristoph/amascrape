@@ -15,7 +15,10 @@ from app.models import Base, Market, MarketChange, MarketCluster, Product, Produ
 from sqlalchemy.exc import OperationalError
 from concurrent.futures import ThreadPoolExecutor
 
+# start with
+ # python -m uvicorn app.main:app --host 0.0.0.0 --port 9000 --reload
 
+ 
 executor = ThreadPoolExecutor()
 
 class NewClusterData(BaseModel):
