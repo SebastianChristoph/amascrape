@@ -1,3 +1,4 @@
+import random
 from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException
 from sqlalchemy.orm import Session, joinedload
 from app.database import get_db
@@ -109,7 +110,6 @@ def get_user_market_clusters(db: Session = Depends(get_db), current_user=Depends
     ]
 
 
-# 📌 GET: Detaillierte Market-Cluster-Informationen mit MarketChanges
 @router.get("/{cluster_id}")
 def get_market_cluster_details(cluster_id: int, db: Session = Depends(get_db), current_user=Depends(get_current_user)):
     market_cluster = db.query(MarketCluster).filter(
@@ -124,7 +124,7 @@ def get_market_cluster_details(cluster_id: int, db: Session = Depends(get_db), c
         "id": market_cluster.id,
         "title": market_cluster.title,
         "markets": [],
-        "total_revenue" : market_cluster.total_revenue
+        "total_revenue": market_cluster.total_revenue
     }
 
     for market in market_cluster.markets:
@@ -141,6 +141,7 @@ def get_market_cluster_details(cluster_id: int, db: Session = Depends(get_db), c
         if latest_market_change:
             market_data["revenue_total"] = latest_market_change.total_revenue
             market_data["top_suggestions"] = latest_market_change.top_suggestions
+
             for product in latest_market_change.products:
                 latest_product_change = db.query(ProductChange).filter(
                     ProductChange.asin == product.asin
@@ -156,8 +157,10 @@ def get_market_cluster_details(cluster_id: int, db: Session = Depends(get_db), c
                     "second_category": latest_product_change.second_category if latest_product_change and latest_product_change.second_category else None,
                     "second_category_rank": latest_product_change.second_category_rank if latest_product_change else None,
                     "total": latest_product_change.total if latest_product_change else None,
-                    "blm": latest_product_change.blm if latest_product_change else None
+                    "blm": latest_product_change.blm if latest_product_change else None,
+                    "sparkline_data": [random.randint(1, 10) for _ in range(9)] 
                 }
+                
                 market_data["products"].append(product_data)
 
         response_data["markets"].append(market_data)

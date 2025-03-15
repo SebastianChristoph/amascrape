@@ -15,12 +15,13 @@ import {
   Typography,
 } from "@mui/material";
 import { motion } from "framer-motion";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { GrCluster } from "react-icons/gr";
 import { MdDelete, MdEdit } from "react-icons/md";
 import { useSnackbar } from "../providers/SnackbarProvider";
 import MarketService from "../services/MarketService";
-import CustomSparkLine from "./charts/CustomSparkLine";
+import ChartDataService from "../services/ChartDataservice";
+import CustomLineChart from "./charts/CustomLineChart";
 
 interface ClusterCardProps {
   cluster: {
@@ -32,7 +33,12 @@ interface ClusterCardProps {
   deletingCluster: number | null;
   setMarketClusters: React.Dispatch<React.SetStateAction<any[]>>;
   setDeletingCluster: React.Dispatch<React.SetStateAction<number | null>>;
-  totalRevenue: Float32Array | 0; 
+  totalRevenue: number;
+}
+
+interface LineChartData {
+  x_axis: number[];
+  series: { name: string; data: number[] }[];
 }
 
 const ClusterCard: React.FC<ClusterCardProps> = ({
@@ -47,6 +53,29 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
   const [openEditDialog, setOpenEditDialog] = useState(false);
   const [newTitle, setNewTitle] = useState(cluster.title);
   const [openConfirmDialog, setOpenConfirmDialog] = useState(false);
+  const [lineChartData, setLineChartData] = useState<LineChartData | null>(
+    null
+  );
+
+  // Chart-Daten laden
+  useEffect(() => {
+    async function fetchLineChartData() {
+      try {
+        const response = await ChartDataService.GetLineChartData();
+        if (response) {
+          setLineChartData(response);
+          console.log("[CLUSTER CARD] Geladene Line Chart Daten:", response);
+        } else {
+          console.error("Keine LineChart-Daten erhalten.");
+          showSnackbar("Fehler beim Laden der LineChart Data.");
+        }
+      } catch (error) {
+        console.error("Fehler beim Abrufen der LineChartData:", error);
+        showSnackbar("Fehler beim Abrufen der LineChartData.");
+      }
+    }
+    fetchLineChartData();
+  }, []);
 
   // Bearbeiten-Dialog öffnen
   const handleEditClick = (event: React.MouseEvent) => {
@@ -150,16 +179,23 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
             )}
           </Box>
 
-     
-
-          <Typography sx={{mt: 4}} variant="h3">
-          Total Revenue: {new Intl.NumberFormat("en-US", {
-                    style: "currency",
-                    currency: "USD",
-                  }).format(Number(totalRevenue))}
+          <Typography sx={{ mt: 4 }} variant="h3">
+            Total Revenue:{" "}
+            {new Intl.NumberFormat("en-US", {
+              style: "currency",
+              currency: "USD",
+            }).format(Number(totalRevenue))}
           </Typography>
-          <Box sx={{ mt: 4, width: 200 }}>
-            <CustomSparkLine />
+
+          <Box sx={{ mt: 4, width: 400 }}>
+            {lineChartData ? (
+              <CustomLineChart
+                x_axis={lineChartData.x_axis}
+                series={lineChartData.series}
+              />
+            ) : (
+              <Typography>Lade Chartdaten...</Typography>
+            )}
           </Box>
         </CardContent>
       </Card>

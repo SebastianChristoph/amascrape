@@ -297,7 +297,7 @@ class AmazonProductScraper:
             price = self.get_price()
             
             if bought_last_month is None:
-                total = 0
+                total = None
             else:
                 total = round(bought_last_month * price, 2) if price is not None else None
             

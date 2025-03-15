@@ -1,4 +1,4 @@
-import { AppBar, Toolbar, Button, Box, Typography, Tooltip } from "@mui/material";
+import { AppBar, Toolbar, Button, Box, Typography, Tooltip, Avatar } from "@mui/material";
 import { Outlet, Link, useLocation, useNavigate } from "react-router-dom";
 import UserService from "../services/UserService";
 import { useState } from "react";
@@ -42,6 +42,9 @@ export default function Layout({ setIsAuthenticated }: { setIsAuthenticated: (au
           {/* 🔹 Benutzerinfo & Logout */}
           {isLoggedIn && (
             <Box sx={{ display: "flex", alignItems: "center", gap: 4, color: "white" }}>
+              <Avatar sx={{backgroundColor: "primary.main", boxShadow: 3, fontSize: 16}}>
+                AS
+              </Avatar>
               <Typography sx={{ mt: 0.3 }} color="white" variant="body2">
                 {user?.sub}
               </Typography>

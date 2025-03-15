@@ -1,19 +1,16 @@
-import * as React from 'react';
-import Stack from '@mui/material/Stack';
-import Box from '@mui/material/Box';
-import { SparkLineChart } from '@mui/x-charts/SparkLineChart';
+import Stack from "@mui/material/Stack";
+import Box from "@mui/material/Box";
+import { SparkLineChart } from "@mui/x-charts/SparkLineChart";
 
-function generateRandomData(length: number, min: number = 1, max: number = 10): number[] {
-  return Array.from({ length }, () => Math.floor(Math.random() * (max - min + 1)) + min);
+interface CustomSparkLineProps {
+  data?: number[]; // Optional, falls `undefined`
 }
 
-export default function CustomSparkLine() {
-  const data = React.useMemo(() => generateRandomData(9), []);
-
+export default function CustomSparkLine({ data = [0] }: CustomSparkLineProps) {
   return (
-    <Stack direction="row" sx={{ width: '100%' }}>
+    <Stack direction="row" sx={{ width: "100%", minWidth: 80, height: 50 }}> {/* ✅ minWidth & height hinzugefügt */}
       <Box sx={{ flexGrow: 1 }}>
-        <SparkLineChart data={data} height={100} />
+        <SparkLineChart data={data.length > 0 ? data : [0]} height={50} /> {/* ✅ Sicherstellen, dass data immer Werte hat */}
       </Box>
     </Stack>
   );

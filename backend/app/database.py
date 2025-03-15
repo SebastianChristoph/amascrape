@@ -35,7 +35,7 @@ def init_db():
         except OperationalError:
             print("📌 Keine Tabellen gefunden. Erstelle alle Tabellen...")
             Base.metadata.create_all(bind=engine)  # ✅ Erstellt alle Tabellen
-            insert_test_user_data(db)  # ✅ Testdaten einfügen
+            ensure_test_users(db)  # ✅ Testdaten einfügen
             return  # Wichtig: Verhindert doppeltes Schließen der Session
 
         print("✅ Datenbank ist bereits initialisiert.")
@@ -54,6 +54,7 @@ def get_db():
 
 def ensure_test_users():
     """Fügt Testbenutzer hinzu, auch wenn die DB bereits existiert."""
+    print("ADD TEST USERS")
     db = SessionLocal()
     try:
         test_users = [

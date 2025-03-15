@@ -26,6 +26,7 @@ const Dashboard: React.FC = () => {
   const [marketClusters, setMarketClusters] = useState<any[]>([]);
   const [deletingCluster, setDeletingCluster] = useState<number | null>(null);
 
+
   const [activeCluster, setActiveCluster] = useState<{
     clustername: string;
     status: string;
@@ -97,6 +98,7 @@ const Dashboard: React.FC = () => {
     }
   };
 
+ 
   // ✅ Holt die Market-Cluster beim Laden
   useEffect(() => {
     fetchMarketClusters();

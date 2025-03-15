@@ -1,5 +1,8 @@
+import sys
+import os
 from datetime import datetime, timezone
 import time
+import logging
 from sqlalchemy.orm import Session
 from app.database import SessionLocal
 from app.models import Product, ProductChange
@@ -8,32 +11,43 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 import scraper.selenium_config as selenium_config
 
-# im backend folder: python -m scraper.Product_Orchestrator
+# 🌍 Globale Log-Datei einrichten
+log_file = "scraping_log.txt"
+
+# Logging konfigurieren (schreibt in Datei & zeigt im Terminal an)
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    handlers=[
+        logging.FileHandler(log_file, mode="w", encoding="utf-8"),  # In Datei schreiben
+        logging.StreamHandler(sys.stdout)  # Gleichzeitig im Terminal ausgeben
+    ]
+)
+
 class Product_Orchestrator:
     def __init__(self, just_scrape_3_products=False):
         """Initialisiert den Orchestrator und setzt den WebDriver einmalig auf."""
         self.just_scrape_3_products = just_scrape_3_products
 
+        logging.info("🚀 Product Orchestrator gestartet.")
+
         # 🌍 Chrome WebDriver mit Optionen starten
         chrome_options = Options()
-        chrome_options.add_argument("--headless=new")  # Neuer Headless-Modus
-        chrome_options.add_argument("--disable-gpu")  # GPU deaktivieren
+        chrome_options.add_argument("--headless=new")  
+        chrome_options.add_argument("--disable-gpu")  
         chrome_options.add_argument("--window-size=1920,1080")  
         chrome_options.add_argument("--no-sandbox")  
         chrome_options.add_argument("--disable-dev-shm-usage")  
-        chrome_options.add_argument("--disable-software-rasterizer")  # Blockiert Software-WebGL-Fallback
-        chrome_options.add_argument("--disable-gpu-rasterization")  # Verhindert GPU-Rendering-Probleme
-        chrome_options.add_argument("--enable-unsafe-webgl")  # WebGL-Fehlermeldungen verhindern
-        chrome_options.add_argument("--enable-unsafe-swiftshader")  # WebGL-Fallback aktivieren
-        chrome_options.add_argument("--mute-audio")  # Falls Amazon Medien-Fehlermeldungen ausgibt
-
-        # 🔹 SSL-Fehlermeldungen verhindern
-        chrome_options.add_argument("--ignore-certificate-errors")  # Ignoriert SSL-Zertifikatsfehler
-        chrome_options.add_argument("--allow-running-insecure-content")  # Lässt unsichere Inhalte zu
-        chrome_options.add_argument("--disable-web-security")  # Deaktiviert Web-Security
-        chrome_options.add_argument("--log-level=3")  # Nur Fehler anzeigen (keine Warnungen)
-        chrome_options.add_argument(f"user-agent={selenium_config.user_agent}")  # User-Agent setzen
-
+        chrome_options.add_argument("--disable-software-rasterizer")  
+        chrome_options.add_argument("--disable-gpu-rasterization")  
+        chrome_options.add_argument("--enable-unsafe-webgl")  
+        chrome_options.add_argument("--enable-unsafe-swiftshader")  
+        chrome_options.add_argument("--mute-audio")  
+        chrome_options.add_argument("--ignore-certificate-errors")  
+        chrome_options.add_argument("--allow-running-insecure-content")  
+        chrome_options.add_argument("--disable-web-security")  
+        chrome_options.add_argument("--log-level=3")  
+        chrome_options.add_argument(f"user-agent={selenium_config.user_agent}")  
 
         self.driver = webdriver.Chrome(options=chrome_options)
         self.scraper = AmazonProductScraper(self.driver, show_details=False)
@@ -48,16 +62,16 @@ class Product_Orchestrator:
         """Überprüft, ob der WebDriver eine Verbindung herstellen kann."""
         try:
             self.driver.get("https://www.amazon.com")
-            print("✅ Verbindung zu Amazon erfolgreich hergestellt!")
+            logging.info("✅ Verbindung zu Amazon erfolgreich hergestellt!")
         except Exception as e:
-            print(f"❌ Fehler beim Verbinden mit Amazon: {e}")
+            logging.error(f"❌ Fehler beim Verbinden mit Amazon: {e}")
 
     def set_cookies(self):
         """Setzt die gespeicherten Cookies."""
-        print("🍪 Setze Cookies...")
+        logging.info("🍪 Setze Cookies...")
         for cookie in selenium_config.cookies:
             self.driver.add_cookie(cookie)
-        print("✅ Cookies gesetzt!")
+        logging.info("✅ Cookies gesetzt!")
 
     def get_latest_product_change(self, db, asin):
         """Holt den letzten ProductChange für ein Produkt anhand der ASIN."""
@@ -79,61 +93,69 @@ class Product_Orchestrator:
             "blm", "total"
         ]
 
+        title_changed = False  # Flag für Titel-Änderung
+
         for field in product_fields:
             old_value = getattr(old_data, field, None) if old_data else None
             new_value = new_data.get(field, None)
 
-            # Null-Werte im neuen Datensatz ignorieren, wenn vorher ein Wert existierte
             if new_value is None and old_value is not None:
                 continue  
 
-            # Wenn sich der Wert geändert hat, speichern
             if new_value != old_value:
-                if field == "title" and not changed_fields:
-                    return ["title changed"], {"title": new_value}
+                if field == "title":
+                    title_changed = True  # Setze das Flag für Title-Änderung
+                else:
+                    changes.append(f"{field} geändert: {old_value} → {new_value}")
                 
-                changes.append(f"{field} geändert: {old_value} → {new_value}")
                 changed_fields[field] = new_value
-        
+
+        # Falls Title geändert wurde, füge "title changed" hinzu
+        if title_changed:
+            changes.insert(0, "title changed")  # Titel-Änderung soll am Anfang stehen
+
         return changes, changed_fields
+
 
     def update_products(self):
         """Scraped alle Produkte nacheinander und schließt den WebDriver danach."""
         db = SessionLocal()
-        scraped_asins = set()  # Set zur Vermeidung doppelter ASINs
+        scraped_asins = set()
 
         try:
-            print("🚀 Starte Product-Update...")
+            logging.info("🚀 Starte Product-Update...")
 
             products = db.query(Product).all()
             if not products:
-                print("⚠️ Keine Produkte gefunden.")
+                logging.warning("⚠️ Keine Produkte gefunden.")
                 return
 
             if self.just_scrape_3_products:
                 products = products[:3]
 
-            for product in products:
+            total_products = len(products)
+            for index, product in enumerate(products, start=1):
                 if product.asin in scraped_asins:
-                    print(f"⏩ ASIN {product.asin} wurde bereits gescraped, überspringe...")
-                    continue  # Diese ASIN wurde bereits verarbeitet
+                    logging.info(f"⏩ ASIN {product.asin} wurde bereits gescraped, überspringe...")
+                    continue
 
-                print(f"\n🔍 Überprüfe Produkt: {product.asin}", f"https://www.amazon.com/dp/{product.asin}?language=en_US")
+                logging.info(f"\n🔍 Überprüfe Produkt [{index}/{total_products}]: {product.asin} https://www.amazon.com/dp/{product.asin}?language=en_US")
+
 
                 try:
                     last_product_change = self.get_latest_product_change(db, product.asin)
                     new_data = self.scraper.get_product_infos(product.asin)
 
                     if not new_data:
-                        print(f"❌ Fehler beim Scrapen von {product.asin}, überspringe...")
-                        continue  # Fehlerhaftes Produkt wird übersprungen
+                        logging.warning(f"❌ Fehler beim Scrapen von {product.asin}, überspringe...")
+                        continue  
 
                     changes, changed_fields = self.detect_product_changes(last_product_change, new_data)
 
                     if not changes:
-                        print(f"✅ Keine Änderungen für {product.asin}.")
+                        logging.info(f"✅ Keine Änderungen für {product.asin}.")
                     else:
-                        print(f"⚡ Änderungen erkannt für {product.asin}: {', '.join(changes)}")
+                        logging.info(f"⚡ Änderungen erkannt für {product.asin}: {', '.join(changes)}")
                         new_product_change = ProductChange(
                             asin=product.asin,
                             title=new_data.get("title"),
@@ -155,26 +177,25 @@ class Product_Orchestrator:
                     product.last_time_scraped = datetime.now(timezone.utc)
                     db.commit()
 
-                    print(f"✅ last_time_scraped für {product.asin} aktualisiert.")
+                    logging.info(f"✅ last_time_scraped für {product.asin} aktualisiert.")
 
-                    # 🔥 ASIN zur Liste der gescrapeten Produkte hinzufügen
                     scraped_asins.add(product.asin)
 
                 except Exception as e:
-                    print(f"❌ Fehler beim Scrapen von {product.asin}: {e}")
-                    continue  # Überspringt fehlerhafte ASIN
+                    logging.error(f"❌ Fehler beim Scrapen von {product.asin}: {e}")
+                    continue  
 
         except Exception as e:
-            print(f"❌ Schwerwiegender Fehler im Product-Update: {e}")
+            logging.critical(f"❌ Schwerwiegender Fehler im Product-Update: {e}")
         finally:
             db.close()
             self.close_driver()
 
     def close_driver(self):
         """Schließt den WebDriver nach dem Scraping."""
-        print("\n🔻 Schließe WebDriver...")
+        logging.info("\n🔻 Schließe WebDriver...")
         self.driver.quit()
-        print("✅ WebDriver geschlossen.")
+        logging.info("✅ WebDriver geschlossen.")
 
 if __name__ == "__main__":
     orchestrator = Product_Orchestrator(just_scrape_3_products=False)
