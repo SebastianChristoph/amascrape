@@ -151,7 +151,6 @@ async def get_market_cluster_details(
                     "second_category_rank": latest_product_change.second_category_rank if latest_product_change else None,
                     "total": latest_product_change.total if latest_product_change else None,
                     "blm": latest_product_change.blm if latest_product_change else None,
-                    "sparkline_data": [random.randint(1, 10) for _ in range(9)]  # ✅ Sparkline-Daten generieren
                 }
 
                 market_data["products"].append(product_data)

@@ -22,7 +22,7 @@ import { MdDelete, MdEdit } from "react-icons/md";
 import { useSnackbar } from "../providers/SnackbarProvider";
 import MarketService from "../services/MarketService";
 import ChartDataService from "../services/ChartDataservice";
-import CustomLineChart from "./charts/CustomLineChart";
+import CustomSparkLine from "./charts/CustomSparkLine"; // ✅ Importiere Sparkline-Komponente
 
 interface ClusterCardProps {
   cluster: {
@@ -37,11 +37,6 @@ interface ClusterCardProps {
   totalRevenue: number;
 }
 
-interface LineChartData {
-  x_axis: number[];
-  series: { name: string; data: number[] }[];
-}
-
 const ClusterCard: React.FC<ClusterCardProps> = ({
   cluster,
   onClick,
@@ -54,30 +49,30 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
   const [openEditDialog, setOpenEditDialog] = useState(false);
   const [newTitle, setNewTitle] = useState(cluster.title);
   const [openConfirmDialog, setOpenConfirmDialog] = useState(false);
-  const [lineChartData, setLineChartData] = useState<LineChartData | null>(null);
-  const [loading, setLoading] = useState<boolean>(true); // ✅ Neuer Ladezustand
+  const [sparklineData, setSparklineData] = useState<number[]>([]);
+  const [loading, setLoading] = useState<boolean>(true); // ✅ Ladezustand für Sparkline
 
-  // ✅ Chart-Daten laden
+  // ✅ Sparkline-Daten laden
   useEffect(() => {
-    async function fetchLineChartData() {
+    async function fetchSparklineData() {
       try {
-        const response = await ChartDataService.GetLineChartData();
-        if (response) {
-          setLineChartData(response);
-          console.log("[CLUSTER CARD] Geladene Line Chart Daten:", response);
+        const response = await ChartDataService.GetSparklineForMarketCluster(cluster.id);
+        if (response.length > 0) {
+          setSparklineData(response); // ✅ Korrekte Speicherung der Sparkline-Daten
+          console.log("[CLUSTER CARD] Geladene Sparkline-Daten:", response);
         } else {
-          console.error("Keine LineChart-Daten erhalten.");
-          showSnackbar("Fehler beim Laden der LineChart Data.");
+          console.error("Keine Sparkline-Daten erhalten.");
+          showSnackbar("Fehler beim Laden der Sparkline-Daten.");
         }
       } catch (error) {
-        console.error("Fehler beim Abrufen der LineChartData:", error);
-        showSnackbar("Fehler beim Abrufen der LineChartData.");
+        console.error("Fehler beim Abrufen der Sparkline-Daten:", error);
+        showSnackbar("Fehler beim Abrufen der Sparkline-Daten.");
       } finally {
         setLoading(false); // ✅ Ladezustand beenden
       }
     }
-    fetchLineChartData();
-  }, []);
+    fetchSparklineData();
+  }, [cluster.id]);
 
   // ✅ Bearbeiten-Dialog öffnen
   const handleEditClick = (event: React.MouseEvent) => {
@@ -129,15 +124,6 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
 
     setOpenConfirmDialog(false);
   };
-
-  // ✅ Ladeanzeige, falls Daten noch nicht da sind
-  if (loading) {
-    return (
-      <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "200px" }}>
-        <CircularProgress size={60} color="primary" />
-      </Box>
-    );
-  }
 
   return (
     <motion.div
@@ -198,15 +184,12 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
             }).format(Number(totalRevenue))}
           </Typography>
 
-          {/* ✅ Zeigt entweder das Chart oder einen Spinner */}
-          <Box sx={{ mt: 4, width: 400 }}>
-            {lineChartData ? (
-              <CustomLineChart
-                x_axis={lineChartData.x_axis}
-                series={lineChartData.series}
-              />
-            ) : (
+          {/* ✅ Zeigt Sparkline Chart statt LineChart */}
+          <Box sx={{ mt: 4, width: "50%", height: 50 }}>
+            {loading ? (
               <CircularProgress size={40} color="primary" />
+            ) : (
+              <CustomSparkLine data={sparklineData} />
             )}
           </Box>
         </CardContent>

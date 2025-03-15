@@ -34,6 +34,90 @@ class ChartDataService {
     }
   }
 
+  static async GetSparkLineGridData(asin: string): Promise<number[] | null> {
+    try {
+      const token = localStorage.getItem(this.TOKEN_KEY);
+      if (!token) {
+        throw new Error("Kein Token vorhanden. Bitte einloggen.");
+      }
+
+      const response = await fetch(`${API_URL}/get-sparkline-grid-data/${asin}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Fehler beim Abrufen der SparkLine-Daten.");
+      }
+
+      const data = await response.json();
+      return data.length > 0 ? data : [0]; // 🔥 Falls keine Daten, dann [0] übergeben
+    } catch (error) {
+      console.error("Fehler beim Abrufen der SparkLine-Daten:", error);
+      return null;
+    }
+  }
+
+  static async GetStackedBarDataForCluster(clusterId: number): Promise<any> {
+    try {
+        const token = localStorage.getItem(this.TOKEN_KEY);
+        if (!token) {
+            throw new Error("Kein Token vorhanden. Bitte einloggen.");
+        }
+
+        const response = await fetch(`${API_URL}/get-stacked-bar-data-for-cluster/${clusterId}`, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+        });
+
+        if (!response.ok) {
+            throw new Error("Fehler beim Abrufen der gestapelten Balken-Daten.");
+        }
+
+        const json = await response.json();
+        return json.stackedData;
+    } catch (error) {
+        console.error("Fehler beim Abrufen der gestapelten Balken-Daten:", error);
+        return null;
+    }
+}
+
+static async GetSparklineForMarketCluster(clusterId: number): Promise<number[]> {
+  try {
+      const token = localStorage.getItem(this.TOKEN_KEY);
+      if (!token) {
+          throw new Error("Kein Token vorhanden. Bitte einloggen.");
+      }
+
+      const response = await fetch(`${API_URL}/get-sparkline-data-for-market-cluster/${clusterId}`, {
+          method: "GET",
+          headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+          },
+      });
+
+      if (!response.ok) {
+          throw new Error("Fehler beim Abrufen der Sparkline-Daten.");
+      }
+
+      const json = await response.json();
+      return json;  // 🔥 Erwartet eine Liste von Zahlen
+  } catch (error) {
+      console.error("Fehler beim Abrufen der Sparkline-Daten:", error);
+      return [];
+  }
+}
+
+
+
+
   static async GetSparkLineData(): Promise<number[] | null> {
     try {
       const token = localStorage.getItem(this.TOKEN_KEY);
