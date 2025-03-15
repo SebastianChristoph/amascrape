@@ -20,8 +20,8 @@ import React, { useEffect, useState } from "react";
 import { GrCluster } from "react-icons/gr";
 import { MdDelete, MdEdit } from "react-icons/md";
 import { useSnackbar } from "../providers/SnackbarProvider";
-import MarketService from "../services/MarketService";
 import ChartDataService from "../services/ChartDataservice";
+import MarketService from "../services/MarketService";
 import CustomSparkLine from "./charts/CustomSparkLine"; // ✅ Importiere Sparkline-Komponente
 
 interface ClusterCardProps {
@@ -56,7 +56,9 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
   useEffect(() => {
     async function fetchSparklineData() {
       try {
-        const response = await ChartDataService.GetSparklineForMarketCluster(cluster.id);
+        const response = await ChartDataService.GetSparklineForMarketCluster(
+          cluster.id
+        );
         if (response.length > 0) {
           setSparklineData(response); // ✅ Korrekte Speicherung der Sparkline-Daten
           console.log("[CLUSTER CARD] Geladene Sparkline-Daten:", response);
@@ -199,12 +201,23 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
       <Dialog open={openEditDialog} onClose={() => setOpenEditDialog(false)}>
         <DialogTitle>Market Cluster bearbeiten</DialogTitle>
         <DialogContent>
-          <DialogContentText>Gib einen neuen Namen für das Market Cluster ein.</DialogContentText>
-          <TextField fullWidth label="Neuer Name" variant="outlined" value={newTitle} onChange={(e) => setNewTitle(e.target.value)} sx={{ mt: 2 }} />
+          <DialogContentText>
+            Gib einen neuen Namen für das Market Cluster ein.
+          </DialogContentText>
+          <TextField
+            fullWidth
+            label="Neuer Name"
+            variant="outlined"
+            value={newTitle}
+            onChange={(e) => setNewTitle(e.target.value)}
+            sx={{ mt: 2 }}
+          />
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setOpenEditDialog(false)}>Abbrechen</Button>
-          <Button onClick={handleUpdateCluster} color="primary">Speichern</Button>
+          <Button onClick={handleUpdateCluster} color="primary">
+            Speichern
+          </Button>
         </DialogActions>
       </Dialog>
     </motion.div>

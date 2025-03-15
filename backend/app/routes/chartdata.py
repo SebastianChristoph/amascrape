@@ -13,13 +13,16 @@ from sqlalchemy.orm import Session
 
 router = APIRouter()
 
+
 class LineChartDataResponse(BaseModel):
     x_axis: List[int]
     series: List[Dict[str, Any]]
 
+
 @router.get("/get-line-chart-data", response_model=LineChartDataResponse)
 async def get_line_chart_data(current_user=Depends(get_current_user)):
-    await asyncio.sleep(1)  # ⏳ Simuliert eine asynchrone Verzögerung (z. B. langsame DB-Abfrage)
+    # ⏳ Simuliert eine asynchrone Verzögerung (z. B. langsame DB-Abfrage)
+    await asyncio.sleep(1)
     return {
         "x_axis": [8, 9, 10],
         "series": [
@@ -27,8 +30,10 @@ async def get_line_chart_data(current_user=Depends(get_current_user)):
         ]
     }
 
+
 class SparkLineDataResponse(BaseModel):
     data: List[int]
+
 
 @router.get("/get-spark-line-data", response_model=SparkLineDataResponse)
 async def get_spark_line_data(current_user=Depends(get_current_user)):
@@ -49,11 +54,13 @@ async def get_sparkline_grid_data(asin: str, db: Session = Depends(get_db), curr
         raise HTTPException(status_code=404, detail="Produkt nicht gefunden")
 
     # ✅ ProductChanges der letzten 30 Tage abrufen
-    cutoff_date = datetime.now(timezone.utc) - timedelta(days=30)  # ✅ timezone-aware
+    cutoff_date = datetime.now(timezone.utc) - \
+        timedelta(days=30)  # ✅ timezone-aware
     product_changes = (
         db.query(ProductChange)
         .filter(ProductChange.asin == asin, ProductChange.change_date.isnot(None), ProductChange.change_date >= cutoff_date)
-        .order_by(ProductChange.change_date.asc())  # 🔹 Sortierung nach Datum (älteste zuerst)
+        # 🔹 Sortierung nach Datum (älteste zuerst)
+        .order_by(ProductChange.change_date.asc())
         .all()
     )
 
@@ -100,11 +107,12 @@ async def get_sparkline_grid_data(asin: str, db: Session = Depends(get_db), curr
 
     for date in date_list:
         if date in changes_dict:
-            last_value = changes_dict[date]  # ✅ Falls ein Change existiert, diesen Wert nehmen
-        filled_data.append(int(last_value) if last_value is not None else 0)  # 🔹 Sicherstellen, dass nur Zahlen zurückgegeben werden
+            # ✅ Falls ein Change existiert, diesen Wert nehmen
+            last_value = changes_dict[date]
+        # 🔹 Sicherstellen, dass nur Zahlen zurückgegeben werden
+        filled_data.append(int(last_value) if last_value is not None else 0)
 
     return filled_data
-
 
 
 @router.get("/get-stacked-bar-data-for-cluster/{cluster_id}")
@@ -112,7 +120,8 @@ async def get_stacked_bar_data_for_cluster(cluster_id: int, db: Session = Depend
     await asyncio.sleep(1)  # ⏳ Simulierte Verzögerung
 
     # 📌 MarketCluster abrufen
-    market_cluster = db.query(MarketCluster).filter(MarketCluster.id == cluster_id).first()
+    market_cluster = db.query(MarketCluster).filter(
+        MarketCluster.id == cluster_id).first()
     if not market_cluster:
         return {"error": "Market Cluster nicht gefunden"}
 
@@ -138,7 +147,8 @@ async def get_stacked_bar_data_for_cluster(cluster_id: int, db: Session = Depend
             continue  # ⏩ Falls keine Änderungen existieren, diesen Markt überspringen
 
         # 🏁 Startdatum = Das früheste `change_date` aus den MarketChanges (aber maximal 30 Tage alt)
-        start_date = max(cutoff_date.date(), changes[0].change_date.date())  # ✅ Fix angewendet
+        # ✅ Fix angewendet
+        start_date = max(cutoff_date.date(), changes[0].change_date.date())
 
         # 🏁 Heutiges Datum
         today = datetime.now().date()
@@ -154,18 +164,19 @@ async def get_stacked_bar_data_for_cluster(cluster_id: int, db: Session = Depend
             numeric_date = current_date.toordinal()  # 🔥 Umwandlung in Zahl für die X-Achse
 
             # Prüfen, ob es an diesem Tag ein MarketChange gibt
-            change_today = next((c for c in changes if c.change_date.date() == current_date), None)
+            change_today = next(
+                (c for c in changes if c.change_date.date() == current_date), None)
             if change_today:
                 last_value = change_today.total_revenue if change_today.total_revenue else last_value
 
             # 📌 Werte speichern
-            market_data[market.keyword].append({"date": numeric_date, "value": last_value})
+            market_data[market.keyword].append(
+                {"date": numeric_date, "value": last_value})
 
             # ⏩ Zum nächsten Tag wechseln
             current_date += timedelta(days=1)
 
     return {"stackedData": market_data}
-
 
 
 @router.get("/get-sparkline-data-for-market-cluster/{cluster_id}", response_model=List[int])
@@ -177,7 +188,8 @@ async def get_sparkline_data_for_market_cluster(cluster_id: int, db: Session = D
     await asyncio.sleep(1)  # Simulierte Verzögerung für realistischere Ladezeiten
 
     # 📌 MarketCluster abrufen
-    market_cluster = db.query(MarketCluster).filter(MarketCluster.id == cluster_id).first()
+    market_cluster = db.query(MarketCluster).filter(
+        MarketCluster.id == cluster_id).first()
     if not market_cluster:
         return []
 
@@ -185,7 +197,8 @@ async def get_sparkline_data_for_market_cluster(cluster_id: int, db: Session = D
     markets = market_cluster.markets
 
     # 📌 Die letzten 30 Tage berechnen
-    cutoff_date = datetime.now(timezone.utc) - timedelta(days=30)  # ✅ timezone-aware
+    cutoff_date = datetime.now(timezone.utc) - \
+        timedelta(days=30)  # ✅ timezone-aware
 
     # 📌 Alle MarketChanges abrufen (maximal 30 Tage zurück)
     market_changes = (
@@ -200,7 +213,8 @@ async def get_sparkline_data_for_market_cluster(cluster_id: int, db: Session = D
 
     # 📌 Earliest Change Date bestimmen (aber nicht älter als cutoff_date)
     earliest_change_date = max(
-        min((mc.change_date.replace(tzinfo=timezone.utc) for mc in market_changes), default=cutoff_date),
+        min((mc.change_date.replace(tzinfo=timezone.utc)
+            for mc in market_changes), default=cutoff_date),
         cutoff_date
     ).date()  # ✅ Sicherstellen, dass es ein `date`-Objekt ist
 
@@ -220,12 +234,14 @@ async def get_sparkline_data_for_market_cluster(cluster_id: int, db: Session = D
 
         for market in markets:
             # 🔍 Letzte bekannte Umsatzänderung für diesen Markt abrufen
-            change_today = next((mc for mc in market_changes if mc.market_id == market.id and mc.change_date.date() == current_date), None)
+            change_today = next((mc for mc in market_changes if mc.market_id ==
+                                market.id and mc.change_date.date() == current_date), None)
 
             if change_today:
                 last_market_values[market.id] = change_today.total_revenue if change_today.total_revenue else last_market_values[market.id]
 
-            total_revenue += last_market_values[market.id]  # Summe für den Cluster
+            # Summe für den Cluster
+            total_revenue += last_market_values[market.id]
 
         # 📌 Speichere den Wert in der Sparkline-Liste
         sparkline_data.append(int(total_revenue))
@@ -234,6 +250,7 @@ async def get_sparkline_data_for_market_cluster(cluster_id: int, db: Session = D
         current_date += timedelta(days=1)
 
     return sparkline_data  # 🔥 KEINE ZEITACHSE – nur die Liste mit Werten
+
 
 @router.get("/get-bar-chart-data")
 async def get_bar_chart_data():

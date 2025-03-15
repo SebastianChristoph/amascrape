@@ -1,15 +1,18 @@
 import asyncio
-from fastapi import APIRouter, Depends, HTTPException
-from sqlalchemy.orm import Session, joinedload
-from app.database import get_db
-from app.auth import get_current_user
-from app.models import Market, MarketChange, ProductChange
-from pydantic import BaseModel
 from typing import List
+
+from app.auth import get_current_user
+from app.database import get_db
+from app.models import Market, MarketChange, ProductChange
+from fastapi import APIRouter, Depends, HTTPException
+from pydantic import BaseModel
+from sqlalchemy.orm import Session, joinedload
 
 router = APIRouter()
 
 # 📌 Market Response Schema
+
+
 class MarketResponse(BaseModel):
     id: int
     keyword: str
@@ -18,10 +21,12 @@ class MarketResponse(BaseModel):
     products: List[dict] = []
 
 # 📌 Asynchrones Abrufen eines einzelnen Markets mit dem neuesten MarketChange
+
+
 @router.get("/{market_id}", response_model=MarketResponse)
 async def get_market(
-    market_id: int, 
-    db: Session = Depends(get_db), 
+    market_id: int,
+    db: Session = Depends(get_db),
     current_user=Depends(get_current_user)
 ):
     await asyncio.sleep(0.5)  # ⏳ Simulierte Verzögerung
@@ -59,6 +64,8 @@ async def get_market(
     return market_data
 
 # 📌 Asynchrone Helferfunktion: Neueste `ProductChange` abrufen
+
+
 async def _get_latest_product_change(db: Session, asin: str) -> dict:
     latest_product_change = db.query(ProductChange).filter(
         ProductChange.asin == asin

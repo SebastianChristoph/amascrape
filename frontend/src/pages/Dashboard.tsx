@@ -25,7 +25,7 @@ const Dashboard: React.FC = () => {
   const { showSnackbar } = useSnackbar();
   const [marketClusters, setMarketClusters] = useState<any[]>([]);
   const [deletingCluster, setDeletingCluster] = useState<number | null>(null);
-  const [loading, setLoading] = useState<boolean>(true); 
+  const [loading, setLoading] = useState<boolean>(true);
 
   const [activeCluster, setActiveCluster] = useState<{
     clustername: string;
@@ -63,32 +63,31 @@ const Dashboard: React.FC = () => {
         setActiveCluster(null);
         setIsFetching(false); // Stoppt das Refetching
         fetchMarketClusters();
-      }
-      else if (data.status === "done") {
+      } else if (data.status === "done") {
         console.log("✅ DONE SCRAPING");
         showSnackbar("Your cluster is ready to go");
         setActiveCluster(null);
         setIsFetching(false); // Stoppt das Refetching
         fetchMarketClusters();
-      }    
-      else if (data.status === "error") {
+      } else if (data.status === "error") {
         console.error("❌ Error scraping data");
         console.log(activeCluster?.clustername);
-        showSnackbar(`Error scraping your new cluster '${activeCluster?.clustername}' ! Please contact the support team!`, "error")
+        showSnackbar(
+          `Error scraping your new cluster '${activeCluster?.clustername}' ! Please contact the support team!`,
+          "error"
+        );
         setIsFetching(false);
 
-        setTimeout(async () => { 
+        setTimeout(async () => {
           console.log("waited 6 sconds!");
           setActiveCluster(null);
-           // Stoppt das Refetching bei Fehlern
+          // Stoppt das Refetching bei Fehlern
           console.log(activeCluster?.clustername);
           fetchMarketClusters();
         }, 6000);
-      
+
         console.log(activeCluster?.clustername);
-       
-      }
-      else {
+      } else {
         setActiveCluster(data);
         setIsFetching(true); // Falls der Status "processing" bleibt, weiter fetchen
       }
@@ -98,7 +97,6 @@ const Dashboard: React.FC = () => {
     }
   };
 
- 
   // ✅ Holt die Market-Cluster beim Laden
   useEffect(() => {
     fetchMarketClusters();
@@ -128,8 +126,9 @@ const Dashboard: React.FC = () => {
           </Typography>
 
           <Alert sx={{ mb: 2 }} severity="info">
-            We are scraping your markets to get a first impression of your cluster. This usually takes some
-            minutes. You can come back later, inspect your other clusters or have a coffee.
+            We are scraping your markets to get a first impression of your
+            cluster. This usually takes some minutes. You can come back later,
+            inspect your other clusters or have a coffee.
           </Alert>
 
           <Box sx={{ flexGrow: 1 }}>
@@ -138,22 +137,40 @@ const Dashboard: React.FC = () => {
                 <CardHeader
                   sx={{ alignItems: "flex-start" }}
                   avatar={<GrCluster size={28} color="#000010" />}
-                  title={<Typography variant="h6">{activeCluster.clustername}</Typography>}
+                  title={
+                    <Typography variant="h6">
+                      {activeCluster.clustername}
+                    </Typography>
+                  }
                 />
                 <CardContent>
                   <Box>
                     <Typography variant="body1">Scraping status:</Typography>
-                    <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-                      {Object.entries(activeCluster.keywords).map(([keyword, status]) => (
-                        <Box key={keyword} sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                          {status === "done" ? (
-                            <AiOutlineCheckCircle size={18} color="green" />
-                          ) : (
-                            <CircularProgress size={16} sx={{ color: "primary.main" }} />
-                          )}
-                          <Typography variant="body2">{keyword}</Typography>
-                        </Box>
-                      ))}
+                    <Box
+                      sx={{ display: "flex", flexDirection: "column", gap: 2 }}
+                    >
+                      {Object.entries(activeCluster.keywords).map(
+                        ([keyword, status]) => (
+                          <Box
+                            key={keyword}
+                            sx={{
+                              display: "flex",
+                              alignItems: "center",
+                              gap: 1,
+                            }}
+                          >
+                            {status === "done" ? (
+                              <AiOutlineCheckCircle size={18} color="green" />
+                            ) : (
+                              <CircularProgress
+                                size={16}
+                                sx={{ color: "primary.main" }}
+                              />
+                            )}
+                            <Typography variant="body2">{keyword}</Typography>
+                          </Box>
+                        )
+                      )}
                     </Box>
                   </Box>
                 </CardContent>
@@ -165,13 +182,23 @@ const Dashboard: React.FC = () => {
 
       {/* ✅ Zeigt alle Market-Cluster an (mit Spinner) */}
       <Paper sx={{ paddingY: 4, paddingX: 4, mt: 2 }}>
-        <Typography variant="h5" sx={{ mb: 3, backgroundColor: "primary.main", p: 2, color: "white" }}>
+        <Typography
+          variant="h5"
+          sx={{ mb: 3, backgroundColor: "primary.main", p: 2, color: "white" }}
+        >
           My Market Clusters
         </Typography>
 
         {/* 🔄 Zeigt einen Spinner, solange `loading` aktiv ist */}
         {loading ? (
-          <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "200px" }}>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              minHeight: "200px",
+            }}
+          >
             <CircularProgress size={80} color="primary" />
           </Box>
         ) : (

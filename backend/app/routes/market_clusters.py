@@ -1,18 +1,22 @@
-import random
 import asyncio
-from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException
-from sqlalchemy.orm import Session, joinedload
-from app.database import get_db
-from app.auth import get_current_user
-from app.models import MarketCluster, Market, MarketChange, ProductChange, market_cluster_markets, User
-from pydantic import BaseModel
+import random
 from typing import List, Optional
+
+from app.auth import get_current_user
+from app.database import get_db
+from app.models import (Market, MarketChange, MarketCluster, ProductChange,
+                        User, market_cluster_markets)
+from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException
+from pydantic import BaseModel
 from sqlalchemy import delete
 from sqlalchemy.exc import IntegrityError
+from sqlalchemy.orm import Session, joinedload
 
 router = APIRouter()
 
 # 📌 MarketCluster Response Schema
+
+
 class MarketClusterResponse(BaseModel):
     id: int
     title: str
@@ -22,14 +26,18 @@ class MarketClusterResponse(BaseModel):
     class Config:
         orm_mode = True
 
+
 class MarketClusterCreate(BaseModel):
     title: str
     keywords: List[str]
+
 
 class MarketClusterUpdate(BaseModel):
     title: str
 
 # 📌 Asynchrones Update eines Market Cluster-Titels
+
+
 @router.put("/update/{cluster_id}", response_model=dict)
 async def update_market_cluster(
     cluster_id: int,
@@ -44,7 +52,8 @@ async def update_market_cluster(
     ).first()
 
     if not cluster:
-        raise HTTPException(status_code=404, detail="Market Cluster nicht gefunden oder nicht autorisiert")
+        raise HTTPException(
+            status_code=404, detail="Market Cluster nicht gefunden oder nicht autorisiert")
 
     cluster.title = cluster_data.title
     db.commit()
@@ -52,6 +61,8 @@ async def update_market_cluster(
     return {"message": "Market Cluster erfolgreich aktualisiert"}
 
 # 📌 Asynchrones Löschen eines Market Clusters mit `BackgroundTasks`
+
+
 @router.delete("/delete/{cluster_id}", response_model=dict)
 async def delete_market_cluster(
     cluster_id: int,
@@ -65,10 +76,13 @@ async def delete_market_cluster(
     ).first()
 
     if not cluster:
-        raise HTTPException(status_code=404, detail="Market Cluster nicht gefunden oder nicht autorisiert")
+        raise HTTPException(
+            status_code=404, detail="Market Cluster nicht gefunden oder nicht autorisiert")
 
-    background_tasks.add_task(_delete_market_cluster, cluster_id, db)  # ✅ Hintergrund-Task
+    background_tasks.add_task(_delete_market_cluster,
+                              cluster_id, db)  # ✅ Hintergrund-Task
     return {"message": "Market Cluster wird im Hintergrund gelöscht"}
+
 
 async def _delete_market_cluster(cluster_id: int, db: Session):
     await asyncio.sleep(1)  # ⏳ Simulierte Verzögerung
@@ -77,9 +91,11 @@ async def _delete_market_cluster(cluster_id: int, db: Session):
     db.commit()
 
 # 📌 Asynchrone Route: MarketClusters des Users abrufen
+
+
 @router.get("/", response_model=List[MarketClusterResponse])
 async def get_user_market_clusters(
-    db: Session = Depends(get_db), 
+    db: Session = Depends(get_db),
     current_user=Depends(get_current_user)
 ):
     await asyncio.sleep(0.5)  # ⏳ Simulierte Verzögerung
@@ -91,17 +107,20 @@ async def get_user_market_clusters(
         MarketClusterResponse(
             id=cluster.id,
             title=cluster.title,
-            markets=[market.keyword for market in cluster.markets] if cluster.markets else ["Keine Märkte"],
+            markets=[market.keyword for market in cluster.markets] if cluster.markets else [
+                "Keine Märkte"],
             total_revenue=cluster.total_revenue
         )
         for cluster in market_clusters
     ]
 
 # 📌 Asynchrone Route: Market Cluster Details abrufen
+
+
 @router.get("/{cluster_id}")
 async def get_market_cluster_details(
-    cluster_id: int, 
-    db: Session = Depends(get_db), 
+    cluster_id: int,
+    db: Session = Depends(get_db),
     current_user=Depends(get_current_user)
 ):
     await asyncio.sleep(0.5)  # ⏳ Simulierte Verzögerung

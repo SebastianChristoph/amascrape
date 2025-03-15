@@ -1,12 +1,13 @@
+from typing import List, Optional
+
+from app.auth import (authenticate_user, create_access_token, get_current_user,
+                      get_password_hash)
+from app.database import get_db
+from app.models import Market, MarketChange, MarketCluster, ProductChange, User
 from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
-from sqlalchemy.orm import Session
-from app.database import get_db
-from app.auth import authenticate_user, create_access_token, get_password_hash, get_current_user
-from app.models import User, MarketCluster, Market, MarketChange, ProductChange
 from pydantic import BaseModel
-from typing import List, Optional
-from sqlalchemy.orm import joinedload
+from sqlalchemy.orm import Session, joinedload
 
 router = APIRouter()
 

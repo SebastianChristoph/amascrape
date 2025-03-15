@@ -1,25 +1,26 @@
-from datetime import datetime, timezone
-from fastapi import FastAPI, HTTPException, BackgroundTasks, Depends
-from fastapi.middleware.cors import CORSMiddleware
-from sqlalchemy import text
-from app.routes import users, markets, market_clusters
-from app.database import SessionLocal, ensure_test_users, init_db, engine, get_db
-from typing import List, Optional
-from sqlalchemy.orm import Session
-from app.auth import get_current_user
-from app.routes import chartdata, scraping
-from scraper.first_page_amazon_scraper import AmazonFirstPageScraper
-from fastapi import BackgroundTasks
-from pydantic import BaseModel
 import asyncio
-from app.models import Base, Market, MarketChange, MarketCluster, Product, ProductChange, User
-from sqlalchemy.exc import OperationalError
 from concurrent.futures import ThreadPoolExecutor
+from datetime import datetime, timezone
+from typing import List, Optional
+
+from app.auth import get_current_user
+from app.database import (SessionLocal, engine, ensure_test_users, get_db,
+                          init_db)
+from app.models import (Base, Market, MarketChange, MarketCluster, Product,
+                        ProductChange, User)
+from app.routes import chartdata, market_clusters, markets, scraping, users
+from fastapi import BackgroundTasks, Depends, FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+from scraper.first_page_amazon_scraper import AmazonFirstPageScraper
+from sqlalchemy import text
+from sqlalchemy.exc import OperationalError
+from sqlalchemy.orm import Session
 
 # start with
- # python -m uvicorn app.main:app --host 0.0.0.0 --port 9000 --reload
+# python -m uvicorn app.main:app --host 0.0.0.0 --port 9000 --reload
 
- 
+
 executor = ThreadPoolExecutor()
 
 # class NewClusterData(BaseModel):
@@ -29,6 +30,8 @@ executor = ThreadPoolExecutor()
 app = FastAPI()
 
 # ✅ Datenbank initialisieren (nur wenn notwendig)
+
+
 def initialize_database():
     db = SessionLocal()
     try:
@@ -41,12 +44,13 @@ def initialize_database():
             print("📌 Keine users-Tabelle gefunden. Erstelle alle Tabellen...")
             Base.metadata.create_all(bind=engine)  # ✅ Erstellt alle Tabellen
             init_db()  # Initialisiert die DB mit Testdaten
-            return  
+            return
 
         print("✅ Datenbank ist bereits initialisiert.")
 
     finally:
         db.close()
+
 
 initialize_database()
 
@@ -61,15 +65,20 @@ app.add_middleware(
 
 app.include_router(users.router, prefix="/users", tags=["Users"])
 app.include_router(markets.router, prefix="/markets", tags=["Markets"])
-app.include_router(market_clusters.router, prefix="/market-clusters", tags=["Market Clusters"])
+app.include_router(market_clusters.router,
+                   prefix="/market-clusters", tags=["Market Clusters"])
 app.include_router(chartdata.router, prefix="/chartdata", tags=["Chart Data"])
-app.include_router(scraping.router, tags=["Scraping"])  # ✅ Scraping als eigenes Modul
+# ✅ Scraping als eigenes Modul
+app.include_router(scraping.router, tags=["Scraping"])
+
 
 @app.get("/")
 def root():
     return {"message": "Welcome to the FastAPI Auth System"}
 
-scraping_processes = {}  # Struktur: { user_id: { cluster_name: { status, keywords: {...} } } }
+
+# Struktur: { user_id: { cluster_name: { status, keywords: {...} } } }
+scraping_processes = {}
 
 # @app.post("/api/start-firstpage-scraping-process")
 # async def post_scraping(newClusterData: NewClusterData, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
@@ -90,7 +99,7 @@ scraping_processes = {}  # Struktur: { user_id: { cluster_name: { status, keywor
 #         else:
 #             print(f"🔍 Scraping für neues Keyword: {keyword}")
 #             scraping_processes[user_id][cluster_name]["keywords"][keyword] = {"status": "processing", "data": {}}
-#             asyncio.create_task(scraping_process(keyword, cluster_name, user_id))  
+#             asyncio.create_task(scraping_process(keyword, cluster_name, user_id))
 
 #     return {"success": True, "message": f"Scraping für {cluster_name} gestartet"}
 
@@ -131,7 +140,7 @@ scraping_processes = {}  # Struktur: { user_id: { cluster_name: { status, keywor
 
 #         scraping_processes[user_id] = {}
 #         print("set scraping processes for user to default")
-        
+
 #         return active_cluster
 
 
@@ -227,7 +236,7 @@ scraping_processes = {}  # Struktur: { user_id: { cluster_name: { status, keywor
 #         # ✅ Alle Prozesse abgeschlossen, leeres Array zurückgeben
 #         del scraping_processes[user_id]
 #         return {"active_clusters": []}
-    
+
 #     else:
 #         if cluster_data["status"] == "processing":
 #             keywords_status = {
@@ -254,10 +263,10 @@ scraping_processes = {}  # Struktur: { user_id: { cluster_name: { status, keywor
 #         scraping_processes[user_id][clustername]["keywords"][keyword]["status"] = "error"
 #     else:
 #         scraping_processes[user_id][clustername]["keywords"][keyword]["status"] = "done"
-    
+
 #     scraping_processes[user_id][clustername]["keywords"][keyword]["data"] = first_page_data
-    
-    
+
+
 #     print(f"✅ Scraping für '{keyword}' abgeschlossen! (Nutzer {user_id})")
 
 

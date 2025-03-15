@@ -1,6 +1,8 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, Float, Table
-from sqlalchemy.orm import relationship, declarative_base
 from datetime import datetime, timezone
+
+from sqlalchemy import (Column, DateTime, Float, ForeignKey, Integer, String,
+                        Table)
+from sqlalchemy.orm import declarative_base, relationship
 
 Base = declarative_base()
 
@@ -29,6 +31,8 @@ market_cluster_markets = Table(
 )
 
 # 1️⃣ Users Table
+
+
 class User(Base):
     __tablename__ = "users"
 
@@ -41,11 +45,12 @@ class User(Base):
 
 # 2️⃣ Products Table
 
+
 class Product(Base):
     __tablename__ = "products"
 
     asin = Column(String, primary_key=True)
-    last_time_scraped = Column(DateTime, nullable=True )
+    last_time_scraped = Column(DateTime, nullable=True)
 
     markets = relationship(
         "Market",
@@ -54,7 +59,8 @@ class Product(Base):
         passive_deletes=True
     )
 
-    product_changes = relationship("ProductChange", back_populates="product", passive_deletes=True)
+    product_changes = relationship(
+        "ProductChange", back_populates="product", passive_deletes=True)
     market_changes = relationship(
         "MarketChange",
         secondary=market_change_products,
@@ -63,6 +69,8 @@ class Product(Base):
     )
 
 # 3️⃣ ProductChanges Table
+
+
 class ProductChange(Base):
     __tablename__ = "product_changes"
 
@@ -83,6 +91,8 @@ class ProductChange(Base):
     product = relationship("Product", back_populates="product_changes")
 
 # 4️⃣ Markets Table
+
+
 class Market(Base):
     __tablename__ = "markets"
 
@@ -96,7 +106,8 @@ class Market(Base):
         passive_deletes=True
     )
 
-    market_changes = relationship("MarketChange", back_populates="market", passive_deletes=True)
+    market_changes = relationship(
+        "MarketChange", back_populates="market", passive_deletes=True)
 
     market_clusters = relationship(
         "MarketCluster",
@@ -106,6 +117,8 @@ class Market(Base):
     )
 
 # 5️⃣ MarketChanges Table
+
+
 class MarketChange(Base):
     __tablename__ = "market_changes"
 
@@ -115,15 +128,16 @@ class MarketChange(Base):
     change_date = Column(DateTime, default=lambda: datetime.now(timezone.utc))
 
     # Verknüpfte Produkte
-    products = relationship("Product", secondary=market_change_products, back_populates="market_changes")
+    products = relationship(
+        "Product", secondary=market_change_products, back_populates="market_changes")
 
     # Neue und entfernte Produkte als Listen
     new_products = Column(String, nullable=True)  # Kommagetrennte ASINs
     removed_products = Column(String, nullable=True)  # Kommagetrennte ASINs
-    changes = Column(String, nullable = True)
+    changes = Column(String, nullable=True)
 
     # 📌 NEUE SPALTE: Top-Suggestions als kommagetrennter String
-    top_suggestions = Column(String, nullable=True, default="")  
+    top_suggestions = Column(String, nullable=True, default="")
 
     market = relationship("Market", back_populates="market_changes")
 
@@ -141,11 +155,13 @@ class MarketCluster(Base):
     __tablename__ = "market_clusters"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
+    user_id = Column(Integer, ForeignKey(
+        "users.id", ondelete="CASCADE"), nullable=False)
     title = Column(String, nullable=False)
     total_revenue = Column(Float, nullable=True, default=0.0)
 
-    user = relationship("User", back_populates="market_clusters", passive_deletes=True)
+    user = relationship(
+        "User", back_populates="market_clusters", passive_deletes=True)
     markets = relationship(
         "Market",
         secondary=market_cluster_markets,

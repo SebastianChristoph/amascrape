@@ -6,7 +6,10 @@ interface CustomLineChartProps {
   series: { name: string; data: number[] }[];
 }
 
-const CustomLineChart: React.FC<CustomLineChartProps> = ({ x_axis, series }) => {
+const CustomLineChart: React.FC<CustomLineChartProps> = ({
+  x_axis,
+  series,
+}) => {
   return (
     <Box>
       <Typography variant="body2">Line Chart</Typography>
