@@ -5,6 +5,7 @@ import {
   CardContent,
   CardHeader,
   Chip,
+  CircularProgress,
   Dialog,
   DialogActions,
   DialogContent,
@@ -53,11 +54,10 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
   const [openEditDialog, setOpenEditDialog] = useState(false);
   const [newTitle, setNewTitle] = useState(cluster.title);
   const [openConfirmDialog, setOpenConfirmDialog] = useState(false);
-  const [lineChartData, setLineChartData] = useState<LineChartData | null>(
-    null
-  );
+  const [lineChartData, setLineChartData] = useState<LineChartData | null>(null);
+  const [loading, setLoading] = useState<boolean>(true); // ✅ Neuer Ladezustand
 
-  // Chart-Daten laden
+  // ✅ Chart-Daten laden
   useEffect(() => {
     async function fetchLineChartData() {
       try {
@@ -72,24 +72,26 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
       } catch (error) {
         console.error("Fehler beim Abrufen der LineChartData:", error);
         showSnackbar("Fehler beim Abrufen der LineChartData.");
+      } finally {
+        setLoading(false); // ✅ Ladezustand beenden
       }
     }
     fetchLineChartData();
   }, []);
 
-  // Bearbeiten-Dialog öffnen
+  // ✅ Bearbeiten-Dialog öffnen
   const handleEditClick = (event: React.MouseEvent) => {
     event.stopPropagation();
     setOpenEditDialog(true);
   };
 
-  // Löschen-Dialog öffnen
+  // ✅ Löschen-Dialog öffnen
   const handleDeleteClick = (event: React.MouseEvent) => {
     event.stopPropagation();
     setOpenConfirmDialog(true);
   };
 
-  // Market Cluster aktualisieren
+  // ✅ Market Cluster aktualisieren
   const handleUpdateCluster = async () => {
     const response = await MarketService.updateMarketCluster(cluster.id, {
       title: newTitle,
@@ -108,7 +110,7 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
     }
   };
 
-  // Market Cluster löschen
+  // ✅ Market Cluster löschen
   const handleConfirmDelete = async () => {
     setDeletingCluster(cluster.id);
 
@@ -127,6 +129,15 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
 
     setOpenConfirmDialog(false);
   };
+
+  // ✅ Ladeanzeige, falls Daten noch nicht da sind
+  if (loading) {
+    return (
+      <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "200px" }}>
+        <CircularProgress size={60} color="primary" />
+      </Box>
+    );
+  }
 
   return (
     <motion.div
@@ -187,6 +198,7 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
             }).format(Number(totalRevenue))}
           </Typography>
 
+          {/* ✅ Zeigt entweder das Chart oder einen Spinner */}
           <Box sx={{ mt: 4, width: 400 }}>
             {lineChartData ? (
               <CustomLineChart
@@ -194,7 +206,7 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
                 series={lineChartData.series}
               />
             ) : (
-              <Typography>Lade Chartdaten...</Typography>
+              <CircularProgress size={40} color="primary" />
             )}
           </Box>
         </CardContent>
@@ -204,45 +216,12 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
       <Dialog open={openEditDialog} onClose={() => setOpenEditDialog(false)}>
         <DialogTitle>Market Cluster bearbeiten</DialogTitle>
         <DialogContent>
-          <DialogContentText>
-            Gib einen neuen Namen für das Market Cluster ein.
-          </DialogContentText>
-          <TextField
-            fullWidth
-            label="Neuer Name"
-            variant="outlined"
-            value={newTitle}
-            onChange={(e) => setNewTitle(e.target.value)}
-            sx={{ mt: 2 }}
-          />
+          <DialogContentText>Gib einen neuen Namen für das Market Cluster ein.</DialogContentText>
+          <TextField fullWidth label="Neuer Name" variant="outlined" value={newTitle} onChange={(e) => setNewTitle(e.target.value)} sx={{ mt: 2 }} />
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setOpenEditDialog(false)}>Abbrechen</Button>
-          <Button onClick={handleUpdateCluster} color="primary">
-            Speichern
-          </Button>
-        </DialogActions>
-      </Dialog>
-
-      {/* Dialog für Löschen */}
-      <Dialog
-        open={openConfirmDialog}
-        onClose={() => setOpenConfirmDialog(false)}
-      >
-        <DialogTitle>Market Cluster löschen?</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            Bist du sicher, dass du dieses Market Cluster löschen möchtest?
-            Diese Aktion kann nicht rückgängig gemacht werden.
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => setOpenConfirmDialog(false)} color="primary">
-            Abbrechen
-          </Button>
-          <Button onClick={handleConfirmDelete} color="error">
-            Löschen
-          </Button>
+          <Button onClick={handleUpdateCluster} color="primary">Speichern</Button>
         </DialogActions>
       </Dialog>
     </motion.div>

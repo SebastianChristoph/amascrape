@@ -6,18 +6,14 @@ from passlib.context import CryptContext
 from jose import JWTError, jwt
 from datetime import datetime, timedelta
 from sqlalchemy.orm import Session
-from app.models import User  # ✅ Direktes Importieren der Models, kein Import von database.py hier!
+from app.models import User
 
-# .env Datei laden
 load_dotenv()
 
-# Umgebungsvariablen aus .env lesen
 SECRET_KEY = os.getenv("SECRET_KEY", "default_secret_key")
 ALGORITHM = os.getenv("ALGORITHM", "HS256")
-ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", 30))
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="users/token")
-
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 def get_password_hash(password: str) -> str:
@@ -26,15 +22,18 @@ def get_password_hash(password: str) -> str:
 def verify_password(plain_password: str, hashed_password: str) -> bool:
     return pwd_context.verify(plain_password, hashed_password)
 
-def create_access_token(data: dict, expires_delta: timedelta | None = None) -> str:
+def create_access_token(data: dict) -> str:
     to_encode = data.copy()
-    expire = datetime.now() + (expires_delta or timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES))
+
+    # 🔥 Setzt den Ablaufzeitpunkt auf 23:59:59 Uhr des aktuellen Tages
+    now = datetime.now()
+    expire = now.replace(hour=23, minute=59, second=59, microsecond=0)
+    
     to_encode.update({"exp": expire})
     return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
 
-# ✅ Fix: Importiere `SessionLocal` erst in `get_db()`, um Circular Import zu vermeiden
 def get_db():
-    from app.database import SessionLocal  # 🔥 Import passiert hier zur Laufzeit
+    from app.database import SessionLocal
     db = SessionLocal()
     try:
         yield db

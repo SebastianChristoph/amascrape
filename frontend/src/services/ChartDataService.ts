@@ -34,7 +34,7 @@ class ChartDataService {
     }
   }
 
-  static async getSparkLineData(): Promise<number[] | null> {
+  static async GetSparkLineData(): Promise<number[] | null> {
     try {
       const token = localStorage.getItem(this.TOKEN_KEY);
       if (!token) {
@@ -57,6 +57,57 @@ class ChartDataService {
       return json.data;
     } catch (error) {
       console.error("Fehler beim Abrufen der SparkLine-Daten:", error);
+      return null;
+    }
+  }
+
+  static async GetStackedChartData(): Promise<any> {
+    try {
+      const token = localStorage.getItem(this.TOKEN_KEY);
+      if (!token) {
+        throw new Error("Kein Token vorhanden. Bitte einloggen.");
+      }
+
+      const response = await fetch(`${API_URL}/get-stacked-chart-data`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Fehler beim Abrufen der Stacked-Chart-Daten.");
+      }
+
+      return await response.json();
+    } catch (error) {
+      console.error("Fehler beim Abrufen der Stacked-Chart-Daten:", error);
+      return null;
+    }
+  }
+  static async GetBarChartData(): Promise<any> {
+    try {
+      const token = localStorage.getItem(this.TOKEN_KEY);
+      if (!token) {
+        throw new Error("Kein Token vorhanden. Bitte einloggen.");
+      }
+
+      const response = await fetch(`${API_URL}/get-bar-chart-data`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Fehler beim Abrufen der Bar-Chart-Daten.");
+      }
+
+      return await response.json();
+    } catch (error) {
+      console.error("Fehler beim Abrufen der Bar-Chart-Daten:", error);
       return null;
     }
   }

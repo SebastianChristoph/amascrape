@@ -25,7 +25,7 @@ const Dashboard: React.FC = () => {
   const { showSnackbar } = useSnackbar();
   const [marketClusters, setMarketClusters] = useState<any[]>([]);
   const [deletingCluster, setDeletingCluster] = useState<number | null>(null);
-
+  const [loading, setLoading] = useState<boolean>(true); 
 
   const [activeCluster, setActiveCluster] = useState<{
     clustername: string;
@@ -39,17 +39,17 @@ const Dashboard: React.FC = () => {
   const fetchMarketClusters = async () => {
     try {
       const data = await MarketService.GetMarketClusters();
-
       if (data) {
         setMarketClusters(data);
-        console.log("[DASHBOARD]", data)
-        console.log(marketClusters)
+        console.log("[DASHBOARD]", data);
       } else {
         showSnackbar("Fehler beim Laden der Market-Cluster.");
       }
     } catch (error) {
       console.error("Fehler beim Abrufen der Market-Cluster:", error);
       showSnackbar("Fehler beim Abrufen der Market-Cluster.");
+    } finally {
+      setLoading(false); // ✅ Setzt `loading` auf false, wenn der Fetch abgeschlossen ist
     }
   };
 
@@ -127,11 +127,10 @@ const Dashboard: React.FC = () => {
             Our robots are scraping for you...
           </Typography>
 
-          <Alert sx={{ mb: 2 }}  severity="info">
-                      We are scraping your markets to get a first impression of your cluster. This usually takes some
-                      minutes. You can come back later, inspect your other
-                      clusters or have a coffee.
-                    </Alert>
+          <Alert sx={{ mb: 2 }} severity="info">
+            We are scraping your markets to get a first impression of your cluster. This usually takes some
+            minutes. You can come back later, inspect your other clusters or have a coffee.
+          </Alert>
 
           <Box sx={{ flexGrow: 1 }}>
             <Grid container spacing={3}>
@@ -139,52 +138,22 @@ const Dashboard: React.FC = () => {
                 <CardHeader
                   sx={{ alignItems: "flex-start" }}
                   avatar={<GrCluster size={28} color="#000010" />}
-                  title={
-                    <Typography variant="h6">
-                      {activeCluster.clustername}
-                    </Typography>
-                  }
+                  title={<Typography variant="h6">{activeCluster.clustername}</Typography>}
                 />
                 <CardContent>
                   <Box>
-                    
-                  <Typography variant="body1">
-                     Scraping status:
-                    </Typography>
-                    <Box
-                      sx={{ display: "flex", flexDirection: "column", gap: 2 }}
-                    >
-                      <Box
-                        sx={{
-                          display: "flex",
-                          flexDirection: "column",
-                          gap: 1,
-                        }}
-                      >
-                        {Object.entries(activeCluster.keywords).map(
-                          ([keyword, status]) => (
-                            <Box
-                              key={keyword}
-                              sx={{
-                                display: "flex",
-                                alignItems: "center",
-                                gap: 1,
-                              }}
-                            >
-                              {/* ✅ Zeigt grünen Haken für "done", sonst Spinner */}
-                              {status === "done" ? (
-                                <AiOutlineCheckCircle size={18} color="green" />
-                              ) : (
-                                <CircularProgress
-                                  size={16}
-                                  sx={{ color: "primary.main" }}
-                                />
-                              )}
-                              <Typography variant="body2">{keyword}</Typography>
-                            </Box>
-                          )
-                        )}
-                      </Box>
+                    <Typography variant="body1">Scraping status:</Typography>
+                    <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+                      {Object.entries(activeCluster.keywords).map(([keyword, status]) => (
+                        <Box key={keyword} sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                          {status === "done" ? (
+                            <AiOutlineCheckCircle size={18} color="green" />
+                          ) : (
+                            <CircularProgress size={16} sx={{ color: "primary.main" }} />
+                          )}
+                          <Typography variant="body2">{keyword}</Typography>
+                        </Box>
+                      ))}
                     </Box>
                   </Box>
                 </CardContent>
@@ -194,41 +163,53 @@ const Dashboard: React.FC = () => {
         </Paper>
       )}
 
-      {/* ✅ Zeigt alle Market-Cluster an */}
+      {/* ✅ Zeigt alle Market-Cluster an (mit Spinner) */}
       <Paper sx={{ paddingY: 4, paddingX: 4, mt: 2 }}>
         <Typography variant="h5" sx={{ mb: 3, backgroundColor: "primary.main", p: 2, color: "white" }}>
           My Market Clusters
         </Typography>
 
-        <Box sx={{ flexGrow: 1 }}>
-          <Grid container spacing={3}>
-            {marketClusters.map((cluster) => (
-              <Grid key={cluster.id} size={{lg: 6, xs: 12}}>
-                <ClusterCard
-                  cluster={cluster}
-                  onClick={() => navigate(`/cluster/${cluster.id}`)}
-                  deletingCluster={deletingCluster}
-                  setMarketClusters={setMarketClusters}
-                  setDeletingCluster={setDeletingCluster}
-                  totalRevenue={cluster.total_revenue}
-                />
-              </Grid>
-            ))}
-          </Grid>
-        </Box>
-
-        {/* ✅ Button ist deaktiviert, wenn Scraping läuft */}
-        <Box sx={{display: "flex", justifyContent: "flex-end"}}>
-        <Button
-          sx={{ mt: 2, backgroundColor: "primary.main" }}
-          variant="contained"
-          startIcon={<MdAdd />}
-          onClick={() => navigate("/add-market-cluster")}
-          disabled={isFetching}
-        >
-          Add Market Cluster
-          </Button>
+        {/* 🔄 Zeigt einen Spinner, solange `loading` aktiv ist */}
+        {loading ? (
+          <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "200px" }}>
+            <CircularProgress size={80} color="primary" />
           </Box>
+        ) : (
+          <Box sx={{ flexGrow: 1 }}>
+            <Grid container spacing={3}>
+              {marketClusters.length > 0 ? (
+                marketClusters.map((cluster) => (
+                  <Grid key={cluster.id} size={{ lg: 6, xs: 12 }}>
+                    <ClusterCard
+                      cluster={cluster}
+                      onClick={() => navigate(`/cluster/${cluster.id}`)}
+                      deletingCluster={deletingCluster}
+                      setMarketClusters={setMarketClusters}
+                      setDeletingCluster={setDeletingCluster}
+                      totalRevenue={cluster.total_revenue}
+                    />
+                  </Grid>
+                ))
+              ) : (
+                <Typography sx={{ textAlign: "center", mt: 4 }} variant="body1">
+                  No market clusters found.
+                </Typography>
+              )}
+            </Grid>
+          </Box>
+        )}
+
+        <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+          <Button
+            sx={{ mt: 2, backgroundColor: "primary.main" }}
+            variant="contained"
+            startIcon={<MdAdd />}
+            onClick={() => navigate("/add-market-cluster")}
+            disabled={isFetching}
+          >
+            Add Market Cluster
+          </Button>
+        </Box>
       </Paper>
     </Container>
   );

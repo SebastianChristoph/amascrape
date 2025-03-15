@@ -28,7 +28,7 @@ class UserService {
     }
   }
 
-  // 📌 Prüft, ob das Token noch gültig ist
+  // 📌 Prüft, ob das Token noch gültig ist (läuft um 23:59:59 ab)
   static isAuthenticated(): boolean {
     const user = this.getUser();
     if (!user || !user.exp) return false;

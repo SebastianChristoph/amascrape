@@ -1,1 +1,256 @@
 2025-03-15 19:28:55,655 [INFO] 🚀 Product Orchestrator gestartet.
+2025-03-15 19:29:02,938 [INFO] ✅ Verbindung zu Amazon erfolgreich hergestellt!
+2025-03-15 19:29:02,938 [INFO] 🍪 Setze Cookies...
+2025-03-15 19:29:02,966 [INFO] ✅ Cookies gesetzt!
+2025-03-15 19:29:02,966 [INFO] 🚀 Starte Product-Update...
+2025-03-15 19:29:02,991 [INFO] 
+🔍 Überprüfe Produkt [1/62]: B0DKJWGQPM https://www.amazon.com/dp/B0DKJWGQPM?language=en_US
+2025-03-15 19:29:17,342 [INFO] ✅ Keine Änderungen für B0DKJWGQPM.
+2025-03-15 19:29:17,362 [INFO] ✅ last_time_scraped für B0DKJWGQPM aktualisiert.
+2025-03-15 19:29:17,364 [INFO] 
+🔍 Überprüfe Produkt [2/62]: B0D4QRC5WK https://www.amazon.com/dp/B0D4QRC5WK?language=en_US
+2025-03-15 19:29:33,283 [INFO] ⚡ Änderungen erkannt für B0D4QRC5WK: blm geändert: 100 → 200, total geändert: 999.0 → 1998.0
+2025-03-15 19:29:33,316 [INFO] ✅ last_time_scraped für B0D4QRC5WK aktualisiert.
+2025-03-15 19:29:33,318 [INFO] 
+🔍 Überprüfe Produkt [3/62]: B00GL2HMES https://www.amazon.com/dp/B00GL2HMES?language=en_US
+2025-03-15 19:29:46,260 [INFO] ✅ Keine Änderungen für B00GL2HMES.
+2025-03-15 19:29:46,279 [INFO] ✅ last_time_scraped für B00GL2HMES aktualisiert.
+2025-03-15 19:29:46,281 [INFO] 
+🔍 Überprüfe Produkt [4/62]: B0DX7846R5 https://www.amazon.com/dp/B0DX7846R5?language=en_US
+2025-03-15 19:29:58,189 [INFO] ✅ Keine Änderungen für B0DX7846R5.
+2025-03-15 19:29:58,219 [INFO] ✅ last_time_scraped für B0DX7846R5 aktualisiert.
+2025-03-15 19:29:58,220 [INFO] 
+🔍 Überprüfe Produkt [5/62]: B002DYIZEO https://www.amazon.com/dp/B002DYIZEO?language=en_US
+2025-03-15 19:30:10,725 [INFO] ✅ Keine Änderungen für B002DYIZEO.
+2025-03-15 19:30:10,737 [INFO] ✅ last_time_scraped für B002DYIZEO aktualisiert.
+2025-03-15 19:30:10,738 [INFO] 
+🔍 Überprüfe Produkt [6/62]: B00E9M4XFI https://www.amazon.com/dp/B00E9M4XFI?language=en_US
+2025-03-15 19:30:23,053 [INFO] ⚡ Änderungen erkannt für B00E9M4XFI: blm geändert: 40000 → 30000, total geändert: 798800.0 → 599100.0
+2025-03-15 19:30:23,077 [INFO] ✅ last_time_scraped für B00E9M4XFI aktualisiert.
+2025-03-15 19:30:23,080 [INFO] 
+🔍 Überprüfe Produkt [7/62]: B07978VPPH https://www.amazon.com/dp/B07978VPPH?language=en_US
+2025-03-15 19:30:35,642 [INFO] ✅ Keine Änderungen für B07978VPPH.
+2025-03-15 19:30:35,654 [INFO] ✅ last_time_scraped für B07978VPPH aktualisiert.
+2025-03-15 19:30:35,655 [INFO] 
+🔍 Überprüfe Produkt [8/62]: B00ULZF5HC https://www.amazon.com/dp/B00ULZF5HC?language=en_US
+2025-03-15 19:30:47,605 [INFO] ✅ Keine Änderungen für B00ULZF5HC.
+2025-03-15 19:30:47,619 [INFO] ✅ last_time_scraped für B00ULZF5HC aktualisiert.
+2025-03-15 19:30:47,620 [INFO] 
+🔍 Überprüfe Produkt [9/62]: B00DLWONF2 https://www.amazon.com/dp/B00DLWONF2?language=en_US
+2025-03-15 19:31:01,362 [INFO] ✅ Keine Änderungen für B00DLWONF2.
+2025-03-15 19:31:01,400 [INFO] ✅ last_time_scraped für B00DLWONF2 aktualisiert.
+2025-03-15 19:31:01,401 [INFO] 
+🔍 Überprüfe Produkt [10/62]: B0186H4VMG https://www.amazon.com/dp/B0186H4VMG?language=en_US
+2025-03-15 19:31:13,994 [INFO] ✅ Keine Änderungen für B0186H4VMG.
+2025-03-15 19:31:14,015 [INFO] ✅ last_time_scraped für B0186H4VMG aktualisiert.
+2025-03-15 19:31:14,017 [INFO] 
+🔍 Überprüfe Produkt [11/62]: B0BKCVLYGX https://www.amazon.com/dp/B0BKCVLYGX?language=en_US
+2025-03-15 19:31:26,118 [INFO] ✅ Keine Änderungen für B0BKCVLYGX.
+2025-03-15 19:31:26,133 [INFO] ✅ last_time_scraped für B0BKCVLYGX aktualisiert.
+2025-03-15 19:31:26,133 [INFO] 
+🔍 Überprüfe Produkt [12/62]: B0DMN9F2KX https://www.amazon.com/dp/B0DMN9F2KX?language=en_US
+2025-03-15 19:31:38,420 [INFO] ✅ Keine Änderungen für B0DMN9F2KX.
+2025-03-15 19:31:38,434 [INFO] ✅ last_time_scraped für B0DMN9F2KX aktualisiert.
+2025-03-15 19:31:38,436 [INFO] 
+🔍 Überprüfe Produkt [13/62]: B019ZVU9QO https://www.amazon.com/dp/B019ZVU9QO?language=en_US
+2025-03-15 19:31:51,461 [INFO] ✅ Keine Änderungen für B019ZVU9QO.
+2025-03-15 19:31:51,475 [INFO] ✅ last_time_scraped für B019ZVU9QO aktualisiert.
+2025-03-15 19:31:51,476 [INFO] 
+🔍 Überprüfe Produkt [14/62]: B0C9GCQX6H https://www.amazon.com/dp/B0C9GCQX6H?language=en_US
+2025-03-15 19:32:03,564 [INFO] ✅ Keine Änderungen für B0C9GCQX6H.
+2025-03-15 19:32:03,582 [INFO] ✅ last_time_scraped für B0C9GCQX6H aktualisiert.
+2025-03-15 19:32:03,584 [INFO] 
+🔍 Überprüfe Produkt [15/62]: B0CWVY3N64 https://www.amazon.com/dp/B0CWVY3N64?language=en_US
+2025-03-15 19:32:16,104 [INFO] ✅ Keine Änderungen für B0CWVY3N64.
+2025-03-15 19:32:16,128 [INFO] ✅ last_time_scraped für B0CWVY3N64 aktualisiert.
+2025-03-15 19:32:16,130 [INFO] 
+🔍 Überprüfe Produkt [16/62]: B00BPS3L8E https://www.amazon.com/dp/B00BPS3L8E?language=en_US
+2025-03-15 19:32:27,623 [INFO] ✅ Keine Änderungen für B00BPS3L8E.
+2025-03-15 19:32:27,652 [INFO] ✅ last_time_scraped für B00BPS3L8E aktualisiert.
+2025-03-15 19:32:27,653 [INFO] 
+🔍 Überprüfe Produkt [17/62]: B0DHYMZBP9 https://www.amazon.com/dp/B0DHYMZBP9?language=en_US
+2025-03-15 19:32:38,758 [INFO] ✅ Keine Änderungen für B0DHYMZBP9.
+2025-03-15 19:32:38,792 [INFO] ✅ last_time_scraped für B0DHYMZBP9 aktualisiert.
+2025-03-15 19:32:38,794 [INFO] 
+🔍 Überprüfe Produkt [18/62]: B085Z9P87K https://www.amazon.com/dp/B085Z9P87K?language=en_US
+2025-03-15 19:32:50,740 [INFO] ✅ Keine Änderungen für B085Z9P87K.
+2025-03-15 19:32:50,770 [INFO] ✅ last_time_scraped für B085Z9P87K aktualisiert.
+2025-03-15 19:32:50,771 [INFO] 
+🔍 Überprüfe Produkt [19/62]: B073ZLDDW2 https://www.amazon.com/dp/B073ZLDDW2?language=en_US
+2025-03-15 19:33:03,356 [INFO] ⚡ Änderungen erkannt für B073ZLDDW2: blm geändert: 3000 → 4000, total geändert: 129870.0 → 173160.0
+2025-03-15 19:33:03,392 [INFO] ✅ last_time_scraped für B073ZLDDW2 aktualisiert.
+2025-03-15 19:33:03,393 [INFO] 
+🔍 Überprüfe Produkt [20/62]: B0C8JNXQKL https://www.amazon.com/dp/B0C8JNXQKL?language=en_US
+2025-03-15 19:33:15,561 [INFO] ✅ Keine Änderungen für B0C8JNXQKL.
+2025-03-15 19:33:15,595 [INFO] ✅ last_time_scraped für B0C8JNXQKL aktualisiert.
+2025-03-15 19:33:15,597 [INFO] 
+🔍 Überprüfe Produkt [21/62]: B0CCJZ248Z https://www.amazon.com/dp/B0CCJZ248Z?language=en_US
+2025-03-15 19:33:29,448 [INFO] ✅ Keine Änderungen für B0CCJZ248Z.
+2025-03-15 19:33:29,465 [INFO] ✅ last_time_scraped für B0CCJZ248Z aktualisiert.
+2025-03-15 19:33:29,466 [INFO] 
+🔍 Überprüfe Produkt [22/62]: B00QEMY4T6 https://www.amazon.com/dp/B00QEMY4T6?language=en_US
+2025-03-15 19:33:44,074 [INFO] ✅ Keine Änderungen für B00QEMY4T6.
+2025-03-15 19:33:44,100 [INFO] ✅ last_time_scraped für B00QEMY4T6 aktualisiert.
+2025-03-15 19:33:44,101 [INFO] 
+🔍 Überprüfe Produkt [23/62]: B008LQT7UY https://www.amazon.com/dp/B008LQT7UY?language=en_US
+2025-03-15 19:33:56,877 [INFO] ✅ Keine Änderungen für B008LQT7UY.
+2025-03-15 19:33:56,915 [INFO] ✅ last_time_scraped für B008LQT7UY aktualisiert.
+2025-03-15 19:33:56,916 [INFO] 
+🔍 Überprüfe Produkt [24/62]: B09R5KPNHZ https://www.amazon.com/dp/B09R5KPNHZ?language=en_US
+2025-03-15 19:34:10,736 [INFO] ✅ Keine Änderungen für B09R5KPNHZ.
+2025-03-15 19:34:10,763 [INFO] ✅ last_time_scraped für B09R5KPNHZ aktualisiert.
+2025-03-15 19:34:10,764 [INFO] 
+🔍 Überprüfe Produkt [25/62]: B00IUHNCIW https://www.amazon.com/dp/B00IUHNCIW?language=en_US
+2025-03-15 19:34:22,546 [INFO] ✅ Keine Änderungen für B00IUHNCIW.
+2025-03-15 19:34:22,562 [INFO] ✅ last_time_scraped für B00IUHNCIW aktualisiert.
+2025-03-15 19:34:22,564 [INFO] 
+🔍 Überprüfe Produkt [26/62]: B0C9NRW7CP https://www.amazon.com/dp/B0C9NRW7CP?language=en_US
+2025-03-15 19:34:34,780 [INFO] ⚡ Änderungen erkannt für B0C9NRW7CP: price geändert: 23.99 → 21.99, total geändert: 47980.0 → 43980.0
+2025-03-15 19:34:34,798 [INFO] ✅ last_time_scraped für B0C9NRW7CP aktualisiert.
+2025-03-15 19:34:34,806 [INFO] 
+🔍 Überprüfe Produkt [27/62]: B09VCTVH98 https://www.amazon.com/dp/B09VCTVH98?language=en_US
+2025-03-15 19:34:47,274 [INFO] ✅ Keine Änderungen für B09VCTVH98.
+2025-03-15 19:34:47,307 [INFO] ✅ last_time_scraped für B09VCTVH98 aktualisiert.
+2025-03-15 19:34:47,308 [INFO] 
+🔍 Überprüfe Produkt [28/62]: B0D6HKTGSH https://www.amazon.com/dp/B0D6HKTGSH?language=en_US
+2025-03-15 19:34:59,496 [INFO] ✅ Keine Änderungen für B0D6HKTGSH.
+2025-03-15 19:34:59,524 [INFO] ✅ last_time_scraped für B0D6HKTGSH aktualisiert.
+2025-03-15 19:34:59,525 [INFO] 
+🔍 Überprüfe Produkt [29/62]: B01IW245EY https://www.amazon.com/dp/B01IW245EY?language=en_US
+2025-03-15 19:35:11,191 [INFO] ⚡ Änderungen erkannt für B01IW245EY: blm geändert: 7000 → 8000, total geändert: 230650.0 → 263600.0
+2025-03-15 19:35:11,210 [INFO] ✅ last_time_scraped für B01IW245EY aktualisiert.
+2025-03-15 19:35:11,212 [INFO] 
+🔍 Überprüfe Produkt [30/62]: B00117ZRXQ https://www.amazon.com/dp/B00117ZRXQ?language=en_US
+2025-03-15 19:35:23,839 [INFO] ✅ Keine Änderungen für B00117ZRXQ.
+2025-03-15 19:35:23,872 [INFO] ✅ last_time_scraped für B00117ZRXQ aktualisiert.
+2025-03-15 19:35:23,874 [INFO] 
+🔍 Überprüfe Produkt [31/62]: B0BS1X7P75 https://www.amazon.com/dp/B0BS1X7P75?language=en_US
+2025-03-15 19:35:33,706 [INFO] ✅ Keine Änderungen für B0BS1X7P75.
+2025-03-15 19:35:33,735 [INFO] ✅ last_time_scraped für B0BS1X7P75 aktualisiert.
+2025-03-15 19:35:33,739 [INFO] 
+🔍 Überprüfe Produkt [32/62]: B0CHK24CC4 https://www.amazon.com/dp/B0CHK24CC4?language=en_US
+2025-03-15 19:35:46,940 [INFO] ✅ Keine Änderungen für B0CHK24CC4.
+2025-03-15 19:35:46,971 [INFO] ✅ last_time_scraped für B0CHK24CC4 aktualisiert.
+2025-03-15 19:35:46,972 [INFO] 
+🔍 Überprüfe Produkt [33/62]: B0BT23VBLJ https://www.amazon.com/dp/B0BT23VBLJ?language=en_US
+2025-03-15 19:36:01,037 [INFO] ✅ Keine Änderungen für B0BT23VBLJ.
+2025-03-15 19:36:01,076 [INFO] ✅ last_time_scraped für B0BT23VBLJ aktualisiert.
+2025-03-15 19:36:01,077 [INFO] 
+🔍 Überprüfe Produkt [34/62]: B0BRNWSMVD https://www.amazon.com/dp/B0BRNWSMVD?language=en_US
+2025-03-15 19:36:14,811 [INFO] ⚡ Änderungen erkannt für B0BRNWSMVD: blm geändert: 4000 → 5000, total geändert: 119960.0 → 149950.0
+2025-03-15 19:36:14,841 [INFO] ✅ last_time_scraped für B0BRNWSMVD aktualisiert.
+2025-03-15 19:36:14,842 [INFO] 
+🔍 Überprüfe Produkt [35/62]: B0BSXR71QC https://www.amazon.com/dp/B0BSXR71QC?language=en_US
+2025-03-15 19:36:28,257 [INFO] ✅ Keine Änderungen für B0BSXR71QC.
+2025-03-15 19:36:28,276 [INFO] ✅ last_time_scraped für B0BSXR71QC aktualisiert.
+2025-03-15 19:36:28,279 [INFO] 
+🔍 Überprüfe Produkt [36/62]: B01LYFAGXI https://www.amazon.com/dp/B01LYFAGXI?language=en_US
+2025-03-15 19:36:39,778 [INFO] ✅ Keine Änderungen für B01LYFAGXI.
+2025-03-15 19:36:39,796 [INFO] ✅ last_time_scraped für B01LYFAGXI aktualisiert.
+2025-03-15 19:36:39,797 [INFO] 
+🔍 Überprüfe Produkt [37/62]: B0BFFYHWLK https://www.amazon.com/dp/B0BFFYHWLK?language=en_US
+2025-03-15 19:36:52,282 [INFO] ✅ Keine Änderungen für B0BFFYHWLK.
+2025-03-15 19:36:52,324 [INFO] ✅ last_time_scraped für B0BFFYHWLK aktualisiert.
+2025-03-15 19:36:52,326 [INFO] 
+🔍 Überprüfe Produkt [38/62]: B008S0I1Q4 https://www.amazon.com/dp/B008S0I1Q4?language=en_US
+2025-03-15 19:37:02,213 [INFO] ✅ Keine Änderungen für B008S0I1Q4.
+2025-03-15 19:37:02,241 [INFO] ✅ last_time_scraped für B008S0I1Q4 aktualisiert.
+2025-03-15 19:37:02,242 [INFO] 
+🔍 Überprüfe Produkt [39/62]: B07M5M5B3S https://www.amazon.com/dp/B07M5M5B3S?language=en_US
+2025-03-15 19:37:14,670 [INFO] ✅ Keine Änderungen für B07M5M5B3S.
+2025-03-15 19:37:14,702 [INFO] ✅ last_time_scraped für B07M5M5B3S aktualisiert.
+2025-03-15 19:37:14,703 [INFO] 
+🔍 Überprüfe Produkt [40/62]: B00012NJT6 https://www.amazon.com/dp/B00012NJT6?language=en_US
+2025-03-15 19:37:27,239 [INFO] ⚡ Änderungen erkannt für B00012NJT6: price geändert: None → 43.7, main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 600, total geändert: None → 26220.0
+2025-03-15 19:37:27,285 [INFO] ✅ last_time_scraped für B00012NJT6 aktualisiert.
+2025-03-15 19:37:27,287 [INFO] 
+🔍 Überprüfe Produkt [41/62]: B0DHGCV7H6 https://www.amazon.com/dp/B0DHGCV7H6?language=en_US
+2025-03-15 19:37:39,603 [INFO] ⚡ Änderungen erkannt für B0DHGCV7H6: blm geändert: 400 → 500, total geändert: 9996.0 → 12495.0
+2025-03-15 19:37:39,626 [INFO] ✅ last_time_scraped für B0DHGCV7H6 aktualisiert.
+2025-03-15 19:37:39,628 [INFO] 
+🔍 Überprüfe Produkt [42/62]: B0CMV32FFG https://www.amazon.com/dp/B0CMV32FFG?language=en_US
+2025-03-15 19:37:53,047 [INFO] ⚡ Änderungen erkannt für B0CMV32FFG: blm geändert: 500 → 600, total geändert: 14985.0 → 17982.0
+2025-03-15 19:37:53,081 [INFO] ✅ last_time_scraped für B0CMV32FFG aktualisiert.
+2025-03-15 19:37:53,084 [INFO] 
+🔍 Überprüfe Produkt [43/62]: B06W5J8KGQ https://www.amazon.com/dp/B06W5J8KGQ?language=en_US
+2025-03-15 19:38:05,154 [INFO] ✅ Keine Änderungen für B06W5J8KGQ.
+2025-03-15 19:38:05,188 [INFO] ✅ last_time_scraped für B06W5J8KGQ aktualisiert.
+2025-03-15 19:38:05,191 [INFO] 
+🔍 Überprüfe Produkt [44/62]: B008KMUNRA https://www.amazon.com/dp/B008KMUNRA?language=en_US
+2025-03-15 19:38:16,872 [INFO] ✅ Keine Änderungen für B008KMUNRA.
+2025-03-15 19:38:16,888 [INFO] ✅ last_time_scraped für B008KMUNRA aktualisiert.
+2025-03-15 19:38:16,889 [INFO] 
+🔍 Überprüfe Produkt [45/62]: B07CYN6W9R https://www.amazon.com/dp/B07CYN6W9R?language=en_US
+2025-03-15 19:38:33,937 [INFO] ✅ Keine Änderungen für B07CYN6W9R.
+2025-03-15 19:38:33,968 [INFO] ✅ last_time_scraped für B07CYN6W9R aktualisiert.
+2025-03-15 19:38:33,969 [INFO] 
+🔍 Überprüfe Produkt [46/62]: B0CM45VWMW https://www.amazon.com/dp/B0CM45VWMW?language=en_US
+2025-03-15 19:38:46,337 [INFO] ✅ Keine Änderungen für B0CM45VWMW.
+2025-03-15 19:38:46,355 [INFO] ✅ last_time_scraped für B0CM45VWMW aktualisiert.
+2025-03-15 19:38:46,356 [INFO] 
+🔍 Überprüfe Produkt [47/62]: B07RV3BQ45 https://www.amazon.com/dp/B07RV3BQ45?language=en_US
+2025-03-15 19:39:00,045 [INFO] ✅ Keine Änderungen für B07RV3BQ45.
+2025-03-15 19:39:00,073 [INFO] ✅ last_time_scraped für B07RV3BQ45 aktualisiert.
+2025-03-15 19:39:00,074 [INFO] 
+🔍 Überprüfe Produkt [48/62]: B0CP9XPYX6 https://www.amazon.com/dp/B0CP9XPYX6?language=en_US
+2025-03-15 19:39:13,099 [INFO] ✅ Keine Änderungen für B0CP9XPYX6.
+2025-03-15 19:39:13,112 [INFO] ✅ last_time_scraped für B0CP9XPYX6 aktualisiert.
+2025-03-15 19:39:13,113 [INFO] 
+🔍 Überprüfe Produkt [49/62]: B0106ZC4T8 https://www.amazon.com/dp/B0106ZC4T8?language=en_US
+2025-03-15 19:39:25,369 [INFO] ✅ Keine Änderungen für B0106ZC4T8.
+2025-03-15 19:39:25,386 [INFO] ✅ last_time_scraped für B0106ZC4T8 aktualisiert.
+2025-03-15 19:39:25,388 [INFO] 
+🔍 Überprüfe Produkt [50/62]: B0B2FF7XN9 https://www.amazon.com/dp/B0B2FF7XN9?language=en_US
+2025-03-15 19:39:39,144 [INFO] ✅ Keine Änderungen für B0B2FF7XN9.
+2025-03-15 19:39:39,168 [INFO] ✅ last_time_scraped für B0B2FF7XN9 aktualisiert.
+2025-03-15 19:39:39,170 [INFO] 
+🔍 Überprüfe Produkt [51/62]: B0BMPLP7K6 https://www.amazon.com/dp/B0BMPLP7K6?language=en_US
+2025-03-15 19:39:50,591 [INFO] ✅ Keine Änderungen für B0BMPLP7K6.
+2025-03-15 19:39:50,619 [INFO] ✅ last_time_scraped für B0BMPLP7K6 aktualisiert.
+2025-03-15 19:39:50,620 [INFO] 
+🔍 Überprüfe Produkt [52/62]: B0CSNBXFKG https://www.amazon.com/dp/B0CSNBXFKG?language=en_US
+2025-03-15 19:40:02,993 [INFO] ✅ Keine Änderungen für B0CSNBXFKG.
+2025-03-15 19:40:03,029 [INFO] ✅ last_time_scraped für B0CSNBXFKG aktualisiert.
+2025-03-15 19:40:03,030 [INFO] 
+🔍 Überprüfe Produkt [53/62]: B0CJMPVHXT https://www.amazon.com/dp/B0CJMPVHXT?language=en_US
+2025-03-15 19:40:16,982 [INFO] ✅ Keine Änderungen für B0CJMPVHXT.
+2025-03-15 19:40:17,000 [INFO] ✅ last_time_scraped für B0CJMPVHXT aktualisiert.
+2025-03-15 19:40:17,001 [INFO] 
+🔍 Überprüfe Produkt [54/62]: B010VEAXUG https://www.amazon.com/dp/B010VEAXUG?language=en_US
+2025-03-15 19:40:29,684 [INFO] ✅ Keine Änderungen für B010VEAXUG.
+2025-03-15 19:40:29,726 [INFO] ✅ last_time_scraped für B010VEAXUG aktualisiert.
+2025-03-15 19:40:29,728 [INFO] 
+🔍 Überprüfe Produkt [55/62]: B0CQ8XWFWL https://www.amazon.com/dp/B0CQ8XWFWL?language=en_US
+2025-03-15 19:40:42,381 [INFO] ⚡ Änderungen erkannt für B0CQ8XWFWL: title changed, price geändert: None → 29.99, main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 2000, total geändert: None → 59980.0
+2025-03-15 19:40:42,397 [INFO] ✅ last_time_scraped für B0CQ8XWFWL aktualisiert.
+2025-03-15 19:40:42,398 [INFO] 
+🔍 Überprüfe Produkt [56/62]: B0B4Z2RTY1 https://www.amazon.com/dp/B0B4Z2RTY1?language=en_US
+2025-03-15 19:40:56,119 [INFO] ⚡ Änderungen erkannt für B0B4Z2RTY1: title changed, price geändert: None → 28.04, main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 6000, total geändert: None → 168240.0
+2025-03-15 19:40:56,152 [INFO] ✅ last_time_scraped für B0B4Z2RTY1 aktualisiert.
+2025-03-15 19:40:56,153 [INFO] 
+🔍 Überprüfe Produkt [57/62]: B086H6366N https://www.amazon.com/dp/B086H6366N?language=en_US
+2025-03-15 19:41:07,547 [INFO] ⚡ Änderungen erkannt für B086H6366N: title changed, price geändert: None → 24.99, main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 1000, total geändert: None → 24990.0
+2025-03-15 19:41:07,578 [INFO] ✅ last_time_scraped für B086H6366N aktualisiert.
+2025-03-15 19:41:07,579 [INFO] 
+🔍 Überprüfe Produkt [58/62]: B0D1DP2D8D https://www.amazon.com/dp/B0D1DP2D8D?language=en_US
+2025-03-15 19:41:19,225 [INFO] ⚡ Änderungen erkannt für B0D1DP2D8D: title changed, price geändert: None → 15.99, main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 1000, total geändert: None → 15990.0
+2025-03-15 19:41:19,262 [INFO] ✅ last_time_scraped für B0D1DP2D8D aktualisiert.
+2025-03-15 19:41:19,264 [INFO] 
+🔍 Überprüfe Produkt [59/62]: B0BQPT34V7 https://www.amazon.com/dp/B0BQPT34V7?language=en_US
+2025-03-15 19:41:30,989 [INFO] ⚡ Änderungen erkannt für B0BQPT34V7: title changed, price geändert: None → 39.99, main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 1000, total geändert: None → 39990.0
+2025-03-15 19:41:31,020 [INFO] ✅ last_time_scraped für B0BQPT34V7 aktualisiert.
+2025-03-15 19:41:31,021 [INFO] 
+🔍 Überprüfe Produkt [60/62]: B0043YJZNC https://www.amazon.com/dp/B0043YJZNC?language=en_US
+2025-03-15 19:41:44,601 [INFO] ⚡ Änderungen erkannt für B0043YJZNC: title changed, price geändert: None → 24.99, main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 400, total geändert: None → 9996.0
+2025-03-15 19:41:44,653 [INFO] ✅ last_time_scraped für B0043YJZNC aktualisiert.
+2025-03-15 19:41:44,655 [INFO] 
+🔍 Überprüfe Produkt [61/62]: B0CQN29QCQ https://www.amazon.com/dp/B0CQN29QCQ?language=en_US
+2025-03-15 19:41:57,995 [INFO] ⚡ Änderungen erkannt für B0CQN29QCQ: title changed, price geändert: None → 30.74, main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 800, total geändert: None → 24592.0
+2025-03-15 19:41:58,025 [INFO] ✅ last_time_scraped für B0CQN29QCQ aktualisiert.
+2025-03-15 19:41:58,026 [INFO] 
+🔍 Überprüfe Produkt [62/62]: B073XTNWXV https://www.amazon.com/dp/B073XTNWXV?language=en_US
+2025-03-15 19:42:10,251 [INFO] ⚡ Änderungen erkannt für B073XTNWXV: title changed, price geändert: None → 19.99, main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 400, total geändert: None → 7996.0
+2025-03-15 19:42:10,284 [INFO] ✅ last_time_scraped für B073XTNWXV aktualisiert.
+2025-03-15 19:42:10,284 [INFO] 
+🔻 Schließe WebDriver...
+2025-03-15 19:42:13,604 [INFO] ✅ WebDriver geschlossen.

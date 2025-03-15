@@ -21,6 +21,7 @@ import CustomBarChart from "../components/charts/CustomBarChart";
 import CustomSparkLine from "../components/charts/CustomSparkLine";
 import CustomStackBars from "../components/charts/CustomStackChart";
 import MarketService from "../services/MarketService";
+import ChartDataService from "../services/ChartDataservice";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -56,6 +57,8 @@ export default function ClusterDetails() {
   const [marketCluster, setMarketCluster] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [tabIndex, setTabIndex] = useState(0);
+  const [stackedChartData, setStackedChartData] = useState<any[]>([]);
+  const [barChartData, setBarChartData] = useState<any[]>([]);
 
   const ItemCard = styled(Card)(({ theme }) => ({
     minHeight: 400,
@@ -111,18 +114,35 @@ export default function ClusterDetails() {
   };
 
   useEffect(() => {
-    async function fetchClusterDetails() {
+    async function fetchAllData() {
       if (!clusterId) return;
-      setLoading(true); // ⏳ Start loading
-      const data = await MarketService.getMarketClusterDetails(Number(clusterId));
-      console.log("[DEBUG] API-Antwort für MarketCluster:", data);
-      setMarketCluster(data);
-      setLoading(false); // ✅ Daten geladen, Spinner ausblenden
-    }
-  
-    fetchClusterDetails();
-  }, [clusterId]);
+      
+      setLoading(true); // 🔄 Starte Ladezustand
 
+      try {
+        const [clusterData, stackedData, barData] = await Promise.all([
+          MarketService.getMarketClusterDetails(Number(clusterId)),
+          ChartDataService.GetStackedChartData(),
+          ChartDataService.GetBarChartData()
+        ]);
+
+        console.log("[DEBUG] API-Antwort für MarketCluster:", clusterData);
+        console.log("[DEBUG] API-Antwort für Stacked Chart:", stackedData);
+        console.log("[DEBUG] API-Antwort für Bar Chart:", barData);
+
+        if (clusterData) setMarketCluster(clusterData);
+        if (stackedData) setStackedChartData(stackedData.balanceSheet);
+        if (barData) setBarChartData(barData.barChart);
+
+      } catch (error) {
+        console.error("Fehler beim Laden der Daten:", error);
+      } finally {
+        setLoading(false); // ✅ Ladezustand beenden
+      }
+    }
+
+    fetchAllData();
+  }, [clusterId]);
   if (loading) {
     return (
       <Box
@@ -232,7 +252,7 @@ export default function ClusterDetails() {
       {/* GRID MARKET CLUSTER */}
       <Grid container spacing={2}>
         <Grid size={{ sm: 12, lg: 4 }}>
-          <CustomBarChart />
+        <CustomBarChart data={barChartData} />
         </Grid>
 
         <Grid size={{ sm: 12, lg: 4 }}>
@@ -245,7 +265,7 @@ export default function ClusterDetails() {
         </Grid>
 
         <Grid size={{ sm: 12, lg: 4 }}>
-          <CustomStackBars />
+        <CustomStackBars data={stackedChartData} />
         </Grid>
       </Grid>
 
