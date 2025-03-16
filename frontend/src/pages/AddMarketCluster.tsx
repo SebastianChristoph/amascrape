@@ -23,34 +23,34 @@ const AddMarketCluster: React.FC = () => {
   const [existingClusters, setExistingClusters] = useState<string[]>([]);
   const [isScraping, setIsScraping] = useState<boolean>(false);
 
+  // Überprüfen, ob der eingegebene Wert eine Liste ist
+  const isListInput = newKeyword.includes(",");
+
   // ✅ Automatisches Fetching für aktive Scraping-Prozesse
   useEffect(() => {
     const fetchActiveScrapingClusters = async () => {
       try {
-        const activeCluster = await MarketService.getActiveScrapingCluster(); // Holt den einzelnen aktiven Cluster
-        console.log(
-          "[AddMarketCluster] Aktiver Scraping-Prozess:",
-          activeCluster
-        );
+        const activeCluster = await MarketService.getActiveScrapingCluster();
+        console.log("[AddMarketCluster] Aktiver Scraping-Prozess:", activeCluster);
 
         if (activeCluster) {
-          setIsScraping(true); // Scraping ist aktiv, weiter fetchen
+          setIsScraping(true);
         } else {
           if (isScraping) {
             showSnackbar("✅ Active cluster available");
           }
-          setIsScraping(false); // Kein aktives Scraping mehr → Form anzeigen
+          setIsScraping(false);
         }
       } catch (error) {
         console.error("Fehler beim Abrufen aktiver Scraping-Prozesse:", error);
       }
     };
 
-    fetchActiveScrapingClusters(); // Initiales Laden
+    fetchActiveScrapingClusters();
 
     if (isScraping) {
       const interval = setInterval(fetchActiveScrapingClusters, 3000);
-      return () => clearInterval(interval); // Cleanup Interval
+      return () => clearInterval(interval);
     }
   }, [isScraping, showSnackbar]);
 
@@ -60,9 +60,7 @@ const AddMarketCluster: React.FC = () => {
       try {
         const data = await MarketService.GetMarketClusters();
         if (Array.isArray(data)) {
-          setExistingClusters(
-            data.map((cluster: any) => cluster.title.toLowerCase())
-          );
+          setExistingClusters(data.map((cluster: any) => cluster.title.toLowerCase()));
         }
       } catch (error) {
         console.error("Fehler beim Laden der Market-Cluster:", error);
@@ -73,13 +71,23 @@ const AddMarketCluster: React.FC = () => {
     fetchMarketClusters();
   }, []);
 
-  // ✅ Keyword hinzufügen (immer in lowercase)
+  // ✅ Keyword(s) hinzufügen
   const handleAddKeyword = () => {
-    const keywordLower = newKeyword.trim().toLowerCase();
-    if (keywordLower && !keywords.includes(keywordLower)) {
-      setKeywords([...keywords, keywordLower]);
-      setNewKeyword("");
+    let newKeywords = newKeyword.split(",").map((kw) => kw.trim().toLowerCase());
+    newKeywords = newKeywords.filter((kw) => kw !== ""); // Entferne leere Einträge
+
+    if (newKeywords.length === 0) return;
+
+    // Prüfe, ob bereits zu viele Keywords existieren
+    if (keywords.length + newKeywords.length > 5) {
+      showSnackbar("❌ Maximal 5 Keywords erlaubt.");
+      return;
     }
+
+    // Füge neue Keywords hinzu, falls sie noch nicht existieren
+    const uniqueNewKeywords = newKeywords.filter((kw) => !keywords.includes(kw));
+    setKeywords([...keywords, ...uniqueNewKeywords]);
+    setNewKeyword("");
   };
 
   // ✅ Keyword entfernen
@@ -117,7 +125,7 @@ const AddMarketCluster: React.FC = () => {
     try {
       await MarketService.startScrapingProcess({
         clusterName: clusterName.trim(),
-        keywords: keywords.map((kw) => kw.toLowerCase()),
+        keywords: keywords,
       });
 
       navigate("/dashboard");
@@ -129,64 +137,62 @@ const AddMarketCluster: React.FC = () => {
 
   return (
     <Container maxWidth="md">
-      <Paper elevation={6} sx={{p: 4}}>
-      
-      <Typography variant="h4" sx={{ mb: 3 }}>
-        Add Market Cluster
-      </Typography>
-     
-      {/* ✅ Falls Scraping läuft, zeige eine Warnung an */}
-      {isScraping ? (
-        <Alert severity="warning">
-          🚧 Ein Scraping-Prozess läuft bereits. Warte, bis dieser abgeschlossen
-          ist, bevor du einen neuen Cluster erstellst.
-        </Alert>
-      ) : (
-        <form onSubmit={handleSubmit}>
-          <TextField
-            fullWidth
-            label="Cluster Title"
-            variant="outlined"
-            value={clusterName}
-            onChange={handleTitleChange}
-            required
-            sx={{ mb: 2 }}
-          />
- <Typography sx={{mt: 2, mb: 2}}>
-                  Add up to five keywords for your cluster. Each keyword acts as a market in your cluster. Our robots will get all the products for this searchterm on amazon
-                </Typography>
-          <Box sx={{ display: "flex", gap: 2, mb: 2 }}>
+      <Paper elevation={6} sx={{ p: 4 }}>
+        <Typography variant="h4" sx={{ mb: 3 }}>
+          Add Market Cluster
+        </Typography>
+
+        {/* ✅ Falls Scraping läuft, zeige eine Warnung an */}
+        {isScraping ? (
+          <Alert severity="warning">
+            🚧 Ein Scraping-Prozess läuft bereits. Warte, bis dieser abgeschlossen ist, bevor du einen neuen Cluster erstellst.
+          </Alert>
+        ) : (
+          <form onSubmit={handleSubmit}>
             <TextField
               fullWidth
-              label="Market Keyword"
+              label="Cluster Title"
               variant="outlined"
-              value={newKeyword}
-                  onChange={(e) => setNewKeyword(e.target.value)}
-                 
-                />
-               
-            <Button onClick={handleAddKeyword} variant="contained">
-              Add
-            </Button>
-          </Box>
+              value={clusterName}
+              onChange={handleTitleChange}
+              required
+              sx={{ mb: 2 }}
+            />
 
-          <Box sx={{ mb: 2 }}>
-            {keywords.map((keyword, index) => (
-              <Chip
-                key={index}
-                label={keyword}
-                onDelete={() => handleRemoveKeyword(keyword)}
-                sx={{ mr: 1 }}
+            <Typography sx={{ mt: 2, mb: 2 }}>
+              Add up to five keywords for your cluster. Each keyword acts as a market in your cluster. Our robots will get all the products for this searchterm on Amazon.
+            </Typography>
+
+            <Box sx={{ display: "flex", gap: 2, mb: 2 }}>
+              <TextField
+                fullWidth
+                label="Market Keyword(s)"
+                variant="outlined"
+                value={newKeyword}
+                onChange={(e) => setNewKeyword(e.target.value)}
               />
-            ))}
-          </Box>
+              <Button onClick={handleAddKeyword} variant="contained">
+                {isListInput ? "Add List" : "Add"}
+              </Button>
+            </Box>
 
-          <Button type="submit" variant="contained" color="primary" fullWidth>
-            Create Market Cluster
-          </Button>
-        </form>
+            <Box sx={{ mb: 2 }}>
+              {keywords.map((keyword, index) => (
+                <Chip
+                  key={index}
+                  label={keyword}
+                  onDelete={() => handleRemoveKeyword(keyword)}
+                  sx={{ mr: 1 }}
+                />
+              ))}
+            </Box>
+
+            <Button type="submit" variant="contained" color="primary" fullWidth>
+              Create Market Cluster
+            </Button>
+          </form>
         )}
-        </Paper>
+      </Paper>
     </Container>
   );
 };

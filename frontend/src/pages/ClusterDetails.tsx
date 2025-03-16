@@ -17,7 +17,7 @@ import { useParams } from "react-router-dom";
 import CustomBarChart from "../components/charts/CustomBarChart";
 import CustomSparkLine from "../components/charts/CustomSparkLine";
 import CustomStackBars from "../components/charts/CustomStackChart";
-import ChartDataService from "../services/ChartDataservice";
+import ChartDataService from "../services/ChartDataService";
 import MarketService from "../services/MarketService";
 
 interface TabPanelProps {
@@ -366,34 +366,35 @@ export default function ClusterDetails() {
 
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
         <Tabs value={tabIndex} onChange={handleTabChange}>
-          {marketCluster.markets.map((market: any, index: number) => (
-            <Tab sx={{ fontSize: 22 }} key={index} label={market.keyword} />
-          ))}
+        {marketCluster.markets.map((market: any) => (
+  <Tab sx={{ fontSize: 22 }} key={market.id} label={market.keyword} />
+))}
         </Tabs>
       </Box>
 
       {marketCluster.markets.map((market: any, index: number) => (
-        <Box key={index} hidden={tabIndex !== index}>
-          <DataGrid
-            rows={market.products.map((product: any) => ({
-              id: product.asin,
-              image: product.image,
-              title: product.title,
-              price: product.price,
-              mainCategory: product.main_category,
-              mainCategoryRank: product.main_category_rank,
-              secondCategory: product.second_category,
-              secondCategoryRank: product.second_category_rank,
-              blm: product.blm,
-              total: product.total,
-              sparkline_data: product.sparkline_data ?? [0],
-            }))}
-            columns={columns}
-            rowHeight={100}
-            pageSizeOptions={[10, 25, 50, 100]}
-            checkboxSelection={false}
-          />
-        </Box>
+       <Box sx={{ minHeight: 500, width: "100%" }}>
+       <DataGrid
+         rows={market.products.map((product: any) => ({
+           id: product.asin,
+           image: product.image,
+           title: product.title,
+           price: product.price,
+           mainCategory: product.main_category,
+           mainCategoryRank: product.main_category_rank,
+           secondCategory: product.second_category,
+           secondCategoryRank: product.second_category_rank,
+           blm: product.blm,
+           total: product.total,
+           sparkline_data: product.sparkline_data ?? [0],
+         }))}
+         columns={columns}
+         rowHeight={100}
+         pageSizeOptions={[10, 25, 50, 100]}
+         checkboxSelection={false}
+       />
+     </Box>
+     
       ))}
     </Paper>
   );

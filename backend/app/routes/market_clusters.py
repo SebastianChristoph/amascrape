@@ -1,22 +1,19 @@
 import asyncio
-import random
+import logging
 from typing import List, Optional
+
+from fastapi import APIRouter, Depends, HTTPException
+from pydantic import BaseModel
+from sqlalchemy import delete
+from sqlalchemy.orm import Session, joinedload
 
 from app.auth import get_current_user
 from app.database import get_db
-from app.models import (Market, MarketChange, MarketCluster, ProductChange,
-                        User, market_cluster_markets)
-from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException
-from pydantic import BaseModel
-from sqlalchemy import delete
-from sqlalchemy.exc import IntegrityError
-from sqlalchemy.orm import Session, joinedload
+from app.models import MarketCluster, MarketChange, ProductChange, User, market_cluster_markets
 
 router = APIRouter()
 
 # 📌 MarketCluster Response Schema
-
-
 class MarketClusterResponse(BaseModel):
     id: int
     title: str
@@ -35,68 +32,67 @@ class MarketClusterCreate(BaseModel):
 class MarketClusterUpdate(BaseModel):
     title: str
 
-# 📌 Asynchrones Update eines Market Cluster-Titels
-
-
+# 📌 Market Cluster Titel aktualisieren
 @router.put("/update/{cluster_id}", response_model=dict)
 async def update_market_cluster(
     cluster_id: int,
     cluster_data: MarketClusterUpdate,
     db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user)
+    current_user: User = Depends(get_current_user),
 ):
-    await asyncio.sleep(0.5)  # ⏳ Simulierte Verzögerung für DB-Operation
+    await asyncio.sleep(0.5)  # ⏳ Simulierte Verzögerung
     cluster = db.query(MarketCluster).filter(
         MarketCluster.id == cluster_id,
-        MarketCluster.user_id == current_user.id
+        MarketCluster.user_id == current_user.id,
     ).first()
 
     if not cluster:
-        raise HTTPException(
-            status_code=404, detail="Market Cluster nicht gefunden oder nicht autorisiert")
+        raise HTTPException(status_code=404, detail="Market Cluster nicht gefunden oder nicht autorisiert")
 
     cluster.title = cluster_data.title
     db.commit()
 
     return {"message": "Market Cluster erfolgreich aktualisiert"}
 
-# 📌 Asynchrones Löschen eines Market Clusters mit `BackgroundTasks`
-
-
+# 📌 Market Cluster synchron löschen
 @router.delete("/delete/{cluster_id}", response_model=dict)
 async def delete_market_cluster(
     cluster_id: int,
-    background_tasks: BackgroundTasks,
     db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user)
+    current_user: User = Depends(get_current_user),
 ):
     cluster = db.query(MarketCluster).filter(
         MarketCluster.id == cluster_id,
-        MarketCluster.user_id == current_user.id
+        MarketCluster.user_id == current_user.id,
     ).first()
 
     if not cluster:
-        raise HTTPException(
-            status_code=404, detail="Market Cluster nicht gefunden oder nicht autorisiert")
+        raise HTTPException(status_code=404, detail="Market Cluster nicht gefunden oder nicht autorisiert")
 
-    background_tasks.add_task(_delete_market_cluster,
-                              cluster_id, db)  # ✅ Hintergrund-Task
-    return {"message": "Market Cluster wird im Hintergrund gelöscht"}
+    try:
+        # 🔥 Löscht Verknüpfungen in der Zwischentabelle
+        db.execute(delete(market_cluster_markets).where(
+            market_cluster_markets.c.market_cluster_id == cluster_id
+        ))
+        db.commit()
 
+        # 🔥 Löscht das eigentliche MarketCluster
+        db.delete(cluster)
+        db.commit()
 
-async def _delete_market_cluster(cluster_id: int, db: Session):
-    await asyncio.sleep(1)  # ⏳ Simulierte Verzögerung
-    db.execute(delete(market_cluster_markets).where(
-        market_cluster_markets.c.market_cluster_id == cluster_id))
-    db.commit()
+        logging.info(f"✅ Market Cluster {cluster_id} wurde gelöscht.")
+        return {"message": "Market Cluster erfolgreich gelöscht"}
 
-# 📌 Asynchrone Route: MarketClusters des Users abrufen
+    except Exception as e:
+        db.rollback()
+        logging.error(f"❌ Fehler beim Löschen des Market Clusters {cluster_id}: {e}")
+        raise HTTPException(status_code=500, detail="Interner Serverfehler beim Löschen")
 
-
+# 📌 Market Cluster des Users abrufen
 @router.get("/", response_model=List[MarketClusterResponse])
 async def get_user_market_clusters(
     db: Session = Depends(get_db),
-    current_user=Depends(get_current_user)
+    current_user=Depends(get_current_user),
 ):
     await asyncio.sleep(0.5)  # ⏳ Simulierte Verzögerung
     market_clusters = db.query(MarketCluster).filter(
@@ -107,36 +103,33 @@ async def get_user_market_clusters(
         MarketClusterResponse(
             id=cluster.id,
             title=cluster.title,
-            markets=[market.keyword for market in cluster.markets] if cluster.markets else [
-                "Keine Märkte"],
-            total_revenue=cluster.total_revenue
+            markets=[market.keyword for market in cluster.markets] if cluster.markets else ["Keine Märkte"],
+            total_revenue=cluster.total_revenue,
         )
         for cluster in market_clusters
     ]
 
-# 📌 Asynchrone Route: Market Cluster Details abrufen
-
-
+# 📌 Market Cluster Details abrufen
 @router.get("/{cluster_id}")
 async def get_market_cluster_details(
     cluster_id: int,
     db: Session = Depends(get_db),
-    current_user=Depends(get_current_user)
+    current_user=Depends(get_current_user),
 ):
     await asyncio.sleep(0.5)  # ⏳ Simulierte Verzögerung
     market_cluster = db.query(MarketCluster).filter(
         MarketCluster.id == cluster_id,
-        MarketCluster.user_id == current_user.id
+        MarketCluster.user_id == current_user.id,
     ).options(joinedload(MarketCluster.markets)).first()
 
     if not market_cluster:
-        raise HTTPException(status_code=404, detail="MarketCluster not found")
+        raise HTTPException(status_code=404, detail="MarketCluster nicht gefunden")
 
     response_data = {
         "id": market_cluster.id,
         "title": market_cluster.title,
         "markets": [],
-        "total_revenue": market_cluster.total_revenue
+        "total_revenue": market_cluster.total_revenue,
     }
 
     for market in market_cluster.markets:
@@ -147,7 +140,7 @@ async def get_market_cluster_details(
         market_data = {
             "id": market.id,
             "keyword": market.keyword,
-            "products": []
+            "products": [],
         }
 
         if latest_market_change:

@@ -20,7 +20,7 @@ import React, { useEffect, useState } from "react";
 import { GrCluster } from "react-icons/gr";
 import { MdDelete, MdEdit } from "react-icons/md";
 import { useSnackbar } from "../providers/SnackbarProvider";
-import ChartDataService from "../services/ChartDataservice";
+import ChartDataService from "../services/ChartDataService";
 import MarketService from "../services/MarketService";
 import CustomSparkLine from "./charts/CustomSparkLine"; // ✅ Importiere Sparkline-Komponente
 
@@ -35,6 +35,7 @@ interface ClusterCardProps {
   setMarketClusters: React.Dispatch<React.SetStateAction<any[]>>;
   setDeletingCluster: React.Dispatch<React.SetStateAction<number | null>>;
   totalRevenue: number;
+  fetchMarketClusters: () => void; // ✅ Hinzugefügt, um Daten nach Löschung zu aktualisieren
 }
 
 const ClusterCard: React.FC<ClusterCardProps> = ({
@@ -44,6 +45,7 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
   setMarketClusters,
   setDeletingCluster,
   totalRevenue,
+  fetchMarketClusters, // ✅ Neue Prop für das Aktualisieren der Market-Cluster
 }) => {
   const { showSnackbar } = useSnackbar();
   const [openEditDialog, setOpenEditDialog] = useState(false);
@@ -52,7 +54,7 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
   const [sparklineData, setSparklineData] = useState<number[]>([]);
   const [loading, setLoading] = useState<boolean>(true); // ✅ Ladezustand für Sparkline
 
-  // ✅ Sparkline-Daten laden
+  // ✅ Holt Sparkline-Daten
   useEffect(() => {
     async function fetchSparklineData() {
       try {
@@ -60,7 +62,7 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
           cluster.id
         );
         if (response.length > 0) {
-          setSparklineData(response); // ✅ Korrekte Speicherung der Sparkline-Daten
+          setSparklineData(response);
           console.log("[CLUSTER CARD] Geladene Sparkline-Daten:", response);
         } else {
           console.error("Keine Sparkline-Daten erhalten.");
@@ -70,7 +72,7 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
         console.error("Fehler beim Abrufen der Sparkline-Daten:", error);
         showSnackbar("Fehler beim Abrufen der Sparkline-Daten.");
       } finally {
-        setLoading(false); // ✅ Ladezustand beenden
+        setLoading(false);
       }
     }
     fetchSparklineData();
@@ -111,19 +113,15 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
   const handleConfirmDelete = async () => {
     setDeletingCluster(cluster.id);
 
-    setTimeout(async () => {
-      const success = await MarketService.deleteMarketCluster(cluster.id);
-      if (success) {
-        setMarketClusters((prevClusters) =>
-          prevClusters.filter((c) => c.id !== cluster.id)
-        );
-        showSnackbar("Market Cluster erfolgreich gelöscht.");
-      } else {
-        showSnackbar("Fehler beim Löschen des Market Clusters.", "error");
-      }
-      setDeletingCluster(null);
-    }, 500);
+    const success = await MarketService.deleteMarketCluster(cluster.id);
+    if (success) {
+      showSnackbar("Market Cluster erfolgreich gelöscht.");
+      fetchMarketClusters(); // 🚀 Frische Daten nach dem Löschen abrufen
+    } else {
+      showSnackbar("Fehler beim Löschen des Market Clusters.", "error");
+    }
 
+    setDeletingCluster(null);
     setOpenConfirmDialog(false);
   };
 
@@ -156,7 +154,7 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
               <IconButton color="primary" onClick={handleEditClick}>
                 <MdEdit size={24} />
               </IconButton>
-              <IconButton color="info" onClick={handleDeleteClick}>
+              <IconButton color="primary" onClick={handleDeleteClick}>
                 <MdDelete size={24} />
               </IconButton>
             </>
@@ -186,7 +184,7 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
             }).format(Number(totalRevenue))}
           </Typography>
 
-          {/* ✅ Zeigt Sparkline Chart statt LineChart */}
+          {/* ✅ Zeigt Sparkline Chart */}
           <Box sx={{ mt: 4, width: "50%", height: 50 }}>
             {loading ? (
               <CircularProgress size={40} color="primary" />
@@ -217,6 +215,24 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
           <Button onClick={() => setOpenEditDialog(false)}>Abbrechen</Button>
           <Button onClick={handleUpdateCluster} color="primary">
             Speichern
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* ✅ Dialog für Löschen */}
+      <Dialog open={openConfirmDialog} onClose={() => setOpenConfirmDialog(false)}>
+        <DialogTitle>Market Cluster löschen?</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Bist du sicher, dass du dieses Market Cluster löschen möchtest?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setOpenConfirmDialog(false)} color="primary">
+            Abbrechen
+          </Button>
+          <Button onClick={handleConfirmDelete} color="error">
+            Löschen
           </Button>
         </DialogActions>
       </Dialog>
