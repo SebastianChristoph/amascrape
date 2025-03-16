@@ -1,13 +1,22 @@
 import {
   Alert,
+  Backdrop,
   Box,
+  Button,
   Card,
   Chip,
   CircularProgress,
+  IconButton,
   Link,
   Paper,
   styled,
   Tab,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
   Tabs,
   Typography
 } from "@mui/material";
@@ -20,6 +29,7 @@ import CustomSparkLine from "../components/charts/CustomSparkLine";
 import CustomStackBars from "../components/charts/CustomStackChart";
 import ChartDataService from "../services/ChartDataService";
 import MarketService from "../services/MarketService";
+import { FaRegEye } from "react-icons/fa";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -27,28 +37,6 @@ interface TabPanelProps {
   value: number;
 }
 
-// function TabPanel(props: TabPanelProps) {
-//   const { children, value, index, ...other } = props;
-
-//   return (
-//     <div
-//       role="tabpanel"
-//       hidden={value !== index}
-//       id={`tabpanel-${index}`}
-//       aria-labelledby={`tab-${index}`}
-//       {...other}
-//     >
-//       {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
-//     </div>
-//   );
-// }
-
-// function a11yProps(index: number) {
-//   return {
-//     id: `tab-${index}`,
-//     "aria-controls": `tabpanel-${index}`,
-//   };
-// }
 
 export default function ClusterDetails() {
   const { clusterId } = useParams(); // ID aus der URL abrufen
@@ -60,6 +48,9 @@ export default function ClusterDetails() {
   >({});
 
   const [barChartData, setBarChartData] = useState<any[]>([]);
+  const [openBackdrop, setOpenBackdrop] = useState(false);
+  const [productChanges, setProductChanges] = useState<any[]>([]);
+  const [selectedAsin, setSelectedAsin] = useState<string | null>(null);
 
   const ItemCard = styled(Card)(({ theme }) => ({
     minHeight: 400,
@@ -88,36 +79,24 @@ export default function ClusterDetails() {
     );
   };
 
-  // const Item = ({
-  //   title,
-  //   icon,
-  //   children,
-  // }: {
-  //   title: string;
-  //   icon: React.ReactNode;
-  //   children: React.ReactNode;
-  // }) => {
-  //   return (
-  //     <ItemCard sx={{ height: 400 }}>
-  //       <CardHeader
-  //         avatar={
-  //           <Avatar
-  //             sx={{
-  //               bgcolor: "primary.main",
-  //               color: "white",
-  //               width: 40,
-  //               height: 40,
-  //             }}
-  //           >
-  //             {icon}
-  //           </Avatar>
-  //         }
-  //         title={<Typography variant="body2">{title}</Typography>}
-  //       />
-  //       <CardContent sx={{ paddingBottom: 2,  display: "flex" , flexDirection:"row", alignItems:"flex-end"}}>{children}</CardContent>
-  //     </ItemCard>
-  //   );
-  // };
+  const handleShowDetails = async (asin: string) => {
+    setSelectedAsin(asin);
+    setOpenBackdrop(true);
+
+    try {
+      const changes = await MarketService.getProductChanges(asin);
+      setProductChanges(changes);
+    } catch (error) {
+      console.error("Fehler beim Laden der Produktänderungen:", error);
+    }
+  };
+
+  const handleCloseBackdrop = () => {
+    setOpenBackdrop(false);
+    setProductChanges([]);
+  };
+
+  
   const transformStackedChartData = (
     data: Record<string, { date: number; value: number }[]>
   ): Record<string, { date: string; value: number }[]> => {
@@ -220,6 +199,19 @@ export default function ClusterDetails() {
 
   // 📌 Spalten für DataGrid mit Sparkline
   const columns: GridColDef[] = [
+    {
+      field: "details",
+      headerName: "Details",
+      width: 30,
+      renderCell: (params) => (
+        <IconButton
+          onClick={() => handleShowDetails(params.row.id)}
+          sx={{ padding: 0, color: "primary.main" }} // Keine extra Padding, nur Icon klickbar
+        >
+          <FaRegEye size={20} />
+        </IconButton>
+      ),
+    },
     {
       field: "image",
       headerName: "Image",
@@ -331,92 +323,182 @@ export default function ClusterDetails() {
       renderCell: (params) => renderWithNoData(params.value, formatCurrency),
     },
   ];
+  
   return (
-    <Paper elevation={4} sx={{ marginBottom: 2, padding: 4 }}>
-      <Typography
-        sx={{
-          mt: 4,
-          mb: 4,
-          backgroundColor: "primary.main",
-          color: "white",
-          padding: 2,
-        }}
-        variant="h5"
-      >
-        Market Cluster Data
-      </Typography>
-
-      <Typography variant="h4" sx={{ marginBottom: 2 }}>
-        {marketCluster.title}
-      </Typography>
-
-      {/* GRID MARKET CLUSTER */}
-      <Grid container spacing={2}>
-        <Grid size={{ sm: 12, lg: 4 }}>
-          <CustomStackBars data={stackedChartData} />{" "}
-          {/* ✅ KORREKTES FORMAT */}
+    <>
+      <Paper elevation={4} sx={{ marginBottom: 2, padding: 4 }}>
+        <Typography
+          sx={{
+            mt: 4,
+            mb: 4,
+            backgroundColor: "primary.main",
+            color: "white",
+            padding: 2,
+          }}
+          variant="h5"
+        >
+          Market Cluster Data
+        </Typography>
+  
+        <Typography variant="h4" sx={{ marginBottom: 2 }}>
+          {marketCluster.title}
+        </Typography>
+  
+        {/* GRID MARKET CLUSTER */}
+        <Grid container spacing={2}>
+          <Grid size={{ sm: 12, lg: 4 }}>
+            <CustomStackBars data={stackedChartData} />
+          </Grid>
+          <Grid size={{ sm: 12, lg: 4 }}>
+            <Typography variant="h3">
+              Total Revenue:{" "}
+              {new Intl.NumberFormat("en-US", {
+                style: "currency",
+                currency: "USD",
+              }).format(marketCluster.total_revenue)}
+             
+            </Typography>
+          </Grid>
+          <Grid size={{ sm: 12, lg: 4 }}>
+            <CustomBarChart data={barChartData} />
+          </Grid>
         </Grid>
-
-        <Grid size={{ sm: 12, lg: 4 }}>
-          <Typography variant="h3">
-            Total Revenue:{" "}
-            {new Intl.NumberFormat("en-US", {
-              style: "currency",
-              currency: "USD",
-            }).format(marketCluster.total_revenue)}
-          </Typography>
-        </Grid>
-
-        <Grid size={{ sm: 12, lg: 4 }}>
-          <CustomBarChart data={barChartData} />
-        </Grid>
-      </Grid>
-
-      <Typography
-        sx={{
-          mt: 4,
-          mb: 2,
-          backgroundColor: "primary.main",
-          color: "white",
-          padding: 2,
-        }}
-        variant="h5"
-      >
-        Markets in {marketCluster.title}
+  
+        <Typography
+          sx={{
+            mt: 4,
+            mb: 2,
+            backgroundColor: "primary.main",
+            color: "white",
+            padding: 2,
+          }}
+          variant="h5"
+        >
+          Markets in {marketCluster.title}
+        </Typography>
+  
+        {/* ✅ Tabs für die verschiedenen Märkte */}
+        <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+          <Tabs value={tabIndex} onChange={handleTabChange}>
+            {marketCluster.markets.map((market: any, index: number) => (
+              <Tab
+                sx={{ fontSize: 22 }}
+                key={market.id}
+                label={market.keyword}
+              />
+            ))}
+          </Tabs>
+        </Box>
+  
+        {/* ✅ Tab-Inhalte (nur aktives DataGrid anzeigen) */}
+        {marketCluster.markets.map((market: any, index: number) => (
+          <>
+            <Paper
+      elevation={3}
+      sx={{
+        p: 2,
+        my: 2,
+        backgroundColor: "#f5f5f5",
+        borderRadius: 2,
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
+      <Typography variant="h6" sx={{ fontWeight: "bold", mb: 1 }}>
+        🔍 Top Suggestions
       </Typography>
-
-      <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-        <Tabs value={tabIndex} onChange={handleTabChange}>
-        {marketCluster.markets.map((market: any) => (
-  <Tab sx={{ fontSize: 22 }} key={market.id} label={market.keyword} />
-))}
-        </Tabs>
+      <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
+        {market.top_suggestions.split(",").map((suggestion: string, idx: number) => (
+          <Chip key={idx} label={suggestion.trim()} variant="outlined" color="primary" />
+        ))}
       </Box>
-
-      {marketCluster.markets.map((market: any, index: number) => (
-       <Box sx={{ minHeight: 500, width: "100%" }}>
-       <DataGrid
-         rows={market.products.map((product: any) => ({
-           id: product.asin,
-           image: product.image,
-           title: product.title,
-           price: product.price,
-           mainCategory: product.main_category,
-           mainCategoryRank: product.main_category_rank,
-           secondCategory: product.second_category,
-           secondCategoryRank: product.second_category_rank,
-           blm: product.blm,
-           total: product.total,
-           sparkline_data: product.sparkline_data ?? [0],
-         }))}
-         columns={columns}
-         rowHeight={100}
-         pageSizeOptions={[10, 25, 50, 100]}
-         checkboxSelection={false}
-       />
-     </Box>
-     
-      ))}
     </Paper>
+          <Box
+            key={market.id}
+            sx={{
+              minHeight: 500,
+              width: "100%",
+              mt: 3,
+              display: tabIndex === index ? "block" : "none", // ✅ Nur aktiven Tab anzeigen
+            }}
+          >
+            <DataGrid
+              rows={market.products.map((product: any) => ({
+                id: product.asin,
+                image: product.image,
+                title: product.title,
+                price: product.price,
+                mainCategory: product.main_category,
+                mainCategoryRank: product.main_category_rank,
+                secondCategory: product.second_category,
+                secondCategoryRank: product.second_category_rank,
+                blm: product.blm,
+                total: product.total,
+                sparkline_data: product.sparkline_data ?? [0],
+              }))}
+              columns={columns}
+              rowHeight={100}
+              pageSizeOptions={[10, 25, 50, 100]}
+              checkboxSelection={false}
+            />
+            </Box>
+            </>
+        ))}
+      </Paper>
+  
+      {/* ✅ Backdrop für Product Changes (außerhalb der `.map()`-Schleife) */}
+      <Backdrop open={openBackdrop} onClick={handleCloseBackdrop}>
+        <TableContainer
+          component={Paper}
+          sx={{ maxWidth: "80vw", maxHeight: "80vh", overflowY: "auto" }}
+        >
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Change Date</TableCell>
+                <TableCell>Title</TableCell>
+                <TableCell>Price</TableCell>
+                <TableCell>Main Category</TableCell>
+                <TableCell>Sub Category</TableCell>
+                <TableCell>Rank (Main)</TableCell>
+                <TableCell>Rank (Sub)</TableCell>
+                <TableCell>BLM</TableCell>
+                <TableCell>Total Revenue</TableCell>
+                <TableCell>Changes</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {productChanges.length > 0 ? (
+                productChanges.map((change, index) => (
+                  <TableRow key={index}>
+                    <TableCell>{change.change_date}</TableCell>
+                    <TableCell>{change.title || "-"}</TableCell>
+                    <TableCell>
+                      {change.price ? formatCurrency(change.price) : "-"}
+                    </TableCell>
+                    <TableCell>{change.main_category || "-"}</TableCell>
+                    <TableCell>{change.second_category || "-"}</TableCell>
+                    <TableCell>{change.main_category_rank || "-"}</TableCell>
+                    <TableCell>{change.second_category_rank || "-"}</TableCell>
+                    <TableCell>{change.blm || "-"}</TableCell>
+                    <TableCell>
+                      {change.total ? formatCurrency(change.total) : "-"}
+                    </TableCell>
+                    <TableCell>{change.changes || "-"}</TableCell>
+                  </TableRow>
+                ))
+              ) : (
+                <TableRow>
+                  <TableCell colSpan={10} align="center">
+                    No Product Changes Found
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Backdrop>
+    </>
   );
+  
 }

@@ -36,11 +36,22 @@ class MarketOrchestrator:
 
         for product in market.products:
             last_valid_product_change = (
-                db.query(ProductChange)
-                .filter(ProductChange.asin == product.asin, ProductChange.change_date < today)
-                .order_by(ProductChange.change_date.desc())
-                .first()
-            )
+            db.query(ProductChange)
+            .filter(ProductChange.asin == product.asin, ProductChange.change_date < today)
+            .order_by(ProductChange.change_date.desc())
+            .first())
+
+              # Fallback: Falls keine alten Einträge vorhanden sind, den neuesten nehmen
+            if not last_valid_product_change:
+                last_valid_product_change = (
+                    db.query(ProductChange)
+                    .filter(ProductChange.asin == product.asin)
+                    .order_by(ProductChange.change_date.desc())
+                    .first()
+                )
+
+        
+
 
             if last_valid_product_change and last_valid_product_change.total is not None:
                 logging.info(f"✅ Produkt {product.asin} trägt {last_valid_product_change.total:.2f}€ bei")

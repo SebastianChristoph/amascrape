@@ -175,6 +175,27 @@ class MarketService {
       return null;
     }
   }
+
+  static async getProductChanges(asin: string): Promise<any[]> {
+    try {
+      const response = await fetch(`${API_URL}/markets/product-changes/${asin}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+  
+      if (!response.ok) {
+        throw new Error("Fehler beim Abrufen der Produktänderungen.");
+      }
+  
+      return await response.json();
+    } catch (error) {
+      console.error("Fehler beim Abrufen der Produktänderungen:", error);
+      return [];
+    }
+  }
+  
 }
 
 export default MarketService;

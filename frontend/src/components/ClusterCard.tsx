@@ -1,4 +1,5 @@
 import {
+  Alert,
   Box,
   Button,
   Card,
@@ -12,6 +13,7 @@ import {
   DialogContentText,
   DialogTitle,
   IconButton,
+  LinearProgress,
   TextField,
   Typography,
 } from "@mui/material";
@@ -35,7 +37,7 @@ interface ClusterCardProps {
   setMarketClusters: React.Dispatch<React.SetStateAction<any[]>>;
   setDeletingCluster: React.Dispatch<React.SetStateAction<number | null>>;
   totalRevenue: number;
-  fetchMarketClusters: () => void; // ✅ Hinzugefügt, um Daten nach Löschung zu aktualisieren
+  fetchMarketClusters: () => void;
 }
 
 const ClusterCard: React.FC<ClusterCardProps> = ({
@@ -45,85 +47,40 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
   setMarketClusters,
   setDeletingCluster,
   totalRevenue,
-  fetchMarketClusters, // ✅ Neue Prop für das Aktualisieren der Market-Cluster
+  fetchMarketClusters,
 }) => {
   const { showSnackbar } = useSnackbar();
   const [openEditDialog, setOpenEditDialog] = useState(false);
   const [newTitle, setNewTitle] = useState(cluster.title);
   const [openConfirmDialog, setOpenConfirmDialog] = useState(false);
   const [sparklineData, setSparklineData] = useState<number[]>([]);
-  const [loading, setLoading] = useState<boolean>(true); // ✅ Ladezustand für Sparkline
+  const [loadingSparkline, setLoadingSparkline] = useState<boolean>(true);
 
-  // ✅ Holt Sparkline-Daten
+  // ✅ Lade Sparkline-Daten nur, wenn `totalRevenue > 0`
   useEffect(() => {
     async function fetchSparklineData() {
-      try {
-        const response = await ChartDataService.GetSparklineForMarketCluster(
-          cluster.id
-        );
-        if (response.length > 0) {
-          setSparklineData(response);
-          console.log("[CLUSTER CARD] Geladene Sparkline-Daten:", response);
-        } else {
-          console.error("Keine Sparkline-Daten erhalten.");
-          showSnackbar("Fehler beim Laden der Sparkline-Daten.");
+      if (totalRevenue > 0) {
+        try {
+          const response = await ChartDataService.GetSparklineForMarketCluster(
+            cluster.id
+          );
+          if (response.length > 0) {
+            setSparklineData(response);
+            console.log("[CLUSTER CARD] Geladene Sparkline-Daten:", response);
+          } else {
+            console.error("Keine Sparkline-Daten erhalten.");
+            showSnackbar("Fehler beim Laden der Sparkline-Daten.");
+          }
+        } catch (error) {
+          console.error("Fehler beim Abrufen der Sparkline-Daten:", error);
+          showSnackbar("Fehler beim Abrufen der Sparkline-Daten.");
+        } finally {
+          setLoadingSparkline(false);
         }
-      } catch (error) {
-        console.error("Fehler beim Abrufen der Sparkline-Daten:", error);
-        showSnackbar("Fehler beim Abrufen der Sparkline-Daten.");
-      } finally {
-        setLoading(false);
       }
     }
     fetchSparklineData();
-  }, [cluster.id]);
-
-  // ✅ Bearbeiten-Dialog öffnen
-  const handleEditClick = (event: React.MouseEvent) => {
-    event.stopPropagation();
-    setOpenEditDialog(true);
-  };
-
-  // ✅ Löschen-Dialog öffnen
-  const handleDeleteClick = (event: React.MouseEvent) => {
-    event.stopPropagation();
-    setOpenConfirmDialog(true);
-  };
-
-  // ✅ Market Cluster aktualisieren
-  const handleUpdateCluster = async () => {
-    const response = await MarketService.updateMarketCluster(cluster.id, {
-      title: newTitle,
-    });
-
-    if (response.success) {
-      setMarketClusters((prevClusters) =>
-        prevClusters.map((c) =>
-          c.id === cluster.id ? { ...c, title: newTitle } : c
-        )
-      );
-      showSnackbar("Market Cluster erfolgreich aktualisiert.");
-      setOpenEditDialog(false);
-    } else {
-      showSnackbar("Fehler beim Aktualisieren des Market Clusters.", "error");
-    }
-  };
-
-  // ✅ Market Cluster löschen
-  const handleConfirmDelete = async () => {
-    setDeletingCluster(cluster.id);
-
-    const success = await MarketService.deleteMarketCluster(cluster.id);
-    if (success) {
-      showSnackbar("Market Cluster erfolgreich gelöscht.");
-      fetchMarketClusters(); // 🚀 Frische Daten nach dem Löschen abrufen
-    } else {
-      showSnackbar("Fehler beim Löschen des Market Clusters.", "error");
-    }
-
-    setDeletingCluster(null);
-    setOpenConfirmDialog(false);
-  };
+  }, [cluster.id, totalRevenue]);
 
   return (
     <motion.div
@@ -151,17 +108,17 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
           title={<Typography variant="h6">{cluster.title}</Typography>}
           action={
             <>
-              <IconButton color="primary" onClick={handleEditClick}>
+              <IconButton color="primary" onClick={() => setOpenEditDialog(true)}>
                 <MdEdit size={24} />
               </IconButton>
-              <IconButton color="primary" onClick={handleDeleteClick}>
+              <IconButton color="primary" onClick={() => setOpenConfirmDialog(true)}>
                 <MdDelete size={24} />
               </IconButton>
             </>
           }
         />
 
-        <CardContent sx={{ minHeight: 200 }}>
+        <CardContent sx={{ minHeight: 300 }}>
           <Typography variant="body2" color="textSecondary">
             Included markets:
           </Typography>
@@ -176,66 +133,39 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
             )}
           </Box>
 
-          <Typography sx={{ mt: 4 }} variant="h3">
-            Total Revenue:{" "}
-            {new Intl.NumberFormat("en-US", {
-              style: "currency",
-              currency: "USD",
-            }).format(Number(totalRevenue))}
-          </Typography>
+          {/* ✅ Falls `totalRevenue === 0` → Zeige Alert */}
+          {totalRevenue === 0 ? (
+            <Box>
+            <Alert severity="info" sx={{ mt: 4 }}>
+              Markets and Products wait for initial scraping, please come back later or click for a first impression
+            </Alert>
+              <LinearProgress />
+              </Box>
+          ) : (
+            <>
+              {/* ✅ Falls Umsatz vorhanden → Zeige Wert + Sparkline */}
+              <Typography sx={{ mt: 4 }} variant="h3">
+                Total Revenue:{" "}
+                {new Intl.NumberFormat("en-US", {
+                  style: "currency",
+                  currency: "USD",
+                }).format(Number(totalRevenue))}
+              </Typography>
 
-          {/* ✅ Zeigt Sparkline Chart */}
-          <Box sx={{ mt: 4, width: "50%", height: 50 }}>
-            {loading ? (
-              <CircularProgress size={40} color="primary" />
-            ) : (
-              <CustomSparkLine data={sparklineData} />
-            )}
-          </Box>
+              {/* ✅ Sparkline nur anzeigen, wenn `totalRevenue > 0` */}
+              {totalRevenue > 0 && (
+                <Box sx={{ mt: 2, width: "50%", height: 50 }}>
+                  {loadingSparkline ? (
+                    <CircularProgress size={30} color="primary" />
+                  ) : (
+                    <CustomSparkLine data={sparklineData} />
+                  )}
+                </Box>
+              )}
+            </>
+          )}
         </CardContent>
       </Card>
-
-      {/* Dialog für Bearbeiten */}
-      <Dialog open={openEditDialog} onClose={() => setOpenEditDialog(false)}>
-        <DialogTitle>Market Cluster bearbeiten</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            Gib einen neuen Namen für das Market Cluster ein.
-          </DialogContentText>
-          <TextField
-            fullWidth
-            label="Neuer Name"
-            variant="outlined"
-            value={newTitle}
-            onChange={(e) => setNewTitle(e.target.value)}
-            sx={{ mt: 2 }}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => setOpenEditDialog(false)}>Abbrechen</Button>
-          <Button onClick={handleUpdateCluster} color="primary">
-            Speichern
-          </Button>
-        </DialogActions>
-      </Dialog>
-
-      {/* ✅ Dialog für Löschen */}
-      <Dialog open={openConfirmDialog} onClose={() => setOpenConfirmDialog(false)}>
-        <DialogTitle>Market Cluster löschen?</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            Bist du sicher, dass du dieses Market Cluster löschen möchtest?
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => setOpenConfirmDialog(false)} color="primary">
-            Abbrechen
-          </Button>
-          <Button onClick={handleConfirmDelete} color="error">
-            Löschen
-          </Button>
-        </DialogActions>
-      </Dialog>
     </motion.div>
   );
 };

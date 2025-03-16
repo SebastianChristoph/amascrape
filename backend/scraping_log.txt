@@ -1,1 +1,464 @@
-2025-03-16 21:43:29,391 [INFO] 🚀 Product Orchestrator gestartet.
+2025-03-16 22:15:53,880 [INFO] 🚀 Product Orchestrator gestartet.
+2025-03-16 22:16:01,640 [INFO] ✅ Verbindung zu Amazon erfolgreich hergestellt!
+2025-03-16 22:16:01,641 [INFO] 🍪 Setze Cookies...
+2025-03-16 22:16:01,665 [INFO] ✅ Cookies gesetzt!
+2025-03-16 22:16:01,665 [INFO] 🚀 Starte Product-Update...
+2025-03-16 22:16:01,700 [INFO] 
+🔍 Überprüfe Produkt [1/114]: B07978VPPH https://www.amazon.com/dp/B07978VPPH?language=en_US
+2025-03-16 22:16:17,491 [INFO] ✅ Keine Änderungen für B07978VPPH.
+2025-03-16 22:16:17,512 [INFO] ✅ last_time_scraped für B07978VPPH erfolgreich aktualisiert.
+2025-03-16 22:16:17,513 [INFO] 
+🔍 Überprüfe Produkt [2/114]: B0DQF8FW57 https://www.amazon.com/dp/B0DQF8FW57?language=en_US
+2025-03-16 22:16:31,642 [INFO] ✅ Keine Änderungen für B0DQF8FW57.
+2025-03-16 22:16:31,666 [INFO] ✅ last_time_scraped für B0DQF8FW57 erfolgreich aktualisiert.
+2025-03-16 22:16:31,668 [INFO] 
+🔍 Überprüfe Produkt [3/114]: B002DYIZEE https://www.amazon.com/dp/B002DYIZEE?language=en_US
+2025-03-16 22:16:45,328 [INFO] ✅ Keine Änderungen für B002DYIZEE.
+2025-03-16 22:16:45,342 [INFO] ✅ last_time_scraped für B002DYIZEE erfolgreich aktualisiert.
+2025-03-16 22:16:45,343 [INFO] 
+🔍 Überprüfe Produkt [4/114]: B085Z9P87K https://www.amazon.com/dp/B085Z9P87K?language=en_US
+2025-03-16 22:16:58,572 [INFO] ✅ Keine Änderungen für B085Z9P87K.
+2025-03-16 22:16:58,591 [INFO] ✅ last_time_scraped für B085Z9P87K erfolgreich aktualisiert.
+2025-03-16 22:16:58,596 [INFO] 
+🔍 Überprüfe Produkt [5/114]: B00GL2HMES https://www.amazon.com/dp/B00GL2HMES?language=en_US
+2025-03-16 22:17:12,103 [INFO] ✅ Keine Änderungen für B00GL2HMES.
+2025-03-16 22:17:12,116 [INFO] ✅ last_time_scraped für B00GL2HMES erfolgreich aktualisiert.
+2025-03-16 22:17:12,117 [INFO] 
+🔍 Überprüfe Produkt [6/114]: B002DYIZEO https://www.amazon.com/dp/B002DYIZEO?language=en_US
+2025-03-16 22:17:25,778 [INFO] ✅ Keine Änderungen für B002DYIZEO.
+2025-03-16 22:17:25,794 [INFO] ✅ last_time_scraped für B002DYIZEO erfolgreich aktualisiert.
+2025-03-16 22:17:25,796 [INFO] 
+🔍 Überprüfe Produkt [7/114]: B00E9M4XFI https://www.amazon.com/dp/B00E9M4XFI?language=en_US
+2025-03-16 22:17:39,281 [INFO] ✅ Keine Änderungen für B00E9M4XFI.
+2025-03-16 22:17:39,317 [INFO] ✅ last_time_scraped für B00E9M4XFI erfolgreich aktualisiert.
+2025-03-16 22:17:39,318 [INFO] 
+🔍 Überprüfe Produkt [8/114]: B000GIQS0W https://www.amazon.com/dp/B000GIQS0W?language=en_US
+2025-03-16 22:17:52,610 [INFO] ✅ Keine Änderungen für B000GIQS0W.
+2025-03-16 22:17:52,627 [INFO] ✅ last_time_scraped für B000GIQS0W erfolgreich aktualisiert.
+2025-03-16 22:17:52,629 [INFO] 
+🔍 Überprüfe Produkt [9/114]: B073V45GLR https://www.amazon.com/dp/B073V45GLR?language=en_US
+2025-03-16 22:18:04,658 [INFO] ✅ Keine Änderungen für B073V45GLR.
+2025-03-16 22:18:04,676 [INFO] ✅ last_time_scraped für B073V45GLR erfolgreich aktualisiert.
+2025-03-16 22:18:04,678 [INFO] 
+🔍 Überprüfe Produkt [10/114]: B0CN8MZ9H6 https://www.amazon.com/dp/B0CN8MZ9H6?language=en_US
+2025-03-16 22:18:17,629 [INFO] ✅ Keine Änderungen für B0CN8MZ9H6.
+2025-03-16 22:18:17,667 [INFO] ✅ last_time_scraped für B0CN8MZ9H6 erfolgreich aktualisiert.
+2025-03-16 22:18:17,669 [INFO] 
+🔍 Überprüfe Produkt [11/114]: B00ULZF5HC https://www.amazon.com/dp/B00ULZF5HC?language=en_US
+2025-03-16 22:18:32,776 [INFO] ✅ Keine Änderungen für B00ULZF5HC.
+2025-03-16 22:18:32,789 [INFO] ✅ last_time_scraped für B00ULZF5HC erfolgreich aktualisiert.
+2025-03-16 22:18:32,790 [INFO] 
+🔍 Überprüfe Produkt [12/114]: B01LYFAGXI https://www.amazon.com/dp/B01LYFAGXI?language=en_US
+2025-03-16 22:18:44,097 [INFO] ✅ Keine Änderungen für B01LYFAGXI.
+2025-03-16 22:18:44,111 [INFO] ✅ last_time_scraped für B01LYFAGXI erfolgreich aktualisiert.
+2025-03-16 22:18:44,112 [INFO] 
+🔍 Überprüfe Produkt [13/114]: B09VCTVH98 https://www.amazon.com/dp/B09VCTVH98?language=en_US
+2025-03-16 22:18:56,636 [INFO] ✅ Keine Änderungen für B09VCTVH98.
+2025-03-16 22:18:56,676 [INFO] ✅ last_time_scraped für B09VCTVH98 erfolgreich aktualisiert.
+2025-03-16 22:18:56,677 [INFO] 
+🔍 Überprüfe Produkt [14/114]: B0BT23VBLJ https://www.amazon.com/dp/B0BT23VBLJ?language=en_US
+2025-03-16 22:19:10,175 [INFO] ✅ Keine Änderungen für B0BT23VBLJ.
+2025-03-16 22:19:10,211 [INFO] ✅ last_time_scraped für B0BT23VBLJ erfolgreich aktualisiert.
+2025-03-16 22:19:10,213 [INFO] 
+🔍 Überprüfe Produkt [15/114]: B0186H4VMG https://www.amazon.com/dp/B0186H4VMG?language=en_US
+2025-03-16 22:19:22,884 [INFO] ✅ Keine Änderungen für B0186H4VMG.
+2025-03-16 22:19:22,914 [INFO] ✅ last_time_scraped für B0186H4VMG erfolgreich aktualisiert.
+2025-03-16 22:19:22,916 [INFO] 
+🔍 Überprüfe Produkt [16/114]: B0DYV7N76M https://www.amazon.com/dp/B0DYV7N76M?language=en_US
+2025-03-16 22:19:34,502 [INFO] ✅ Keine Änderungen für B0DYV7N76M.
+2025-03-16 22:19:34,535 [INFO] ✅ last_time_scraped für B0DYV7N76M erfolgreich aktualisiert.
+2025-03-16 22:19:34,536 [INFO] 
+🔍 Überprüfe Produkt [17/114]: B0DKJWGQPM https://www.amazon.com/dp/B0DKJWGQPM?language=en_US
+2025-03-16 22:19:47,316 [INFO] ✅ Keine Änderungen für B0DKJWGQPM.
+2025-03-16 22:19:47,356 [INFO] ✅ last_time_scraped für B0DKJWGQPM erfolgreich aktualisiert.
+2025-03-16 22:19:47,357 [INFO] 
+🔍 Überprüfe Produkt [18/114]: B0BZGDKLFN https://www.amazon.com/dp/B0BZGDKLFN?language=en_US
+2025-03-16 22:19:58,663 [INFO] ✅ Keine Änderungen für B0BZGDKLFN.
+2025-03-16 22:19:58,702 [INFO] ✅ last_time_scraped für B0BZGDKLFN erfolgreich aktualisiert.
+2025-03-16 22:19:58,704 [INFO] 
+🔍 Überprüfe Produkt [19/114]: B073ZLDDW2 https://www.amazon.com/dp/B073ZLDDW2?language=en_US
+2025-03-16 22:20:11,861 [INFO] ✅ Keine Änderungen für B073ZLDDW2.
+2025-03-16 22:20:11,893 [INFO] ✅ last_time_scraped für B073ZLDDW2 erfolgreich aktualisiert.
+2025-03-16 22:20:11,895 [INFO] 
+🔍 Überprüfe Produkt [20/114]: B0DWFTY8B6 https://www.amazon.com/dp/B0DWFTY8B6?language=en_US
+2025-03-16 22:20:21,776 [INFO] ✅ Keine Änderungen für B0DWFTY8B6.
+2025-03-16 22:20:21,795 [INFO] ✅ last_time_scraped für B0DWFTY8B6 erfolgreich aktualisiert.
+2025-03-16 22:20:21,796 [INFO] 
+🔍 Überprüfe Produkt [21/114]: B0DWFV57C8 https://www.amazon.com/dp/B0DWFV57C8?language=en_US
+2025-03-16 22:20:30,544 [INFO] ✅ Keine Änderungen für B0DWFV57C8.
+2025-03-16 22:20:30,597 [INFO] ✅ last_time_scraped für B0DWFV57C8 erfolgreich aktualisiert.
+2025-03-16 22:20:30,599 [INFO] 
+🔍 Überprüfe Produkt [22/114]: B0C4899NZF https://www.amazon.com/dp/B0C4899NZF?language=en_US
+2025-03-16 22:20:42,804 [INFO] ✅ Keine Änderungen für B0C4899NZF.
+2025-03-16 22:20:42,848 [INFO] ✅ last_time_scraped für B0C4899NZF erfolgreich aktualisiert.
+2025-03-16 22:20:42,850 [INFO] 
+🔍 Überprüfe Produkt [23/114]: B0DG1RR6KH https://www.amazon.com/dp/B0DG1RR6KH?language=en_US
+2025-03-16 22:20:53,743 [INFO] ✅ Keine Änderungen für B0DG1RR6KH.
+2025-03-16 22:20:53,774 [INFO] ✅ last_time_scraped für B0DG1RR6KH erfolgreich aktualisiert.
+2025-03-16 22:20:53,775 [INFO] 
+🔍 Überprüfe Produkt [24/114]: B0CLS8WY25 https://www.amazon.com/dp/B0CLS8WY25?language=en_US
+2025-03-16 22:21:06,680 [INFO] ✅ Keine Änderungen für B0CLS8WY25.
+2025-03-16 22:21:06,711 [INFO] ✅ last_time_scraped für B0CLS8WY25 erfolgreich aktualisiert.
+2025-03-16 22:21:06,712 [INFO] 
+🔍 Überprüfe Produkt [25/114]: B0DNK78CPY https://www.amazon.com/dp/B0DNK78CPY?language=en_US
+2025-03-16 22:21:19,625 [INFO] ✅ Keine Änderungen für B0DNK78CPY.
+2025-03-16 22:21:19,645 [INFO] ✅ last_time_scraped für B0DNK78CPY erfolgreich aktualisiert.
+2025-03-16 22:21:19,646 [INFO] 
+🔍 Überprüfe Produkt [26/114]: B0D56Y4TM9 https://www.amazon.com/dp/B0D56Y4TM9?language=en_US
+2025-03-16 22:21:27,953 [INFO] ✅ Keine Änderungen für B0D56Y4TM9.
+2025-03-16 22:21:27,994 [INFO] ✅ last_time_scraped für B0D56Y4TM9 erfolgreich aktualisiert.
+2025-03-16 22:21:27,996 [INFO] 
+🔍 Überprüfe Produkt [27/114]: B004GXV2TU https://www.amazon.com/dp/B004GXV2TU?language=en_US
+2025-03-16 22:21:45,328 [INFO] ✅ Keine Änderungen für B004GXV2TU.
+2025-03-16 22:21:45,365 [INFO] ✅ last_time_scraped für B004GXV2TU erfolgreich aktualisiert.
+2025-03-16 22:21:45,365 [INFO] 
+🔍 Überprüfe Produkt [28/114]: B0D9RZ7RV7 https://www.amazon.com/dp/B0D9RZ7RV7?language=en_US
+2025-03-16 22:21:54,079 [INFO] ✅ Keine Änderungen für B0D9RZ7RV7.
+2025-03-16 22:21:54,121 [INFO] ✅ last_time_scraped für B0D9RZ7RV7 erfolgreich aktualisiert.
+2025-03-16 22:21:54,122 [INFO] 
+🔍 Überprüfe Produkt [29/114]: B0D9RYBP7V https://www.amazon.com/dp/B0D9RYBP7V?language=en_US
+2025-03-16 22:22:02,999 [INFO] ✅ Keine Änderungen für B0D9RYBP7V.
+2025-03-16 22:22:03,016 [INFO] ✅ last_time_scraped für B0D9RYBP7V erfolgreich aktualisiert.
+2025-03-16 22:22:03,017 [INFO] 
+🔍 Überprüfe Produkt [30/114]: B0D9RX2BRQ https://www.amazon.com/dp/B0D9RX2BRQ?language=en_US
+2025-03-16 22:22:11,467 [INFO] ✅ Keine Änderungen für B0D9RX2BRQ.
+2025-03-16 22:22:11,497 [INFO] ✅ last_time_scraped für B0D9RX2BRQ erfolgreich aktualisiert.
+2025-03-16 22:22:11,498 [INFO] 
+🔍 Überprüfe Produkt [31/114]: B0BGLBX4Q9 https://www.amazon.com/dp/B0BGLBX4Q9?language=en_US
+2025-03-16 22:22:20,444 [INFO] ✅ Keine Änderungen für B0BGLBX4Q9.
+2025-03-16 22:22:20,458 [INFO] ✅ last_time_scraped für B0BGLBX4Q9 erfolgreich aktualisiert.
+2025-03-16 22:22:20,459 [INFO] 
+🔍 Überprüfe Produkt [32/114]: B0CXB52292 https://www.amazon.com/dp/B0CXB52292?language=en_US
+2025-03-16 22:22:31,097 [INFO] ✅ Keine Änderungen für B0CXB52292.
+2025-03-16 22:22:31,113 [INFO] ✅ last_time_scraped für B0CXB52292 erfolgreich aktualisiert.
+2025-03-16 22:22:31,114 [INFO] 
+🔍 Überprüfe Produkt [33/114]: B0CZ4JYB9M https://www.amazon.com/dp/B0CZ4JYB9M?language=en_US
+2025-03-16 22:22:43,705 [INFO] ✅ Keine Änderungen für B0CZ4JYB9M.
+2025-03-16 22:22:43,721 [INFO] ✅ last_time_scraped für B0CZ4JYB9M erfolgreich aktualisiert.
+2025-03-16 22:22:43,722 [INFO] 
+🔍 Überprüfe Produkt [34/114]: B0D56L3DHM https://www.amazon.com/dp/B0D56L3DHM?language=en_US
+2025-03-16 22:22:53,300 [WARNING] ❌ Fehler beim Scrapen von B0D56L3DHM, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-16 22:22:53,317 [INFO] ✅ last_time_scraped für B0D56L3DHM erfolgreich aktualisiert.
+2025-03-16 22:22:53,318 [INFO] 
+🔍 Überprüfe Produkt [35/114]: B0D56L4RG3 https://www.amazon.com/dp/B0D56L4RG3?language=en_US
+2025-03-16 22:23:02,663 [WARNING] ❌ Fehler beim Scrapen von B0D56L4RG3, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-16 22:23:02,714 [INFO] ✅ last_time_scraped für B0D56L4RG3 erfolgreich aktualisiert.
+2025-03-16 22:23:02,716 [INFO] 
+🔍 Überprüfe Produkt [36/114]: B0D56L7XGT https://www.amazon.com/dp/B0D56L7XGT?language=en_US
+2025-03-16 22:23:11,520 [WARNING] ❌ Fehler beim Scrapen von B0D56L7XGT, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-16 22:23:11,532 [INFO] ✅ last_time_scraped für B0D56L7XGT erfolgreich aktualisiert.
+2025-03-16 22:23:11,533 [INFO] 
+🔍 Überprüfe Produkt [37/114]: B0CSDY3XV4 https://www.amazon.com/dp/B0CSDY3XV4?language=en_US
+2025-03-16 22:23:22,466 [INFO] ⚡ Änderungen erkannt für B0CSDY3XV4: title changed, blm geändert: None → 200, total geändert: None → 30400.0
+2025-03-16 22:23:22,493 [INFO] ✅ last_time_scraped für B0CSDY3XV4 erfolgreich aktualisiert.
+2025-03-16 22:23:22,494 [INFO] 
+🔍 Überprüfe Produkt [38/114]: B0CSDWT13K https://www.amazon.com/dp/B0CSDWT13K?language=en_US
+2025-03-16 22:23:33,709 [INFO] ⚡ Änderungen erkannt für B0CSDWT13K: title changed, blm geändert: None → 100, total geändert: None → 21999.0
+2025-03-16 22:23:33,742 [INFO] ✅ last_time_scraped für B0CSDWT13K erfolgreich aktualisiert.
+2025-03-16 22:23:33,743 [INFO] 
+🔍 Überprüfe Produkt [39/114]: B0CSDY6LJ8 https://www.amazon.com/dp/B0CSDY6LJ8?language=en_US
+2025-03-16 22:23:44,925 [INFO] ⚡ Änderungen erkannt für B0CSDY6LJ8: title changed, blm geändert: None → 50, total geändert: None → 14285.0
+2025-03-16 22:23:44,956 [INFO] ✅ last_time_scraped für B0CSDY6LJ8 erfolgreich aktualisiert.
+2025-03-16 22:23:44,957 [INFO] 
+🔍 Überprüfe Produkt [40/114]: B0DSQZX1C5 https://www.amazon.com/dp/B0DSQZX1C5?language=en_US
+2025-03-16 22:23:55,846 [INFO] ⚡ Änderungen erkannt für B0DSQZX1C5: title changed
+2025-03-16 22:23:55,892 [INFO] ✅ last_time_scraped für B0DSQZX1C5 erfolgreich aktualisiert.
+2025-03-16 22:23:55,893 [INFO] 
+🔍 Überprüfe Produkt [41/114]: B0DW1Q6JY1 https://www.amazon.com/dp/B0DW1Q6JY1?language=en_US
+2025-03-16 22:24:07,522 [INFO] ⚡ Änderungen erkannt für B0DW1Q6JY1: title changed
+2025-03-16 22:24:07,540 [INFO] ✅ last_time_scraped für B0DW1Q6JY1 erfolgreich aktualisiert.
+2025-03-16 22:24:07,541 [INFO] 
+🔍 Überprüfe Produkt [42/114]: B0CLLV68VK https://www.amazon.com/dp/B0CLLV68VK?language=en_US
+2025-03-16 22:24:18,647 [INFO] ⚡ Änderungen erkannt für B0CLLV68VK: title changed, blm geändert: None → 100, total geändert: None → 28899.0
+2025-03-16 22:24:18,677 [INFO] ✅ last_time_scraped für B0CLLV68VK erfolgreich aktualisiert.
+2025-03-16 22:24:18,679 [INFO] 
+🔍 Überprüfe Produkt [43/114]: B0CSZ8BQVZ https://www.amazon.com/dp/B0CSZ8BQVZ?language=en_US
+2025-03-16 22:24:28,188 [INFO] ⚡ Änderungen erkannt für B0CSZ8BQVZ: title changed
+2025-03-16 22:24:28,207 [INFO] ✅ last_time_scraped für B0CSZ8BQVZ erfolgreich aktualisiert.
+2025-03-16 22:24:28,208 [INFO] 
+🔍 Überprüfe Produkt [44/114]: B0CSZB2GVJ https://www.amazon.com/dp/B0CSZB2GVJ?language=en_US
+2025-03-16 22:24:38,852 [INFO] ⚡ Änderungen erkannt für B0CSZB2GVJ: title changed
+2025-03-16 22:24:38,867 [INFO] ✅ last_time_scraped für B0CSZB2GVJ erfolgreich aktualisiert.
+2025-03-16 22:24:38,868 [INFO] 
+🔍 Überprüfe Produkt [45/114]: B0CQKBV5WY https://www.amazon.com/dp/B0CQKBV5WY?language=en_US
+2025-03-16 22:24:48,300 [WARNING] ❌ Fehler beim Scrapen von B0CQKBV5WY, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-16 22:24:48,314 [INFO] ✅ last_time_scraped für B0CQKBV5WY erfolgreich aktualisiert.
+2025-03-16 22:24:48,315 [INFO] 
+🔍 Überprüfe Produkt [46/114]: B0CSF3QRW7 https://www.amazon.com/dp/B0CSF3QRW7?language=en_US
+2025-03-16 22:24:58,495 [INFO] ⚡ Änderungen erkannt für B0CSF3QRW7: title changed
+2025-03-16 22:24:58,530 [INFO] ✅ last_time_scraped für B0CSF3QRW7 erfolgreich aktualisiert.
+2025-03-16 22:24:58,536 [INFO] 
+🔍 Überprüfe Produkt [47/114]: B0DSQMJV9Y https://www.amazon.com/dp/B0DSQMJV9Y?language=en_US
+2025-03-16 22:25:09,097 [INFO] ⚡ Änderungen erkannt für B0DSQMJV9Y: title changed
+2025-03-16 22:25:09,130 [INFO] ✅ last_time_scraped für B0DSQMJV9Y erfolgreich aktualisiert.
+2025-03-16 22:25:09,131 [INFO] 
+🔍 Überprüfe Produkt [48/114]: B0DFPGMGD2 https://www.amazon.com/dp/B0DFPGMGD2?language=en_US
+2025-03-16 22:25:20,643 [INFO] ⚡ Änderungen erkannt für B0DFPGMGD2: title changed, price geändert: None → 179.99
+2025-03-16 22:25:20,676 [INFO] ✅ last_time_scraped für B0DFPGMGD2 erfolgreich aktualisiert.
+2025-03-16 22:25:20,677 [INFO] 
+🔍 Überprüfe Produkt [49/114]: B0CSFVWW4B https://www.amazon.com/dp/B0CSFVWW4B?language=en_US
+2025-03-16 22:25:31,669 [INFO] ⚡ Änderungen erkannt für B0CSFVWW4B: title changed
+2025-03-16 22:25:31,694 [INFO] ✅ last_time_scraped für B0CSFVWW4B erfolgreich aktualisiert.
+2025-03-16 22:25:31,695 [INFO] 
+🔍 Überprüfe Produkt [50/114]: B0CQKD7NRS https://www.amazon.com/dp/B0CQKD7NRS?language=en_US
+2025-03-16 22:25:43,112 [INFO] ⚡ Änderungen erkannt für B0CQKD7NRS: title changed, blm geändert: None → 50, total geändert: None → 16499.5
+2025-03-16 22:25:43,142 [INFO] ✅ last_time_scraped für B0CQKD7NRS erfolgreich aktualisiert.
+2025-03-16 22:25:43,143 [INFO] 
+🔍 Überprüfe Produkt [51/114]: B0CTJ1HTYR https://www.amazon.com/dp/B0CTJ1HTYR?language=en_US
+2025-03-16 22:25:53,102 [INFO] ⚡ Änderungen erkannt für B0CTJ1HTYR: title changed
+2025-03-16 22:25:53,157 [INFO] ✅ last_time_scraped für B0CTJ1HTYR erfolgreich aktualisiert.
+2025-03-16 22:25:53,158 [INFO] 
+🔍 Überprüfe Produkt [52/114]: B0CS2LSCPB https://www.amazon.com/dp/B0CS2LSCPB?language=en_US
+2025-03-16 22:26:04,181 [INFO] ⚡ Änderungen erkannt für B0CS2LSCPB: title changed
+2025-03-16 22:26:04,203 [INFO] ✅ last_time_scraped für B0CS2LSCPB erfolgreich aktualisiert.
+2025-03-16 22:26:04,205 [INFO] 
+🔍 Überprüfe Produkt [53/114]: B0DFPGMQJZ https://www.amazon.com/dp/B0DFPGMQJZ?language=en_US
+2025-03-16 22:26:13,356 [INFO] ⚡ Änderungen erkannt für B0DFPGMQJZ: title changed, price geändert: None → 179.99
+2025-03-16 22:26:13,373 [INFO] ✅ last_time_scraped für B0DFPGMQJZ erfolgreich aktualisiert.
+2025-03-16 22:26:13,374 [INFO] 
+🔍 Überprüfe Produkt [54/114]: B0DSR2SM8R https://www.amazon.com/dp/B0DSR2SM8R?language=en_US
+2025-03-16 22:26:24,047 [INFO] ⚡ Änderungen erkannt für B0DSR2SM8R: title changed
+2025-03-16 22:26:24,083 [INFO] ✅ last_time_scraped für B0DSR2SM8R erfolgreich aktualisiert.
+2025-03-16 22:26:24,085 [INFO] 
+🔍 Überprüfe Produkt [55/114]: B0DN2PH8W9 https://www.amazon.com/dp/B0DN2PH8W9?language=en_US
+2025-03-16 22:26:36,455 [INFO] ⚡ Änderungen erkannt für B0DN2PH8W9: title changed, price geändert: None → 188.88
+2025-03-16 22:26:36,469 [INFO] ✅ last_time_scraped für B0DN2PH8W9 erfolgreich aktualisiert.
+2025-03-16 22:26:36,470 [INFO] 
+🔍 Überprüfe Produkt [56/114]: B0DGDGBLZS https://www.amazon.com/dp/B0DGDGBLZS?language=en_US
+2025-03-16 22:26:48,653 [INFO] ⚡ Änderungen erkannt für B0DGDGBLZS: title changed, price geändert: None → 188.88
+2025-03-16 22:26:48,694 [INFO] ✅ last_time_scraped für B0DGDGBLZS erfolgreich aktualisiert.
+2025-03-16 22:26:48,695 [INFO] 
+🔍 Überprüfe Produkt [57/114]: B0DMDZHFZW https://www.amazon.com/dp/B0DMDZHFZW?language=en_US
+2025-03-16 22:27:00,257 [INFO] ⚡ Änderungen erkannt für B0DMDZHFZW: title changed, price geändert: None → 188.88
+2025-03-16 22:27:00,290 [INFO] ✅ last_time_scraped für B0DMDZHFZW erfolgreich aktualisiert.
+2025-03-16 22:27:00,291 [INFO] 
+🔍 Überprüfe Produkt [58/114]: B086MY7JS2 https://www.amazon.com/dp/B086MY7JS2?language=en_US
+2025-03-16 22:27:14,030 [INFO] ⚡ Änderungen erkannt für B086MY7JS2: title changed, price geändert: None → 39.99, blm geändert: None → 200, total geändert: None → 7998.0
+2025-03-16 22:27:14,046 [INFO] ✅ last_time_scraped für B086MY7JS2 erfolgreich aktualisiert.
+2025-03-16 22:27:14,047 [INFO] 
+🔍 Überprüfe Produkt [59/114]: B008PAIDO2 https://www.amazon.com/dp/B008PAIDO2?language=en_US
+2025-03-16 22:27:28,076 [INFO] ⚡ Änderungen erkannt für B008PAIDO2: blm geändert: None → 400, total geändert: None → 3996.0
+2025-03-16 22:27:28,115 [INFO] ✅ last_time_scraped für B008PAIDO2 erfolgreich aktualisiert.
+2025-03-16 22:27:28,117 [INFO] 
+🔍 Überprüfe Produkt [60/114]: B081ZMDBW8 https://www.amazon.com/dp/B081ZMDBW8?language=en_US
+2025-03-16 22:27:41,147 [INFO] ✅ Keine Änderungen für B081ZMDBW8.
+2025-03-16 22:27:41,163 [INFO] ✅ last_time_scraped für B081ZMDBW8 erfolgreich aktualisiert.
+2025-03-16 22:27:41,166 [INFO] 
+🔍 Überprüfe Produkt [61/114]: B07TF7VMC7 https://www.amazon.com/dp/B07TF7VMC7?language=en_US
+2025-03-16 22:27:54,072 [INFO] ⚡ Änderungen erkannt für B07TF7VMC7: blm geändert: None → 100, total geändert: None → 1249.0
+2025-03-16 22:27:54,092 [INFO] ✅ last_time_scraped für B07TF7VMC7 erfolgreich aktualisiert.
+2025-03-16 22:27:54,095 [INFO] 
+🔍 Überprüfe Produkt [62/114]: B0BL38NHX8 https://www.amazon.com/dp/B0BL38NHX8?language=en_US
+2025-03-16 22:28:06,853 [INFO] ✅ Keine Änderungen für B0BL38NHX8.
+2025-03-16 22:28:06,868 [INFO] ✅ last_time_scraped für B0BL38NHX8 erfolgreich aktualisiert.
+2025-03-16 22:28:06,869 [INFO] 
+🔍 Überprüfe Produkt [63/114]: 1476755744 https://www.amazon.com/dp/1476755744?language=en_US
+2025-03-16 22:28:21,782 [WARNING] ❌ Fehler beim Scrapen von 1476755744, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-16 22:28:21,807 [INFO] ✅ last_time_scraped für 1476755744 erfolgreich aktualisiert.
+2025-03-16 22:28:21,809 [INFO] 
+🔍 Überprüfe Produkt [64/114]: B0C2CQLV2J https://www.amazon.com/dp/B0C2CQLV2J?language=en_US
+2025-03-16 22:28:33,362 [INFO] ⚡ Änderungen erkannt für B0C2CQLV2J: blm geändert: None → 100, total geändert: None → 798.0
+2025-03-16 22:28:33,393 [INFO] ✅ last_time_scraped für B0C2CQLV2J erfolgreich aktualisiert.
+2025-03-16 22:28:33,394 [INFO] 
+🔍 Überprüfe Produkt [65/114]: B000BMA9T4 https://www.amazon.com/dp/B000BMA9T4?language=en_US
+2025-03-16 22:28:46,662 [INFO] ⚡ Änderungen erkannt für B000BMA9T4: blm geändert: None → 300, total geändert: None → 2187.0
+2025-03-16 22:28:46,702 [INFO] ✅ last_time_scraped für B000BMA9T4 erfolgreich aktualisiert.
+2025-03-16 22:28:46,703 [INFO] 
+🔍 Überprüfe Produkt [66/114]: B006SMEV9K https://www.amazon.com/dp/B006SMEV9K?language=en_US
+2025-03-16 22:28:54,024 [WARNING] ❌ Fehler beim Scrapen von B006SMEV9K, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-16 22:28:54,054 [INFO] ✅ last_time_scraped für B006SMEV9K erfolgreich aktualisiert.
+2025-03-16 22:28:54,055 [INFO] 
+🔍 Überprüfe Produkt [67/114]: B00006IFDQ https://www.amazon.com/dp/B00006IFDQ?language=en_US
+2025-03-16 22:29:06,191 [INFO] ⚡ Änderungen erkannt für B00006IFDQ: blm geändert: None → 400, total geändert: None → 1516.0
+2025-03-16 22:29:06,210 [INFO] ✅ last_time_scraped für B00006IFDQ erfolgreich aktualisiert.
+2025-03-16 22:29:06,213 [INFO] 
+🔍 Überprüfe Produkt [68/114]: B07VG65YS9 https://www.amazon.com/dp/B07VG65YS9?language=en_US
+2025-03-16 22:29:20,284 [INFO] ⚡ Änderungen erkannt für B07VG65YS9: blm geändert: None → 100, total geändert: None → 699.0
+2025-03-16 22:29:20,319 [INFO] ✅ last_time_scraped für B07VG65YS9 erfolgreich aktualisiert.
+2025-03-16 22:29:20,320 [INFO] 
+🔍 Überprüfe Produkt [69/114]: B0CNV87FWT https://www.amazon.com/dp/B0CNV87FWT?language=en_US
+2025-03-16 22:29:32,548 [INFO] ✅ Keine Änderungen für B0CNV87FWT.
+2025-03-16 22:29:32,588 [INFO] ✅ last_time_scraped für B0CNV87FWT erfolgreich aktualisiert.
+2025-03-16 22:29:32,590 [INFO] 
+🔍 Überprüfe Produkt [70/114]: B0DT7MC73D https://www.amazon.com/dp/B0DT7MC73D?language=en_US
+2025-03-16 22:29:41,618 [WARNING] ❌ Fehler beim Scrapen von B0DT7MC73D, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-16 22:29:41,649 [INFO] ✅ last_time_scraped für B0DT7MC73D erfolgreich aktualisiert.
+2025-03-16 22:29:41,649 [INFO] 
+🔍 Überprüfe Produkt [71/114]: B0D2CF62G6 https://www.amazon.com/dp/B0D2CF62G6?language=en_US
+2025-03-16 22:29:53,275 [INFO] ✅ Keine Änderungen für B0D2CF62G6.
+2025-03-16 22:29:53,290 [INFO] ✅ last_time_scraped für B0D2CF62G6 erfolgreich aktualisiert.
+2025-03-16 22:29:53,291 [INFO] 
+🔍 Überprüfe Produkt [72/114]: B0CQR6MWXW https://www.amazon.com/dp/B0CQR6MWXW?language=en_US
+2025-03-16 22:30:04,822 [INFO] ✅ Keine Änderungen für B0CQR6MWXW.
+2025-03-16 22:30:04,859 [INFO] ✅ last_time_scraped für B0CQR6MWXW erfolgreich aktualisiert.
+2025-03-16 22:30:04,860 [INFO] 
+🔍 Überprüfe Produkt [73/114]: B07XVNFB66 https://www.amazon.com/dp/B07XVNFB66?language=en_US
+2025-03-16 22:30:18,053 [INFO] ⚡ Änderungen erkannt für B07XVNFB66: blm geändert: None → 50, total geändert: None → 749.5
+2025-03-16 22:30:18,083 [INFO] ✅ last_time_scraped für B07XVNFB66 erfolgreich aktualisiert.
+2025-03-16 22:30:18,084 [INFO] 
+🔍 Überprüfe Produkt [74/114]: B00CMKA9BG https://www.amazon.com/dp/B00CMKA9BG?language=en_US
+2025-03-16 22:30:33,793 [INFO] ⚡ Änderungen erkannt für B00CMKA9BG: blm geändert: None → 200, total geändert: None → 4800.0
+2025-03-16 22:30:33,831 [INFO] ✅ last_time_scraped für B00CMKA9BG erfolgreich aktualisiert.
+2025-03-16 22:30:33,832 [INFO] 
+🔍 Überprüfe Produkt [75/114]: B0CRK53519 https://www.amazon.com/dp/B0CRK53519?language=en_US
+2025-03-16 22:30:46,031 [INFO] ⚡ Änderungen erkannt für B0CRK53519: blm geändert: None → 50, total geändert: None → 1059.5
+2025-03-16 22:30:46,064 [INFO] ✅ last_time_scraped für B0CRK53519 erfolgreich aktualisiert.
+2025-03-16 22:30:46,065 [INFO] 
+🔍 Überprüfe Produkt [76/114]: B0058TVXA4 https://www.amazon.com/dp/B0058TVXA4?language=en_US
+2025-03-16 22:30:58,384 [INFO] ⚡ Änderungen erkannt für B0058TVXA4: blm geändert: None → 200, total geändert: None → 1998.0
+2025-03-16 22:30:58,423 [INFO] ✅ last_time_scraped für B0058TVXA4 erfolgreich aktualisiert.
+2025-03-16 22:30:58,424 [INFO] 
+🔍 Überprüfe Produkt [77/114]: B0BCJTYWBP https://www.amazon.com/dp/B0BCJTYWBP?language=en_US
+2025-03-16 22:31:12,917 [INFO] ⚡ Änderungen erkannt für B0BCJTYWBP: blm geändert: None → 100, total geändert: None → 699.0
+2025-03-16 22:31:12,934 [INFO] ✅ last_time_scraped für B0BCJTYWBP erfolgreich aktualisiert.
+2025-03-16 22:31:12,936 [INFO] 
+🔍 Überprüfe Produkt [78/114]: B07XTL573L https://www.amazon.com/dp/B07XTL573L?language=en_US
+2025-03-16 22:31:24,233 [WARNING] ❌ Fehler beim Scrapen von B07XTL573L, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-16 22:31:24,272 [INFO] ✅ last_time_scraped für B07XTL573L erfolgreich aktualisiert.
+2025-03-16 22:31:24,274 [INFO] 
+🔍 Überprüfe Produkt [79/114]: B0002DOC5O https://www.amazon.com/dp/B0002DOC5O?language=en_US
+2025-03-16 22:31:37,433 [INFO] ✅ Keine Änderungen für B0002DOC5O.
+2025-03-16 22:31:37,465 [INFO] ✅ last_time_scraped für B0002DOC5O erfolgreich aktualisiert.
+2025-03-16 22:31:37,466 [INFO] 
+🔍 Überprüfe Produkt [80/114]: B00006JNMD https://www.amazon.com/dp/B00006JNMD?language=en_US
+2025-03-16 22:31:51,378 [INFO] ⚡ Änderungen erkannt für B00006JNMD: blm geändert: None → 200, total geändert: None → 1610.0
+2025-03-16 22:31:51,391 [INFO] ✅ last_time_scraped für B00006JNMD erfolgreich aktualisiert.
+2025-03-16 22:31:51,392 [INFO] 
+🔍 Überprüfe Produkt [81/114]: B09JLV2VN3 https://www.amazon.com/dp/B09JLV2VN3?language=en_US
+2025-03-16 22:32:03,896 [INFO] ✅ Keine Änderungen für B09JLV2VN3.
+2025-03-16 22:32:03,927 [INFO] ✅ last_time_scraped für B09JLV2VN3 erfolgreich aktualisiert.
+2025-03-16 22:32:03,929 [INFO] 
+🔍 Überprüfe Produkt [82/114]: B07YJZYW4B https://www.amazon.com/dp/B07YJZYW4B?language=en_US
+2025-03-16 22:32:16,601 [INFO] ⚡ Änderungen erkannt für B07YJZYW4B: blm geändert: None → 200, total geändert: None → 1398.0
+2025-03-16 22:32:16,629 [INFO] ✅ last_time_scraped für B07YJZYW4B erfolgreich aktualisiert.
+2025-03-16 22:32:16,631 [INFO] 
+🔍 Überprüfe Produkt [83/114]: B099WNN4P4 https://www.amazon.com/dp/B099WNN4P4?language=en_US
+2025-03-16 22:32:29,488 [INFO] ✅ Keine Änderungen für B099WNN4P4.
+2025-03-16 22:32:29,518 [INFO] ✅ last_time_scraped für B099WNN4P4 erfolgreich aktualisiert.
+2025-03-16 22:32:29,521 [INFO] 
+🔍 Überprüfe Produkt [84/114]: B0DCYHF5ZT https://www.amazon.com/dp/B0DCYHF5ZT?language=en_US
+2025-03-16 22:32:41,257 [INFO] ✅ Keine Änderungen für B0DCYHF5ZT.
+2025-03-16 22:32:41,286 [INFO] ✅ last_time_scraped für B0DCYHF5ZT erfolgreich aktualisiert.
+2025-03-16 22:32:41,288 [INFO] 
+🔍 Überprüfe Produkt [85/114]: B0C8JNXSY4 https://www.amazon.com/dp/B0C8JNXSY4?language=en_US
+2025-03-16 22:32:53,060 [INFO] ⚡ Änderungen erkannt für B0C8JNXSY4: blm geändert: None → 50, total geändert: None → 749.5
+2025-03-16 22:32:53,075 [INFO] ✅ last_time_scraped für B0C8JNXSY4 erfolgreich aktualisiert.
+2025-03-16 22:32:53,076 [INFO] 
+🔍 Überprüfe Produkt [86/114]: B0D5D9ZSH4 https://www.amazon.com/dp/B0D5D9ZSH4?language=en_US
+2025-03-16 22:33:05,318 [INFO] ✅ Keine Änderungen für B0D5D9ZSH4.
+2025-03-16 22:33:05,426 [INFO] ✅ last_time_scraped für B0D5D9ZSH4 erfolgreich aktualisiert.
+2025-03-16 22:33:05,429 [INFO] 
+🔍 Überprüfe Produkt [87/114]: B07RXSHNXF https://www.amazon.com/dp/B07RXSHNXF?language=en_US
+2025-03-16 22:33:18,446 [INFO] ✅ Keine Änderungen für B07RXSHNXF.
+2025-03-16 22:33:18,475 [INFO] ✅ last_time_scraped für B07RXSHNXF erfolgreich aktualisiert.
+2025-03-16 22:33:18,477 [INFO] 
+🔍 Überprüfe Produkt [88/114]: B08XZ183W4 https://www.amazon.com/dp/B08XZ183W4?language=en_US
+2025-03-16 22:33:27,701 [WARNING] ❌ Fehler beim Scrapen von B08XZ183W4, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-16 22:33:27,721 [INFO] ✅ last_time_scraped für B08XZ183W4 erfolgreich aktualisiert.
+2025-03-16 22:33:27,722 [INFO] 
+🔍 Überprüfe Produkt [89/114]: B0CFFQTB66 https://www.amazon.com/dp/B0CFFQTB66?language=en_US
+2025-03-16 22:33:40,106 [INFO] ✅ Keine Änderungen für B0CFFQTB66.
+2025-03-16 22:33:40,138 [INFO] ✅ last_time_scraped für B0CFFQTB66 erfolgreich aktualisiert.
+2025-03-16 22:33:40,140 [INFO] 
+🔍 Überprüfe Produkt [90/114]: B08CTPZQCG https://www.amazon.com/dp/B08CTPZQCG?language=en_US
+2025-03-16 22:33:52,137 [WARNING] ❌ Fehler beim Scrapen von B08CTPZQCG, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-16 22:33:52,164 [INFO] ✅ last_time_scraped für B08CTPZQCG erfolgreich aktualisiert.
+2025-03-16 22:33:52,165 [INFO] 
+🔍 Überprüfe Produkt [91/114]: B07Q5VKWCQ https://www.amazon.com/dp/B07Q5VKWCQ?language=en_US
+2025-03-16 22:34:04,152 [INFO] ⚡ Änderungen erkannt für B07Q5VKWCQ: blm geändert: None → 600, total geändert: None → 6012.0
+2025-03-16 22:34:04,174 [INFO] ✅ last_time_scraped für B07Q5VKWCQ erfolgreich aktualisiert.
+2025-03-16 22:34:04,177 [INFO] 
+🔍 Überprüfe Produkt [92/114]: B08VVX1QLD https://www.amazon.com/dp/B08VVX1QLD?language=en_US
+2025-03-16 22:34:22,132 [WARNING] ❌ Fehler beim Scrapen von B08VVX1QLD, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-16 22:34:22,166 [INFO] ✅ last_time_scraped für B08VVX1QLD erfolgreich aktualisiert.
+2025-03-16 22:34:22,168 [INFO] 
+🔍 Überprüfe Produkt [93/114]: B097GTV9G3 https://www.amazon.com/dp/B097GTV9G3?language=en_US
+2025-03-16 22:34:35,169 [INFO] ✅ Keine Änderungen für B097GTV9G3.
+2025-03-16 22:34:35,199 [INFO] ✅ last_time_scraped für B097GTV9G3 erfolgreich aktualisiert.
+2025-03-16 22:34:35,200 [INFO] 
+🔍 Überprüfe Produkt [94/114]: B0CGVDNX5Z https://www.amazon.com/dp/B0CGVDNX5Z?language=en_US
+2025-03-16 22:34:47,875 [INFO] ⚡ Änderungen erkannt für B0CGVDNX5Z: blm geändert: None → 400, total geändert: None → 3996.0
+2025-03-16 22:34:47,908 [INFO] ✅ last_time_scraped für B0CGVDNX5Z erfolgreich aktualisiert.
+2025-03-16 22:34:47,910 [INFO] 
+🔍 Überprüfe Produkt [95/114]: B0D6GM3SZY https://www.amazon.com/dp/B0D6GM3SZY?language=en_US
+2025-03-16 22:35:00,326 [INFO] ✅ Keine Änderungen für B0D6GM3SZY.
+2025-03-16 22:35:00,341 [INFO] ✅ last_time_scraped für B0D6GM3SZY erfolgreich aktualisiert.
+2025-03-16 22:35:00,343 [INFO] 
+🔍 Überprüfe Produkt [96/114]: B0002DOEPW https://www.amazon.com/dp/B0002DOEPW?language=en_US
+2025-03-16 22:35:13,289 [INFO] ⚡ Änderungen erkannt für B0002DOEPW: blm geändert: None → 100, total geändert: None → 1244.0
+2025-03-16 22:35:13,324 [INFO] ✅ last_time_scraped für B0002DOEPW erfolgreich aktualisiert.
+2025-03-16 22:35:13,327 [INFO] 
+🔍 Überprüfe Produkt [97/114]: B003O2RXWO https://www.amazon.com/dp/B003O2RXWO?language=en_US
+2025-03-16 22:35:26,175 [INFO] ⚡ Änderungen erkannt für B003O2RXWO: blm geändert: None → 1000, total geändert: None → 6980.0
+2025-03-16 22:35:26,208 [INFO] ✅ last_time_scraped für B003O2RXWO erfolgreich aktualisiert.
+2025-03-16 22:35:26,210 [INFO] 
+🔍 Überprüfe Produkt [98/114]: B0BCFD1VTG https://www.amazon.com/dp/B0BCFD1VTG?language=en_US
+2025-03-16 22:35:38,618 [INFO] ✅ Keine Änderungen für B0BCFD1VTG.
+2025-03-16 22:35:38,648 [INFO] ✅ last_time_scraped für B0BCFD1VTG erfolgreich aktualisiert.
+2025-03-16 22:35:38,650 [INFO] 
+🔍 Überprüfe Produkt [99/114]: B08C9PQ21F https://www.amazon.com/dp/B08C9PQ21F?language=en_US
+2025-03-16 22:35:51,112 [INFO] ✅ Keine Änderungen für B08C9PQ21F.
+2025-03-16 22:35:51,148 [INFO] ✅ last_time_scraped für B08C9PQ21F erfolgreich aktualisiert.
+2025-03-16 22:35:51,150 [INFO] 
+🔍 Überprüfe Produkt [100/114]: B0DCSFNB1C https://www.amazon.com/dp/B0DCSFNB1C?language=en_US
+2025-03-16 22:36:03,311 [WARNING] ❌ Fehler beim Scrapen von B0DCSFNB1C, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-16 22:36:03,354 [INFO] ✅ last_time_scraped für B0DCSFNB1C erfolgreich aktualisiert.
+2025-03-16 22:36:03,357 [INFO] 
+🔍 Überprüfe Produkt [101/114]: B0BCG2MTY7 https://www.amazon.com/dp/B0BCG2MTY7?language=en_US
+2025-03-16 22:36:16,552 [INFO] ✅ Keine Änderungen für B0BCG2MTY7.
+2025-03-16 22:36:16,582 [INFO] ✅ last_time_scraped für B0BCG2MTY7 erfolgreich aktualisiert.
+2025-03-16 22:36:16,583 [INFO] 
+🔍 Überprüfe Produkt [102/114]: B0BQ6R6WMX https://www.amazon.com/dp/B0BQ6R6WMX?language=en_US
+2025-03-16 22:36:28,656 [INFO] ⚡ Änderungen erkannt für B0BQ6R6WMX: blm geändert: None → 100, total geändert: None → 3299.0
+2025-03-16 22:36:28,670 [INFO] ✅ last_time_scraped für B0BQ6R6WMX erfolgreich aktualisiert.
+2025-03-16 22:36:28,671 [INFO] 
+🔍 Überprüfe Produkt [103/114]: B0CKVZ5FBP https://www.amazon.com/dp/B0CKVZ5FBP?language=en_US
+2025-03-16 22:36:41,492 [INFO] ✅ Keine Änderungen für B0CKVZ5FBP.
+2025-03-16 22:36:41,521 [INFO] ✅ last_time_scraped für B0CKVZ5FBP erfolgreich aktualisiert.
+2025-03-16 22:36:41,522 [INFO] 
+🔍 Überprüfe Produkt [104/114]: B001B0F33W https://www.amazon.com/dp/B001B0F33W?language=en_US
+2025-03-16 22:36:54,576 [INFO] ⚡ Änderungen erkannt für B001B0F33W: blm geändert: None → 500, total geändert: None → 5430.0
+2025-03-16 22:36:54,594 [INFO] ✅ last_time_scraped für B001B0F33W erfolgreich aktualisiert.
+2025-03-16 22:36:54,596 [INFO] 
+🔍 Überprüfe Produkt [105/114]: B0C89GRPRX https://www.amazon.com/dp/B0C89GRPRX?language=en_US
+2025-03-16 22:37:08,132 [INFO] ⚡ Änderungen erkannt für B0C89GRPRX: blm geändert: None → 2000, total geändert: None → 13760.0
+2025-03-16 22:37:08,150 [INFO] ✅ last_time_scraped für B0C89GRPRX erfolgreich aktualisiert.
+2025-03-16 22:37:08,151 [INFO] 
+🔍 Überprüfe Produkt [106/114]: B0CHMKYN89 https://www.amazon.com/dp/B0CHMKYN89?language=en_US
+2025-03-16 22:37:21,167 [INFO] ⚡ Änderungen erkannt für B0CHMKYN89: blm geändert: None → 100, total geändert: None → 695.0
+2025-03-16 22:37:21,183 [INFO] ✅ last_time_scraped für B0CHMKYN89 erfolgreich aktualisiert.
+2025-03-16 22:37:21,183 [INFO] 
+🔍 Überprüfe Produkt [107/114]: B005TDHFEW https://www.amazon.com/dp/B005TDHFEW?language=en_US
+2025-03-16 22:37:34,294 [INFO] ⚡ Änderungen erkannt für B005TDHFEW: title changed, price geändert: None → 16.89, blm geändert: None → 8000, total geändert: None → 135120.0
+2025-03-16 22:37:34,324 [INFO] ✅ last_time_scraped für B005TDHFEW erfolgreich aktualisiert.
+2025-03-16 22:37:34,326 [INFO] 
+🔍 Überprüfe Produkt [108/114]: B0DF2GLYXJ https://www.amazon.com/dp/B0DF2GLYXJ?language=en_US
+2025-03-16 22:37:47,758 [INFO] ⚡ Änderungen erkannt für B0DF2GLYXJ: title changed, price geändert: None → 15.29
+2025-03-16 22:37:47,793 [INFO] ✅ last_time_scraped für B0DF2GLYXJ erfolgreich aktualisiert.
+2025-03-16 22:37:47,795 [INFO] 
+🔍 Überprüfe Produkt [109/114]: B0DF2M85M1 https://www.amazon.com/dp/B0DF2M85M1?language=en_US
+2025-03-16 22:38:00,013 [INFO] ⚡ Änderungen erkannt für B0DF2M85M1: title changed, price geändert: None → 21.59, blm geändert: None → 100, total geändert: None → 2159.0
+2025-03-16 22:38:00,032 [INFO] ✅ last_time_scraped für B0DF2M85M1 erfolgreich aktualisiert.
+2025-03-16 22:38:00,034 [INFO] 
+🔍 Überprüfe Produkt [110/114]: B08PZG1BYZ https://www.amazon.com/dp/B08PZG1BYZ?language=en_US
+2025-03-16 22:38:12,471 [INFO] ⚡ Änderungen erkannt für B08PZG1BYZ: title changed, price geändert: None → 27.99, blm geändert: None → 50, total geändert: None → 1399.5
+2025-03-16 22:38:12,488 [INFO] ✅ last_time_scraped für B08PZG1BYZ erfolgreich aktualisiert.
+2025-03-16 22:38:12,489 [INFO] 
+🔍 Überprüfe Produkt [111/114]: B0D7DZ1LZ3 https://www.amazon.com/dp/B0D7DZ1LZ3?language=en_US
+2025-03-16 22:38:25,525 [INFO] ⚡ Änderungen erkannt für B0D7DZ1LZ3: title changed, price geändert: None → 8.31, blm geändert: None → 100, total geändert: None → 831.0
+2025-03-16 22:38:25,546 [INFO] ✅ last_time_scraped für B0D7DZ1LZ3 erfolgreich aktualisiert.
+2025-03-16 22:38:25,549 [INFO] 
+🔍 Überprüfe Produkt [112/114]: B09MWQPJZ8 https://www.amazon.com/dp/B09MWQPJZ8?language=en_US
+2025-03-16 22:38:38,789 [INFO] ⚡ Änderungen erkannt für B09MWQPJZ8: title changed, price geändert: None → 15.49, blm geändert: None → 2000, total geändert: None → 30980.0
+2025-03-16 22:38:38,826 [INFO] ✅ last_time_scraped für B09MWQPJZ8 erfolgreich aktualisiert.
+2025-03-16 22:38:38,827 [INFO] 
+🔍 Überprüfe Produkt [113/114]: B0CL6CBCYF https://www.amazon.com/dp/B0CL6CBCYF?language=en_US
+2025-03-16 22:38:50,665 [INFO] ⚡ Änderungen erkannt für B0CL6CBCYF: title changed, price geändert: None → 16.29, blm geändert: None → 200, total geändert: None → 3258.0
+2025-03-16 22:38:50,686 [INFO] ✅ last_time_scraped für B0CL6CBCYF erfolgreich aktualisiert.
+2025-03-16 22:38:50,689 [INFO] 
+🔍 Überprüfe Produkt [114/114]: B07WN2KQWP https://www.amazon.com/dp/B07WN2KQWP?language=en_US
+2025-03-16 22:39:02,365 [INFO] ⚡ Änderungen erkannt für B07WN2KQWP: title changed, price geändert: None → 19.99, blm geändert: None → 1000, total geändert: None → 19990.0
+2025-03-16 22:39:02,383 [INFO] ✅ last_time_scraped für B07WN2KQWP erfolgreich aktualisiert.
+2025-03-16 22:39:02,383 [INFO] 
+🔻 Schließe WebDriver...
+2025-03-16 22:39:05,434 [INFO] ✅ WebDriver geschlossen.
