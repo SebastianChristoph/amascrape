@@ -52,6 +52,26 @@ def register(user: UserCreate, db: Session = Depends(get_db)):
 
     return {"message": "User created successfully"}
 
+
+@router.post("/register", status_code=201)
+def register(user: UserCreate, db: Session = Depends(get_db)):
+    # Prüfe, ob der Benutzer bereits existiert
+    existing_user = db.query(User).filter(User.username == user.username).first()
+    if existing_user:
+        raise HTTPException(status_code=400, detail="User already exists")
+
+    # Neues Passwort hashen und Benutzer erstellen
+    hashed_password = get_password_hash(user.password)
+    new_user = User(username=user.username, hashed_password=hashed_password)
+    
+    db.add(new_user)
+    db.commit()
+    db.refresh(new_user)
+
+    return {"message": "User registered successfully"}
+
+
+
 # 📌 Token-Generierung (Login)
 
 

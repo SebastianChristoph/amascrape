@@ -15,6 +15,7 @@ import Login from "./pages/Login";
 import { SnackbarProvider } from "./providers/SnackbarProvider";
 import UserService from "./services/UserService";
 import { lightTheme } from "./theme";
+import Register from "./pages/Register";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(
@@ -37,6 +38,7 @@ function App() {
                 isAuthenticated ? <Navigate to="/dashboard" /> : <Login />
               }
             />
+              <Route path="/register" element={<Register />} /> {/* 📌 Neue Route */}
             <Route element={<Layout setIsAuthenticated={setIsAuthenticated} />}>
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/cluster/:clusterId" element={<ClusterDetails />} />

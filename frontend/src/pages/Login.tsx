@@ -7,7 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useSnackbar } from "../providers/SnackbarProvider";
 import LoginService from "../services/LoginService";
 
@@ -28,10 +28,7 @@ export default function Login() {
     if (success) {
       navigate("/dashboard");
     } else {
-      showSnackbar(
-        "Login fehlgeschlagen. Bitte überprüfe deine Anmeldedaten.",
-        "error"
-      );
+      showSnackbar("Login fehlgeschlagen. Bitte überprüfe deine Anmeldedaten.", "error");
     }
   };
 
@@ -80,6 +77,9 @@ export default function Login() {
               {loading ? "Logging in..." : "Login"}
             </Button>
           </form>
+          <Typography sx={{ mt: 2, textAlign: "center" }}>
+            <Link to="/register">Sie wollen sich registrieren?</Link>
+          </Typography>
         </Paper>
       </Box>
     </Container>

@@ -7,8 +7,33 @@ interface DecodedToken {
   [key: string]: any; // Falls das Token weitere Felder enthält
 }
 
+const API_URL = "http://127.0.0.1:9000"; // Backend-URL
+
 class UserService {
   private static TOKEN_KEY = "token";
+
+  static async register(username: string, password: string): Promise<boolean> {
+    try {
+      const response = await fetch(`${API_URL}/users/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, password }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.detail || "Registrierung fehlgeschlagen");
+      }
+
+      return true;
+    } catch (error) {
+      console.error("Fehler bei der Registrierung:", error);
+      return false;
+    }
+  }
+
 
   // 📌 Holt das JWT-Token aus localStorage
   static getToken(): string | null {
