@@ -2,6 +2,7 @@ import {
   Alert,
   Box,
   Card,
+  Chip,
   CircularProgress,
   Link,
   Paper,
@@ -210,39 +211,52 @@ export default function ClusterDetails() {
     setTabIndex(newIndex);
   };
 
+  const renderWithNoData = (value: any, formatter?: (val: any) => any) => {
+    if (value === null || value === undefined || value === "") {
+      return <Chip label="No Data" color="default" size="small" />;
+    }
+    return formatter ? formatter(value) : value;
+  };
+
   // 📌 Spalten für DataGrid mit Sparkline
   const columns: GridColDef[] = [
     {
       field: "image",
       headerName: "Image",
       width: 80,
-      renderCell: (params) => (
-        <Link
-          href={`https://www.amazon.com/dp/${params.row.id}?language=en_US`}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img
-            src={params.value}
-            alt="Product"
-            style={{ width: "100%", objectFit: "fill", cursor: "pointer" }}
-          />
-        </Link>
-      ),
+      renderCell: (params) =>
+        params.value ? (
+          <Link
+            href={`https://www.amazon.com/dp/${params.row.id}?language=en_US`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              src={params.value}
+              alt="Product"
+              style={{ width: "100%", objectFit: "fill", cursor: "pointer" }}
+            />
+          </Link>
+        ) : (
+          <Chip label="No Image" color="default" size="small" />
+        ),
     },
     {
       field: "id",
       headerName: "ASIN",
       width: 150,
-      renderCell: (params) => (
-        <Link
-          href={`https://www.amazon.com/dp/${params.value}?language=en_US`}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {params.value}
-        </Link>
-      ),
+      renderCell: (params) =>
+        params.value ? (
+          <Link
+            href={`https://www.amazon.com/dp/${params.value}?language=en_US`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {params.value}
+          </Link>
+        ) : (
+          <Chip label="No ASIN" color="default" size="small" />
+        ),
     },
     { field: "title", headerName: "Title", width: 400 },
     {
@@ -250,17 +264,15 @@ export default function ClusterDetails() {
       headerName: "Price",
       type: "number",
       width: 120,
-      renderCell: (params) => formatCurrency(params.value), // ✅ Preis als $1,234.78 formatieren
+      renderCell: (params) => renderWithNoData(params.value, formatCurrency),
     },
     {
       field: "chart",
       headerName: "Chart",
       width: 100,
       renderCell: (params) => {
-        const [sparklineData, setSparklineData] = useState<number[] | null>(
-          null
-        );
-
+        const [sparklineData, setSparklineData] = useState<number[] | null>(null);
+  
         useEffect(() => {
           async function fetchSparkline() {
             const response = await ChartDataService.GetSparkLineGridData(
@@ -270,46 +282,55 @@ export default function ClusterDetails() {
           }
           fetchSparkline();
         }, [params.row.id]);
-
+  
         return sparklineData ? (
           <Box sx={{ mt: 4 }}>
             <CustomSparkLine data={sparklineData} />
           </Box>
         ) : (
-          <CircularProgress size={20} />
+          <Chip label="No Chart" color="default" size="small" />
         );
       },
     },
-    { field: "mainCategory", headerName: "Main Category", width: 200 },
+    {
+      field: "mainCategory",
+      headerName: "Main Category",
+      width: 200,
+      renderCell: (params) => renderWithNoData(params.value),
+    },
     {
       field: "mainCategoryRank",
       headerName: "Rank Main",
       width: 100,
-      renderCell: (params) => formatNumber(params.value),
+      renderCell: (params) => renderWithNoData(params.value, formatNumber),
     },
-    { field: "secondCategory", headerName: "Sub Category", width: 200 },
+    {
+      field: "secondCategory",
+      headerName: "Sub Category",
+      width: 200,
+      renderCell: (params) => renderWithNoData(params.value),
+    },
     {
       field: "secondCategoryRank",
       headerName: "Sub Rank",
       width: 100,
-      renderCell: (params) => formatNumber(params.value),
+      renderCell: (params) => renderWithNoData(params.value, formatNumber),
     },
     {
       field: "blm",
       headerName: "Bought Last Month",
       type: "number",
       width: 130,
-      renderCell: (params) => formatNumber(params.value), // ✅ BLM als 5,000 formatieren
+      renderCell: (params) => renderWithNoData(params.value, formatNumber),
     },
     {
       field: "total",
       headerName: "Total Revenue",
       type: "number",
       width: 150,
-      renderCell: (params) => formatCurrency(params.value), // ✅ Total Revenue als $1,234.78 formatieren
+      renderCell: (params) => renderWithNoData(params.value, formatCurrency),
     },
   ];
-
   return (
     <Paper elevation={4} sx={{ marginBottom: 2, padding: 4 }}>
       <Typography

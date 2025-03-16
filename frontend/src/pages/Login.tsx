@@ -7,16 +7,18 @@ import {
   Typography,
 } from "@mui/material";
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 import { useSnackbar } from "../providers/SnackbarProvider";
 import LoginService from "../services/LoginService";
 
 export default function Login() {
   const navigate = useNavigate();
   const { showSnackbar } = useSnackbar();
-  const [username, setUsername] = useState("");
+ 
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const location = useLocation();
+  const [username, setUsername] = useState(location.state?.username || ""); // ✅ Falls vorhanden, vorbefüllen
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -48,15 +50,15 @@ export default function Login() {
             Login
           </Typography>
           <form onSubmit={handleLogin}>
-            <TextField
-              fullWidth
-              label="Username"
-              variant="outlined"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
-              sx={{ mb: 2 }}
-            />
+          <TextField
+      fullWidth
+      label="Username"
+      variant="outlined"
+      value={username}
+      onChange={(e) => setUsername(e.target.value)}
+      required
+      sx={{ mb: 2 }}
+    />
             <TextField
               fullWidth
               label="Password"

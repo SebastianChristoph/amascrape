@@ -8,3 +8,4 @@ python-multipart
 SQLAlchemy
 selenium
 asynco
+fastapi-mail

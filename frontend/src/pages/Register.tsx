@@ -5,31 +5,57 @@ import {
     Paper,
     TextField,
     Typography,
+    Snackbar,
   } from "@mui/material";
   import { useState } from "react";
-  import { useNavigate, Link } from "react-router-dom";
+  import { useNavigate } from "react-router-dom";
   import { useSnackbar } from "../providers/SnackbarProvider";
-  import UserService from "../services/UserService";
+  import VerifyService from "../services/VerifyService";
+import UserService from "../services/UserService";
   
   export default function Register() {
     const navigate = useNavigate();
     const { showSnackbar } = useSnackbar();
     const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [passwordRepeat, setPasswordRepeat] = useState("");
     const [loading, setLoading] = useState(false);
+    const [mockedLink, setMockedLink] = useState<string | null>(null);
   
     const handleRegister = async (e: React.FormEvent) => {
       e.preventDefault();
       setLoading(true);
   
-      const success = await UserService.register(username, password);
+      const response = await UserService.register(username, email, password, passwordRepeat);
+  
       setLoading(false);
   
-      if (success) {
-        showSnackbar("Registrierung erfolgreich. Bitte loggen Sie sich ein.", "success");
-        navigate("/"); // Weiterleitung zur Login-Seite
+      if (response.success) {
+        showSnackbar("✅ E-Mail gesendet! Link hier klicken.");
+        setMockedLink(response.mocked_verification_link || ""); // ✅ Falls null, wird "" gesetzt
       } else {
-        showSnackbar("Registrierung fehlgeschlagen. Benutzername bereits vergeben?", "error");
+        showSnackbar(response.message, "error");
+      }
+    };
+  
+    // ✅ NEUE FUNKTION: Klick auf Mock-Link → Verifizierung ausführen
+    const handleVerification = async () => {
+      if (!mockedLink) return;
+  
+      // Extrahiere das Token aus dem Mock-Link (letzter Teil der URL)
+      const token = mockedLink.split("/").pop();
+      if (!token) return;
+  
+      const verifyResponse = await VerifyService.verifyUser(token);
+  
+      if (verifyResponse.success) {
+        showSnackbar(`✅ Nutzer ${verifyResponse.username} (${verifyResponse.email}) wurde angelegt.`);
+  
+        // ✅ Speichere den Nutzername für das Login-Feld & navigiere zur Login-Seite
+        navigate("/login", { state: { username: verifyResponse.username } });
+      } else {
+        showSnackbar(verifyResponse.message, "error");
       }
     };
   
@@ -60,11 +86,31 @@ import {
               />
               <TextField
                 fullWidth
-                label="Password"
+                label="E-Mail"
+                variant="outlined"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                sx={{ mb: 2 }}
+              />
+              <TextField
+                fullWidth
+                label="Passwort"
                 variant="outlined"
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                required
+                sx={{ mb: 2 }}
+              />
+              <TextField
+                fullWidth
+                label="Passwort wiederholen"
+                variant="outlined"
+                type="password"
+                value={passwordRepeat}
+                onChange={(e) => setPasswordRepeat(e.target.value)}
                 required
                 sx={{ mb: 3 }}
               />
@@ -75,13 +121,20 @@ import {
                 fullWidth
                 disabled={loading}
               >
-                {loading ? "Registrieren..." : "Registrieren"}
+                {loading ? "Registriere..." : "Registrieren"}
               </Button>
             </form>
-            <Typography sx={{ mt: 2, textAlign: "center" }}>
-              <Link to="/">Bereits registriert? Hier einloggen</Link>
-            </Typography>
           </Paper>
+  
+          {/* ✅ Mocked Verifikations-Link */}
+          {mockedLink && (
+            <Typography
+              sx={{ mt: 2, color: "blue", cursor: "pointer" }}
+              onClick={handleVerification} // ✅ Klick auf Link → Verifizierung starten
+            >
+              Klicke hier, um dein Konto zu aktivieren
+            </Typography>
+          )}
         </Box>
       </Container>
     );

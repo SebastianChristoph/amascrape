@@ -1,87 +1,140 @@
-from typing import List, Optional
+from typing import List
+import os  # 📌 Fehlender Import
+from datetime import datetime, timezone
 
-from app.auth import (authenticate_user, create_access_token, get_current_user,
+from app.auth import (authenticate_user, create_access_token, generate_verification_token, get_current_user, get_expiration_time,
                       get_password_hash)
 from app.database import get_db
-from app.models import Market, MarketChange, MarketCluster, ProductChange, User
+from app.models import User
 from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
-from pydantic import BaseModel
-from sqlalchemy.orm import Session, joinedload
+from pydantic import BaseModel, EmailStr
+from sqlalchemy.orm import Session
+from fastapi_mail import ConnectionConfig, FastMail, MessageSchema
 
 router = APIRouter()
 
 # 📌 User-Registrierung Schema
-
-
 class UserCreate(BaseModel):
     username: str
+    email: EmailStr
     password: str
+    password_repeat: str  # 
 
-# 📌 MarketCluster Response Schema
+# 📧 Mail-Konfiguration (mit .env Werten)
+MAIL_CONFIG = ConnectionConfig(
+    MAIL_USERNAME=os.getenv("MAIL_USERNAME", "dein-email@gmail.com"),
+    MAIL_PASSWORD=os.getenv("MAIL_PASSWORD", "dein-passwort"),
+    MAIL_FROM=os.getenv("MAIL_FROM", "dein-email@gmail.com"),
+    MAIL_FROM_NAME="Mein Unternehmen",
+    MAIL_PORT=587,  # Falls du SSL nutzt, ändere auf 465
+    MAIL_SERVER="smtp.gmail.com",  # SMTP-Server für Gmail (ändere, falls nötig)
+    MAIL_STARTTLS=True,  # ✅ Erforderlich für TLS
+    MAIL_SSL_TLS=False,  # ✅ Erforderlich für neue `fastapi-mail` Version
+)
 
-
-class MarketClusterResponse(BaseModel):
-    id: int
-    title: str
-    markets: List[str]
-
-# 📌 Market Response Schema
-
-
-class MarketResponse(BaseModel):
-    id: int
-    keyword: str
-    products: List[dict]
-
-# 📌 User-Registrierung mit SQLAlchemy
-
-
+# 📌 Registrierung mit E-Mail-Verifikation
 @router.post("/register")
-def register(user: UserCreate, db: Session = Depends(get_db)):
+async def register(user: UserCreate, db: Session = Depends(get_db)):
+    if user.password != user.password_repeat:
+        raise HTTPException(status_code=400, detail="Passwörter stimmen nicht überein.")
+
     existing_user = db.query(User).filter(
-        User.username == user.username).first()
+        (User.username == user.username) | (User.email == user.email)
+    ).first()
     if existing_user:
-        raise HTTPException(status_code=400, detail="User already exists")
+        raise HTTPException(status_code=400, detail="Benutzername oder E-Mail bereits vergeben.")
 
-    new_user = User(username=user.username,
-                    hashed_password=get_password_hash(user.password))
+    verification_token = generate_verification_token()
+    expiration_time = get_expiration_time()
+
+    new_user = User(
+        username=user.username,
+        email=user.email,
+        hashed_password=get_password_hash(user.password),
+        is_verified=False,
+        verification_token=verification_token,
+        verification_token_expires=expiration_time,
+    )
     db.add(new_user)
     db.commit()
-    db.refresh(new_user)
 
-    return {"message": "User created successfully"}
+    # 📌 Hier kommt der Mock! Statt E-Mail wird der Link im API-Response zurückgegeben
+    verification_link = f"http://localhost:5173/verify/{verification_token}"
+
+    return {
+        "message": "Registrierung erfolgreich! Bitte prüfe die angezeigte E-Mail.",
+        "mocked_verification_link": verification_link  # ✅ Für Frontend-Anzeige
+    }
 
 
-@router.post("/register", status_code=201)
-def register(user: UserCreate, db: Session = Depends(get_db)):
-    # Prüfe, ob der Benutzer bereits existiert
-    existing_user = db.query(User).filter(User.username == user.username).first()
-    if existing_user:
-        raise HTTPException(status_code=400, detail="User already exists")
+# 📧 Verifizierungs-E-Mail senden
+async def send_verification_email(email: str, username: str, token: str, expires: datetime):
+    expiration_time_formatted = expires.astimezone(timezone.utc).strftime("%H:%M UTC")
+    verification_link = f"http://127.0.0.1:9000/users/verify/{token}"
 
-    # Neues Passwort hashen und Benutzer erstellen
-    hashed_password = get_password_hash(user.password)
-    new_user = User(username=user.username, hashed_password=hashed_password)
+    message_body = f"""
+    Hallo {username},
+
+    Bitte klicke auf den folgenden Link, um dein Konto zu aktivieren:
     
-    db.add(new_user)
+    {verification_link}
+    
+    ⚠️ **Wichtig:** Der Link ist nur bis {expiration_time_formatted} gültig (30 Minuten).
+
+    Falls du dich nicht registriert hast, kannst du diese E-Mail ignorieren.
+
+    Viele Grüße,
+    Dein Team
+    """
+
+    message = MessageSchema(
+        subject="Verifiziere dein Konto",
+        recipients=[email],
+        body=message_body,
+        subtype="plain",
+    )
+
+    fm = FastMail(MAIL_CONFIG)
+    await fm.send_message(message)
+
+# 📌 Verifizierungs-Route
+@router.get("/verify/{token}")
+def verify_email(token: str, db: Session = Depends(get_db)):
+    user = db.query(User).filter(User.verification_token == token).first()
+    if not user:
+        raise HTTPException(status_code=400, detail="Ungültiger oder abgelaufener Token.")
+
+    # 📌 **Fix: Beide Datumswerte in "offset-aware" umwandeln**
+    if user.verification_token_expires:
+        expires_aware = user.verification_token_expires.replace(tzinfo=timezone.utc)
+        now_aware = datetime.now(timezone.utc)
+
+        if expires_aware < now_aware:
+            raise HTTPException(status_code=400, detail="Der Verifizierungslink ist abgelaufen. Bitte registriere dich erneut.")
+
+    # ✅ Benutzer als verifiziert markieren
+    user.is_verified = True
+    user.verification_token = None
+    user.verification_token_expires = None  # Ablaufzeit zurücksetzen
     db.commit()
-    db.refresh(new_user)
 
-    return {"message": "User registered successfully"}
+    print(f"✅ Benutzer {user.username} ({user.email}) erfolgreich verifiziert!")  # Debug-Info
 
-
+    return {
+        "message": "E-Mail erfolgreich verifiziert! Du kannst dich jetzt einloggen.",
+        "username": user.username,
+        "email": user.email,
+    }
 
 # 📌 Token-Generierung (Login)
-
-
 @router.post("/token")
 def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
     user = authenticate_user(db, form_data.username, form_data.password)
-    if not user:
+    if not user or not user.is_verified:  # 📌 Benutzer muss verifiziert sein!
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Incorrect username or password",
+            detail="Falsche Anmeldedaten oder Konto nicht verifiziert",
             headers={"WWW-Authenticate": "Bearer"},
         )
 

@@ -12,28 +12,33 @@ const API_URL = "http://127.0.0.1:9000"; // Backend-URL
 class UserService {
   private static TOKEN_KEY = "token";
 
-  static async register(username: string, password: string): Promise<boolean> {
+  static async register(
+    username: string,
+    email: string,
+    password: string,
+    passwordRepeat: string
+  ): Promise<{ success: boolean; mocked_verification_link?: string; message: string }> {
     try {
       const response = await fetch(`${API_URL}/users/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ username, email, password, password_repeat: passwordRepeat }),
       });
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.detail || "Registrierung fehlgeschlagen");
+        return { success: false, message: errorData.detail || "Registrierung fehlgeschlagen." };
       }
 
-      return true;
+      const data = await response.json(); // ✅ Jetzt wird die JSON-Antwort korrekt geparsed
+      return { success: true, mocked_verification_link: data.mocked_verification_link, message: data.message };
     } catch (error) {
       console.error("Fehler bei der Registrierung:", error);
-      return false;
+      return { success: false, message: "Netzwerkfehler. Bitte versuche es erneut." };
     }
   }
-
 
   // 📌 Holt das JWT-Token aus localStorage
   static getToken(): string | null {

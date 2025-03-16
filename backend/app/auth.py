@@ -1,5 +1,6 @@
 import os
-from datetime import datetime, timedelta
+import secrets  # 📌 Fehlender Import hinzugefügt
+from datetime import datetime, timedelta, timezone
 
 from app.models import User
 from dotenv import load_dotenv
@@ -35,6 +36,12 @@ def create_access_token(data: dict) -> str:
 
     to_encode.update({"exp": expire})
     return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
+
+def generate_verification_token():
+    return secrets.token_urlsafe(32)  # 📌 Sicherer Token-Generator
+
+def get_expiration_time():
+    return datetime.now(timezone.utc) + timedelta(minutes=30)  # 📌 Ablaufzeit 30 Minuten
 
 
 def get_db():

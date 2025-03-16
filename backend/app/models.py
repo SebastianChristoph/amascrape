@@ -1,6 +1,6 @@
 from datetime import datetime, timezone
 
-from sqlalchemy import (Column, DateTime, Float, ForeignKey, Integer, String,
+from sqlalchemy import (Boolean, Column, DateTime, Float, ForeignKey, Integer, String,
                         Table)
 from sqlalchemy.orm import declarative_base, relationship
 
@@ -31,21 +31,21 @@ market_cluster_markets = Table(
 )
 
 # 1️⃣ Users Table
-
-
 class User(Base):
     __tablename__ = "users"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    username = Column(String, unique=True, nullable=False)
+    username = Column(String, unique=True, nullable=False, index=True)
+    email = Column(String, unique=True, nullable=False, index=True)
     hashed_password = Column(String, nullable=False)
+    is_verified = Column(Boolean, default=False)
+    verification_token = Column(String(64), unique=True, nullable=True)
+    verification_token_expires = Column(DateTime, nullable=True)
 
-    # Beziehung zu MarketClusters
-    market_clusters = relationship("MarketCluster", back_populates="user")
+    # ✅ Beziehung zu MarketCluster reparieren
+    market_clusters = relationship("MarketCluster", back_populates="user", passive_deletes=True)
 
 # 2️⃣ Products Table
-
-
 class Product(Base):
     __tablename__ = "products"
 

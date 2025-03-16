@@ -21,7 +21,7 @@ class MarketClusterResponse(BaseModel):
     total_revenue: Optional[float]
 
     class Config:
-        orm_mode = True
+        from_attributes = True  # ✅ Neuer Name in Pydantic 2
 
 
 class MarketClusterCreate(BaseModel):

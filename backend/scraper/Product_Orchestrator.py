@@ -148,62 +148,63 @@ class Product_Orchestrator:
                     f"\n🔍 Überprüfe Produkt [{index}/{total_products}]: {product.asin} https://www.amazon.com/dp/{product.asin}?language=en_US")
 
                 try:
-                    last_product_change = self.get_latest_product_change(
-                        db, product.asin)
+                    last_product_change = self.get_latest_product_change(db, product.asin)
                     new_data = self.scraper.get_product_infos(product.asin)
 
                     if not new_data:
                         logging.warning(
-                            f"❌ Fehler beim Scrapen von {product.asin}, überspringe...")
-                        continue
-
-                    changes, changed_fields = self.detect_product_changes(
-                        last_product_change, new_data)
-
-                    if not changes:
-                        logging.info(f"✅ Keine Änderungen für {product.asin}.")
+                            f"❌ Fehler beim Scrapen von {product.asin}, aber last_time_scraped wird trotzdem aktualisiert.")
                     else:
-                        logging.info(
-                            f"⚡ Änderungen erkannt für {product.asin}: {', '.join(changes)}")
-                        new_product_change = ProductChange(
-                            asin=product.asin,
-                            title=new_data.get("title"),
-                            price=new_data.get("price"),
-                            main_category=new_data.get("main_category"),
-                            second_category=new_data.get("second_category"),
-                            main_category_rank=new_data.get(
-                                "rank_main_category"),
-                            second_category_rank=new_data.get(
-                                "rank_second_category"),
-                            img_path=new_data.get("image_url"),
-                            blm=new_data.get("blm"),
-                            total=new_data.get("total"),
-                            change_date=datetime.now(timezone.utc),
-                            changes=" | ".join(changes)
-                        )
+                        changes, changed_fields = self.detect_product_changes(
+                            last_product_change, new_data)
 
-                        db.add(new_product_change)
-                        product.product_changes.append(new_product_change)
+                        if not changes:
+                            logging.info(f"✅ Keine Änderungen für {product.asin}.")
+                        else:
+                            logging.info(
+                                f"⚡ Änderungen erkannt für {product.asin}: {', '.join(changes)}")
+                            new_product_change = ProductChange(
+                                asin=product.asin,
+                                title=new_data.get("title"),
+                                price=new_data.get("price"),
+                                main_category=new_data.get("main_category"),
+                                second_category=new_data.get("second_category"),
+                                main_category_rank=new_data.get(
+                                    "rank_main_category"),
+                                second_category_rank=new_data.get(
+                                    "rank_second_category"),
+                                img_path=new_data.get("image_url"),
+                                blm=new_data.get("blm"),
+                                total=new_data.get("total"),
+                                change_date=datetime.now(timezone.utc),
+                                changes=" | ".join(changes)
+                            )
 
+                            db.add(new_product_change)
+                            product.product_changes.append(new_product_change)
+
+                    # ✅ last_time_scraped wird jetzt immer aktualisiert!
                     product.last_time_scraped = datetime.now(timezone.utc)
                     db.commit()
 
                     logging.info(
-                        f"✅ last_time_scraped für {product.asin} aktualisiert.")
+                        f"✅ last_time_scraped für {product.asin} erfolgreich aktualisiert.")
 
                     scraped_asins.add(product.asin)
 
                 except Exception as e:
-                    logging.error(
-                        f"❌ Fehler beim Scrapen von {product.asin}: {e}")
-                    continue
+                    logging.error(f"❌ Fehler beim Scrapen von {product.asin}: {e}")
+                    product.last_time_scraped = datetime.now(timezone.utc)  # ✅ Trotzdem updaten
+                    db.commit()
+                    logging.info(
+                        f"⚠️ Fehler, aber last_time_scraped für {product.asin} wurde trotzdem aktualisiert.")
 
         except Exception as e:
-            logging.critical(
-                f"❌ Schwerwiegender Fehler im Product-Update: {e}")
+            logging.critical(f"❌ Schwerwiegender Fehler im Product-Update: {e}")
         finally:
             db.close()
             self.close_driver()
+
 
     def close_driver(self):
         """Schließt den WebDriver nach dem Scraping."""

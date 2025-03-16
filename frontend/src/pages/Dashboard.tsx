@@ -100,15 +100,67 @@ const Dashboard: React.FC = () => {
     <Container maxWidth="xl">
       {/* ✅ Zeigt aktive Scraping-Prozesse mit Keywords & Status an */}
       {activeCluster && activeCluster.status === "processing" && (
-        <Paper sx={{ paddingY: 4, paddingX: 4, mt: 2, borderRadius: 3 }}>
-          <Typography variant="h5" sx={{ mb: 2, display: "flex", alignItems: "center", gap: 1 }}>
+          <Paper sx={{ paddingY: 4, paddingX: 4, mt: 2, borderRadius: 3 }}>
+          <Typography
+            variant="h5"
+            sx={{ mb: 2, display: "flex", alignItems: "center", gap: 1 }}
+          >
             <CircularProgress size={24} sx={{ color: "primary.main" }} />
             Our robots are scraping for you...
           </Typography>
+
           <Alert sx={{ mb: 2 }} severity="info">
             We are scraping your markets to get a first impression of your
-            cluster. This usually takes some minutes. You can come back later.
+            cluster. This usually takes some minutes. You can come back later,
+            inspect your other clusters or have a coffee.
           </Alert>
+
+          <Box sx={{ flexGrow: 1 }}>
+            <Grid container spacing={3}>
+              <Card elevation={5} sx={{ cursor: "pointer", borderRadius: 3 }}>
+                <CardHeader
+                  sx={{ alignItems: "flex-start" }}
+                  avatar={<GrCluster size={28} color="#000010" />}
+                  title={
+                    <Typography variant="h6">
+                      {activeCluster.clustername}
+                    </Typography>
+                  }
+                />
+                <CardContent>
+                  <Box>
+                    <Typography variant="body1">Scraping status:</Typography>
+                    <Box
+                      sx={{ display: "flex", flexDirection: "column", gap: 2 }}
+                    >
+                      {Object.entries(activeCluster.keywords).map(
+                        ([keyword, status]) => (
+                          <Box
+                            key={keyword}
+                            sx={{
+                              display: "flex",
+                              alignItems: "center",
+                              gap: 1,
+                            }}
+                          >
+                            {status === "done" ? (
+                              <AiOutlineCheckCircle size={18} color="green" />
+                            ) : (
+                              <CircularProgress
+                                size={16}
+                                sx={{ color: "primary.main" }}
+                              />
+                            )}
+                            <Typography variant="body2">{keyword}</Typography>
+                          </Box>
+                        )
+                      )}
+                    </Box>
+                  </Box>
+                </CardContent>
+              </Card>
+            </Grid>
+          </Box>
         </Paper>
       )}
 
