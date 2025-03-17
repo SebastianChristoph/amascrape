@@ -1,5 +1,6 @@
 import { BarChart } from "@mui/x-charts/BarChart";
 
+
 interface CustomStackBarsProps {
   data: Record<string, { date: string; value: number }[]>; // ✅ Märkte mit Datum & Wert
 }
@@ -28,14 +29,21 @@ export default function CustomStackBars({ data }: CustomStackBarsProps) {
 
   return (
     <BarChart
-      dataset={dataset} // ✅ Korrektes Format
+      dataset={dataset.filter((entry) =>
+        Object.keys(entry).some(
+          (key) => key !== "date" && Number(entry[key]) > 0 // 🔥 Explizite Konvertierung zu Number
+        )
+      )}
       series={Object.keys(data).map((market) => ({
         dataKey: market,
         label: market,
-      }))} // ✅ Jeder Market eine Serie
-      xAxis={[{ scaleType: "band", dataKey: "date" }]} // ✅ x-Achse mit `date`
+        stack: 'total',
+      }))}
+      xAxis={[{ scaleType: "band", dataKey: "date" }]}
       slotProps={{ legend: { hidden: false } }}
       height={300}
     />
   );
+  
+  
 }
