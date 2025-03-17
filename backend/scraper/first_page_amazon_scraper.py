@@ -107,64 +107,134 @@ class AmazonFirstPageScraper:
 
     def get_first_page_products(self) -> list:
         if self.show_details:
-            if self.show_details:
-                print("📋 Collecting list items")
+            print("📋 Collecting list items")
         try:
             self.scroll_down()
             wait = WebDriverWait(self.driver, 10)
-            list_items = wait.until(EC.presence_of_all_elements_located(
-                (By.XPATH, "//div[@role='listitem' and @data-asin]")))
+            
+            # Wait for any product cards to load
+            wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "[data-asin]")))
+            
+            # Get all product cards
+            list_items = self.driver.find_elements(By.CSS_SELECTOR, "[data-asin]")
 
             results = []
             for item in list_items:
                 try:
-                    # Extract ASIN
+                    # Skip items without ASIN
                     asin = item.get_attribute("data-asin")
+                    if not asin:
+                        continue
 
-                    # Extract price
-                    price_link = next((a for a in item.find_elements(
-                        By.TAG_NAME, "a") if a.get_attribute("aria-describedby") == "price-link"), None)
-                    if not price_link:
-                        # raise Exception("Price link not found")
-                        price = None
-                    else:
+                    # Extract price - try multiple methods
+                    price = None
+                    try:
+                        # Method 1: Price link
+                        price_link = item.find_element(By.CSS_SELECTOR, "a[aria-describedby='price-link']")
                         price_text = price_link.text.replace("$", "").strip()
-                        price_numbers = re.findall(r'\d+', price_text)
-                        if len(price_numbers) >= 2:
-                            price = float(
-                                f"{price_numbers[0]}.{price_numbers[1]}")
-                        else:
-                            price = float(
-                                price_numbers[0]) if price_numbers else None
+                        if price_text and price_text != ".":
+                            price_numbers = re.findall(r'\d+', price_text)
+                            if len(price_numbers) >= 2:
+                                price = float(f"{price_numbers[0]}.{price_numbers[1]}")
+                            elif len(price_numbers) == 1:
+                                price = float(price_numbers[0])
+                    except (NoSuchElementException, ValueError):
+                        pass
 
-                    # Extract title
-                    title_element = item.find_element(By.TAG_NAME, "h2")
-                    title = title_element.text.strip()
+                    # Method 2: Price span
+                    if price is None:
+                        try:
+                            price_span = item.find_element(By.CSS_SELECTOR, "span.a-price span.a-offscreen")
+                            price_text = price_span.text.replace("$", "").strip()
+                            if price_text and price_text != ".":
+                                price_numbers = re.findall(r'\d+', price_text)
+                                if len(price_numbers) >= 2:
+                                    price = float(f"{price_numbers[0]}.{price_numbers[1]}")
+                                elif len(price_numbers) == 1:
+                                    price = float(price_numbers[0])
+                        except (NoSuchElementException, ValueError):
+                            pass
 
-                    if title == "":
-                        title = None
+                    # Method 3: Whole price
+                    if price is None:
+                        try:
+                            whole_price = item.find_element(By.CSS_SELECTOR, "span.a-price-whole")
+                            fraction_price = item.find_element(By.CSS_SELECTOR, "span.a-price-fraction")
+                            whole_text = whole_price.text.strip()
+                            fraction_text = fraction_price.text.strip()
+                            if whole_text and fraction_text:
+                                price = float(f"{whole_text}.{fraction_text}")
+                        except (NoSuchElementException, ValueError):
+                            pass
 
-                    # Extract img
-                    img_element = item.find_element(
-                        By.XPATH, ".//img[@class='s-image']")
-                    image_src = img_element.get_attribute("src")
+                    # Method 4: Try to find any price text
+                    if price is None:
+                        try:
+                            price_elements = item.find_elements(By.CSS_SELECTOR, "span.a-price")
+                            for price_elem in price_elements:
+                                price_text = price_elem.text.replace("$", "").strip()
+                                if price_text and price_text != ".":
+                                    price_numbers = re.findall(r'\d+', price_text)
+                                    if len(price_numbers) >= 2:
+                                        price = float(f"{price_numbers[0]}.{price_numbers[1]}")
+                                        break
+                                    elif len(price_numbers) == 1:
+                                        price = float(price_numbers[0])
+                                        break
+                        except (NoSuchElementException, ValueError):
+                            pass
 
-                    # Store in results list
-                    results.append({"asin": asin, "price": price,
-                                   "title": title, "image": image_src})
+                    # Extract title - try multiple methods
+                    title = None
+                    try:
+                        # Method 1: h2 tag
+                        title_element = item.find_element(By.TAG_NAME, "h2")
+                        title = title_element.text.strip()
+                    except NoSuchElementException:
+                        pass
+
+                    # Method 2: Product title link
+                    if not title:
+                        try:
+                            title_link = item.find_element(By.CSS_SELECTOR, "a.a-link-normal h2")
+                            title = title_link.text.strip()
+                        except NoSuchElementException:
+                            pass
+
+                    # Method 3: Product title span
+                    if not title:
+                        try:
+                            title_span = item.find_element(By.CSS_SELECTOR, "span.a-text-normal")
+                            title = title_span.text.strip()
+                        except NoSuchElementException:
+                            pass
+
+                    # Extract image
+                    try:
+                        img_element = item.find_element(By.CSS_SELECTOR, "img.s-image")
+                        image_src = img_element.get_attribute("src")
+                    except NoSuchElementException:
+                        image_src = None
+
+                    # Only add if we have at least a title or price
+                    if title or price:
+                        results.append({
+                            "asin": asin,
+                            "price": price,
+                            "title": title,
+                            "image": image_src
+                        })
+
                 except Exception as e:
-                    print(
-                        f"   ❌ Skipping item ({asin}) due to missing element!", e)
+                    if self.show_details:
+                        print(f"   ❌ Skipping item ({asin}) due to error: {e}")
                     continue
 
-                # print("Extracted items:")
-                # for item in results:
-                #     print("\n")
-                #     print(60 *"-")
-                #     print(f"ASIN: {item['asin']}, \nTitle: {item['title'][:30]}..., \nPrice: {item['price']}, \nImage: {item['image']}")
             return results
+
         except Exception as e:
-            print("   ❌ Error finding list items!", e)
+            if self.show_details:
+                print("   ❌ Error finding list items!", e)
             return []
 
     def close_driver(self):

@@ -21,8 +21,6 @@ class LineChartDataResponse(BaseModel):
 
 @router.get("/get-line-chart-data", response_model=LineChartDataResponse)
 async def get_line_chart_data(current_user=Depends(get_current_user)):
-    # ⏳ Simuliert eine asynchrone Verzögerung (z. B. langsame DB-Abfrage)
-    await asyncio.sleep(1)
     return {
         "x_axis": [8, 9, 10],
         "series": [
@@ -37,7 +35,6 @@ class SparkLineDataResponse(BaseModel):
 
 @router.get("/get-spark-line-data", response_model=SparkLineDataResponse)
 async def get_spark_line_data(current_user=Depends(get_current_user)):
-    await asyncio.sleep(1)  # ⏳ Simuliert Verzögerung
     return {"data": [random.randint(1, 10) for _ in range(9)]}
 
 
@@ -117,8 +114,6 @@ async def get_sparkline_grid_data(asin: str, db: Session = Depends(get_db), curr
 
 @router.get("/get-stacked-bar-data-for-cluster/{cluster_id}")
 async def get_stacked_bar_data_for_cluster(cluster_id: int, db: Session = Depends(get_db)):
-    await asyncio.sleep(1)  # ⏳ Simulierte Verzögerung
-
     # 📌 MarketCluster abrufen
     market_cluster = db.query(MarketCluster).filter(
         MarketCluster.id == cluster_id).first()
@@ -185,8 +180,6 @@ async def get_sparkline_data_for_market_cluster(cluster_id: int, db: Session = D
     Holt die aggregierte Umsatzentwicklung für ein MarketCluster als Liste von Integer-Werten.
     Falls ein Markt keine Änderung an einem Tag hat, wird der letzte bekannte Wert übernommen.
     """
-    await asyncio.sleep(1)  # Simulierte Verzögerung für realistischere Ladezeiten
-
     # 📌 MarketCluster abrufen
     market_cluster = db.query(MarketCluster).filter(
         MarketCluster.id == cluster_id).first()
@@ -254,7 +247,6 @@ async def get_sparkline_data_for_market_cluster(cluster_id: int, db: Session = D
 
 @router.get("/get-bar-chart-data")
 async def get_bar_chart_data():
-    await asyncio.sleep(1)  # ⏳ Simuliert Verzögerung
     quarters = ["Q1", "Q2", "Q3", "Q4"]
     data = [
         {

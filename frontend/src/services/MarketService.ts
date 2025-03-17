@@ -79,6 +79,43 @@ class MarketService {
     }
   }
 
+  static async getDashboardOverview(): Promise<any> {
+    try {
+      const token = localStorage.getItem(this.TOKEN_KEY);
+      if (!token) {
+        throw new Error("No token found. Please login.");
+      }
+
+      console.log("Fetching dashboard overview...");
+      const response = await fetch(`${API_URL}/market-clusters/dashboard-overview`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error("Dashboard overview error:", response.status, errorText);
+        throw new Error(`Error fetching dashboard overview data: ${response.status} ${errorText}`);
+      }
+
+      const data = await response.json();
+      console.log("Dashboard overview data:", data);
+      return data;
+    } catch (error) {
+      console.error("Error fetching dashboard overview:", error);
+      return {
+        total_revenue: 0,
+        total_markets: 0,
+        clusters_without_revenue: 0,
+        total_unique_products: 0,
+        revenue_development: new Array(30).fill(0)
+      };
+    }
+  }
+
   // 📌 Einzelnes Market-Cluster mit MarketChanges abrufen
   static async getMarketClusterDetails(clusterId: number): Promise<any> {
     try {

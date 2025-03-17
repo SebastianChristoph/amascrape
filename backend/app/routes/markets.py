@@ -29,8 +29,6 @@ async def get_market(
     db: Session = Depends(get_db),
     current_user=Depends(get_current_user)
 ):
-    await asyncio.sleep(0.5)  # ⏳ Simulierte Verzögerung
-
     # ✅ Market abrufen
     market = db.query(Market).filter(Market.id == market_id).first()
 

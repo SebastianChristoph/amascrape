@@ -108,10 +108,16 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
           title={<Typography variant="h6">{cluster.title}</Typography>}
           action={
             <>
-              <IconButton color="primary" onClick={() => setOpenEditDialog(true)}>
+              <IconButton color="primary" onClick={(e) => {
+                e.stopPropagation();
+                setOpenEditDialog(true);
+              }}>
                 <MdEdit size={24} />
               </IconButton>
-              <IconButton color="primary" onClick={() => setOpenConfirmDialog(true)}>
+              <IconButton color="primary" onClick={(e) => {
+                e.stopPropagation();
+                setOpenConfirmDialog(true);
+              }}>
                 <MdDelete size={24} />
               </IconButton>
             </>
@@ -166,6 +172,73 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
           )}
         </CardContent>
       </Card>
+
+      {/* Confirmation Dialog for Delete */}
+      <Dialog open={openConfirmDialog} onClose={() => setOpenConfirmDialog(false)}>
+        <DialogTitle>Delete Market Cluster</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Are you sure you want to delete the market cluster "{cluster.title}"? This action cannot be undone.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setOpenConfirmDialog(false)}>Cancel</Button>
+          <Button
+            onClick={async () => {
+              setDeletingCluster(cluster.id);
+              const success = await MarketService.deleteMarketCluster(cluster.id);
+              if (success) {
+                showSnackbar("Market Cluster successfully deleted");
+                fetchMarketClusters();
+              } else {
+                showSnackbar("Error deleting Market Cluster", "error");
+                setDeletingCluster(null);
+              }
+              setOpenConfirmDialog(false);
+            }}
+            color="error"
+            variant="contained"
+          >
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* Edit Dialog */}
+      <Dialog open={openEditDialog} onClose={() => setOpenEditDialog(false)}>
+        <DialogTitle>Edit Market Cluster</DialogTitle>
+        <DialogContent>
+          <TextField
+            autoFocus
+            margin="dense"
+            label="Cluster Title"
+            type="text"
+            fullWidth
+            variant="outlined"
+            value={newTitle}
+            onChange={(e) => setNewTitle(e.target.value)}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setOpenEditDialog(false)}>Cancel</Button>
+          <Button
+            onClick={async () => {
+              try {
+                await MarketService.updateMarketCluster(cluster.id, { title: newTitle });
+                showSnackbar("Market Cluster title updated successfully");
+                fetchMarketClusters();
+                setOpenEditDialog(false);
+              } catch (error) {
+                showSnackbar("Error updating Market Cluster title", "error");
+              }
+            }}
+            color="primary"
+            variant="contained"
+          >
+            Save
+          </Button>
+        </DialogActions>
+      </Dialog>
     </motion.div>
   );
 };

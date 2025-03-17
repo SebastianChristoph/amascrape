@@ -3,6 +3,7 @@ import os
 import sys
 import time
 from datetime import datetime, timezone
+from statistics import mean
 
 import scraper.selenium_config as selenium_config
 from app.database import SessionLocal
@@ -31,6 +32,8 @@ class Product_Orchestrator:
     def __init__(self, just_scrape_3_products=False):
         """Initialisiert den Orchestrator und setzt den WebDriver einmalig auf."""
         self.just_scrape_3_products = just_scrape_3_products
+        self.scraping_times = []
+        self.start_time = None
 
         logging.info("🚀 Product Orchestrator gestartet.")
 
@@ -125,6 +128,7 @@ class Product_Orchestrator:
         """Scraped alle Produkte nacheinander und schließt den WebDriver danach."""
         db = SessionLocal()
         scraped_asins = set()
+        self.start_time = time.time()
 
         try:
             logging.info("🚀 Starte Product-Update...")
@@ -148,8 +152,11 @@ class Product_Orchestrator:
                     f"\n🔍 Überprüfe Produkt [{index}/{total_products}]: {product.asin} https://www.amazon.com/dp/{product.asin}?language=en_US")
 
                 try:
+                    product_start_time = time.time()
                     last_product_change = self.get_latest_product_change(db, product.asin)
                     new_data = self.scraper.get_product_infos(product.asin)
+                    product_end_time = time.time()
+                    self.scraping_times.append(product_end_time - product_start_time)
 
                     if not new_data:
                         logging.warning(
@@ -183,7 +190,6 @@ class Product_Orchestrator:
                             db.add(new_product_change)
                             product.product_changes.append(new_product_change)
 
-                    # ✅ last_time_scraped wird jetzt immer aktualisiert!
                     product.last_time_scraped = datetime.now(timezone.utc)
                     db.commit()
 
@@ -194,7 +200,7 @@ class Product_Orchestrator:
 
                 except Exception as e:
                     logging.error(f"❌ Fehler beim Scrapen von {product.asin}: {e}")
-                    product.last_time_scraped = datetime.now(timezone.utc)  # ✅ Trotzdem updaten
+                    product.last_time_scraped = datetime.now(timezone.utc)
                     db.commit()
                     logging.info(
                         f"⚠️ Fehler, aber last_time_scraped für {product.asin} wurde trotzdem aktualisiert.")
@@ -202,9 +208,17 @@ class Product_Orchestrator:
         except Exception as e:
             logging.critical(f"❌ Schwerwiegender Fehler im Product-Update: {e}")
         finally:
+            end_time = time.time()
+            total_time = end_time - self.start_time
+            avg_time = mean(self.scraping_times) if self.scraping_times else 0
+            
+            logging.info("\n📊 Scraping Performance Metrics:")
+            logging.info(f"🕒 Gesamtzeit: {total_time:.2f} Sekunden")
+            logging.info(f"⚡ Durchschnittliche Zeit pro Produkt: {avg_time:.2f} Sekunden")
+            logging.info(f"📦 Anzahl gescrapte Produkte: {len(scraped_asins)}")
+            
             db.close()
             self.close_driver()
-
 
     def close_driver(self):
         """Schließt den WebDriver nach dem Scraping."""

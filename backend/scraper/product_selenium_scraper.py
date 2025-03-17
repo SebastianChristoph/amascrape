@@ -103,38 +103,41 @@ class AmazonProductScraper:
         if self.show_details:
             print("📝 Getting rating")
 
-        if self.product_info_box_content != None:
-            try:
-                match = re.search(
-                    r"(\d+\.\d+)\s+([\d,]+) ratings", self.product_info_box_content["Customer Reviews"])
-                if match:
-                    # print("1", match.group(1))
-                    # print("2", match.group(2))
-                    return float(match.group(1).replace(',', ''))
-            except KeyError as e:
-                print(
-                    "   🔹  KeyError: 'Customer Reviews'  not found in Prodcut Info Box!, trying to get it from UI")
-            except Exception as e:
-                print("   ⚠️  Error parsing rating")
-        else:
-            if self.show_details:
-                print("   🔹  No product info available, try to get data in UI")
-
+        # Try multiple ways to get the rating
         try:
-            rating_element = self.driver.find_element(
-                By.XPATH, self.web_elements["rating"])
-            if self.show_details:
-                print("   ✅ Found rating in UI")
-            # print("\t before slicing", rating_element.text)
-            rating_text = rating_element.text.strip()[:3]
-            # print("\t after slicing", rating_text)
-            return float(rating_text)
-        except NoSuchElementException as e:
-            print("   ⚠️  No rating element found, returning None")
-        except ValueError as e:
-            print("   ⚠️  Error parsing rating, returning None")
+            # Method 1: From product info box
+            if self.product_info_box_content and "Customer Reviews" in self.product_info_box_content:
+                match = re.search(r"(\d+\.\d+)\s+([\d,]+) ratings", self.product_info_box_content["Customer Reviews"])
+                if match:
+                    return float(match.group(1).replace(',', ''))
+
+            # Method 2: From the rating histogram
+            try:
+                rating_element = self.driver.find_element(By.XPATH, self.web_elements["rating"])
+                if rating_element:
+                    rating_text = rating_element.text.strip()[:3]
+                    return float(rating_text)
+            except NoSuchElementException:
+                pass
+
+            # Method 3: From the star rating in the product title area
+            try:
+                star_rating = self.driver.find_element(By.XPATH, "//div[@id='averageCustomerReviews']//span[@class='a-icon-alt']")
+                rating_text = star_rating.text.split()[0]  # Usually format is "4.5 out of 5"
+                return float(rating_text)
+            except NoSuchElementException:
+                pass
+
+            # Method 4: From the review count element (sometimes contains rating)
+            try:
+                review_element = self.driver.find_element(By.XPATH, self.web_elements["review_count"])
+                rating_text = review_element.text.split()[0]  # Sometimes rating is first part
+                return float(rating_text)
+            except (NoSuchElementException, ValueError):
+                pass
+
         except Exception as e:
-            print("   ⚠️  Error getting rating, returning None", e)
+            print(f"   ⚠️  Error getting rating: {e}")
 
         return None
 
@@ -142,61 +145,100 @@ class AmazonProductScraper:
         if self.show_details:
             print("📝 Getting reviews count")
 
-        if self.product_info_box_content != None:
-
-            try:
-                match = re.search(
-                    r"(\d+\.\d+)\s+([\d,]+) ratings", self.product_info_box_content["Customer Reviews"])
-                if match:
-                    # print(match.group(1))
-                    # print(match.group(2))
-                    return int(match.group(2).replace(',', ''))
-            except KeyError as e:
-                print(
-                    "   🔹  KeyError: 'Customer Reviews' not found in Prodcut Info Box!, trying to get it from UI")
-            except Exception as e:
-                print("   ⚠️  Error parsing review count")
-        else:
-            if self.show_details:
-                print("   🔹  No product info available, try to get data in UI")
-
+        # Try multiple ways to get the review count
         try:
-            review_count_element = self.driver.find_element(
-                By.XPATH, self.web_elements["review_count"])
-            if self.show_details:
-                print("   ✅ Found review count in UI")
-            review_count_text = review_count_element.text.strip()
-            # print("\ttext:", review_count_text)
-            match = re.search(r"(\d[\d,]*)", review_count_text)
+            # Method 1: From product info box
+            if self.product_info_box_content and "Customer Reviews" in self.product_info_box_content:
+                match = re.search(r"(\d+\.\d+)\s+([\d,]+) ratings", self.product_info_box_content["Customer Reviews"])
+                if match:
+                    return int(match.group(2).replace(',', ''))
 
-            if match:
-                # print("\tgroup1:", match.group(1))
-                # print("\tgroup2:", match.group(2))
-                review_count = int(match.group(1).replace(",", ""))
-                return review_count
-        except NoSuchElementException as e:
-            print("   ⚠️  No review count element found, returning None")
-        except ValueError as e:
-            print("   ⚠️  Error parsing review count, returning None")
+            # Method 2: From the review count element
+            try:
+                review_count_element = self.driver.find_element(By.XPATH, self.web_elements["review_count"])
+                review_count_text = review_count_element.text.strip()
+                match = re.search(r"(\d[\d,]*)", review_count_text)
+                if match:
+                    return int(match.group(1).replace(",", ""))
+            except NoSuchElementException:
+                pass
+
+            # Method 3: From the rating histogram
+            try:
+                rating_histogram = self.driver.find_element(By.XPATH, "//div[@id='cm_cr_dp_d_rating_histogram']")
+                total_reviews = rating_histogram.find_element(By.XPATH, ".//div[contains(@class, 'a-histogram-row')]//a")
+                review_text = total_reviews.text
+                match = re.search(r"(\d[\d,]*)", review_text)
+                if match:
+                    return int(match.group(1).replace(",", ""))
+            except NoSuchElementException:
+                pass
+
+            # Method 4: From the product title area
+            try:
+                review_count = self.driver.find_element(By.XPATH, "//div[@id='averageCustomerReviews']//span[contains(@class, 'a-size-base')]")
+                review_text = review_count.text
+                match = re.search(r"(\d[\d,]*)", review_text)
+                if match:
+                    return int(match.group(1).replace(",", ""))
+            except NoSuchElementException:
+                pass
+
         except Exception as e:
-            print("   ⚠️  Error getting review count, returning None: ", e)
+            print(f"   ⚠️  Error getting review count: {e}")
 
         return None
 
     def get_blm(self) -> int:
         if self.show_details:
             print("📝 Getting bought last month")
+            
+        # Try multiple ways to get the BLM
         try:
-            blm_element = self.driver.find_element(
-                By.XPATH, self.web_elements["bought_last_month"])
-            blm_str = blm_element.text
-            blm_str = blm_str.replace("bought", "").replace("K", "000").replace(
-                "k", "000").replace("+", "").replace(" ", "").replace("inpastmonth", "")
-            return int(blm_str)
+            # Method 1: Original method
+            try:
+                blm_element = self.driver.find_element(By.XPATH, self.web_elements["bought_last_month"])
+                blm_str = blm_element.text
+                blm_str = blm_str.replace("bought", "").replace("K", "000").replace(
+                    "k", "000").replace("+", "").replace(" ", "").replace("inpastmonth", "")
+                return int(blm_str)
+            except NoSuchElementException:
+                pass
+
+            # Method 2: Look for alternative BLM text
+            try:
+                blm_element = self.driver.find_element(By.XPATH, "//div[contains(text(), 'bought in past month')]")
+                blm_str = blm_element.text
+                blm_str = blm_str.replace("bought", "").replace("K", "000").replace(
+                    "k", "000").replace("+", "").replace(" ", "").replace("inpastmonth", "")
+                return int(blm_str)
+            except NoSuchElementException:
+                pass
+
+            # Method 3: Look for social proof section
+            try:
+                social_proof = self.driver.find_element(By.XPATH, "//div[contains(@class, 'socialProofingAsinFaceout')]")
+                blm_text = social_proof.text
+                match = re.search(r"(\d+)\s*bought", blm_text)
+                if match:
+                    return int(match.group(1))
+            except NoSuchElementException:
+                pass
+
+            # Method 4: Look for purchase frequency
+            try:
+                purchase_freq = self.driver.find_element(By.XPATH, "//div[contains(text(), 'purchased')]")
+                freq_text = purchase_freq.text
+                match = re.search(r"(\d+)\s*purchased", freq_text)
+                if match:
+                    return int(match.group(1))
+            except NoSuchElementException:
+                pass
 
         except Exception as e:
-            print("   ⚠️  Error finding blm! Return None")
-            return None
+            print(f"   ⚠️  Error finding BLM: {e}")
+
+        return None
 
     def get_store(self) -> str:
         try:
@@ -265,64 +307,44 @@ class AmazonProductScraper:
 
     def get_product_infos_box_content(self):
         """Extrahiert Produktinformationen aus der Tabelle oder Liste."""
+        product_info = {}
+        
+        # Try to get info from the product info box
         try:
             items = self.driver.find_elements(
                 By.XPATH, self.web_elements["product_infos_ul"] + "//li")
-            return {item.text.split(":")[0].strip(): item.text.split(":")[1].strip() for item in items if ":" in item.text}
+            product_info = {item.text.split(":")[0].strip(): item.text.split(":")[1].strip() for item in items if ":" in item.text}
+        except NoSuchElementException:
+            pass
+
+        # Try to get info from the product details table
+        try:
+            rows = self.driver.find_elements(
+                By.XPATH, self.web_elements["product_infos_table"] + "//tr")
+            table_info = {row.find_element(By.TAG_NAME, 'th').text.strip(): row.find_element(By.TAG_NAME, 'td').text.strip() for row in rows}
+            product_info.update(table_info)
+        except NoSuchElementException:
+            pass
+
+        # Try to get info from the Item details section
+        try:
+            # First try to find and click the "Item details" button if it exists
+            item_details_button = self.driver.find_element(By.XPATH, "//button[contains(text(), 'Item details')]")
+            item_details_button.click()
+            time.sleep(1)  # Wait for content to load
         except NoSuchElementException:
             pass
 
         try:
-            rows = self.driver.find_elements(
-                By.XPATH, self.web_elements["product_infos_table"] + "//tr")
-            return {row.find_element(By.TAG_NAME, 'th').text.strip(): row.find_element(By.TAG_NAME, 'td').text.strip() for row in rows}
+            # Look for the Item details content
+            item_details_rows = self.driver.find_elements(By.XPATH, "//div[contains(@class, 'item-details')]//tr")
+            item_details_info = {row.find_element(By.TAG_NAME, 'th').text.strip(): row.find_element(By.TAG_NAME, 'td').text.strip() 
+                               for row in item_details_rows}
+            product_info.update(item_details_info)
         except NoSuchElementException:
-            return {}
+            pass
 
-    def get_review_count(self) -> int:
-        if self.show_details:
-            print("📝 Getting reviews count")
-
-        if self.product_info_box_content != None:
-
-            try:
-                match = re.search(
-                    r"(\d+\.\d+)\s+([\d,]+) ratings", self.product_info_box_content["Customer Reviews"])
-                if match:
-                    # print(match.group(1))
-                    # print(match.group(2))
-                    return int(match.group(2).replace(',', ''))
-            except KeyError as e:
-                print(
-                    "   🔹  KeyError: 'Customer Reviews' not found in Prodcut Info Box!, trying to get it from UI")
-            except Exception as e:
-                print("   ⚠️  Error parsing review count")
-        else:
-            if self.show_details:
-                print("   🔹  No product info available, try to get data in UI")
-
-        try:
-            review_count_element = self.driver.find_element(
-                By.XPATH, self.web_elements["review_count"])
-            if self.show_details:
-                print("   ✅ Found review count in UI")
-            review_count_text = review_count_element.text.strip()
-            # print("\ttext:", review_count_text)
-            match = re.search(r"(\d[\d,]*)", review_count_text)
-
-            if match:
-                # print("\tgroup1:", match.group(1))
-                # print("\tgroup2:", match.group(2))
-                review_count = int(match.group(1).replace(",", ""))
-                return review_count
-        except NoSuchElementException as e:
-            print("   ⚠️  No review count element found, returning None")
-        except ValueError as e:
-            print("   ⚠️  Error parsing review count, returning None")
-        except Exception as e:
-            print("   ⚠️  Error getting review count, returning None: ", e)
-
-        return None
+        return product_info
 
     def get_product_infos(self, asin):
         """Scraped Produktdaten für eine gegebene ASIN."""

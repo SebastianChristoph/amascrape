@@ -19,6 +19,7 @@ import { useNavigate } from "react-router-dom";
 import ClusterCard from "../components/ClusterCard";
 import { useSnackbar } from "../providers/SnackbarProvider";
 import MarketService from "../services/MarketService";
+import CustomSparkLine from "../components/charts/CustomSparkLine";
 
 const Dashboard: React.FC = () => {
   const navigate = useNavigate();
@@ -27,27 +28,33 @@ const Dashboard: React.FC = () => {
   const [deletingCluster, setDeletingCluster] = useState<number | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [isFetching, setIsFetching] = useState<boolean>(true);
+  const [dashboardData, setDashboardData] = useState<any>(null);
   const [activeCluster, setActiveCluster] = useState<{
     clustername: string;
     status: string;
     keywords: { [keyword: string]: string };
   } | null>(null);
 
-  // ✅ Holt alle Market-Cluster des Users
-  const fetchMarketClusters = async () => {
+  // Fetch all data
+  const fetchData = async () => {
     try {
-      const data = await MarketService.GetMarketClusters();
-      console.log("[DASHBOARD] Aktuelle Market-Cluster:", data);
-      if (data) {
-        setMarketClusters(data);
-      } else {
-        showSnackbar("Fehler beim Laden der Market-Cluster.");
+      const [clustersData, overviewData] = await Promise.all([
+        MarketService.GetMarketClusters(),
+        MarketService.getDashboardOverview()
+      ]);
+
+      if (clustersData) {
+        setMarketClusters(clustersData);
+      }
+      if (overviewData) {
+        setDashboardData(overviewData);
       }
     } catch (error) {
-      console.error("Fehler beim Abrufen der Market-Cluster:", error);
-      showSnackbar("Fehler beim Abrufen der Market-Cluster.");
+      console.error("Error fetching data:", error);
+      showSnackbar("Error loading dashboard data", "error");
     } finally {
       setLoading(false);
+      setIsFetching(false);
     }
   };
 
@@ -59,19 +66,19 @@ const Dashboard: React.FC = () => {
       if (!data) {
         setActiveCluster(null);
         setIsFetching(false);
-        fetchMarketClusters();
+        fetchData();
       } else if (data.status === "done") {
         showSnackbar("Your cluster is ready to go");
         setActiveCluster(null);
         setIsFetching(false);
-        fetchMarketClusters();
+        fetchData();
       } else if (data.status === "error") {
         showSnackbar(
           `Error scraping your new cluster '${activeCluster?.clustername}' !`,
           "error"
         );
         setIsFetching(false);
-        setTimeout(fetchMarketClusters, 6000);
+        setTimeout(fetchData, 6000);
       } else {
         setActiveCluster(data);
         setIsFetching(true);
@@ -82,9 +89,8 @@ const Dashboard: React.FC = () => {
     }
   };
 
-  // ✅ Holt die Market-Cluster beim Laden
   useEffect(() => {
-    fetchMarketClusters();
+    fetchData();
   }, []);
 
   // ✅ Prüft auf aktive Scraping-Prozesse
@@ -98,9 +104,93 @@ const Dashboard: React.FC = () => {
 
   return (
     <Container maxWidth="xl">
+      {/* Overview Section */}
+      <Paper elevation={3} sx={{ marginBottom: 2, padding: 4 }}>
+        <Typography
+          variant="h5"
+          sx={{
+            mb: 4,
+            backgroundColor: "primary.main",
+            color: "white",
+            padding: 2,
+          }}
+        >
+          Market Clusters Overview
+        </Typography>
+        <Typography variant="subtitle1" sx={{ mb: 2 }}>
+          Here is a quick snapshot of your Total markets Revenue development
+        </Typography>
+
+        {loading ? (
+          <Box sx={{ display: "flex", justifyContent: "center", p: 4 }}>
+            <CircularProgress />
+          </Box>
+        ) : (
+          <>
+            <Grid container spacing={3} sx={{ mb: 4 }}>
+              <Grid size={3}>
+                <Box>
+                  <Typography variant="subtitle2" color="text.secondary">
+                    Total 30D Revenue
+                  </Typography>
+                  <Typography variant="h4">
+                    {new Intl.NumberFormat("en-US", {
+                      style: "currency",
+                      currency: "USD",
+                    }).format(dashboardData?.total_revenue || 0)}
+                  </Typography>
+                  {dashboardData?.clusters_without_revenue > 0 && (
+                    <Typography variant="caption" color="text.secondary">
+                      {dashboardData.clusters_without_revenue} cluster(s) still scraping
+                    </Typography>
+                  )}
+                </Box>
+              </Grid>
+              <Grid size={3}>
+                <Box>
+                  <Typography variant="subtitle2" color="text.secondary">
+                    30D Revenue change
+                  </Typography>
+                  <Box sx={{ height: 50 }}>
+                    {dashboardData?.revenue_development && (
+                      <CustomSparkLine data={dashboardData.revenue_development} />
+                    )}
+                  </Box>
+                </Box>
+              </Grid>
+              <Grid size={3}>
+                <Box>
+                  <Typography variant="subtitle2" color="text.secondary">
+                    Number of market clusters
+                  </Typography>
+                  <Typography variant="h4">
+                    {dashboardData?.total_clusters || 0}
+                  </Typography>
+                  {dashboardData?.clusters_without_revenue > 0 && (
+                    <Typography variant="caption" color="text.secondary">
+                      {dashboardData.clusters_without_revenue} cluster(s) still being scraped
+                    </Typography>
+                  )}
+                </Box>
+              </Grid>
+              <Grid size={3}>
+                <Box>
+                  <Typography variant="subtitle2" color="text.secondary">
+                    Number of tracked products
+                  </Typography>
+                  <Typography variant="h4">
+                    {dashboardData?.total_unique_products || 0}
+                  </Typography>
+                </Box>
+              </Grid>
+            </Grid>
+          </>
+        )}
+      </Paper>
+
       {/* ✅ Zeigt aktive Scraping-Prozesse mit Keywords & Status an */}
       {activeCluster && activeCluster.status === "processing" && (
-          <Paper sx={{ paddingY: 4, paddingX: 4, mt: 2, borderRadius: 3 }}>
+          <Paper elevation={3} sx={{ paddingY: 4, paddingX: 4, mt: 2, borderRadius: 3 }}>
           <Typography
             variant="h5"
             sx={{ mb: 2, display: "flex", alignItems: "center", gap: 1 }}
@@ -165,7 +255,7 @@ const Dashboard: React.FC = () => {
       )}
 
       {/* ✅ Zeigt alle Market-Cluster an */}
-      <Paper sx={{ paddingY: 4, paddingX: 4, mt: 2 }}>
+      <Paper elevation={3} sx={{ paddingY: 4, paddingX: 4, mt: 2 }}>
         <Typography variant="h5" sx={{ mb: 3, backgroundColor: "primary.main", p: 2, color: "white" }}>
           My Market Clusters
         </Typography>
@@ -187,7 +277,7 @@ const Dashboard: React.FC = () => {
                       setMarketClusters={setMarketClusters}
                       setDeletingCluster={setDeletingCluster}
                       totalRevenue={cluster.total_revenue}
-                      fetchMarketClusters={fetchMarketClusters} // ✅ Neue Prop hinzugefügt
+                      fetchMarketClusters={fetchData}
                     />
                   </Grid>
                 ))
