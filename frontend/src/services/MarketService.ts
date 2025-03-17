@@ -1,3 +1,5 @@
+import { formatError } from '../utils/errorFormatting';
+
 const API_URL = "http://127.0.0.1:9000";
 
 class MarketService {
@@ -25,7 +27,7 @@ class MarketService {
         throw new Error("Fehler beim Aktualisieren des Market Clusters.");
       return { success: true, data: await response.json() };
     } catch (error) {
-      console.error("Fehler beim Aktualisieren des Market Clusters:", error);
+      console.error("[MarketService] Update cluster error:", formatError(error));
       return { success: false };
     }
   }
@@ -47,7 +49,7 @@ class MarketService {
         throw new Error("Fehler beim Löschen des Market Clusters.");
       return true;
     } catch (error) {
-      console.error("Fehler beim Löschen des Market Clusters:", error);
+      console.error("[MarketService] Delete cluster error:", formatError(error));
       return false;
     }
   }
@@ -74,7 +76,7 @@ class MarketService {
 
       return await response.json();
     } catch (error) {
-      console.error("Fehler beim Abrufen der Market-Cluster:", error);
+      console.error("[MarketService] Get clusters error:", formatError(error));
       return null;
     }
   }
@@ -86,7 +88,6 @@ class MarketService {
         throw new Error("No token found. Please login.");
       }
 
-      console.log("Fetching dashboard overview...");
       const response = await fetch(`${API_URL}/market-clusters/dashboard-overview`, {
         method: "GET",
         headers: {
@@ -97,15 +98,13 @@ class MarketService {
 
       if (!response.ok) {
         const errorText = await response.text();
-        console.error("Dashboard overview error:", response.status, errorText);
         throw new Error(`Error fetching dashboard overview data: ${response.status} ${errorText}`);
       }
 
       const data = await response.json();
-      console.log("Dashboard overview data:", data);
       return data;
     } catch (error) {
-      console.error("Error fetching dashboard overview:", error);
+      console.error("[MarketService] Dashboard overview error:", formatError(error));
       return {
         total_revenue: 0,
         total_markets: 0,
@@ -140,7 +139,7 @@ class MarketService {
 
       return await response.json();
     } catch (error) {
-      console.error("Fehler beim Abrufen der Market-Cluster-Details:", error);
+      console.error("[MarketService] Cluster details error:", formatError(error));
       return null;
     }
   }
@@ -171,7 +170,7 @@ class MarketService {
       const data = await response.json();
       return { success: data.success ?? false };
     } catch (error) {
-      console.error("Fehler beim Starten des Scraping-Prozesses:", error);
+      console.error("[MarketService] Start scraping error:", formatError(error));
       return { success: false };
     }
   }
@@ -197,18 +196,13 @@ class MarketService {
 
       const data = await response.json();
 
-      // ✅ Falls kein aktiver Cluster existiert, `null` zurückgeben
       if (!data || !data.clustername) {
-        console.log("[MarketService] Kein aktiver Scraping-Prozess gefunden.");
         return null;
       }
 
-      return data; // ✅ Falls ein aktiver Cluster existiert, diesen zurückgeben
+      return data;
     } catch (error) {
-      console.error(
-        "Fehler beim Abrufen des aktiven Scraping-Prozesses:",
-        error
-      );
+      console.error("[MarketService] Active cluster error:", formatError(error));
       return null;
     }
   }
@@ -228,11 +222,10 @@ class MarketService {
   
       return await response.json();
     } catch (error) {
-      console.error("Fehler beim Abrufen der Produktänderungen:", error);
+      console.error("[MarketService] Product changes error:", formatError(error));
       return [];
     }
   }
-  
 }
 
 export default MarketService;

@@ -1,3 +1,5 @@
+import { formatError } from '../utils/errorFormatting';
+
 const API_URL = "http://127.0.0.1:9000";
 
 class VerifyService {
@@ -13,7 +15,7 @@ class VerifyService {
       const data = await response.json();
       return { success: true, username: data.username, email: data.email, message: data.message };
     } catch (error) {
-      console.error("Fehler bei der Verifizierung:", error);
+      console.error("[VerifyService] Verification error:", formatError(error));
       return { success: false, message: "Netzwerkfehler. Bitte versuche es erneut." };
     }
   }

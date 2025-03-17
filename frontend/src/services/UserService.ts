@@ -1,4 +1,4 @@
-import { jwtDecode } from "jwt-decode";
+import { formatError } from '../utils/errorFormatting';
 
 interface DecodedToken {
   sub: string; // Benutzername
@@ -32,10 +32,10 @@ class UserService {
         return { success: false, message: errorData.detail || "Registrierung fehlgeschlagen." };
       }
 
-      const data = await response.json(); // ✅ Jetzt wird die JSON-Antwort korrekt geparsed
+      const data = await response.json();
       return { success: true, mocked_verification_link: data.mocked_verification_link, message: data.message };
     } catch (error) {
-      console.error("Fehler bei der Registrierung:", error);
+      console.error("[UserService] Registration error:", formatError(error));
       return { success: false, message: "Netzwerkfehler. Bitte versuche es erneut." };
     }
   }
@@ -46,25 +46,27 @@ class UserService {
   }
 
   // 📌 Dekodiert das JWT-Token und gibt die User-Daten zurück
-  static getUser(): DecodedToken | null {
+  static getUser(): { username: string } | null {
     const token = this.getToken();
     if (!token) return null;
 
     try {
-      return jwtDecode<DecodedToken>(token);
+      const base64Url = token.split('.')[1];
+      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+      const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+      }).join(''));
+
+      return JSON.parse(jsonPayload);
     } catch (error) {
-      console.error("Fehler beim Dekodieren des Tokens:", error);
+      console.error("[UserService] Token parsing error:", formatError(error));
       return null;
     }
   }
 
   // 📌 Prüft, ob das Token noch gültig ist (läuft um 23:59:59 ab)
   static isAuthenticated(): boolean {
-    const user = this.getUser();
-    if (!user || !user.exp) return false;
-
-    const currentTime = Math.floor(Date.now() / 1000);
-    return user.exp > currentTime; // Token ist gültig, wenn es noch nicht abgelaufen ist
+    return !!this.getToken();
   }
 
   // 📌 Entfernt das Token (Logout)

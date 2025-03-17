@@ -1,4 +1,5 @@
 import logging
+import time
 from datetime import datetime, timezone
 
 from app.database import SessionLocal
@@ -12,7 +13,8 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(me
 
 class MarketOrchestrator:
     def __init__(self):
-        pass
+        self.start_time = None
+        self.market_times = []
 
     def get_latest_market_change(self, db: Session, market_id: int):
         logging.info(f"🔍 Suche letzten MarketChange für Market ID {market_id}...")
@@ -24,9 +26,16 @@ class MarketOrchestrator:
         )
 
     def fetch_current_market_data(self, keyword: str):
-        logging.info(f"🌐 Scraping Market-Daten für: {keyword}")
-        scraper = AmazonFirstPageScraper(headless=True, show_details=True)
-        return scraper.get_first_page_data(keyword)
+        print(f"Scraping market: {keyword}")
+        start_time = time.time()
+        
+        scraper = AmazonFirstPageScraper(headless=True, show_details=False)
+        result = scraper.get_first_page_data(keyword)
+        
+        if result:
+            self.market_times.append(time.time() - start_time)
+        
+        return result
 
     def calculate_total_revenue(self, db: Session, market: Market):
         logging.info(f"💰 Berechne total_revenue für Market: {market.keyword}")
@@ -65,91 +74,72 @@ class MarketOrchestrator:
         logging.info(f"🏆 Gesamtumsatz für {market.keyword}: {total_revenue:.2f}€")
         return total_revenue
 
-    def update_market_revenue_and_changes(self):
-        logging.info("🚀 Starte Market Revenue Updates...")
+    def update_markets(self):
         db = SessionLocal()
+        self.start_time = time.time()
+        self.market_times = []
+        updated_markets = 0
+        failed_markets = 0
+
         try:
             markets = db.query(Market).all()
-            for market in markets:
-                logging.info(f"🔎 Verarbeite Market: {market.keyword}")
-                last_market_change = self.get_latest_market_change(db, market.id)
-                if not last_market_change:
-                    logging.warning(f"⚠️ Kein MarketChange für {market.keyword} gefunden. Überspringe...")
-                    continue
-
-                all_products_scraped = all(p.last_time_scraped is not None for p in market.products)
-                some_products_scraped = any(p.last_time_scraped is not None for p in market.products)
-
-                if last_market_change.total_revenue is None:
-                    if not some_products_scraped:
-                        logging.info(f"🚫 Market {market.keyword} wird ignoriert (keine gescrapten Produkte)")
-                        continue
-                    elif all_products_scraped:
-                        logging.info(f"🆕 Market {market.keyword} wird gescrapet")
-                        new_data = self.fetch_current_market_data(market.keyword)
-                        new_total_revenue = self.calculate_total_revenue(db, market)
+            total_markets = len(markets)
+            
+            print(f"\nStarting market update for {total_markets} markets")
+            
+            for index, market in enumerate(markets, 1):
+                print(f"\n[{index}/{total_markets}] Processing market: {market.keyword}")
+                
+                try:
+                    market_data = self.fetch_current_market_data(market.keyword)
+                    
+                    if market_data:
+                        # Update market data
+                        self.update_market_in_db(db, market, market_data)
+                        updated_markets += 1
                     else:
-                        logging.info(f"⏩ Market {market.keyword} wird übersprungen (teilweise gescrapet)")
-                        continue
-                else:
-                    logging.info(f"🔄 Prüfe Änderungen für Market {market.keyword}")
-                    new_data = self.fetch_current_market_data(market.keyword)
-                    new_total_revenue = self.calculate_total_revenue(db, market)
+                        print(f"Failed to scrape market: {market.keyword}")
+                        failed_markets += 1
+                        
+                except Exception as e:
+                    print(f"Error processing market {market.keyword}: {e}")
+                    failed_markets += 1
 
-                changes = []
-                new_products_asins = set(p["asin"] for p in new_data["first_page_products"])
-                old_products_asins = set(last_market_change.new_products.split(",")) if last_market_change.new_products else set()
-                removed_products_asins = old_products_asins - new_products_asins
+            # Print timing statistics
+            total_time = time.time() - self.start_time
+            avg_time = sum(self.market_times) / len(self.market_times) if self.market_times else 0
+            
+            print(f"\nMarket update completed:")
+            print(f"Total time: {total_time:.2f}s")
+            print(f"Average time per market: {avg_time:.2f}s")
+            print(f"Successfully updated: {updated_markets}/{total_markets}")
+            print(f"Failed markets: {failed_markets}")
 
-                if new_total_revenue != last_market_change.total_revenue:
-                    changes.append("new total revenue")
-                if new_data["top_search_suggestions"] != last_market_change.top_suggestions.split(","):
-                    changes.append("new top suggestions")
-                if new_products_asins != old_products_asins:
-                    changes.append("new or removed products")
-
-                changes_detected = bool(changes)
-                
-                if changes_detected:
-                    logging.info(f"⚡ Änderungen erkannt! Erstelle neuen MarketChange für {market.keyword}")
-                    new_market_change = MarketChange(
-                        market_id=market.id,
-                        change_date=datetime.now(timezone.utc),
-                        total_revenue=new_total_revenue,
-                        new_products=",".join(new_products_asins),
-                        removed_products=",".join(removed_products_asins),
-                        top_suggestions=",".join(new_data["top_search_suggestions"]),
-                        changes=", ".join(changes)
-                    )
-                    db.add(new_market_change)
-                    db.commit()
-                    db.refresh(new_market_change)
-
-                    # 🆕 Neue Produkte mit MarketChange verknüpfen
-                    logging.info("🔗 Verknüpfe neue Produkte mit MarketChange...")
-                    new_products = db.query(Product).filter(Product.asin.in_(new_products_asins)).all()
-                    for product in new_products:
-                        if product not in new_market_change.products:
-                            new_market_change.products.append(product)
-
-                    # ❌ Entfernte Produkte aus dem MarketChange entfernen
-                    logging.info("❌ Entferne nicht mehr gefundene Produkte aus dem MarketChange...")
-                    removed_products = db.query(Product).filter(Product.asin.in_(removed_products_asins)).all()
-                    for product in removed_products:
-                        if product in new_market_change.products:
-                            new_market_change.products.remove(product)
-
-                    db.commit()
-                    logging.info(f"✅ Neuer MarketChange für {market.keyword} mit Änderungen: {', '.join(changes)}")
-                else:
-                    logging.info(f"✅ Keine Änderungen für Market {market.keyword}")
-                
-            self.update_market_cluster_total_revenue(db)
         except Exception as e:
-            db.rollback()
-            logging.error(f"❌ Fehler in Market Orchestrator: {e}")
+            print(f"Error in update_markets: {e}")
         finally:
             db.close()
+
+    def update_market_in_db(self, db, market, market_data):
+        try:
+            # Create market change record
+            change = MarketChange(
+                market_id=market.id,
+                change_date=datetime.now(timezone.utc),
+                top_suggestions=",".join(market_data["top_search_suggestions"]),
+                products_count=len(market_data["first_page_products"])
+            )
+            db.add(change)
+            
+            # Update market
+            market.top_suggestions = ",".join(market_data["top_search_suggestions"])
+            market.last_time_scraped = datetime.now(timezone.utc)
+            
+            db.commit()
+            
+        except Exception as e:
+            print(f"Error updating market in database: {e}")
+            db.rollback()
 
     def update_market_cluster_total_revenue(self, db: Session):
         logging.info("🔄 Aktualisiere total_revenue für alle MarketCluster...")
@@ -166,4 +156,4 @@ class MarketOrchestrator:
 
 if __name__ == "__main__":
     orchestrator = MarketOrchestrator()
-    orchestrator.update_market_revenue_and_changes()
+    orchestrator.update_markets()

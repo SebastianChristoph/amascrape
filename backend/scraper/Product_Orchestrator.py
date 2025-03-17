@@ -34,6 +34,7 @@ class Product_Orchestrator:
         self.just_scrape_3_products = just_scrape_3_products
         self.scraping_times = []
         self.start_time = None
+        self.failed_products = []
 
         logging.info("🚀 Product Orchestrator gestartet.")
 
@@ -69,15 +70,23 @@ class Product_Orchestrator:
         try:
             self.driver.get("https://www.amazon.com")
             logging.info("✅ Verbindung zu Amazon erfolgreich hergestellt!")
+            return True
         except Exception as e:
             logging.error(f"❌ Fehler beim Verbinden mit Amazon: {e}")
+            return False
 
     def set_cookies(self):
         """Setzt die gespeicherten Cookies."""
-        logging.info("🍪 Setze Cookies...")
-        for cookie in selenium_config.cookies:
-            self.driver.add_cookie(cookie)
-        logging.info("✅ Cookies gesetzt!")
+        try:
+            self.driver.get("https://www.amazon.com")
+            logging.info("🍪 Setze Cookies...")
+            for cookie in selenium_config.cookies:
+                self.driver.add_cookie(cookie)
+            logging.info("✅ Cookies gesetzt!")
+            return True
+        except Exception as e:
+            logging.error(f"❌ Fehler beim Setzen der Cookies: {e}")
+            return False
 
     def get_latest_product_change(self, db, asin):
         """Holt den letzten ProductChange für ein Produkt anhand der ASIN."""
@@ -129,6 +138,7 @@ class Product_Orchestrator:
         db = SessionLocal()
         scraped_asins = set()
         self.start_time = time.time()
+        self.failed_products = []
 
         try:
             logging.info("🚀 Starte Product-Update...")
@@ -161,6 +171,11 @@ class Product_Orchestrator:
                     if not new_data:
                         logging.warning(
                             f"❌ Fehler beim Scrapen von {product.asin}, aber last_time_scraped wird trotzdem aktualisiert.")
+                        self.failed_products.append({
+                            'asin': product.asin,
+                            'missing': ['Complete scrape failed'],
+                            'timestamp': datetime.now(timezone.utc)
+                        })
                     else:
                         changes, changed_fields = self.detect_product_changes(
                             last_product_change, new_data)
@@ -204,6 +219,28 @@ class Product_Orchestrator:
                     db.commit()
                     logging.info(
                         f"⚠️ Fehler, aber last_time_scraped für {product.asin} wurde trotzdem aktualisiert.")
+                    self.failed_products.append({
+                        'asin': product.asin,
+                        'missing': [str(e)],
+                        'timestamp': datetime.now(timezone.utc)
+                    })
+
+            # Write failed products to file
+            if self.failed_products:
+                with open('fails.txt', 'a') as f:
+                    f.write(f"\n--- Scraping session {datetime.now(timezone.utc)} ---\n")
+                    for fail in self.failed_products:
+                        f.write(f"ASIN: {fail['asin']}, Missing: {', '.join(fail['missing'])}, Time: {fail['timestamp']}\n")
+
+            # Print timing statistics
+            total_time = time.time() - self.start_time
+            avg_time = mean(self.scraping_times) if self.scraping_times else 0
+            
+            logging.info("\n📊 Scraping Performance Metrics:")
+            logging.info(f"🕒 Gesamtzeit: {total_time:.2f} Sekunden")
+            logging.info(f"⚡ Durchschnittliche Zeit pro Produkt: {avg_time:.2f} Sekunden")
+            logging.info(f"📦 Anzahl gescrapte Produkte: {len(scraped_asins)}")
+            logging.info(f"Failed products: {len(self.failed_products)}")
 
         except Exception as e:
             logging.critical(f"❌ Schwerwiegender Fehler im Product-Update: {e}")
@@ -216,6 +253,7 @@ class Product_Orchestrator:
             logging.info(f"🕒 Gesamtzeit: {total_time:.2f} Sekunden")
             logging.info(f"⚡ Durchschnittliche Zeit pro Produkt: {avg_time:.2f} Sekunden")
             logging.info(f"📦 Anzahl gescrapte Produkte: {len(scraped_asins)}")
+            logging.info(f"Failed products: {len(self.failed_products)}")
             
             db.close()
             self.close_driver()

@@ -42,3 +42,30 @@ no_ranking = ["B0BLMW5F3Y", "B09Z6JRQ2Y"]
 no_reviews = ["B09WG31GRR", "B096QYTJT8"]
 
 asins_from_live_scenarios = ["B009EO0FSU", "B0043MV5VO"]
+
+# Firefox preferences for Docker environment
+firefox_preferences = {
+    "browser.download.folderList": 2,
+    "browser.download.manager.showWhenStarting": False,
+    "browser.download.dir": "/tmp",
+    "browser.helperApps.neverAsk.saveToDisk": "application/x-gzip",
+    "general.useragent.override": user_agent,
+    "network.proxy.type": 0,
+    "dom.webdriver.enabled": False,
+    "dom.webnotifications.enabled": False,
+    "app.update.auto": False,
+    "app.update.enabled": False,
+    "browser.tabs.remote.autostart": False,
+    "browser.tabs.remote.autostart.2": False,
+}
+
+# Firefox arguments for Docker environment
+firefox_arguments = [
+    "--headless",
+    "--disable-gpu",
+    "--no-sandbox",
+    "--disable-dev-shm-usage",
+    "--disable-extensions",
+    "--disable-notifications",
+    "--window-size=1920,1080"
+]

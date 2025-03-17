@@ -1,3 +1,5 @@
+import { formatError } from '../utils/errorFormatting';
+
 const API_URL = "http://127.0.0.1:9000/chartdata";
 
 interface LineChartData {
@@ -29,7 +31,7 @@ class ChartDataService {
 
       return await response.json();
     } catch (error) {
-      console.error("Fehler beim Abrufen der LineChart-Daten:", error);
+      console.error("[ChartDataService] Line chart error:", formatError(error));
       return null;
     }
   }
@@ -57,9 +59,9 @@ class ChartDataService {
       }
 
       const data = await response.json();
-      return data.length > 0 ? data : [0]; // 🔥 Falls keine Daten, dann [0] übergeben
+      return data.length > 0 ? data : [0];
     } catch (error) {
-      console.error("Fehler beim Abrufen der SparkLine-Daten:", error);
+      console.error("[ChartDataService] Sparkline grid error:", formatError(error));
       return null;
     }
   }
@@ -89,7 +91,7 @@ class ChartDataService {
       const json = await response.json();
       return json.stackedData;
     } catch (error) {
-      console.error("Fehler beim Abrufen der gestapelten Balken-Daten:", error);
+      console.error("[ChartDataService] Stacked bar error:", formatError(error));
       return null;
     }
   }
@@ -119,9 +121,9 @@ class ChartDataService {
       }
 
       const json = await response.json();
-      return json; // 🔥 Erwartet eine Liste von Zahlen
+      return json;
     } catch (error) {
-      console.error("Fehler beim Abrufen der Sparkline-Daten:", error);
+      console.error("[ChartDataService] Market cluster sparkline error:", formatError(error));
       return [];
     }
   }
@@ -148,7 +150,7 @@ class ChartDataService {
       const json = await response.json();
       return json.data;
     } catch (error) {
-      console.error("Fehler beim Abrufen der SparkLine-Daten:", error);
+      console.error("[ChartDataService] Sparkline data error:", formatError(error));
       return null;
     }
   }
@@ -174,10 +176,11 @@ class ChartDataService {
 
       return await response.json();
     } catch (error) {
-      console.error("Fehler beim Abrufen der Stacked-Chart-Daten:", error);
+      console.error("[ChartDataService] Stacked chart error:", formatError(error));
       return null;
     }
   }
+
   static async GetBarChartData(): Promise<any> {
     try {
       const token = localStorage.getItem(this.TOKEN_KEY);
@@ -199,7 +202,7 @@ class ChartDataService {
 
       return await response.json();
     } catch (error) {
-      console.error("Fehler beim Abrufen der Bar-Chart-Daten:", error);
+      console.error("[ChartDataService] Bar chart error:", formatError(error));
       return null;
     }
   }

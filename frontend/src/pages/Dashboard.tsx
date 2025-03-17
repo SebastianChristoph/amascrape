@@ -50,7 +50,7 @@ const Dashboard: React.FC = () => {
         setDashboardData(overviewData);
       }
     } catch (error) {
-      console.error("Error fetching data:", error);
+      console.error("[Dashboard] Data fetch error:", error);
       showSnackbar("Error loading dashboard data", "error");
     } finally {
       setLoading(false);
@@ -62,7 +62,6 @@ const Dashboard: React.FC = () => {
   const fetchActiveScrapingCluster = async () => {
     try {
       const data = await MarketService.getActiveScrapingCluster();
-      console.log("[DASHBOARD] FETCHED:", data);
       if (!data) {
         setActiveCluster(null);
         setIsFetching(false);
@@ -84,7 +83,7 @@ const Dashboard: React.FC = () => {
         setIsFetching(true);
       }
     } catch (error) {
-      console.error("Fehler beim Laden des aktiven Scraping-Clusters:", error);
+      console.error("[Dashboard] Active cluster error:", error);
       setIsFetching(false);
     }
   };
@@ -128,7 +127,7 @@ const Dashboard: React.FC = () => {
         ) : (
           <>
             <Grid container spacing={3} sx={{ mb: 4 }}>
-              <Grid size={3}>
+              <Grid size={{ xs: 12, sm: 6, md: 3 }}>
                 <Box>
                   <Typography variant="subtitle2" color="text.secondary">
                     Total 30D Revenue
@@ -146,7 +145,7 @@ const Dashboard: React.FC = () => {
                   )}
                 </Box>
               </Grid>
-              <Grid size={3}>
+              <Grid size={{ xs: 12, sm: 6, md: 3 }}>
                 <Box>
                   <Typography variant="subtitle2" color="text.secondary">
                     30D Revenue change
@@ -158,7 +157,7 @@ const Dashboard: React.FC = () => {
                   </Box>
                 </Box>
               </Grid>
-              <Grid size={3}>
+              <Grid size={{ xs: 12, sm: 6, md: 3 }}>
                 <Box>
                   <Typography variant="subtitle2" color="text.secondary">
                     Number of market clusters
@@ -173,7 +172,7 @@ const Dashboard: React.FC = () => {
                   )}
                 </Box>
               </Grid>
-              <Grid size={3}>
+              <Grid size={{ xs: 12, sm: 6, md: 3 }}>
                 <Box>
                   <Typography variant="subtitle2" color="text.secondary">
                     Number of tracked products
@@ -269,7 +268,7 @@ const Dashboard: React.FC = () => {
             <Grid container spacing={3}>
               {marketClusters.length > 0 ? (
                 marketClusters.map((cluster) => (
-                  <Grid key={cluster.id} size={{ lg: 6, xs: 12 }}>
+                  <Grid key={cluster.id} size={{ xs: 12, sm: 12, lg: 6 }}>
                     <ClusterCard
                       cluster={cluster}
                       onClick={() => navigate(`/cluster/${cluster.id}`)}

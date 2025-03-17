@@ -20,8 +20,6 @@ class AmazonProductScraper:
 
     def scroll_down(self, duration=5):
         """Simuliert das Scrollen auf der Seite, um Inhalte zu laden."""
-        if self.show_details:
-            print("📜 Scrolling down")
         start = time.time()
         while time.time() - start < duration:
             self.driver.execute_script(
@@ -277,8 +275,8 @@ class AmazonProductScraper:
             title_element = self.driver.find_element(
                 By.XPATH, self.web_elements["title"])
             return title_element.text
-        except Exception:
-            print("   ❌ Error finding title!")
+        except Exception as e:
+            print(f"   ❌ Error finding title: {e}")
             return None
 
     def get_image_path(self):
@@ -287,8 +285,8 @@ class AmazonProductScraper:
             img_element = self.driver.find_element(
                 By.XPATH, '//*[@id="imgTagWrapperId"]//img')
             return img_element.get_attribute("src")
-        except Exception:
-            print("   ❌ Error finding image path!")
+        except Exception as e:
+            print(f"   ❌ Error finding image path: {e}")
             return None
 
     def get_price(self):
@@ -301,8 +299,8 @@ class AmazonProductScraper:
             if match:
                 dollars, cents = match.groups()
                 return float(f"{dollars}.{cents}")
-        except Exception:
-            print("   ❌ Error finding price!")
+        except Exception as e:
+            print(f"   ❌ Error finding price: {e}")
             return None
 
     def get_product_infos_box_content(self):

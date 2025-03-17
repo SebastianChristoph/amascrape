@@ -31,6 +31,8 @@ import CustomStackBars from "../components/charts/CustomStackChart";
 import ChartDataService from "../services/ChartDataService";
 import MarketService from "../services/MarketService";
 import { FaRegEye, FaDollarSign, FaStore, FaChartLine, FaTrophy } from "react-icons/fa";
+import { GrCluster } from "react-icons/gr";
+import { AiOutlineCheckCircle } from "react-icons/ai";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -38,9 +40,8 @@ interface TabPanelProps {
   value: number;
 }
 
-
 export default function ClusterDetails() {
-  const { clusterId } = useParams(); // ID aus der URL abrufen
+  const { clusterId } = useParams();
   const [marketCluster, setMarketCluster] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [tabIndex, setTabIndex] = useState(0);
@@ -97,7 +98,6 @@ export default function ClusterDetails() {
     setProductChanges([]);
   };
 
-  
   const transformStackedChartData = (
     data: Record<string, { date: number; value: number }[]>
   ): Record<string, { date: string; value: number }[]> => {
@@ -108,7 +108,7 @@ export default function ClusterDetails() {
       transformedData[market] = data[market].map((entry) => ({
         date: new Date((entry.date - 719163) * 86400000)
           .toISOString()
-          .split("T")[0], // ✅ Korrigierte Umwandlung
+          .split("T")[0],
         value: entry.value,
       }));
     });
@@ -120,29 +120,25 @@ export default function ClusterDetails() {
     async function fetchAllData() {
       if (!clusterId) return;
 
-      setLoading(true); // 🔄 Ladezustand starten
+      setLoading(true);
 
       try {
         const [clusterData, stackedData, barData] = await Promise.all([
           MarketService.getMarketClusterDetails(Number(clusterId)),
-          ChartDataService.GetStackedBarDataForCluster(Number(clusterId)), // ✅ NEUE ROUTE VERWENDEN
+          ChartDataService.GetStackedBarDataForCluster(Number(clusterId)),
           ChartDataService.GetBarChartData(),
         ]);
 
-        console.log("[DEBUG] API-Antwort für MarketCluster:", clusterData);
-        console.log("[DEBUG] API-Antwort für Stacked Chart:", stackedData);
-        console.log("[DEBUG] API-Antwort für Bar Chart:", barData);
-
         if (clusterData) setMarketCluster(clusterData);
         if (stackedData) {
-          const transformedData = transformStackedChartData(stackedData); // 🔥 Korrekt umwandeln!
+          const transformedData = transformStackedChartData(stackedData);
           setStackedChartData(transformedData);
         }
         if (barData) setBarChartData(barData.barChart);
       } catch (error) {
-        console.error("Fehler beim Laden der Daten:", error);
+        console.error("Error loading data:", error);
       } finally {
-        setLoading(false); // ✅ Ladezustand beenden
+        setLoading(false);
       }
     }
 
@@ -159,7 +155,7 @@ export default function ClusterDetails() {
           justifyContent: "center",
         }}
       >
-        <CircularProgress size={80} color="primary" /> {/* ⏳ Spinner */}
+        <CircularProgress size={80} color="primary" />
       </Box>
     );
   }
@@ -198,7 +194,6 @@ export default function ClusterDetails() {
     return formatter ? formatter(value) : value;
   };
 
-  // 📌 Spalten für DataGrid mit Sparkline
   const columns: GridColDef[] = [
     {
       field: "details",
@@ -207,7 +202,7 @@ export default function ClusterDetails() {
       renderCell: (params) => (
         <IconButton
           onClick={() => handleShowDetails(params.row.id)}
-          sx={{ padding: 0, color: "primary.main" }} // Keine extra Padding, nur Icon klickbar
+          sx={{ padding: 0, color: "primary.main" }}
         >
           <FaRegEye size={20} />
         </IconButton>
@@ -351,9 +346,8 @@ export default function ClusterDetails() {
           {marketCluster.title}
         </Typography>
   
-        {/* GRID MARKET CLUSTER */}
         <Grid container spacing={2}>
-          <Grid size={{ sm: 12, lg: 4 }}>
+          <Grid size={{ xs: 12, sm: 12, md: 4 }}>
             <Box sx={{ width: '100%', height: 300 }}>
               {Object.keys(stackedChartData).length === 0 || 
                Object.values(stackedChartData).every(marketData => 
@@ -404,7 +398,7 @@ export default function ClusterDetails() {
               )}
             </Box>
           </Grid>
-          <Grid size={{ sm: 12, lg: 8 }}>
+          <Grid size={{ xs: 12, sm: 12, md: 8 }}>
             <Box sx={{ width: '100%', height: 300 }}>
               {!marketCluster.total_revenue || marketCluster.total_revenue === 0 ? (
                 <Box sx={{ height: '100%' }}>
@@ -446,9 +440,8 @@ export default function ClusterDetails() {
                     Market Cluster Insights
                   </Typography>
                   <Grid container spacing={4}>
-                    <Grid xs={6} sm={6} md={6}>
+                    <Grid size={{ xs: 12, sm: 6, md: 6 }}>
                       <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                        {/* Total Revenue */}
                         <Box>
                           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                             <FaDollarSign size={16} color="#666" />
@@ -461,7 +454,6 @@ export default function ClusterDetails() {
                           </Typography>
                         </Box>
 
-                        {/* Markets and Products */}
                         <Box>
                           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                             <FaStore size={16} color="#666" />
@@ -474,7 +466,6 @@ export default function ClusterDetails() {
                           </Typography>
                         </Box>
 
-                        {/* Average Revenue */}
                         <Box>
                           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                             <FaChartLine size={16} color="#666" />
@@ -492,9 +483,8 @@ export default function ClusterDetails() {
                       </Box>
                     </Grid>
 
-                    <Grid xs={6} sm={6} md={6}>
+                    <Grid size={{ xs: 12, sm: 6, md: 6 }}>
                       <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                        {/* Top Performers */}
                         <Box>
                           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                             <FaTrophy size={16} color="#666" />
@@ -546,7 +536,6 @@ export default function ClusterDetails() {
           Markets in {marketCluster.title}
         </Typography>
   
-        {/* ✅ Tabs für die verschiedenen Märkte */}
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
           <Tabs value={tabIndex} onChange={handleTabChange}>
             {marketCluster.markets.map((market: any, index: number) => (
@@ -559,7 +548,6 @@ export default function ClusterDetails() {
           </Tabs>
         </Box>
   
-        {/* ✅ Tab-Inhalte (nur aktives DataGrid anzeigen) */}
         {marketCluster.markets.map((market: any, index: number) => (
           <Box
             key={market.id}
@@ -585,13 +573,13 @@ export default function ClusterDetails() {
                 </Alert>
               ) : (
                 <Grid container spacing={2} sx={{ mb: 3 }}>
-                  <Grid size={3}>
+                  <Grid size={{ xs: 12, sm: 6, md: 3 }}>
                     <Typography variant="subtitle2" color="text.secondary">Market Revenue</Typography>
                     <Typography variant="h6">
                       {formatCurrency(market.revenue_total || 0)}
                     </Typography>
                   </Grid>
-                  <Grid size={3}>
+                  <Grid size={{ xs: 12, sm: 6, md: 3 }}>
                     <Typography variant="subtitle2" color="text.secondary">Most Expensive</Typography>
                     <Typography variant="h6">
                       {(() => {
@@ -601,7 +589,7 @@ export default function ClusterDetails() {
                       })()}
                     </Typography>
                   </Grid>
-                  <Grid size={3}>
+                  <Grid size={{ xs: 12, sm: 6, md: 3 }}>
                     <Typography variant="subtitle2" color="text.secondary">Least Expensive</Typography>
                     <Typography variant="h6">
                       {(() => {
@@ -613,7 +601,7 @@ export default function ClusterDetails() {
                       })()}
                     </Typography>
                   </Grid>
-                  <Grid size={3}>
+                  <Grid size={{ xs: 12, sm: 6, md: 3 }}>
                     <Typography variant="subtitle2" color="text.secondary">Highest Revenue Product</Typography>
                     <Typography variant="h6">
                       {(() => {
@@ -658,7 +646,6 @@ export default function ClusterDetails() {
         ))}
       </Paper>
   
-      {/* ✅ Backdrop für Product Changes (außerhalb der `.map()`-Schleife) */}
       <Backdrop open={openBackdrop} onClick={handleCloseBackdrop}>
         <TableContainer
           component={Paper}
