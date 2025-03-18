@@ -153,7 +153,7 @@ class MarketService {
       if (!token) throw new Error("Kein Token vorhanden. Bitte einloggen.");
 
       const response = await fetch(
-        `${API_URL}/api/start-firstpage-scraping-process`,
+        `${API_URL}/scraping/start-firstpage-scraping-process`,
         {
           method: "POST",
           headers: {
@@ -184,7 +184,7 @@ class MarketService {
       const token = localStorage.getItem(this.TOKEN_KEY);
       if (!token) throw new Error("Kein Token vorhanden. Bitte einloggen.");
 
-      const response = await fetch(`${API_URL}/api/get-loading-clusters`, {
+      const response = await fetch(`${API_URL}/scraping/get-loading-clusters`, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",

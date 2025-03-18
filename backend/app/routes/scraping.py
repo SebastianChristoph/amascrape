@@ -24,7 +24,7 @@ class NewClusterData(BaseModel):
 scraping_processes: Dict[int, Dict[str, Dict[str, Dict[str, any]]]] = {}
 
 
-@router.post("/api/start-firstpage-scraping-process")
+@router.post("/start-firstpage-scraping-process")
 async def post_scraping(
     newClusterData: NewClusterData,
     db: Session = Depends(get_db),
@@ -57,7 +57,7 @@ async def post_scraping(
     return {"success": True, "message": f"Scraping für {cluster_name} gestartet"}
 
 
-@router.get("/api/get-loading-clusters")
+@router.get("/get-loading-clusters")
 async def get_loading_clusters(
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
