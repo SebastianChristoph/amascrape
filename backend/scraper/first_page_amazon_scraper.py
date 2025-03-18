@@ -229,7 +229,7 @@ class AmazonFirstPageScraper:
             print(f"❌❌❌ [get_first_page_data] Error getting first page data! Message: {str(e)}\n")
             return None
         finally:
-            print("\nClosing WebDriver\n")
+            # print("\nClosing WebDriver\n")
             self.close_driver()
 
 

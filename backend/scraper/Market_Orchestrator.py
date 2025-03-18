@@ -167,7 +167,8 @@ class MarketOrchestrator:
             logging.info(f"🚀 Starte Markt-Update für {total_markets} Märkte...")
             
             for index, market in enumerate(markets, 1):
-                logging.info(f"{index}/{total_markets}] Verarbeite Markt: {market.keyword}")
+                logging.info(f" ------------------------------------------------------------ ")
+                logging.info(f"[{index}/{total_markets}] Verarbeite Markt: {market.keyword}")
                 
                 try:
                     last_market_change = self.get_latest_market_change(
@@ -227,7 +228,8 @@ class MarketOrchestrator:
             total_time = time.time() - self.start_time
             avg_time = sum(self.market_times) / len(self.market_times) if self.market_times else 0
             
-            logging.info("\n📊 Scraping Performance Metrics:")
+            logging.info("-----------------------------------------------------------------")
+            logging.info("📊 Scraping Performance Metrics:")
             logging.info(f"🕒 Gesamtzeit: {self.format_time(total_time)}")
             logging.info(f"⚡ Durchschnittliche Zeit pro Markt: {avg_time:.2f} Sekunden")
             logging.info(f"📦 Erfolgreich aktualisiert: {updated_markets}/{total_markets}")
