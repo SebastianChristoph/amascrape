@@ -1,7 +1,7 @@
 import asyncio
 import logging
 from typing import List, Optional
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
@@ -225,6 +225,10 @@ async def get_market_cluster_details(
             MarketChange.market_id == market.id
         ).order_by(MarketChange.change_date.desc()).first()
 
+        if not latest_market_change.products:
+            logging.warning(f"⚠️ Kein ProductChange gefunden für Market {market.keyword} (MarketChange ID: {latest_market_change.id})")
+
+
         market_data = {
             "id": market.id,
             "keyword": market.keyword,
@@ -236,7 +240,6 @@ async def get_market_cluster_details(
             market_data["revenue_total"] = market_revenue
             market_data["top_suggestions"] = latest_market_change.top_suggestions
 
-            # Track top performing market
             if market_revenue > max_market_revenue:
                 max_market_revenue = market_revenue
                 top_market = market.keyword
@@ -247,8 +250,13 @@ async def get_market_cluster_details(
                     ProductChange.asin == product.asin
                 ).order_by(ProductChange.change_date.desc()).first()
 
+                # Generiere Sparkline-Daten für Preis, Main Category Rank und Second Category Rank
+                sparkline_price = get_sparkline_for_product(db, product.asin, "price")
+                sparkline_main_rank = get_sparkline_for_product(db, product.asin, "main_category_rank")
+                sparkline_second_rank = get_sparkline_for_product(db, product.asin, "second_category_rank")
+                sparkline_total = get_sparkline_for_product(db, product.asin, "total")
+
                 if latest_product_change and latest_product_change.total:
-                    # Track top performing product
                     if latest_product_change.total > top_product["revenue"]:
                         top_product = {
                             "asin": product.asin,
@@ -267,13 +275,16 @@ async def get_market_cluster_details(
                     "second_category_rank": latest_product_change.second_category_rank if latest_product_change else None,
                     "total": latest_product_change.total if latest_product_change else None,
                     "blm": latest_product_change.blm if latest_product_change else None,
+                    "sparkline_price": sparkline_price,
+                    "sparkline_main_rank": sparkline_main_rank,
+                    "sparkline_second_rank": sparkline_second_rank,
+                    "sparkline_total": sparkline_total,
                 }
 
                 market_data["products"].append(product_data)
 
         response_data["markets"].append(market_data)
 
-    # Calculate final insights
     total_revenue = response_data["total_revenue"] or 0
     response_data["insights"].update({
         "total_products": total_products,
@@ -284,3 +295,69 @@ async def get_market_cluster_details(
     })
 
     return response_data
+
+
+from datetime import datetime, timedelta, timezone
+from typing import List
+import logging
+from sqlalchemy.orm import Session
+from app.models import ProductChange
+
+def get_sparkline_for_product(db: Session, asin: str, field: str) -> List[int]:
+    """Generiert Sparkline-Daten für ein bestimmtes Produktfeld (Preis, Rank, etc.)."""
+    
+    today = datetime.now(timezone.utc).date()
+    cutoff_date = today - timedelta(days=30)
+
+    # Alle ProductChanges für die letzten 30 Tage abrufen (sortiert aufsteigend nach Datum)
+    product_changes = (
+        db.query(ProductChange)
+        .filter(ProductChange.asin == asin)
+        .order_by(ProductChange.change_date.asc())
+        .all()
+    )
+
+    if not product_changes:
+        print(f"⚠️ Keine Änderungen für {asin} gefunden!")
+        return [0] * 30  
+
+    # ✅ Entferne alle Einträge, wo das Feld `None` ist (erste gültige Werte finden)
+    valid_changes = [change for change in product_changes if getattr(change, field, None) is not None]
+
+    if not valid_changes:
+        print(f"⚠️ Keine gültigen Werte für {asin}, Feld: {field}!")
+        return [0] * 30  
+
+    # Erstes gültiges Datum und Wert als Startpunkt finden
+    first_valid_change = valid_changes[0]
+    first_valid_date = first_valid_change.change_date.date()
+    first_valid_value = getattr(first_valid_change, field)
+
+    # 🗓️ Bestimmen des Startdatums:
+    if first_valid_date > cutoff_date:
+        # Falls das erste Produkt innerhalb der letzten 30 Tage liegt, nutze es als Start
+        start_date = first_valid_date
+    else:
+        # Falls es älter ist, beginne ab cutoff_date (30 Tage zurück)
+        start_date = cutoff_date
+
+    # Erstelle eine Liste aller Tage vom `start_date` bis heute
+    date_list = [(start_date + timedelta(days=i)).strftime("%Y-%m-%d") for i in range((today - start_date).days + 1)]
+ 
+   
+    # Mapping von Datum zu Feldwert aus den gespeicherten Änderungen
+    changes_dict = {change.change_date.strftime("%Y-%m-%d"): getattr(change, field) for change in valid_changes}
+
+    filled_data = []
+    last_value = first_valid_value  # Starte mit dem ersten bekannten Wert
+
+    # 🔄 Sparkline-Daten generieren (letzten bekannten Wert nutzen, falls keiner existiert)
+    for date in date_list:
+        if date in changes_dict:
+            last_value = changes_dict[date]
+        filled_data.append(int(last_value) if last_value is not None else 0)
+
+    return filled_data
+
+
+

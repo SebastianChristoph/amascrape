@@ -261,31 +261,64 @@ export default function ClusterDetails() {
       renderCell: (params) => renderWithNoData(params.value, formatCurrency),
     },
     {
-      field: "chart",
-      headerName: "Chart",
+      field: "chart_total",
+      headerName: "Total Trend",
       width: 100,
       renderCell: (params) => {
-        const [sparklineData, setSparklineData] = useState<number[] | null>(null);
-  
-        useEffect(() => {
-          async function fetchSparkline() {
-            const response = await ChartDataService.GetSparkLineGridData(
-              params.row.id
-            );
-            setSparklineData(response || [0]);
-          }
-          fetchSparkline();
-        }, [params.row.id]);
-  
-        return sparklineData ? (
+        return params.row.sparkline_price ? (
           <Box sx={{ mt: 4 }}>
-            <CustomSparkLine data={sparklineData} />
+            <CustomSparkLine data={params.row.sparkline_total} />
           </Box>
         ) : (
-          <Chip label="No Chart" color="default" size="small" />
+          <Chip label="No Data" color="default" size="small" />
         );
       },
     },
+    {
+      field: "chart_price",
+      headerName: "Price Trend",
+      width: 100,
+      renderCell: (params) => {
+        return params.row.sparkline_price ? (
+          <Box sx={{ mt: 4 }}>
+            <CustomSparkLine data={params.row.sparkline_price} />
+          </Box>
+        ) : (
+          <Chip label="No Data" color="default" size="small" />
+        );
+      },
+    },
+    {
+      field: "chart_main_rank",
+      headerName: "Main Rank Trend",
+      width: 100,
+      renderCell: (params) => {
+       
+    
+        return params.row.sparkline_main_rank && params.row.sparkline_main_rank.length > 0 ? (
+          <Box sx={{ mt: 4 }}>
+            <CustomSparkLine data={params.row.sparkline_main_rank} />
+          </Box>
+        ) : (
+          <Chip label="No Data" color="default" size="small" />
+        );
+      },
+    },
+    {
+      field: "chart_second_rank",
+      headerName: "Second Rank Trend",
+      width: 100,
+      renderCell: (params) => {
+        return params.row.sparkline_second_rank ? (
+          <Box sx={{ mt: 4 }}>
+            <CustomSparkLine data={params.row.sparkline_second_rank} />
+          </Box>
+        ) : (
+          <Chip label="No Data" color="default" size="small" />
+        );
+      },
+    },
+    
     {
       field: "mainCategory",
       headerName: "Main Category",
@@ -641,7 +674,10 @@ export default function ClusterDetails() {
                 secondCategoryRank: product.second_category_rank,
                 blm: product.blm,
                 total: product.total,
-                sparkline_data: product.sparkline_data ?? [0],
+                sparkline_main_rank: product.sparkline_main_rank,
+                sparkline_second_rank: product.sparkline_second_rank,
+                sparkline_price: product.sparkline_price,
+                sparkline_total: product.sparkline_total,
               }))}
               columns={columns}
               rowHeight={100}
