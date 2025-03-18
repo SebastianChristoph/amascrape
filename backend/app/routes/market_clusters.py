@@ -382,7 +382,7 @@ def get_sparkline_for_market(db: Session, id: int, field: str) -> List[int]:
     valid_changes = [change for change in market_changes if getattr(change, field, None) is not None]
 
     if not valid_changes:
-        print(f"⚠️ Keine gültigen Werte für {id}, Feld: {field}!")
+        #print(f"⚠️ Keine gültigen Werte für {id}, Feld: {field}!")
         return [0] * 30  
 
     # Erstes gültiges Datum und Wert als Startpunkt finden
@@ -390,7 +390,7 @@ def get_sparkline_for_market(db: Session, id: int, field: str) -> List[int]:
     first_valid_date = first_valid_change.change_date.date()
     first_valid_value = getattr(first_valid_change, field)
 
-    print(f"✅ Erstes gültiges Datum für {id}, Feld {field}: {first_valid_date} mit Wert {first_valid_value}")
+    # print(f"✅ Erstes gültiges Datum für {id}, Feld {field}: {first_valid_date} mit Wert {first_valid_value}")
 
 
 

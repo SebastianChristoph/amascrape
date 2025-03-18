@@ -10,3 +10,7 @@
   margin: 0 auto;
   padding: 1rem;
 }
+
+.my-product-row {
+  background-color: rgba(0, 128, 0, 0.15) !important; /* 🌿 Sanftes Grün für eigene Produkte */
+}

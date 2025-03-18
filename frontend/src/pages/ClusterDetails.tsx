@@ -3,14 +3,12 @@ import {
   Backdrop,
   Box,
   Button,
-  Card,
   Chip,
   CircularProgress,
   IconButton,
   Link,
   Paper,
   Skeleton,
-  styled,
   Tab,
   Table,
   TableBody,
@@ -19,32 +17,52 @@ import {
   TableHead,
   TableRow,
   Tabs,
-  Typography,
+  Typography
 } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { useEffect, useState } from "react";
+import {
+  FaChartLine,
+  FaDollarSign,
+  FaRegEye,
+  FaStore,
+  FaTrophy,
+} from "react-icons/fa";
 import { useParams } from "react-router-dom";
-import CustomBarChart from "../components/charts/CustomBarChart";
 import CustomSparkLine from "../components/charts/CustomSparkLine";
 import CustomStackBars from "../components/charts/CustomStackChart";
 import ChartDataService from "../services/ChartDataService";
 import MarketService from "../services/MarketService";
-import {
-  FaRegEye,
-  FaDollarSign,
-  FaStore,
-  FaChartLine,
-  FaTrophy,
-} from "react-icons/fa";
-import { GrCluster } from "react-icons/gr";
-import { AiOutlineCheckCircle } from "react-icons/ai";
 
 interface TabPanelProps {
   children?: React.ReactNode;
   index: number;
   value: number;
 }
+
+interface MyProduct {
+  id: string; // oder number, je nach DB
+  title: string;
+  price: number;
+  image: string;
+}
+
+interface ProductType {
+  asin: string;  // ✅ Ändere 'id' zu 'asin'
+  title: string;
+  price: number;
+  image: string;
+  isMyProduct: boolean;
+}
+
+
+interface MarketType {
+  id: number;
+  keyword: string;
+  products: ProductType[];
+}
+
 
 export default function ClusterDetails() {
   const { clusterId } = useParams();
@@ -59,18 +77,12 @@ export default function ClusterDetails() {
   const [openBackdrop, setOpenBackdrop] = useState(false);
   const [productChanges, setProductChanges] = useState<any[]>([]);
   const [selectedAsin, setSelectedAsin] = useState<string | null>(null);
+  const [userProductInsights, setUserProductInsights] = useState<any>(null);
 
-  const ItemCard = styled(Card)(({ theme }) => ({
-    minHeight: 400,
-    backgroundColor: "#fff",
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: "start",
-    color: theme.palette.text.secondary,
-    ...theme.applyStyles("dark", {
-      backgroundColor: "#1A2027",
-    }),
-  }));
+  const API_URL = "http://localhost:9000"; // ✅ API Basis-URL
+  const TOKEN_KEY = "token"; // ✅ Konstanter Schlüssel für den Token
+
+ 
 
   const formatCurrency = (value: number | null) => {
     if (value === null || value === undefined) return "-";
@@ -103,7 +115,7 @@ export default function ClusterDetails() {
     setOpenBackdrop(false);
     setProductChanges([]);
   };
-
+  
   const transformStackedChartData = (
     data: Record<string, { date: number; value: number }[]>
   ): Record<string, { date: string; value: number }[]> => {
@@ -125,28 +137,50 @@ export default function ClusterDetails() {
   useEffect(() => {
     async function fetchAllData() {
       if (!clusterId) return;
-
       setLoading(true);
 
       try {
-        const [clusterData, stackedData, barData] = await Promise.all([
+        // 🔄 Alle API-Anfragen parallel abrufen
+        const [clusterData, stackedData, userInsights, barData, myProducts] = await Promise.all([
           MarketService.getMarketClusterDetails(Number(clusterId)),
-          ChartDataService.GetStackedBarDataForCluster(Number(clusterId)),
+          ChartDataService.GetStackedBarDataForCluster(Number(clusterId)), 
+          fetch(`${API_URL}/user-products/insights/${clusterId}`, {
+            headers: { Authorization: `Bearer ${localStorage.getItem(TOKEN_KEY)}` },
+          }).then((res) => res.json()),
           ChartDataService.GetBarChartData(),
+          fetch(`${API_URL}/user-products/`, {
+            headers: { Authorization: `Bearer ${localStorage.getItem(TOKEN_KEY)}` }
+          }).then(res => res.json()) // ✅ My Products abrufen
         ]);
 
+        if (userInsights) {
+          console.log("[DEBUG] userInsights:", userInsights);
+  
+          setUserProductInsights(userInsights);
+        }
+  
         if (clusterData) {
           console.log("[DEBUG] clusterData:", clusterData);
-          setMarketCluster(clusterData);
+  
+          // 🔍 Alle Produkte mit `isMyProduct` flaggen
+          const updatedMarkets = clusterData.markets.map((market: MarketType) => ({
+            ...market,
+            products: market.products.map((p: ProductType) => ({
+              ...p,
+              isMyProduct: myProducts.includes(p.asin) // ✅ Falls in My Products, setze `isMyProduct`
+            }))
+          }));
+  
+          setMarketCluster({ ...clusterData, markets: updatedMarkets });
         }
-
+  
         if (stackedData) {
           console.log("[DEBUG] stackedData:", stackedData);
-          const transformedData = transformStackedChartData(stackedData);
-          console.log("[DEBUG] transformed stackedData:", transformedData);
-          setStackedChartData(transformedData);
+          setStackedChartData(transformStackedChartData(stackedData));
         }
+  
         if (barData) setBarChartData(barData.barChart);
+  
       } catch (error) {
         console.error("Error loading data:", error);
       } finally {
@@ -156,6 +190,19 @@ export default function ClusterDetails() {
 
     fetchAllData();
   }, [clusterId]);
+
+  const fetchUserProductInsights = async () => {
+    try {
+      const response = await fetch(`${API_URL}/user-products/insights/${clusterId}`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem(TOKEN_KEY)}` },
+      });
+      const data = await response.json();
+      setUserProductInsights(data);
+    } catch (error) {
+      console.error("Error fetching user product insights:", error);
+    }
+  };
+  
 
   if (loading) {
     return (
@@ -206,6 +253,46 @@ export default function ClusterDetails() {
     return formatter ? formatter(value) : value;
   };
 
+
+
+
+  
+  const toggleMyProduct = async (asin: string) => {
+    try {
+      const token = localStorage.getItem(TOKEN_KEY);
+      if (!token) {
+        console.error("User is not authenticated.");
+        return;
+      }
+
+      const product = marketCluster.markets
+  .flatMap((market: MarketType) => market.products)
+  .find((p: ProductType) => p.asin === asin);
+
+      if (!product) return;
+
+      const apiUrl = `${API_URL}/user-products/${asin}`;
+      const method = product.isMyProduct ? "DELETE" : "POST";
+
+      await fetch(apiUrl, {
+        method,
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+      });
+
+      const updatedMarkets = marketCluster.markets.map((market: MarketType) => ({
+        ...market,
+        products: market.products.map((p: ProductType) => (p.asin === asin ? { ...p, isMyProduct: !p.isMyProduct } : p)),
+      }));
+
+      setMarketCluster({ ...marketCluster, markets: updatedMarkets });
+
+      await fetchUserProductInsights(); 
+    } catch (error) {
+      console.error("Error toggling MyProduct:", error);
+    }
+  };
+  
+  
   const columns: GridColDef[] = [
     {
       field: "details",
@@ -218,6 +305,21 @@ export default function ClusterDetails() {
         >
           <FaRegEye size={20} />
         </IconButton>
+      ),
+    },
+    {
+      field: "myProduct",
+      headerName: "My Product",
+      width: 100,
+      renderCell: (params) => (
+        <Button
+          variant={params.row.isMyProduct ? "contained" : "outlined"}
+          color="primary"
+          size="small"
+          onClick={() => toggleMyProduct(params.row.id)}
+        >
+          {params.row.isMyProduct ? "Remove" : "Add"}
+        </Button>
       ),
     },
     {
@@ -364,7 +466,7 @@ export default function ClusterDetails() {
       renderCell: (params) => renderWithNoData(params.value, formatCurrency),
     },
   ];
-
+  
   return (
     <>
       <Paper elevation={4} sx={{ marginBottom: 2, padding: 4 }}>
@@ -389,11 +491,11 @@ export default function ClusterDetails() {
             one day).
           </Alert>
         )}
-
+  
         <Typography variant="h4" sx={{ marginBottom: 2 }}>
           {marketCluster.title}
         </Typography>
-
+  
         <Grid container spacing={2}>
           <Grid size={{ xs: 12, sm: 12, md: 4 }}>
             <Box sx={{ width: "100%", height: 300 }}>
@@ -442,7 +544,7 @@ export default function ClusterDetails() {
                     Market Development
                   </Typography>
                   <Box sx={{ height: "calc(100% - 40px)" }}>
-                    <CustomStackBars data={stackedChartData} />
+            <CustomStackBars data={stackedChartData} />
                   </Box>
                 </Box>
               )}
@@ -643,19 +745,38 @@ export default function ClusterDetails() {
                                   marketCluster.insights?.top_performing_product
                                     .revenue || 0
                                 )}
-                              </Typography>
+            </Typography>
                             </Box>
                           )}
                         </Box>
                       </Box>
                     </Grid>
-                  </Grid>
+          </Grid>
                 </Box>
               )}
             </Box>
           </Grid>
         </Grid>
 
+        
+        <Typography sx={{ mt: 4, mb: 2, backgroundColor: "primary.main", color: "white", padding: 2 }} variant="h5">
+          User Products Insights
+        </Typography>
+
+        {userProductInsights && (
+          <Paper sx={{ p: 3, mb: 3, backgroundColor: "#e0f7fa" }}>
+            <Typography variant="h6">Total Revenue from My Products</Typography>
+            <Typography variant="h4">{userProductInsights.total_revenue_user_products.toLocaleString()} USD</Typography>
+
+            <Typography variant="h6">Total User Products</Typography>
+            <Typography variant="h4">{userProductInsights.user_product_count}</Typography>
+
+            <Typography variant="h6">Revenue Trend (Last 30 Days)</Typography>
+            <CustomSparkLine data={userProductInsights.sparkline_data_user_products} />
+          </Paper>
+        )}
+
+  
         <Typography
           sx={{
             mt: 4,
@@ -668,7 +789,7 @@ export default function ClusterDetails() {
         >
           Markets in {marketCluster.title}
         </Typography>
-
+  
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
           <Tabs value={tabIndex} onChange={handleTabChange}>
             {marketCluster.markets.map((market: any, index: number) => (
@@ -680,7 +801,7 @@ export default function ClusterDetails() {
             ))}
           </Tabs>
         </Box>
-
+  
         {marketCluster.markets.map((market: any, index: number) => (
           // Debugging Logs
         
@@ -796,6 +917,23 @@ export default function ClusterDetails() {
                     />
                   ))}
               </Box>
+
+              {userProductInsights?.markets?.find((m: any) => m.market_id === market.id) && (
+                <Paper sx={{ p: 3, mb: 3, backgroundColor: "#e3f2fd" }}>
+                  <Typography variant="h6">My Products in {market.keyword}</Typography>
+                  <Typography variant="h4">
+                    {userProductInsights.markets.find((m: any) => m.market_id === market.id)?.user_product_count} Products
+                  </Typography>
+
+                  <Typography variant="h6">Total Revenue</Typography>
+                  <Typography variant="h4">
+                    {userProductInsights.markets.find((m: any) => m.market_id === market.id)?.total_revenue_user_products.toLocaleString()} USD
+                  </Typography>
+
+                  <Typography variant="h6">Revenue Trend (Last 30 Days)</Typography>
+                 
+                </Paper>
+              )}
             </Paper>
             <DataGrid
               rows={market.products.map((product: any) => ({
@@ -813,16 +951,21 @@ export default function ClusterDetails() {
                 sparkline_second_rank: product.sparkline_second_rank,
                 sparkline_price: product.sparkline_price,
                 sparkline_total: product.sparkline_total,
+                isMyProduct: product.isMyProduct, // ✅ Status für Zeilen-Highlight
               }))}
               columns={columns}
               rowHeight={100}
               pageSizeOptions={[10, 25, 50, 100]}
               checkboxSelection={false}
+              getRowClassName={(params) =>
+                params.row.isMyProduct ? "my-product-row" : ""
+              }
+              
             />
-          </Box>
+            </Box>
         ))}
       </Paper>
-
+  
       <Backdrop open={openBackdrop} onClick={handleCloseBackdrop}>
         <TableContainer
           component={Paper}

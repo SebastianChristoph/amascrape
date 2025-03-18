@@ -9,3 +9,4 @@ SQLAlchemy
 selenium
 asynco
 fastapi-mail
+alembic

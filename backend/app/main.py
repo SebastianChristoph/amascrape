@@ -4,11 +4,13 @@ from concurrent.futures import ThreadPoolExecutor
 from typing import List
 
 from app.database import SessionLocal, engine, init_db, ensure_admin_user
-from app.routes import chartdata, market_clusters, markets, scraping, users
+from app.routes import chartdata, market_clusters, markets, scraping, users, user_products
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.exc import OperationalError
 from sqlalchemy.sql import text
+
+
 
 # Start mit:
 # python -m uvicorn app.main:app --host 0.0.0.0 --port 9000 --reload
@@ -44,6 +46,8 @@ app.include_router(markets.router, prefix="/markets", tags=["Markets"])
 app.include_router(market_clusters.router, prefix="/market-clusters", tags=["Market Clusters"])
 app.include_router(chartdata.router, prefix="/chartdata", tags=["Chart Data"])
 app.include_router(scraping.router, prefix="/scraping", tags=["Scraping"])
+app.include_router(user_products.router, prefix="/user-products", tags=["User Products"])
+
 
 @app.get("/")
 def root():

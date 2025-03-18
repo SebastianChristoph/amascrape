@@ -53,9 +53,9 @@ class MarketOrchestrator:
 
         for product in market.products:
             last_valid_product_change = (
-                db.query(ProductChange)
-                .filter(ProductChange.asin == product.asin, ProductChange.change_date < today)
-                .order_by(ProductChange.change_date.desc())
+            db.query(ProductChange)
+            .filter(ProductChange.asin == product.asin, ProductChange.change_date < today)
+            .order_by(ProductChange.change_date.desc())
                 .first()
             )
 
@@ -192,19 +192,19 @@ class MarketOrchestrator:
                         logging.info(
                             f"⚡ Erstelle neuen MarketChange für {market.keyword}")
 
-                        new_market_change = MarketChange(
-                            market_id=market.id,
-                            change_date=datetime.now(timezone.utc),
-                            total_revenue=new_total_revenue,
+                    new_market_change = MarketChange(
+                        market_id=market.id,
+                        change_date=datetime.now(timezone.utc),
+                        total_revenue=new_total_revenue,
                             new_products=",".join(added_asins),
                             removed_products=",".join(removed_asins),
                             top_suggestions=",".join(new_suggestions),
                             changes=" | ".join(
                                 changes) if changes else "Kein Total Revenue Change, aber andere Änderungen"
-                        )
-                        db.add(new_market_change)
-                        db.commit()
-                        db.refresh(new_market_change)
+                    )
+                    db.add(new_market_change)
+                    db.commit()
+                    db.refresh(new_market_change)
                         updated_markets += 1
 
                         self.update_market_changes(

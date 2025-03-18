@@ -68,6 +68,26 @@ class Product(Base):
         passive_deletes=True
     )
 
+
+
+# ✅ Neue Tabelle für die Verknüpfung zwischen User und Product
+class UserProduct(Base):
+    __tablename__ = "user_products"
+
+    user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), primary_key=True)
+    asin = Column(String, ForeignKey("products.asin", ondelete="CASCADE"), primary_key=True)
+    added_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+
+    # ✅ Beziehungen zu den Usern und Produkten
+    user = relationship("User", back_populates="user_products")
+    product = relationship("Product", back_populates="user_products")
+
+# ✅ Beziehung in User und Product definieren
+User.user_products = relationship("UserProduct", back_populates="user", cascade="all, delete-orphan")
+Product.user_products = relationship("UserProduct", back_populates="product", cascade="all, delete-orphan")
+
+
+
 # 3️⃣ ProductChanges Table
 
 
