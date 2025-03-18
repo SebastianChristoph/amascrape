@@ -28,6 +28,7 @@ import {
   FaRegEye,
   FaStore,
   FaTrophy,
+  FaSearch
 } from "react-icons/fa";
 import { useParams } from "react-router-dom";
 import CustomSparkLine from "../components/charts/CustomSparkLine";
@@ -470,18 +471,7 @@ export default function ClusterDetails() {
   return (
     <>
       <Paper elevation={4} sx={{ marginBottom: 2, padding: 4 }}>
-        <Typography
-          sx={{
-            mt: 4,
-            mb: 4,
-            backgroundColor: "primary.main",
-            color: "white",
-            padding: 2,
-          }}
-          variant="h5"
-        >
-          Market Cluster Data
-        </Typography>
+        
 
         {(!marketCluster.total_revenue ||
           marketCluster.total_revenue === 0) && (
@@ -759,20 +749,54 @@ export default function ClusterDetails() {
         </Grid>
 
         
-        <Typography sx={{ mt: 4, mb: 2, backgroundColor: "primary.main", color: "white", padding: 2 }} variant="h5">
-          User Products Insights
-        </Typography>
+       
 
         {userProductInsights && (
-          <Paper sx={{ p: 3, mb: 3, backgroundColor: "#e0f7fa" }}>
-            <Typography variant="h6">Total Revenue from My Products</Typography>
-            <Typography variant="h4">{userProductInsights.total_revenue_user_products.toLocaleString()} USD</Typography>
-
-            <Typography variant="h6">Total User Products</Typography>
-            <Typography variant="h4">{userProductInsights.user_product_count}</Typography>
-
-            <Typography variant="h6">Revenue Trend (Last 30 Days)</Typography>
-            <CustomSparkLine data={userProductInsights.sparkline_data_user_products} />
+          <Paper sx={{ p: 2, mt: 4, mb: 3, backgroundColor: "#f8f9fa" }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+              <Grid container spacing={2}>
+                <Grid size={{ xs: 12 }}>
+                  <Typography variant="h6" sx={{ color: "primary.main", fontWeight: 500 }}>
+                    My Products Overview
+                  </Typography>
+                </Grid>
+                <Grid size={{ xs: 12, md: 4 }}>
+                  <Box sx={{ display: 'flex', gap: 1 }}>
+                    <Box sx={{ pt: 0.5 }}>
+                      <FaDollarSign size={16} color="#2196f3" />
+                    </Box>
+                    <Box>
+                      <Typography variant="body2" color="text.secondary">Total Revenue</Typography>
+                      <Typography variant="h6">{formatCurrency(userProductInsights.total_revenue_user_products)}</Typography>
+                    </Box>
+                  </Box>
+                </Grid>
+                <Grid size={{ xs: 12, md: 4 }}>
+                  <Box sx={{ display: 'flex', gap: 1 }}>
+                    <Box sx={{ pt: 0.5 }}>
+                      <FaStore size={16} color="#2196f3" />
+                    </Box>
+                    <Box>
+                      <Typography variant="body2" color="text.secondary">Active Products</Typography>
+                      <Typography variant="h6">{userProductInsights.user_product_count}</Typography>
+                    </Box>
+                  </Box>
+                </Grid>
+                <Grid size={{ xs: 12, md: 4 }}>
+                  <Box sx={{ display: 'flex', gap: 1 }}>
+                    <Box sx={{ pt: 0.5 }}>
+                      <FaChartLine size={16} color="#2196f3" />
+                    </Box>
+                    <Box>
+                      <Typography variant="body2" color="text.secondary">30-Day Trend</Typography>
+                      <Box sx={{ width: 120, height: 40 }}>
+                        <CustomSparkLine data={userProductInsights.sparkline_data_user_products} />
+                      </Box>
+                    </Box>
+                  </Box>
+                </Grid>
+              </Grid>
+            </Box>
           </Paper>
         )}
 
@@ -820,7 +844,7 @@ export default function ClusterDetails() {
               sx={{
                 p: 2,
                 my: 2,
-                backgroundColor: "#f5f5f5",
+                backgroundColor: "#f8f9fa",
                 borderRadius: 2,
               }}
             >
@@ -830,108 +854,178 @@ export default function ClusterDetails() {
                   is complete
                 </Alert>
               ) : (
-                <Grid container spacing={2} sx={{ mb: 3 }}>
-                  <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-                    <Typography variant="subtitle2" color="text.secondary">
-                      Market Revenue
-                    </Typography>
-                    <Typography variant="h6">
-                      {formatCurrency(market.revenue_total || 0)}
-                      </Typography>
-                      
-                      <Box>
-             
-             {market.sparkline_data_total_revenue &&
-             market.sparkline_data_total_revenue.length > 0 ? (
-               <Box sx={{ mt: 4 }}>
-                 <CustomSparkLine data={market.sparkline_data_total_revenue} />
-               </Box>
-             ) : (
-               <Chip label="No Data" color="default" size="small" />
-             )}
+                <>
+                  <Grid container spacing={3}>
+                    <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+                      <Box sx={{ p: 2, height: '100%' }}>
+                        <Typography variant="subtitle2" color="text.secondary" gutterBottom>
+                          Market Revenue
+                        </Typography>
+                        <Typography variant="h6" sx={{ mb: 1 }}>
+                          {formatCurrency(market.revenue_total || 0)}
+                        </Typography>
+                        {market.sparkline_data_total_revenue &&
+                          market.sparkline_data_total_revenue.length > 0 ? (
+                          <Box sx={{ mt: 1 }}>
+                            <CustomSparkLine data={market.sparkline_data_total_revenue} />
+                          </Box>
+                        ) : (
+                          <Chip label="No Trend Data" color="default" size="small" />
+                        )}
                       </Box>
-                      
+                    </Grid>
+                    <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+                      <Box sx={{ p: 2, height: '100%' }}>
+                        <Typography variant="subtitle2" color="text.secondary" gutterBottom>
+                          Most Expensive
+                        </Typography>
+                        <Typography variant="h6">
+                          {(() => {
+                            const maxPriceProduct = market.products.reduce(
+                              (max: any, p: any) =>
+                                !max || (p.price || 0) > (max.price || 0) ? p : max,
+                              null
+                            );
+                            return (
+                              <Link
+                                href={`https://www.amazon.com/dp/${maxPriceProduct?.asin}?language=en_US`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                sx={{ textDecoration: 'none' }}
+                              >
+                                {formatCurrency(maxPriceProduct?.price || 0)}
+                                <Typography variant="caption" display="block" color="text.secondary">
+                                  {maxPriceProduct?.asin || "N/A"}
+                                </Typography>
+                              </Link>
+                            );
+                          })()}
+                        </Typography>
+                      </Box>
+                    </Grid>
+                    <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+                      <Box sx={{ p: 2, height: '100%' }}>
+                        <Typography variant="subtitle2" color="text.secondary" gutterBottom>
+                          Least Expensive
+                        </Typography>
+                        <Typography variant="h6">
+                          {(() => {
+                            const minPriceProduct = market.products
+                              .filter((p: any) => p.price > 0)
+                              .reduce(
+                                (min: any, p: any) =>
+                                  !min || p.price < min.price ? p : min,
+                                null
+                              );
+                            return (
+                              <Link
+                                href={`https://www.amazon.com/dp/${minPriceProduct?.asin}?language=en_US`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                sx={{ textDecoration: 'none' }}
+                              >
+                                {formatCurrency(minPriceProduct?.price || 0)}
+                                <Typography variant="caption" display="block" color="text.secondary">
+                                  {minPriceProduct?.asin || "N/A"}
+                                </Typography>
+                              </Link>
+                            );
+                          })()}
+                        </Typography>
+                      </Box>
+                    </Grid>
+                    <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+                      <Box sx={{ p: 2, height: '100%' }}>
+                        <Typography variant="subtitle2" color="text.secondary" gutterBottom>
+                          Highest Revenue Product
+                        </Typography>
+                        <Typography variant="h6">
+                          {(() => {
+                            const maxRevenueProduct = market.products.reduce(
+                              (max: any, p: any) =>
+                                !max || (p.total || 0) > (max.total || 0) ? p : max,
+                              null
+                            );
+                            return (
+                              <Link
+                                href={`https://www.amazon.com/dp/${maxRevenueProduct?.asin}?language=en_US`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                sx={{ textDecoration: 'none' }}
+                              >
+                                {formatCurrency(maxRevenueProduct?.total || 0)}
+                                <Typography variant="caption" display="block" color="text.secondary">
+                                  {maxRevenueProduct?.asin || "N/A"}
+                                </Typography>
+                              </Link>
+                            );
+                          })()}
+                        </Typography>
+                      </Box>
+                    </Grid>
                   </Grid>
-                  <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-                    <Typography variant="subtitle2" color="text.secondary">
-                      Most Expensive
+
+                  <Box sx={{ mt: 4 }}>
+                    <Typography variant="subtitle1" sx={{ fontWeight: 600, mb: 2, display: 'flex', alignItems: 'center', gap: 1 }}>
+                      <FaSearch size={16} color="#666" />
+                      Top Suggestions
                     </Typography>
-                    <Typography variant="h6">
-                      {(() => {
-                        const maxPriceProduct = market.products.reduce(
-                          (max: any, p: any) =>
-                            !max || (p.price || 0) > (max.price || 0) ? p : max,
-                          null
-                        );
-                        return `${formatCurrency(maxPriceProduct?.price || 0)} (${maxPriceProduct?.asin || "N/A"})`;
-                      })()}
-                    </Typography>
-                  </Grid>
-                  <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-                    <Typography variant="subtitle2" color="text.secondary">
-                      Least Expensive
-                    </Typography>
-                    <Typography variant="h6">
-                      {(() => {
-                        const minPriceProduct = market.products
-                          .filter((p: any) => p.price > 0)
-                          .reduce(
-                            (min: any, p: any) =>
-                              !min || p.price < min.price ? p : min,
-                            null
-                          );
-                        return `${formatCurrency(minPriceProduct?.price || 0)} (${minPriceProduct?.asin || "N/A"})`;
-                      })()}
-                    </Typography>
-                  </Grid>
-                  <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-                    <Typography variant="subtitle2" color="text.secondary">
-                      Highest Revenue Product
-                    </Typography>
-                    <Typography variant="h6">
-                      {(() => {
-                        const maxRevenueProduct = market.products.reduce(
-                          (max: any, p: any) =>
-                            !max || (p.total || 0) > (max.total || 0) ? p : max,
-                          null
-                        );
-                        return `${formatCurrency(maxRevenueProduct?.total || 0)} (${maxRevenueProduct?.asin || "N/A"})`;
-                      })()}
-                    </Typography>
-                  </Grid>
-                </Grid>
+                    <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
+                      {market.top_suggestions
+                        .split(",")
+                        .map((suggestion: string, idx: number) => (
+                          <Chip
+                            key={idx}
+                            label={suggestion.trim()}
+                            variant="filled"
+                            color="primary"
+                            size="small"
+                            sx={{
+                              borderRadius: '16px',
+                              height: '32px',
+                              fontSize: '0.875rem',
+                              fontWeight: 400,
+                              backgroundColor: 'primary.main',
+                              color: 'white',
+                              '&:hover': {
+                                backgroundColor: 'primary.dark',
+                              },
+                              '& .MuiChip-label': {
+                                padding: '0 12px',
+                              }
+                            }}
+                          />
+                        ))}
+                    </Box>
+                  </Box>
+                </>
               )}
 
-              <Typography variant="h6" sx={{ fontWeight: "bold", mb: 1 }}>
-                🔍 Top Suggestions
-              </Typography>
-              <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
-                {market.top_suggestions
-                  .split(",")
-                  .map((suggestion: string, idx: number) => (
-                    <Chip
-                      key={idx}
-                      label={suggestion.trim()}
-                      variant="outlined"
-                      color="primary"
-                    />
-                  ))}
-              </Box>
-
               {userProductInsights?.markets?.find((m: any) => m.market_id === market.id) && (
-                <Paper sx={{ p: 3, mb: 3, backgroundColor: "#e3f2fd" }}>
-                  <Typography variant="h6">My Products in {market.keyword}</Typography>
-                  <Typography variant="h4">
-                    {userProductInsights.markets.find((m: any) => m.market_id === market.id)?.user_product_count} Products
-                  </Typography>
-
-                  <Typography variant="h6">Total Revenue</Typography>
-                  <Typography variant="h4">
-                    {userProductInsights.markets.find((m: any) => m.market_id === market.id)?.total_revenue_user_products.toLocaleString()} USD
-                  </Typography>
-
-                  <Typography variant="h6">Revenue Trend (Last 30 Days)</Typography>
-                 
+                <Paper sx={{ p: 3, mt: 3, backgroundColor: "#e3f2fd", borderRadius: 2 }}>
+                  <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                    <Typography variant="subtitle1" sx={{ fontWeight: 600, color: 'primary.main' }}>
+                      My Products in {market.keyword}
+                    </Typography>
+                    <Grid container spacing={2}>
+                      <Grid size={{ xs: 12, sm: 6 }}>
+                        <Box>
+                          <Typography variant="body2" color="text.secondary">Products</Typography>
+                          <Typography variant="h5">
+                            {userProductInsights.markets.find((m: any) => m.market_id === market.id)?.user_product_count}
+                          </Typography>
+                        </Box>
+                      </Grid>
+                      <Grid size={{ xs: 12, sm: 6 }}>
+                        <Box>
+                          <Typography variant="body2" color="text.secondary">Total Revenue</Typography>
+                          <Typography variant="h5">
+                            {formatCurrency(userProductInsights.markets.find((m: any) => m.market_id === market.id)?.total_revenue_user_products || 0)}
+                          </Typography>
+                        </Box>
+                      </Grid>
+                    </Grid>
+                  </Box>
                 </Paper>
               )}
             </Paper>
