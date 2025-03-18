@@ -1,18 +1,17 @@
+import logging
+import time
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 import scraper.selenium_config as selenium_config
 from scraper.first_page_amazon_scraper import AmazonFirstPageScraper
-import logging
-import json
 
-# Configure logging
+# Logging-Konfiguration
 logging.basicConfig(level=logging.INFO, format='%(message)s')
 
-def test_first_page_scraper(keyword):
-    """Testet den FirstPageAmazonScraper mit einem Suchbegriff."""
-    logging.info(f"🚀 Starte Test für Keyword: {keyword}")
+def test_first_page(search_query):
+    """Testet das Scraping der ersten Seite mit dem AmazonFirstPageScraper."""
+    logging.info(f"Starte Test für die Suche: {search_query}")
     
-    # Chrome WebDriver mit Optionen starten
     chrome_options = Options()
     chrome_options.add_argument("--headless=new")
     chrome_options.add_argument("--disable-gpu")
@@ -29,41 +28,39 @@ def test_first_page_scraper(keyword):
     chrome_options.add_argument("--disable-web-security")
     chrome_options.add_argument("--log-level=3")
     chrome_options.add_argument(f"user-agent={selenium_config.user_agent}")
-
+    
     try:
-        # Scraper initialisieren
-        scraper = AmazonFirstPageScraper(headless=True, show_details=True)
+        driver = webdriver.Chrome(options=chrome_options)
+        scraper = AmazonFirstPageScraper(driver, show_details=True)
         
-        # Daten scrapen
-        results = scraper.get_first_page_data(keyword)
+        start_time = time.time()
+        search_results = scraper.get_first_page_data(search_query)
+        end_time = time.time()
         
-        if results and results['first_page_products']:
-            logging.info(f"\n✅ Erfolgreich {len(results['first_page_products'])} Produkte gefunden!")
+        if search_results:
+            logging.info("\n✅ Erste Seite erfolgreich gescraped!")
+            logging.info("\nErgebnisse:")
+            logging.info("\nTop Suggestions:", search_results["top_search_suggestions"])
             
-            # Übersichtliche Ausgabe der Produkte
-            logging.info("\nGefundene Produkte:")
-            logging.info("=" * 80)
-            
-            for i, product in enumerate(results['first_page_products'], 1):
-                logging.info(f"\nProdukt {i}:")
-                logging.info(f"ASIN: {product['asin']}")
-                logging.info(f"Titel: {product['title'][:100]}{'...' if len(product['title']) > 100 else ''}")
-                logging.info(f"Preis: ${product['price'] if product['price'] else 'N/A'}")
-                logging.info("-" * 80)
-            
-            # Optional: Speichere die Ergebnisse in einer JSON-Datei
-            with open(f'first_page_results_{keyword.replace(" ", "_")}.json', 'w', encoding='utf-8') as f:
-                json.dump(results, f, indent=2, ensure_ascii=False)
-            logging.info(f"\n✅ Ergebnisse wurden in 'first_page_results_{keyword.replace(' ', '_')}.json' gespeichert.")
+            for index, result in enumerate(search_results["first_page_products"], start=1):
+                logging.info(f"{index}. {result}")
+            logging.info(f"⏳ Dauer des Scraping: {end_time - start_time:.2f} Sekunden")
         else:
-            logging.error("❌ Keine Produkte gefunden!")
+            logging.error("❌ Keine Ergebnisse gefunden!")
             
     except Exception as e:
         logging.error(f"❌ Fehler: {e}")
     finally:
-        scraper.close_driver()
+        driver.quit()
         logging.info("\n✅ WebDriver geschlossen.")
 
 if __name__ == "__main__":
-    # Hier das zu testende Keyword eingeben
-    test_first_page_scraper("creatine")  # Beispiel-Keyword 
+    while True:
+        search_query = input("Bitte geben Sie eine Suchanfrage ein [default ist creatine]: ").strip()
+        if search_query == "":
+            search_query = "creatine"
+        test_first_page(search_query)
+        repeat = input("Möchten Sie eine weitere Suche testen? (ja/nein): ").strip().lower()
+        if repeat != "ja":
+            logging.info("Beende das Programm.")
+            break

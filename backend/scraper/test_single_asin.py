@@ -1,17 +1,17 @@
+import logging
+import time
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 import scraper.selenium_config as selenium_config
 from scraper.product_selenium_scraper import AmazonProductScraper
-import logging
 
-# Configure logging
+# Logging-Konfiguration
 logging.basicConfig(level=logging.INFO, format='%(message)s')
 
 def test_asin(asin):
     """Testet einen einzelnen ASIN mit dem AmazonProductScraper."""
-    logging.info(f"🚀 Starte Test für ASIN: {asin}")
+    logging.info(f"Starte Test für ASIN: {asin}")
     
-    # Chrome WebDriver mit Optionen starten
     chrome_options = Options()
     chrome_options.add_argument("--headless=new")
     chrome_options.add_argument("--disable-gpu")
@@ -28,16 +28,14 @@ def test_asin(asin):
     chrome_options.add_argument("--disable-web-security")
     chrome_options.add_argument("--log-level=3")
     chrome_options.add_argument(f"user-agent={selenium_config.user_agent}")
-
+    
     try:
-        # WebDriver initialisieren
         driver = webdriver.Chrome(options=chrome_options)
-        
-        # Scraper initialisieren
         scraper = AmazonProductScraper(driver, show_details=True)
         
-        # Produktinformationen scrapen
+        start_time = time.time()
         product_data = scraper.get_product_infos(asin)
+        end_time = time.time()
         
         if product_data:
             logging.info("\n✅ Produkt erfolgreich gescraped!")
@@ -46,6 +44,7 @@ def test_asin(asin):
                 if isinstance(value, str):
                     value = value[:60] + "..." if len(value) > 60 else value
                 logging.info(f"{key}: {value}")
+            logging.info(f"⏳ Dauer des Scraping: {end_time - start_time:.2f} Sekunden")
         else:
             logging.error("❌ Fehler beim Scrapen des Produkts!")
             
@@ -56,5 +55,12 @@ def test_asin(asin):
         logging.info("\n✅ WebDriver geschlossen.")
 
 if __name__ == "__main__":
-    # Hier die zu testende ASIN eingeben
-    test_asin("B0DWFTY8B6")  # Beispiel-ASIN 
+    while True:
+        asin = input("Bitte geben Sie eine ASIN ein [default ist B008PAIDO2]: ").strip()
+        if asin == "":
+            asin = "B008PAIDO2"
+        test_asin(asin)
+        repeat = input("Möchten Sie eine weitere ASIN testen? (ja/nein): ").strip().lower()
+        if repeat != "ja":
+            logging.info("Beende das Programm.")
+            break

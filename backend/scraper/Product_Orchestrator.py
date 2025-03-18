@@ -1,5 +1,4 @@
 import logging
-import os
 import sys
 import time
 from datetime import datetime, timezone
@@ -208,8 +207,8 @@ class Product_Orchestrator:
                     product.last_time_scraped = datetime.now(timezone.utc)
                     db.commit()
 
-                    logging.info(
-                        f"✅ last_time_scraped für {product.asin} erfolgreich aktualisiert.")
+                    # logging.info(
+                    #     f"✅ last_time_scraped für {product.asin} erfolgreich aktualisiert.")
 
                     scraped_asins.add(product.asin)
 
@@ -236,21 +235,22 @@ class Product_Orchestrator:
             total_time = time.time() - self.start_time
             avg_time = mean(self.scraping_times) if self.scraping_times else 0
             
-            logging.info("\n📊 Scraping Performance Metrics:")
-            logging.info(f"🕒 Gesamtzeit: {total_time:.2f} Sekunden")
-            logging.info(f"⚡ Durchschnittliche Zeit pro Produkt: {avg_time:.2f} Sekunden")
-            logging.info(f"📦 Anzahl gescrapte Produkte: {len(scraped_asins)}")
-            logging.info(f"Failed products: {len(self.failed_products)}")
+            # logging.info("\n📊 Scraping Performance Metrics:")
+            # logging.info(f"🕒 Gesamtzeit: {total_time:.2f} Sekunden")
+            # logging.info(f"⚡ Durchschnittliche Zeit pro Produkt: {avg_time:.2f} Sekunden")
+            # logging.info(f"📦 Anzahl gescrapte Produkte: {len(scraped_asins)}")
+            # logging.info(f"Failed products: {len(self.failed_products)}")
 
         except Exception as e:
             logging.critical(f"❌ Schwerwiegender Fehler im Product-Update: {e}")
         finally:
+           # Gesamtzeit berechnen
             end_time = time.time()
             total_time = end_time - self.start_time
             avg_time = mean(self.scraping_times) if self.scraping_times else 0
-            
+
             logging.info("\n📊 Scraping Performance Metrics:")
-            logging.info(f"🕒 Gesamtzeit: {total_time:.2f} Sekunden")
+            logging.info(f"🕒 Gesamtzeit: {self.format_time(total_time)}")
             logging.info(f"⚡ Durchschnittliche Zeit pro Produkt: {avg_time:.2f} Sekunden")
             logging.info(f"📦 Anzahl gescrapte Produkte: {len(scraped_asins)}")
             logging.info(f"Failed products: {len(self.failed_products)}")

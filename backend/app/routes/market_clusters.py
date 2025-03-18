@@ -133,7 +133,7 @@ async def get_dashboard_overview(
             MarketCluster.user_id == current_user.id
         ).options(joinedload(MarketCluster.markets)).all()
         
-        print(f"Found {len(market_clusters)} market clusters")  # Using print for immediate feedback
+        
         
         # Calculate total revenue (from clusters with revenue > 0)
         total_revenue = 0.0
@@ -146,9 +146,7 @@ async def get_dashboard_overview(
             else:
                 clusters_without_revenue += 1
         
-        print(f"Total revenue: {total_revenue}")
-        print(f"Total clusters: {total_clusters}")
-        print(f"Clusters without revenue: {clusters_without_revenue}")
+      
         
         # Get market IDs that belong to user's clusters first
         market_ids = db.query(Market.id).join(
@@ -166,7 +164,7 @@ async def get_dashboard_overview(
             ProductChange.total.isnot(None)  # Only count products that have been scraped
         ).scalar() or 0
         
-        print(f"Unique products count: {unique_products_count}")
+      
         
         # Simplified revenue development data for debugging
         revenue_data = [int(total_revenue)] * 30  # Just use current total revenue for all 30 days
@@ -179,7 +177,7 @@ async def get_dashboard_overview(
             "revenue_development": revenue_data
         }
         
-        print(f"Response data: {response_data}")
+        # print(f"Response data: {response_data}")
         return response_data
         
     except Exception as e:

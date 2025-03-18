@@ -401,11 +401,11 @@ class AmazonProductScraper:
                 "image_url": image_path,
             }
 
-            max_key_length = max(len(key) for key in product_dict.keys())
-            for key, value in product_dict.items():
-                if isinstance(value, str):
-                    value = value[:60] + "..." if len(value) > 60 else value
-                print(f"\t{key.ljust(max_key_length)} : {value}")
+            # max_key_length = max(len(key) for key in product_dict.keys())
+            # for key, value in product_dict.items():
+            #     if isinstance(value, str):
+            #         value = value[:60] + "..." if len(value) > 60 else value
+            #     print(f"\t{key.ljust(max_key_length)} : {value}")
 
             return product_dict
         except Exception as e:
