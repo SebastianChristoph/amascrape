@@ -10,6 +10,8 @@ from app.models import MarketChange, MarketCluster, Product, ProductChange
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
+from collections import defaultdict
+
 
 router = APIRouter()
 
@@ -178,11 +180,11 @@ async def get_stacked_bar_data_for_cluster(cluster_id: int, db: Session = Depend
 async def get_sparkline_data_for_market_cluster(cluster_id: int, db: Session = Depends(get_db)) -> List[int]:
     """
     Holt die aggregierte Umsatzentwicklung für ein MarketCluster als Liste von Integer-Werten.
-    Falls ein Markt keine Änderung an einem Tag hat, wird der letzte bekannte Wert übernommen.
+    Falls ein Markt mehrere Änderungen an einem Tag hat, wird der späteste Wert genommen.
+    Falls kein Wert existiert, wird der vorherige bekannte Wert übernommen.
     """
     # 📌 MarketCluster abrufen
-    market_cluster = db.query(MarketCluster).filter(
-        MarketCluster.id == cluster_id).first()
+    market_cluster = db.query(MarketCluster).filter(MarketCluster.id == cluster_id).first()
     if not market_cluster:
         return []
 
@@ -190,8 +192,7 @@ async def get_sparkline_data_for_market_cluster(cluster_id: int, db: Session = D
     markets = market_cluster.markets
 
     # 📌 Die letzten 30 Tage berechnen
-    cutoff_date = datetime.now(timezone.utc) - \
-        timedelta(days=30)  # ✅ timezone-aware
+    cutoff_date = datetime.now(timezone.utc) - timedelta(days=30)  # ✅ timezone-aware
 
     # 📌 Alle MarketChanges abrufen (maximal 30 Tage zurück)
     market_changes = (
@@ -202,46 +203,69 @@ async def get_sparkline_data_for_market_cluster(cluster_id: int, db: Session = D
     )
 
     if not market_changes:
+        print("❌ Keine MarketChanges gefunden!")
         return []
 
-    # 📌 Earliest Change Date bestimmen (aber nicht älter als cutoff_date)
-    earliest_change_date = max(
-        min((mc.change_date.replace(tzinfo=timezone.utc)
-            for mc in market_changes), default=cutoff_date),
-        cutoff_date
-    ).date()  # ✅ Sicherstellen, dass es ein `date`-Objekt ist
+    # 📌 Bestimme das früheste Change-Date pro Markt (innerhalb von 30 Tagen)
+    earliest_change_dates = {}
+    market_change_map = defaultdict(lambda: defaultdict(list))  # {market_id: {date: [entries]}}
+
+    for mc in market_changes:
+        date = mc.change_date.replace(tzinfo=timezone.utc).date()
+        market_change_map[mc.market_id][date].append(mc)
+
+    # 📌 Finde das späteste `total_revenue` pro Tag & Markt
+    latest_market_values_per_day = defaultdict(dict)
+
+    for market_id, date_entries in market_change_map.items():
+        for date, entries in date_entries.items():
+            latest_entry = max(entries, key=lambda x: x.change_date)  # ⏳ Spätester Eintrag pro Tag
+            if latest_entry.total_revenue is not None:
+                latest_market_values_per_day[market_id][date] = latest_entry.total_revenue
+
+    # 📌 Das späteste dieser frühesten Change-Dates bestimmen
+    earliest_common_date = max(
+        (min(dates) for dates in latest_market_values_per_day.values() if dates),
+        default=cutoff_date.date()
+    )
+    print("🗓️ Earliest common date:", earliest_common_date)
 
     # 📌 Heute als Enddatum setzen
     today = datetime.now(timezone.utc).date()
 
-    # 📌 Liste für aggregierte Umsätze initialisieren
-    sparkline_data = []
-
     # 📌 Letzte bekannte Werte für jeden Markt initialisieren
     last_market_values = {market.id: 0 for market in markets}
 
+    print("🔄 Initial last market values:", last_market_values)
+
+    # 📌 Sparkline-Data initialisieren
+    sparkline_data = []
+
     # 📌 Iteration über die Zeitreihe
-    current_date = earliest_change_date
+    current_date = earliest_common_date
     while current_date <= today:
         total_revenue = 0  # Tagesumsatz für das gesamte Cluster
 
         for market in markets:
-            # 🔍 Letzte bekannte Umsatzänderung für diesen Markt abrufen
-            change_today = next((mc for mc in market_changes if mc.market_id ==
-                                market.id and mc.change_date.date() == current_date), None)
+            if current_date in latest_market_values_per_day[market.id]:
+                last_market_values[market.id] = latest_market_values_per_day[market.id][current_date]
+                print(f"✅ Markt {market.id} - Letzter Wert für {current_date}: {last_market_values[market.id]}")
+            else:
+                print(f"⚠️ Markt {market.id} - Keine Änderung für {current_date}, behalte letzten Wert: {last_market_values[market.id]}")
 
-            if change_today:
-                last_market_values[market.id] = change_today.total_revenue if change_today.total_revenue else last_market_values[market.id]
-
-            # Summe für den Cluster
+            # Summe für das Cluster
             total_revenue += last_market_values[market.id]
 
         # 📌 Speichere den Wert in der Sparkline-Liste
         sparkline_data.append(int(total_revenue))
+        print(f"📊 Sparkline [{current_date}]: {total_revenue}")
 
         # ⏩ Zum nächsten Tag wechseln
         current_date += timedelta(days=1)
 
+    if len(sparkline_data) == 1:
+        sparkline_data.append(sparkline_data[0])
+    print("📈 Final Sparkline Data:", sparkline_data)
     return sparkline_data  # 🔥 KEINE ZEITACHSE – nur die Liste mit Werten
 
 

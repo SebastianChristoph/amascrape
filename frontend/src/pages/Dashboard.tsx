@@ -48,6 +48,7 @@ const Dashboard: React.FC = () => {
         setMarketClusters(clustersData);
       }
       if (overviewData) {
+        console.log("[DEBUG] OverviewData:", overviewData)
         setDashboardData(overviewData);
       }
     } catch (error) {

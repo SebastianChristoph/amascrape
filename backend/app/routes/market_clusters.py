@@ -1,16 +1,17 @@
 import asyncio
 import logging
-from typing import List, Optional
 from datetime import datetime, timedelta, timezone
-
-from fastapi import APIRouter, Depends, HTTPException
-from pydantic import BaseModel
-from sqlalchemy import delete, func, distinct
-from sqlalchemy.orm import Session, joinedload
+from typing import List, Optional
 
 from app.auth import get_current_user
 from app.database import get_db
-from app.models import MarketCluster, MarketChange, ProductChange, User, market_cluster_markets, Market, Product, market_change_products
+from app.models import (Market, MarketChange, MarketCluster, Product,
+                        ProductChange, User, market_change_products,
+                        market_cluster_markets)
+from fastapi import APIRouter, Depends, HTTPException
+from pydantic import BaseModel
+from sqlalchemy import delete, distinct, func
+from sqlalchemy.orm import Session, joinedload
 
 router = APIRouter()
 
@@ -298,11 +299,6 @@ async def get_market_cluster_details(
     return response_data
 
 
-from datetime import datetime, timedelta, timezone
-from typing import List
-import logging
-from sqlalchemy.orm import Session
-from app.models import ProductChange
 
 def get_sparkline_for_product(db: Session, asin: str, field: str) -> List[int]:
     """Generiert Sparkline-Daten für ein bestimmtes Produktfeld (Preis, Rank, etc.)."""
