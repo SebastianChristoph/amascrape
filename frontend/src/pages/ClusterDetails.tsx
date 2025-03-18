@@ -19,7 +19,7 @@ import {
   TableHead,
   TableRow,
   Tabs,
-  Typography
+  Typography,
 } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
@@ -30,7 +30,13 @@ import CustomSparkLine from "../components/charts/CustomSparkLine";
 import CustomStackBars from "../components/charts/CustomStackChart";
 import ChartDataService from "../services/ChartDataService";
 import MarketService from "../services/MarketService";
-import { FaRegEye, FaDollarSign, FaStore, FaChartLine, FaTrophy } from "react-icons/fa";
+import {
+  FaRegEye,
+  FaDollarSign,
+  FaStore,
+  FaChartLine,
+  FaTrophy,
+} from "react-icons/fa";
 import { GrCluster } from "react-icons/gr";
 import { AiOutlineCheckCircle } from "react-icons/ai";
 
@@ -253,12 +259,88 @@ export default function ClusterDetails() {
         ),
     },
     { field: "title", headerName: "Title", width: 400 },
+
+    {
+      field: "chart_price",
+      headerName: "Price Trend",
+      width: 100,
+      renderCell: (params) => {
+        return params.row.sparkline_price ? (
+          <Box sx={{ mt: 4 }}>
+            <CustomSparkLine data={params.row.sparkline_price} />
+          </Box>
+        ) : (
+          <Chip label="No Data" color="default" size="small" />
+        );
+      },
+    },
     {
       field: "price",
       headerName: "Price",
       type: "number",
       width: 120,
       renderCell: (params) => renderWithNoData(params.value, formatCurrency),
+    },
+
+    {
+      field: "mainCategory",
+      headerName: "Main Category",
+      width: 200,
+      renderCell: (params) => renderWithNoData(params.value),
+    },
+    {
+      field: "chart_main_rank",
+      headerName: "Main Rank Trend",
+      width: 100,
+      renderCell: (params) => {
+        return params.row.sparkline_main_rank &&
+          params.row.sparkline_main_rank.length > 0 ? (
+          <Box sx={{ mt: 4 }}>
+            <CustomSparkLine data={params.row.sparkline_main_rank} />
+          </Box>
+        ) : (
+          <Chip label="No Data" color="default" size="small" />
+        );
+      },
+    },
+    {
+      field: "mainCategoryRank",
+      headerName: "Rank Main",
+      width: 100,
+      renderCell: (params) => renderWithNoData(params.value, formatNumber),
+    },
+    {
+      field: "secondCategory",
+      headerName: "Sub Category",
+      width: 200,
+      renderCell: (params) => renderWithNoData(params.value),
+    },
+    {
+      field: "chart_second_rank",
+      headerName: "Second Rank Trend",
+      width: 100,
+      renderCell: (params) => {
+        return params.row.sparkline_second_rank ? (
+          <Box sx={{ mt: 4 }}>
+            <CustomSparkLine data={params.row.sparkline_second_rank} />
+          </Box>
+        ) : (
+          <Chip label="No Data" color="default" size="small" />
+        );
+      },
+    },
+    {
+      field: "secondCategoryRank",
+      headerName: "Sub Rank",
+      width: 100,
+      renderCell: (params) => renderWithNoData(params.value, formatNumber),
+    },
+    {
+      field: "blm",
+      headerName: "Bought Last Month",
+      type: "number",
+      width: 130,
+      renderCell: (params) => renderWithNoData(params.value, formatNumber),
     },
     {
       field: "chart_total",
@@ -275,82 +357,6 @@ export default function ClusterDetails() {
       },
     },
     {
-      field: "chart_price",
-      headerName: "Price Trend",
-      width: 100,
-      renderCell: (params) => {
-        return params.row.sparkline_price ? (
-          <Box sx={{ mt: 4 }}>
-            <CustomSparkLine data={params.row.sparkline_price} />
-          </Box>
-        ) : (
-          <Chip label="No Data" color="default" size="small" />
-        );
-      },
-    },
-    {
-      field: "chart_main_rank",
-      headerName: "Main Rank Trend",
-      width: 100,
-      renderCell: (params) => {
-       
-    
-        return params.row.sparkline_main_rank && params.row.sparkline_main_rank.length > 0 ? (
-          <Box sx={{ mt: 4 }}>
-            <CustomSparkLine data={params.row.sparkline_main_rank} />
-          </Box>
-        ) : (
-          <Chip label="No Data" color="default" size="small" />
-        );
-      },
-    },
-    {
-      field: "chart_second_rank",
-      headerName: "Second Rank Trend",
-      width: 100,
-      renderCell: (params) => {
-        return params.row.sparkline_second_rank ? (
-          <Box sx={{ mt: 4 }}>
-            <CustomSparkLine data={params.row.sparkline_second_rank} />
-          </Box>
-        ) : (
-          <Chip label="No Data" color="default" size="small" />
-        );
-      },
-    },
-    
-    {
-      field: "mainCategory",
-      headerName: "Main Category",
-      width: 200,
-      renderCell: (params) => renderWithNoData(params.value),
-    },
-    {
-      field: "mainCategoryRank",
-      headerName: "Rank Main",
-      width: 100,
-      renderCell: (params) => renderWithNoData(params.value, formatNumber),
-    },
-    {
-      field: "secondCategory",
-      headerName: "Sub Category",
-      width: 200,
-      renderCell: (params) => renderWithNoData(params.value),
-    },
-    {
-      field: "secondCategoryRank",
-      headerName: "Sub Rank",
-      width: 100,
-      renderCell: (params) => renderWithNoData(params.value, formatNumber),
-    },
-    {
-      field: "blm",
-      headerName: "Bought Last Month",
-      type: "number",
-      width: 130,
-      renderCell: (params) => renderWithNoData(params.value, formatNumber),
-    },
-    {
       field: "total",
       headerName: "Total Revenue",
       type: "number",
@@ -358,7 +364,7 @@ export default function ClusterDetails() {
       renderCell: (params) => renderWithNoData(params.value, formatCurrency),
     },
   ];
-  
+
   return (
     <>
       <Paper elevation={4} sx={{ marginBottom: 2, padding: 4 }}>
@@ -374,51 +380,56 @@ export default function ClusterDetails() {
         >
           Market Cluster Data
         </Typography>
-  
-        {(!marketCluster.total_revenue || marketCluster.total_revenue === 0) && (
+
+        {(!marketCluster.total_revenue ||
+          marketCluster.total_revenue === 0) && (
           <Alert severity="info" sx={{ mb: 2 }}>
-            This is a first impression of the market. More detailed data will be available after the initial scraping process (usually takes about one day).
+            This is a first impression of the market. More detailed data will be
+            available after the initial scraping process (usually takes about
+            one day).
           </Alert>
         )}
-  
+
         <Typography variant="h4" sx={{ marginBottom: 2 }}>
           {marketCluster.title}
         </Typography>
-  
+
         <Grid container spacing={2}>
           <Grid size={{ xs: 12, sm: 12, md: 4 }}>
-            <Box sx={{ width: '100%', height: 300 }}>
-              {Object.keys(stackedChartData).length === 0 || 
-               Object.values(stackedChartData).every(marketData => 
-                 marketData.every(entry => entry.value === 0)
-               ) ? (
-                <Box sx={{ height: '100%' }}>
+            <Box sx={{ width: "100%", height: 300 }}>
+              {Object.keys(stackedChartData).length === 0 ||
+              Object.values(stackedChartData).every((marketData) =>
+                marketData.every((entry) => entry.value === 0)
+              ) ? (
+                <Box sx={{ height: "100%" }}>
                   <Typography variant="h6" color="text.secondary" gutterBottom>
                     Market Development
                   </Typography>
-                  <Box sx={{ position: 'relative', height: 'calc(100% - 40px)' }}>
-                    <Skeleton 
-                      variant="rectangular" 
+                  <Box
+                    sx={{ position: "relative", height: "calc(100% - 40px)" }}
+                  >
+                    <Skeleton
+                      variant="rectangular"
                       animation="wave"
-                      width="100%" 
+                      width="100%"
                       height="100%"
                       sx={{
                         borderRadius: 1,
-                        bgcolor: 'grey.100'
+                        bgcolor: "grey.100",
                       }}
                     />
-                    <Typography 
-                      variant="body2" 
-                      color="text.secondary" 
-                      sx={{ 
-                        position: 'absolute',
-                        top: '50%',
-                        left: '50%',
-                        transform: 'translate(-50%, -50%)',
-                        textAlign: 'center',
-                        backgroundColor: 'rgba(255, 255, 255, 0.8)',
-                        padding: '8px 16px',
-                        borderRadius: 1
+                    <Typography
+                      variant="body2"
+                      color="text.secondary"
+                      sx={{
+                        position: "absolute",
+                        top: "50%",
+                        left: "50%",
+                        transform: "translate(-50%, -50%)",
+                        textAlign: "center",
+                        backgroundColor: "rgba(255, 255, 255, 0.8)",
+                        padding: "8px 16px",
+                        borderRadius: 1,
                       }}
                     >
                       Historical market data will be available soon
@@ -426,11 +437,11 @@ export default function ClusterDetails() {
                   </Box>
                 </Box>
               ) : (
-                <Box sx={{ height: '100%' }}>
+                <Box sx={{ height: "100%" }}>
                   <Typography variant="h6" color="text.secondary" gutterBottom>
                     Market Development
                   </Typography>
-                  <Box sx={{ height: 'calc(100% - 40px)' }}>
+                  <Box sx={{ height: "calc(100% - 40px)" }}>
                     <CustomStackBars data={stackedChartData} />
                   </Box>
                 </Box>
@@ -438,35 +449,38 @@ export default function ClusterDetails() {
             </Box>
           </Grid>
           <Grid size={{ xs: 12, sm: 12, md: 8 }}>
-            <Box sx={{ width: '100%', height: 300 }}>
-              {!marketCluster.total_revenue || marketCluster.total_revenue === 0 ? (
-                <Box sx={{ height: '100%' }}>
+            <Box sx={{ width: "100%", height: 300 }}>
+              {!marketCluster.total_revenue ||
+              marketCluster.total_revenue === 0 ? (
+                <Box sx={{ height: "100%" }}>
                   <Typography variant="h6" color="text.secondary" gutterBottom>
                     Market Cluster Insights
                   </Typography>
-                  <Box sx={{ position: 'relative', height: 'calc(100% - 40px)' }}>
-                    <Skeleton 
-                      variant="rectangular" 
+                  <Box
+                    sx={{ position: "relative", height: "calc(100% - 40px)" }}
+                  >
+                    <Skeleton
+                      variant="rectangular"
                       animation="wave"
-                      width="100%" 
+                      width="100%"
                       height="100%"
                       sx={{
                         borderRadius: 1,
-                        bgcolor: 'grey.100'
+                        bgcolor: "grey.100",
                       }}
                     />
-                    <Typography 
-                      variant="body2" 
-                      color="text.secondary" 
-                      sx={{ 
-                        position: 'absolute',
-                        top: '50%',
-                        left: '50%',
-                        transform: 'translate(-50%, -50%)',
-                        textAlign: 'center',
-                        backgroundColor: 'rgba(255, 255, 255, 0.8)',
-                        padding: '8px 16px',
-                        borderRadius: 1
+                    <Typography
+                      variant="body2"
+                      color="text.secondary"
+                      sx={{
+                        position: "absolute",
+                        top: "50%",
+                        left: "50%",
+                        transform: "translate(-50%, -50%)",
+                        textAlign: "center",
+                        backgroundColor: "rgba(255, 255, 255, 0.8)",
+                        padding: "8px 16px",
+                        borderRadius: 1,
                       }}
                     >
                       Insights will be available once data scraping is complete
@@ -474,81 +488,161 @@ export default function ClusterDetails() {
                   </Box>
                 </Box>
               ) : (
-                <Box sx={{ height: '100%', overflow: 'auto' }}>
+                <Box sx={{ height: "100%", overflow: "auto" }}>
                   <Typography variant="h6" color="text.secondary" gutterBottom>
                     Market Cluster Insights
                   </Typography>
                   <Grid container spacing={4}>
                     <Grid size={{ xs: 12, sm: 6, md: 6 }}>
-                      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                      <Box
+                        sx={{
+                          display: "flex",
+                          flexDirection: "column",
+                          gap: 2,
+                        }}
+                      >
                         <Box>
-                          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                          <Box
+                            sx={{
+                              display: "flex",
+                              alignItems: "center",
+                              gap: 1,
+                            }}
+                          >
                             <FaDollarSign size={16} color="#666" />
-                            <Typography variant="subtitle2" color="text.secondary">
+                            <Typography
+                              variant="subtitle2"
+                              color="text.secondary"
+                            >
                               Total Revenue
                             </Typography>
                           </Box>
                           <Typography variant="h4">
-                            {formatCurrency(marketCluster.insights?.total_revenue || 0)}
+                            {formatCurrency(
+                              marketCluster.insights?.total_revenue || 0
+                            )}
                           </Typography>
                         </Box>
 
                         <Box>
-                          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                          <Box
+                            sx={{
+                              display: "flex",
+                              alignItems: "center",
+                              gap: 1,
+                            }}
+                          >
                             <FaStore size={16} color="#666" />
-                            <Typography variant="subtitle2" color="text.secondary">
+                            <Typography
+                              variant="subtitle2"
+                              color="text.secondary"
+                            >
                               Markets & Products
                             </Typography>
                           </Box>
                           <Typography variant="body1">
-                            {marketCluster.insights?.total_markets} Markets • {marketCluster.insights?.total_products} Products
+                            {marketCluster.insights?.total_markets} Markets •{" "}
+                            {marketCluster.insights?.total_products} Products
                           </Typography>
                         </Box>
 
                         <Box>
-                          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                          <Box
+                            sx={{
+                              display: "flex",
+                              alignItems: "center",
+                              gap: 1,
+                            }}
+                          >
                             <FaChartLine size={16} color="#666" />
-                            <Typography variant="subtitle2" color="text.secondary">
+                            <Typography
+                              variant="subtitle2"
+                              color="text.secondary"
+                            >
                               Average Revenue
                             </Typography>
                           </Box>
                           <Typography variant="body1">
-                            Per Market: {formatCurrency(marketCluster.insights?.avg_revenue_per_market || 0)}
+                            Per Market:{" "}
+                            {formatCurrency(
+                              marketCluster.insights?.avg_revenue_per_market ||
+                                0
+                            )}
                           </Typography>
                           <Typography variant="body1">
-                            Per Product: {formatCurrency(marketCluster.insights?.avg_revenue_per_product || 0)}
+                            Per Product:{" "}
+                            {formatCurrency(
+                              marketCluster.insights?.avg_revenue_per_product ||
+                                0
+                            )}
                           </Typography>
                         </Box>
                       </Box>
                     </Grid>
 
                     <Grid size={{ xs: 12, sm: 6, md: 6 }}>
-                      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                      <Box
+                        sx={{
+                          display: "flex",
+                          flexDirection: "column",
+                          gap: 2,
+                        }}
+                      >
                         <Box>
-                          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                          <Box
+                            sx={{
+                              display: "flex",
+                              alignItems: "center",
+                              gap: 1,
+                            }}
+                          >
                             <FaTrophy size={16} color="#666" />
-                            <Typography variant="subtitle2" color="text.secondary">
+                            <Typography
+                              variant="subtitle2"
+                              color="text.secondary"
+                            >
                               Top Performers
                             </Typography>
                           </Box>
-                          <Typography variant="body1" sx={{ fontWeight: 'medium' }}>
-                            Best Market: {marketCluster.insights?.top_performing_market || 'N/A'}
+                          <Typography
+                            variant="body1"
+                            sx={{ fontWeight: "medium" }}
+                          >
+                            Best Market:{" "}
+                            {marketCluster.insights?.top_performing_market ||
+                              "N/A"}
                           </Typography>
-                          {marketCluster.insights?.top_performing_product?.title && (
+                          {marketCluster.insights?.top_performing_product
+                            ?.title && (
                             <Box>
-                              <Typography variant="body1" sx={{ fontWeight: 'medium' }}>
-                                Best Product: 
+                              <Typography
+                                variant="body1"
+                                sx={{ fontWeight: "medium" }}
+                              >
+                                Best Product:
                               </Typography>
-                              <Typography variant="body2" sx={{ 
-                                wordBreak: 'break-word',
-                                mb: 1
-                              }}>
-                                {marketCluster.insights?.top_performing_product.title.length > 50 
+                              <Typography
+                                variant="body2"
+                                sx={{
+                                  wordBreak: "break-word",
+                                  mb: 1,
+                                }}
+                              >
+                                {marketCluster.insights?.top_performing_product
+                                  .title.length > 50
                                   ? `${marketCluster.insights?.top_performing_product.title.substring(0, 50)}...`
-                                  : marketCluster.insights?.top_performing_product.title}
+                                  : marketCluster.insights
+                                      ?.top_performing_product.title}
                               </Typography>
-                              <Typography variant="body2" color="text.secondary">
-                                Revenue: {formatCurrency(marketCluster.insights?.top_performing_product.revenue || 0)}
+                              <Typography
+                                variant="body2"
+                                color="text.secondary"
+                              >
+                                Revenue:{" "}
+                                {formatCurrency(
+                                  marketCluster.insights?.top_performing_product
+                                    .revenue || 0
+                                )}
                               </Typography>
                             </Box>
                           )}
@@ -561,7 +655,7 @@ export default function ClusterDetails() {
             </Box>
           </Grid>
         </Grid>
-  
+
         <Typography
           sx={{
             mt: 4,
@@ -574,7 +668,7 @@ export default function ClusterDetails() {
         >
           Markets in {marketCluster.title}
         </Typography>
-  
+
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
           <Tabs value={tabIndex} onChange={handleTabChange}>
             {marketCluster.markets.map((market: any, index: number) => (
@@ -586,8 +680,10 @@ export default function ClusterDetails() {
             ))}
           </Tabs>
         </Box>
-  
+
         {marketCluster.markets.map((market: any, index: number) => (
+          // Debugging Logs
+        
           <Box
             key={market.id}
             sx={{
@@ -597,6 +693,7 @@ export default function ClusterDetails() {
               display: tabIndex === index ? "block" : "none",
             }}
           >
+           
             <Paper
               elevation={3}
               sx={{
@@ -608,45 +705,76 @@ export default function ClusterDetails() {
             >
               {!market.revenue_total || market.revenue_total === 0 ? (
                 <Alert severity="info" sx={{ mb: 3 }}>
-                  Market revenue will be calculated once product data scraping is complete
+                  Market revenue will be calculated once product data scraping
+                  is complete
                 </Alert>
               ) : (
                 <Grid container spacing={2} sx={{ mb: 3 }}>
                   <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-                    <Typography variant="subtitle2" color="text.secondary">Market Revenue</Typography>
+                    <Typography variant="subtitle2" color="text.secondary">
+                      Market Revenue
+                    </Typography>
                     <Typography variant="h6">
                       {formatCurrency(market.revenue_total || 0)}
-                    </Typography>
+                      </Typography>
+                      
+                      <Box>
+             
+             {market.sparkline_data_total_revenue &&
+             market.sparkline_data_total_revenue.length > 0 ? (
+               <Box sx={{ mt: 4 }}>
+                 <CustomSparkLine data={market.sparkline_data_total_revenue} />
+               </Box>
+             ) : (
+               <Chip label="No Data" color="default" size="small" />
+             )}
+                      </Box>
+                      
                   </Grid>
                   <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-                    <Typography variant="subtitle2" color="text.secondary">Most Expensive</Typography>
+                    <Typography variant="subtitle2" color="text.secondary">
+                      Most Expensive
+                    </Typography>
                     <Typography variant="h6">
                       {(() => {
-                        const maxPriceProduct = market.products.reduce((max: any, p: any) => 
-                          (!max || (p.price || 0) > (max.price || 0)) ? p : max, null);
-                        return `${formatCurrency(maxPriceProduct?.price || 0)} (${maxPriceProduct?.asin || 'N/A'})`;
+                        const maxPriceProduct = market.products.reduce(
+                          (max: any, p: any) =>
+                            !max || (p.price || 0) > (max.price || 0) ? p : max,
+                          null
+                        );
+                        return `${formatCurrency(maxPriceProduct?.price || 0)} (${maxPriceProduct?.asin || "N/A"})`;
                       })()}
                     </Typography>
                   </Grid>
                   <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-                    <Typography variant="subtitle2" color="text.secondary">Least Expensive</Typography>
+                    <Typography variant="subtitle2" color="text.secondary">
+                      Least Expensive
+                    </Typography>
                     <Typography variant="h6">
                       {(() => {
                         const minPriceProduct = market.products
                           .filter((p: any) => p.price > 0)
-                          .reduce((min: any, p: any) => 
-                            (!min || p.price < min.price) ? p : min, null);
-                        return `${formatCurrency(minPriceProduct?.price || 0)} (${minPriceProduct?.asin || 'N/A'})`;
+                          .reduce(
+                            (min: any, p: any) =>
+                              !min || p.price < min.price ? p : min,
+                            null
+                          );
+                        return `${formatCurrency(minPriceProduct?.price || 0)} (${minPriceProduct?.asin || "N/A"})`;
                       })()}
                     </Typography>
                   </Grid>
                   <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-                    <Typography variant="subtitle2" color="text.secondary">Highest Revenue Product</Typography>
+                    <Typography variant="subtitle2" color="text.secondary">
+                      Highest Revenue Product
+                    </Typography>
                     <Typography variant="h6">
                       {(() => {
-                        const maxRevenueProduct = market.products.reduce((max: any, p: any) => 
-                          (!max || (p.total || 0) > (max.total || 0)) ? p : max, null);
-                        return `${formatCurrency(maxRevenueProduct?.total || 0)} (${maxRevenueProduct?.asin || 'N/A'})`;
+                        const maxRevenueProduct = market.products.reduce(
+                          (max: any, p: any) =>
+                            !max || (p.total || 0) > (max.total || 0) ? p : max,
+                          null
+                        );
+                        return `${formatCurrency(maxRevenueProduct?.total || 0)} (${maxRevenueProduct?.asin || "N/A"})`;
                       })()}
                     </Typography>
                   </Grid>
@@ -657,9 +785,16 @@ export default function ClusterDetails() {
                 🔍 Top Suggestions
               </Typography>
               <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
-                {market.top_suggestions.split(",").map((suggestion: string, idx: number) => (
-                  <Chip key={idx} label={suggestion.trim()} variant="outlined" color="primary" />
-                ))}
+                {market.top_suggestions
+                  .split(",")
+                  .map((suggestion: string, idx: number) => (
+                    <Chip
+                      key={idx}
+                      label={suggestion.trim()}
+                      variant="outlined"
+                      color="primary"
+                    />
+                  ))}
               </Box>
             </Paper>
             <DataGrid
@@ -687,7 +822,7 @@ export default function ClusterDetails() {
           </Box>
         ))}
       </Paper>
-  
+
       <Backdrop open={openBackdrop} onClick={handleCloseBackdrop}>
         <TableContainer
           component={Paper}
@@ -741,5 +876,4 @@ export default function ClusterDetails() {
       </Backdrop>
     </>
   );
-  
 }

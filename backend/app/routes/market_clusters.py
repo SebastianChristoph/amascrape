@@ -228,11 +228,12 @@ async def get_market_cluster_details(
         if not latest_market_change.products:
             logging.warning(f"⚠️ Kein ProductChange gefunden für Market {market.keyword} (MarketChange ID: {latest_market_change.id})")
 
-
+        sparkline_data_total_revenue = get_sparkline_for_market(db=db, id=market.id, field="total_revenue" )
         market_data = {
             "id": market.id,
             "keyword": market.keyword,
             "products": [],
+            "sparkline_data_total_revenue" : sparkline_data_total_revenue
         }
 
         if latest_market_change:
@@ -357,7 +358,76 @@ def get_sparkline_for_product(db: Session, asin: str, field: str) -> List[int]:
             last_value = changes_dict[date]
         filled_data.append(int(last_value) if last_value is not None else 0)
 
+
+    if len(filled_data) == 1:
+        filled_data.append(filled_data[0])
+    
     return filled_data
+
+
+def get_sparkline_for_market(db: Session, id: int, field: str) -> List[int]:
+    """Generiert Sparkline-Daten für ein bestimmtes Produktfeld (Preis, Rank, etc.)."""
+    
+    today = datetime.now(timezone.utc).date()
+    cutoff_date = today - timedelta(days=30)
+
+    # Alle ProductChanges für die letzten 30 Tage abrufen (sortiert aufsteigend nach Datum)
+    market_changes = (
+        db.query(MarketChange)
+        .filter(MarketChange.market_id == id)
+        .order_by(MarketChange.change_date.asc())
+        .all()
+    )
+
+    if not market_changes:
+        print(f"⚠️ Keine Änderungen für {id} gefunden!")
+        return [0] * 30  
+
+    valid_changes = [change for change in market_changes if getattr(change, field, None) is not None]
+
+    if not valid_changes:
+        print(f"⚠️ Keine gültigen Werte für {id}, Feld: {field}!")
+        return [0] * 30  
+
+    # Erstes gültiges Datum und Wert als Startpunkt finden
+    first_valid_change = valid_changes[0]
+    first_valid_date = first_valid_change.change_date.date()
+    first_valid_value = getattr(first_valid_change, field)
+
+    print(f"✅ Erstes gültiges Datum für {id}, Feld {field}: {first_valid_date} mit Wert {first_valid_value}")
+
+
+
+    # 🗓️ Bestimmen des Startdatums:
+    if first_valid_date > cutoff_date:
+        # Falls das erste Produkt innerhalb der letzten 30 Tage liegt, nutze es als Start
+        start_date = first_valid_date
+    else:
+        # Falls es älter ist, beginne ab cutoff_date (30 Tage zurück)
+        start_date = cutoff_date
+
+    # Erstelle eine Liste aller Tage vom `start_date` bis heute
+    date_list = [(start_date + timedelta(days=i)).strftime("%Y-%m-%d") for i in range((today - start_date).days + 1)]
+ 
+   
+    # Mapping von Datum zu Feldwert aus den gespeicherten Änderungen
+    changes_dict = {change.change_date.strftime("%Y-%m-%d"): getattr(change, field) for change in valid_changes}
+
+    filled_data = []
+    last_value = first_valid_value  # Starte mit dem ersten bekannten Wert
+
+    # 🔄 Sparkline-Daten generieren (letzten bekannten Wert nutzen, falls keiner existiert)
+    for date in date_list:
+        if date in changes_dict:
+            last_value = changes_dict[date]
+        filled_data.append(int(last_value) if last_value is not None else 0)
+
+   
+    if len(filled_data) == 1:
+        filled_data.append(filled_data[0])
+
+    return filled_data
+
 
 
 
