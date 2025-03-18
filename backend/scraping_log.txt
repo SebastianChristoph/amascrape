@@ -1,376 +1,301 @@
-2025-03-18 10:35:24,849 [INFO] 🚀 Product Orchestrator gestartet.
-2025-03-18 10:35:31,586 [INFO] ✅ Verbindung zu Amazon erfolgreich hergestellt!
-2025-03-18 10:35:33,784 [INFO] 🍪 Setze Cookies...
-2025-03-18 10:35:33,800 [INFO] ✅ Cookies gesetzt!
-2025-03-18 10:35:33,801 [INFO] 🚀 Starte Product-Update...
-2025-03-18 10:35:33,816 [INFO] 
-🔍 Überprüfe Produkt [1/89]: B00GL2HMES https://www.amazon.com/dp/B00GL2HMES?language=en_US
-2025-03-18 10:35:50,659 [INFO] ⚡ Änderungen erkannt für B00GL2HMES: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 100000, total geändert: None → 2150000.0
-2025-03-18 10:35:50,676 [INFO] ✅ last_time_scraped für B00GL2HMES erfolgreich aktualisiert.
-2025-03-18 10:35:50,677 [INFO] 
-🔍 Überprüfe Produkt [2/89]: B002DYIZEO https://www.amazon.com/dp/B002DYIZEO?language=en_US
-2025-03-18 10:36:04,420 [INFO] ⚡ Änderungen erkannt für B002DYIZEO: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 70000, total geändert: None → 1679300.0
-2025-03-18 10:36:04,434 [INFO] ✅ last_time_scraped für B002DYIZEO erfolgreich aktualisiert.
-2025-03-18 10:36:04,436 [INFO] 
-🔍 Überprüfe Produkt [3/89]: B07978VPPH https://www.amazon.com/dp/B07978VPPH?language=en_US
-2025-03-18 10:36:16,567 [INFO] ⚡ Änderungen erkannt für B07978VPPH: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 60000, total geändert: None → 2580000.0
-2025-03-18 10:36:16,584 [INFO] ✅ last_time_scraped für B07978VPPH erfolgreich aktualisiert.
-2025-03-18 10:36:16,585 [INFO] 
-🔍 Überprüfe Produkt [4/89]: B00E9M4XFI https://www.amazon.com/dp/B00E9M4XFI?language=en_US
-2025-03-18 10:36:29,574 [INFO] ⚡ Änderungen erkannt für B00E9M4XFI: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 40000, total geändert: None → 798800.0
-2025-03-18 10:36:29,590 [INFO] ✅ last_time_scraped für B00E9M4XFI erfolgreich aktualisiert.
-2025-03-18 10:36:29,591 [INFO] 
-🔍 Überprüfe Produkt [5/89]: B0C9GCQX6H https://www.amazon.com/dp/B0C9GCQX6H?language=en_US
-2025-03-18 10:36:41,875 [INFO] ⚡ Änderungen erkannt für B0C9GCQX6H: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Sports Nutrition Endurance & Energy Supplements, blm geändert: None → 10000, total geändert: None → 149900.0
-2025-03-18 10:36:41,893 [INFO] ✅ last_time_scraped für B0C9GCQX6H erfolgreich aktualisiert.
-2025-03-18 10:36:41,894 [INFO] 
-🔍 Überprüfe Produkt [6/89]: B002DYIZGC https://www.amazon.com/dp/B002DYIZGC?language=en_US
-2025-03-18 10:36:54,728 [INFO] ⚡ Änderungen erkannt für B002DYIZGC: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 20000, total geändert: None → 559800.0
-2025-03-18 10:36:54,757 [INFO] ✅ last_time_scraped für B002DYIZGC erfolgreich aktualisiert.
-2025-03-18 10:36:54,758 [INFO] 
-🔍 Überprüfe Produkt [7/89]: B0B9YMNYWK https://www.amazon.com/dp/B0B9YMNYWK?language=en_US
-2025-03-18 10:37:06,012 [INFO] ⚡ Änderungen erkannt für B0B9YMNYWK: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 10000, total geändert: None → 229900.0
-2025-03-18 10:37:06,061 [INFO] ✅ last_time_scraped für B0B9YMNYWK erfolgreich aktualisiert.
-2025-03-18 10:37:06,064 [INFO] 
-🔍 Überprüfe Produkt [8/89]: B0CSMZ882F https://www.amazon.com/dp/B0CSMZ882F?language=en_US
-2025-03-18 10:37:18,154 [INFO] ⚡ Änderungen erkannt für B0CSMZ882F: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 10000, total geändert: None → 120000.0
-2025-03-18 10:37:18,172 [INFO] ✅ last_time_scraped für B0CSMZ882F erfolgreich aktualisiert.
-2025-03-18 10:37:18,174 [INFO] 
-🔍 Überprüfe Produkt [9/89]: B0CCJZVJYG https://www.amazon.com/dp/B0CCJZVJYG?language=en_US
-2025-03-18 10:37:31,846 [INFO] ⚡ Änderungen erkannt für B0CCJZVJYG: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 10000, total geändert: None → 279500.0
-2025-03-18 10:37:31,877 [INFO] ✅ last_time_scraped für B0CCJZVJYG erfolgreich aktualisiert.
-2025-03-18 10:37:31,878 [INFO] 
-🔍 Überprüfe Produkt [10/89]: B09YX7G6JJ https://www.amazon.com/dp/B09YX7G6JJ?language=en_US
-2025-03-18 10:37:43,094 [INFO] ⚡ Änderungen erkannt für B09YX7G6JJ: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 6000, total geändert: None → 59940.0
-2025-03-18 10:37:43,130 [INFO] ✅ last_time_scraped für B09YX7G6JJ erfolgreich aktualisiert.
-2025-03-18 10:37:43,132 [INFO] 
-🔍 Überprüfe Produkt [11/89]: B00BPS3L8E https://www.amazon.com/dp/B00BPS3L8E?language=en_US
-2025-03-18 10:37:55,549 [INFO] ⚡ Änderungen erkannt für B00BPS3L8E: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 5000, total geändert: None → 48750.0
-2025-03-18 10:37:55,579 [INFO] ✅ last_time_scraped für B00BPS3L8E erfolgreich aktualisiert.
-2025-03-18 10:37:55,580 [INFO] 
-🔍 Überprüfe Produkt [12/89]: B09R5KPNHZ https://www.amazon.com/dp/B09R5KPNHZ?language=en_US
-2025-03-18 10:38:08,856 [INFO] ⚡ Änderungen erkannt für B09R5KPNHZ: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 10000, total geändert: None → 176800.0
-2025-03-18 10:38:08,871 [INFO] ✅ last_time_scraped für B09R5KPNHZ erfolgreich aktualisiert.
-2025-03-18 10:38:08,873 [INFO] 
-🔍 Überprüfe Produkt [13/89]: B01BVRO7T0 https://www.amazon.com/dp/B01BVRO7T0?language=en_US
-2025-03-18 10:38:21,202 [INFO] ⚡ Änderungen erkannt für B01BVRO7T0: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 4000, total geändert: None → 87960.0
-2025-03-18 10:38:21,237 [INFO] ✅ last_time_scraped für B01BVRO7T0 erfolgreich aktualisiert.
-2025-03-18 10:38:21,239 [INFO] 
-🔍 Überprüfe Produkt [14/89]: B0BSXR71QC https://www.amazon.com/dp/B0BSXR71QC?language=en_US
-2025-03-18 10:38:32,929 [INFO] ⚡ Änderungen erkannt für B0BSXR71QC: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 3000, total geändert: None → 71970.0
-2025-03-18 10:38:32,946 [INFO] ✅ last_time_scraped für B0BSXR71QC erfolgreich aktualisiert.
-2025-03-18 10:38:32,948 [INFO] 
-🔍 Überprüfe Produkt [15/89]: B01IW245EY https://www.amazon.com/dp/B01IW245EY?language=en_US
-2025-03-18 10:38:44,263 [INFO] ⚡ Änderungen erkannt für B01IW245EY: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 8000, total geändert: None → 263600.0
-2025-03-18 10:38:44,296 [INFO] ✅ last_time_scraped für B01IW245EY erfolgreich aktualisiert.
-2025-03-18 10:38:44,298 [INFO] 
-🔍 Überprüfe Produkt [16/89]: B08DH161T6 https://www.amazon.com/dp/B08DH161T6?language=en_US
-2025-03-18 10:39:00,182 [INFO] ⚡ Änderungen erkannt für B08DH161T6: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 6000, total geändert: None → 119940.0
-2025-03-18 10:39:00,206 [INFO] ✅ last_time_scraped für B08DH161T6 erfolgreich aktualisiert.
-2025-03-18 10:39:00,209 [INFO] 
-🔍 Überprüfe Produkt [17/89]: B0BT23VBLJ https://www.amazon.com/dp/B0BT23VBLJ?language=en_US
-2025-03-18 10:39:13,130 [INFO] ⚡ Änderungen erkannt für B0BT23VBLJ: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 10000, total geändert: None → 359900.0
-2025-03-18 10:39:13,163 [INFO] ✅ last_time_scraped für B0BT23VBLJ erfolgreich aktualisiert.
-2025-03-18 10:39:13,165 [INFO] 
-🔍 Überprüfe Produkt [18/89]: B085Z9P87K https://www.amazon.com/dp/B085Z9P87K?language=en_US
-2025-03-18 10:39:24,384 [INFO] ⚡ Änderungen erkannt für B085Z9P87K: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 10000, total geändert: None → 397700.0
-2025-03-18 10:39:24,403 [INFO] ✅ last_time_scraped für B085Z9P87K erfolgreich aktualisiert.
-2025-03-18 10:39:24,404 [INFO] 
-🔍 Überprüfe Produkt [19/89]: B0B4Z2RTY1 https://www.amazon.com/dp/B0B4Z2RTY1?language=en_US
-2025-03-18 10:39:36,708 [INFO] ⚡ Änderungen erkannt für B0B4Z2RTY1: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 6000, total geändert: None → 168240.0
-2025-03-18 10:39:36,731 [INFO] ✅ last_time_scraped für B0B4Z2RTY1 erfolgreich aktualisiert.
-2025-03-18 10:39:36,732 [INFO] 
-🔍 Überprüfe Produkt [20/89]: B0BFFYHWLK https://www.amazon.com/dp/B0BFFYHWLK?language=en_US
-2025-03-18 10:39:48,103 [INFO] ⚡ Änderungen erkannt für B0BFFYHWLK: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 600, total geändert: None → 29994.0
-2025-03-18 10:39:48,139 [INFO] ✅ last_time_scraped für B0BFFYHWLK erfolgreich aktualisiert.
-2025-03-18 10:39:48,140 [INFO] 
-🔍 Überprüfe Produkt [21/89]: B07M5M5B3S https://www.amazon.com/dp/B07M5M5B3S?language=en_US
-2025-03-18 10:39:59,925 [INFO] ⚡ Änderungen erkannt für B07M5M5B3S: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 6000, total geändert: None → 197940.0
-2025-03-18 10:39:59,959 [INFO] ✅ last_time_scraped für B07M5M5B3S erfolgreich aktualisiert.
-2025-03-18 10:39:59,961 [INFO] 
-🔍 Überprüfe Produkt [22/89]: B00UWSRZ8K https://www.amazon.com/dp/B00UWSRZ8K?language=en_US
-2025-03-18 10:40:11,515 [INFO] ⚡ Änderungen erkannt für B00UWSRZ8K: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 3000, total geändert: None → 74970.0
-2025-03-18 10:40:11,549 [INFO] ✅ last_time_scraped für B00UWSRZ8K erfolgreich aktualisiert.
-2025-03-18 10:40:11,551 [INFO] 
-🔍 Überprüfe Produkt [23/89]: B0CXM2PG68 https://www.amazon.com/dp/B0CXM2PG68?language=en_US
-2025-03-18 10:40:24,522 [INFO] ⚡ Änderungen erkannt für B0CXM2PG68: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 6000, total geändert: None → 119940.0
-2025-03-18 10:40:24,536 [INFO] ✅ last_time_scraped für B0CXM2PG68 erfolgreich aktualisiert.
-2025-03-18 10:40:24,537 [INFO] 
-🔍 Überprüfe Produkt [24/89]: B00QEMY4T6 https://www.amazon.com/dp/B00QEMY4T6?language=en_US
-2025-03-18 10:40:38,818 [INFO] ⚡ Änderungen erkannt für B00QEMY4T6: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 2000, total geändert: None → 40200.0
-2025-03-18 10:40:38,840 [INFO] ✅ last_time_scraped für B00QEMY4T6 erfolgreich aktualisiert.
-2025-03-18 10:40:38,841 [INFO] 
-🔍 Überprüfe Produkt [25/89]: B09L8KTJ2G https://www.amazon.com/dp/B09L8KTJ2G?language=en_US
-2025-03-18 10:40:50,567 [INFO] ⚡ Änderungen erkannt für B09L8KTJ2G: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 3000, total geändert: None → 71730.0
-2025-03-18 10:40:50,582 [INFO] ✅ last_time_scraped für B09L8KTJ2G erfolgreich aktualisiert.
-2025-03-18 10:40:50,583 [INFO] 
-🔍 Überprüfe Produkt [26/89]: B018ITUM5C https://www.amazon.com/dp/B018ITUM5C?language=en_US
-2025-03-18 10:41:03,920 [INFO] ⚡ Änderungen erkannt für B018ITUM5C: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 1000, total geändert: None → 24990.0
-2025-03-18 10:41:03,960 [INFO] ✅ last_time_scraped für B018ITUM5C erfolgreich aktualisiert.
-2025-03-18 10:41:03,962 [INFO] 
-🔍 Überprüfe Produkt [27/89]: B0CJMPVHXT https://www.amazon.com/dp/B0CJMPVHXT?language=en_US
-2025-03-18 10:41:16,139 [INFO] ⚡ Änderungen erkannt für B0CJMPVHXT: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 1000, total geändert: None → 49990.0
-2025-03-18 10:41:16,171 [INFO] ✅ last_time_scraped für B0CJMPVHXT erfolgreich aktualisiert.
-2025-03-18 10:41:16,172 [INFO] 
-🔍 Überprüfe Produkt [28/89]: B01LYFAGXI https://www.amazon.com/dp/B01LYFAGXI?language=en_US
-2025-03-18 10:41:27,292 [INFO] ⚡ Änderungen erkannt für B01LYFAGXI: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 7000, total geändert: None → 229600.0
-2025-03-18 10:41:27,322 [INFO] ✅ last_time_scraped für B01LYFAGXI erfolgreich aktualisiert.
-2025-03-18 10:41:27,323 [INFO] 
-🔍 Überprüfe Produkt [29/89]: B0CQPJG4F5 https://www.amazon.com/dp/B0CQPJG4F5?language=en_US
-2025-03-18 10:41:38,714 [INFO] ⚡ Änderungen erkannt für B0CQPJG4F5: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 400, total geändert: None → 11996.0
-2025-03-18 10:41:38,752 [INFO] ✅ last_time_scraped für B0CQPJG4F5 erfolgreich aktualisiert.
-2025-03-18 10:41:38,754 [INFO] 
-🔍 Überprüfe Produkt [30/89]: B0B9HWN8S9 https://www.amazon.com/dp/B0B9HWN8S9?language=en_US
-2025-03-18 10:41:51,108 [INFO] ⚡ Änderungen erkannt für B0B9HWN8S9: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 2000, total geändert: None → 33940.0
-2025-03-18 10:41:51,127 [INFO] ✅ last_time_scraped für B0B9HWN8S9 erfolgreich aktualisiert.
-2025-03-18 10:41:51,128 [INFO] 
-🔍 Überprüfe Produkt [31/89]: B0C9NRW7CP https://www.amazon.com/dp/B0C9NRW7CP?language=en_US
-2025-03-18 10:42:01,632 [INFO] ⚡ Änderungen erkannt für B0C9NRW7CP: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 2000, total geändert: None → 43380.0
-2025-03-18 10:42:01,685 [INFO] ✅ last_time_scraped für B0C9NRW7CP erfolgreich aktualisiert.
-2025-03-18 10:42:01,687 [INFO] 
-🔍 Überprüfe Produkt [32/89]: B09TNMZBQ5 https://www.amazon.com/dp/B09TNMZBQ5?language=en_US
-2025-03-18 10:42:13,191 [INFO] ⚡ Änderungen erkannt für B09TNMZBQ5: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 1000, total geändert: None → 19990.0
-2025-03-18 10:42:13,226 [INFO] ✅ last_time_scraped für B09TNMZBQ5 erfolgreich aktualisiert.
-2025-03-18 10:42:13,228 [INFO] 
-🔍 Überprüfe Produkt [33/89]: B008KMUNRA https://www.amazon.com/dp/B008KMUNRA?language=en_US
-2025-03-18 10:42:24,146 [INFO] ⚡ Änderungen erkannt für B008KMUNRA: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 3000, total geändert: None → 107970.0
-2025-03-18 10:42:24,182 [INFO] ✅ last_time_scraped für B008KMUNRA erfolgreich aktualisiert.
-2025-03-18 10:42:24,184 [INFO] 
-🔍 Überprüfe Produkt [34/89]: B0D4QRC5WK https://www.amazon.com/dp/B0D4QRC5WK?language=en_US
-2025-03-18 10:42:38,044 [INFO] ⚡ Änderungen erkannt für B0D4QRC5WK: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Sports Nutrition Electrolyte Replacement Drinks, blm geändert: None → 500, total geändert: None → 4995.0
-2025-03-18 10:42:38,076 [INFO] ✅ last_time_scraped für B0D4QRC5WK erfolgreich aktualisiert.
-2025-03-18 10:42:38,078 [INFO] 
-🔍 Überprüfe Produkt [35/89]: B086H6366N https://www.amazon.com/dp/B086H6366N?language=en_US
-2025-03-18 10:42:49,366 [INFO] ⚡ Änderungen erkannt für B086H6366N: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 1000, total geändert: None → 24990.0
-2025-03-18 10:42:49,385 [INFO] ✅ last_time_scraped für B086H6366N erfolgreich aktualisiert.
-2025-03-18 10:42:49,386 [INFO] 
-🔍 Überprüfe Produkt [36/89]: B0BRNWSMVD https://www.amazon.com/dp/B0BRNWSMVD?language=en_US
-2025-03-18 10:43:00,158 [INFO] ⚡ Änderungen erkannt für B0BRNWSMVD: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 5000, total geändert: None → 149950.0
-2025-03-18 10:43:00,176 [INFO] ✅ last_time_scraped für B0BRNWSMVD erfolgreich aktualisiert.
-2025-03-18 10:43:00,177 [INFO] 
-🔍 Überprüfe Produkt [37/89]: B0CZ1823BM https://www.amazon.com/dp/B0CZ1823BM?language=en_US
-2025-03-18 10:43:10,716 [INFO] ⚡ Änderungen erkannt für B0CZ1823BM: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 1000, total geändert: None → 45000.0
-2025-03-18 10:43:10,749 [INFO] ✅ last_time_scraped für B0CZ1823BM erfolgreich aktualisiert.
-2025-03-18 10:43:10,750 [INFO] 
-🔍 Überprüfe Produkt [38/89]: B0BMPLP7K6 https://www.amazon.com/dp/B0BMPLP7K6?language=en_US
-2025-03-18 10:43:21,649 [INFO] ⚡ Änderungen erkannt für B0BMPLP7K6: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 2000, total geändert: None → 39900.0
-2025-03-18 10:43:21,676 [INFO] ✅ last_time_scraped für B0BMPLP7K6 erfolgreich aktualisiert.
-2025-03-18 10:43:21,677 [INFO] 
-🔍 Überprüfe Produkt [39/89]: B0D1DP2D8D https://www.amazon.com/dp/B0D1DP2D8D?language=en_US
-2025-03-18 10:43:31,987 [INFO] ⚡ Änderungen erkannt für B0D1DP2D8D: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 1000, total geändert: None → 15990.0
-2025-03-18 10:43:32,021 [INFO] ✅ last_time_scraped für B0D1DP2D8D erfolgreich aktualisiert.
-2025-03-18 10:43:32,023 [INFO] 
-🔍 Überprüfe Produkt [40/89]: B00012NJT6 https://www.amazon.com/dp/B00012NJT6?language=en_US
-2025-03-18 10:43:43,912 [INFO] ⚡ Änderungen erkannt für B00012NJT6: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 600, total geändert: None → 26610.0
-2025-03-18 10:43:43,928 [INFO] ✅ last_time_scraped für B00012NJT6 erfolgreich aktualisiert.
-2025-03-18 10:43:43,929 [INFO] 
-🔍 Überprüfe Produkt [41/89]: B0CQN29QCQ https://www.amazon.com/dp/B0CQN29QCQ?language=en_US
-2025-03-18 10:43:54,389 [INFO] ⚡ Änderungen erkannt für B0CQN29QCQ: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 800, total geändert: None → 24592.0
-2025-03-18 10:43:54,404 [INFO] ✅ last_time_scraped für B0CQN29QCQ erfolgreich aktualisiert.
-2025-03-18 10:43:54,405 [INFO] 
-🔍 Überprüfe Produkt [42/89]: B0BDCV36CX https://www.amazon.com/dp/B0BDCV36CX?language=en_US
-2025-03-18 10:44:05,135 [INFO] ⚡ Änderungen erkannt für B0BDCV36CX: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 800, total geändert: None → 19992.0
-2025-03-18 10:44:05,166 [INFO] ✅ last_time_scraped für B0BDCV36CX erfolgreich aktualisiert.
-2025-03-18 10:44:05,168 [INFO] 
-🔍 Überprüfe Produkt [43/89]: B0BQPT34V7 https://www.amazon.com/dp/B0BQPT34V7?language=en_US
-2025-03-18 10:44:16,227 [INFO] ⚡ Änderungen erkannt für B0BQPT34V7: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 1000, total geändert: None → 39990.0
-2025-03-18 10:44:16,247 [INFO] ✅ last_time_scraped für B0BQPT34V7 erfolgreich aktualisiert.
-2025-03-18 10:44:16,248 [INFO] 
-🔍 Überprüfe Produkt [44/89]: B0045MLCL0 https://www.amazon.com/dp/B0045MLCL0?language=en_US
-2025-03-18 10:44:27,329 [INFO] ⚡ Änderungen erkannt für B0045MLCL0: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 700, total geändert: None → 21630.0
-2025-03-18 10:44:27,345 [INFO] ✅ last_time_scraped für B0045MLCL0 erfolgreich aktualisiert.
-2025-03-18 10:44:27,345 [INFO] 
-🔍 Überprüfe Produkt [45/89]: B001181M16 https://www.amazon.com/dp/B001181M16?language=en_US
-2025-03-18 10:44:39,739 [INFO] ⚡ Änderungen erkannt für B001181M16: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 2000, total geändert: None → 43980.0
-2025-03-18 10:44:39,765 [INFO] ✅ last_time_scraped für B001181M16 erfolgreich aktualisiert.
-2025-03-18 10:44:39,766 [INFO] 
-🔍 Überprüfe Produkt [46/89]: B0BFZJJY5M https://www.amazon.com/dp/B0BFZJJY5M?language=en_US
-2025-03-18 10:44:51,290 [INFO] ⚡ Änderungen erkannt für B0BFZJJY5M: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 1000, total geändert: None → 16660.0
-2025-03-18 10:44:51,331 [INFO] ✅ last_time_scraped für B0BFZJJY5M erfolgreich aktualisiert.
-2025-03-18 10:44:51,333 [INFO] 
-🔍 Überprüfe Produkt [47/89]: B0BKNVNLN9 https://www.amazon.com/dp/B0BKNVNLN9?language=en_US
-2025-03-18 10:45:02,201 [INFO] ⚡ Änderungen erkannt für B0BKNVNLN9: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 1000, total geändert: None → 18990.0
-2025-03-18 10:45:02,241 [INFO] ✅ last_time_scraped für B0BKNVNLN9 erfolgreich aktualisiert.
-2025-03-18 10:45:02,243 [INFO] 
-🔍 Überprüfe Produkt [48/89]: B0C8L96Y3T https://www.amazon.com/dp/B0C8L96Y3T?language=en_US
-2025-03-18 10:45:13,244 [INFO] ⚡ Änderungen erkannt für B0C8L96Y3T: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 1000, total geändert: None → 30950.0
-2025-03-18 10:45:13,281 [INFO] ✅ last_time_scraped für B0C8L96Y3T erfolgreich aktualisiert.
-2025-03-18 10:45:13,283 [INFO] 
-🔍 Überprüfe Produkt [49/89]: B0DDB5BWYP https://www.amazon.com/dp/B0DDB5BWYP?language=en_US
-2025-03-18 10:45:24,376 [INFO] ⚡ Änderungen erkannt für B0DDB5BWYP: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 800, total geändert: None → 15992.0
-2025-03-18 10:45:24,392 [INFO] ✅ last_time_scraped für B0DDB5BWYP erfolgreich aktualisiert.
-2025-03-18 10:45:24,394 [INFO] 
-🔍 Überprüfe Produkt [50/89]: B0C6WCWJ9P https://www.amazon.com/dp/B0C6WCWJ9P?language=en_US
-2025-03-18 10:45:34,283 [INFO] ⚡ Änderungen erkannt für B0C6WCWJ9P: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 1000, total geändert: None → 16500.0
-2025-03-18 10:45:34,317 [INFO] ✅ last_time_scraped für B0C6WCWJ9P erfolgreich aktualisiert.
-2025-03-18 10:45:34,318 [INFO] 
-🔍 Überprüfe Produkt [51/89]: B005DKV9SE https://www.amazon.com/dp/B005DKV9SE?language=en_US
-2025-03-18 10:45:45,395 [INFO] ⚡ Änderungen erkannt für B005DKV9SE: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 1000, total geändert: None → 12570.0
-2025-03-18 10:45:45,428 [INFO] ✅ last_time_scraped für B005DKV9SE erfolgreich aktualisiert.
-2025-03-18 10:45:45,430 [INFO] 
-🔍 Überprüfe Produkt [52/89]: B00117ZRXQ https://www.amazon.com/dp/B00117ZRXQ?language=en_US
-2025-03-18 10:45:56,941 [INFO] ⚡ Änderungen erkannt für B00117ZRXQ: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 2000, total geändert: None → 71980.0
-2025-03-18 10:45:56,972 [INFO] ✅ last_time_scraped für B00117ZRXQ erfolgreich aktualisiert.
-2025-03-18 10:45:56,973 [INFO] 
-🔍 Überprüfe Produkt [53/89]: B0B9289VLY https://www.amazon.com/dp/B0B9289VLY?language=en_US
-2025-03-18 10:46:08,146 [INFO] ⚡ Änderungen erkannt für B0B9289VLY: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 1000, total geändert: None → 28990.0
-2025-03-18 10:46:08,164 [INFO] ✅ last_time_scraped für B0B9289VLY erfolgreich aktualisiert.
-2025-03-18 10:46:08,165 [INFO] 
-🔍 Überprüfe Produkt [54/89]: B0CLSCPZG4 https://www.amazon.com/dp/B0CLSCPZG4?language=en_US
-2025-03-18 10:46:18,638 [INFO] ⚡ Änderungen erkannt für B0CLSCPZG4: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 700, total geändert: None → 6965.0
-2025-03-18 10:46:18,679 [INFO] ✅ last_time_scraped für B0CLSCPZG4 erfolgreich aktualisiert.
-2025-03-18 10:46:18,681 [INFO] 
-🔍 Überprüfe Produkt [55/89]: B001KYS2DC https://www.amazon.com/dp/B001KYS2DC?language=en_US
-2025-03-18 10:46:30,271 [INFO] ⚡ Änderungen erkannt für B001KYS2DC: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 1000, total geändert: None → 24990.0
-2025-03-18 10:46:30,304 [INFO] ✅ last_time_scraped für B001KYS2DC erfolgreich aktualisiert.
-2025-03-18 10:46:30,306 [INFO] 
-🔍 Überprüfe Produkt [56/89]: B0CSWHQ3PN https://www.amazon.com/dp/B0CSWHQ3PN?language=en_US
-2025-03-18 10:46:41,060 [INFO] ⚡ Änderungen erkannt für B0CSWHQ3PN: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 500, total geändert: None → 12455.0
-2025-03-18 10:46:41,077 [INFO] ✅ last_time_scraped für B0CSWHQ3PN erfolgreich aktualisiert.
-2025-03-18 10:46:41,078 [INFO] 
-🔍 Überprüfe Produkt [57/89]: B0B6GKMZCL https://www.amazon.com/dp/B0B6GKMZCL?language=en_US
-2025-03-18 10:46:51,434 [INFO] ⚡ Änderungen erkannt für B0B6GKMZCL: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 2000, total geändert: None → 65940.0
-2025-03-18 10:46:51,466 [INFO] ✅ last_time_scraped für B0B6GKMZCL erfolgreich aktualisiert.
-2025-03-18 10:46:51,467 [INFO] 
-🔍 Überprüfe Produkt [58/89]: B079JWLSH9 https://www.amazon.com/dp/B079JWLSH9?language=en_US
-2025-03-18 10:47:03,084 [INFO] ⚡ Änderungen erkannt für B079JWLSH9: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 700, total geändert: None → 45493.0
-2025-03-18 10:47:03,117 [INFO] ✅ last_time_scraped für B079JWLSH9 erfolgreich aktualisiert.
-2025-03-18 10:47:03,118 [INFO] 
-🔍 Überprüfe Produkt [59/89]: B0BLJ51MK7 https://www.amazon.com/dp/B0BLJ51MK7?language=en_US
-2025-03-18 10:47:13,676 [INFO] ⚡ Änderungen erkannt für B0BLJ51MK7: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 400, total geändert: None → 15996.0
-2025-03-18 10:47:13,691 [INFO] ✅ last_time_scraped für B0BLJ51MK7 erfolgreich aktualisiert.
-2025-03-18 10:47:13,691 [INFO] 
-🔍 Überprüfe Produkt [60/89]: B0C6L85Z16 https://www.amazon.com/dp/B0C6L85Z16?language=en_US
-2025-03-18 10:47:24,571 [INFO] ⚡ Änderungen erkannt für B0C6L85Z16: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 400, total geändert: None → 13460.0
-2025-03-18 10:47:24,585 [INFO] ✅ last_time_scraped für B0C6L85Z16 erfolgreich aktualisiert.
-2025-03-18 10:47:24,586 [INFO] 
-🔍 Überprüfe Produkt [61/89]: B09MZV4LCS https://www.amazon.com/dp/B09MZV4LCS?language=en_US
-2025-03-18 10:47:36,876 [INFO] ⚡ Änderungen erkannt für B09MZV4LCS: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 1000, total geändert: None → 24980.0
-2025-03-18 10:47:36,893 [INFO] ✅ last_time_scraped für B09MZV4LCS erfolgreich aktualisiert.
-2025-03-18 10:47:36,894 [INFO] 
-🔍 Überprüfe Produkt [62/89]: B0BKCVLYGX https://www.amazon.com/dp/B0BKCVLYGX?language=en_US
-2025-03-18 10:47:48,141 [INFO] ⚡ Änderungen erkannt für B0BKCVLYGX: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 3000, total geändert: None → 89970.0
-2025-03-18 10:47:48,175 [INFO] ✅ last_time_scraped für B0BKCVLYGX erfolgreich aktualisiert.
-2025-03-18 10:47:48,176 [INFO] 
-🔍 Überprüfe Produkt [63/89]: B0C8K2Z6SH https://www.amazon.com/dp/B0C8K2Z6SH?language=en_US
-2025-03-18 10:48:00,066 [INFO] ⚡ Änderungen erkannt für B0C8K2Z6SH: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 700, total geändert: None → 13993.0
-2025-03-18 10:48:00,082 [INFO] ✅ last_time_scraped für B0C8K2Z6SH erfolgreich aktualisiert.
-2025-03-18 10:48:00,083 [INFO] 
-🔍 Überprüfe Produkt [64/89]: B016C9GIIK https://www.amazon.com/dp/B016C9GIIK?language=en_US
-2025-03-18 10:48:10,301 [INFO] ⚡ Änderungen erkannt für B016C9GIIK: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 200, total geändert: None → 7898.0
-2025-03-18 10:48:10,319 [INFO] ✅ last_time_scraped für B016C9GIIK erfolgreich aktualisiert.
-2025-03-18 10:48:10,321 [INFO] 
-🔍 Überprüfe Produkt [65/89]: B0BQ1FZJS6 https://www.amazon.com/dp/B0BQ1FZJS6?language=en_US
-2025-03-18 10:48:21,871 [INFO] ⚡ Änderungen erkannt für B0BQ1FZJS6: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 200, total geändert: None → 9894.0
-2025-03-18 10:48:21,891 [INFO] ✅ last_time_scraped für B0BQ1FZJS6 erfolgreich aktualisiert.
-2025-03-18 10:48:21,892 [INFO] 
-🔍 Überprüfe Produkt [66/89]: B09Z2XPHFQ https://www.amazon.com/dp/B09Z2XPHFQ?language=en_US
-2025-03-18 10:48:32,839 [INFO] ⚡ Änderungen erkannt für B09Z2XPHFQ: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 600, total geändert: None → 7770.0
-2025-03-18 10:48:32,874 [INFO] ✅ last_time_scraped für B09Z2XPHFQ erfolgreich aktualisiert.
-2025-03-18 10:48:32,875 [INFO] 
-🔍 Überprüfe Produkt [67/89]: B0DHYMZBP9 https://www.amazon.com/dp/B0DHYMZBP9?language=en_US
-2025-03-18 10:48:42,829 [INFO] ⚡ Änderungen erkannt für B0DHYMZBP9: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 200, total geändert: None → 3998.0
-2025-03-18 10:48:42,891 [INFO] ✅ last_time_scraped für B0DHYMZBP9 erfolgreich aktualisiert.
-2025-03-18 10:48:42,893 [INFO] 
-🔍 Überprüfe Produkt [68/89]: B08VJNTY36 https://www.amazon.com/dp/B08VJNTY36?language=en_US
-2025-03-18 10:48:52,826 [INFO] ⚡ Änderungen erkannt für B08VJNTY36: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 200, total geändert: None → 5998.0
-2025-03-18 10:48:52,878 [INFO] ✅ last_time_scraped für B08VJNTY36 erfolgreich aktualisiert.
-2025-03-18 10:48:52,879 [INFO] 
-🔍 Überprüfe Produkt [69/89]: B0D3GLRGVM https://www.amazon.com/dp/B0D3GLRGVM?language=en_US
-2025-03-18 10:49:04,089 [INFO] ⚡ Änderungen erkannt für B0D3GLRGVM: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 400, total geändert: None → 11548.0
-2025-03-18 10:49:04,124 [INFO] ✅ last_time_scraped für B0D3GLRGVM erfolgreich aktualisiert.
-2025-03-18 10:49:04,126 [INFO] 
-🔍 Überprüfe Produkt [70/89]: B07TBH84L1 https://www.amazon.com/dp/B07TBH84L1?language=en_US
-2025-03-18 10:49:15,029 [INFO] ⚡ Änderungen erkannt für B07TBH84L1: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 50, total geändert: None → 2149.5
-2025-03-18 10:49:15,052 [INFO] ✅ last_time_scraped für B07TBH84L1 erfolgreich aktualisiert.
-2025-03-18 10:49:15,053 [INFO] 
-🔍 Überprüfe Produkt [71/89]: B081G8V25N https://www.amazon.com/dp/B081G8V25N?language=en_US
-2025-03-18 10:49:25,577 [INFO] ⚡ Änderungen erkannt für B081G8V25N: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 400, total geändert: None → 6152.0
-2025-03-18 10:49:25,609 [INFO] ✅ last_time_scraped für B081G8V25N erfolgreich aktualisiert.
-2025-03-18 10:49:25,610 [INFO] 
-🔍 Überprüfe Produkt [72/89]: B0CSZ66LTQ https://www.amazon.com/dp/B0CSZ66LTQ?language=en_US
-2025-03-18 10:49:37,045 [INFO] ⚡ Änderungen erkannt für B0CSZ66LTQ: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 800, total geändert: None → 23960.0
-2025-03-18 10:49:37,090 [INFO] ✅ last_time_scraped für B0CSZ66LTQ erfolgreich aktualisiert.
-2025-03-18 10:49:37,092 [INFO] 
-🔍 Überprüfe Produkt [73/89]: B0D8KZCLD1 https://www.amazon.com/dp/B0D8KZCLD1?language=en_US
-2025-03-18 10:49:48,733 [INFO] ⚡ Änderungen erkannt für B0D8KZCLD1: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 100, total geändert: None → 1999.0
-2025-03-18 10:49:48,767 [INFO] ✅ last_time_scraped für B0D8KZCLD1 erfolgreich aktualisiert.
-2025-03-18 10:49:48,769 [INFO] 
-🔍 Überprüfe Produkt [74/89]: B0CVH4MNPQ https://www.amazon.com/dp/B0CVH4MNPQ?language=en_US
-2025-03-18 10:50:00,776 [INFO] ⚡ Änderungen erkannt für B0CVH4MNPQ: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements
-2025-03-18 10:50:00,813 [INFO] ✅ last_time_scraped für B0CVH4MNPQ erfolgreich aktualisiert.
-2025-03-18 10:50:00,814 [INFO] 
-🔍 Überprüfe Produkt [75/89]: B0BG9QYXLK https://www.amazon.com/dp/B0BG9QYXLK?language=en_US
-2025-03-18 10:50:11,675 [INFO] ⚡ Änderungen erkannt für B0BG9QYXLK: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 1000, total geändert: None → 29950.0
-2025-03-18 10:50:11,723 [INFO] ✅ last_time_scraped für B0BG9QYXLK erfolgreich aktualisiert.
-2025-03-18 10:50:11,725 [INFO] 
-🔍 Überprüfe Produkt [76/89]: B0D1CTKV5K https://www.amazon.com/dp/B0D1CTKV5K?language=en_US
-2025-03-18 10:50:22,804 [INFO] ⚡ Änderungen erkannt für B0D1CTKV5K: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 100, total geändert: None → 1649.0
-2025-03-18 10:50:22,837 [INFO] ✅ last_time_scraped für B0D1CTKV5K erfolgreich aktualisiert.
-2025-03-18 10:50:22,838 [INFO] 
-🔍 Überprüfe Produkt [77/89]: B0D5PX3MZX https://www.amazon.com/dp/B0D5PX3MZX?language=en_US
-2025-03-18 10:50:33,930 [INFO] ⚡ Änderungen erkannt für B0D5PX3MZX: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 200, total geändert: None → 2538.0
-2025-03-18 10:50:33,958 [INFO] ✅ last_time_scraped für B0D5PX3MZX erfolgreich aktualisiert.
-2025-03-18 10:50:33,959 [INFO] 
-🔍 Überprüfe Produkt [78/89]: B099XC3L7R https://www.amazon.com/dp/B099XC3L7R?language=en_US
-2025-03-18 10:50:44,359 [INFO] ⚡ Änderungen erkannt für B099XC3L7R: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 200, total geändert: None → 8596.0
-2025-03-18 10:50:44,391 [INFO] ✅ last_time_scraped für B099XC3L7R erfolgreich aktualisiert.
-2025-03-18 10:50:44,393 [INFO] 
-🔍 Überprüfe Produkt [79/89]: B0C7Y85JJH https://www.amazon.com/dp/B0C7Y85JJH?language=en_US
-2025-03-18 10:50:55,591 [INFO] ⚡ Änderungen erkannt für B0C7Y85JJH: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 900, total geändert: None → 22491.0
-2025-03-18 10:50:55,629 [INFO] ✅ last_time_scraped für B0C7Y85JJH erfolgreich aktualisiert.
-2025-03-18 10:50:55,630 [INFO] 
-🔍 Überprüfe Produkt [80/89]: B0DCKC5S71 https://www.amazon.com/dp/B0DCKC5S71?language=en_US
-2025-03-18 10:51:06,369 [INFO] ⚡ Änderungen erkannt für B0DCKC5S71: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 100, total geändert: None → 1072.0
-2025-03-18 10:51:06,419 [INFO] ✅ last_time_scraped für B0DCKC5S71 erfolgreich aktualisiert.
-2025-03-18 10:51:06,421 [INFO] 
-🔍 Überprüfe Produkt [81/89]: B0BT3GTSVW https://www.amazon.com/dp/B0BT3GTSVW?language=en_US
-2025-03-18 10:51:16,477 [INFO] ⚡ Änderungen erkannt für B0BT3GTSVW: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 100, total geändert: None → 899.0
-2025-03-18 10:51:16,510 [INFO] ✅ last_time_scraped für B0BT3GTSVW erfolgreich aktualisiert.
-2025-03-18 10:51:16,512 [INFO] 
-🔍 Überprüfe Produkt [82/89]: B0DJTKMQ2R https://www.amazon.com/dp/B0DJTKMQ2R?language=en_US
-2025-03-18 10:51:26,194 [INFO] ⚡ Änderungen erkannt für B0DJTKMQ2R: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 900, total geändert: None → 22482.0
-2025-03-18 10:51:26,215 [INFO] ✅ last_time_scraped für B0DJTKMQ2R erfolgreich aktualisiert.
-2025-03-18 10:51:26,215 [INFO] 
-🔍 Überprüfe Produkt [83/89]: B07CVNM3JV https://www.amazon.com/dp/B07CVNM3JV?language=en_US
-2025-03-18 10:51:36,737 [INFO] ⚡ Änderungen erkannt für B07CVNM3JV: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 200, total geändert: None → 3998.0
-2025-03-18 10:51:36,755 [INFO] ✅ last_time_scraped für B07CVNM3JV erfolgreich aktualisiert.
-2025-03-18 10:51:36,756 [INFO] 
-🔍 Überprüfe Produkt [84/89]: B0018OADEA https://www.amazon.com/dp/B0018OADEA?language=en_US
-2025-03-18 10:51:47,826 [INFO] ⚡ Änderungen erkannt für B0018OADEA: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 800, total geändert: None → 9296.0
-2025-03-18 10:51:47,862 [INFO] ✅ last_time_scraped für B0018OADEA erfolgreich aktualisiert.
-2025-03-18 10:51:47,863 [INFO] 
-🔍 Überprüfe Produkt [85/89]: B0BSXQNLJ4 https://www.amazon.com/dp/B0BSXQNLJ4?language=en_US
-2025-03-18 10:51:59,022 [INFO] ⚡ Änderungen erkannt für B0BSXQNLJ4: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 100, total geändert: None → 1798.0
-2025-03-18 10:51:59,037 [INFO] ✅ last_time_scraped für B0BSXQNLJ4 erfolgreich aktualisiert.
-2025-03-18 10:51:59,039 [INFO] 
-🔍 Überprüfe Produkt [86/89]: B0BG65459C https://www.amazon.com/dp/B0BG65459C?language=en_US
-2025-03-18 10:52:10,341 [INFO] ⚡ Änderungen erkannt für B0BG65459C: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements
-2025-03-18 10:52:10,362 [INFO] ✅ last_time_scraped für B0BG65459C erfolgreich aktualisiert.
-2025-03-18 10:52:10,364 [INFO] 
-🔍 Überprüfe Produkt [87/89]: B0DD5PKWMR https://www.amazon.com/dp/B0DD5PKWMR?language=en_US
-2025-03-18 10:52:20,902 [INFO] ⚡ Änderungen erkannt für B0DD5PKWMR: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 100, total geändert: None → 962.0
-2025-03-18 10:52:20,934 [INFO] ✅ last_time_scraped für B0DD5PKWMR erfolgreich aktualisiert.
-2025-03-18 10:52:20,935 [INFO] 
-🔍 Überprüfe Produkt [88/89]: B0D78MM7HK https://www.amazon.com/dp/B0D78MM7HK?language=en_US
-2025-03-18 10:52:31,608 [INFO] ⚡ Änderungen erkannt für B0D78MM7HK: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 300, total geändert: None → 7497.0
-2025-03-18 10:52:31,649 [INFO] ✅ last_time_scraped für B0D78MM7HK erfolgreich aktualisiert.
-2025-03-18 10:52:31,650 [INFO] 
-🔍 Überprüfe Produkt [89/89]: B0CXTPJZ5Y https://www.amazon.com/dp/B0CXTPJZ5Y?language=en_US
-2025-03-18 10:52:42,546 [INFO] ⚡ Änderungen erkannt für B0CXTPJZ5Y: main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 200, total geändert: None → 3998.0
-2025-03-18 10:52:42,568 [INFO] ✅ last_time_scraped für B0CXTPJZ5Y erfolgreich aktualisiert.
-2025-03-18 10:52:42,569 [INFO] 
+2025-03-18 11:52:11,273 [INFO] 🚀 Product Orchestrator gestartet.
+2025-03-18 11:52:18,668 [INFO] ✅ Verbindung zu Amazon erfolgreich hergestellt!
+2025-03-18 11:52:20,435 [INFO] 🍪 Setze Cookies...
+2025-03-18 11:52:20,456 [INFO] ✅ Cookies gesetzt!
+2025-03-18 11:52:20,456 [INFO] 🚀 Starte Product-Update...
+2025-03-18 11:52:20,493 [INFO] 
+🔍 Überprüfe Produkt [1/98]: B00GL2HMES https://www.amazon.com/dp/B00GL2HMES?language=en_US
+2025-03-18 11:52:36,098 [INFO] ✅ Keine Änderungen für B00GL2HMES.
+2025-03-18 11:52:36,115 [INFO] 
+🔍 Überprüfe Produkt [2/98]: B002DYIZEO https://www.amazon.com/dp/B002DYIZEO?language=en_US
+2025-03-18 11:52:47,722 [INFO] ✅ Keine Änderungen für B002DYIZEO.
+2025-03-18 11:52:47,755 [INFO] 
+🔍 Überprüfe Produkt [3/98]: B07978VPPH https://www.amazon.com/dp/B07978VPPH?language=en_US
+2025-03-18 11:53:00,358 [INFO] ✅ Keine Änderungen für B07978VPPH.
+2025-03-18 11:53:00,389 [INFO] 
+🔍 Überprüfe Produkt [4/98]: B00E9M4XFI https://www.amazon.com/dp/B00E9M4XFI?language=en_US
+2025-03-18 11:53:11,874 [INFO] ✅ Keine Änderungen für B00E9M4XFI.
+2025-03-18 11:53:11,906 [INFO] 
+🔍 Überprüfe Produkt [5/98]: B0C9GCQX6H https://www.amazon.com/dp/B0C9GCQX6H?language=en_US
+2025-03-18 11:53:22,488 [INFO] ✅ Keine Änderungen für B0C9GCQX6H.
+2025-03-18 11:53:22,504 [INFO] 
+🔍 Überprüfe Produkt [6/98]: B002DYIZGC https://www.amazon.com/dp/B002DYIZGC?language=en_US
+2025-03-18 11:53:34,827 [INFO] ✅ Keine Änderungen für B002DYIZGC.
+2025-03-18 11:53:34,857 [INFO] 
+🔍 Überprüfe Produkt [7/98]: B0B9YMNYWK https://www.amazon.com/dp/B0B9YMNYWK?language=en_US
+2025-03-18 11:53:46,508 [INFO] ✅ Keine Änderungen für B0B9YMNYWK.
+2025-03-18 11:53:46,538 [INFO] 
+🔍 Überprüfe Produkt [8/98]: B0CSMZ882F https://www.amazon.com/dp/B0CSMZ882F?language=en_US
+2025-03-18 11:53:57,657 [INFO] ✅ Keine Änderungen für B0CSMZ882F.
+2025-03-18 11:53:57,701 [INFO] 
+🔍 Überprüfe Produkt [9/98]: B0CCJZVJYG https://www.amazon.com/dp/B0CCJZVJYG?language=en_US
+2025-03-18 11:54:09,726 [INFO] ✅ Keine Änderungen für B0CCJZVJYG.
+2025-03-18 11:54:09,739 [INFO] 
+🔍 Überprüfe Produkt [10/98]: B09YX7G6JJ https://www.amazon.com/dp/B09YX7G6JJ?language=en_US
+2025-03-18 11:54:20,591 [INFO] ✅ Keine Änderungen für B09YX7G6JJ.
+2025-03-18 11:54:20,608 [INFO] 
+🔍 Überprüfe Produkt [11/98]: B00BPS3L8E https://www.amazon.com/dp/B00BPS3L8E?language=en_US
+2025-03-18 11:54:30,940 [INFO] ✅ Keine Änderungen für B00BPS3L8E.
+2025-03-18 11:54:30,958 [INFO] 
+🔍 Überprüfe Produkt [12/98]: B09R5KPNHZ https://www.amazon.com/dp/B09R5KPNHZ?language=en_US
+2025-03-18 11:54:44,538 [INFO] ✅ Keine Änderungen für B09R5KPNHZ.
+2025-03-18 11:54:44,566 [INFO] 
+🔍 Überprüfe Produkt [13/98]: B01BVRO7T0 https://www.amazon.com/dp/B01BVRO7T0?language=en_US
+2025-03-18 11:54:56,990 [INFO] ✅ Keine Änderungen für B01BVRO7T0.
+2025-03-18 11:54:57,015 [INFO] 
+🔍 Überprüfe Produkt [14/98]: B0BSXR71QC https://www.amazon.com/dp/B0BSXR71QC?language=en_US
+2025-03-18 11:55:08,180 [INFO] ✅ Keine Änderungen für B0BSXR71QC.
+2025-03-18 11:55:08,198 [INFO] 
+🔍 Überprüfe Produkt [15/98]: B01IW245EY https://www.amazon.com/dp/B01IW245EY?language=en_US
+2025-03-18 11:55:18,924 [INFO] ✅ Keine Änderungen für B01IW245EY.
+2025-03-18 11:55:18,963 [INFO] 
+🔍 Überprüfe Produkt [16/98]: B08DH161T6 https://www.amazon.com/dp/B08DH161T6?language=en_US
+2025-03-18 11:55:30,687 [INFO] ✅ Keine Änderungen für B08DH161T6.
+2025-03-18 11:55:30,703 [INFO] 
+🔍 Überprüfe Produkt [17/98]: B0BT23VBLJ https://www.amazon.com/dp/B0BT23VBLJ?language=en_US
+2025-03-18 11:55:41,738 [INFO] ✅ Keine Änderungen für B0BT23VBLJ.
+2025-03-18 11:55:41,783 [INFO] 
+🔍 Überprüfe Produkt [18/98]: B085Z9P87K https://www.amazon.com/dp/B085Z9P87K?language=en_US
+2025-03-18 11:55:52,026 [INFO] ✅ Keine Änderungen für B085Z9P87K.
+2025-03-18 11:55:52,061 [INFO] 
+🔍 Überprüfe Produkt [19/98]: B0B4Z2RTY1 https://www.amazon.com/dp/B0B4Z2RTY1?language=en_US
+2025-03-18 11:56:02,747 [INFO] ✅ Keine Änderungen für B0B4Z2RTY1.
+2025-03-18 11:56:02,772 [INFO] 
+🔍 Überprüfe Produkt [20/98]: B0BFFYHWLK https://www.amazon.com/dp/B0BFFYHWLK?language=en_US
+2025-03-18 11:56:13,616 [INFO] ✅ Keine Änderungen für B0BFFYHWLK.
+2025-03-18 11:56:13,659 [INFO] 
+🔍 Überprüfe Produkt [21/98]: B07M5M5B3S https://www.amazon.com/dp/B07M5M5B3S?language=en_US
+2025-03-18 11:56:24,143 [INFO] ✅ Keine Änderungen für B07M5M5B3S.
+2025-03-18 11:56:24,175 [INFO] 
+🔍 Überprüfe Produkt [22/98]: B00UWSRZ8K https://www.amazon.com/dp/B00UWSRZ8K?language=en_US
+2025-03-18 11:56:34,914 [INFO] ✅ Keine Änderungen für B00UWSRZ8K.
+2025-03-18 11:56:34,946 [INFO] 
+🔍 Überprüfe Produkt [23/98]: B0CXM2PG68 https://www.amazon.com/dp/B0CXM2PG68?language=en_US
+2025-03-18 11:56:46,306 [INFO] ✅ Keine Änderungen für B0CXM2PG68.
+2025-03-18 11:56:46,355 [INFO] 
+🔍 Überprüfe Produkt [24/98]: B00QEMY4T6 https://www.amazon.com/dp/B00QEMY4T6?language=en_US
+2025-03-18 11:56:59,282 [INFO] ✅ Keine Änderungen für B00QEMY4T6.
+2025-03-18 11:56:59,306 [INFO] 
+🔍 Überprüfe Produkt [25/98]: B09L8KTJ2G https://www.amazon.com/dp/B09L8KTJ2G?language=en_US
+2025-03-18 11:57:09,623 [INFO] ✅ Keine Änderungen für B09L8KTJ2G.
+2025-03-18 11:57:09,650 [INFO] 
+🔍 Überprüfe Produkt [26/98]: B018ITUM5C https://www.amazon.com/dp/B018ITUM5C?language=en_US
+2025-03-18 11:57:20,351 [INFO] ✅ Keine Änderungen für B018ITUM5C.
+2025-03-18 11:57:20,388 [INFO] 
+🔍 Überprüfe Produkt [27/98]: B0CJMPVHXT https://www.amazon.com/dp/B0CJMPVHXT?language=en_US
+2025-03-18 11:57:30,861 [INFO] ✅ Keine Änderungen für B0CJMPVHXT.
+2025-03-18 11:57:30,889 [INFO] 
+🔍 Überprüfe Produkt [28/98]: B01LYFAGXI https://www.amazon.com/dp/B01LYFAGXI?language=en_US
+2025-03-18 11:57:41,650 [INFO] ⚡ Änderungen erkannt für B01LYFAGXI: blm geändert: 7000 → 8000, total geändert: 229600.0 → 262400.0
+2025-03-18 11:57:41,679 [INFO] 
+🔍 Überprüfe Produkt [29/98]: B0CQPJG4F5 https://www.amazon.com/dp/B0CQPJG4F5?language=en_US
+2025-03-18 11:57:51,591 [INFO] ✅ Keine Änderungen für B0CQPJG4F5.
+2025-03-18 11:57:51,627 [INFO] 
+🔍 Überprüfe Produkt [30/98]: B0B9HWN8S9 https://www.amazon.com/dp/B0B9HWN8S9?language=en_US
+2025-03-18 11:58:03,349 [INFO] ✅ Keine Änderungen für B0B9HWN8S9.
+2025-03-18 11:58:03,366 [INFO] 
+🔍 Überprüfe Produkt [31/98]: B0C9NRW7CP https://www.amazon.com/dp/B0C9NRW7CP?language=en_US
+2025-03-18 11:58:13,435 [INFO] ✅ Keine Änderungen für B0C9NRW7CP.
+2025-03-18 11:58:13,478 [INFO] 
+🔍 Überprüfe Produkt [32/98]: B09TNMZBQ5 https://www.amazon.com/dp/B09TNMZBQ5?language=en_US
+2025-03-18 11:58:24,000 [INFO] ✅ Keine Änderungen für B09TNMZBQ5.
+2025-03-18 11:58:24,039 [INFO] 
+🔍 Überprüfe Produkt [33/98]: B008KMUNRA https://www.amazon.com/dp/B008KMUNRA?language=en_US
+2025-03-18 11:58:33,754 [INFO] ✅ Keine Änderungen für B008KMUNRA.
+2025-03-18 11:58:33,783 [INFO] 
+🔍 Überprüfe Produkt [34/98]: B0D4QRC5WK https://www.amazon.com/dp/B0D4QRC5WK?language=en_US
+2025-03-18 11:58:45,743 [INFO] ✅ Keine Änderungen für B0D4QRC5WK.
+2025-03-18 11:58:45,774 [INFO] 
+🔍 Überprüfe Produkt [35/98]: B086H6366N https://www.amazon.com/dp/B086H6366N?language=en_US
+2025-03-18 11:58:55,328 [INFO] ✅ Keine Änderungen für B086H6366N.
+2025-03-18 11:58:55,347 [INFO] 
+🔍 Überprüfe Produkt [36/98]: B0BRNWSMVD https://www.amazon.com/dp/B0BRNWSMVD?language=en_US
+2025-03-18 11:59:06,308 [INFO] ✅ Keine Änderungen für B0BRNWSMVD.
+2025-03-18 11:59:06,330 [INFO] 
+🔍 Überprüfe Produkt [37/98]: B0CZ1823BM https://www.amazon.com/dp/B0CZ1823BM?language=en_US
+2025-03-18 11:59:16,594 [INFO] ✅ Keine Änderungen für B0CZ1823BM.
+2025-03-18 11:59:16,632 [INFO] 
+🔍 Überprüfe Produkt [38/98]: B0BMPLP7K6 https://www.amazon.com/dp/B0BMPLP7K6?language=en_US
+2025-03-18 11:59:26,147 [INFO] ✅ Keine Änderungen für B0BMPLP7K6.
+2025-03-18 11:59:26,180 [INFO] 
+🔍 Überprüfe Produkt [39/98]: B0D1DP2D8D https://www.amazon.com/dp/B0D1DP2D8D?language=en_US
+2025-03-18 11:59:35,964 [INFO] ✅ Keine Änderungen für B0D1DP2D8D.
+2025-03-18 11:59:35,982 [INFO] 
+🔍 Überprüfe Produkt [40/98]: B00012NJT6 https://www.amazon.com/dp/B00012NJT6?language=en_US
+2025-03-18 11:59:45,913 [INFO] ✅ Keine Änderungen für B00012NJT6.
+2025-03-18 11:59:45,934 [INFO] 
+🔍 Überprüfe Produkt [41/98]: B0CQN29QCQ https://www.amazon.com/dp/B0CQN29QCQ?language=en_US
+2025-03-18 11:59:56,137 [INFO] ✅ Keine Änderungen für B0CQN29QCQ.
+2025-03-18 11:59:56,170 [INFO] 
+🔍 Überprüfe Produkt [42/98]: B0BDCV36CX https://www.amazon.com/dp/B0BDCV36CX?language=en_US
+2025-03-18 12:00:06,413 [INFO] ✅ Keine Änderungen für B0BDCV36CX.
+2025-03-18 12:00:06,427 [INFO] 
+🔍 Überprüfe Produkt [43/98]: B0BQPT34V7 https://www.amazon.com/dp/B0BQPT34V7?language=en_US
+2025-03-18 12:00:16,404 [INFO] ✅ Keine Änderungen für B0BQPT34V7.
+2025-03-18 12:00:16,426 [INFO] 
+🔍 Überprüfe Produkt [44/98]: B0045MLCL0 https://www.amazon.com/dp/B0045MLCL0?language=en_US
+2025-03-18 12:00:27,123 [INFO] ✅ Keine Änderungen für B0045MLCL0.
+2025-03-18 12:00:27,150 [INFO] 
+🔍 Überprüfe Produkt [45/98]: B001181M16 https://www.amazon.com/dp/B001181M16?language=en_US
+2025-03-18 12:00:39,184 [INFO] ✅ Keine Änderungen für B001181M16.
+2025-03-18 12:00:39,201 [INFO] 
+🔍 Überprüfe Produkt [46/98]: B0BFZJJY5M https://www.amazon.com/dp/B0BFZJJY5M?language=en_US
+2025-03-18 12:00:49,900 [INFO] ✅ Keine Änderungen für B0BFZJJY5M.
+2025-03-18 12:00:49,936 [INFO] 
+🔍 Überprüfe Produkt [47/98]: B0BKNVNLN9 https://www.amazon.com/dp/B0BKNVNLN9?language=en_US
+2025-03-18 12:00:59,672 [INFO] ✅ Keine Änderungen für B0BKNVNLN9.
+2025-03-18 12:00:59,686 [INFO] 
+🔍 Überprüfe Produkt [48/98]: B0C8L96Y3T https://www.amazon.com/dp/B0C8L96Y3T?language=en_US
+2025-03-18 12:01:10,495 [INFO] ✅ Keine Änderungen für B0C8L96Y3T.
+2025-03-18 12:01:10,528 [INFO] 
+🔍 Überprüfe Produkt [49/98]: B0DDB5BWYP https://www.amazon.com/dp/B0DDB5BWYP?language=en_US
+2025-03-18 12:01:21,063 [INFO] ✅ Keine Änderungen für B0DDB5BWYP.
+2025-03-18 12:01:21,084 [INFO] 
+🔍 Überprüfe Produkt [50/98]: B0C6WCWJ9P https://www.amazon.com/dp/B0C6WCWJ9P?language=en_US
+2025-03-18 12:01:30,786 [INFO] ✅ Keine Änderungen für B0C6WCWJ9P.
+2025-03-18 12:01:30,819 [INFO] 
+🔍 Überprüfe Produkt [51/98]: B005DKV9SE https://www.amazon.com/dp/B005DKV9SE?language=en_US
+2025-03-18 12:01:42,198 [INFO] ✅ Keine Änderungen für B005DKV9SE.
+2025-03-18 12:01:42,215 [INFO] 
+🔍 Überprüfe Produkt [52/98]: B00117ZRXQ https://www.amazon.com/dp/B00117ZRXQ?language=en_US
+2025-03-18 12:01:53,018 [INFO] ✅ Keine Änderungen für B00117ZRXQ.
+2025-03-18 12:01:53,052 [INFO] 
+🔍 Überprüfe Produkt [53/98]: B0B9289VLY https://www.amazon.com/dp/B0B9289VLY?language=en_US
+2025-03-18 12:02:03,331 [INFO] ✅ Keine Änderungen für B0B9289VLY.
+2025-03-18 12:02:03,349 [INFO] 
+🔍 Überprüfe Produkt [54/98]: B0CLSCPZG4 https://www.amazon.com/dp/B0CLSCPZG4?language=en_US
+2025-03-18 12:02:13,580 [INFO] ✅ Keine Änderungen für B0CLSCPZG4.
+2025-03-18 12:02:13,615 [INFO] 
+🔍 Überprüfe Produkt [55/98]: B001KYS2DC https://www.amazon.com/dp/B001KYS2DC?language=en_US
+2025-03-18 12:02:23,636 [INFO] ✅ Keine Änderungen für B001KYS2DC.
+2025-03-18 12:02:23,657 [INFO] 
+🔍 Überprüfe Produkt [56/98]: B0CSWHQ3PN https://www.amazon.com/dp/B0CSWHQ3PN?language=en_US
+2025-03-18 12:02:34,082 [INFO] ✅ Keine Änderungen für B0CSWHQ3PN.
+2025-03-18 12:02:34,101 [INFO] 
+🔍 Überprüfe Produkt [57/98]: B0B6GKMZCL https://www.amazon.com/dp/B0B6GKMZCL?language=en_US
+2025-03-18 12:02:45,381 [INFO] ✅ Keine Änderungen für B0B6GKMZCL.
+2025-03-18 12:02:45,408 [INFO] 
+🔍 Überprüfe Produkt [58/98]: B079JWLSH9 https://www.amazon.com/dp/B079JWLSH9?language=en_US
+2025-03-18 12:02:56,011 [INFO] ✅ Keine Änderungen für B079JWLSH9.
+2025-03-18 12:02:56,048 [INFO] 
+🔍 Überprüfe Produkt [59/98]: B0BLJ51MK7 https://www.amazon.com/dp/B0BLJ51MK7?language=en_US
+2025-03-18 12:03:06,046 [INFO] ✅ Keine Änderungen für B0BLJ51MK7.
+2025-03-18 12:03:06,061 [INFO] 
+🔍 Überprüfe Produkt [60/98]: B0C6L85Z16 https://www.amazon.com/dp/B0C6L85Z16?language=en_US
+2025-03-18 12:03:16,052 [INFO] ⚡ Änderungen erkannt für B0C6L85Z16: blm geändert: 400 → 500, total geändert: 13460.0 → 16825.0
+2025-03-18 12:03:16,070 [INFO] 
+🔍 Überprüfe Produkt [61/98]: B09MZV4LCS https://www.amazon.com/dp/B09MZV4LCS?language=en_US
+2025-03-18 12:03:27,373 [INFO] ✅ Keine Änderungen für B09MZV4LCS.
+2025-03-18 12:03:27,402 [INFO] 
+🔍 Überprüfe Produkt [62/98]: B0BKCVLYGX https://www.amazon.com/dp/B0BKCVLYGX?language=en_US
+2025-03-18 12:03:37,456 [INFO] ✅ Keine Änderungen für B0BKCVLYGX.
+2025-03-18 12:03:37,484 [INFO] 
+🔍 Überprüfe Produkt [63/98]: B0C8K2Z6SH https://www.amazon.com/dp/B0C8K2Z6SH?language=en_US
+2025-03-18 12:03:48,665 [INFO] ✅ Keine Änderungen für B0C8K2Z6SH.
+2025-03-18 12:03:48,700 [INFO] 
+🔍 Überprüfe Produkt [64/98]: B016C9GIIK https://www.amazon.com/dp/B016C9GIIK?language=en_US
+2025-03-18 12:03:58,229 [INFO] ⚡ Änderungen erkannt für B016C9GIIK: price geändert: 39.49 → 39.99, total geändert: 7898.0 → 7998.0
+2025-03-18 12:03:58,267 [INFO] 
+🔍 Überprüfe Produkt [65/98]: B0BQ1FZJS6 https://www.amazon.com/dp/B0BQ1FZJS6?language=en_US
+2025-03-18 12:04:09,163 [INFO] ⚡ Änderungen erkannt für B0BQ1FZJS6: price geändert: 49.47 → 52.03, total geändert: 9894.0 → 10406.0
+2025-03-18 12:04:09,201 [INFO] 
+🔍 Überprüfe Produkt [66/98]: B09Z2XPHFQ https://www.amazon.com/dp/B09Z2XPHFQ?language=en_US
+2025-03-18 12:04:19,763 [INFO] ✅ Keine Änderungen für B09Z2XPHFQ.
+2025-03-18 12:04:19,791 [INFO] 
+🔍 Überprüfe Produkt [67/98]: B0DHYMZBP9 https://www.amazon.com/dp/B0DHYMZBP9?language=en_US
+2025-03-18 12:04:29,588 [INFO] ✅ Keine Änderungen für B0DHYMZBP9.
+2025-03-18 12:04:29,621 [INFO] 
+🔍 Überprüfe Produkt [68/98]: B08VJNTY36 https://www.amazon.com/dp/B08VJNTY36?language=en_US
+2025-03-18 12:04:39,152 [INFO] ✅ Keine Änderungen für B08VJNTY36.
+2025-03-18 12:04:39,189 [INFO] 
+🔍 Überprüfe Produkt [69/98]: B0D3GLRGVM https://www.amazon.com/dp/B0D3GLRGVM?language=en_US
+2025-03-18 12:04:49,795 [INFO] ✅ Keine Änderungen für B0D3GLRGVM.
+2025-03-18 12:04:49,836 [INFO] 
+🔍 Überprüfe Produkt [70/98]: B07TBH84L1 https://www.amazon.com/dp/B07TBH84L1?language=en_US
+2025-03-18 12:04:59,738 [INFO] ✅ Keine Änderungen für B07TBH84L1.
+2025-03-18 12:04:59,766 [INFO] 
+🔍 Überprüfe Produkt [71/98]: B081G8V25N https://www.amazon.com/dp/B081G8V25N?language=en_US
+2025-03-18 12:05:09,212 [INFO] ✅ Keine Änderungen für B081G8V25N.
+2025-03-18 12:05:09,243 [INFO] 
+🔍 Überprüfe Produkt [72/98]: B0CSZ66LTQ https://www.amazon.com/dp/B0CSZ66LTQ?language=en_US
+2025-03-18 12:05:19,421 [INFO] ✅ Keine Änderungen für B0CSZ66LTQ.
+2025-03-18 12:05:19,442 [INFO] 
+🔍 Überprüfe Produkt [73/98]: B0D8KZCLD1 https://www.amazon.com/dp/B0D8KZCLD1?language=en_US
+2025-03-18 12:05:29,601 [INFO] ✅ Keine Änderungen für B0D8KZCLD1.
+2025-03-18 12:05:29,629 [INFO] 
+🔍 Überprüfe Produkt [74/98]: B0CVH4MNPQ https://www.amazon.com/dp/B0CVH4MNPQ?language=en_US
+2025-03-18 12:05:40,333 [INFO] ✅ Keine Änderungen für B0CVH4MNPQ.
+2025-03-18 12:05:40,373 [INFO] 
+🔍 Überprüfe Produkt [75/98]: B0BG9QYXLK https://www.amazon.com/dp/B0BG9QYXLK?language=en_US
+2025-03-18 12:05:50,977 [INFO] ✅ Keine Änderungen für B0BG9QYXLK.
+2025-03-18 12:05:50,994 [INFO] 
+🔍 Überprüfe Produkt [76/98]: B0D1CTKV5K https://www.amazon.com/dp/B0D1CTKV5K?language=en_US
+2025-03-18 12:06:00,855 [INFO] ✅ Keine Änderungen für B0D1CTKV5K.
+2025-03-18 12:06:00,885 [INFO] 
+🔍 Überprüfe Produkt [77/98]: B0D5PX3MZX https://www.amazon.com/dp/B0D5PX3MZX?language=en_US
+2025-03-18 12:06:11,256 [INFO] ✅ Keine Änderungen für B0D5PX3MZX.
+2025-03-18 12:06:11,271 [INFO] 
+🔍 Überprüfe Produkt [78/98]: B099XC3L7R https://www.amazon.com/dp/B099XC3L7R?language=en_US
+2025-03-18 12:06:21,826 [INFO] ✅ Keine Änderungen für B099XC3L7R.
+2025-03-18 12:06:21,865 [INFO] 
+🔍 Überprüfe Produkt [79/98]: B0C7Y85JJH https://www.amazon.com/dp/B0C7Y85JJH?language=en_US
+2025-03-18 12:06:32,945 [INFO] ✅ Keine Änderungen für B0C7Y85JJH.
+2025-03-18 12:06:32,967 [INFO] 
+🔍 Überprüfe Produkt [80/98]: B0DCKC5S71 https://www.amazon.com/dp/B0DCKC5S71?language=en_US
+2025-03-18 12:06:42,758 [INFO] ✅ Keine Änderungen für B0DCKC5S71.
+2025-03-18 12:06:42,777 [INFO] 
+🔍 Überprüfe Produkt [81/98]: B0BT3GTSVW https://www.amazon.com/dp/B0BT3GTSVW?language=en_US
+2025-03-18 12:06:51,902 [INFO] ✅ Keine Änderungen für B0BT3GTSVW.
+2025-03-18 12:06:51,933 [INFO] 
+🔍 Überprüfe Produkt [82/98]: B0DJTKMQ2R https://www.amazon.com/dp/B0DJTKMQ2R?language=en_US
+2025-03-18 12:07:00,857 [INFO] ✅ Keine Änderungen für B0DJTKMQ2R.
+2025-03-18 12:07:00,901 [INFO] 
+🔍 Überprüfe Produkt [83/98]: B07CVNM3JV https://www.amazon.com/dp/B07CVNM3JV?language=en_US
+2025-03-18 12:07:09,956 [INFO] ✅ Keine Änderungen für B07CVNM3JV.
+2025-03-18 12:07:09,972 [INFO] 
+🔍 Überprüfe Produkt [84/98]: B0018OADEA https://www.amazon.com/dp/B0018OADEA?language=en_US
+2025-03-18 12:07:20,069 [INFO] ✅ Keine Änderungen für B0018OADEA.
+2025-03-18 12:07:20,098 [INFO] 
+🔍 Überprüfe Produkt [85/98]: B0BSXQNLJ4 https://www.amazon.com/dp/B0BSXQNLJ4?language=en_US
+2025-03-18 12:07:29,649 [INFO] ✅ Keine Änderungen für B0BSXQNLJ4.
+2025-03-18 12:07:29,662 [INFO] 
+🔍 Überprüfe Produkt [86/98]: B0BG65459C https://www.amazon.com/dp/B0BG65459C?language=en_US
+2025-03-18 12:07:39,760 [INFO] ✅ Keine Änderungen für B0BG65459C.
+2025-03-18 12:07:39,787 [INFO] 
+🔍 Überprüfe Produkt [87/98]: B0DD5PKWMR https://www.amazon.com/dp/B0DD5PKWMR?language=en_US
+2025-03-18 12:07:50,819 [INFO] ✅ Keine Änderungen für B0DD5PKWMR.
+2025-03-18 12:07:50,837 [INFO] 
+🔍 Überprüfe Produkt [88/98]: B0D78MM7HK https://www.amazon.com/dp/B0D78MM7HK?language=en_US
+2025-03-18 12:08:00,146 [INFO] ✅ Keine Änderungen für B0D78MM7HK.
+2025-03-18 12:08:00,162 [INFO] 
+🔍 Überprüfe Produkt [89/98]: B0CXTPJZ5Y https://www.amazon.com/dp/B0CXTPJZ5Y?language=en_US
+2025-03-18 12:08:10,308 [INFO] ✅ Keine Änderungen für B0CXTPJZ5Y.
+2025-03-18 12:08:10,342 [INFO] 
+🔍 Überprüfe Produkt [90/98]: B0B1V1TBYF https://www.amazon.com/dp/B0B1V1TBYF?language=en_US
+2025-03-18 12:08:21,858 [INFO] ⚡ Änderungen erkannt für B0B1V1TBYF: title changed, price geändert: None → 49.99, main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 3000, total geändert: None → 149970.0
+2025-03-18 12:08:21,891 [INFO] 
+🔍 Überprüfe Produkt [91/98]: B0CFWCMBNG https://www.amazon.com/dp/B0CFWCMBNG?language=en_US
+2025-03-18 12:08:32,177 [INFO] ⚡ Änderungen erkannt für B0CFWCMBNG: title changed, price geändert: None → 26.97, main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 3000, total geändert: None → 80910.0
+2025-03-18 12:08:32,220 [INFO] 
+🔍 Überprüfe Produkt [92/98]: B0BBWMC33H https://www.amazon.com/dp/B0BBWMC33H?language=en_US
+2025-03-18 12:08:42,598 [INFO] ⚡ Änderungen erkannt für B0BBWMC33H: title changed, price geändert: None → 22.99, main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 100, total geändert: None → 2299.0
+2025-03-18 12:08:42,617 [INFO] 
+🔍 Überprüfe Produkt [93/98]: B01IA7QIS2 https://www.amazon.com/dp/B01IA7QIS2?language=en_US
+2025-03-18 12:08:52,516 [INFO] ⚡ Änderungen erkannt für B01IA7QIS2: title changed, price geändert: None → 9.99, main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 50, total geändert: None → 499.5
+2025-03-18 12:08:52,550 [INFO] 
+🔍 Überprüfe Produkt [94/98]: B0106ZC4T8 https://www.amazon.com/dp/B0106ZC4T8?language=en_US
+2025-03-18 12:09:01,831 [INFO] ⚡ Änderungen erkannt für B0106ZC4T8: title changed, price geändert: None → 23.89, main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 3000, total geändert: None → 71670.0
+2025-03-18 12:09:01,865 [INFO] 
+🔍 Überprüfe Produkt [95/98]: B0CP9XPYX6 https://www.amazon.com/dp/B0CP9XPYX6?language=en_US
+2025-03-18 12:09:11,806 [INFO] ⚡ Änderungen erkannt für B0CP9XPYX6: title changed, price geändert: None → 49.98, main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 4000, total geändert: None → 199920.0
+2025-03-18 12:09:11,844 [INFO] 
+🔍 Überprüfe Produkt [96/98]: B07RV3BQ45 https://www.amazon.com/dp/B07RV3BQ45?language=en_US
+2025-03-18 12:09:22,722 [INFO] ⚡ Änderungen erkannt für B07RV3BQ45: title changed, price geändert: None → 49.99, main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 2000, total geändert: None → 99980.0
+2025-03-18 12:09:22,760 [INFO] 
+🔍 Überprüfe Produkt [97/98]: B008WTWUFO https://www.amazon.com/dp/B008WTWUFO?language=en_US
+2025-03-18 12:09:34,230 [INFO] ⚡ Änderungen erkannt für B008WTWUFO: title changed, price geändert: None → 74.9, main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 900, total geändert: None → 67410.0
+2025-03-18 12:09:34,257 [INFO] 
+🔍 Überprüfe Produkt [98/98]: B099KRBL53 https://www.amazon.com/dp/B099KRBL53?language=en_US
+2025-03-18 12:09:44,637 [INFO] ⚡ Änderungen erkannt für B099KRBL53: title changed, price geändert: None → 19.99, main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 2000, total geändert: None → 39980.0
+2025-03-18 12:09:44,669 [INFO] 
 📊 Scraping Performance Metrics:
-2025-03-18 10:52:42,569 [INFO] 🕒 Gesamtzeit: 1028.77 Sekunden
-2025-03-18 10:52:42,570 [INFO] ⚡ Durchschnittliche Zeit pro Produkt: 11.53 Sekunden
-2025-03-18 10:52:42,570 [INFO] 📦 Anzahl gescrapte Produkte: 89
-2025-03-18 10:52:42,571 [INFO] Failed products: 0
-2025-03-18 10:52:42,571 [INFO] 
-📊 Scraping Performance Metrics:
-2025-03-18 10:52:42,572 [INFO] 🕒 Gesamtzeit: 1028.77 Sekunden
-2025-03-18 10:52:42,572 [INFO] ⚡ Durchschnittliche Zeit pro Produkt: 11.53 Sekunden
-2025-03-18 10:52:42,573 [INFO] 📦 Anzahl gescrapte Produkte: 89
-2025-03-18 10:52:42,573 [INFO] Failed products: 0
-2025-03-18 10:52:42,574 [INFO] 
-🔻 Schließe WebDriver...
-2025-03-18 10:52:45,462 [INFO] ✅ WebDriver geschlossen.

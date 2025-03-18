@@ -44,6 +44,7 @@ const Dashboard: React.FC = () => {
       ]);
 
       if (clustersData) {
+        console.log("[DEBUG] ClusterData:", clustersData)
         setMarketClusters(clustersData);
       }
       if (overviewData) {

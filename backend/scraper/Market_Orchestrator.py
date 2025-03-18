@@ -29,7 +29,7 @@ class MarketOrchestrator:
         )
 
     def fetch_current_market_data(self, keyword: str):
-        logging.info(f"Scraping market: {keyword}")
+        logging.info(f"🔍 Scraping market: {keyword}")
         start_time = time.time()
         
         scraper = AmazonFirstPageScraper(headless=True, show_details=False)
@@ -101,7 +101,7 @@ class MarketOrchestrator:
 
             changes = []
             if added_asins:
-                logging.info(f"✅ Neue Produkte gefunden: {', '.join(added_asins)}")
+                logging.info(f"✅ Neue Produkte gefunden!")
                 changes.append(f"Neue Produkte: {', '.join(added_asins)}")
             if removed_asins:
                 logging.info(f"⚠️ Entfernte Produkte: {', '.join(removed_asins)}")
@@ -224,10 +224,12 @@ class MarketOrchestrator:
                     logging.error(f"❌ Fehler beim Verarbeiten von Markt {market.keyword}: {e}")
                     failed_markets += 1
 
+            self.update_market_cluster_total_revenue(db=db)
            # Gesamtzeit berechnen
             total_time = time.time() - self.start_time
             avg_time = sum(self.market_times) / len(self.market_times) if self.market_times else 0
             
+            logging.info("-----------------------------------------------------------------")
             logging.info("-----------------------------------------------------------------")
             logging.info("📊 Scraping Performance Metrics:")
             logging.info(f"🕒 Gesamtzeit: {self.format_time(total_time)}")

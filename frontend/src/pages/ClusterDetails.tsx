@@ -129,9 +129,15 @@ export default function ClusterDetails() {
           ChartDataService.GetBarChartData(),
         ]);
 
-        if (clusterData) setMarketCluster(clusterData);
+        if (clusterData) {
+          console.log("[DEBUG] clusterData:", clusterData);
+          setMarketCluster(clusterData);
+        }
+
         if (stackedData) {
+          console.log("[DEBUG] stackedData:", stackedData);
           const transformedData = transformStackedChartData(stackedData);
+          console.log("[DEBUG] transformed stackedData:", transformedData);
           setStackedChartData(transformedData);
         }
         if (barData) setBarChartData(barData.barChart);

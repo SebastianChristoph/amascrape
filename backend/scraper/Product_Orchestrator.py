@@ -64,6 +64,10 @@ class Product_Orchestrator:
         # 🍪 Cookies setzen
         self.set_cookies()
 
+    def format_time(self, seconds):
+        minutes, seconds = divmod(seconds, 60)
+        return f"{int(minutes)}m {int(seconds)}s"
+
     def check_connection(self):
         """Überprüft, ob der WebDriver eine Verbindung herstellen kann."""
         try:
@@ -121,7 +125,8 @@ class Product_Orchestrator:
                     title_changed = True  # Setze das Flag für Title-Änderung
                 else:
                     changes.append(
-                        f"{field} geändert: {old_value} → {new_value}")
+                        #f"{field} geändert: {old_value} → {new_value}")
+                        f"{field}")
 
                 changed_fields[field] = new_value
 
@@ -158,7 +163,7 @@ class Product_Orchestrator:
                     continue
 
                 logging.info(
-                    f"\n🔍 Überprüfe Produkt [{index}/{total_products}]: {product.asin} https://www.amazon.com/dp/{product.asin}?language=en_US")
+                    f"🔍 Überprüfe Produkt [{index}/{total_products}]: {product.asin} https://www.amazon.com/dp/{product.asin}?language=en_US")
 
                 try:
                     product_start_time = time.time()
@@ -179,9 +184,7 @@ class Product_Orchestrator:
                         changes, changed_fields = self.detect_product_changes(
                             last_product_change, new_data)
 
-                        if not changes:
-                            logging.info(f"✅ Keine Änderungen für {product.asin}.")
-                        else:
+                        if changes:
                             logging.info(
                                 f"⚡ Änderungen erkannt für {product.asin}: {', '.join(changes)}")
                             new_product_change = ProductChange(
