@@ -110,6 +110,8 @@ class ProductChange(Base):
     blm = Column(Integer, nullable=True)
     total = Column(Float, nullable=True)
     img_path = Column(String, nullable=True)
+    store = Column(String, nullable=True)
+    manufacturer = Column(String, nullable=True)
 
     product = relationship("Product", back_populates="product_changes")
 

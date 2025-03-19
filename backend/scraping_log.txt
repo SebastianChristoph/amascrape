@@ -123,3 +123,18 @@
 2025-03-19 19:24:23,688 [ERROR] ❌ Fehler beim Scrapen von B002DYIZEO: 'store' is an invalid keyword argument for ProductChange
 2025-03-19 19:24:23,717 [INFO] ⚠️ Fehler, aber last_time_scraped für B002DYIZEO wurde trotzdem aktualisiert.
 2025-03-19 19:24:23,718 [INFO] 🔍 Überprüfe Produkt [3/90]: B07978VPPH https://www.amazon.com/dp/B07978VPPH?language=en_US
+2025-03-19 19:24:36,998 [INFO] ⚡ Änderungen erkannt für B07978VPPH: store, manufacturer
+2025-03-19 19:24:36,999 [ERROR] ❌ Fehler beim Scrapen von B07978VPPH: 'store' is an invalid keyword argument for ProductChange
+2025-03-19 19:24:37,014 [INFO] ⚠️ Fehler, aber last_time_scraped für B07978VPPH wurde trotzdem aktualisiert.
+2025-03-19 19:24:37,015 [INFO] 🔍 Überprüfe Produkt [4/90]: B00ULZF5HC https://www.amazon.com/dp/B00ULZF5HC?language=en_US
+2025-03-19 19:24:50,782 [INFO] ⚡ Änderungen erkannt für B00ULZF5HC: store, manufacturer
+2025-03-19 19:24:50,783 [ERROR] ❌ Fehler beim Scrapen von B00ULZF5HC: 'store' is an invalid keyword argument for ProductChange
+2025-03-19 19:24:50,796 [INFO] ⚠️ Fehler, aber last_time_scraped für B00ULZF5HC wurde trotzdem aktualisiert.
+2025-03-19 19:24:50,797 [INFO] 🔍 Überprüfe Produkt [5/90]: B000GIQS0W https://www.amazon.com/dp/B000GIQS0W?language=en_US
+2025-03-19 19:25:01,329 [INFO] 📊 Scraping Performance Metrics:
+2025-03-19 19:25:01,330 [INFO] 🕒 Gesamtzeit: 1m 4s
+2025-03-19 19:25:01,330 [INFO] ⚡ Durchschnittliche Zeit pro Produkt: 13.39 Sekunden
+2025-03-19 19:25:01,330 [INFO] 📦 Anzahl gescrapte Produkte: 0
+2025-03-19 19:25:01,330 [INFO] Failed products: 4
+2025-03-19 19:25:01,330 [INFO] 🔻 Schließe WebDriver...
+2025-03-19 19:25:01,332 [WARNING] Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(10054, 'Eine vorhandene Verbindung wurde vom Remotehost geschlossen', None, 10054, None)': /session/6576c46ceac335f663db82c59693fef1

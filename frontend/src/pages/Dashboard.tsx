@@ -20,6 +20,32 @@ import ClusterCard from "../components/ClusterCard";
 import { useSnackbar } from "../providers/SnackbarProvider";
 import MarketService from "../services/MarketService";
 import CustomSparkLine from "../components/charts/CustomSparkLine";
+import { FaRocket } from 'react-icons/fa';
+import { keyframes } from '@mui/system';
+
+const rocketAnimation = keyframes`
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(5deg);
+  }
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+`;
+
+const pulseAnimation = keyframes`
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+  }
+`;
 
 const Dashboard: React.FC = () => {
   const navigate = useNavigate();
@@ -102,6 +128,71 @@ const Dashboard: React.FC = () => {
       return () => clearInterval(interval);
     }
   }, [isFetching]);
+
+  if (marketClusters.length === 0) {
+    return (
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          minHeight: 'calc(100vh - 64px)',
+          p: 3,
+        }}
+      >
+        <Paper
+          elevation={3}
+          sx={{
+            p: 4,
+            maxWidth: 600,
+            width: '100%',
+            background: 'linear-gradient(135deg, #1976d2 0%, #2196f3 100%)',
+            color: 'white',
+            borderRadius: 2,
+            textAlign: 'center',
+          }}
+        >
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'center',
+              mb: 3,
+              animation: `${rocketAnimation} 2s infinite ease-in-out`,
+            }}
+          >
+            <FaRocket
+              size={48}
+              style={{
+                color: 'white'
+              }}
+            />
+          </Box>
+          <Typography variant="h4" gutterBottom>
+            Welcome to Market Analysis
+          </Typography>
+          <Typography variant="body1" sx={{ mb: 4 , color: 'white'}}>
+            You haven't created any market clusters yet. Start your journey by creating your first one!
+          </Typography>
+          <Button
+            variant="contained"
+            color="secondary"
+            size="large"
+            onClick={() => navigate('/add-market-cluster')}
+            sx={{
+              backgroundColor: 'white',
+              color: 'primary.main',
+              animation: `${pulseAnimation} 2s infinite`,
+              '&:hover': {
+                backgroundColor: 'grey.100',
+              },
+            }}
+          >
+            Create Your First Market Cluster
+          </Button>
+        </Paper>
+      </Box>
+    );
+  }
 
   return (
     <Container maxWidth="xl">
