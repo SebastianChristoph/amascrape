@@ -1,301 +1,124 @@
-2025-03-18 11:52:11,273 [INFO] 🚀 Product Orchestrator gestartet.
-2025-03-18 11:52:18,668 [INFO] ✅ Verbindung zu Amazon erfolgreich hergestellt!
-2025-03-18 11:52:20,435 [INFO] 🍪 Setze Cookies...
-2025-03-18 11:52:20,456 [INFO] ✅ Cookies gesetzt!
-2025-03-18 11:52:20,456 [INFO] 🚀 Starte Product-Update...
-2025-03-18 11:52:20,493 [INFO] 
-🔍 Überprüfe Produkt [1/98]: B00GL2HMES https://www.amazon.com/dp/B00GL2HMES?language=en_US
-2025-03-18 11:52:36,098 [INFO] ✅ Keine Änderungen für B00GL2HMES.
-2025-03-18 11:52:36,115 [INFO] 
-🔍 Überprüfe Produkt [2/98]: B002DYIZEO https://www.amazon.com/dp/B002DYIZEO?language=en_US
-2025-03-18 11:52:47,722 [INFO] ✅ Keine Änderungen für B002DYIZEO.
-2025-03-18 11:52:47,755 [INFO] 
-🔍 Überprüfe Produkt [3/98]: B07978VPPH https://www.amazon.com/dp/B07978VPPH?language=en_US
-2025-03-18 11:53:00,358 [INFO] ✅ Keine Änderungen für B07978VPPH.
-2025-03-18 11:53:00,389 [INFO] 
-🔍 Überprüfe Produkt [4/98]: B00E9M4XFI https://www.amazon.com/dp/B00E9M4XFI?language=en_US
-2025-03-18 11:53:11,874 [INFO] ✅ Keine Änderungen für B00E9M4XFI.
-2025-03-18 11:53:11,906 [INFO] 
-🔍 Überprüfe Produkt [5/98]: B0C9GCQX6H https://www.amazon.com/dp/B0C9GCQX6H?language=en_US
-2025-03-18 11:53:22,488 [INFO] ✅ Keine Änderungen für B0C9GCQX6H.
-2025-03-18 11:53:22,504 [INFO] 
-🔍 Überprüfe Produkt [6/98]: B002DYIZGC https://www.amazon.com/dp/B002DYIZGC?language=en_US
-2025-03-18 11:53:34,827 [INFO] ✅ Keine Änderungen für B002DYIZGC.
-2025-03-18 11:53:34,857 [INFO] 
-🔍 Überprüfe Produkt [7/98]: B0B9YMNYWK https://www.amazon.com/dp/B0B9YMNYWK?language=en_US
-2025-03-18 11:53:46,508 [INFO] ✅ Keine Änderungen für B0B9YMNYWK.
-2025-03-18 11:53:46,538 [INFO] 
-🔍 Überprüfe Produkt [8/98]: B0CSMZ882F https://www.amazon.com/dp/B0CSMZ882F?language=en_US
-2025-03-18 11:53:57,657 [INFO] ✅ Keine Änderungen für B0CSMZ882F.
-2025-03-18 11:53:57,701 [INFO] 
-🔍 Überprüfe Produkt [9/98]: B0CCJZVJYG https://www.amazon.com/dp/B0CCJZVJYG?language=en_US
-2025-03-18 11:54:09,726 [INFO] ✅ Keine Änderungen für B0CCJZVJYG.
-2025-03-18 11:54:09,739 [INFO] 
-🔍 Überprüfe Produkt [10/98]: B09YX7G6JJ https://www.amazon.com/dp/B09YX7G6JJ?language=en_US
-2025-03-18 11:54:20,591 [INFO] ✅ Keine Änderungen für B09YX7G6JJ.
-2025-03-18 11:54:20,608 [INFO] 
-🔍 Überprüfe Produkt [11/98]: B00BPS3L8E https://www.amazon.com/dp/B00BPS3L8E?language=en_US
-2025-03-18 11:54:30,940 [INFO] ✅ Keine Änderungen für B00BPS3L8E.
-2025-03-18 11:54:30,958 [INFO] 
-🔍 Überprüfe Produkt [12/98]: B09R5KPNHZ https://www.amazon.com/dp/B09R5KPNHZ?language=en_US
-2025-03-18 11:54:44,538 [INFO] ✅ Keine Änderungen für B09R5KPNHZ.
-2025-03-18 11:54:44,566 [INFO] 
-🔍 Überprüfe Produkt [13/98]: B01BVRO7T0 https://www.amazon.com/dp/B01BVRO7T0?language=en_US
-2025-03-18 11:54:56,990 [INFO] ✅ Keine Änderungen für B01BVRO7T0.
-2025-03-18 11:54:57,015 [INFO] 
-🔍 Überprüfe Produkt [14/98]: B0BSXR71QC https://www.amazon.com/dp/B0BSXR71QC?language=en_US
-2025-03-18 11:55:08,180 [INFO] ✅ Keine Änderungen für B0BSXR71QC.
-2025-03-18 11:55:08,198 [INFO] 
-🔍 Überprüfe Produkt [15/98]: B01IW245EY https://www.amazon.com/dp/B01IW245EY?language=en_US
-2025-03-18 11:55:18,924 [INFO] ✅ Keine Änderungen für B01IW245EY.
-2025-03-18 11:55:18,963 [INFO] 
-🔍 Überprüfe Produkt [16/98]: B08DH161T6 https://www.amazon.com/dp/B08DH161T6?language=en_US
-2025-03-18 11:55:30,687 [INFO] ✅ Keine Änderungen für B08DH161T6.
-2025-03-18 11:55:30,703 [INFO] 
-🔍 Überprüfe Produkt [17/98]: B0BT23VBLJ https://www.amazon.com/dp/B0BT23VBLJ?language=en_US
-2025-03-18 11:55:41,738 [INFO] ✅ Keine Änderungen für B0BT23VBLJ.
-2025-03-18 11:55:41,783 [INFO] 
-🔍 Überprüfe Produkt [18/98]: B085Z9P87K https://www.amazon.com/dp/B085Z9P87K?language=en_US
-2025-03-18 11:55:52,026 [INFO] ✅ Keine Änderungen für B085Z9P87K.
-2025-03-18 11:55:52,061 [INFO] 
-🔍 Überprüfe Produkt [19/98]: B0B4Z2RTY1 https://www.amazon.com/dp/B0B4Z2RTY1?language=en_US
-2025-03-18 11:56:02,747 [INFO] ✅ Keine Änderungen für B0B4Z2RTY1.
-2025-03-18 11:56:02,772 [INFO] 
-🔍 Überprüfe Produkt [20/98]: B0BFFYHWLK https://www.amazon.com/dp/B0BFFYHWLK?language=en_US
-2025-03-18 11:56:13,616 [INFO] ✅ Keine Änderungen für B0BFFYHWLK.
-2025-03-18 11:56:13,659 [INFO] 
-🔍 Überprüfe Produkt [21/98]: B07M5M5B3S https://www.amazon.com/dp/B07M5M5B3S?language=en_US
-2025-03-18 11:56:24,143 [INFO] ✅ Keine Änderungen für B07M5M5B3S.
-2025-03-18 11:56:24,175 [INFO] 
-🔍 Überprüfe Produkt [22/98]: B00UWSRZ8K https://www.amazon.com/dp/B00UWSRZ8K?language=en_US
-2025-03-18 11:56:34,914 [INFO] ✅ Keine Änderungen für B00UWSRZ8K.
-2025-03-18 11:56:34,946 [INFO] 
-🔍 Überprüfe Produkt [23/98]: B0CXM2PG68 https://www.amazon.com/dp/B0CXM2PG68?language=en_US
-2025-03-18 11:56:46,306 [INFO] ✅ Keine Änderungen für B0CXM2PG68.
-2025-03-18 11:56:46,355 [INFO] 
-🔍 Überprüfe Produkt [24/98]: B00QEMY4T6 https://www.amazon.com/dp/B00QEMY4T6?language=en_US
-2025-03-18 11:56:59,282 [INFO] ✅ Keine Änderungen für B00QEMY4T6.
-2025-03-18 11:56:59,306 [INFO] 
-🔍 Überprüfe Produkt [25/98]: B09L8KTJ2G https://www.amazon.com/dp/B09L8KTJ2G?language=en_US
-2025-03-18 11:57:09,623 [INFO] ✅ Keine Änderungen für B09L8KTJ2G.
-2025-03-18 11:57:09,650 [INFO] 
-🔍 Überprüfe Produkt [26/98]: B018ITUM5C https://www.amazon.com/dp/B018ITUM5C?language=en_US
-2025-03-18 11:57:20,351 [INFO] ✅ Keine Änderungen für B018ITUM5C.
-2025-03-18 11:57:20,388 [INFO] 
-🔍 Überprüfe Produkt [27/98]: B0CJMPVHXT https://www.amazon.com/dp/B0CJMPVHXT?language=en_US
-2025-03-18 11:57:30,861 [INFO] ✅ Keine Änderungen für B0CJMPVHXT.
-2025-03-18 11:57:30,889 [INFO] 
-🔍 Überprüfe Produkt [28/98]: B01LYFAGXI https://www.amazon.com/dp/B01LYFAGXI?language=en_US
-2025-03-18 11:57:41,650 [INFO] ⚡ Änderungen erkannt für B01LYFAGXI: blm geändert: 7000 → 8000, total geändert: 229600.0 → 262400.0
-2025-03-18 11:57:41,679 [INFO] 
-🔍 Überprüfe Produkt [29/98]: B0CQPJG4F5 https://www.amazon.com/dp/B0CQPJG4F5?language=en_US
-2025-03-18 11:57:51,591 [INFO] ✅ Keine Änderungen für B0CQPJG4F5.
-2025-03-18 11:57:51,627 [INFO] 
-🔍 Überprüfe Produkt [30/98]: B0B9HWN8S9 https://www.amazon.com/dp/B0B9HWN8S9?language=en_US
-2025-03-18 11:58:03,349 [INFO] ✅ Keine Änderungen für B0B9HWN8S9.
-2025-03-18 11:58:03,366 [INFO] 
-🔍 Überprüfe Produkt [31/98]: B0C9NRW7CP https://www.amazon.com/dp/B0C9NRW7CP?language=en_US
-2025-03-18 11:58:13,435 [INFO] ✅ Keine Änderungen für B0C9NRW7CP.
-2025-03-18 11:58:13,478 [INFO] 
-🔍 Überprüfe Produkt [32/98]: B09TNMZBQ5 https://www.amazon.com/dp/B09TNMZBQ5?language=en_US
-2025-03-18 11:58:24,000 [INFO] ✅ Keine Änderungen für B09TNMZBQ5.
-2025-03-18 11:58:24,039 [INFO] 
-🔍 Überprüfe Produkt [33/98]: B008KMUNRA https://www.amazon.com/dp/B008KMUNRA?language=en_US
-2025-03-18 11:58:33,754 [INFO] ✅ Keine Änderungen für B008KMUNRA.
-2025-03-18 11:58:33,783 [INFO] 
-🔍 Überprüfe Produkt [34/98]: B0D4QRC5WK https://www.amazon.com/dp/B0D4QRC5WK?language=en_US
-2025-03-18 11:58:45,743 [INFO] ✅ Keine Änderungen für B0D4QRC5WK.
-2025-03-18 11:58:45,774 [INFO] 
-🔍 Überprüfe Produkt [35/98]: B086H6366N https://www.amazon.com/dp/B086H6366N?language=en_US
-2025-03-18 11:58:55,328 [INFO] ✅ Keine Änderungen für B086H6366N.
-2025-03-18 11:58:55,347 [INFO] 
-🔍 Überprüfe Produkt [36/98]: B0BRNWSMVD https://www.amazon.com/dp/B0BRNWSMVD?language=en_US
-2025-03-18 11:59:06,308 [INFO] ✅ Keine Änderungen für B0BRNWSMVD.
-2025-03-18 11:59:06,330 [INFO] 
-🔍 Überprüfe Produkt [37/98]: B0CZ1823BM https://www.amazon.com/dp/B0CZ1823BM?language=en_US
-2025-03-18 11:59:16,594 [INFO] ✅ Keine Änderungen für B0CZ1823BM.
-2025-03-18 11:59:16,632 [INFO] 
-🔍 Überprüfe Produkt [38/98]: B0BMPLP7K6 https://www.amazon.com/dp/B0BMPLP7K6?language=en_US
-2025-03-18 11:59:26,147 [INFO] ✅ Keine Änderungen für B0BMPLP7K6.
-2025-03-18 11:59:26,180 [INFO] 
-🔍 Überprüfe Produkt [39/98]: B0D1DP2D8D https://www.amazon.com/dp/B0D1DP2D8D?language=en_US
-2025-03-18 11:59:35,964 [INFO] ✅ Keine Änderungen für B0D1DP2D8D.
-2025-03-18 11:59:35,982 [INFO] 
-🔍 Überprüfe Produkt [40/98]: B00012NJT6 https://www.amazon.com/dp/B00012NJT6?language=en_US
-2025-03-18 11:59:45,913 [INFO] ✅ Keine Änderungen für B00012NJT6.
-2025-03-18 11:59:45,934 [INFO] 
-🔍 Überprüfe Produkt [41/98]: B0CQN29QCQ https://www.amazon.com/dp/B0CQN29QCQ?language=en_US
-2025-03-18 11:59:56,137 [INFO] ✅ Keine Änderungen für B0CQN29QCQ.
-2025-03-18 11:59:56,170 [INFO] 
-🔍 Überprüfe Produkt [42/98]: B0BDCV36CX https://www.amazon.com/dp/B0BDCV36CX?language=en_US
-2025-03-18 12:00:06,413 [INFO] ✅ Keine Änderungen für B0BDCV36CX.
-2025-03-18 12:00:06,427 [INFO] 
-🔍 Überprüfe Produkt [43/98]: B0BQPT34V7 https://www.amazon.com/dp/B0BQPT34V7?language=en_US
-2025-03-18 12:00:16,404 [INFO] ✅ Keine Änderungen für B0BQPT34V7.
-2025-03-18 12:00:16,426 [INFO] 
-🔍 Überprüfe Produkt [44/98]: B0045MLCL0 https://www.amazon.com/dp/B0045MLCL0?language=en_US
-2025-03-18 12:00:27,123 [INFO] ✅ Keine Änderungen für B0045MLCL0.
-2025-03-18 12:00:27,150 [INFO] 
-🔍 Überprüfe Produkt [45/98]: B001181M16 https://www.amazon.com/dp/B001181M16?language=en_US
-2025-03-18 12:00:39,184 [INFO] ✅ Keine Änderungen für B001181M16.
-2025-03-18 12:00:39,201 [INFO] 
-🔍 Überprüfe Produkt [46/98]: B0BFZJJY5M https://www.amazon.com/dp/B0BFZJJY5M?language=en_US
-2025-03-18 12:00:49,900 [INFO] ✅ Keine Änderungen für B0BFZJJY5M.
-2025-03-18 12:00:49,936 [INFO] 
-🔍 Überprüfe Produkt [47/98]: B0BKNVNLN9 https://www.amazon.com/dp/B0BKNVNLN9?language=en_US
-2025-03-18 12:00:59,672 [INFO] ✅ Keine Änderungen für B0BKNVNLN9.
-2025-03-18 12:00:59,686 [INFO] 
-🔍 Überprüfe Produkt [48/98]: B0C8L96Y3T https://www.amazon.com/dp/B0C8L96Y3T?language=en_US
-2025-03-18 12:01:10,495 [INFO] ✅ Keine Änderungen für B0C8L96Y3T.
-2025-03-18 12:01:10,528 [INFO] 
-🔍 Überprüfe Produkt [49/98]: B0DDB5BWYP https://www.amazon.com/dp/B0DDB5BWYP?language=en_US
-2025-03-18 12:01:21,063 [INFO] ✅ Keine Änderungen für B0DDB5BWYP.
-2025-03-18 12:01:21,084 [INFO] 
-🔍 Überprüfe Produkt [50/98]: B0C6WCWJ9P https://www.amazon.com/dp/B0C6WCWJ9P?language=en_US
-2025-03-18 12:01:30,786 [INFO] ✅ Keine Änderungen für B0C6WCWJ9P.
-2025-03-18 12:01:30,819 [INFO] 
-🔍 Überprüfe Produkt [51/98]: B005DKV9SE https://www.amazon.com/dp/B005DKV9SE?language=en_US
-2025-03-18 12:01:42,198 [INFO] ✅ Keine Änderungen für B005DKV9SE.
-2025-03-18 12:01:42,215 [INFO] 
-🔍 Überprüfe Produkt [52/98]: B00117ZRXQ https://www.amazon.com/dp/B00117ZRXQ?language=en_US
-2025-03-18 12:01:53,018 [INFO] ✅ Keine Änderungen für B00117ZRXQ.
-2025-03-18 12:01:53,052 [INFO] 
-🔍 Überprüfe Produkt [53/98]: B0B9289VLY https://www.amazon.com/dp/B0B9289VLY?language=en_US
-2025-03-18 12:02:03,331 [INFO] ✅ Keine Änderungen für B0B9289VLY.
-2025-03-18 12:02:03,349 [INFO] 
-🔍 Überprüfe Produkt [54/98]: B0CLSCPZG4 https://www.amazon.com/dp/B0CLSCPZG4?language=en_US
-2025-03-18 12:02:13,580 [INFO] ✅ Keine Änderungen für B0CLSCPZG4.
-2025-03-18 12:02:13,615 [INFO] 
-🔍 Überprüfe Produkt [55/98]: B001KYS2DC https://www.amazon.com/dp/B001KYS2DC?language=en_US
-2025-03-18 12:02:23,636 [INFO] ✅ Keine Änderungen für B001KYS2DC.
-2025-03-18 12:02:23,657 [INFO] 
-🔍 Überprüfe Produkt [56/98]: B0CSWHQ3PN https://www.amazon.com/dp/B0CSWHQ3PN?language=en_US
-2025-03-18 12:02:34,082 [INFO] ✅ Keine Änderungen für B0CSWHQ3PN.
-2025-03-18 12:02:34,101 [INFO] 
-🔍 Überprüfe Produkt [57/98]: B0B6GKMZCL https://www.amazon.com/dp/B0B6GKMZCL?language=en_US
-2025-03-18 12:02:45,381 [INFO] ✅ Keine Änderungen für B0B6GKMZCL.
-2025-03-18 12:02:45,408 [INFO] 
-🔍 Überprüfe Produkt [58/98]: B079JWLSH9 https://www.amazon.com/dp/B079JWLSH9?language=en_US
-2025-03-18 12:02:56,011 [INFO] ✅ Keine Änderungen für B079JWLSH9.
-2025-03-18 12:02:56,048 [INFO] 
-🔍 Überprüfe Produkt [59/98]: B0BLJ51MK7 https://www.amazon.com/dp/B0BLJ51MK7?language=en_US
-2025-03-18 12:03:06,046 [INFO] ✅ Keine Änderungen für B0BLJ51MK7.
-2025-03-18 12:03:06,061 [INFO] 
-🔍 Überprüfe Produkt [60/98]: B0C6L85Z16 https://www.amazon.com/dp/B0C6L85Z16?language=en_US
-2025-03-18 12:03:16,052 [INFO] ⚡ Änderungen erkannt für B0C6L85Z16: blm geändert: 400 → 500, total geändert: 13460.0 → 16825.0
-2025-03-18 12:03:16,070 [INFO] 
-🔍 Überprüfe Produkt [61/98]: B09MZV4LCS https://www.amazon.com/dp/B09MZV4LCS?language=en_US
-2025-03-18 12:03:27,373 [INFO] ✅ Keine Änderungen für B09MZV4LCS.
-2025-03-18 12:03:27,402 [INFO] 
-🔍 Überprüfe Produkt [62/98]: B0BKCVLYGX https://www.amazon.com/dp/B0BKCVLYGX?language=en_US
-2025-03-18 12:03:37,456 [INFO] ✅ Keine Änderungen für B0BKCVLYGX.
-2025-03-18 12:03:37,484 [INFO] 
-🔍 Überprüfe Produkt [63/98]: B0C8K2Z6SH https://www.amazon.com/dp/B0C8K2Z6SH?language=en_US
-2025-03-18 12:03:48,665 [INFO] ✅ Keine Änderungen für B0C8K2Z6SH.
-2025-03-18 12:03:48,700 [INFO] 
-🔍 Überprüfe Produkt [64/98]: B016C9GIIK https://www.amazon.com/dp/B016C9GIIK?language=en_US
-2025-03-18 12:03:58,229 [INFO] ⚡ Änderungen erkannt für B016C9GIIK: price geändert: 39.49 → 39.99, total geändert: 7898.0 → 7998.0
-2025-03-18 12:03:58,267 [INFO] 
-🔍 Überprüfe Produkt [65/98]: B0BQ1FZJS6 https://www.amazon.com/dp/B0BQ1FZJS6?language=en_US
-2025-03-18 12:04:09,163 [INFO] ⚡ Änderungen erkannt für B0BQ1FZJS6: price geändert: 49.47 → 52.03, total geändert: 9894.0 → 10406.0
-2025-03-18 12:04:09,201 [INFO] 
-🔍 Überprüfe Produkt [66/98]: B09Z2XPHFQ https://www.amazon.com/dp/B09Z2XPHFQ?language=en_US
-2025-03-18 12:04:19,763 [INFO] ✅ Keine Änderungen für B09Z2XPHFQ.
-2025-03-18 12:04:19,791 [INFO] 
-🔍 Überprüfe Produkt [67/98]: B0DHYMZBP9 https://www.amazon.com/dp/B0DHYMZBP9?language=en_US
-2025-03-18 12:04:29,588 [INFO] ✅ Keine Änderungen für B0DHYMZBP9.
-2025-03-18 12:04:29,621 [INFO] 
-🔍 Überprüfe Produkt [68/98]: B08VJNTY36 https://www.amazon.com/dp/B08VJNTY36?language=en_US
-2025-03-18 12:04:39,152 [INFO] ✅ Keine Änderungen für B08VJNTY36.
-2025-03-18 12:04:39,189 [INFO] 
-🔍 Überprüfe Produkt [69/98]: B0D3GLRGVM https://www.amazon.com/dp/B0D3GLRGVM?language=en_US
-2025-03-18 12:04:49,795 [INFO] ✅ Keine Änderungen für B0D3GLRGVM.
-2025-03-18 12:04:49,836 [INFO] 
-🔍 Überprüfe Produkt [70/98]: B07TBH84L1 https://www.amazon.com/dp/B07TBH84L1?language=en_US
-2025-03-18 12:04:59,738 [INFO] ✅ Keine Änderungen für B07TBH84L1.
-2025-03-18 12:04:59,766 [INFO] 
-🔍 Überprüfe Produkt [71/98]: B081G8V25N https://www.amazon.com/dp/B081G8V25N?language=en_US
-2025-03-18 12:05:09,212 [INFO] ✅ Keine Änderungen für B081G8V25N.
-2025-03-18 12:05:09,243 [INFO] 
-🔍 Überprüfe Produkt [72/98]: B0CSZ66LTQ https://www.amazon.com/dp/B0CSZ66LTQ?language=en_US
-2025-03-18 12:05:19,421 [INFO] ✅ Keine Änderungen für B0CSZ66LTQ.
-2025-03-18 12:05:19,442 [INFO] 
-🔍 Überprüfe Produkt [73/98]: B0D8KZCLD1 https://www.amazon.com/dp/B0D8KZCLD1?language=en_US
-2025-03-18 12:05:29,601 [INFO] ✅ Keine Änderungen für B0D8KZCLD1.
-2025-03-18 12:05:29,629 [INFO] 
-🔍 Überprüfe Produkt [74/98]: B0CVH4MNPQ https://www.amazon.com/dp/B0CVH4MNPQ?language=en_US
-2025-03-18 12:05:40,333 [INFO] ✅ Keine Änderungen für B0CVH4MNPQ.
-2025-03-18 12:05:40,373 [INFO] 
-🔍 Überprüfe Produkt [75/98]: B0BG9QYXLK https://www.amazon.com/dp/B0BG9QYXLK?language=en_US
-2025-03-18 12:05:50,977 [INFO] ✅ Keine Änderungen für B0BG9QYXLK.
-2025-03-18 12:05:50,994 [INFO] 
-🔍 Überprüfe Produkt [76/98]: B0D1CTKV5K https://www.amazon.com/dp/B0D1CTKV5K?language=en_US
-2025-03-18 12:06:00,855 [INFO] ✅ Keine Änderungen für B0D1CTKV5K.
-2025-03-18 12:06:00,885 [INFO] 
-🔍 Überprüfe Produkt [77/98]: B0D5PX3MZX https://www.amazon.com/dp/B0D5PX3MZX?language=en_US
-2025-03-18 12:06:11,256 [INFO] ✅ Keine Änderungen für B0D5PX3MZX.
-2025-03-18 12:06:11,271 [INFO] 
-🔍 Überprüfe Produkt [78/98]: B099XC3L7R https://www.amazon.com/dp/B099XC3L7R?language=en_US
-2025-03-18 12:06:21,826 [INFO] ✅ Keine Änderungen für B099XC3L7R.
-2025-03-18 12:06:21,865 [INFO] 
-🔍 Überprüfe Produkt [79/98]: B0C7Y85JJH https://www.amazon.com/dp/B0C7Y85JJH?language=en_US
-2025-03-18 12:06:32,945 [INFO] ✅ Keine Änderungen für B0C7Y85JJH.
-2025-03-18 12:06:32,967 [INFO] 
-🔍 Überprüfe Produkt [80/98]: B0DCKC5S71 https://www.amazon.com/dp/B0DCKC5S71?language=en_US
-2025-03-18 12:06:42,758 [INFO] ✅ Keine Änderungen für B0DCKC5S71.
-2025-03-18 12:06:42,777 [INFO] 
-🔍 Überprüfe Produkt [81/98]: B0BT3GTSVW https://www.amazon.com/dp/B0BT3GTSVW?language=en_US
-2025-03-18 12:06:51,902 [INFO] ✅ Keine Änderungen für B0BT3GTSVW.
-2025-03-18 12:06:51,933 [INFO] 
-🔍 Überprüfe Produkt [82/98]: B0DJTKMQ2R https://www.amazon.com/dp/B0DJTKMQ2R?language=en_US
-2025-03-18 12:07:00,857 [INFO] ✅ Keine Änderungen für B0DJTKMQ2R.
-2025-03-18 12:07:00,901 [INFO] 
-🔍 Überprüfe Produkt [83/98]: B07CVNM3JV https://www.amazon.com/dp/B07CVNM3JV?language=en_US
-2025-03-18 12:07:09,956 [INFO] ✅ Keine Änderungen für B07CVNM3JV.
-2025-03-18 12:07:09,972 [INFO] 
-🔍 Überprüfe Produkt [84/98]: B0018OADEA https://www.amazon.com/dp/B0018OADEA?language=en_US
-2025-03-18 12:07:20,069 [INFO] ✅ Keine Änderungen für B0018OADEA.
-2025-03-18 12:07:20,098 [INFO] 
-🔍 Überprüfe Produkt [85/98]: B0BSXQNLJ4 https://www.amazon.com/dp/B0BSXQNLJ4?language=en_US
-2025-03-18 12:07:29,649 [INFO] ✅ Keine Änderungen für B0BSXQNLJ4.
-2025-03-18 12:07:29,662 [INFO] 
-🔍 Überprüfe Produkt [86/98]: B0BG65459C https://www.amazon.com/dp/B0BG65459C?language=en_US
-2025-03-18 12:07:39,760 [INFO] ✅ Keine Änderungen für B0BG65459C.
-2025-03-18 12:07:39,787 [INFO] 
-🔍 Überprüfe Produkt [87/98]: B0DD5PKWMR https://www.amazon.com/dp/B0DD5PKWMR?language=en_US
-2025-03-18 12:07:50,819 [INFO] ✅ Keine Änderungen für B0DD5PKWMR.
-2025-03-18 12:07:50,837 [INFO] 
-🔍 Überprüfe Produkt [88/98]: B0D78MM7HK https://www.amazon.com/dp/B0D78MM7HK?language=en_US
-2025-03-18 12:08:00,146 [INFO] ✅ Keine Änderungen für B0D78MM7HK.
-2025-03-18 12:08:00,162 [INFO] 
-🔍 Überprüfe Produkt [89/98]: B0CXTPJZ5Y https://www.amazon.com/dp/B0CXTPJZ5Y?language=en_US
-2025-03-18 12:08:10,308 [INFO] ✅ Keine Änderungen für B0CXTPJZ5Y.
-2025-03-18 12:08:10,342 [INFO] 
-🔍 Überprüfe Produkt [90/98]: B0B1V1TBYF https://www.amazon.com/dp/B0B1V1TBYF?language=en_US
-2025-03-18 12:08:21,858 [INFO] ⚡ Änderungen erkannt für B0B1V1TBYF: title changed, price geändert: None → 49.99, main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 3000, total geändert: None → 149970.0
-2025-03-18 12:08:21,891 [INFO] 
-🔍 Überprüfe Produkt [91/98]: B0CFWCMBNG https://www.amazon.com/dp/B0CFWCMBNG?language=en_US
-2025-03-18 12:08:32,177 [INFO] ⚡ Änderungen erkannt für B0CFWCMBNG: title changed, price geändert: None → 26.97, main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 3000, total geändert: None → 80910.0
-2025-03-18 12:08:32,220 [INFO] 
-🔍 Überprüfe Produkt [92/98]: B0BBWMC33H https://www.amazon.com/dp/B0BBWMC33H?language=en_US
-2025-03-18 12:08:42,598 [INFO] ⚡ Änderungen erkannt für B0BBWMC33H: title changed, price geändert: None → 22.99, main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 100, total geändert: None → 2299.0
-2025-03-18 12:08:42,617 [INFO] 
-🔍 Überprüfe Produkt [93/98]: B01IA7QIS2 https://www.amazon.com/dp/B01IA7QIS2?language=en_US
-2025-03-18 12:08:52,516 [INFO] ⚡ Änderungen erkannt für B01IA7QIS2: title changed, price geändert: None → 9.99, main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 50, total geändert: None → 499.5
-2025-03-18 12:08:52,550 [INFO] 
-🔍 Überprüfe Produkt [94/98]: B0106ZC4T8 https://www.amazon.com/dp/B0106ZC4T8?language=en_US
-2025-03-18 12:09:01,831 [INFO] ⚡ Änderungen erkannt für B0106ZC4T8: title changed, price geändert: None → 23.89, main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 3000, total geändert: None → 71670.0
-2025-03-18 12:09:01,865 [INFO] 
-🔍 Überprüfe Produkt [95/98]: B0CP9XPYX6 https://www.amazon.com/dp/B0CP9XPYX6?language=en_US
-2025-03-18 12:09:11,806 [INFO] ⚡ Änderungen erkannt für B0CP9XPYX6: title changed, price geändert: None → 49.98, main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 4000, total geändert: None → 199920.0
-2025-03-18 12:09:11,844 [INFO] 
-🔍 Überprüfe Produkt [96/98]: B07RV3BQ45 https://www.amazon.com/dp/B07RV3BQ45?language=en_US
-2025-03-18 12:09:22,722 [INFO] ⚡ Änderungen erkannt für B07RV3BQ45: title changed, price geändert: None → 49.99, main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 2000, total geändert: None → 99980.0
-2025-03-18 12:09:22,760 [INFO] 
-🔍 Überprüfe Produkt [97/98]: B008WTWUFO https://www.amazon.com/dp/B008WTWUFO?language=en_US
-2025-03-18 12:09:34,230 [INFO] ⚡ Änderungen erkannt für B008WTWUFO: title changed, price geändert: None → 74.9, main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 900, total geändert: None → 67410.0
-2025-03-18 12:09:34,257 [INFO] 
-🔍 Überprüfe Produkt [98/98]: B099KRBL53 https://www.amazon.com/dp/B099KRBL53?language=en_US
-2025-03-18 12:09:44,637 [INFO] ⚡ Änderungen erkannt für B099KRBL53: title changed, price geändert: None → 19.99, main_category geändert: None → Health & Household (See Top 100 in Health & Household), second_category geändert: None → Creatine Nutritional Supplements, blm geändert: None → 2000, total geändert: None → 39980.0
-2025-03-18 12:09:44,669 [INFO] 
+2025-03-19 09:19:19,591 [INFO] 🚀 Product Orchestrator gestartet.
+2025-03-19 09:19:24,652 [INFO] ✅ Verbindung zu Amazon erfolgreich hergestellt!
+2025-03-19 09:19:24,725 [INFO] 🍪 Setze Cookies...
+2025-03-19 09:19:24,740 [INFO] ✅ Cookies gesetzt!
+2025-03-19 09:19:24,740 [INFO] 🚀 Starte Product-Update...
+2025-03-19 09:19:24,767 [INFO] 🔍 Überprüfe Produkt [1/98]: B00GL2HMES https://www.amazon.com/dp/B00GL2HMES?language=en_US
+2025-03-19 09:19:42,745 [INFO] 🔍 Überprüfe Produkt [2/98]: B002DYIZEO https://www.amazon.com/dp/B002DYIZEO?language=en_US
+2025-03-19 09:19:57,476 [INFO] 🔍 Überprüfe Produkt [3/98]: B07978VPPH https://www.amazon.com/dp/B07978VPPH?language=en_US
+2025-03-19 09:20:10,988 [INFO] 🔍 Überprüfe Produkt [4/98]: B00E9M4XFI https://www.amazon.com/dp/B00E9M4XFI?language=en_US
+2025-03-19 09:20:24,483 [INFO] 🔍 Überprüfe Produkt [5/98]: B0C9GCQX6H https://www.amazon.com/dp/B0C9GCQX6H?language=en_US
+2025-03-19 09:20:38,035 [INFO] 🔍 Überprüfe Produkt [6/98]: B002DYIZGC https://www.amazon.com/dp/B002DYIZGC?language=en_US
+2025-03-19 09:20:50,746 [INFO] 🔍 Überprüfe Produkt [7/98]: B0B9YMNYWK https://www.amazon.com/dp/B0B9YMNYWK?language=en_US
+2025-03-19 09:21:03,372 [INFO] 🔍 Überprüfe Produkt [8/98]: B0CSMZ882F https://www.amazon.com/dp/B0CSMZ882F?language=en_US
+2025-03-19 09:21:16,259 [INFO] 🔍 Überprüfe Produkt [9/98]: B0CCJZVJYG https://www.amazon.com/dp/B0CCJZVJYG?language=en_US
+2025-03-19 09:21:29,687 [INFO] 🔍 Überprüfe Produkt [10/98]: B09YX7G6JJ https://www.amazon.com/dp/B09YX7G6JJ?language=en_US
+2025-03-19 09:21:41,607 [INFO] 🔍 Überprüfe Produkt [11/98]: B00BPS3L8E https://www.amazon.com/dp/B00BPS3L8E?language=en_US
+2025-03-19 09:21:53,928 [INFO] 🔍 Überprüfe Produkt [12/98]: B09R5KPNHZ https://www.amazon.com/dp/B09R5KPNHZ?language=en_US
+2025-03-19 09:22:09,087 [INFO] 🔍 Überprüfe Produkt [13/98]: B01BVRO7T0 https://www.amazon.com/dp/B01BVRO7T0?language=en_US
+2025-03-19 09:22:21,621 [INFO] 🔍 Überprüfe Produkt [14/98]: B0BSXR71QC https://www.amazon.com/dp/B0BSXR71QC?language=en_US
+2025-03-19 09:22:32,914 [INFO] ⚡ Änderungen erkannt für B0BSXR71QC: blm, total
+2025-03-19 09:22:32,959 [INFO] 🔍 Überprüfe Produkt [15/98]: B01IW245EY https://www.amazon.com/dp/B01IW245EY?language=en_US
+2025-03-19 09:22:45,564 [INFO] 🔍 Überprüfe Produkt [16/98]: B08DH161T6 https://www.amazon.com/dp/B08DH161T6?language=en_US
+2025-03-19 09:22:58,148 [INFO] 🔍 Überprüfe Produkt [17/98]: B0BT23VBLJ https://www.amazon.com/dp/B0BT23VBLJ?language=en_US
+2025-03-19 09:23:10,157 [INFO] 🔍 Überprüfe Produkt [18/98]: B085Z9P87K https://www.amazon.com/dp/B085Z9P87K?language=en_US
+2025-03-19 09:23:22,350 [INFO] 🔍 Überprüfe Produkt [19/98]: B0B4Z2RTY1 https://www.amazon.com/dp/B0B4Z2RTY1?language=en_US
+2025-03-19 09:23:35,701 [INFO] 🔍 Überprüfe Produkt [20/98]: B0BFFYHWLK https://www.amazon.com/dp/B0BFFYHWLK?language=en_US
+2025-03-19 09:23:47,605 [INFO] 🔍 Überprüfe Produkt [21/98]: B07M5M5B3S https://www.amazon.com/dp/B07M5M5B3S?language=en_US
+2025-03-19 09:24:00,372 [INFO] 🔍 Überprüfe Produkt [22/98]: B00UWSRZ8K https://www.amazon.com/dp/B00UWSRZ8K?language=en_US
+2025-03-19 09:24:13,059 [INFO] 🔍 Überprüfe Produkt [23/98]: B0CXM2PG68 https://www.amazon.com/dp/B0CXM2PG68?language=en_US
+2025-03-19 09:24:26,288 [INFO] 🔍 Überprüfe Produkt [24/98]: B00QEMY4T6 https://www.amazon.com/dp/B00QEMY4T6?language=en_US
+2025-03-19 09:24:40,170 [INFO] 🔍 Überprüfe Produkt [25/98]: B09L8KTJ2G https://www.amazon.com/dp/B09L8KTJ2G?language=en_US
+2025-03-19 09:24:53,793 [INFO] 🔍 Überprüfe Produkt [26/98]: B018ITUM5C https://www.amazon.com/dp/B018ITUM5C?language=en_US
+2025-03-19 09:25:06,510 [INFO] 🔍 Überprüfe Produkt [27/98]: B0CJMPVHXT https://www.amazon.com/dp/B0CJMPVHXT?language=en_US
+2025-03-19 09:25:19,039 [INFO] 🔍 Überprüfe Produkt [28/98]: B01LYFAGXI https://www.amazon.com/dp/B01LYFAGXI?language=en_US
+2025-03-19 09:25:30,723 [INFO] ⚡ Änderungen erkannt für B01LYFAGXI: blm, total
+2025-03-19 09:25:30,740 [INFO] 🔍 Überprüfe Produkt [29/98]: B0CQPJG4F5 https://www.amazon.com/dp/B0CQPJG4F5?language=en_US
+2025-03-19 09:25:43,364 [INFO] 🔍 Überprüfe Produkt [30/98]: B0B9HWN8S9 https://www.amazon.com/dp/B0B9HWN8S9?language=en_US
+2025-03-19 09:25:54,818 [INFO] 🔍 Überprüfe Produkt [31/98]: B0C9NRW7CP https://www.amazon.com/dp/B0C9NRW7CP?language=en_US
+2025-03-19 09:26:08,198 [INFO] 🔍 Überprüfe Produkt [32/98]: B09TNMZBQ5 https://www.amazon.com/dp/B09TNMZBQ5?language=en_US
+2025-03-19 09:26:19,488 [INFO] 🔍 Überprüfe Produkt [33/98]: B008KMUNRA https://www.amazon.com/dp/B008KMUNRA?language=en_US
+2025-03-19 09:26:30,627 [INFO] 🔍 Überprüfe Produkt [34/98]: B0D4QRC5WK https://www.amazon.com/dp/B0D4QRC5WK?language=en_US
+2025-03-19 09:26:45,563 [INFO] ⚡ Änderungen erkannt für B0D4QRC5WK: price, blm, total
+2025-03-19 09:26:45,583 [INFO] 🔍 Überprüfe Produkt [35/98]: B086H6366N https://www.amazon.com/dp/B086H6366N?language=en_US
+2025-03-19 09:26:57,052 [INFO] 🔍 Überprüfe Produkt [36/98]: B0BRNWSMVD https://www.amazon.com/dp/B0BRNWSMVD?language=en_US
+2025-03-19 09:27:08,412 [INFO] 🔍 Überprüfe Produkt [37/98]: B0CZ1823BM https://www.amazon.com/dp/B0CZ1823BM?language=en_US
+2025-03-19 09:27:19,677 [INFO] 🔍 Überprüfe Produkt [38/98]: B0BMPLP7K6 https://www.amazon.com/dp/B0BMPLP7K6?language=en_US
+2025-03-19 09:27:31,835 [INFO] 🔍 Überprüfe Produkt [39/98]: B0D1DP2D8D https://www.amazon.com/dp/B0D1DP2D8D?language=en_US
+2025-03-19 09:27:42,626 [INFO] 🔍 Überprüfe Produkt [40/98]: B00012NJT6 https://www.amazon.com/dp/B00012NJT6?language=en_US
+2025-03-19 09:27:53,513 [INFO] 🔍 Überprüfe Produkt [41/98]: B0CQN29QCQ https://www.amazon.com/dp/B0CQN29QCQ?language=en_US
+2025-03-19 09:28:05,366 [INFO] 🔍 Überprüfe Produkt [42/98]: B0BDCV36CX https://www.amazon.com/dp/B0BDCV36CX?language=en_US
+2025-03-19 09:28:15,476 [INFO] 🔍 Überprüfe Produkt [43/98]: B0BQPT34V7 https://www.amazon.com/dp/B0BQPT34V7?language=en_US
+2025-03-19 09:28:25,506 [INFO] 🔍 Überprüfe Produkt [44/98]: B0045MLCL0 https://www.amazon.com/dp/B0045MLCL0?language=en_US
+2025-03-19 09:28:37,117 [INFO] 🔍 Überprüfe Produkt [45/98]: B001181M16 https://www.amazon.com/dp/B001181M16?language=en_US
+2025-03-19 09:28:49,579 [INFO] 🔍 Überprüfe Produkt [46/98]: B0BFZJJY5M https://www.amazon.com/dp/B0BFZJJY5M?language=en_US
+2025-03-19 09:29:00,872 [INFO] 🔍 Überprüfe Produkt [47/98]: B0BKNVNLN9 https://www.amazon.com/dp/B0BKNVNLN9?language=en_US
+2025-03-19 09:29:11,542 [INFO] 🔍 Überprüfe Produkt [48/98]: B0C8L96Y3T https://www.amazon.com/dp/B0C8L96Y3T?language=en_US
+2025-03-19 09:29:23,770 [INFO] 🔍 Überprüfe Produkt [49/98]: B0DDB5BWYP https://www.amazon.com/dp/B0DDB5BWYP?language=en_US
+2025-03-19 09:29:34,845 [INFO] 🔍 Überprüfe Produkt [50/98]: B0C6WCWJ9P https://www.amazon.com/dp/B0C6WCWJ9P?language=en_US
+2025-03-19 09:29:45,729 [INFO] 🔍 Überprüfe Produkt [51/98]: B005DKV9SE https://www.amazon.com/dp/B005DKV9SE?language=en_US
+2025-03-19 09:29:57,415 [INFO] 🔍 Überprüfe Produkt [52/98]: B00117ZRXQ https://www.amazon.com/dp/B00117ZRXQ?language=en_US
+2025-03-19 09:30:08,993 [INFO] 🔍 Überprüfe Produkt [53/98]: B0B9289VLY https://www.amazon.com/dp/B0B9289VLY?language=en_US
+2025-03-19 09:30:20,541 [INFO] 🔍 Überprüfe Produkt [54/98]: B0CLSCPZG4 https://www.amazon.com/dp/B0CLSCPZG4?language=en_US
+2025-03-19 09:30:30,600 [INFO] 🔍 Überprüfe Produkt [55/98]: B001KYS2DC https://www.amazon.com/dp/B001KYS2DC?language=en_US
+2025-03-19 09:30:40,812 [INFO] 🔍 Überprüfe Produkt [56/98]: B0CSWHQ3PN https://www.amazon.com/dp/B0CSWHQ3PN?language=en_US
+2025-03-19 09:30:52,119 [INFO] 🔍 Überprüfe Produkt [57/98]: B0B6GKMZCL https://www.amazon.com/dp/B0B6GKMZCL?language=en_US
+2025-03-19 09:31:03,400 [INFO] 🔍 Überprüfe Produkt [58/98]: B079JWLSH9 https://www.amazon.com/dp/B079JWLSH9?language=en_US
+2025-03-19 09:31:14,924 [INFO] 🔍 Überprüfe Produkt [59/98]: B0BLJ51MK7 https://www.amazon.com/dp/B0BLJ51MK7?language=en_US
+2025-03-19 09:31:25,861 [INFO] 🔍 Überprüfe Produkt [60/98]: B0C6L85Z16 https://www.amazon.com/dp/B0C6L85Z16?language=en_US
+2025-03-19 09:31:36,510 [INFO] 🔍 Überprüfe Produkt [61/98]: B09MZV4LCS https://www.amazon.com/dp/B09MZV4LCS?language=en_US
+2025-03-19 09:31:48,201 [INFO] 🔍 Überprüfe Produkt [62/98]: B0BKCVLYGX https://www.amazon.com/dp/B0BKCVLYGX?language=en_US
+2025-03-19 09:31:59,198 [INFO] 🔍 Überprüfe Produkt [63/98]: B0C8K2Z6SH https://www.amazon.com/dp/B0C8K2Z6SH?language=en_US
+2025-03-19 09:32:10,995 [INFO] 🔍 Überprüfe Produkt [64/98]: B016C9GIIK https://www.amazon.com/dp/B016C9GIIK?language=en_US
+2025-03-19 09:32:21,524 [INFO] 🔍 Überprüfe Produkt [65/98]: B0BQ1FZJS6 https://www.amazon.com/dp/B0BQ1FZJS6?language=en_US
+2025-03-19 09:32:33,410 [INFO] ⚡ Änderungen erkannt für B0BQ1FZJS6: price, total
+2025-03-19 09:32:33,426 [INFO] 🔍 Überprüfe Produkt [66/98]: B09Z2XPHFQ https://www.amazon.com/dp/B09Z2XPHFQ?language=en_US
+2025-03-19 09:32:44,945 [INFO] 🔍 Überprüfe Produkt [67/98]: B0DHYMZBP9 https://www.amazon.com/dp/B0DHYMZBP9?language=en_US
+2025-03-19 09:32:55,536 [INFO] 🔍 Überprüfe Produkt [68/98]: B08VJNTY36 https://www.amazon.com/dp/B08VJNTY36?language=en_US
+2025-03-19 09:33:06,075 [INFO] ⚡ Änderungen erkannt für B08VJNTY36: price, total
+2025-03-19 09:33:06,102 [INFO] 🔍 Überprüfe Produkt [69/98]: B0D3GLRGVM https://www.amazon.com/dp/B0D3GLRGVM?language=en_US
+2025-03-19 09:33:17,811 [INFO] 🔍 Überprüfe Produkt [70/98]: B07TBH84L1 https://www.amazon.com/dp/B07TBH84L1?language=en_US
+2025-03-19 09:33:28,270 [INFO] 🔍 Überprüfe Produkt [71/98]: B081G8V25N https://www.amazon.com/dp/B081G8V25N?language=en_US
+2025-03-19 09:33:39,308 [INFO] 🔍 Überprüfe Produkt [72/98]: B0CSZ66LTQ https://www.amazon.com/dp/B0CSZ66LTQ?language=en_US
+2025-03-19 09:33:51,248 [INFO] ⚡ Änderungen erkannt für B0CSZ66LTQ: blm, total
+2025-03-19 09:33:51,268 [INFO] 🔍 Überprüfe Produkt [73/98]: B0D8KZCLD1 https://www.amazon.com/dp/B0D8KZCLD1?language=en_US
+2025-03-19 09:34:01,778 [INFO] 🔍 Überprüfe Produkt [74/98]: B0CVH4MNPQ https://www.amazon.com/dp/B0CVH4MNPQ?language=en_US
+2025-03-19 09:34:13,286 [INFO] 🔍 Überprüfe Produkt [75/98]: B0BG9QYXLK https://www.amazon.com/dp/B0BG9QYXLK?language=en_US
+2025-03-19 09:34:24,252 [INFO] 🔍 Überprüfe Produkt [76/98]: B0D1CTKV5K https://www.amazon.com/dp/B0D1CTKV5K?language=en_US
+2025-03-19 09:34:33,628 [INFO] 🔍 Überprüfe Produkt [77/98]: B0D5PX3MZX https://www.amazon.com/dp/B0D5PX3MZX?language=en_US
+2025-03-19 09:34:45,165 [INFO] 🔍 Überprüfe Produkt [78/98]: B099XC3L7R https://www.amazon.com/dp/B099XC3L7R?language=en_US
+2025-03-19 09:34:58,692 [INFO] 🔍 Überprüfe Produkt [79/98]: B0C7Y85JJH https://www.amazon.com/dp/B0C7Y85JJH?language=en_US
+2025-03-19 09:35:10,076 [INFO] 🔍 Überprüfe Produkt [80/98]: B0DCKC5S71 https://www.amazon.com/dp/B0DCKC5S71?language=en_US
+2025-03-19 09:35:20,650 [INFO] ⚡ Änderungen erkannt für B0DCKC5S71: price, total
+2025-03-19 09:35:20,667 [INFO] 🔍 Überprüfe Produkt [81/98]: B0BT3GTSVW https://www.amazon.com/dp/B0BT3GTSVW?language=en_US
+2025-03-19 09:35:31,219 [INFO] 🔍 Überprüfe Produkt [82/98]: B0DJTKMQ2R https://www.amazon.com/dp/B0DJTKMQ2R?language=en_US
+2025-03-19 09:35:42,024 [INFO] ⚡ Änderungen erkannt für B0DJTKMQ2R: blm, total
+2025-03-19 09:35:42,043 [INFO] 🔍 Überprüfe Produkt [83/98]: B07CVNM3JV https://www.amazon.com/dp/B07CVNM3JV?language=en_US
+2025-03-19 09:35:52,002 [INFO] 🔍 Überprüfe Produkt [84/98]: B0018OADEA https://www.amazon.com/dp/B0018OADEA?language=en_US
+2025-03-19 09:36:03,445 [INFO] 🔍 Überprüfe Produkt [85/98]: B0BSXQNLJ4 https://www.amazon.com/dp/B0BSXQNLJ4?language=en_US
+2025-03-19 09:36:13,388 [INFO] 🔍 Überprüfe Produkt [86/98]: B0BG65459C https://www.amazon.com/dp/B0BG65459C?language=en_US
+2025-03-19 09:36:24,915 [INFO] 🔍 Überprüfe Produkt [87/98]: B0DD5PKWMR https://www.amazon.com/dp/B0DD5PKWMR?language=en_US
+2025-03-19 09:36:36,774 [INFO] ⚡ Änderungen erkannt für B0DD5PKWMR: price, total
+2025-03-19 09:36:36,806 [INFO] 🔍 Überprüfe Produkt [88/98]: B0D78MM7HK https://www.amazon.com/dp/B0D78MM7HK?language=en_US
+2025-03-19 09:36:47,299 [INFO] 🔍 Überprüfe Produkt [89/98]: B0CXTPJZ5Y https://www.amazon.com/dp/B0CXTPJZ5Y?language=en_US
+2025-03-19 09:36:58,998 [INFO] 🔍 Überprüfe Produkt [90/98]: B0B1V1TBYF https://www.amazon.com/dp/B0B1V1TBYF?language=en_US
+2025-03-19 09:37:10,339 [INFO] ⚡ Änderungen erkannt für B0B1V1TBYF: price, total
+2025-03-19 09:37:10,371 [INFO] 🔍 Überprüfe Produkt [91/98]: B0CFWCMBNG https://www.amazon.com/dp/B0CFWCMBNG?language=en_US
+2025-03-19 09:37:22,187 [INFO] 🔍 Überprüfe Produkt [92/98]: B0BBWMC33H https://www.amazon.com/dp/B0BBWMC33H?language=en_US
+2025-03-19 09:37:32,643 [INFO] 🔍 Überprüfe Produkt [93/98]: B01IA7QIS2 https://www.amazon.com/dp/B01IA7QIS2?language=en_US
+2025-03-19 09:37:43,611 [INFO] 🔍 Überprüfe Produkt [94/98]: B0106ZC4T8 https://www.amazon.com/dp/B0106ZC4T8?language=en_US
+2025-03-19 09:37:54,134 [INFO] 🔍 Überprüfe Produkt [95/98]: B0CP9XPYX6 https://www.amazon.com/dp/B0CP9XPYX6?language=en_US
+2025-03-19 09:38:06,408 [INFO] ⚡ Änderungen erkannt für B0CP9XPYX6: blm, total
+2025-03-19 09:38:06,450 [INFO] 🔍 Überprüfe Produkt [96/98]: B07RV3BQ45 https://www.amazon.com/dp/B07RV3BQ45?language=en_US
+2025-03-19 09:38:17,817 [INFO] ⚡ Änderungen erkannt für B07RV3BQ45: blm, total
+2025-03-19 09:38:17,846 [INFO] 🔍 Überprüfe Produkt [97/98]: B008WTWUFO https://www.amazon.com/dp/B008WTWUFO?language=en_US
+2025-03-19 09:38:29,426 [INFO] 🔍 Überprüfe Produkt [98/98]: B099KRBL53 https://www.amazon.com/dp/B099KRBL53?language=en_US
+2025-03-19 09:38:41,265 [INFO] 
 📊 Scraping Performance Metrics:
+2025-03-19 09:38:41,265 [INFO] 🕒 Gesamtzeit: 19m 16s
+2025-03-19 09:38:41,265 [INFO] ⚡ Durchschnittliche Zeit pro Produkt: 11.78 Sekunden
+2025-03-19 09:38:41,266 [INFO] 📦 Anzahl gescrapte Produkte: 98
+2025-03-19 09:38:41,266 [INFO] Failed products: 0
+2025-03-19 09:38:41,267 [INFO] 
+🔻 Schließe WebDriver...
+2025-03-19 09:38:44,123 [INFO] ✅ WebDriver geschlossen.
