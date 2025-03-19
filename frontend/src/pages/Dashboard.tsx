@@ -12,7 +12,7 @@ import {
   Fab,
 } from "@mui/material";
 import Grid from "@mui/material/Grid2";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { AiOutlineCheckCircle } from "react-icons/ai";
 import { GrCluster } from "react-icons/gr";
 import { MdAdd } from "react-icons/md";
@@ -21,19 +21,38 @@ import ClusterCard from "../components/ClusterCard";
 import { useSnackbar } from "../providers/SnackbarProvider";
 import MarketService from "../services/MarketService";
 import CustomSparkLine from "../components/charts/CustomSparkLine";
-import { FaRocket } from 'react-icons/fa';
 import { keyframes } from '@mui/system';
 import { commonBackgroundStyle, moveBackgroundKeyframes } from "../components/BackgroundPattern";
+import { Line } from 'react-chartjs-2';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+} from 'chart.js';
 
-const rocketAnimation = keyframes`
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
+
+const chartAnimation = keyframes`
   0% {
-    transform: translateY(0) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-20px) rotate(5deg);
+    opacity: 0;
+    transform: scaleY(0);
   }
   100% {
-    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+    transform: scaleY(1);
   }
 `;
 
@@ -73,11 +92,53 @@ const Dashboard: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [isFetching, setIsFetching] = useState<boolean>(true);
   const [dashboardData, setDashboardData] = useState<any>(null);
+  const [chartValues, setChartValues] = useState<number[]>([15, 20, 25, 30, 35, 40]);
+  const animationRef = useRef<number | null>(null);
+  const targetValuesRef = useRef<number[]>([]);
+  const isAnimatingRef = useRef(false);
   const [activeCluster, setActiveCluster] = useState<{
     clustername: string;
     status: string;
     keywords: { [keyword: string]: string };
   } | null>(null);
+
+  // Function to generate new values with overall upward trend but allowing some decreases
+  const generateGrowingValues = () => {
+    return chartValues.map((currentValue, index) => {
+      // 30% chance of a small decrease, 70% chance of increase
+      const isDecrease = Math.random() < 0.3;
+      
+      if (isDecrease) {
+        // Small decrease (max 15% down)
+        const decrease = currentValue * (Math.random() * 0.15);
+        return Math.max(15, currentValue - decrease);
+      } else {
+        // Normal growth pattern
+        const minGrowth = 1; // Minimum growth
+        const maxGrowth = 12; // Maximum growth
+        const growth = minGrowth + Math.random() * (maxGrowth - minGrowth);
+        const newValue = currentValue + growth;
+        
+        // Reset if too high, but ensure new value is higher than previous point (if exists)
+        if (newValue > 90) {
+          const baseValue = 15;
+          return index === 0 ? baseValue : Math.max(chartValues[index - 1] + 2, baseValue);
+        }
+        
+        return newValue;
+      }
+    });
+  };
+
+  useEffect(() => {
+    if (marketClusters.length === 0 && !isFetching) {
+      const timer = setInterval(() => {
+        setChartValues(generateGrowingValues());
+      }, 2500);
+
+      return () => clearInterval(timer);
+    }
+  }, [marketClusters.length, isFetching]);
 
   // Fetch all data
   const fetchData = async () => {
@@ -150,6 +211,59 @@ const Dashboard: React.FC = () => {
   }, [isFetching]);
 
   if (marketClusters.length === 0 && !isFetching) {
+    const chartData = {
+      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+      datasets: [
+        {
+          label: 'Market Growth',
+          data: chartValues,
+          borderColor: 'white',
+          backgroundColor: 'rgba(255, 255, 255, 0.1)',
+          tension: 0.3,
+          fill: true,
+          pointRadius: 4,
+          pointBackgroundColor: 'white',
+        }
+      ]
+    };
+
+    const chartOptions = {
+      responsive: true,
+      maintainAspectRatio: false,
+      animation: {
+        duration: 1500,
+        easing: 'easeInOutQuart' as const,
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          max: 100,
+          grid: {
+            color: 'rgba(255, 255, 255, 0.1)',
+          },
+          ticks: {
+            display: false,
+          },
+          border: {
+            display: false
+          }
+        },
+        x: {
+          grid: {
+            color: 'rgba(255, 255, 255, 0.1)',
+          },
+          ticks: {
+            color: 'white',
+          },
+        },
+      },
+      plugins: {
+        legend: {
+          display: false,
+        },
+      },
+    };
+
     return (
       <Box
         sx={{
@@ -174,23 +288,16 @@ const Dashboard: React.FC = () => {
         >
           <Box
             sx={{
-              display: 'flex',
-              justifyContent: 'center',
+              height: 200,
               mb: 3,
-              animation: `${rocketAnimation} 2s infinite ease-in-out`,
             }}
           >
-            <FaRocket
-              size={48}
-              style={{
-                color: 'white'
-              }}
-            />
+            <Line data={chartData} options={chartOptions} />
           </Box>
           <Typography variant="h4" gutterBottom>
             Welcome to MarketScope
           </Typography>
-          <Typography variant="body1" sx={{ mb: 4 , color: 'white'}}>
+          <Typography variant="body1" sx={{ mb: 4, color: 'white' }}>
             You haven't created any market clusters yet. Start your journey by creating your first one!
           </Typography>
           <Button

@@ -8,13 +8,35 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useSnackbar } from "../providers/SnackbarProvider";
-import { AiFillAmazonCircle, AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { IoIosAnalytics } from "react-icons/io";
 import { FaSignInAlt } from "react-icons/fa";
 import LoginService from "../services/LoginService";
 import { commonBackgroundStyle, moveBackgroundKeyframes } from "../components/BackgroundPattern";
+import { Line } from 'react-chartjs-2';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+} from 'chart.js';
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 export default function Login() {
   const navigate = useNavigate();
@@ -24,6 +46,96 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [chartValues, setChartValues] = useState<number[]>([15, 20, 25, 30, 35, 40]);
+
+  // Function to generate new values with overall upward trend but allowing some decreases
+  const generateGrowingValues = () => {
+    return chartValues.map((currentValue, index) => {
+      // 30% chance of a small decrease, 70% chance of increase
+      const isDecrease = Math.random() < 0.3;
+      
+      if (isDecrease) {
+        // Small decrease (max 15% down)
+        const decrease = currentValue * (Math.random() * 0.15);
+        return Math.max(15, currentValue - decrease);
+      } else {
+        // Normal growth pattern
+        const minGrowth = 1; // Minimum growth
+        const maxGrowth = 12; // Maximum growth
+        const growth = minGrowth + Math.random() * (maxGrowth - minGrowth);
+        const newValue = currentValue + growth;
+        
+        // Reset if too high, but ensure new value is higher than previous point (if exists)
+        if (newValue > 90) {
+          const baseValue = 15;
+          return index === 0 ? baseValue : Math.max(chartValues[index - 1] + 2, baseValue);
+        }
+        
+        return newValue;
+      }
+    });
+  };
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setChartValues(generateGrowingValues());
+    }, 2500);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  const chartData = {
+    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+    datasets: [
+      {
+        label: 'Market Growth',
+        data: chartValues,
+        borderColor: 'white',
+        backgroundColor: 'rgba(255, 255, 255, 0.1)',
+        tension: 0.3,
+        fill: true,
+        pointRadius: 4,
+        pointBackgroundColor: 'white',
+      }
+    ]
+  };
+
+  const chartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    animation: {
+      duration: 1500,
+      easing: 'easeInOutQuart' as const,
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+        max: 100,
+        grid: {
+          color: 'rgba(255, 255, 255, 0.1)',
+        },
+        ticks: {
+          display: false,
+        },
+        border: {
+          display: false
+        }
+      },
+      x: {
+        grid: {
+          color: 'rgba(255, 255, 255, 0.1)',
+        },
+        ticks: {
+          color: 'white',
+        },
+      },
+    },
+    plugins: {
+      legend: {
+        display: false,
+      },
+    },
+  };
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -64,7 +176,7 @@ export default function Login() {
           elevation={6}
           sx={{
             width: "900px",
-            height: "500px",
+            height: "450px",
             display: "flex",
             borderRadius: 3,
             overflow: "hidden",
@@ -79,24 +191,33 @@ export default function Login() {
               width: "50%",
               backgroundColor: "#0096FF",
               display: "flex",
+              flexDirection: "column",
               alignItems: "center",
-              justifyContent: "center",
               background: "linear-gradient(45deg, #1976d2 30%, #2196f3 90%)",
+              position: "relative",
+              padding: 3,
+              pt: 8,
             }}
           >
-            <Box sx={{ mt: 0.5 }}>
-              <AiFillAmazonCircle size={40} color="white" />
+            <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
+              <Box sx={{ mt: 0.5, mr: 1 }}>
+                <IoIosAnalytics size={40} color="white" />
+              </Box>
+              <Typography
+                variant="h2"
+                sx={{
+                  color: "white",
+                  fontWeight: "bold",
+                  letterSpacing: 1,
+                  fontSize: "2.5rem",
+                }}
+              >
+                MarketScope
+              </Typography>
             </Box>
-            <Typography
-              variant="h2"
-              sx={{
-                color: "white",
-                fontWeight: "bold",
-                letterSpacing: 1,
-              }}
-            >
-              AmaScraper
-            </Typography>
+            <Box sx={{ height: "180px", width: "100%" }}>
+              <Line data={chartData} options={chartOptions} />
+            </Box>
           </Box>
 
           {/* Right half: Login form */}
@@ -104,14 +225,19 @@ export default function Login() {
             sx={{
               width: "50%",
               p: 4,
+              pt: 4,
               display: "flex",
               flexDirection: "column",
-              justifyContent: "center",
             }}
           >
             <Typography
               variant="h5"
-              sx={{ mb: 2, textAlign: "center", fontWeight: "bold", color: "primary.main" }}
+              sx={{ 
+                mb: 2, 
+                textAlign: "center", 
+                fontWeight: "bold", 
+                color: "primary.main",
+              }}
             >
               Welcome Back!
             </Typography>
