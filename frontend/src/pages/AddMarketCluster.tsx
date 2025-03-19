@@ -158,7 +158,15 @@ const AddMarketCluster: React.FC = () => {
     >
       <Container maxWidth="lg" sx={{ position: "relative", zIndex: 1, py: 4 }}>
         <Paper elevation={3} sx={{ p: 4, mt: 4 }}>
-          <Typography variant="h4" gutterBottom sx={{ color: "primary.main" }}>
+          <Typography
+            variant="h4"
+            sx={{
+              mb: 4,
+              backgroundColor: "primary.main",
+              color: "white",
+              padding: 2,
+            }}
+          >
             Create New Market Cluster
           </Typography>
           <Typography variant="body1" color="text.secondary" sx={{ mb: 4 }}>
@@ -188,7 +196,7 @@ const AddMarketCluster: React.FC = () => {
 
                 {/* Bulk Input Section */}
                 <Grid size={{ xs: 12 }}>
-                  <Paper variant="outlined" sx={{ p: 2, backgroundColor: "#f8f9fa" }}>
+                  <Paper elevation={2} sx={{ p: 2, backgroundColor: "background.paper" }}>
                     <Box sx={{ display: "flex", alignItems: "center", gap: 1, mb: 2 }}>
                       <Typography variant="subtitle1" sx={{ fontWeight: 500 }}>
                         Bulk Add Keywords
@@ -227,7 +235,7 @@ const AddMarketCluster: React.FC = () => {
 
                 {/* Keywords List */}
                 <Grid size={{ xs: 12 }}>
-                  <Paper variant="outlined" sx={{ p: 2 }}>
+                  <Paper elevation={2} sx={{ p: 2 }}>
                     <Typography variant="subtitle1" sx={{ mb: 2, fontWeight: 500 }}>
                       Added Keywords ({keywords.length}/5)
                     </Typography>
@@ -246,7 +254,7 @@ const AddMarketCluster: React.FC = () => {
                               display: "flex",
                               alignItems: "center",
                               gap: 1,
-                              backgroundColor: "primary.light",
+                              backgroundColor: "primary.main",
                               color: "white",
                             }}
                           >
