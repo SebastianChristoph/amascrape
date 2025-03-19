@@ -407,6 +407,18 @@ export default function ClusterDetails() {
       width: 120,
       renderCell: (params) => renderWithNoData(params.value, formatCurrency),
     },
+    {
+      field: "store",
+      headerName: "Store",
+      width: 120,
+      renderCell: (params) => renderWithNoData(params.value),
+    },
+    {
+      field: "manufacturer",
+      headerName: "Manufacturer/Brand",
+      width: 120,
+      renderCell: (params) => renderWithNoData(params.value),
+    },
 
     {
       field: "mainCategory",
@@ -1158,6 +1170,8 @@ export default function ClusterDetails() {
                 image: product.image,
                 title: product.title,
                 price: product.price,
+                manufacturer: product.manufacturer,
+                store: product.store,
                 mainCategory: product.main_category,
                 mainCategoryRank: product.main_category_rank,
                 secondCategory: product.second_category,

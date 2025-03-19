@@ -12,18 +12,14 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from sqlalchemy.orm import Session
 
-# 🌍 Globale Log-Datei einrichten
-LOG_FILE = "scraping_log.txt"
-
-# 🔹 Beim Start die Datei leeren
-open(LOG_FILE, "w").close()
-print("scraping log cleared")
+LOG_FILE_PRODUCT = "scraping_log.txt"
 
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(message)s",
     handlers=[
-        logging.FileHandler(LOG_FILE, mode="a", encoding="utf-8"),  # 🔹 Datei wird überschrieben (leeren)
+        # 🔹 Datei wird überschrieben
+        logging.FileHandler(LOG_FILE_PRODUCT, mode="a", encoding="utf-8"),
         logging.StreamHandler(sys.stdout)  # 🔹 In Konsole ausgeben
     ]
 )
@@ -36,6 +32,11 @@ class Product_Orchestrator:
         self.scraping_times = []
         self.start_time = None
         self.failed_products = []
+
+        # 🌍 Globale Log-Datei einrichten
+
+        # 🔹 Datei leeren, wenn der Orchestrator startet
+        print("PO: cleared file", LOG_FILE_PRODUCT)
 
         logging.info("🚀 Product Orchestrator gestartet.")
 
@@ -110,7 +111,7 @@ class Product_Orchestrator:
         product_fields = [
             "title", "price", "main_category", "second_category",
             "main_category_rank", "second_category_rank", "img_path",
-            "blm", "total"
+            "blm", "total", "store", "manufacturer"
         ]
 
         title_changed = False  # Flag für Titel-Änderung
@@ -127,7 +128,7 @@ class Product_Orchestrator:
                     title_changed = True  # Setze das Flag für Title-Änderung
                 else:
                     changes.append(
-                        #f"{field} geändert: {old_value} → {new_value}")
+                        # f"{field} geändert: {old_value} → {new_value}")
                         f"{field}")
 
                 changed_fields[field] = new_value
@@ -169,10 +170,12 @@ class Product_Orchestrator:
 
                 try:
                     product_start_time = time.time()
-                    last_product_change = self.get_latest_product_change(db, product.asin)
+                    last_product_change = self.get_latest_product_change(
+                        db, product.asin)
                     new_data = self.scraper.get_product_infos(product.asin)
                     product_end_time = time.time()
-                    self.scraping_times.append(product_end_time - product_start_time)
+                    self.scraping_times.append(
+                        product_end_time - product_start_time)
 
                     if not new_data:
                         logging.warning(
@@ -194,7 +197,8 @@ class Product_Orchestrator:
                                 title=new_data.get("title"),
                                 price=new_data.get("price"),
                                 main_category=new_data.get("main_category"),
-                                second_category=new_data.get("second_category"),
+                                second_category=new_data.get(
+                                    "second_category"),
                                 main_category_rank=new_data.get(
                                     "rank_main_category"),
                                 second_category_rank=new_data.get(
@@ -202,6 +206,8 @@ class Product_Orchestrator:
                                 img_path=new_data.get("image_url"),
                                 blm=new_data.get("blm"),
                                 total=new_data.get("total"),
+                                store=new_data.get("store"),
+                                manufacturer=new_data.get("manufacturer"),
                                 change_date=datetime.now(timezone.utc),
                                 changes=" | ".join(changes)
                             )
@@ -218,7 +224,8 @@ class Product_Orchestrator:
                     scraped_asins.add(product.asin)
 
                 except Exception as e:
-                    logging.error(f"❌ Fehler beim Scrapen von {product.asin}: {e}")
+                    logging.error(
+                        f"❌ Fehler beim Scrapen von {product.asin}: {e}")
                     product.last_time_scraped = datetime.now(timezone.utc)
                     db.commit()
                     logging.info(
@@ -232,14 +239,16 @@ class Product_Orchestrator:
             # Write failed products to file
             if self.failed_products:
                 with open('fails.txt', 'a') as f:
-                    f.write(f"\n--- Scraping session {datetime.now(timezone.utc)} ---\n")
+                    f.write(
+                        f"\n--- Scraping session {datetime.now(timezone.utc)} ---\n")
                     for fail in self.failed_products:
-                        f.write(f"ASIN: {fail['asin']}, Missing: {', '.join(fail['missing'])}, Time: {fail['timestamp']}\n")
+                        f.write(
+                            f"ASIN: {fail['asin']}, Missing: {', '.join(fail['missing'])}, Time: {fail['timestamp']}\n")
 
             # Print timing statistics
             total_time = time.time() - self.start_time
             avg_time = mean(self.scraping_times) if self.scraping_times else 0
-            
+
             # logging.info("\n📊 Scraping Performance Metrics:")
             # logging.info(f"🕒 Gesamtzeit: {total_time:.2f} Sekunden")
             # logging.info(f"⚡ Durchschnittliche Zeit pro Produkt: {avg_time:.2f} Sekunden")
@@ -247,25 +256,27 @@ class Product_Orchestrator:
             # logging.info(f"Failed products: {len(self.failed_products)}")
 
         except Exception as e:
-            logging.critical(f"❌ Schwerwiegender Fehler im Product-Update: {e}")
+            logging.critical(
+                f"❌ Schwerwiegender Fehler im Product-Update: {e}")
         finally:
            # Gesamtzeit berechnen
             end_time = time.time()
             total_time = end_time - self.start_time
             avg_time = mean(self.scraping_times) if self.scraping_times else 0
 
-            logging.info("\n📊 Scraping Performance Metrics:")
+            logging.info("📊 Scraping Performance Metrics:")
             logging.info(f"🕒 Gesamtzeit: {self.format_time(total_time)}")
-            logging.info(f"⚡ Durchschnittliche Zeit pro Produkt: {avg_time:.2f} Sekunden")
+            logging.info(
+                f"⚡ Durchschnittliche Zeit pro Produkt: {avg_time:.2f} Sekunden")
             logging.info(f"📦 Anzahl gescrapte Produkte: {len(scraped_asins)}")
             logging.info(f"Failed products: {len(self.failed_products)}")
-            
+
             db.close()
             self.close_driver()
 
     def close_driver(self):
         """Schließt den WebDriver nach dem Scraping."""
-        logging.info("\n🔻 Schließe WebDriver...")
+        logging.info("🔻 Schließe WebDriver...")
         self.driver.quit()
         logging.info("✅ WebDriver geschlossen.")
 

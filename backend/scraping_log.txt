@@ -1,0 +1,125 @@
+2025-03-19 19:13:58,165 [INFO] 🚀 Product Orchestrator gestartet.
+2025-03-19 19:14:02,025 [INFO] ✅ Verbindung zu Amazon erfolgreich hergestellt!
+2025-03-19 19:14:05,915 [INFO] 🍪 Setze Cookies...
+2025-03-19 19:14:05,934 [INFO] ✅ Cookies gesetzt!
+2025-03-19 19:14:05,934 [INFO] 🚀 Starte Product-Update...
+2025-03-19 19:14:05,937 [INFO] 🔍 Überprüfe Produkt [1/90]: B00GL2HMES https://www.amazon.com/dp/B00GL2HMES?language=en_US
+2025-03-19 19:14:18,001 [INFO] ⚡ Änderungen erkannt für B00GL2HMES: main_category, second_category, blm, total
+2025-03-19 19:14:18,043 [INFO] 🔍 Überprüfe Produkt [2/90]: B002DYIZEO https://www.amazon.com/dp/B002DYIZEO?language=en_US
+2025-03-19 19:14:29,548 [INFO] ⚡ Änderungen erkannt für B002DYIZEO: main_category, second_category, blm, total
+2025-03-19 19:14:29,565 [INFO] 🔍 Überprüfe Produkt [3/90]: B07978VPPH https://www.amazon.com/dp/B07978VPPH?language=en_US
+2025-03-19 19:14:41,315 [INFO] ⚡ Änderungen erkannt für B07978VPPH: main_category, second_category, blm, total
+2025-03-19 19:14:41,691 [INFO] 🔍 Überprüfe Produkt [4/90]: B00ULZF5HC https://www.amazon.com/dp/B00ULZF5HC?language=en_US
+2025-03-19 19:14:55,438 [INFO] ⚡ Änderungen erkannt für B00ULZF5HC: main_category, second_category, blm, total
+2025-03-19 19:14:55,472 [INFO] 🔍 Überprüfe Produkt [5/90]: B000GIQS0W https://www.amazon.com/dp/B000GIQS0W?language=en_US
+2025-03-19 19:15:08,138 [INFO] ⚡ Änderungen erkannt für B000GIQS0W: main_category, second_category, blm, total
+2025-03-19 19:15:08,168 [INFO] 🔍 Überprüfe Produkt [6/90]: B0C9GCQX6H https://www.amazon.com/dp/B0C9GCQX6H?language=en_US
+2025-03-19 19:15:18,968 [INFO] ⚡ Änderungen erkannt für B0C9GCQX6H: main_category, second_category, blm, total
+2025-03-19 19:15:18,993 [INFO] 🔍 Überprüfe Produkt [7/90]: B0CSMZ882F https://www.amazon.com/dp/B0CSMZ882F?language=en_US
+2025-03-19 19:15:29,285 [INFO] ⚡ Änderungen erkannt für B0CSMZ882F: main_category, second_category, blm, total
+2025-03-19 19:15:29,306 [INFO] 🔍 Überprüfe Produkt [8/90]: B09YX7G6JJ https://www.amazon.com/dp/B09YX7G6JJ?language=en_US
+2025-03-19 19:15:39,386 [INFO] ⚡ Änderungen erkannt für B09YX7G6JJ: main_category, second_category, blm, total
+2025-03-19 19:15:39,403 [INFO] 🔍 Überprüfe Produkt [9/90]: B09VCTVH98 https://www.amazon.com/dp/B09VCTVH98?language=en_US
+2025-03-19 19:15:50,131 [INFO] ⚡ Änderungen erkannt für B09VCTVH98: main_category, second_category, blm, total
+2025-03-19 19:15:50,147 [INFO] 🔍 Überprüfe Produkt [10/90]: B0CCCNKD73 https://www.amazon.com/dp/B0CCCNKD73?language=en_US
+2025-03-19 19:16:00,979 [INFO] ⚡ Änderungen erkannt für B0CCCNKD73: main_category, second_category, blm, total
+2025-03-19 19:16:01,008 [INFO] 🔍 Überprüfe Produkt [11/90]: B0BT23VBLJ https://www.amazon.com/dp/B0BT23VBLJ?language=en_US
+2025-03-19 19:16:12,282 [INFO] ⚡ Änderungen erkannt für B0BT23VBLJ: main_category, second_category, blm, total
+2025-03-19 19:16:12,299 [INFO] 🔍 Überprüfe Produkt [12/90]: B085Z9P87K https://www.amazon.com/dp/B085Z9P87K?language=en_US
+2025-03-19 19:16:22,536 [INFO] ⚡ Änderungen erkannt für B085Z9P87K: main_category, second_category, blm, total
+2025-03-19 19:16:22,552 [INFO] 🔍 Überprüfe Produkt [13/90]: B00BPS3L8E https://www.amazon.com/dp/B00BPS3L8E?language=en_US
+2025-03-19 19:16:33,235 [INFO] ⚡ Änderungen erkannt für B00BPS3L8E: main_category, second_category, blm, total
+2025-03-19 19:16:33,283 [INFO] 🔍 Überprüfe Produkt [14/90]: B0D4QRC5WK https://www.amazon.com/dp/B0D4QRC5WK?language=en_US
+2025-03-19 19:16:47,047 [INFO] ⚡ Änderungen erkannt für B0D4QRC5WK: main_category, second_category, blm, total
+2025-03-19 19:16:47,062 [INFO] 🔍 Überprüfe Produkt [15/90]: B08DH161T6 https://www.amazon.com/dp/B08DH161T6?language=en_US
+2025-03-19 19:16:59,005 [INFO] ⚡ Änderungen erkannt für B08DH161T6: main_category, second_category, blm, total
+2025-03-19 19:16:59,026 [INFO] 🔍 Überprüfe Produkt [16/90]: B00E9M4XEE https://www.amazon.com/dp/B00E9M4XEE?language=en_US
+2025-03-19 19:17:10,381 [INFO] ⚡ Änderungen erkannt für B00E9M4XEE: main_category, second_category, blm, total
+2025-03-19 19:17:10,403 [INFO] 🔍 Überprüfe Produkt [17/90]: B09R5KPNHZ https://www.amazon.com/dp/B09R5KPNHZ?language=en_US
+2025-03-19 19:17:24,524 [INFO] ⚡ Änderungen erkannt für B09R5KPNHZ: main_category, second_category, blm, total
+2025-03-19 19:17:24,554 [INFO] 🔍 Überprüfe Produkt [18/90]: B01IW245EY https://www.amazon.com/dp/B01IW245EY?language=en_US
+2025-03-19 19:17:35,593 [INFO] ⚡ Änderungen erkannt für B01IW245EY: main_category, second_category, blm, total
+2025-03-19 19:17:35,625 [INFO] 🔍 Überprüfe Produkt [19/90]: B0CCJZ248Z https://www.amazon.com/dp/B0CCJZ248Z?language=en_US
+2025-03-19 19:17:46,464 [INFO] ⚡ Änderungen erkannt für B0CCJZ248Z: main_category, second_category, blm, total
+2025-03-19 19:17:46,494 [INFO] 🔍 Überprüfe Produkt [20/90]: B0BSXR71QC https://www.amazon.com/dp/B0BSXR71QC?language=en_US
+2025-03-19 19:17:57,340 [INFO] ⚡ Änderungen erkannt für B0BSXR71QC: main_category, second_category, blm, total
+2025-03-19 19:17:57,355 [INFO] 🔍 Überprüfe Produkt [21/90]: B078JZQ5QL https://www.amazon.com/dp/B078JZQ5QL?language=en_US
+2025-03-19 19:18:08,089 [INFO] ⚡ Änderungen erkannt für B078JZQ5QL: main_category, second_category, blm, total
+2025-03-19 19:18:08,118 [INFO] 🔍 Überprüfe Produkt [22/90]: B00012NJT6 https://www.amazon.com/dp/B00012NJT6?language=en_US
+2025-03-19 19:18:18,726 [INFO] ⚡ Änderungen erkannt für B00012NJT6: main_category, second_category, blm, total
+2025-03-19 19:18:18,760 [INFO] 🔍 Überprüfe Produkt [23/90]: B09L8KTJ2G https://www.amazon.com/dp/B09L8KTJ2G?language=en_US
+2025-03-19 19:18:29,203 [INFO] ⚡ Änderungen erkannt für B09L8KTJ2G: main_category, second_category, blm, total
+2025-03-19 19:18:29,256 [INFO] 🔍 Überprüfe Produkt [24/90]: B07CKFG53T https://www.amazon.com/dp/B07CKFG53T?language=en_US
+2025-03-19 19:18:39,798 [INFO] ⚡ Änderungen erkannt für B07CKFG53T: main_category, second_category, blm, total
+2025-03-19 19:18:39,831 [INFO] 🔍 Überprüfe Produkt [25/90]: B0B4Z2RTY1 https://www.amazon.com/dp/B0B4Z2RTY1?language=en_US
+2025-03-19 19:18:50,957 [INFO] ⚡ Änderungen erkannt für B0B4Z2RTY1: main_category, second_category, blm, total
+2025-03-19 19:18:50,973 [INFO] 🔍 Überprüfe Produkt [26/90]: B018ITUM5C https://www.amazon.com/dp/B018ITUM5C?language=en_US
+2025-03-19 19:19:01,717 [INFO] ⚡ Änderungen erkannt für B018ITUM5C: main_category, second_category, blm, total
+2025-03-19 19:19:01,735 [INFO] 🔍 Überprüfe Produkt [27/90]: B0BRNWSMVD https://www.amazon.com/dp/B0BRNWSMVD?language=en_US
+2025-03-19 19:19:12,478 [INFO] ⚡ Änderungen erkannt für B0BRNWSMVD: main_category, second_category, blm, total
+2025-03-19 19:19:12,511 [INFO] 🔍 Überprüfe Produkt [28/90]: B0BFFYHWLK https://www.amazon.com/dp/B0BFFYHWLK?language=en_US
+2025-03-19 19:19:22,486 [WARNING] Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000002A494F30C30>: Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte')': /session/806516a88a2d7d3b36bcdef115ca9815/execute/sync
+2025-03-19 19:19:26,538 [WARNING] Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000002A494E143E0>: Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte')': /session/806516a88a2d7d3b36bcdef115ca9815/execute/sync
+2025-03-19 19:19:30,636 [WARNING] Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000002A494C37AD0>: Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte')': /session/806516a88a2d7d3b36bcdef115ca9815/execute/sync
+2025-03-19 19:19:34,677 [WARNING] ❌ Fehler beim Scrapen von B0BFFYHWLK, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-19 19:19:34,720 [INFO] 🔍 Überprüfe Produkt [29/90]: B0B9HWN8S9 https://www.amazon.com/dp/B0B9HWN8S9?language=en_US
+2025-03-19 19:19:38,793 [WARNING] Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000002A494E089E0>: Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte')': /session/806516a88a2d7d3b36bcdef115ca9815/url
+2025-03-19 19:19:42,852 [WARNING] Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000002A494E0B570>: Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte')': /session/806516a88a2d7d3b36bcdef115ca9815/url
+2025-03-19 19:19:46,915 [WARNING] Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000002A494E0A580>: Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte')': /session/806516a88a2d7d3b36bcdef115ca9815/url
+2025-03-19 19:19:50,970 [WARNING] ❌ Fehler beim Scrapen von B0B9HWN8S9, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-19 19:19:51,023 [INFO] 🔍 Überprüfe Produkt [30/90]: B01LYFAGXI https://www.amazon.com/dp/B01LYFAGXI?language=en_US
+2025-03-19 19:19:55,098 [WARNING] Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000002A494E0B9B0>: Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte')': /session/806516a88a2d7d3b36bcdef115ca9815/url
+2025-03-19 19:19:59,156 [WARNING] Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000002A494E0BBD0>: Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte')': /session/806516a88a2d7d3b36bcdef115ca9815/url
+2025-03-19 19:20:03,222 [WARNING] Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000002A494E0BDF0>: Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte')': /session/806516a88a2d7d3b36bcdef115ca9815/url
+2025-03-19 19:20:07,300 [WARNING] ❌ Fehler beim Scrapen von B01LYFAGXI, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-19 19:20:07,354 [INFO] 🔍 Überprüfe Produkt [31/90]: B008KMUNRA https://www.amazon.com/dp/B008KMUNRA?language=en_US
+2025-03-19 19:20:11,424 [WARNING] Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000002A49544C490>: Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte')': /session/806516a88a2d7d3b36bcdef115ca9815/url
+2025-03-19 19:20:15,485 [WARNING] Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000002A49544C6B0>: Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte')': /session/806516a88a2d7d3b36bcdef115ca9815/url
+2025-03-19 19:20:19,525 [WARNING] Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000002A49544C8D0>: Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte')': /session/806516a88a2d7d3b36bcdef115ca9815/url
+2025-03-19 19:20:23,607 [WARNING] ❌ Fehler beim Scrapen von B008KMUNRA, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-19 19:20:23,630 [INFO] 🔍 Überprüfe Produkt [32/90]: B0C9NRW7CP https://www.amazon.com/dp/B0C9NRW7CP?language=en_US
+2025-03-19 19:20:27,708 [WARNING] Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000002A49544CF30>: Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte')': /session/806516a88a2d7d3b36bcdef115ca9815/url
+2025-03-19 19:20:31,791 [WARNING] Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000002A49544D150>: Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte')': /session/806516a88a2d7d3b36bcdef115ca9815/url
+2025-03-19 19:20:35,859 [WARNING] Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000002A49544D370>: Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte')': /session/806516a88a2d7d3b36bcdef115ca9815/url
+2025-03-19 19:20:39,926 [WARNING] ❌ Fehler beim Scrapen von B0C9NRW7CP, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-19 19:20:39,948 [INFO] 🔍 Überprüfe Produkt [33/90]: B0C6L85Z16 https://www.amazon.com/dp/B0C6L85Z16?language=en_US
+2025-03-19 19:20:44,017 [WARNING] Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000002A49544D9D0>: Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte')': /session/806516a88a2d7d3b36bcdef115ca9815/url
+2025-03-19 19:20:48,073 [WARNING] Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000002A49544DBF0>: Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte')': /session/806516a88a2d7d3b36bcdef115ca9815/url
+2025-03-19 19:20:52,167 [WARNING] Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000002A49544DE10>: Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte')': /session/806516a88a2d7d3b36bcdef115ca9815/url
+2025-03-19 19:20:56,208 [WARNING] ❌ Fehler beim Scrapen von B0C6L85Z16, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-19 19:20:56,231 [INFO] 🔍 Überprüfe Produkt [34/90]: B0CSWHQ3PN https://www.amazon.com/dp/B0CSWHQ3PN?language=en_US
+2025-03-19 19:21:00,294 [WARNING] Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000002A49544E470>: Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte')': /session/806516a88a2d7d3b36bcdef115ca9815/url
+2025-03-19 19:21:04,372 [WARNING] Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000002A49544E690>: Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte')': /session/806516a88a2d7d3b36bcdef115ca9815/url
+2025-03-19 19:21:08,408 [WARNING] Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000002A49544E8B0>: Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte')': /session/806516a88a2d7d3b36bcdef115ca9815/url
+2025-03-19 19:21:12,488 [WARNING] ❌ Fehler beim Scrapen von B0CSWHQ3PN, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-19 19:21:12,533 [INFO] 🔍 Überprüfe Produkt [35/90]: B0CP9XPYX6 https://www.amazon.com/dp/B0CP9XPYX6?language=en_US
+2025-03-19 19:21:16,564 [WARNING] Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000002A49544EF10>: Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte')': /session/806516a88a2d7d3b36bcdef115ca9815/url
+2025-03-19 19:21:20,614 [WARNING] Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000002A49544F130>: Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte')': /session/806516a88a2d7d3b36bcdef115ca9815/url
+2025-03-19 19:21:24,654 [WARNING] Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000002A49544F350>: Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte')': /session/806516a88a2d7d3b36bcdef115ca9815/url
+2025-03-19 19:21:28,704 [WARNING] ❌ Fehler beim Scrapen von B0CP9XPYX6, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-19 19:21:28,722 [INFO] 🔍 Überprüfe Produkt [36/90]: B0BMPLP7K6 https://www.amazon.com/dp/B0BMPLP7K6?language=en_US
+2025-03-19 19:21:32,767 [WARNING] Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000002A49544F9B0>: Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte')': /session/806516a88a2d7d3b36bcdef115ca9815/url
+2025-03-19 19:21:36,819 [WARNING] Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000002A49544FBD0>: Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte')': /session/806516a88a2d7d3b36bcdef115ca9815/url
+2025-03-19 19:21:40,875 [WARNING] Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000002A49544FDF0>: Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte')': /session/806516a88a2d7d3b36bcdef115ca9815/url
+2025-03-19 19:21:44,931 [WARNING] ❌ Fehler beim Scrapen von B0BMPLP7K6, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-19 19:21:44,957 [INFO] 🔍 Überprüfe Produkt [37/90]: B008LQT7UO https://www.amazon.com/dp/B008LQT7UO?language=en_US
+2025-03-19 19:21:49,002 [WARNING] Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000002A495458490>: Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte')': /session/806516a88a2d7d3b36bcdef115ca9815/url
+2025-03-19 19:21:53,065 [WARNING] Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000002A4954586B0>: Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte')': /session/806516a88a2d7d3b36bcdef115ca9815/url
+2025-03-19 19:21:57,131 [WARNING] Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000002A4954588D0>: Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte')': /session/806516a88a2d7d3b36bcdef115ca9815/url
+2025-03-19 19:22:01,211 [WARNING] ❌ Fehler beim Scrapen von B008LQT7UO, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-19 19:22:01,246 [INFO] 🔍 Überprüfe Produkt [38/90]: B0BH9H71LK https://www.amazon.com/dp/B0BH9H71LK?language=en_US
+2025-03-19 19:22:05,282 [WARNING] Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000002A494E0BCE0>: Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte')': /session/806516a88a2d7d3b36bcdef115ca9815/url
+2025-03-19 19:23:49,498 [INFO] 🚀 Product Orchestrator gestartet.
+2025-03-19 19:23:53,609 [INFO] ✅ Verbindung zu Amazon erfolgreich hergestellt!
+2025-03-19 19:23:57,110 [INFO] 🍪 Setze Cookies...
+2025-03-19 19:23:57,134 [INFO] ✅ Cookies gesetzt!
+2025-03-19 19:23:57,135 [INFO] 🚀 Starte Product-Update...
+2025-03-19 19:23:57,152 [INFO] 🔍 Überprüfe Produkt [1/90]: B00GL2HMES https://www.amazon.com/dp/B00GL2HMES?language=en_US
+2025-03-19 19:24:10,381 [INFO] ⚡ Änderungen erkannt für B00GL2HMES: store, manufacturer
+2025-03-19 19:24:10,381 [ERROR] ❌ Fehler beim Scrapen von B00GL2HMES: 'store' is an invalid keyword argument for ProductChange
+2025-03-19 19:24:10,416 [INFO] ⚠️ Fehler, aber last_time_scraped für B00GL2HMES wurde trotzdem aktualisiert.
+2025-03-19 19:24:10,418 [INFO] 🔍 Überprüfe Produkt [2/90]: B002DYIZEO https://www.amazon.com/dp/B002DYIZEO?language=en_US
+2025-03-19 19:24:23,688 [INFO] ⚡ Änderungen erkannt für B002DYIZEO: store, manufacturer
+2025-03-19 19:24:23,688 [ERROR] ❌ Fehler beim Scrapen von B002DYIZEO: 'store' is an invalid keyword argument for ProductChange
+2025-03-19 19:24:23,717 [INFO] ⚠️ Fehler, aber last_time_scraped für B002DYIZEO wurde trotzdem aktualisiert.
+2025-03-19 19:24:23,718 [INFO] 🔍 Überprüfe Produkt [3/90]: B07978VPPH https://www.amazon.com/dp/B07978VPPH?language=en_US

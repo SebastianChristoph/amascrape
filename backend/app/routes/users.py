@@ -202,7 +202,6 @@ def delete_user_admin(user_id: int, db: Session = Depends(get_db), admin: User =
 
 @router.get("/admin/all-users")
 def get_all_users(db: Session = Depends(get_db), admin: User = Depends(get_current_user)):
-    print("get all users")
     if admin.username != "admin":
         raise HTTPException(status_code=403, detail="Zugriff verweigert. Nur Admins erlaubt.")
 

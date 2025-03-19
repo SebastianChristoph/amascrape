@@ -1,19 +1,28 @@
 import logging
 import time
 from datetime import datetime, timezone
-
+import sys
 from app.database import SessionLocal
 from app.models import Market, MarketChange, MarketCluster, Product, ProductChange
 from scraper.first_page_amazon_scraper import AmazonFirstPageScraper
 from sqlalchemy.orm import Session
 
-# Logging einrichten
-logging.basicConfig(level=logging.INFO, format="[%(levelname)s] %(message)s")
+LOG_FILE_MARKET = "market_scraping_log.txt"
 
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    handlers=[
+        logging.FileHandler(LOG_FILE_MARKET, mode="a", encoding="utf-8"),  # ✅ In Market-Log-Datei schreiben
+        logging.StreamHandler(sys.stdout)
+    ]
+)
 class MarketOrchestrator:
     def __init__(self):
         self.start_time = None
         self.market_times = []
+        open(LOG_FILE_MARKET, "w").close()  # ✅ Market-Logs beim Start leeren
+        print("MO: cleared file", LOG_FILE_MARKET)
 
     def format_time(self, seconds):
         minutes, seconds = divmod(seconds, 60)
