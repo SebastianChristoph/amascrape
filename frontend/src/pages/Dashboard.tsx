@@ -47,6 +47,22 @@ const pulseAnimation = keyframes`
   }
 `;
 
+// SVG Pattern as Base64 to avoid external file dependencies
+const backgroundPattern = `data:image/svg+xml;base64,${btoa(`
+  <svg width="50" height="50" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <pattern id="gridPattern" width="50" height="50" patternUnits="userSpaceOnUse">
+        <path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(33, 150, 243, 0.08)" stroke-width="1.5"/>
+        <circle cx="0" cy="0" r="2" fill="rgba(33, 150, 243, 0.08)"/>
+        <circle cx="50" cy="0" r="2" fill="rgba(33, 150, 243, 0.08)"/>
+        <circle cx="0" cy="50" r="2" fill="rgba(33, 150, 243, 0.08)"/>
+        <circle cx="25" cy="25" r="1.5" fill="rgba(33, 150, 243, 0.08)"/>
+      </pattern>
+    </defs>
+    <rect width="50" height="50" fill="url(#gridPattern)"/>
+  </svg>
+`)}`;
+
 const Dashboard: React.FC = () => {
   const navigate = useNavigate();
   const { showSnackbar } = useSnackbar();
@@ -197,206 +213,245 @@ const Dashboard: React.FC = () => {
   }
 
   return (
-    <Container maxWidth="xl">
-      {/* Overview Section */}
-      <Paper elevation={3} sx={{ marginBottom: 2, padding: 4 }}>
-        <Typography
-          variant="h5"
-          sx={{
-            mb: 4,
-            backgroundColor: "primary.main",
-            color: "white",
-            padding: 2,
-          }}
-        >
-          Market Clusters Overview
-        </Typography>
-        <Typography variant="subtitle1" sx={{ mb: 2 }}>
-          Here is a quick snapshot of your Total markets Revenue development
-        </Typography>
-
-        {loading ? (
-          <Box sx={{ display: "flex", justifyContent: "center", p: 4 }}>
-            <CircularProgress />
-          </Box>
-        ) : (
-          <>
-            <Grid container spacing={3} sx={{ mb: 4 }}>
-              <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-                <Box>
-                  <Typography variant="subtitle2" color="text.secondary">
-                    Total 30D Revenue
-                  </Typography>
-                  <Typography variant="h4">
-                    {new Intl.NumberFormat("en-US", {
-                      style: "currency",
-                      currency: "USD",
-                    }).format(dashboardData?.total_revenue || 0)}
-                  </Typography>
-                  {dashboardData?.clusters_without_revenue > 0 && (
-                    <Typography variant="caption" color="text.secondary">
-                      {dashboardData.clusters_without_revenue} cluster(s) still scraping
-                    </Typography>
-                  )}
-                </Box>
-              </Grid>
-              <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-                <Box>
-                  <Typography variant="subtitle2" color="text.secondary">
-                    30D Revenue change
-                  </Typography>
-                  <Box sx={{ height: 50 }}>
-                    {dashboardData?.revenue_development && (
-                      <CustomSparkLine data={dashboardData.revenue_development} />
-                    )}
-                  </Box>
-                </Box>
-              </Grid>
-              <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-                <Box>
-                  <Typography variant="subtitle2" color="text.secondary">
-                    Number of market clusters
-                  </Typography>
-                  <Typography variant="h4">
-                    {dashboardData?.total_clusters || 0}
-                  </Typography>
-                  {dashboardData?.clusters_without_revenue > 0 && (
-                    <Typography variant="caption" color="text.secondary">
-                      {dashboardData.clusters_without_revenue} cluster(s) still being scraped
-                    </Typography>
-                  )}
-                </Box>
-              </Grid>
-              <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-                <Box>
-                  <Typography variant="subtitle2" color="text.secondary">
-                    Number of tracked products
-                  </Typography>
-                  <Typography variant="h4">
-                    {dashboardData?.total_unique_products || 0}
-                  </Typography>
-                </Box>
-              </Grid>
-            </Grid>
-          </>
-        )}
-      </Paper>
-
-      {/* ✅ Zeigt aktive Scraping-Prozesse mit Keywords & Status an */}
-      {activeCluster && activeCluster.status === "processing" && (
-          <Paper elevation={3} sx={{ paddingY: 4, paddingX: 4, mt: 2, borderRadius: 3 }}>
+    <Box
+      sx={{
+        minHeight: "100vh",
+        position: "relative",
+        overflow: "hidden",
+        backgroundColor: "#f8f9fa",
+        "&::before": {
+          content: '""',
+          position: "absolute",
+          top: "-50%",
+          left: "-50%",
+          right: "-50%",
+          bottom: "-50%",
+          backgroundImage: `url("${backgroundPattern}")`,
+          backgroundRepeat: "repeat",
+          opacity: 0.6,
+          transform: "rotate(-10deg) scale(1.2)",
+          animation: "moveBackground 120s linear infinite",
+          filter: "contrast(100%)",
+          zIndex: 0,
+        },
+        "@keyframes moveBackground": {
+          "0%": {
+            transform: "rotate(-10deg) scale(1.2) translateY(0)",
+          },
+          "100%": {
+            transform: "rotate(-10deg) scale(1.2) translateY(-25%)",
+          },
+        },
+      }}
+    >
+      <Container 
+        maxWidth="lg" 
+        sx={{ 
+          position: "relative",
+          zIndex: 1,
+          py: 4
+        }}
+      >
+        {/* Overview Section */}
+        <Paper elevation={3} sx={{ marginBottom: 2, padding: 4 }}>
           <Typography
             variant="h5"
-            sx={{ mb: 2, display: "flex", alignItems: "center", gap: 1 }}
+            sx={{
+              mb: 4,
+              backgroundColor: "primary.main",
+              color: "white",
+              padding: 2,
+            }}
           >
-            <CircularProgress size={24} sx={{ color: "primary.main" }} />
-            Our robots are scraping for you...
+            Market Clusters Overview
+          </Typography>
+          <Typography variant="subtitle1" sx={{ mb: 2 }}>
+            Here is a quick snapshot of your Total markets Revenue development
           </Typography>
 
-          <Alert sx={{ mb: 2 }} severity="info">
-            We are scraping your markets to get a first impression of your
-            cluster. This usually takes some minutes. You can come back later,
-            inspect your other clusters or have a coffee.
-          </Alert>
-
-          <Box sx={{ flexGrow: 1 }}>
-            <Grid container spacing={3}>
-              <Card elevation={5} sx={{ cursor: "pointer", borderRadius: 3 }}>
-                <CardHeader
-                  sx={{ alignItems: "flex-start" }}
-                  avatar={<GrCluster size={28} color="#000010" />}
-                  title={
-                    <Typography variant="h6">
-                      {activeCluster.clustername}
-                    </Typography>
-                  }
-                />
-                <CardContent>
+          {loading ? (
+            <Box sx={{ display: "flex", justifyContent: "center", p: 4 }}>
+              <CircularProgress />
+            </Box>
+          ) : (
+            <>
+              <Grid container spacing={3} sx={{ mb: 4 }}>
+                <Grid size={{ xs: 12, sm: 6, md: 3 }}>
                   <Box>
-                    <Typography variant="body1">Scraping status:</Typography>
-                    <Box
-                      sx={{ display: "flex", flexDirection: "column", gap: 2 }}
-                    >
-                      {Object.entries(activeCluster.keywords).map(
-                        ([keyword, status]) => (
-                          <Box
-                            key={keyword}
-                            sx={{
-                              display: "flex",
-                              alignItems: "center",
-                              gap: 1,
-                            }}
-                          >
-                            {status === "done" ? (
-                              <AiOutlineCheckCircle size={18} color="green" />
-                            ) : (
-                              <CircularProgress
-                                size={16}
-                                sx={{ color: "primary.main" }}
-                              />
-                            )}
-                            <Typography variant="body2">{keyword}</Typography>
-                          </Box>
-                        )
+                    <Typography variant="subtitle2" color="text.secondary">
+                      Total 30D Revenue
+                    </Typography>
+                    <Typography variant="h4">
+                      {new Intl.NumberFormat("en-US", {
+                        style: "currency",
+                        currency: "USD",
+                      }).format(dashboardData?.total_revenue || 0)}
+                    </Typography>
+                    {dashboardData?.clusters_without_revenue > 0 && (
+                      <Typography variant="caption" color="text.secondary">
+                        {dashboardData.clusters_without_revenue} cluster(s) still scraping
+                      </Typography>
+                    )}
+                  </Box>
+                </Grid>
+                <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+                  <Box>
+                    <Typography variant="subtitle2" color="text.secondary">
+                      30D Revenue change
+                    </Typography>
+                    <Box sx={{ height: 50 }}>
+                      {dashboardData?.revenue_development && (
+                        <CustomSparkLine data={dashboardData.revenue_development} />
                       )}
                     </Box>
                   </Box>
-                </CardContent>
-              </Card>
-            </Grid>
-          </Box>
+                </Grid>
+                <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+                  <Box>
+                    <Typography variant="subtitle2" color="text.secondary">
+                      Number of market clusters
+                    </Typography>
+                    <Typography variant="h4">
+                      {dashboardData?.total_clusters || 0}
+                    </Typography>
+                    {dashboardData?.clusters_without_revenue > 0 && (
+                      <Typography variant="caption" color="text.secondary">
+                        {dashboardData.clusters_without_revenue} cluster(s) still being scraped
+                      </Typography>
+                    )}
+                  </Box>
+                </Grid>
+                <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+                  <Box>
+                    <Typography variant="subtitle2" color="text.secondary">
+                      Number of tracked products
+                    </Typography>
+                    <Typography variant="h4">
+                      {dashboardData?.total_unique_products || 0}
+                    </Typography>
+                  </Box>
+                </Grid>
+              </Grid>
+            </>
+          )}
         </Paper>
-      )}
 
-      {/* ✅ Zeigt alle Market-Cluster an */}
-      <Paper elevation={3} sx={{ paddingY: 4, paddingX: 4, mt: 2 }}>
-        <Typography variant="h5" sx={{ mb: 3, backgroundColor: "primary.main", p: 2, color: "white" }}>
-          My Market Clusters
-        </Typography>
+        {/* ✅ Zeigt aktive Scraping-Prozesse mit Keywords & Status an */}
+        {activeCluster && activeCluster.status === "processing" && (
+            <Paper elevation={3} sx={{ paddingY: 4, paddingX: 4, mt: 2, borderRadius: 3 }}>
+            <Typography
+              variant="h5"
+              sx={{ mb: 2, display: "flex", alignItems: "center", gap: 1 }}
+            >
+              <CircularProgress size={24} sx={{ color: "primary.main" }} />
+              Our robots are scraping for you...
+            </Typography>
 
-        {loading ? (
-          <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "200px" }}>
-            <CircularProgress size={80} color="primary" />
-          </Box>
-        ) : (
-          <Box sx={{ flexGrow: 1 }}>
-            <Grid container spacing={3}>
-              {marketClusters.length > 0 ? (
-                marketClusters.map((cluster) => (
-                  <Grid key={cluster.id} size={{ xs: 12, sm: 12, lg: 6 }}>
-                    <ClusterCard
-                      cluster={cluster}
-                      onClick={() => navigate(`/cluster/${cluster.id}`)}
-                      deletingCluster={deletingCluster}
-                      setMarketClusters={setMarketClusters}
-                      setDeletingCluster={setDeletingCluster}
-                      totalRevenue={cluster.total_revenue}
-                      fetchMarketClusters={fetchData}
-                    />
-                  </Grid>
-                ))
-              ) : (
-                <Typography sx={{ textAlign: "center", mt: 4 }} variant="body1">
-                  No market clusters found.
-                </Typography>
-              )}
-            </Grid>
-          </Box>
+            <Alert sx={{ mb: 2 }} severity="info">
+              We are scraping your markets to get a first impression of your
+              cluster. This usually takes some minutes. You can come back later,
+              inspect your other clusters or have a coffee.
+            </Alert>
+
+            <Box sx={{ flexGrow: 1 }}>
+              <Grid container spacing={3}>
+                <Card elevation={5} sx={{ cursor: "pointer", borderRadius: 3 }}>
+                  <CardHeader
+                    sx={{ alignItems: "flex-start" }}
+                    avatar={<GrCluster size={28} color="#000010" />}
+                    title={
+                      <Typography variant="h6">
+                        {activeCluster.clustername}
+                      </Typography>
+                    }
+                  />
+                  <CardContent>
+                    <Box>
+                      <Typography variant="body1">Scraping status:</Typography>
+                      <Box
+                        sx={{ display: "flex", flexDirection: "column", gap: 2 }}
+                      >
+                        {Object.entries(activeCluster.keywords).map(
+                          ([keyword, status]) => (
+                            <Box
+                              key={keyword}
+                              sx={{
+                                display: "flex",
+                                alignItems: "center",
+                                gap: 1,
+                              }}
+                            >
+                              {status === "done" ? (
+                                <AiOutlineCheckCircle size={18} color="green" />
+                              ) : (
+                                <CircularProgress
+                                  size={16}
+                                  sx={{ color: "primary.main" }}
+                                />
+                              )}
+                              <Typography variant="body2">{keyword}</Typography>
+                            </Box>
+                          )
+                        )}
+                      </Box>
+                    </Box>
+                  </CardContent>
+                </Card>
+              </Grid>
+            </Box>
+          </Paper>
         )}
 
-        <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-          <Button
-            sx={{ mt: 2, backgroundColor: "primary.main" }}
-            variant="contained"
-            startIcon={<MdAdd />}
-            onClick={() => navigate("/add-market-cluster")}
-            disabled={isFetching}
-          >
-            Add Market Cluster
-          </Button>
-        </Box>
-      </Paper>
-    </Container>
+        {/* ✅ Zeigt alle Market-Cluster an */}
+        <Paper elevation={3} sx={{ paddingY: 4, paddingX: 4, mt: 2 }}>
+          <Typography variant="h5" sx={{ mb: 3, backgroundColor: "primary.main", p: 2, color: "white" }}>
+            My Market Clusters
+          </Typography>
+
+          {loading ? (
+            <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "200px" }}>
+              <CircularProgress size={80} color="primary" />
+            </Box>
+          ) : (
+            <Box sx={{ flexGrow: 1 }}>
+              <Grid container spacing={3}>
+                {marketClusters.length > 0 ? (
+                  marketClusters.map((cluster) => (
+                    <Grid key={cluster.id} size={{ xs: 12, sm: 12, lg: 6 }}>
+                      <ClusterCard
+                        cluster={cluster}
+                        onClick={() => navigate(`/cluster/${cluster.id}`)}
+                        deletingCluster={deletingCluster}
+                        setMarketClusters={setMarketClusters}
+                        setDeletingCluster={setDeletingCluster}
+                        totalRevenue={cluster.total_revenue}
+                        fetchMarketClusters={fetchData}
+                      />
+                    </Grid>
+                  ))
+                ) : (
+                  <Typography sx={{ textAlign: "center", mt: 4 }} variant="body1">
+                    No market clusters found.
+                  </Typography>
+                )}
+              </Grid>
+            </Box>
+          )}
+
+          <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+            <Button
+              sx={{ mt: 2, backgroundColor: "primary.main" }}
+              variant="contained"
+              startIcon={<MdAdd />}
+              onClick={() => navigate("/add-market-cluster")}
+              disabled={isFetching}
+            >
+              Add Market Cluster
+            </Button>
+          </Box>
+        </Paper>
+      </Container>
+    </Box>
   );
 };
 
