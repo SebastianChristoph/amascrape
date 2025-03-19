@@ -257,6 +257,7 @@ async def get_market_cluster_details(
                 sparkline_main_rank = get_sparkline_for_product(db, product.asin, "main_category_rank")
                 sparkline_second_rank = get_sparkline_for_product(db, product.asin, "second_category_rank")
                 sparkline_total = get_sparkline_for_product(db, product.asin, "total")
+                sparkline_blm = get_sparkline_for_product(db, product.asin, "blm")
 
                 if latest_product_change and latest_product_change.total:
                     if latest_product_change.total > top_product["revenue"]:
@@ -281,6 +282,7 @@ async def get_market_cluster_details(
                     "sparkline_main_rank": sparkline_main_rank,
                     "sparkline_second_rank": sparkline_second_rank,
                     "sparkline_total": sparkline_total,
+                    "sparkline_blm": sparkline_blm,
                 }
 
                 market_data["products"].append(product_data)

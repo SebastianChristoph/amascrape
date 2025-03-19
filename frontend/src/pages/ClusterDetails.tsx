@@ -469,6 +469,20 @@ export default function ClusterDetails() {
       renderCell: (params) => renderWithNoData(params.value, formatNumber),
     },
     {
+      field: "chart_blm",
+      headerName: "BLM Trend",
+      width: 100,
+      renderCell: (params) => {
+        return params.row.sparkline_price ? (
+          <Box sx={{ mt: 0 }}>
+            <CustomSparkLine data={params.row.sparkline_blm} />
+          </Box>
+        ) : (
+          <Chip label="No Data" color="default" size="small" />
+        );
+      },
+    },
+    {
       field: "chart_total",
       headerName: "Total Trend",
       width: 100,
@@ -1154,6 +1168,7 @@ export default function ClusterDetails() {
                 sparkline_second_rank: product.sparkline_second_rank,
                 sparkline_price: product.sparkline_price,
                 sparkline_total: product.sparkline_total,
+                sparkline_blm: product.sparkline_blm,
                 isMyProduct: product.isMyProduct, // ✅ Status für Zeilen-Highlight
               }))}
               columns={columns}
