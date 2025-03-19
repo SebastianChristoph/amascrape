@@ -17,6 +17,7 @@ import { useNavigate } from "react-router-dom";
 import { MdAdd, MdDelete, MdInfo } from "react-icons/md";
 import { useSnackbar } from "../providers/SnackbarProvider";
 import MarketService from "../services/MarketService";
+import { commonBackgroundStyle, moveBackgroundKeyframes } from "../components/BackgroundPattern";
 
 const AddMarketCluster: React.FC = () => {
   const navigate = useNavigate();
@@ -141,139 +142,154 @@ const AddMarketCluster: React.FC = () => {
   };
 
   return (
-    <Container maxWidth="md">
-      <Paper elevation={3} sx={{ p: 4, mt: 4 }}>
-        <Typography variant="h4" gutterBottom sx={{ color: "primary.main" }}>
-          Create New Market Cluster
-        </Typography>
-        <Typography variant="body1" color="text.secondary" sx={{ mb: 4 }}>
-          Define your market cluster by adding keywords. You can add them one by one or use a comma-separated list.
-        </Typography>
+    <Box
+      sx={{
+        minHeight: "100vh",
+        position: "relative",
+        overflow: "hidden",
+        backgroundColor: "#f8f9fa",
+        "&::before": {
+          ...commonBackgroundStyle,
+          opacity: 0.6,
+          filter: "contrast(100%)",
+        },
+        "@keyframes moveBackground": moveBackgroundKeyframes,
+      }}
+    >
+      <Container maxWidth="lg" sx={{ position: "relative", zIndex: 1, py: 4 }}>
+        <Paper elevation={3} sx={{ p: 4, mt: 4 }}>
+          <Typography variant="h4" gutterBottom sx={{ color: "primary.main" }}>
+            Create New Market Cluster
+          </Typography>
+          <Typography variant="body1" color="text.secondary" sx={{ mb: 4 }}>
+            Define your market cluster by adding keywords. You can add them one by one or use a comma-separated list.
+          </Typography>
 
-        {/* ✅ Falls Scraping läuft, zeige eine Warnung an */}
-        {isScraping ? (
-          <Alert severity="warning" sx={{ mb: 4 }}>
-            🚧 Ein Scraping-Prozess läuft bereits. Warte, bis dieser abgeschlossen ist, bevor du einen neuen Cluster erstellst.
-          </Alert>
-        ) : (
-          <form onSubmit={handleSubmit}>
-            <Grid container spacing={4}>
-              {/* Cluster Name Section */}
-              <Grid size={{ xs: 12 }}>
-                <TextField
-                  fullWidth
-                  label="Cluster Title"
-                  variant="outlined"
-                  value={clusterName}
-                  onChange={handleTitleChange}
-                  required
-                  placeholder="e.g., Electronics Accessories"
-                />
-              </Grid>
+          {/* ✅ Falls Scraping läuft, zeige eine Warnung an */}
+          {isScraping ? (
+            <Alert severity="warning" sx={{ mb: 4 }}>
+              🚧 Ein Scraping-Prozess läuft bereits. Warte, bis dieser abgeschlossen ist, bevor du einen neuen Cluster erstellst.
+            </Alert>
+          ) : (
+            <form onSubmit={handleSubmit}>
+              <Grid container spacing={4}>
+                {/* Cluster Name Section */}
+                <Grid size={{ xs: 12 }}>
+                  <TextField
+                    fullWidth
+                    label="Cluster Title"
+                    variant="outlined"
+                    value={clusterName}
+                    onChange={handleTitleChange}
+                    required
+                    placeholder="e.g., Electronics Accessories"
+                  />
+                </Grid>
 
-              {/* Bulk Input Section */}
-              <Grid size={{ xs: 12 }}>
-                <Paper variant="outlined" sx={{ p: 2, backgroundColor: "#f8f9fa" }}>
-                  <Box sx={{ display: "flex", alignItems: "center", gap: 1, mb: 2 }}>
-                    <Typography variant="subtitle1" sx={{ fontWeight: 500 }}>
-                      Bulk Add Keywords
+                {/* Bulk Input Section */}
+                <Grid size={{ xs: 12 }}>
+                  <Paper variant="outlined" sx={{ p: 2, backgroundColor: "#f8f9fa" }}>
+                    <Box sx={{ display: "flex", alignItems: "center", gap: 1, mb: 2 }}>
+                      <Typography variant="subtitle1" sx={{ fontWeight: 500 }}>
+                        Bulk Add Keywords
+                      </Typography>
+                      <Tooltip title="Enter multiple keywords separated by commas">
+                        <IconButton size="small">
+                          <MdInfo />
+                        </IconButton>
+                      </Tooltip>
+                    </Box>
+                    <Box sx={{ display: "flex", gap: 1 }}>
+                      <TextField
+                        fullWidth
+                        label="Comma-separated keywords"
+                        value={newKeyword}
+                        onChange={(e) => setNewKeyword(e.target.value)}
+                        placeholder="e.g., wireless earbuds, bluetooth headphones, portable speakers"
+                        variant="outlined"
+                        size="small"
+                      />
+                      <Button
+                        variant="contained"
+                        onClick={handleAddKeyword}
+                        startIcon={<MdAdd />}
+                        disabled={!newKeyword.trim()}
+                        sx={{
+                          minWidth: '120px',
+                          whiteSpace: 'nowrap'
+                        }}
+                      >
+                        {isListInput ? "Add List" : "Add"}
+                      </Button>
+                    </Box>
+                  </Paper>
+                </Grid>
+
+                {/* Keywords List */}
+                <Grid size={{ xs: 12 }}>
+                  <Paper variant="outlined" sx={{ p: 2 }}>
+                    <Typography variant="subtitle1" sx={{ mb: 2, fontWeight: 500 }}>
+                      Added Keywords ({keywords.length}/5)
                     </Typography>
-                    <Tooltip title="Enter multiple keywords separated by commas">
-                      <IconButton size="small">
-                        <MdInfo />
-                      </IconButton>
-                    </Tooltip>
-                  </Box>
-                  <Box sx={{ display: "flex", gap: 1 }}>
-                    <TextField
-                      fullWidth
-                      label="Comma-separated keywords"
-                      value={newKeyword}
-                      onChange={(e) => setNewKeyword(e.target.value)}
-                      placeholder="e.g., wireless earbuds, bluetooth headphones, portable speakers"
-                      variant="outlined"
-                      size="small"
-                    />
+                    {keywords.length === 0 ? (
+                      <Alert severity="info">
+                        No keywords added yet. Add keywords using the form above or use the bulk input option.
+                      </Alert>
+                    ) : (
+                      <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
+                        {keywords.map((keyword, index) => (
+                          <Paper
+                            key={index}
+                            variant="outlined"
+                            sx={{
+                              p: 1,
+                              display: "flex",
+                              alignItems: "center",
+                              gap: 1,
+                              backgroundColor: "primary.light",
+                              color: "white",
+                            }}
+                          >
+                            <Typography variant="body2">{keyword}</Typography>
+                            <IconButton
+                              size="small"
+                              onClick={() => handleRemoveKeyword(keyword)}
+                              sx={{ color: "white" }}
+                            >
+                              <MdDelete />
+                            </IconButton>
+                          </Paper>
+                        ))}
+                      </Box>
+                    )}
+                  </Paper>
+                </Grid>
+
+                {/* Submit Button */}
+                <Grid size={{ xs: 12 }}>
+                  <Box sx={{ display: "flex", justifyContent: "flex-end", gap: 2 }}>
                     <Button
-                      variant="contained"
-                      onClick={handleAddKeyword}
-                      startIcon={<MdAdd />}
-                      disabled={!newKeyword.trim()}
-                      sx={{
-                        minWidth: '120px',
-                        whiteSpace: 'nowrap'
-                      }}
+                      variant="outlined"
+                      onClick={() => navigate("/dashboard")}
                     >
-                      {isListInput ? "Add List" : "Add"}
+                      Cancel
+                    </Button>
+                    <Button
+                      type="submit"
+                      variant="contained"
+                      color="primary"
+                      disabled={!clusterName.trim() || keywords.length === 0}
+                    >
+                      Create Market Cluster
                     </Button>
                   </Box>
-                </Paper>
+                </Grid>
               </Grid>
-
-              {/* Keywords List */}
-              <Grid size={{ xs: 12 }}>
-                <Paper variant="outlined" sx={{ p: 2 }}>
-                  <Typography variant="subtitle1" sx={{ mb: 2, fontWeight: 500 }}>
-                    Added Keywords ({keywords.length}/5)
-                  </Typography>
-                  {keywords.length === 0 ? (
-                    <Alert severity="info">
-                      No keywords added yet. Add keywords using the form above or use the bulk input option.
-                    </Alert>
-                  ) : (
-                    <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
-                      {keywords.map((keyword, index) => (
-                        <Paper
-                          key={index}
-                          variant="outlined"
-                          sx={{
-                            p: 1,
-                            display: "flex",
-                            alignItems: "center",
-                            gap: 1,
-                            backgroundColor: "primary.light",
-                            color: "white",
-                          }}
-                        >
-                          <Typography variant="body2">{keyword}</Typography>
-                          <IconButton
-                            size="small"
-                            onClick={() => handleRemoveKeyword(keyword)}
-                            sx={{ color: "white" }}
-                          >
-                            <MdDelete />
-                          </IconButton>
-                        </Paper>
-                      ))}
-                    </Box>
-                  )}
-                </Paper>
-              </Grid>
-
-              {/* Submit Button */}
-              <Grid size={{ xs: 12 }}>
-                <Box sx={{ display: "flex", justifyContent: "flex-end", gap: 2 }}>
-                  <Button
-                    variant="outlined"
-                    onClick={() => navigate("/dashboard")}
-                  >
-                    Cancel
-                  </Button>
-                  <Button
-                    type="submit"
-                    variant="contained"
-                    color="primary"
-                    disabled={!clusterName.trim() || keywords.length === 0}
-                  >
-                    Create Market Cluster
-                  </Button>
-                </Box>
-              </Grid>
-            </Grid>
-          </form>
-        )}
-      </Paper>
-    </Container>
+            </form>
+          )}
+        </Paper>
+      </Container>
+    </Box>
   );
 };
 
