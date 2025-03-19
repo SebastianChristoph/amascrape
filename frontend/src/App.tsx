@@ -16,14 +16,16 @@ import { SnackbarProvider } from "./providers/SnackbarProvider";
 import UserService from "./services/UserService";
 import { lightTheme } from "./theme";
 import Register from "./pages/Register";
+import Admin from "./pages/Admin"; // ✅ Import der Admin-Seite
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(
-    UserService.isAuthenticated()
-  );
+  const [isAuthenticated, setIsAuthenticated] = useState(UserService.isAuthenticated());
+  const [user, setUser] = useState(UserService.getUser()); // 🔹 User in State speichern
 
   useEffect(() => {
     setIsAuthenticated(UserService.isAuthenticated());
+    setUser(UserService.getUser());
+    console.log("User aktualisiert:", UserService.getUser()); // 🔹 Hier siehst du, ob der Benutzer korrekt geladen wird
   }, []);
 
   return (
@@ -34,28 +36,29 @@ function App() {
           <Routes>
             <Route
               path="/"
-              element={
-                isAuthenticated ? <Navigate to="/dashboard" /> : <Login />
-              }
+              element={isAuthenticated ? <Navigate to="/dashboard" /> : <Login />}
             />
-              <Route path="/register" element={<Register />} /> {/* 📌 Neue Route */}
+            <Route path="/register" element={<Register />} />
+
             <Route element={<Layout setIsAuthenticated={setIsAuthenticated} />}>
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/cluster/:clusterId" element={<ClusterDetails />} />
+              <Route path="/add-market-cluster" element={<AddMarketCluster />} />
+              
+              {/* ✅ Geschützte Admin-Route */}
               <Route
-                path="/add-market-cluster"
-                element={<AddMarketCluster />}
+                path="/admin"
+                element={user?.username === "admin" ? <Admin /> : <Navigate to="/dashboard" />}
               />
             </Route>
-            <Route
-              path="*"
-              element={<Navigate to={isAuthenticated ? "/dashboard" : "/"} />}
-            />
+
+            <Route path="*" element={<Navigate to={isAuthenticated ? "/dashboard" : "/"} />} />
           </Routes>
         </Router>
       </SnackbarProvider>
     </ThemeProvider>
   );
 }
+
 
 export default App;

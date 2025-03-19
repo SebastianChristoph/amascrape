@@ -1,9 +1,10 @@
-import { AppBar, Toolbar, Button, Box, Typography, Tooltip, Avatar } from "@mui/material";
+import { AppBar, Toolbar, Button, Box, Typography, Tooltip, Avatar, IconButton } from "@mui/material";
 import { Outlet, Link, useLocation, useNavigate } from "react-router-dom";
 import UserService from "../services/UserService";
 import { useState } from "react";
 import { AiFillAmazonCircle } from "react-icons/ai";
 import { MdLogout } from "react-icons/md";
+import { FiSettings } from "react-icons/fi";
 
 export default function Layout({ setIsAuthenticated }: { setIsAuthenticated: (auth: boolean) => void }) {
   const navigate = useNavigate();
@@ -42,12 +43,27 @@ export default function Layout({ setIsAuthenticated }: { setIsAuthenticated: (au
           {/* 🔹 Benutzerinfo & Logout */}
           {isLoggedIn && (
             <Box sx={{ display: "flex", alignItems: "center", gap: 4, color: "white" }}>
-              <Avatar sx={{backgroundColor: "primary.main", boxShadow: 3, fontSize: 16}}>
-                AS
-              </Avatar>
+              
               <Typography sx={{ mt: 0.3 }} color="white" variant="body2">
-                {user?.sub}
+                {user?.username}
               </Typography>
+
+                {/* ✅ Admin-Zahnrad-Icon */}
+                {user?.username === "admin" && (
+  <Tooltip title="Admin Panel">
+    <IconButton
+      color="inherit"
+      onClick={() => {
+        console.log("Aktueller Benutzer:", user?.username);
+        navigate("/admin"); // ⬅ Direkt zur Admin-Seite navigieren
+      }}
+    >
+      <FiSettings size={25} />
+    </IconButton>
+  </Tooltip>
+)}
+
+              
               <Tooltip title="Logout">
               <Button color="inherit" onClick={handleLogout}>
                   <MdLogout size={25} />

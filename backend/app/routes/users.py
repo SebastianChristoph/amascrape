@@ -3,7 +3,7 @@ import os  # 📌 Fehlender Import
 from datetime import datetime, timezone
 
 from app.auth import (authenticate_user, create_access_token, generate_verification_token, get_current_user, get_expiration_time,
-                      get_password_hash)
+                      get_password_hash, is_admin)
 from app.database import get_db
 from app.models import User
 from fastapi import APIRouter, Depends, HTTPException, status
@@ -138,5 +138,16 @@ def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depend
             headers={"WWW-Authenticate": "Bearer"},
         )
 
-    access_token = create_access_token({"sub": user.username})
+    access_token = create_access_token({"username": user.username})
     return {"access_token": access_token, "token_type": "bearer"}
+
+@router.get("/admin")
+def admin_access(user: User = Depends(get_current_user)):
+    print("auf route admin")
+    if not is_admin(user):
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Zugriff verweigert. Nur Admins erlaubt."
+        )
+    return {"message": "Willkommen im Admin-Bereich!"}
+

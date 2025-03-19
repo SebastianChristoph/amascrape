@@ -1,7 +1,7 @@
 import { formatError } from '../utils/errorFormatting';
 
 interface DecodedToken {
-  sub: string; // Benutzername
+  username: string; // Benutzername
   exp: number; // Ablaufzeitpunkt des Tokens (Unix Timestamp)
   iat?: number; // Zeitpunkt der Erstellung (optional)
   [key: string]: any; // Falls das Token weitere Felder enthält

@@ -18,6 +18,10 @@ ALGORITHM = os.getenv("ALGORITHM", "HS256")
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="users/token")
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
+def is_admin(user: User) -> bool:
+    print("isAdmin", user)
+    return user.username == "admin"
+
 
 def get_password_hash(password: str) -> str:
     return pwd_context.hash(password)
@@ -67,7 +71,7 @@ def authenticate_user(db: Session, username: str, password: str):
 def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
-        username: str = payload.get("sub")
+        username: str = payload.get("username")
         if username is None:
             raise HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED,

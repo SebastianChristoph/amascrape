@@ -228,7 +228,7 @@ async def get_sparkline_data_for_market_cluster(cluster_id: int, db: Session = D
         (min(dates) for dates in latest_market_values_per_day.values() if dates),
         default=cutoff_date.date()
     )
-    print("🗓️ Earliest common date:", earliest_common_date)
+    #print("🗓️ Earliest common date:", earliest_common_date)
 
     # 📌 Heute als Enddatum setzen
     today = datetime.now(timezone.utc).date()
@@ -236,7 +236,7 @@ async def get_sparkline_data_for_market_cluster(cluster_id: int, db: Session = D
     # 📌 Letzte bekannte Werte für jeden Markt initialisieren
     last_market_values = {market.id: 0 for market in markets}
 
-    print("🔄 Initial last market values:", last_market_values)
+    #print("🔄 Initial last market values:", last_market_values)
 
     # 📌 Sparkline-Data initialisieren
     sparkline_data = []
@@ -249,7 +249,7 @@ async def get_sparkline_data_for_market_cluster(cluster_id: int, db: Session = D
         for market in markets:
             if current_date in latest_market_values_per_day[market.id]:
                 last_market_values[market.id] = latest_market_values_per_day[market.id][current_date]
-                print(f"✅ Markt {market.id} - Letzter Wert für {current_date}: {last_market_values[market.id]}")
+                #print(f"✅ Markt {market.id} - Letzter Wert für {current_date}: {last_market_values[market.id]}")
             else:
                 print(f"⚠️ Markt {market.id} - Keine Änderung für {current_date}, behalte letzten Wert: {last_market_values[market.id]}")
 
@@ -258,14 +258,14 @@ async def get_sparkline_data_for_market_cluster(cluster_id: int, db: Session = D
 
         # 📌 Speichere den Wert in der Sparkline-Liste
         sparkline_data.append(int(total_revenue))
-        print(f"📊 Sparkline [{current_date}]: {total_revenue}")
+        #print(f"📊 Sparkline [{current_date}]: {total_revenue}")
 
         # ⏩ Zum nächsten Tag wechseln
         current_date += timedelta(days=1)
 
     if len(sparkline_data) == 1:
         sparkline_data.append(sparkline_data[0])
-    print("📈 Final Sparkline Data:", sparkline_data)
+    #print("📈 Final Sparkline Data:", sparkline_data)
     return sparkline_data  # 🔥 KEINE ZEITACHSE – nur die Liste mit Werten
 
 
