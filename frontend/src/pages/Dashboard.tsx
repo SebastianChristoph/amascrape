@@ -9,6 +9,7 @@ import {
   Container,
   Paper,
   Typography,
+  Fab,
 } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import { useEffect, useState } from "react";
@@ -421,20 +422,33 @@ const Dashboard: React.FC = () => {
               </Grid>
             </Box>
           )}
-
-          <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-            <Button
-              sx={{ mt: 2, backgroundColor: "primary.main" }}
-              variant="contained"
-              startIcon={<MdAdd />}
-              onClick={() => navigate("/add-market-cluster")}
-              disabled={isFetching}
-            >
-              Add Market Cluster
-            </Button>
-          </Box>
         </Paper>
       </Container>
+      
+      {/* Extended Add Market Cluster Button */}
+      <Button
+        variant="contained"
+        color="primary"
+        startIcon={<MdAdd size={24} />}
+        onClick={() => navigate('/add-market-cluster')}
+        sx={{
+          position: 'fixed',
+          bottom: 32,
+          right: 32,
+          padding: '12px 24px',
+          borderRadius: '28px',
+          boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+          backgroundColor: 'primary.main',
+          '&:hover': {
+            backgroundColor: 'primary.dark',
+            transform: 'scale(1.05)',
+            transition: 'all 0.2s ease-in-out',
+            boxShadow: '0 6px 16px rgba(0,0,0,0.2)',
+          },
+        }}
+      >
+        Add Market Cluster
+      </Button>
     </Box>
   );
 };
