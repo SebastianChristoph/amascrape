@@ -107,7 +107,7 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
         }}
         onClick={onClick}
       >
-        <CardContent sx={{ p: 3 }}>
+        <CardContent sx={{ p: 3 , minHeight: 350}}>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 3 }}>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
               <Box
