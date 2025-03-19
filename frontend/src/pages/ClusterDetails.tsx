@@ -603,7 +603,10 @@ export default function ClusterDetails() {
                     borderRadius: 2,
                     display: 'flex',
                     alignItems: 'center',
-                    gap: 2,
+                    gap: 2,transition: 'transform 0.2s',
+                    '&:hover': {
+                      transform: 'translateY(-4px)',
+                    },
                   }}
                 >
                   <Box
@@ -641,7 +644,10 @@ export default function ClusterDetails() {
                     borderRadius: 2,
                     display: 'flex',
                     alignItems: 'center',
-                    gap: 2,
+                    gap: 2,transition: 'transform 0.2s',
+                    '&:hover': {
+                      transform: 'translateY(-4px)',
+                    },
                   }}
                 >
                   <Box
@@ -679,7 +685,10 @@ export default function ClusterDetails() {
                     borderRadius: 2,
                     display: 'flex',
                     alignItems: 'center',
-                    gap: 2,
+                    gap: 2,transition: 'transform 0.2s',
+                    '&:hover': {
+                      transform: 'translateY(-4px)',
+                    },
                   }}
                 >
                   <Box
@@ -728,7 +737,10 @@ export default function ClusterDetails() {
                     borderRadius: 2,
                     display: 'flex',
                     alignItems: 'center',
-                    gap: 2,
+                    gap: 2,transition: 'transform 0.2s',
+                    '&:hover': {
+                      transform: 'translateY(-4px)',
+                    },
                   }}
                 >
                   <Box
@@ -766,7 +778,10 @@ export default function ClusterDetails() {
                     borderRadius: 2,
                     display: 'flex',
                     alignItems: 'center',
-                    gap: 2,
+                    gap: 2,transition: 'transform 0.2s',
+                    '&:hover': {
+                      transform: 'translateY(-4px)',
+                    },
                   }}
                 >
                   <Box
@@ -804,7 +819,10 @@ export default function ClusterDetails() {
                     borderRadius: 2,
                     display: 'flex',
                     alignItems: 'center',
-                    gap: 2,
+                    gap: 2,transition: 'transform 0.2s',
+                    '&:hover': {
+                      transform: 'translateY(-4px)',
+                    },
                   }}
                 >
                   <Box
@@ -1223,13 +1241,13 @@ export default function ClusterDetails() {
                 <>
                   <Grid container spacing={4}>
                     {/* Left side - Market Metrics */}
-                    <Grid size={{ xs: 12, md: 6 }}>
+                    <Grid size={{ xs: 12, md: 6 }} >
                       <Typography variant="h6" color="text.secondary" gutterBottom>
                         Market Metrics
                       </Typography>
-                      <Grid container spacing={2}>
+                      <Grid container spacing={2}  sx={{height: 160}}>
                         {/* Market Revenue Card */}
-                        <Grid size={12}>
+                        <Grid size={4}>
                           <Paper
                             elevation={1}
                             sx={{
@@ -1239,7 +1257,10 @@ export default function ClusterDetails() {
                               borderRadius: 2,
                               display: 'flex',
                               alignItems: 'center',
-                              gap: 2,
+                              gap: 2,transition: 'transform 0.2s',
+                              '&:hover': {
+                                transform: 'translateY(-4px)',
+                              },
                             }}
                           >
                             <Box
@@ -1272,7 +1293,7 @@ export default function ClusterDetails() {
                         </Grid>
 
                         {/* Most Expensive Card */}
-                        <Grid size={12}>
+                        <Grid size={4}>
                           <Paper
                             elevation={1}
                             sx={{
@@ -1282,7 +1303,10 @@ export default function ClusterDetails() {
                               borderRadius: 2,
                               display: 'flex',
                               alignItems: 'center',
-                              gap: 2,
+                              gap: 2,transition: 'transform 0.2s',
+                              '&:hover': {
+                                transform: 'translateY(-4px)',
+                              },
                             }}
                           >
                             <Box
@@ -1331,7 +1355,7 @@ export default function ClusterDetails() {
                         </Grid>
 
                         {/* Least Expensive Card */}
-                        <Grid size={12}>
+                        <Grid size={4}>
                           <Paper
                             elevation={1}
                             sx={{
@@ -1341,7 +1365,10 @@ export default function ClusterDetails() {
                               borderRadius: 2,
                               display: 'flex',
                               alignItems: 'center',
-                              gap: 2,
+                              gap: 2,transition: 'transform 0.2s',
+                              '&:hover': {
+                                transform: 'translateY(-4px)',
+                              },
                             }}
                           >
                             <Box
@@ -1402,7 +1429,7 @@ export default function ClusterDetails() {
                         ) ? (
                           <>
                             {/* Products Card */}
-                            <Grid size={12}>
+                            <Grid size={4}>
                               <Paper
                                 elevation={1}
                                 sx={{
@@ -1412,7 +1439,10 @@ export default function ClusterDetails() {
                                   borderRadius: 2,
                                   display: 'flex',
                                   alignItems: 'center',
-                                  gap: 2,
+                                  gap: 2,transition: 'transform 0.2s',
+                                  '&:hover': {
+                                    transform: 'translateY(-4px)',
+                                  },
                                 }}
                               >
                                 <Box
@@ -1442,7 +1472,7 @@ export default function ClusterDetails() {
                             </Grid>
 
                             {/* Total Revenue Card */}
-                            <Grid size={12}>
+                            <Grid size={4} sx={{height: 160}}>
                               <Paper
                                 elevation={1}
                                 sx={{
@@ -1452,7 +1482,10 @@ export default function ClusterDetails() {
                                   borderRadius: 2,
                                   display: 'flex',
                                   alignItems: 'center',
-                                  gap: 2,
+                                  gap: 2,transition: 'transform 0.2s',
+                                  '&:hover': {
+                                    transform: 'translateY(-4px)',
+                                  },
                                 }}
                               >
                                 <Box
