@@ -40,6 +40,53 @@ class UserService {
     }
   }
 
+   // ✅ Admin kann Benutzer hinzufügen
+   static async createUserAsAdmin(username: string, email: string, password: string): Promise<{ success: boolean; message: string }> {
+    try {
+        const response = await fetch(`${API_URL}/users/admin/create`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${this.getToken()}`
+            },
+            body: JSON.stringify({ username, email, password }), // ✅ Korrektes JSON-Format
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            return { success: false, message: errorData.detail || "Fehler beim Erstellen des Benutzers." };
+        }
+
+        return { success: true, message: "Benutzer erfolgreich erstellt." };
+    } catch (error) {
+        console.error("[UserService] Fehler beim Erstellen des Benutzers:", error);
+        return { success: false, message: "Netzwerkfehler." };
+    }
+}
+
+
+  // ✅ Admin kann Benutzer löschen
+  static async deleteUser(userId: number): Promise<{ success: boolean; message: string }> {
+    try {
+      const response = await fetch(`${API_URL}/users/admin/delete/${userId}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${this.getToken()}`,
+        },
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        return { success: false, message: errorData.detail || "Fehler beim Löschen des Benutzers." };
+      }
+
+      return { success: true, message: "Benutzer erfolgreich gelöscht." };
+    } catch (error) {
+      console.error("[UserService] Fehler beim Löschen des Benutzers:", error);
+      return { success: false, message: "Netzwerkfehler." };
+    }
+  }
+
   // 📌 Holt das JWT-Token aus localStorage
   static getToken(): string | null {
     return localStorage.getItem(this.TOKEN_KEY);

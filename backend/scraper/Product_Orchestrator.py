@@ -13,16 +13,18 @@ from selenium.webdriver.chrome.options import Options
 from sqlalchemy.orm import Session
 
 # 🌍 Globale Log-Datei einrichten
-log_file = "scraping_log.txt"
+LOG_FILE = "scraping_log.txt"
 
-# Logging konfigurieren (schreibt in Datei & zeigt im Terminal an)
+# 🔹 Beim Start die Datei leeren
+open(LOG_FILE, "w").close()
+print("scraping log cleared")
+
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(message)s",
     handlers=[
-        # In Datei schreiben
-        logging.FileHandler(log_file, mode="w", encoding="utf-8"),
-        logging.StreamHandler(sys.stdout)  # Gleichzeitig im Terminal ausgeben
+        logging.FileHandler(LOG_FILE, mode="a", encoding="utf-8"),  # 🔹 Datei wird überschrieben (leeren)
+        logging.StreamHandler(sys.stdout)  # 🔹 In Konsole ausgeben
     ]
 )
 

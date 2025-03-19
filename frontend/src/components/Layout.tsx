@@ -6,7 +6,7 @@ import { AiFillAmazonCircle } from "react-icons/ai";
 import { MdLogout } from "react-icons/md";
 import { FiSettings } from "react-icons/fi";
 
-export default function Layout({ setIsAuthenticated }: { setIsAuthenticated: (auth: boolean) => void }) {
+export default function Layout({ setIsAuthenticated, setUser }: { setIsAuthenticated: (auth: boolean) => void, setUser: (user: any) => void }) {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(UserService.isAuthenticated());
   const location = useLocation();
@@ -15,8 +15,17 @@ export default function Layout({ setIsAuthenticated }: { setIsAuthenticated: (au
   const handleLogout = () => {
     UserService.logout();
     setIsLoggedIn(false);
-    setIsAuthenticated(false); // ✅ Aktualisiert App-weit die Authentifizierung
+    setIsAuthenticated(false);
     navigate("/");
+  };
+
+  // ✅ Diese Funktion wird aufgerufen, wenn auf das Zahnrad geklickt wird
+  const clickAdminIcon = () => {
+    const updatedUser = UserService.getUser(); // Neuen User holen
+    setUser(updatedUser); // In globalen State speichern
+    console.log("Aktueller Benutzer nach Update:", updatedUser);
+
+    navigate("/admin"); // Erst nach /admin navigieren
   };
 
   if (location.pathname === "/") return <Outlet />;
@@ -50,18 +59,15 @@ export default function Layout({ setIsAuthenticated }: { setIsAuthenticated: (au
 
                 {/* ✅ Admin-Zahnrad-Icon */}
                 {user?.username === "admin" && (
-  <Tooltip title="Admin Panel">
-    <IconButton
-      color="inherit"
-      onClick={() => {
-        console.log("Aktueller Benutzer:", user?.username);
-        navigate("/admin"); // ⬅ Direkt zur Admin-Seite navigieren
-      }}
-    >
-      <FiSettings size={25} />
-    </IconButton>
-  </Tooltip>
-)}
+                  <Tooltip title="Admin Panel">
+                    <IconButton
+                      color="inherit"
+                      onClick={clickAdminIcon} // ⬅ Admin-Icon-Click Funktion
+                    >
+                      <FiSettings size={25} />
+                    </IconButton>
+                  </Tooltip>
+                )}
 
               
               <Tooltip title="Logout">

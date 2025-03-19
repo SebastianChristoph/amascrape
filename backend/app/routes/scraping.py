@@ -1,6 +1,7 @@
 import asyncio
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
+import os
 from typing import Dict, List, Optional
 
 from app.auth import get_current_user
@@ -9,17 +10,34 @@ from app.models import (Market, MarketChange, MarketCluster, Product,
                         ProductChange, User)
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
+from scraper.Product_Orchestrator import Product_Orchestrator  # ✅ Richtig
+
 from scraper.first_page_amazon_scraper import AmazonFirstPageScraper
 from sqlalchemy.orm import Session
+import logging
+
 
 router = APIRouter()
 executor = ThreadPoolExecutor()
+orchestrator_task = None
+orchestrator_running = False 
 
 
 class NewClusterData(BaseModel):
     keywords: List[str]
     clusterName: Optional[str] = None
 
+
+LOG_FILE = "scraping_log.txt"
+
+# ✅ Logging-Konfiguration
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    handlers=[
+        logging.StreamHandler()  # Direkt in die Konsole schreiben
+    ]
+)
 
 scraping_processes: Dict[int, Dict[str, Dict[str, Dict[str, any]]]] = {}
 
@@ -55,7 +73,6 @@ async def post_scraping(
                 keyword, cluster_name, user_id))
 
     return {"success": True, "message": f"Scraping für {cluster_name} gestartet"}
-
 
 @router.get("/get-loading-clusters")
 async def get_loading_clusters(
@@ -197,3 +214,89 @@ def fetch_first_page_data(keyword: str):
     """Führt das Scraping im Hintergrund aus"""
     amazon_scraper = AmazonFirstPageScraper(headless=True, show_details=True)
     return amazon_scraper.get_first_page_data(keyword)
+
+@router.post("/start-product-orchestrator")
+async def start_product_orchestrator(
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    """Startet den Product Orchestrator asynchron."""
+    global orchestrator_task, orchestrator_running
+
+    # ✅ Zugriff prüfen
+    if not is_admin(current_user):
+        raise HTTPException(status_code=403, detail="Zugriff verweigert. Nur Admins dürfen den Product Orchestrator starten.")
+
+    if orchestrator_running:
+        logging.warning("⚠️ Product Orchestrator läuft bereits! Kein zweiter Start möglich.")
+        return {"success": False, "message": "Product Orchestrator läuft bereits!"}
+
+    # Falls bereits ein Prozess läuft, verhindere einen zweiten Start
+    if orchestrator_task and not orchestrator_task.done():
+        logging.warning("⚠️ Product Orchestrator läuft bereits!")
+        return {"success": False, "message": "Product Orchestrator läuft bereits!"}
+
+      # ✅ Setzt den Status auf "läuft"
+    orchestrator_running = True
+    logging.info("🚀 Starte Product Orchestrator...")
+
+    loop = asyncio.get_running_loop()
+    orchestrator_task = loop.run_in_executor(executor, run_product_orchestrator)
+
+    logging.info("🎯 Orchestrator wurde erfolgreich in Thread gestartet.")
+    
+    return {"success": True, "message": "Product Orchestrator wurde gestartet!"}
+
+
+def is_admin(user: User):
+    """Prüft, ob der eingeloggte Nutzer Admin ist."""
+    return user.username == "admin"
+
+def run_product_orchestrator():
+    """Startet den Product Orchestrator."""
+    global orchestrator_running
+    try:
+        logging.info("🚀 Product Orchestrator wird gestartet...")
+        
+        # ✅ Korrekte Instanziierung der Klasse
+        orchestrator = Product_Orchestrator(just_scrape_3_products=False)  
+        orchestrator.update_products()
+
+        logging.info("✅ Product Orchestrator abgeschlossen.")
+    except Exception as e:
+        logging.error(f"❌ Fehler im Product Orchestrator: {e}")
+    finally:
+        orchestrator_running = False  # ✅ Status zurücksetzen
+
+@router.get("/is-product-orchestrator-running")
+async def is_product_orchestrator_running(
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    """Prüft, ob der Product Orchestrator aktuell läuft. Nur für Admins!"""
+    global orchestrator_running
+
+    # ✅ Zugriff prüfen (nur Admins)
+    if not is_admin(current_user):
+        raise HTTPException(status_code=403, detail="Zugriff verweigert. Nur Admins dürfen den Status abrufen.")
+
+    return {"running": orchestrator_running}
+
+@router.get("/get-product-orchestrator-logs")
+async def get_orchestrator_logs(current_user: User = Depends(get_current_user)):
+    """Gibt die letzten 20 Zeilen des Product Orchestrator Logs zurück (Nur Admins)."""
+
+    if current_user.username != "admin":
+        raise HTTPException(status_code=403, detail="Zugriff verweigert. Nur Admins dürfen Logs sehen.")
+
+    if not os.path.exists(LOG_FILE):
+        return {"logs": ["🚫 Keine Logs gefunden!"]}
+
+    try:
+        with open(LOG_FILE, "r", encoding="utf-8") as f:
+            logs = f.readlines()
+        
+        last_logs = logs[-20:]  # Nur die letzten 20 Zeilen senden
+        return {"logs": last_logs}
+    except Exception as e:
+        return {"logs": [f"❌ Fehler beim Abrufen der Logs: {str(e)}"]}

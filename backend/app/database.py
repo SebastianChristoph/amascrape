@@ -10,6 +10,8 @@ from sqlalchemy import create_engine
 from sqlalchemy.exc import OperationalError
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.sql import text
+from sqlalchemy import create_engine, event
+from sqlalchemy.engine import Engine
 
 # ✅ Lade Umgebungsvariablen
 load_dotenv()
@@ -23,6 +25,14 @@ print(f"✅ Loaded DATABASE_URL: {DATABASE_URL}")
 # ✅ Datenbank-Verbindung einrichten
 engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+
+# ✅ Fix für SQLite: Aktiviert Foreign Key Constraints
+@event.listens_for(Engine, "connect")
+def set_sqlite_pragma(dbapi_connection, connection_record):
+    cursor = dbapi_connection.cursor()
+    cursor.execute("PRAGMA foreign_keys=ON")
+    cursor.close()
+
 
 # ✅ Datenbank-Initialisierung
 def init_db():

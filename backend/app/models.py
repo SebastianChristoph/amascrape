@@ -42,8 +42,13 @@ class User(Base):
     verification_token = Column(String(64), unique=True, nullable=True)
     verification_token_expires = Column(DateTime, nullable=True)
 
-    # ✅ Beziehung zu MarketCluster reparieren
-    market_clusters = relationship("MarketCluster", back_populates="user", passive_deletes=True)
+    # ✅ Beziehung zu MarketCluster fehlt eventuell!
+    market_clusters = relationship(
+        "MarketCluster",
+        back_populates="user",
+        cascade="all, delete-orphan",
+        passive_deletes=True
+    )
 
 # 2️⃣ Products Table
 class Product(Base):
@@ -78,10 +83,8 @@ class UserProduct(Base):
     asin = Column(String, ForeignKey("products.asin", ondelete="CASCADE"), primary_key=True)
     added_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
 
-    # ✅ Beziehungen zu den Usern und Produkten
     user = relationship("User", back_populates="user_products")
     product = relationship("Product", back_populates="user_products")
-
 # ✅ Beziehung in User und Product definieren
 User.user_products = relationship("UserProduct", back_populates="user", cascade="all, delete-orphan")
 Product.user_products = relationship("UserProduct", back_populates="product", cascade="all, delete-orphan")
@@ -175,16 +178,18 @@ class MarketCluster(Base):
     __tablename__ = "market_clusters"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    user_id = Column(Integer, ForeignKey(
-        "users.id", ondelete="CASCADE"), nullable=False)
+    user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
     title = Column(String, nullable=False)
     total_revenue = Column(Float, nullable=True, default=0.0)
 
-    user = relationship(
-        "User", back_populates="market_clusters", passive_deletes=True)
+    # ✅ Stelle sicher, dass diese Beziehung existiert!
+    user = relationship("User", back_populates="market_clusters", passive_deletes=True)
+
+    # ✅ Cascade-Fix: Löscht `market_cluster_markets`, wenn MarketCluster gelöscht wird
     markets = relationship(
         "Market",
         secondary=market_cluster_markets,
         back_populates="market_clusters",
+        cascade="all, delete",  # 🔥 Löscht automatisch Verknüpfungen in `market_cluster_markets`
         passive_deletes=True
     )

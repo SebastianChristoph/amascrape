@@ -16,16 +16,15 @@ import { SnackbarProvider } from "./providers/SnackbarProvider";
 import UserService from "./services/UserService";
 import { lightTheme } from "./theme";
 import Register from "./pages/Register";
-import Admin from "./pages/Admin"; // ✅ Import der Admin-Seite
+import Admin from "./pages/Admin";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(UserService.isAuthenticated());
-  const [user, setUser] = useState(UserService.getUser()); // 🔹 User in State speichern
+  const [user, setUser] = useState(UserService.getUser());
 
   useEffect(() => {
     setIsAuthenticated(UserService.isAuthenticated());
     setUser(UserService.getUser());
-    console.log("User aktualisiert:", UserService.getUser()); // 🔹 Hier siehst du, ob der Benutzer korrekt geladen wird
   }, []);
 
   return (
@@ -40,12 +39,13 @@ function App() {
             />
             <Route path="/register" element={<Register />} />
 
-            <Route element={<Layout setIsAuthenticated={setIsAuthenticated} />}>
+            {/* ✅ setUser wird an Layout weitergegeben */}
+            <Route element={<Layout setIsAuthenticated={setIsAuthenticated} setUser={setUser} />}>
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/cluster/:clusterId" element={<ClusterDetails />} />
               <Route path="/add-market-cluster" element={<AddMarketCluster />} />
-              
-              {/* ✅ Geschützte Admin-Route */}
+
+              {/* ✅ Admin-Route mit aktuellem User */}
               <Route
                 path="/admin"
                 element={user?.username === "admin" ? <Admin /> : <Navigate to="/dashboard" />}
@@ -59,6 +59,5 @@ function App() {
     </ThemeProvider>
   );
 }
-
 
 export default App;

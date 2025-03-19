@@ -141,6 +141,10 @@ def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depend
     access_token = create_access_token({"username": user.username})
     return {"access_token": access_token, "token_type": "bearer"}
 
+
+def is_admin(user: User):
+    return user.username == "admin"
+
 @router.get("/admin")
 def admin_access(user: User = Depends(get_current_user)):
     print("auf route admin")
@@ -151,3 +155,56 @@ def admin_access(user: User = Depends(get_current_user)):
         )
     return {"message": "Willkommen im Admin-Bereich!"}
 
+class UserCreateRequest(BaseModel):
+    username: str
+    email: str
+    password: str
+
+# ✅ Admin kann Benutzer ohne Bestätigungslink anlegen
+@router.post("/admin/create")
+def create_user_admin(user: UserCreateRequest, db: Session = Depends(get_db), admin: User = Depends(get_current_user)):
+    if admin.username != "admin":
+        raise HTTPException(status_code=403, detail="Zugriff verweigert. Nur Admins dürfen neue Benutzer anlegen.")
+    
+    if user.username == "" or user.email == "" or user.password == "":
+        raise HTTPException(status_code=400, detail="Mindestens ein Feld ist leer")
+
+    existing_user = db.query(User).filter((User.username == user.username) | (User.email == user.email)).first()
+    if existing_user:
+        raise HTTPException(status_code=400, detail="Benutzername oder E-Mail bereits vergeben.")
+
+    new_user = User(
+        username=user.username,
+        email=user.email,
+        hashed_password=get_password_hash(user.password),
+        is_verified=True,  # ✅ Direkte Verifizierung, kein Token notwendig
+        verification_token=None,
+        verification_token_expires=None
+    )
+
+    db.add(new_user)
+    db.commit()
+    return {"message": f"Benutzer {user.username} wurde erfolgreich erstellt."}
+
+# ✅ Admin kann Benutzer löschen
+@router.delete("/admin/delete/{user_id}")
+def delete_user_admin(user_id: int, db: Session = Depends(get_db), admin: User = Depends(get_current_user)):
+    if not is_admin(admin):
+        raise HTTPException(status_code=403, detail="Zugriff verweigert. Nur Admins dürfen Benutzer löschen.")
+
+    user = db.query(User).filter(User.id == user_id).first()
+    if not user:
+        raise HTTPException(status_code=404, detail="Benutzer nicht gefunden.")
+
+    db.delete(user)
+    db.commit()
+    return {"message": f"Benutzer {user.username} wurde gelöscht."}
+
+@router.get("/admin/all-users")
+def get_all_users(db: Session = Depends(get_db), admin: User = Depends(get_current_user)):
+    print("get all users")
+    if admin.username != "admin":
+        raise HTTPException(status_code=403, detail="Zugriff verweigert. Nur Admins erlaubt.")
+
+    users = db.query(User).all()
+    return [{"id": user.id, "username": user.username, "email": user.email} for user in users]
