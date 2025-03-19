@@ -94,6 +94,7 @@ const Dashboard: React.FC = () => {
         setActiveCluster(null);
         setIsFetching(false);
         fetchData();
+        console.log("keine aktiven scraping market clusters");
       } else if (data.status === "done") {
         showSnackbar("Your cluster is ready to go");
         setActiveCluster(null);
@@ -108,6 +109,7 @@ const Dashboard: React.FC = () => {
         setTimeout(fetchData, 6000);
       } else {
         setActiveCluster(data);
+        console.log("data active clusters:", data);
         setIsFetching(true);
       }
     } catch (error) {
@@ -129,7 +131,7 @@ const Dashboard: React.FC = () => {
     }
   }, [isFetching]);
 
-  if (marketClusters.length === 0) {
+  if (marketClusters.length === 0 && !isFetching) {
     return (
       <Box
         sx={{

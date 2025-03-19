@@ -138,3 +138,5 @@
 2025-03-19 19:25:01,330 [INFO] Failed products: 4
 2025-03-19 19:25:01,330 [INFO] 🔻 Schließe WebDriver...
 2025-03-19 19:25:01,332 [WARNING] Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(10054, 'Eine vorhandene Verbindung wurde vom Remotehost geschlossen', None, 10054, None)': /session/6576c46ceac335f663db82c59693fef1
+2025-03-19 19:58:03,792 [INFO] ✅ Market Cluster 1 wurde gelöscht.
+2025-03-19 19:58:05,541 [INFO] ✅ Market Cluster 2 wurde gelöscht.
