@@ -29,6 +29,8 @@ import {
   FaStore,
   FaTrophy,
   FaSearch,
+  FaBoxes,
+  FaPercentage,
 } from "react-icons/fa";
 import { useParams } from "react-router-dom";
 import CustomSparkLine from "../components/charts/CustomSparkLine";
@@ -519,7 +521,7 @@ export default function ClusterDetails() {
 
   return (
     <>
-      <Paper elevation={4} sx={{ marginBottom: 2, padding: 4 }}>
+      <Paper elevation={1} sx={{ marginBottom: 2, padding: 4 }}>
         {(!marketCluster.total_revenue ||
           marketCluster.total_revenue === 0) && (
           <Alert severity="info" sx={{ mb: 2 }}>
@@ -529,11 +531,316 @@ export default function ClusterDetails() {
           </Alert>
         )}
 
-        <Typography variant="h4" sx={{ marginBottom: 2 }}>
+        <Typography variant="h4" sx={{ marginBottom: 3, color: 'text.primary', fontWeight: 600 }}>
           {marketCluster.title}
         </Typography>
 
-        <Grid container spacing={2}>
+        <Grid container spacing={4}>
+          {/* Market Development Chart - 1/3 width */}
+          <Grid size={{ xs: 12, md: 4 }}>
+            <Box sx={{ height: "100%" }}>
+              <Typography variant="h6" color="text.secondary" gutterBottom>
+                Market Development
+              </Typography>
+              {Object.keys(stackedChartData).length === 0 ||
+              Object.values(stackedChartData).every((marketData) =>
+                marketData.every((entry) => entry.value === 0)
+              ) ? (
+                <Box sx={{ height: "100%" }}>
+                  <Box
+                    sx={{ position: "relative", height: "calc(100% - 40px)" }}
+                  >
+                    <Skeleton
+                      variant="rectangular"
+                      animation="wave"
+                      width="100%"
+                      height="100%"
+                      sx={{
+                        borderRadius: 1,
+                        bgcolor: "grey.100",
+                      }}
+                    />
+                    <Typography
+                      variant="body2"
+                      color="text.secondary"
+                      sx={{
+                        position: "absolute",
+                        top: "50%",
+                        left: "50%",
+                        transform: "translate(-50%, -50%)",
+                        textAlign: "center",
+                        backgroundColor: "rgba(255, 255, 255, 0.8)",
+                        padding: "8px 16px",
+                        borderRadius: 1,
+                      }}
+                    >
+                      Historical market data will be available soon
+                    </Typography>
+                  </Box>
+                </Box>
+              ) : (
+                <Box sx={{ height: "calc(100% - 40px)" }}>
+                  <CustomStackBars data={stackedChartData} />
+                </Box>
+              )}
+            </Box>
+          </Grid>
+
+          {/* Market Metrics - 1/3 width */}
+          <Grid size={{ xs: 12, md: 4 }}>
+            <Typography variant="h6" color="text.secondary" gutterBottom>
+              Market Cluster Insights
+            </Typography>
+            <Grid container spacing={2}>
+              {/* Total Revenue Card */}
+              <Grid size={12}>
+                <Paper
+                  elevation={1}
+                  sx={{
+                    p: 3,
+                    height: '100%',
+                    backgroundColor: 'white',
+                    borderRadius: 2,
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 2,
+                  }}
+                >
+                  <Box
+                    sx={{
+                      width: 45,
+                      height: 45,
+                      borderRadius: '12px',
+                      backgroundColor: '#e3f2fd',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    <FaDollarSign size={22} color="#1976d2" />
+                  </Box>
+                  <Box>
+                    <Typography variant="body2" color="text.secondary" gutterBottom>
+                      Total Revenue
+                    </Typography>
+                    <Typography variant="h6" color="text.primary" sx={{ fontWeight: 600 }}>
+                      {formatCurrency(marketCluster.insights?.total_revenue || 0)}
+                    </Typography>
+                  </Box>
+                </Paper>
+              </Grid>
+
+              {/* Markets & Products Card */}
+              <Grid size={12}>
+                <Paper
+                  elevation={1}
+                  sx={{
+                    p: 3,
+                    height: '100%',
+                    backgroundColor: 'white',
+                    borderRadius: 2,
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 2,
+                  }}
+                >
+                  <Box
+                    sx={{
+                      width: 45,
+                      height: 45,
+                      borderRadius: '12px',
+                      backgroundColor: '#e3f2fd',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    <FaStore size={22} color="#1976d2" />
+                  </Box>
+                  <Box>
+                    <Typography variant="body2" color="text.secondary" gutterBottom>
+                      Markets & Products
+                    </Typography>
+                    <Typography variant="h6" color="text.primary" sx={{ fontWeight: 600 }}>
+                      {marketCluster.insights?.total_markets || 0} Markets • {marketCluster.insights?.total_products || 0} Products
+                    </Typography>
+                  </Box>
+                </Paper>
+              </Grid>
+
+              {/* Average Revenue Cards */}
+              <Grid size={12}>
+                <Paper
+                  elevation={1}
+                  sx={{
+                    p: 3,
+                    height: '100%',
+                    backgroundColor: 'white',
+                    borderRadius: 2,
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 2,
+                  }}
+                >
+                  <Box
+                    sx={{
+                      width: 45,
+                      height: 45,
+                      borderRadius: '12px',
+                      backgroundColor: '#e3f2fd',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    <FaChartLine size={22} color="#1976d2" />
+                  </Box>
+                  <Box>
+                    <Typography variant="body2" color="text.secondary" gutterBottom>
+                      Average Revenue
+                    </Typography>
+                    <Typography variant="body2" sx={{ fontWeight: 500, color: 'text.primary' }}>
+                      Per Market: {formatCurrency(marketCluster.insights?.avg_revenue_per_market || 0)}
+                    </Typography>
+                    <Typography variant="body2" sx={{ fontWeight: 500, color: 'text.primary' }}>
+                      Per Product: {formatCurrency(marketCluster.insights?.avg_revenue_per_product || 0)}
+                    </Typography>
+                  </Box>
+                </Paper>
+              </Grid>
+            </Grid>
+          </Grid>
+
+          {/* My Market Share - 1/3 width */}
+          <Grid size={{ xs: 12, md: 4 }}>
+            <Typography variant="h6" color="text.secondary" gutterBottom>
+              My Market Share
+            </Typography>
+            <Grid container spacing={2}>
+              {/* Total Revenue Card */}
+              <Grid size={12}>
+                <Paper
+                  elevation={1}
+                  sx={{
+                    p: 3,
+                    height: '100%',
+                    backgroundColor: 'white',
+                    borderRadius: 2,
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 2,
+                  }}
+                >
+                  <Box
+                    sx={{
+                      width: 45,
+                      height: 45,
+                      borderRadius: '12px',
+                      backgroundColor: '#e3f2fd',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    <FaDollarSign size={22} color="#1976d2" />
+                  </Box>
+                  <Box>
+                    <Typography variant="body2" color="text.secondary" gutterBottom>
+                      My Total Revenue
+                    </Typography>
+                    <Typography variant="h6" color="text.primary" sx={{ fontWeight: 600 }}>
+                      {formatCurrency(userProductInsights?.total_revenue_user_products || 0)}
+                    </Typography>
+                  </Box>
+                </Paper>
+              </Grid>
+
+              {/* Active Products Card */}
+              <Grid size={12}>
+                <Paper
+                  elevation={1}
+                  sx={{
+                    p: 3,
+                    height: '100%',
+                    backgroundColor: 'white',
+                    borderRadius: 2,
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 2,
+                  }}
+                >
+                  <Box
+                    sx={{
+                      width: 45,
+                      height: 45,
+                      borderRadius: '12px',
+                      backgroundColor: '#e3f2fd',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    <FaBoxes size={22} color="#1976d2" />
+                  </Box>
+                  <Box>
+                    <Typography variant="body2" color="text.secondary" gutterBottom>
+                      Active Products
+                    </Typography>
+                    <Typography variant="h6" color="text.primary" sx={{ fontWeight: 600 }}>
+                      {userProductInsights?.user_product_count || 0}
+                    </Typography>
+                  </Box>
+                </Paper>
+              </Grid>
+
+              {/* Market Share Card */}
+              <Grid size={12}>
+                <Paper
+                  elevation={1}
+                  sx={{
+                    p: 3,
+                    height: '100%',
+                    backgroundColor: 'white',
+                    borderRadius: 2,
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 2,
+                  }}
+                >
+                  <Box
+                    sx={{
+                      width: 45,
+                      height: 45,
+                      borderRadius: '12px',
+                      backgroundColor: '#e3f2fd',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    <FaPercentage size={22} color="#1976d2" />
+                  </Box>
+                  <Box>
+                    <Typography variant="body2" color="text.secondary" gutterBottom>
+                      30-Day Trend
+                    </Typography>
+                    <Box sx={{ width: 120, height: 40, mt: 1 }}>
+                      <CustomSparkLine
+                        data={userProductInsights?.sparkline_data_user_products || []}
+                      />
+                    </Box>
+                  </Box>
+                </Paper>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Paper>
+
+      <Paper elevation={4} sx={{ marginBottom: 2, padding: 4 }}>
+       
+
+        {/* <Grid container spacing={2}>
           <Grid size={{ xs: 12, sm: 12, md: 4 }}>
             <Box sx={{ width: "100%", height: 300 }}>
               {Object.keys(stackedChartData).length === 0 ||
@@ -793,9 +1100,9 @@ export default function ClusterDetails() {
               )}
             </Box>
           </Grid>
-        </Grid>
+        </Grid> */}
 
-        {userProductInsights && (
+        {/* {userProductInsights && (
           <Paper sx={{ p: 2, mt: 4, mb: 3, backgroundColor: "#f8f9fa" }}>
             <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
               <Grid container spacing={2}>
@@ -861,7 +1168,7 @@ export default function ClusterDetails() {
               </Grid>
             </Box>
           </Paper>
-        )}
+        )} */}
 
         <Typography
           sx={{
