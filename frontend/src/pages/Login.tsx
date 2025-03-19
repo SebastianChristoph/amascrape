@@ -2,11 +2,11 @@ import {
   Box,
   Button,
   Container,
+  IconButton,
+  InputAdornment,
   Paper,
   TextField,
   Typography,
-  IconButton,
-  InputAdornment,
 } from "@mui/material";
 import { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
@@ -14,22 +14,7 @@ import { useSnackbar } from "../providers/SnackbarProvider";
 import { AiFillAmazonCircle, AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { FaSignInAlt } from "react-icons/fa";
 import LoginService from "../services/LoginService";
-
-// SVG Pattern as Base64 to avoid external file dependencies
-const backgroundPattern = `data:image/svg+xml;base64,${btoa(`
-  <svg width="50" height="50" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <pattern id="gridPattern" width="50" height="50" patternUnits="userSpaceOnUse">
-        <path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(33, 150, 243, 0.15)" stroke-width="1.5"/>
-        <circle cx="0" cy="0" r="2" fill="rgba(33, 150, 243, 0.15)"/>
-        <circle cx="50" cy="0" r="2" fill="rgba(33, 150, 243, 0.15)"/>
-        <circle cx="0" cy="50" r="2" fill="rgba(33, 150, 243, 0.15)"/>
-        <circle cx="25" cy="25" r="1.5" fill="rgba(33, 150, 243, 0.15)"/>
-      </pattern>
-    </defs>
-    <rect width="50" height="50" fill="url(#gridPattern)"/>
-  </svg>
-`)}`;
+import { commonBackgroundStyle, moveBackgroundKeyframes } from "../components/BackgroundPattern";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -58,33 +43,15 @@ export default function Login() {
     <Box
       sx={{
         minHeight: "100vh",
-        display: "flex",
-        alignItems: "center",
         position: "relative",
         overflow: "hidden",
         backgroundColor: "#f8f9fa",
         "&::before": {
-          content: '""',
-          position: "absolute",
-          top: "-50%",
-          left: "-50%",
-          right: "-50%",
-          bottom: "-50%",
-          backgroundImage: `url("${backgroundPattern}")`,
-          backgroundRepeat: "repeat",
+          ...commonBackgroundStyle,
           opacity: 0.8,
-          transform: "rotate(-10deg) scale(1.2)",
-          animation: "moveBackground 120s linear infinite",
           filter: "contrast(110%)",
         },
-        "@keyframes moveBackground": {
-          "0%": {
-            transform: "rotate(-10deg) scale(1.2) translateY(0)",
-          },
-          "100%": {
-            transform: "rotate(-10deg) scale(1.2) translateY(-25%)",
-          },
-        },
+        "@keyframes moveBackground": moveBackgroundKeyframes,
       }}
     >
       <Container maxWidth="lg" sx={{

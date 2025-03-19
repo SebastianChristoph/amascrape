@@ -22,6 +22,7 @@ import MarketService from "../services/MarketService";
 import CustomSparkLine from "../components/charts/CustomSparkLine";
 import { FaRocket } from 'react-icons/fa';
 import { keyframes } from '@mui/system';
+import { commonBackgroundStyle, moveBackgroundKeyframes } from "../components/BackgroundPattern";
 
 const rocketAnimation = keyframes`
   0% {
@@ -220,28 +221,11 @@ const Dashboard: React.FC = () => {
         overflow: "hidden",
         backgroundColor: "#f8f9fa",
         "&::before": {
-          content: '""',
-          position: "absolute",
-          top: "-50%",
-          left: "-50%",
-          right: "-50%",
-          bottom: "-50%",
-          backgroundImage: `url("${backgroundPattern}")`,
-          backgroundRepeat: "repeat",
+          ...commonBackgroundStyle,
           opacity: 0.6,
-          transform: "rotate(-10deg) scale(1.2)",
-          animation: "moveBackground 120s linear infinite",
           filter: "contrast(100%)",
-          zIndex: 0,
         },
-        "@keyframes moveBackground": {
-          "0%": {
-            transform: "rotate(-10deg) scale(1.2) translateY(0)",
-          },
-          "100%": {
-            transform: "rotate(-10deg) scale(1.2) translateY(-25%)",
-          },
-        },
+        "@keyframes moveBackground": moveBackgroundKeyframes,
       }}
     >
       <Container 
