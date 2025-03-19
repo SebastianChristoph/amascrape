@@ -1566,18 +1566,21 @@ export default function ClusterDetails() {
                             color="primary"
                             size="small"
                             sx={{
+                          
                               borderRadius: "16px",
+                              cursor: "pointer",
                               height: "32px",
                               fontSize: "0.875rem",
                               fontWeight: 400,
                               backgroundColor: "primary.main",
                               color: "white",
                               "&:hover": {
-                                backgroundColor: "primary.dark",
+                                backgroundColor: "primary.dark", transform: 'translateY(-4px)',
                               },
                               "& .MuiChip-label": {
                                 padding: "0 12px",
-                              },
+                              },transition: 'transform 0.2s',
+                  
                             }}
                           />
                         ))}
