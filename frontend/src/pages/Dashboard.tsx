@@ -34,6 +34,7 @@ import {
   Tooltip,
   Legend
 } from 'chart.js';
+import { FaDollarSign, FaChartLine, FaBoxes, FaLayerGroup } from 'react-icons/fa';
 
 ChartJS.register(
   CategoryScale,
@@ -357,75 +358,179 @@ const Dashboard: React.FC = () => {
           >
             Market Clusters Overview
           </Typography>
-          <Typography variant="subtitle1" sx={{ mb: 2 }}>
+          <Typography variant="subtitle1" sx={{ mb: 3 }}>
             Here is a quick snapshot of your Total markets Revenue development
           </Typography>
+          
+          <Grid container spacing={3}>
+            {/* Total 30D Revenue Card */}
+            <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+              <Paper
+                elevation={1}
+                sx={{
+                  p: 3,
+                  height: '100%',
+                  backgroundColor: 'white',
+                  borderRadius: 2,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 2,
+                  transition: 'transform 0.2s',
+                  '&:hover': {
+                    transform: 'translateY(-4px)',
+                  },
+                }}
+              >
+                <Box
+                  sx={{
+                    width: 45,
+                    height: 45,
+                    borderRadius: '12px',
+                    backgroundColor: '#e3f2fd',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <FaDollarSign size={22} color="#1976d2" />
+                </Box>
+                <Box>
+                  <Typography variant="body2" color="text.secondary" gutterBottom>
+                    Total 30D Revenue
+                  </Typography>
+                  <Typography variant="h6" color="text.primary" sx={{ fontWeight: 600 }}>
+                    ${dashboardData?.total_revenue || '0.00'}
+                  </Typography>
+                </Box>
+              </Paper>
+            </Grid>
 
-          {loading ? (
-            <Box sx={{ display: "flex", justifyContent: "center", p: 4 }}>
-              <CircularProgress />
-            </Box>
-          ) : (
-            <>
-              <Grid container spacing={3} sx={{ mb: 4 }}>
-                <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-                  <Box>
-                    <Typography variant="subtitle2" color="text.secondary">
-                      Total 30D Revenue
-                    </Typography>
-                    <Typography variant="h4">
-                      {new Intl.NumberFormat("en-US", {
-                        style: "currency",
-                        currency: "USD",
-                      }).format(dashboardData?.total_revenue || 0)}
-                    </Typography>
-                    {dashboardData?.clusters_without_revenue > 0 && (
-                      <Typography variant="caption" color="text.secondary">
-                        {dashboardData.clusters_without_revenue} cluster(s) still scraping
-                      </Typography>
-                    )}
-                  </Box>
-                </Grid>
-                <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-                  <Box>
-                    <Typography variant="subtitle2" color="text.secondary">
-                      30D Revenue change
-                    </Typography>
-                    <Box sx={{ height: 50 }}>
-                      {dashboardData?.revenue_development && (
-                        <CustomSparkLine data={dashboardData.revenue_development} />
-                      )}
-                    </Box>
-                  </Box>
-                </Grid>
-                <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-                  <Box>
-                    <Typography variant="subtitle2" color="text.secondary">
-                      Number of market clusters
-                    </Typography>
-                    <Typography variant="h4">
-                      {dashboardData?.total_clusters || 0}
-                    </Typography>
-                    {dashboardData?.clusters_without_revenue > 0 && (
-                      <Typography variant="caption" color="text.secondary">
-                        {dashboardData.clusters_without_revenue} cluster(s) still being scraped
-                      </Typography>
-                    )}
-                  </Box>
-                </Grid>
-                <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-                  <Box>
-                    <Typography variant="subtitle2" color="text.secondary">
-                      Number of tracked products
-                    </Typography>
-                    <Typography variant="h4">
-                      {dashboardData?.total_unique_products || 0}
-                    </Typography>
-                  </Box>
-                </Grid>
-              </Grid>
-            </>
-          )}
+            {/* 30D Revenue Change Card */}
+            <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+              <Paper
+                elevation={1}
+                sx={{
+                  p: 3,
+                  height: '100%',
+                  backgroundColor: 'white',
+                  borderRadius: 2,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 2,
+                  transition: 'transform 0.2s',
+                  '&:hover': {
+                    transform: 'translateY(-4px)',
+                  },
+                }}
+              >
+                <Box
+                  sx={{
+                    width: 45,
+                    height: 45,
+                    borderRadius: '12px',
+                    backgroundColor: '#e3f2fd',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <FaChartLine size={22} color="#1976d2" />
+                </Box>
+                <Box>
+                  <Typography variant="body2" color="text.secondary" gutterBottom>
+                    30D Revenue Change
+                  </Typography>
+                  <Typography variant="h6" color="text.primary" sx={{ fontWeight: 600 }}>
+                    {dashboardData?.revenue_change || '0'}%
+                  </Typography>
+                </Box>
+              </Paper>
+            </Grid>
+
+            {/* Number of Market Clusters Card */}
+            <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+              <Paper
+                elevation={1}
+                sx={{
+                  p: 3,
+                  height: '100%',
+                  backgroundColor: 'white',
+                  borderRadius: 2,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 2,
+                  transition: 'transform 0.2s',
+                  '&:hover': {
+                    transform: 'translateY(-4px)',
+                  },
+                }}
+              >
+                <Box
+                  sx={{
+                    width: 45,
+                    height: 45,
+                    borderRadius: '12px',
+                    backgroundColor: '#e3f2fd',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <FaLayerGroup size={22} color="#1976d2" />
+                </Box>
+                <Box>
+                  <Typography variant="body2" color="text.secondary" gutterBottom>
+                    Market Clusters
+                  </Typography>
+                  <Typography variant="h6" color="text.primary" sx={{ fontWeight: 600 }}>
+                    {dashboardData?.total_markets || '0'}
+                  </Typography>
+                </Box>
+              </Paper>
+            </Grid>
+
+            {/* Number of Tracked Products Card */}
+            <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+              <Paper
+                elevation={1}
+                sx={{
+                  p: 3,
+                  height: '100%',
+                  backgroundColor: 'white',
+                  borderRadius: 2,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 2,
+                  transition: 'transform 0.2s',
+                  '&:hover': {
+                    transform: 'translateY(-4px)',
+                  },
+                }}
+              >
+                <Box
+                  sx={{
+                    width: 45,
+                    height: 45,
+                    borderRadius: '12px',
+                    backgroundColor: '#e3f2fd',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <FaBoxes size={22} color="#1976d2" />
+                </Box>
+                <Box>
+                  <Typography variant="body2" color="text.secondary" gutterBottom>
+                    Tracked Products
+                  </Typography>
+                  <Typography variant="h6" color="text.primary" sx={{ fontWeight: 600 }}>
+                    {dashboardData?.total_unique_products || '0'}
+                  </Typography>
+                </Box>
+              </Paper>
+            </Grid>
+          </Grid>
         </Paper>
 
         {/* ✅ Zeigt aktive Scraping-Prozesse mit Keywords & Status an */}

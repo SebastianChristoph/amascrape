@@ -4,7 +4,6 @@ import {
   Button,
   Card,
   CardContent,
-  CardHeader,
   Chip,
   CircularProgress,
   Dialog,
@@ -19,12 +18,11 @@ import {
 } from "@mui/material";
 import { motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
-import { GrCluster } from "react-icons/gr";
-import { MdDelete, MdEdit } from "react-icons/md";
+import { FaLayerGroup, FaDollarSign, FaEdit, FaTrash } from "react-icons/fa";
 import { useSnackbar } from "../providers/SnackbarProvider";
 import ChartDataService from "../services/ChartDataService";
 import MarketService from "../services/MarketService";
-import CustomSparkLine from "./charts/CustomSparkLine"; // ✅ Importiere Sparkline-Komponente
+import CustomSparkLine from "./charts/CustomSparkLine";
 
 interface ClusterCardProps {
   cluster: {
@@ -56,7 +54,6 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
   const [sparklineData, setSparklineData] = useState<number[]>([]);
   const [loadingSparkline, setLoadingSparkline] = useState<boolean>(true);
 
-  // ✅ Lade Sparkline-Daten nur, wenn `totalRevenue > 0`
   useEffect(() => {
     async function fetchSparklineData() {
       if (totalRevenue > 0) {
@@ -93,87 +90,166 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
       transition={{ duration: 0.5 }}
     >
       <Card
-        elevation={5}
+        elevation={1}
         sx={{
           cursor: "pointer",
-          "&:hover": { boxShadow: 6 },
-          borderRadius: 3,
+          backgroundColor: 'white',
+          borderRadius: 2,
           overflow: "hidden",
+          transition: 'transform 0.2s',
+          '&:hover': {
+            transform: 'translateY(-4px)',
+            '& .delete-button': {
+              opacity: 1,
+              visibility: 'visible',
+            },
+          },
         }}
         onClick={onClick}
       >
-        <CardHeader
-          sx={{ alignItems: "flex-start" }}
-          avatar={<GrCluster size={28} color="#000010" />}
-          title={<Typography variant="h6">{cluster.title}</Typography>}
-          action={
-            <>
-              <IconButton color="primary" onClick={(e) => {
-                e.stopPropagation();
-                setOpenEditDialog(true);
-              }}>
-                <MdEdit size={24} />
+        <CardContent sx={{ p: 3 }}>
+          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 3 }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+              <Box
+                sx={{
+                  width: 45,
+                  height: 45,
+                  borderRadius: '12px',
+                  backgroundColor: '#e3f2fd',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <FaLayerGroup size={22} color="#1976d2" />
+              </Box>
+              <Typography variant="h6" color="text.primary" sx={{ fontWeight: 600 }}>
+                {cluster.title}
+              </Typography>
+            </Box>
+            <Box sx={{ display: 'flex', gap: 1 }}>
+              <IconButton 
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setOpenEditDialog(true);
+                }}
+                sx={{ color: 'primary.main' }}
+              >
+                <FaEdit size={20} />
               </IconButton>
-              <IconButton color="primary" onClick={(e) => {
-                e.stopPropagation();
-                setOpenConfirmDialog(true);
-              }}>
-                <MdDelete size={24} />
+              <IconButton
+                className="delete-button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setOpenConfirmDialog(true);
+                }}
+                sx={{ 
+                  color: 'error.main',
+                  opacity: 0,
+                  visibility: 'hidden',
+                  transition: 'opacity 0.2s, visibility 0.2s',
+                }}
+              >
+                <FaTrash size={20} />
               </IconButton>
-            </>
-          }
-        />
-
-        <CardContent sx={{ minHeight: 300 }}>
-          <Typography variant="body2" color="textSecondary">
-            Included markets:
-          </Typography>
-
-          <Box sx={{ mt: 2, display: "flex", flexWrap: "wrap", gap: 1 }}>
-            {Array.isArray(cluster.markets) && cluster.markets.length > 0 ? (
-              cluster.markets.map((market, index) => (
-                <Chip key={index} label={market} variant="outlined" />
-              ))
-            ) : (
-              <Chip label="Keine Märkte" color="default" />
-            )}
+            </Box>
           </Box>
 
-          {/* ✅ Falls `totalRevenue === 0` → Zeige Alert */}
-          {totalRevenue === 0 ? (
-            <Box>
-            <Alert severity="info" sx={{ mt: 4 }}>
-              Markets and Products wait for initial scraping, please come back later or click for a first impression
-            </Alert>
-              <LinearProgress />
-              </Box>
-          ) : (
-            <>
-              {/* ✅ Falls Umsatz vorhanden → Zeige Wert + Sparkline */}
-              <Typography sx={{ mt: 4 }} variant="h3">
-                Total Revenue:{" "}
-                {new Intl.NumberFormat("en-US", {
-                  style: "currency",
-                  currency: "USD",
-                }).format(Number(totalRevenue))}
-              </Typography>
+          <Box sx={{ mb: 3 }}>
+            <Typography variant="body2" color="text.secondary" gutterBottom>
+              Included markets:
+            </Typography>
+            <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
+              {Array.isArray(cluster.markets) && cluster.markets.length > 0 ? (
+                cluster.markets.map((market, index) => (
+                  <Chip 
+                    key={index} 
+                    label={market} 
+                    variant="outlined" 
+                    size="small"
+                    sx={{ 
+                      borderColor: 'primary.main',
+                      color: 'primary.main',
+                      backgroundColor: '#e3f2fd',
+                      '& .MuiChip-label': {
+                        fontWeight: 500,
+                      }
+                    }}
+                  />
+                ))
+              ) : (
+                <Chip label="No markets" color="default" size="small" />
+              )}
+            </Box>
+          </Box>
 
-              {/* ✅ Sparkline nur anzeigen, wenn `totalRevenue > 0` */}
+          {totalRevenue === 0 ? (
+            <Box sx={{ mt: 2 }}>
+              <Alert 
+                severity="info" 
+                sx={{ 
+                  backgroundColor: '#e3f2fd',
+                  color: 'primary.main',
+                  '& .MuiAlert-icon': {
+                    color: 'primary.main'
+                  }
+                }}
+              >
+                Markets and Products wait for initial scraping, please come back later or click for a first impression
+              </Alert>
+              <LinearProgress 
+                sx={{ 
+                  mt: 2,
+                  backgroundColor: '#e3f2fd',
+                  '& .MuiLinearProgress-bar': {
+                    backgroundColor: 'primary.main'
+                  }
+                }} 
+              />
+            </Box>
+          ) : (
+            <Box>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
+                <Box
+                  sx={{
+                    width: 45,
+                    height: 45,
+                    borderRadius: '12px',
+                    backgroundColor: '#e3f2fd',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <FaDollarSign size={22} color="#1976d2" />
+                </Box>
+                <Box>
+                  <Typography variant="body2" color="text.secondary" gutterBottom>
+                    Total Revenue
+                  </Typography>
+                  <Typography variant="h6" color="text.primary" sx={{ fontWeight: 600 }}>
+                    {new Intl.NumberFormat("en-US", {
+                      style: "currency",
+                      currency: "USD",
+                    }).format(Number(totalRevenue))}
+                  </Typography>
+                </Box>
+              </Box>
+
               {totalRevenue > 0 && (
-                <Box sx={{ mt: 2, width: "50%", height: 50 }}>
+                <Box sx={{ mt: 2, height: 50 }}>
                   {loadingSparkline ? (
-                    <CircularProgress size={30} color="primary" />
+                    <CircularProgress size={30} sx={{ color: 'primary.main' }} />
                   ) : (
                     <CustomSparkLine data={sparklineData} />
                   )}
                 </Box>
               )}
-            </>
+            </Box>
           )}
         </CardContent>
       </Card>
 
-      {/* Confirmation Dialog for Delete */}
       <Dialog open={openConfirmDialog} onClose={() => setOpenConfirmDialog(false)}>
         <DialogTitle>Delete Market Cluster</DialogTitle>
         <DialogContent>
@@ -204,7 +280,6 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
         </DialogActions>
       </Dialog>
 
-      {/* Edit Dialog */}
       <Dialog open={openEditDialog} onClose={() => setOpenEditDialog(false)}>
         <DialogTitle>Edit Market Cluster</DialogTitle>
         <DialogContent>
