@@ -38,7 +38,7 @@ export default function Layout({ setIsAuthenticated, setUser }: { setIsAuthentic
           <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
             <AiFillAmazonCircle size={40} />
             <Typography variant="h6" sx={{ fontWeight: "bold", marginRight: 2 }}>
-              AmaScraper
+              MarketScope
             </Typography>
             {isLoggedIn && (
               <Box sx={{ display: "flex", alignItems: "center", gap: 2, mt: 0.2 }}>
@@ -86,7 +86,7 @@ export default function Layout({ setIsAuthenticated, setUser }: { setIsAuthentic
       </div>
 
       <Box sx={{ textAlign: "center", padding: 2, backgroundColor: "#f5f5f5" }}>
-        <Typography variant="body2">© {new Date().getFullYear()} My WebApp</Typography>
+        <Typography variant="body2">© {new Date().getFullYear()} MarketScope</Typography>
       </Box>
     </>
   );

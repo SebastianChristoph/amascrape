@@ -170,7 +170,7 @@ const Dashboard: React.FC = () => {
             />
           </Box>
           <Typography variant="h4" gutterBottom>
-            Welcome to Market Analysis
+            Welcome to MarketScope
           </Typography>
           <Typography variant="body1" sx={{ mb: 4 , color: 'white'}}>
             You haven't created any market clusters yet. Start your journey by creating your first one!
