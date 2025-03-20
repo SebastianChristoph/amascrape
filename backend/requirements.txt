@@ -3,10 +3,12 @@ uvicorn
 passlib[bcrypt]
 python-jose[cryptography]
 pydantic
-dotenv
+python-dotenv
 python-multipart
 SQLAlchemy
 selenium
-asynco
 fastapi-mail
 alembic
+requests
+beautifulsoup4
+aiohttp
