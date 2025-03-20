@@ -23,10 +23,12 @@ import { MdAdd, MdDelete, MdInfo } from "react-icons/md";
 import { useSnackbar } from "../providers/SnackbarProvider";
 import MarketService from "../services/MarketService";
 import { commonBackgroundStyle, moveBackgroundKeyframes } from "../components/BackgroundPattern";
+import { useTheme } from '@mui/material/styles';
 
 const AddMarketCluster: React.FC = () => {
   const navigate = useNavigate();
   const { showSnackbar } = useSnackbar();
+  const theme = useTheme();
 
   const [clusterName, setClusterName] = useState<string>("");
   const [keywords, setKeywords] = useState<string[]>([]);
@@ -160,7 +162,7 @@ const AddMarketCluster: React.FC = () => {
         minHeight: "100vh",
         position: "relative",
         overflow: "hidden",
-        backgroundColor: "#f8f9fa",
+        backgroundColor: theme.palette.background.default,
         "&::before": {
           ...commonBackgroundStyle,
           opacity: 0.6,
@@ -223,7 +225,7 @@ const AddMarketCluster: React.FC = () => {
                     </RadioGroup>
                     </FormControl>
                      <Typography variant="body2" color="warning" gutterBottom>
-                                 Choseable but o logic implemented yet
+                                 Choseable but no logic implemented yet
                                       </Typography>
                 </Grid>
 
@@ -257,7 +259,8 @@ const AddMarketCluster: React.FC = () => {
                         disabled={!newKeyword.trim()}
                         sx={{
                           minWidth: '120px',
-                          whiteSpace: 'nowrap'
+                          whiteSpace: 'nowrap',
+                          color: theme.palette.common.white,
                         }}
                       >
                         {isListInput ? "Add List" : "Add"}
@@ -288,14 +291,14 @@ const AddMarketCluster: React.FC = () => {
                               alignItems: "center",
                               gap: 1,
                               backgroundColor: "primary.main",
-                              color: "white",
+                              color: theme.palette.common.white,
                             }}
                           >
                             <Typography variant="body2">{keyword}</Typography>
                             <IconButton
                               size="small"
                               onClick={() => handleRemoveKeyword(keyword)}
-                              sx={{ color: "white" }}
+                              sx={{ color: theme.palette.common.white }}
                             >
                               <MdDelete />
                             </IconButton>

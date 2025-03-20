@@ -15,9 +15,21 @@ declare module '@mui/material/styles' {
 export const lightTheme = createTheme({
   palette: {
     mode: "light",
-    primary: { main: "#1470CC" }, // Seriöses Blau
-    secondary: { main: "#017D7B" }, // Professionelles Orange für Akzente
-    tertiary: { main: "#455A64" }, // Dezentes Grau-Blau für zusätzliche Elemente
+    primary: { 
+      main: "#1470CC",
+      light: "#4791db",
+      dark: "#0d47a1"
+    },
+    secondary: { 
+      main: "#017D7B",
+      light: "#34a09e",
+      dark: "#005755"
+    },
+    tertiary: { 
+      main: "#455A64",
+      light: "#718792",
+      dark: "#1c313a"
+    },
     background: { default: "#F5F5F5", paper: "#FFFFFF" }, // Helles Grau & Weiß für Professionalität
     text: { primary: "#212121", secondary: "#757575" }, // Dunkles Grau für Lesbarkeit
   },
@@ -53,9 +65,21 @@ export const lightTheme = createTheme({
 export const darkTheme = createTheme({
   palette: {
     mode: 'dark',
-    primary: { main: '#66B6F7' },
-    secondary: { main: '#FB958D' },
-    tertiary: { main: '#ff4081' },
+    primary: { 
+      main: '#66B6F7',
+      light: '#90caf9',
+      dark: '#42a5f5'
+    },
+    secondary: { 
+      main: '#FB958D',
+      light: '#ffb4ae',
+      dark: '#c7766f'
+    },
+    tertiary: { 
+      main: '#ff4081',
+      light: '#ff79b0',
+      dark: '#c60055'
+    },
     background: { default: '#2e2e2e', paper: '#1e1e1e' },
   },
   typography: {

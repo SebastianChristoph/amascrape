@@ -12,6 +12,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link as RouterLink } from "react-router-dom";
 import { Link } from "@mui/material";
+import { useTheme } from '@mui/material/styles';
 
 import { useSnackbar } from "../providers/SnackbarProvider";
 import { FaUserPlus } from "react-icons/fa"; // 🔥 Register Icon
@@ -23,6 +24,7 @@ import UserService from "../services/UserService";
 export default function Register() {
   const navigate = useNavigate();
   const { showSnackbar } = useSnackbar();
+  const theme = useTheme();
 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -87,28 +89,26 @@ export default function Register() {
         <Box
           sx={{
             width: "50%",
-            backgroundColor: "#0096FF",
+            background: (theme) => `linear-gradient(45deg, ${theme.palette.primary.dark} 30%, ${theme.palette.primary.main} 90%)`,
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
           }}
         >
-                   <Box sx={{mt: 0.5}}>
-                       <AiFillAmazonCircle size={40} color="white" />
-                       </Box>
-                   <Typography
-                     variant="h2"
-                     sx={{
-                       color: "white",
-                       fontWeight: "bold",
-                       letterSpacing: 1,
-                     }}
-                   >
-                     
-                     AmaScraper
-                   </Typography>
-                 </Box>
-         
+          <Box sx={{mt: 0.5}}>
+            <AiFillAmazonCircle size={40} style={{ color: theme.palette.common.white }} />
+          </Box>
+          <Typography
+            variant="h2"
+            sx={{
+              color: "white",
+              fontWeight: "bold",
+              letterSpacing: 1,
+            }}
+          >
+            AmaScraper
+          </Typography>
+        </Box>
 
         {/* ✅ Right Side: Registration Form */}
         <Box
@@ -118,7 +118,7 @@ export default function Register() {
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
-            backgroundColor: "#fff",
+            backgroundColor: theme.palette.background.paper,
           }}
         >
           <Typography
@@ -213,19 +213,23 @@ export default function Register() {
             </Button>
           </form>
 
-            {/* ✅ Back to Login Link */}
-            <Typography sx={{ mt: 2, textAlign: "center" }}>
+          {/* ✅ Back to Login Link */}
+          <Typography sx={{ mt: 2, textAlign: "center" }}>
             Already have an account?{" "}
             <Link to="/login" component={RouterLink} sx={{ color: "primary.main", fontWeight: "bold" }}>
-  Back to Login
-</Link>
-
+              Back to Login
+            </Link>
           </Typography>
 
           {/* ✅ Mocked Verification Link */}
           {mockedLink && (
             <Typography
-              sx={{ mt: 2, color: "blue", cursor: "pointer", textAlign: "center" }}
+              sx={{ 
+                mt: 2, 
+                color: theme.palette.primary.main, 
+                cursor: "pointer", 
+                textAlign: "center" 
+              }}
               onClick={handleVerification}
             >
               Click here to activate your account

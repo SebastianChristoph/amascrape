@@ -17,6 +17,7 @@ import UserService from "./services/UserService";
 import { lightTheme } from "./theme";
 import Register from "./pages/Register";
 import Admin from "./pages/Admin";
+import LandingPage from "./pages/LandingPage";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(UserService.isAuthenticated());
@@ -33,6 +34,7 @@ function App() {
       <SnackbarProvider>
         <Router>
           <Routes>
+            <Route path="/landing" element={<LandingPage />} />
             <Route
               path="/"
               element={isAuthenticated ? <Navigate to="/dashboard" /> : <Login />}

@@ -27,6 +27,7 @@ import {
   Tooltip,
   Legend
 } from 'chart.js';
+import { useTheme } from "@mui/material/styles";
 
 ChartJS.register(
   CategoryScale,
@@ -47,6 +48,7 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [chartValues, setChartValues] = useState<number[]>([15, 20, 25, 30, 35, 40]);
+  const theme = useTheme();
 
   // Function to generate new values with overall upward trend but allowing some decreases
   const generateGrowingValues = () => {
@@ -90,12 +92,12 @@ export default function Login() {
       {
         label: 'Market Growth',
         data: chartValues,
-        borderColor: 'white',
-        backgroundColor: 'rgba(255, 255, 255, 0.1)',
+        borderColor: theme.palette.common.white,
+        backgroundColor: `${theme.palette.common.white}1A`,
         tension: 0.3,
         fill: true,
         pointRadius: 4,
-        pointBackgroundColor: 'white',
+        pointBackgroundColor: theme.palette.common.white,
       }
     ]
   };
@@ -112,7 +114,7 @@ export default function Login() {
         beginAtZero: true,
         max: 100,
         grid: {
-          color: 'rgba(255, 255, 255, 0.1)',
+          color: `${theme.palette.common.white}1A`,
         },
         ticks: {
           display: false,
@@ -123,10 +125,10 @@ export default function Login() {
       },
       x: {
         grid: {
-          color: 'rgba(255, 255, 255, 0.1)',
+          color: `${theme.palette.common.white}1A`,
         },
         ticks: {
-          color: 'white',
+          color: theme.palette.common.white,
         },
       },
     },
@@ -157,7 +159,7 @@ export default function Login() {
         minHeight: "100vh",
         position: "relative",
         overflow: "hidden",
-        backgroundColor: "#f8f9fa",
+        backgroundColor: (theme) => theme.palette.background.default,
         "&::before": {
           ...commonBackgroundStyle,
           opacity: 0.8,
@@ -180,20 +182,19 @@ export default function Login() {
             display: "flex",
             borderRadius: 3,
             overflow: "hidden",
-            background: "linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.85) 100%)",
+            background: (theme) => `linear-gradient(135deg, ${theme.palette.background.paper} 0%, ${theme.palette.background.paper}D9) 100%)`,
             backdropFilter: "blur(10px)",
-            boxShadow: "0 8px 32px rgba(0,0,0,0.1)",
+            boxShadow: (theme) => theme.shadows[3],
           }}
         >
           {/* Left half: Blue box with title */}
           <Box
             sx={{
               width: "50%",
-              backgroundColor: "#0096FF",
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-              background: "linear-gradient(45deg, #1976d2 30%, #2196f3 90%)",
+              background: (theme) => `linear-gradient(45deg, ${theme.palette.primary.dark} 30%, ${theme.palette.primary.main} 90%)`,
               position: "relative",
               padding: 3,
               pt: 8,
@@ -201,12 +202,12 @@ export default function Login() {
           >
             <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
               <Box sx={{ mt: 0.5, mr: 1 }}>
-                <IoIosAnalytics size={40} color="white" />
+                <IoIosAnalytics size={40} style={{ color: theme.palette.common.white }} />
               </Box>
               <Typography
                 variant="h2"
                 sx={{
-                  color: "white",
+                  color: theme.palette.common.white,
                   fontWeight: "bold",
                   letterSpacing: 1,
                   fontSize: "2.5rem",
@@ -291,10 +292,10 @@ export default function Login() {
                   fontSize: 16,
                   fontWeight: "bold",
                   textTransform: "none",
-                  background: "linear-gradient(45deg, #1976d2 30%, #2196f3 90%)",
-                  boxShadow: "0 3px 5px 2px rgba(33, 150, 243, .3)",
+                  background: (theme) => `linear-gradient(45deg, ${theme.palette.primary.dark} 30%, ${theme.palette.primary.main} 90%)`,
+                  boxShadow: (theme) => `0 3px 5px 2px ${theme.palette.primary.main}33`,
                   "&:hover": {
-                    background: "linear-gradient(45deg, #1565c0 30%, #1976d2 90%)",
+                    background: (theme) => `linear-gradient(45deg, ${theme.palette.primary.dark} 30%, ${theme.palette.primary.main} 90%)`,
                   },
                 }}
               >
@@ -304,7 +305,14 @@ export default function Login() {
 
             <Typography sx={{ mt: 2, textAlign: "center", color: "text.secondary" }}>
               Don't have an account?{" "}
-              <Link to="/register" style={{ textDecoration: "none", color: "#1976d2", fontWeight: "bold" }}>
+              <Link 
+                to="/register" 
+                style={{ 
+                  textDecoration: "none", 
+                  color: theme.palette.primary.main, 
+                  fontWeight: "bold" 
+                }}
+              >
                 Register now
               </Link>
             </Typography>

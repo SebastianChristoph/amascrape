@@ -24,7 +24,7 @@ import {
 import { useEffect, useRef, useState } from "react";
 import { Line } from 'react-chartjs-2';
 import { AiOutlineCheckCircle } from "react-icons/ai";
-import { FaBoxes, FaChartLine, FaDollarSign, FaLayerGroup } from 'react-icons/fa';
+import { FaBoxes, FaChartLine, FaDollarSign, FaLayerGroup, FaStore } from 'react-icons/fa';
 import { MdAdd } from "react-icons/md";
 import { RiRobot2Fill } from 'react-icons/ri';
 import { useNavigate } from "react-router-dom";
@@ -32,6 +32,7 @@ import { commonBackgroundStyle, moveBackgroundKeyframes } from "../components/Ba
 import ClusterCard from "../components/ClusterCard";
 import { useSnackbar } from "../providers/SnackbarProvider";
 import MarketService from "../services/MarketService";
+import { useTheme } from '@mui/material/styles';
 
 ChartJS.register(
   CategoryScale,
@@ -43,37 +44,10 @@ ChartJS.register(
   Legend
 );
 
-
-const pulseAnimation = keyframes`
-  0% {
-    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4);
-  }
-  70% {
-    box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
-  }
-`;
-
-// Add robot animation keyframes
-const robotAnimation = keyframes`
-  0% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-  100% {
-    transform: translateY(0px);
-  }
-`;
-
-
-
 const Dashboard: React.FC = () => {
   const navigate = useNavigate();
   const { showSnackbar } = useSnackbar();
+  const theme = useTheme();
   const [marketClusters, setMarketClusters] = useState<any[]>([]);
   const [deletingCluster, setDeletingCluster] = useState<number | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -86,6 +60,31 @@ const Dashboard: React.FC = () => {
     status: string;
     keywords: { [keyword: string]: string };
   } | null>(null);
+
+  const pulseAnimation = keyframes`
+    0% {
+      box-shadow: 0 0 0 0 ${theme.palette.common.white}66;
+    }
+    70% {
+      box-shadow: 0 0 0 10px ${theme.palette.common.white}00;
+    }
+    100% {
+      box-shadow: 0 0 0 0 ${theme.palette.common.white}00;
+    }
+  `;
+
+  // Add robot animation keyframes
+  const robotAnimation = keyframes`
+    0% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+    100% {
+      transform: translateY(0px);
+    }
+  `;
 
   // Function to generate new values with overall upward trend but allowing some decreases
   const generateGrowingValues = () => {
@@ -208,12 +207,12 @@ const Dashboard: React.FC = () => {
         {
           label: 'Market Growth',
           data: chartValues,
-          borderColor: 'white',
-          backgroundColor: 'rgba(255, 255, 255, 0.1)',
+          borderColor: theme.palette.common.white,
+          backgroundColor: `${theme.palette.common.white}1A`,
           tension: 0.3,
           fill: true,
           pointRadius: 4,
-          pointBackgroundColor: 'white',
+          pointBackgroundColor: theme.palette.common.white,
         }
       ]
     };
@@ -230,7 +229,7 @@ const Dashboard: React.FC = () => {
           beginAtZero: true,
           max: 100,
           grid: {
-            color: 'rgba(255, 255, 255, 0.1)',
+            color: `${theme.palette.common.white}1A`,
           },
           ticks: {
             display: false,
@@ -241,10 +240,10 @@ const Dashboard: React.FC = () => {
         },
         x: {
           grid: {
-            color: 'rgba(255, 255, 255, 0.1)',
+            color: `${theme.palette.common.white}1A`,
           },
           ticks: {
-            color: 'white',
+            color: theme.palette.common.white,
           },
         },
       },
@@ -271,8 +270,8 @@ const Dashboard: React.FC = () => {
             p: 4,
             maxWidth: 600,
             width: '100%',
-            background: 'linear-gradient(135deg, #1976d2 0%, #2196f3 100%)',
-            color: 'white',
+            background: (theme) => `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.light} 100%)`,
+            color: (theme) => theme.palette.common.white,
             borderRadius: 2,
             textAlign: 'center',
           }}
@@ -288,7 +287,7 @@ const Dashboard: React.FC = () => {
           <Typography variant="h4" gutterBottom>
             Welcome to MarketScope
           </Typography>
-          <Typography variant="body1" sx={{ mb: 4, color: 'white' }}>
+          <Typography variant="body1" sx={{ mb: 4, color: theme.palette.common.white }}>
             You haven't created any market clusters yet. Start your journey by creating your first one!
           </Typography>
           <Button
@@ -318,7 +317,7 @@ const Dashboard: React.FC = () => {
         minHeight: "100vh",
         position: "relative",
         overflow: "hidden",
-        backgroundColor: "#f8f9fa",
+        backgroundColor: (theme) => theme.palette.background.default,
         "&::before": {
           ...commonBackgroundStyle,
           opacity: 0.6,
@@ -361,7 +360,7 @@ const Dashboard: React.FC = () => {
                 sx={{
                   p: 3,
                   height: '100%',
-                  backgroundColor: 'white',
+                  backgroundColor: theme.palette.background.paper,
                   borderRadius: 2,
                   display: 'flex',
                   flexDirection: 'column',
@@ -376,14 +375,14 @@ const Dashboard: React.FC = () => {
                   sx={{
                     width: 45,
                     height: 45,
-                    borderRadius: '12px',
-                    backgroundColor: '#e3f2fd',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
+                    borderRadius: "12px",
+                    backgroundColor: theme.palette.primary.light,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
                   }}
                 >
-                  <FaDollarSign size={22} color="#1976d2" />
+                  <FaDollarSign size={22} style={{ color: theme.palette.primary.main }} />
                 </Box>
                 <Box>
                   <Typography variant="body2" color="text.secondary" gutterBottom>
@@ -406,7 +405,7 @@ const Dashboard: React.FC = () => {
                 sx={{
                   p: 3,
                   height: '100%',
-                  backgroundColor: 'white',
+                  backgroundColor: theme.palette.background.paper,
                   borderRadius: 2,
                   display: 'flex',
                   flexDirection: 'column',
@@ -421,14 +420,14 @@ const Dashboard: React.FC = () => {
                   sx={{
                     width: 45,
                     height: 45,
-                    borderRadius: '12px',
-                    backgroundColor: '#e3f2fd',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
+                    borderRadius: "12px",
+                    backgroundColor: theme.palette.primary.light,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
                   }}
                 >
-                  <FaChartLine size={22} color="#1976d2" />
+                  <FaChartLine size={22} style={{ color: theme.palette.primary.main }} />
                 </Box>
                 <Box>
                   <Typography variant="body2" color="text.secondary" gutterBottom>
@@ -451,7 +450,7 @@ const Dashboard: React.FC = () => {
                 sx={{
                   p: 3,
                   height: '100%',
-                  backgroundColor: 'white',
+                  backgroundColor: theme.palette.background.paper,
                   borderRadius: 2,
                   display: 'flex',
                   flexDirection: 'column',
@@ -466,14 +465,14 @@ const Dashboard: React.FC = () => {
                   sx={{
                     width: 45,
                     height: 45,
-                    borderRadius: '12px',
-                    backgroundColor: '#e3f2fd',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
+                    borderRadius: "12px",
+                    backgroundColor: theme.palette.primary.light,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
                   }}
                 >
-                  <FaLayerGroup size={22} color="#1976d2" />
+                  <FaLayerGroup size={22} style={{ color: theme.palette.primary.main }} />
                 </Box>
                 <Box>
                   <Typography variant="body2" color="text.secondary" gutterBottom>
@@ -496,7 +495,7 @@ const Dashboard: React.FC = () => {
                 sx={{
                   p: 3,
                   height: '100%',
-                  backgroundColor: 'white',
+                  backgroundColor: theme.palette.background.paper,
                   borderRadius: 2,
                   display: 'flex',
                   flexDirection: 'column',
@@ -511,14 +510,14 @@ const Dashboard: React.FC = () => {
                   sx={{
                     width: 45,
                     height: 45,
-                    borderRadius: '12px',
-                    backgroundColor: '#e3f2fd',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
+                    borderRadius: "12px",
+                    backgroundColor: theme.palette.primary.light,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
                   }}
                 >
-                  <FaBoxes size={22} color="#1976d2" />
+                  <FaBoxes size={22} style={{ color: theme.palette.primary.main }} />
                 </Box>
                 <Box>
                   <Typography variant="body2" color="text.secondary" gutterBottom>
@@ -545,7 +544,7 @@ const Dashboard: React.FC = () => {
               p: 3,
               mt: 2,
               borderRadius: 2,
-              backgroundColor: 'white',
+              backgroundColor: theme.palette.background.paper,
             }}
           >
             {/* Header with animated robot */}
@@ -560,14 +559,14 @@ const Dashboard: React.FC = () => {
                   width: 45,
                   height: 45,
                   borderRadius: '12px',
-                  backgroundColor: '#e3f2fd',
+                  backgroundColor: theme.palette.background.paper,
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   animation: `${robotAnimation} 2s ease-in-out infinite`,
                 }}
               >
-                <RiRobot2Fill size={24} color="#1976d2" />
+                <RiRobot2Fill size={24} color={theme.palette.primary.main} />
               </Box>
               <Typography variant="h6" color="text.primary" sx={{ fontWeight: 600 }}>
                 Our robots are scraping for you...
@@ -578,10 +577,10 @@ const Dashboard: React.FC = () => {
               severity="info" 
               sx={{ 
                 mb: 3,
-                backgroundColor: '#e3f2fd',
-                color: 'primary.main',
+                backgroundColor: theme.palette.background.paper,
+                color: theme.palette.primary.main,
                 '& .MuiAlert-icon': {
-                  color: 'primary.main'
+                  color: theme.palette.primary.main
                 }
               }}
             >
@@ -593,7 +592,7 @@ const Dashboard: React.FC = () => {
             <Card
               elevation={1}
               sx={{
-                backgroundColor: 'white',
+                backgroundColor: theme.palette.background.paper,
                 borderRadius: 2,
                 border: '1px solid',
                 borderColor: 'divider',
@@ -606,14 +605,14 @@ const Dashboard: React.FC = () => {
                     sx={{
                       width: 45,
                       height: 45,
-                      borderRadius: '12px',
-                      backgroundColor: '#e3f2fd',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
+                      borderRadius: "12px",
+                      backgroundColor: theme.palette.primary.light,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
                     }}
                   >
-                    <FaLayerGroup size={22} color="#1976d2" />
+                    <FaLayerGroup size={22} style={{ color: theme.palette.primary.main }} />
                   </Box>
                   <Typography variant="h6" color="text.primary" sx={{ fontWeight: 600 }}>
                     Cluster to build: {activeCluster.clustername} (Todo: Add cluster type and logo )
@@ -635,23 +634,23 @@ const Dashboard: React.FC = () => {
                           gap: 2,
                           p: 2,
                           borderRadius: 1,
-                          backgroundColor: status === "done" ? '#e8f5e9' : '#e3f2fd',
+                          backgroundColor: status === "done" ? theme.palette.success.light : theme.palette.primary.light,
                         }}
                       >
                         <Box sx={{ minWidth: 24 }}>
                           {status === "done" ? (
-                            <AiOutlineCheckCircle size={20} color="#2e7d32" />
+                            <AiOutlineCheckCircle size={20} style={{ color: theme.palette.success.main }} />
                           ) : (
                             <CircularProgress
                               size={20}
-                              sx={{ color: "primary.main" }}
+                              sx={{ color: theme.palette.primary.main }}
                             />
                           )}
                         </Box>
                         <Typography 
                           variant="body2" 
                           sx={{ 
-                            color: status === "done" ? '#2e7d32' : 'primary.main',
+                            color: status === "done" ? theme.palette.success.main : theme.palette.primary.main,
                             fontWeight: 500
                           }}
                         >
@@ -669,7 +668,7 @@ const Dashboard: React.FC = () => {
         {/* ✅ Zeigt alle Market-Cluster an */}
         {marketClusters.length > 0 && (
           <Paper elevation={3} sx={{ paddingY: 4, paddingX: 4, mt: 2 }}>
-            <Typography variant="h5" sx={{ mb: 3, backgroundColor: "primary.main", p: 2, color: "white" }}>
+            <Typography variant="h5" sx={{ mb: 3, backgroundColor: theme.palette.primary.main, p: 2, color: theme.palette.common.white }}>
               My Market Clusters
             </Typography>
 
@@ -719,13 +718,13 @@ const Dashboard: React.FC = () => {
           right: 32,
           padding: '12px 24px',
           borderRadius: '28px',
-          boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
-          backgroundColor: 'primary.main',
+          boxShadow: theme.shadows[3],
+          backgroundColor: theme.palette.primary.main,
           '&:hover': {
-            backgroundColor: 'primary.dark',
+            backgroundColor: theme.palette.primary.dark,
             transform: 'scale(1.05)',
             transition: 'all 0.2s ease-in-out',
-            boxShadow: '0 6px 16px rgba(0,0,0,0.2)',
+            boxShadow: theme.shadows[4],
           },
         }}
       >

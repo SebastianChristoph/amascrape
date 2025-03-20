@@ -38,6 +38,7 @@ import CustomStackBars from "../components/charts/CustomStackChart";
 import ChartDataService from "../services/ChartDataService";
 import MarketService from "../services/MarketService";
 import { FaCheckCircle, FaPlusCircle } from "react-icons/fa";
+import { useTheme } from '@mui/material/styles';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -68,6 +69,7 @@ interface MarketType {
 
 export default function ClusterDetails() {
   const { clusterId } = useParams();
+  const theme = useTheme();
   const [marketCluster, setMarketCluster] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [tabIndex, setTabIndex] = useState(0);
@@ -565,7 +567,7 @@ export default function ClusterDetails() {
                       height="100%"
                       sx={{
                         borderRadius: 1,
-                        bgcolor: "grey.100",
+                        bgcolor: theme.palette.grey[100],
                       }}
                     />
                     <Typography
@@ -577,7 +579,7 @@ export default function ClusterDetails() {
                         left: "50%",
                         transform: "translate(-50%, -50%)",
                         textAlign: "center",
-                        backgroundColor: "rgba(255, 255, 255, 0.8)",
+                        backgroundColor: theme.palette.common.white,
                         padding: "8px 16px",
                         borderRadius: 1,
                       }}
@@ -607,7 +609,7 @@ export default function ClusterDetails() {
                   sx={{
                     p: 3,
                     height: "100%",
-                    backgroundColor: "white",
+                    backgroundColor: theme.palette.background.paper,
                     borderRadius: 2,
                     display: "flex",
                     alignItems: "center",
@@ -623,13 +625,13 @@ export default function ClusterDetails() {
                       width: 45,
                       height: 45,
                       borderRadius: "12px",
-                      backgroundColor: "#e3f2fd",
+                      backgroundColor: theme.palette.primary.light,
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                     }}
                   >
-                    <FaDollarSign size={22} color="#1976d2" />
+                    <FaDollarSign size={22} style={{ color: theme.palette.primary.main }} />
                   </Box>
                   <Box>
                     <Typography
@@ -668,7 +670,7 @@ export default function ClusterDetails() {
                   sx={{
                     p: 3,
                     height: "100%",
-                    backgroundColor: "white",
+                    backgroundColor: theme.palette.background.paper,
                     borderRadius: 2,
                     display: "flex",
                     alignItems: "center",
@@ -684,13 +686,13 @@ export default function ClusterDetails() {
                       width: 45,
                       height: 45,
                       borderRadius: "12px",
-                      backgroundColor: "#e3f2fd",
+                      backgroundColor: theme.palette.primary.light,
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                     }}
                   >
-                    <FaStore size={22} color="#1976d2" />
+                    <FaStore size={22} style={{ color: theme.palette.primary.main }} />
                   </Box>
                   <Box>
                     <Typography
@@ -719,7 +721,7 @@ export default function ClusterDetails() {
                   sx={{
                     p: 3,
                     height: "100%",
-                    backgroundColor: "white",
+                    backgroundColor: theme.palette.background.paper,
                     borderRadius: 2,
                     display: "flex",
                     alignItems: "center",
@@ -735,13 +737,13 @@ export default function ClusterDetails() {
                       width: 45,
                       height: 45,
                       borderRadius: "12px",
-                      backgroundColor: "#e3f2fd",
+                      backgroundColor: theme.palette.primary.light,
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                     }}
                   >
-                    <FaChartLine size={22} color="#1976d2" />
+                    <FaChartLine size={22} style={{ color: theme.palette.primary.main }} />
                   </Box>
                   <Box>
                     <Typography
@@ -799,7 +801,7 @@ export default function ClusterDetails() {
                   sx={{
                     p: 3,
                     height: "100%",
-                    backgroundColor: "white",
+                    backgroundColor: theme.palette.background.paper,
                     borderRadius: 2,
                     display: "flex",
                     alignItems: "center",
@@ -815,13 +817,13 @@ export default function ClusterDetails() {
                       width: 45,
                       height: 45,
                       borderRadius: "12px",
-                      backgroundColor: "#e3f2fd",
+                      backgroundColor: theme.palette.primary.light,
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                     }}
                   >
-                    <FaDollarSign size={22} color="#1976d2" />
+                    <FaDollarSign size={22} style={{ color: theme.palette.primary.main }} />
                   </Box>
                   <Box>
                     <Typography
@@ -861,7 +863,7 @@ export default function ClusterDetails() {
                   sx={{
                     p: 3,
                     height: "100%",
-                    backgroundColor: "white",
+                    backgroundColor: theme.palette.background.paper,
                     borderRadius: 2,
                     display: "flex",
                     alignItems: "center",
@@ -877,13 +879,13 @@ export default function ClusterDetails() {
                       width: 45,
                       height: 45,
                       borderRadius: "12px",
-                      backgroundColor: "#e3f2fd",
+                      backgroundColor: theme.palette.primary.light,
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                     }}
                   >
-                    <FaBoxes size={22} color="#1976d2" />
+                    <FaBoxes size={22} style={{ color: theme.palette.primary.main }} />
                   </Box>
                   <Box>
                     <Typography
@@ -912,7 +914,7 @@ export default function ClusterDetails() {
                   sx={{
                     p: 3,
                     height: "100%",
-                    backgroundColor: "white",
+                    backgroundColor: theme.palette.background.paper,
                     borderRadius: 2,
                     display: "flex",
                     alignItems: "center",
@@ -928,13 +930,13 @@ export default function ClusterDetails() {
                       width: 45,
                       height: 45,
                       borderRadius: "12px",
-                      backgroundColor: "#e3f2fd",
+                      backgroundColor: theme.palette.primary.light,
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                     }}
                   >
-                    <FaPercentage size={22} color="#1976d2" />
+                    <FaPercentage size={22} style={{ color: theme.palette.primary.main }} />
                   </Box>
                   <Box>
                     <Typography
@@ -971,7 +973,7 @@ export default function ClusterDetails() {
             mt: 4,
             mb: 2,
             backgroundColor: "primary.main",
-            color: "white",
+            color: theme.palette.common.white,
             padding: 2,
           }}
           variant="h5"
@@ -1006,7 +1008,7 @@ export default function ClusterDetails() {
               sx={{
                 p: 4,
                 my: 2,
-                backgroundColor: "#fff",
+                backgroundColor: theme.palette.background.paper,
                 borderRadius: 2,
               }}
             >
@@ -1035,7 +1037,7 @@ export default function ClusterDetails() {
                             sx={{
                               p: 3,
                               height: "100%",
-                              backgroundColor: "white",
+                              backgroundColor: theme.palette.background.paper,
                               borderRadius: 2,
                               display: "flex",
                               alignItems: "center",
@@ -1051,13 +1053,13 @@ export default function ClusterDetails() {
                                 width: 45,
                                 height: 45,
                                 borderRadius: "12px",
-                                backgroundColor: "#e3f2fd",
+                                backgroundColor: theme.palette.primary.light,
                                 display: "flex",
                                 alignItems: "center",
                                 justifyContent: "center",
                               }}
                             >
-                              <FaDollarSign size={22} color="#1976d2" />
+                              <FaDollarSign size={22} style={{ color: theme.palette.primary.main }} />
                             </Box>
                             <Box>
                               <Typography
@@ -1101,7 +1103,7 @@ export default function ClusterDetails() {
                             sx={{
                               p: 3,
                               height: "100%",
-                              backgroundColor: "white",
+                              backgroundColor: theme.palette.background.paper,
                               borderRadius: 2,
                               display: "flex",
                               alignItems: "center",
@@ -1117,13 +1119,13 @@ export default function ClusterDetails() {
                                 width: 45,
                                 height: 45,
                                 borderRadius: "12px",
-                                backgroundColor: "#e3f2fd",
+                                backgroundColor: theme.palette.primary.light,
                                 display: "flex",
                                 alignItems: "center",
                                 justifyContent: "center",
                               }}
                             >
-                              <FaTrophy size={22} color="#1976d2" />
+                              <FaTrophy size={22} style={{ color: theme.palette.primary.main }} />
                             </Box>
                             <Box>
                               <Typography
@@ -1177,7 +1179,7 @@ export default function ClusterDetails() {
                             sx={{
                               p: 3,
                               height: "100%",
-                              backgroundColor: "white",
+                              backgroundColor: theme.palette.background.paper,
                               borderRadius: 2,
                               display: "flex",
                               alignItems: "center",
@@ -1193,13 +1195,13 @@ export default function ClusterDetails() {
                                 width: 45,
                                 height: 45,
                                 borderRadius: "12px",
-                                backgroundColor: "#e3f2fd",
+                                backgroundColor: theme.palette.primary.light,
                                 display: "flex",
                                 alignItems: "center",
                                 justifyContent: "center",
                               }}
                             >
-                              <FaStore size={22} color="#1976d2" />
+                              <FaStore size={22} style={{ color: theme.palette.primary.main }} />
                             </Box>
                             <Box>
                               <Typography
@@ -1269,7 +1271,7 @@ export default function ClusterDetails() {
                                 sx={{
                                   p: 3,
                                   height: "100%",
-                                  backgroundColor: "white",
+                                  backgroundColor: theme.palette.background.paper,
                                   borderRadius: 2,
                                   display: "flex",
                                   alignItems: "center",
@@ -1285,13 +1287,13 @@ export default function ClusterDetails() {
                                     width: 45,
                                     height: 45,
                                     borderRadius: "12px",
-                                    backgroundColor: "#e3f2fd",
+                                    backgroundColor: theme.palette.primary.light,
                                     display: "flex",
                                     alignItems: "center",
                                     justifyContent: "center",
                                   }}
                                 >
-                                  <FaBoxes size={22} color="#1976d2" />
+                                  <FaBoxes size={22} style={{ color: theme.palette.primary.main }} />
                                 </Box>
                                 <Box>
                                   <Typography
@@ -1323,7 +1325,7 @@ export default function ClusterDetails() {
                                 sx={{
                                   p: 3,
                                   height: "100%",
-                                  backgroundColor: "white",
+                                  backgroundColor: theme.palette.background.paper,
                                   borderRadius: 2,
                                   display: "flex",
                                   alignItems: "center",
@@ -1339,13 +1341,13 @@ export default function ClusterDetails() {
                                     width: 45,
                                     height: 45,
                                     borderRadius: "12px",
-                                    backgroundColor: "#e3f2fd",
+                                    backgroundColor: theme.palette.primary.light,
                                     display: "flex",
                                     alignItems: "center",
                                     justifyContent: "center",
                                   }}
                                 >
-                                  <FaDollarSign size={22} color="#1976d2" />
+                                  <FaDollarSign size={22} style={{ color: theme.palette.primary.main }} />
                                 </Box>
                                 <Box>
                                   <Typography
@@ -1384,7 +1386,7 @@ export default function ClusterDetails() {
                               sx={{
                                 p: 3,
                                 height: "100%",
-                                backgroundColor: "#f5f5f5",
+                                backgroundColor: theme.palette.grey[100],
                                 borderRadius: 2,
                                 display: "flex",
                                 alignItems: "center",
@@ -1393,7 +1395,7 @@ export default function ClusterDetails() {
                             >
                               <Typography
                                 variant="body1"
-                                color="text.secondary"
+                                color={theme.palette.common.white}
                               >
                                 No products in this market yet
                               </Typography>
@@ -1435,10 +1437,10 @@ export default function ClusterDetails() {
                               height: "32px",
                               fontSize: "0.875rem",
                               fontWeight: 400,
-                              backgroundColor: "primary.main",
-                              color: "white",
+                              backgroundColor: theme.palette.primary.main,
+                              color: theme.palette.common.white,
                               "&:hover": {
-                                backgroundColor: "primary.dark",
+                                backgroundColor: theme.palette.primary.dark,
                                 transform: "translateY(-4px)",
                               },
                               "& .MuiChip-label": {

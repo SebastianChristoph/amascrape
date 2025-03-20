@@ -1,4 +1,4 @@
-import { AppBar, Toolbar, Button, Box, Typography, Tooltip, IconButton, Avatar } from "@mui/material";
+import { AppBar, Toolbar, Button, Box, Typography, Tooltip, IconButton, Avatar, useTheme } from "@mui/material";
 import { Outlet, Link, useLocation, useNavigate } from "react-router-dom";
 import UserService from "../services/UserService";
 import { useState } from "react";
@@ -13,6 +13,7 @@ export default function Layout({ setIsAuthenticated, setUser }: { setIsAuthentic
   const [isLoggedIn, setIsLoggedIn] = useState(UserService.isAuthenticated());
   const location = useLocation();
   const user = UserService.getUser();
+  const theme = useTheme();
 
   const handleLogout = () => {
     UserService.logout();
@@ -37,9 +38,9 @@ export default function Layout({ setIsAuthenticated, setUser }: { setIsAuthentic
       <AppBar 
         position="static" 
         sx={{ 
-          background: "linear-gradient(45deg, #1976d2 30%, #2196f3 90%)",
-          boxShadow: "0 3px 5px 2px rgba(33, 150, 243, .3)",
-          borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
+          background: `linear-gradient(45deg, ${theme.palette.primary.dark} 30%, ${theme.palette.primary.main} 90%)`,
+          boxShadow: theme.shadows[3],
+          borderBottom: `1px solid ${theme.palette.common.white}1A`,
         }}
       >
         <Toolbar 
@@ -52,12 +53,12 @@ export default function Layout({ setIsAuthenticated, setUser }: { setIsAuthentic
         >
           {/* Logo & App Name */}
           <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-            <AiFillAmazonCircle size={32} style={{ color: "white" }} />
+            <AiFillAmazonCircle size={32} style={{ color: theme.palette.common.white }} />
             <Typography 
               variant="h6" 
               sx={{ 
                 fontWeight: "bold", 
-                color: "white",
+                color: theme.palette.common.white,
                 letterSpacing: 0.5,
                 display: { xs: "none", sm: "block" }
               }}
@@ -75,7 +76,7 @@ export default function Layout({ setIsAuthenticated, setUser }: { setIsAuthentic
                     textTransform: "none",
                     fontWeight: 500,
                     "&:hover": {
-                      backgroundColor: "rgba(255, 255, 255, 0.1)",
+                      backgroundColor: `${theme.palette.common.white}1A`,
                     }
                   }}
                 >
@@ -89,10 +90,10 @@ export default function Layout({ setIsAuthenticated, setUser }: { setIsAuthentic
           {isLoggedIn && (
             <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
               <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                <IoPersonCircle size={24} style={{ color: "white" }} />
+                <IoPersonCircle size={24} style={{ color: theme.palette.common.white }} />
                 <Typography 
                   sx={{ 
-                    color: "white", 
+                    color: theme.palette.common.white, 
                     fontWeight: 500,
                     display: { xs: "none", sm: "block" }
                   }} 
@@ -109,7 +110,7 @@ export default function Layout({ setIsAuthenticated, setUser }: { setIsAuthentic
                     onClick={clickAdminIcon}
                     sx={{
                       "&:hover": {
-                        backgroundColor: "rgba(255, 255, 255, 0.1)",
+                        backgroundColor: `${theme.palette.common.white}1A`,
                       }
                     }}
                   >
@@ -124,7 +125,7 @@ export default function Layout({ setIsAuthenticated, setUser }: { setIsAuthentic
                   onClick={handleLogout}
                   sx={{
                     "&:hover": {
-                      backgroundColor: "rgba(255, 255, 255, 0.1)",
+                      backgroundColor: `${theme.palette.common.white}1A`,
                     }
                   }}
                 >
@@ -140,7 +141,7 @@ export default function Layout({ setIsAuthenticated, setUser }: { setIsAuthentic
         <Outlet />
       </div>
 
-      <Box sx={{ textAlign: "center", padding: 2, backgroundColor: "#f5f5f5" }}>
+      <Box sx={{ textAlign: "center", padding: 2, backgroundColor: theme.palette.grey[100] }}>
         <Typography variant="body2">© {new Date().getFullYear()} MarketScope</Typography>
       </Box>
     </>
