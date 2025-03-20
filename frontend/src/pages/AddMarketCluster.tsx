@@ -165,32 +165,56 @@ const AddMarketCluster: React.FC = () => {
         backgroundColor: theme.palette.background.default,
         "&::before": {
           ...commonBackgroundStyle,
-          opacity: 0.6,
-          filter: "contrast(100%)",
+          opacity: 0.4,
+          filter: "contrast(110%)",
+          background: `linear-gradient(135deg, ${theme.palette.primary.main}20 0%, ${theme.palette.primary.dark}30 100%)`,
         },
         "@keyframes moveBackground": moveBackgroundKeyframes,
       }}
     >
       <Container maxWidth="lg" sx={{ position: "relative", zIndex: 1, py: 4 }}>
-        <Paper elevation={3} sx={{ p: 4, mt: 4 }}>
-          <Typography
-            variant="h4"
-            sx={{
-              mb: 4,
-              backgroundColor: "primary.main",
-              color: "white",
-              padding: 2,
-            }}
-          >
-            Create New Market Cluster
-          </Typography>
-          <Typography variant="body1" color="text.secondary" sx={{ mb: 4 }}>
-            Define your market cluster by adding keywords. You can add them one by one or use a comma-separated list.
-          </Typography>
+        <Paper 
+          elevation={0} 
+          sx={{ 
+            p: 4, 
+            mt: 4,
+            border: `1px solid ${theme.palette.divider}`,
+            borderRadius: 2,
+            backgroundColor: 'background.paper',
+          }}
+        >
+          <Box sx={{ 
+            mb: 4, 
+            pb: 2,
+            borderBottom: `2px solid ${theme.palette.tertiary.main}40`,
+          }}>
+            <Typography
+              variant="h4"
+              sx={{
+                fontWeight: 600,
+                color: 'primary.main',
+                mb: 2,
+              }}
+            >
+              Create New Market Cluster
+            </Typography>
+            <Typography variant="body1" color="text.secondary">
+              Define your market cluster by adding keywords. You can add them one by one or use a comma-separated list.
+            </Typography>
+          </Box>
 
           {/* ✅ Falls Scraping läuft, zeige eine Warnung an */}
           {isScraping ? (
-            <Alert severity="warning" sx={{ mb: 4 }}>
+            <Alert 
+              severity="warning" 
+              sx={{ 
+                mb: 4,
+                backgroundColor: (theme) => `${theme.palette.warning.main}15`,
+                '& .MuiAlert-icon': {
+                  color: 'warning.main'
+                }
+              }}
+            >
               🚧 Ein Scraping-Prozess läuft bereits. Warte, bis dieser abgeschlossen ist, bevor du einen neuen Cluster erstellst.
             </Alert>
           ) : (
@@ -206,38 +230,122 @@ const AddMarketCluster: React.FC = () => {
                     onChange={handleTitleChange}
                     required
                     placeholder="e.g., Electronics Accessories"
+                    sx={{
+                      '& .MuiOutlinedInput-root': {
+                        '&:hover fieldset': {
+                          borderColor: 'secondary.light',
+                        },
+                        '&.Mui-focused fieldset': {
+                          borderColor: 'secondary.main',
+                        }
+                      },
+                      '& .MuiInputLabel-root.Mui-focused': {
+                        color: 'secondary.main',
+                      }
+                    }}
                   />
-                  </Grid>
-                  
+                </Grid>
                   
                 {/* 🆕 Cluster Type Selection */}
                 <Grid size={{ xs: 12 }}>
                   <FormControl component="fieldset">
-                    <FormLabel component="legend">Cluster Type</FormLabel>
+                    <FormLabel 
+                      component="legend"
+                      sx={{
+                        color: 'primary.main',
+                        '&.Mui-focused': {
+                          color: 'primary.main',
+                        }
+                      }}
+                    >
+                      Cluster Type
+                    </FormLabel>
                     <RadioGroup
                       row
                       value={clusterType}
                       onChange={handleClusterTypeChange}
                     >
-                      <FormControlLabel value="dynamic" control={<Radio />} label="Dynamic" />
-                      <FormControlLabel value="static" control={<Radio />} label="Static" />
-                      <FormControlLabel value="snapshot" control={<Radio />} label="Snapshot" />
+                      <FormControlLabel 
+                        value="dynamic" 
+                        control={
+                          <Radio 
+                            sx={{
+                              color: 'secondary.main',
+                              '&.Mui-checked': {
+                                color: 'secondary.main',
+                              }
+                            }}
+                          />
+                        } 
+                        label="Dynamic" 
+                      />
+                      <FormControlLabel 
+                        value="static" 
+                        control={
+                          <Radio 
+                            sx={{
+                              color: 'secondary.main',
+                              '&.Mui-checked': {
+                                color: 'secondary.main',
+                              }
+                            }}
+                          />
+                        } 
+                        label="Static" 
+                      />
+                      <FormControlLabel 
+                        value="snapshot" 
+                        control={
+                          <Radio 
+                            sx={{
+                              color: 'secondary.main',
+                              '&.Mui-checked': {
+                                color: 'secondary.main',
+                              }
+                            }}
+                          />
+                        } 
+                        label="Snapshot" 
+                      />
                     </RadioGroup>
                     </FormControl>
-                     <Typography variant="body2" color="text.secondary" gutterBottom>
-                                 Choseable but no logic implemented yet
-                                      </Typography>
+                    <Typography 
+                      variant="body2" 
+                      sx={{ 
+                        color: 'text.secondary',
+                        mt: 1,
+                        fontStyle: 'italic'
+                      }}
+                    >
+                      Choseable but no logic implemented yet
+                    </Typography>
                 </Grid>
 
                 {/* Bulk Input Section */}
                 <Grid size={{ xs: 12 }}>
-                  <Paper elevation={2} sx={{ p: 2, backgroundColor: "background.paper" }}>
+                  <Paper 
+                    elevation={0} 
+                    sx={{ 
+                      p: 3,
+                      backgroundColor: (theme) => `${theme.palette.primary.main}05`,
+                      border: `1px solid ${theme.palette.divider}`,
+                      borderRadius: 2,
+                    }}
+                  >
                     <Box sx={{ display: "flex", alignItems: "center", gap: 1, mb: 2 }}>
-                      <Typography variant="subtitle1" sx={{ fontWeight: 500 }}>
+                      <Typography variant="subtitle1" sx={{ fontWeight: 500, color: 'primary.main' }}>
                         Bulk Add Keywords
                       </Typography>
                       <Tooltip title="Enter multiple keywords separated by commas">
-                        <IconButton size="small">
+                        <IconButton 
+                          size="small"
+                          sx={{
+                            color: 'secondary.main',
+                            '&:hover': {
+                              backgroundColor: (theme) => `${theme.palette.secondary.main}15`,
+                            }
+                          }}
+                        >
                           <MdInfo />
                         </IconButton>
                       </Tooltip>
@@ -251,6 +359,19 @@ const AddMarketCluster: React.FC = () => {
                         placeholder="e.g., wireless earbuds, bluetooth headphones, portable speakers"
                         variant="outlined"
                         size="small"
+                        sx={{
+                          '& .MuiOutlinedInput-root': {
+                            '&:hover fieldset': {
+                              borderColor: 'secondary.light',
+                            },
+                            '&.Mui-focused fieldset': {
+                              borderColor: 'secondary.main',
+                            }
+                          },
+                          '& .MuiInputLabel-root.Mui-focused': {
+                            color: 'secondary.main',
+                          }
+                        }}
                       />
                       <Button
                         variant="contained"
@@ -260,7 +381,13 @@ const AddMarketCluster: React.FC = () => {
                         sx={{
                           minWidth: '120px',
                           whiteSpace: 'nowrap',
-                          color: theme.palette.common.white,
+                          backgroundColor: 'secondary.main',
+                          '&:hover': {
+                            backgroundColor: 'secondary.dark',
+                          },
+                          '&.Mui-disabled': {
+                            backgroundColor: (theme) => `${theme.palette.secondary.main}40`,
+                          }
                         }}
                       >
                         {isListInput ? "Add List" : "Add"}
@@ -271,12 +398,28 @@ const AddMarketCluster: React.FC = () => {
 
                 {/* Keywords List */}
                 <Grid size={{ xs: 12 }}>
-                  <Paper elevation={2} sx={{ p: 2 }}>
-                    <Typography variant="subtitle1" sx={{ mb: 2, fontWeight: 500 }}>
+                  <Paper 
+                    elevation={0} 
+                    sx={{ 
+                      p: 3,
+                      border: `1px solid ${theme.palette.divider}`,
+                      borderRadius: 2,
+                    }}
+                  >
+                    <Typography variant="subtitle1" sx={{ mb: 2, fontWeight: 500, color: 'primary.main' }}>
                       Added Keywords ({keywords.length}/5)
                     </Typography>
                     {keywords.length === 0 ? (
-                      <Alert severity="info">
+                      <Alert 
+                        severity="info"
+                        sx={{
+                          backgroundColor: (theme) => `${theme.palette.tertiary.main}15`,
+                          color: 'tertiary.main',
+                          '& .MuiAlert-icon': {
+                            color: 'tertiary.main'
+                          }
+                        }}
+                      >
                         No keywords added yet. Add keywords using the form above or use the bulk input option.
                       </Alert>
                     ) : (
@@ -290,17 +433,24 @@ const AddMarketCluster: React.FC = () => {
                               display: "flex",
                               alignItems: "center",
                               gap: 1,
-                              backgroundColor: "primary.main",
-                              color: theme.palette.common.white,
+                              backgroundColor: (theme) => `${theme.palette.secondary.main}15`,
+                              borderColor: 'secondary.main',
+                              color: 'secondary.main',
                             }}
                           >
-                            <Typography variant="body2">{keyword}</Typography>
+                            <Typography variant="body2" sx={{ fontWeight: 500 }}>{keyword}</Typography>
                             <IconButton
                               size="small"
                               onClick={() => handleRemoveKeyword(keyword)}
-                              sx={{ color: theme.palette.common.white }}
+                              sx={{ 
+                                color: 'secondary.main',
+                                p: 0.5,
+                                '&:hover': {
+                                  backgroundColor: (theme) => `${theme.palette.secondary.main}15`,
+                                }
+                              }}
                             >
-                              <MdDelete />
+                              <MdDelete size={16} />
                             </IconButton>
                           </Paper>
                         ))}
@@ -315,14 +465,30 @@ const AddMarketCluster: React.FC = () => {
                     <Button
                       variant="outlined"
                       onClick={() => navigate("/dashboard")}
+                      sx={{
+                        borderColor: 'secondary.main',
+                        color: 'secondary.main',
+                        '&:hover': {
+                          borderColor: 'secondary.dark',
+                          backgroundColor: (theme) => `${theme.palette.secondary.main}15`,
+                        }
+                      }}
                     >
                       Cancel
                     </Button>
                     <Button
                       type="submit"
                       variant="contained"
-                      color="primary"
                       disabled={!clusterName.trim() || keywords.length === 0}
+                      sx={{
+                        backgroundColor: 'secondary.main',
+                        '&:hover': {
+                          backgroundColor: 'secondary.dark',
+                        },
+                        '&.Mui-disabled': {
+                          backgroundColor: (theme) => `${theme.palette.secondary.main}40`,
+                        }
+                      }}
                     >
                       Create Market Cluster
                     </Button>

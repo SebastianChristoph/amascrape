@@ -320,416 +320,294 @@ const Dashboard: React.FC = () => {
         backgroundColor: (theme) => theme.palette.background.default,
         "&::before": {
           ...commonBackgroundStyle,
-          opacity: 0.6,
-          filter: "contrast(100%)",
+          opacity: 0.8,
+          filter: "contrast(110%)",
         },
         "@keyframes moveBackground": moveBackgroundKeyframes,
       }}
     >
-      <Container 
-        maxWidth="lg" 
-        sx={{ 
-          position: "relative",
-          zIndex: 1,
-          py: 4
-        }}
-      >
-        {/* Overview Section */}
-        {marketClusters.length > 0 && (
-        <Paper elevation={3} sx={{ marginBottom: 2, padding: 4 }}>
-          <Typography
-            variant="h5"
-            sx={{
-              mb: 4,
-              backgroundColor: "primary.main",
-              color: "white",
-              padding: 2,
-            }}
-          >
-            Market Clusters Overview
-          </Typography>
-          <Typography variant="subtitle1" sx={{ mb: 3 }}>
-            Here is a quick snapshot of your Total markets Revenue development
-          </Typography>
-          
-          <Grid container spacing={3}>
-            {/* Total 30D Revenue Card */}
-            <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-              <Paper
-                elevation={1}
-                sx={{
-                  p: 3,
-                  height: '100%',
-                  backgroundColor: theme.palette.background.paper,
-                  borderRadius: 2,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: 2,
-                  transition: 'transform 0.2s',
-                  '&:hover': {
-                    transform: 'translateY(-4px)',
-                  },
-                }}
-              >
-                <Box
+      <Container maxWidth="xl" sx={{ py: 4 }}>
+        {loading ? (
+          <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", height: "80vh" }}>
+            <CircularProgress sx={{ color: "secondary.main" }} />
+          </Box>
+        ) : (
+          <>
+            {/* Overview Cards */}
+            <Grid container spacing={3} sx={{ mb: 4 }}>
+              {/* Total Products Card */}
+              <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+                <Card
                   sx={{
-                    width: 45,
-                    height: 45,
-                    borderRadius: "12px",
-                    backgroundColor: theme.palette.primary.light,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
+                    height: "100%",
+                    background: (theme) => `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 100%)`,
+                    color: "white",
+                    position: "relative",
+                    overflow: "hidden",
+                    transition: "transform 0.2s",
+                    "&:hover": {
+                      transform: "translateY(-4px)",
+                    },
                   }}
                 >
-                  <FaDollarSign size={22} style={{ color: theme.palette.primary.main }} />
-                </Box>
-                <Box>
-                  <Typography variant="body2" color="text.secondary" gutterBottom>
-                    Total 30D Revenue
-                  </Typography>
-                  <Typography variant="h6" color="text.primary" sx={{ fontWeight: 600 }}>
-                    ${dashboardData?.total_revenue || '0.00'}
+                  <CardContent>
+                    <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
+                      <FaBoxes size={24} style={{ marginRight: "8px", color: theme.palette.secondary.light }} />
+                      <Typography variant="h6" component="div">
+                        Total Products
+                      </Typography>
+                    </Box>
+                    <Typography variant="h4" sx={{ mb: 1, fontWeight: "bold" }}>
+                      {dashboardData?.totalProducts || 0}
                     </Typography>
-                    <Typography variant="body2" color="text.secondary" gutterBottom>
-                    Waiting for valid calculation by Alex
-                  </Typography>
-                </Box>
-              </Paper>
-            </Grid>
+                    <Typography variant="body2" sx={{ opacity: 0.8 }}>
+                      Across all clusters
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
 
-            {/* 30D Revenue Change Card */}
-            <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-              <Paper
-                elevation={1}
-                sx={{
-                  p: 3,
-                  height: '100%',
-                  backgroundColor: theme.palette.background.paper,
-                  borderRadius: 2,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: 2,
-                  transition: 'transform 0.2s',
-                  '&:hover': {
-                    transform: 'translateY(-4px)',
-                  },
-                }}
-              >
-                <Box
+              {/* Average Price Card */}
+              <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+                <Card
                   sx={{
-                    width: 45,
-                    height: 45,
-                    borderRadius: "12px",
-                    backgroundColor: theme.palette.primary.light,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
+                    height: "100%",
+                    background: (theme) => `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 100%)`,
+                    color: "white",
+                    position: "relative",
+                    overflow: "hidden",
+                    transition: "transform 0.2s",
+                    "&:hover": {
+                      transform: "translateY(-4px)",
+                    },
                   }}
                 >
-                  <FaChartLine size={22} style={{ color: theme.palette.primary.main }} />
-                </Box>
-                <Box>
-                  <Typography variant="body2" color="text.secondary" gutterBottom>
-                    30D Revenue Change
-                  </Typography>
-                  <Typography variant="h6" color="text.primary" sx={{ fontWeight: 600 }}>
-                   Sparkline
+                  <CardContent>
+                    <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
+                      <FaDollarSign size={24} style={{ marginRight: "8px", color: theme.palette.secondary.light }} />
+                      <Typography variant="h6" component="div">
+                        Average Price
+                      </Typography>
+                    </Box>
+                    <Typography variant="h4" sx={{ mb: 1, fontWeight: "bold" }}>
+                      ${dashboardData?.averagePrice?.toFixed(2) || "0.00"}
                     </Typography>
-                    <Typography variant="body2" color="text.secondary" gutterBottom>
-                    Waiting for valid calculation by Alex
-                  </Typography>
-                </Box>
-              </Paper>
-            </Grid>
+                    <Typography variant="body2" sx={{ opacity: 0.8 }}>
+                      Market average
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
 
-            {/* Number of Market Clusters Card */}
-            <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-              <Paper
-                elevation={1}
-                sx={{
-                  p: 3,
-                  height: '100%',
-                  backgroundColor: theme.palette.background.paper,
-                  borderRadius: 2,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: 2,
-                  transition: 'transform 0.2s',
-                  '&:hover': {
-                    transform: 'translateY(-4px)',
-                  },
-                }}
-              >
-                <Box
+              {/* Total Markets Card */}
+              <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+                <Card
                   sx={{
-                    width: 45,
-                    height: 45,
-                    borderRadius: "12px",
-                    backgroundColor: theme.palette.primary.light,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
+                    height: "100%",
+                    background: (theme) => `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 100%)`,
+                    color: "white",
+                    position: "relative",
+                    overflow: "hidden",
+                    transition: "transform 0.2s",
+                    "&:hover": {
+                      transform: "translateY(-4px)",
+                    },
                   }}
                 >
-                  <FaLayerGroup size={22} style={{ color: theme.palette.primary.main }} />
-                </Box>
-                <Box>
-                  <Typography variant="body2" color="text.secondary" gutterBottom>
-                    Market Clusters
-                  </Typography>
-                  <Typography variant="h6" color="text.primary" sx={{ fontWeight: 600 }}>
-                    {dashboardData?.total_clusters|| '0'}
+                  <CardContent>
+                    <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
+                      <FaStore size={24} style={{ marginRight: "8px", color: theme.palette.secondary.light }} />
+                      <Typography variant="h6" component="div">
+                        Total Markets
+                      </Typography>
+                    </Box>
+                    <Typography variant="h4" sx={{ mb: 1, fontWeight: "bold" }}>
+                      {dashboardData?.totalMarkets || 0}
                     </Typography>
-                    <Typography variant="body2" color="text.secondary" gutterBottom>
-                    ToDo: Only count ready scraped clusters
-                  </Typography>
-                </Box>
-              </Paper>
-            </Grid>
+                    <Typography variant="body2" sx={{ opacity: 0.8 }}>
+                      Active marketplaces
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
 
-            {/* Number of Tracked Products Card */}
-            <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-              <Paper
-                elevation={1}
-                sx={{
-                  p: 3,
-                  height: '100%',
-                  backgroundColor: theme.palette.background.paper,
-                  borderRadius: 2,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: 2,
-                  transition: 'transform 0.2s',
-                  '&:hover': {
-                    transform: 'translateY(-4px)',
-                  },
-                }}
-              >
-                <Box
+              {/* Market Clusters Card */}
+              <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+                <Card
                   sx={{
-                    width: 45,
-                    height: 45,
-                    borderRadius: "12px",
-                    backgroundColor: theme.palette.primary.light,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
+                    height: "100%",
+                    background: (theme) => `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 100%)`,
+                    color: "white",
+                    position: "relative",
+                    overflow: "hidden",
+                    transition: "transform 0.2s",
+                    "&:hover": {
+                      transform: "translateY(-4px)",
+                    },
                   }}
                 >
-                  <FaBoxes size={22} style={{ color: theme.palette.primary.main }} />
-                </Box>
-                <Box>
-                  <Typography variant="body2" color="text.secondary" gutterBottom>
-                    Tracked Products
-                  </Typography>
-                  <Typography variant="h6" color="text.primary" sx={{ fontWeight: 600 }}>
-                    {dashboardData?.total_unique_products || '0'}
+                  <CardContent>
+                    <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
+                      <FaLayerGroup size={24} style={{ marginRight: "8px", color: theme.palette.secondary.light }} />
+                      <Typography variant="h6" component="div">
+                        Market Clusters
+                      </Typography>
+                    </Box>
+                    <Typography variant="h4" sx={{ mb: 1, fontWeight: "bold" }}>
+                      {marketClusters.length}
                     </Typography>
-                    <Typography variant="body2" color="text.secondary" gutterBottom>
-                    ToDo: Get only products from not-scraping clusters
-                  </Typography>
-                </Box>
-              </Paper>
+                    <Typography variant="body2" sx={{ opacity: 0.8 }}>
+                      Active clusters
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
             </Grid>
-          </Grid>
-          </Paper>
-          )}
 
-        {/* Scraping Status Section */}
-        {activeCluster && activeCluster.status === "processing" && (
-          <Paper 
-            elevation={1} 
-            sx={{ 
-              p: 3,
-              mt: 2,
-              borderRadius: 2,
-              backgroundColor: theme.palette.background.paper,
-            }}
-          >
-            {/* Header with animated robot */}
-            <Box sx={{ 
-              display: "flex", 
-              alignItems: "center", 
-              gap: 2,
-              mb: 3,
-            }}>
-              <Box
-                sx={{
-                  width: 45,
-                  height: 45,
-                  borderRadius: '12px',
-                  backgroundColor: theme.palette.background.paper,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  animation: `${robotAnimation} 2s ease-in-out infinite`,
-                }}
-              >
-                <RiRobot2Fill size={24} color={theme.palette.primary.main} />
+            {/* Market Clusters Section */}
+            <Box sx={{ mb: 4 }}>
+              <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 3 }}>
+                <Typography variant="h5" sx={{ 
+                  fontWeight: "bold",
+                  color: "primary.main",
+                  position: "relative",
+                  "&::after": {
+                    content: '""',
+                    position: "absolute",
+                    bottom: -8,
+                    left: 0,
+                    width: "60px",
+                    height: "3px",
+                    backgroundColor: "tertiary.main",
+                    borderRadius: "2px"
+                  }
+                }}>
+                  Market Clusters
+                </Typography>
+                <Button
+                  variant="contained"
+                  startIcon={<MdAdd />}
+                  onClick={() => navigate("/add-market-cluster")}
+                  sx={{
+                    backgroundColor: "secondary.main",
+                    "&:hover": {
+                      backgroundColor: "secondary.dark",
+                    },
+                    borderRadius: "8px",
+                    textTransform: "none",
+                    px: 3
+                  }}
+                >
+                  Create New Cluster
+                </Button>
               </Box>
-              <Typography variant="h6" color="text.primary" sx={{ fontWeight: 600 }}>
-                Our robots are scraping for you...
-              </Typography>
-            </Box>
 
-            <Alert 
-              severity="info" 
-              sx={{ 
-                mb: 3,
-                backgroundColor: theme.palette.background.paper,
-                color: theme.palette.primary.main,
-                '& .MuiAlert-icon': {
-                  color: theme.palette.primary.main
-                }
-              }}
-            >
-              We are scraping your markets to get a first impression of your cluster. 
-              This usually takes some minutes. You can come back later, inspect your other clusters or have a coffee.
-            </Alert>
+              {/* Active Scraping Alert */}
+              {activeCluster && (
+                <Alert
+                  severity="info"
+                  sx={{
+                    mb: 3,
+                    backgroundColor: "tertiary.main",
+                    color: "white",
+                    "& .MuiAlert-icon": {
+                      color: "white"
+                    },
+                    display: "flex",
+                    alignItems: "center"
+                  }}
+                  icon={
+                    <Box
+                      sx={{
+                        animation: `${robotAnimation} 2s ease-in-out infinite`,
+                        display: "flex",
+                        alignItems: "center"
+                      }}
+                    >
+                      <RiRobot2Fill size={24} />
+                    </Box>
+                  }
+                >
+                  <Box sx={{ display: "flex", alignItems: "center" }}>
+                    <Typography variant="body1" sx={{ mr: 1 }}>
+                      Currently scraping cluster "{activeCluster.clustername}"
+                    </Typography>
+                    <Box
+                      sx={{
+                        width: 12,
+                        height: 12,
+                        borderRadius: "50%",
+                        backgroundColor: "white",
+                        animation: `${pulseAnimation} 2s infinite`,
+                      }}
+                    />
+                  </Box>
+                </Alert>
+              )}
 
-            {/* Active Cluster Card */}
-            <Card
-              elevation={1}
-              sx={{
-                backgroundColor: theme.palette.background.paper,
-                borderRadius: 2,
-                border: '1px solid',
-                borderColor: 'divider',
-              }}
-            >
-              <CardContent sx={{ p: 3 }}>
-                {/* Cluster Header */}
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 3 }}>
-                  <Box
+              {/* Empty State */}
+              {marketClusters.length === 0 && !isFetching && (
+                <Paper
+                  sx={{
+                    p: 4,
+                    textAlign: "center",
+                    background: (theme) => `linear-gradient(135deg, ${theme.palette.background.paper} 0%, ${theme.palette.background.paper}D9 100%)`,
+                    backdropFilter: "blur(10px)",
+                    borderRadius: 3,
+                  }}
+                >
+                  <Box sx={{ mb: 3 }}>
+                    <FaChartLine size={48} style={{ color: theme.palette.secondary.main }} />
+                  </Box>
+                  <Typography variant="h6" sx={{ mb: 2, color: "primary.main" }}>
+                    No Market Clusters Yet
+                  </Typography>
+                  <Typography variant="body1" sx={{ mb: 3, color: "text.secondary" }}>
+                    Create your first market cluster to start analyzing product data
+                  </Typography>
+                  <Button
+                    variant="contained"
+                    startIcon={<MdAdd />}
+                    onClick={() => navigate("/create-cluster")}
                     sx={{
-                      width: 45,
-                      height: 45,
-                      borderRadius: "12px",
-                      backgroundColor: theme.palette.primary.light,
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
+                      backgroundColor: "secondary.main",
+                      "&:hover": {
+                        backgroundColor: "secondary.dark",
+                      },
+                      borderRadius: "8px",
+                      textTransform: "none",
+                      px: 4,
+                      py: 1.5
                     }}
                   >
-                    <FaLayerGroup size={22} style={{ color: theme.palette.primary.main }} />
-                  </Box>
-                  <Typography variant="h6" color="text.primary" sx={{ fontWeight: 600 }}>
-                    Cluster to build: {activeCluster.clustername} (Todo: Add cluster type and logo )
-                  </Typography>
-                </Box>
+                    Create First Cluster
+                  </Button>
+                </Paper>
+              )}
 
-                {/* Scraping Status */}
-                <Box>
-                  <Typography variant="body2" color="text.secondary" gutterBottom>
-                    Scraping status:
-                  </Typography>
-                  <Box sx={{ display: "flex", flexDirection: "column", gap: 2, mt: 1 }}>
-                    {Object.entries(activeCluster.keywords).map(([keyword, status]) => (
-                      <Box
-                        key={keyword}
-                        sx={{
-                          display: "flex",
-                          alignItems: "center",
-                          gap: 2,
-                          p: 2,
-                          borderRadius: 1,
-                          backgroundColor: status === "done" ? theme.palette.success.light : theme.palette.primary.light,
-                        }}
-                      >
-                        <Box sx={{ minWidth: 24 }}>
-                          {status === "done" ? (
-                            <AiOutlineCheckCircle size={20} style={{ color: theme.palette.success.main }} />
-                          ) : (
-                            <CircularProgress
-                              size={20}
-                              sx={{ color: theme.palette.primary.main }}
-                            />
-                          )}
-                        </Box>
-                        <Typography 
-                          variant="body2" 
-                          sx={{ 
-                            color: status === "done" ? theme.palette.success.main : theme.palette.primary.main,
-                            fontWeight: 500
-                          }}
-                        >
-                          {keyword}
-                        </Typography>
-                      </Box>
-                    ))}
-                  </Box>
-                </Box>
-              </CardContent>
-            </Card>
-          </Paper>
-        )}
-
-        {/* ✅ Zeigt alle Market-Cluster an */}
-        {marketClusters.length > 0 && (
-          <Paper elevation={3} sx={{ paddingY: 4, paddingX: 4, mt: 2 }}>
-            <Typography variant="h5" sx={{ mb: 3, backgroundColor: theme.palette.primary.main, p: 2, color: theme.palette.common.white }}>
-              My Market Clusters
-            </Typography>
-
-            {loading ? (
-              <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "200px" }}>
-                <CircularProgress size={80} color="primary" />
-              </Box>
-            ) : (
-              <Box sx={{ flexGrow: 1 }}>
+              {/* Cluster Grid */}
+              {marketClusters.length > 0 && (
                 <Grid container spacing={3}>
-                  {marketClusters.length > 0 ? (
-                    marketClusters.map((cluster) => (
-                      <Grid key={cluster.id} size={{ xs: 12, sm: 12, lg: 6 }}>
-                        <ClusterCard
-                          cluster={cluster}
-                          onClick={() => navigate(`/cluster/${cluster.id}`)}
-                          deletingCluster={deletingCluster}
-                          setMarketClusters={setMarketClusters}
-                          setDeletingCluster={setDeletingCluster}
-                          totalRevenue={cluster.total_revenue}
-                          is_initial_scraped = {cluster.is_initial_scraped}
-                          fetchMarketClusters={fetchData}
-                        />
-                      </Grid>
-                    ))
-                  ) : (
-                    <Typography sx={{ textAlign: "center", mt: 4 }} variant="body1">
-                      No market clusters found.
-                    </Typography>
-                  )}
+                  {marketClusters.map((cluster: any) => (
+                    <Grid size={{ xs: 12, sm: 6, md: 4 }} key={cluster.id}>
+                      <ClusterCard
+                        cluster={cluster}
+                        onClick={() => navigate(`/cluster/${cluster.id}`)}
+                        deletingCluster={deletingCluster}
+                        setMarketClusters={setMarketClusters}
+                        setDeletingCluster={setDeletingCluster}
+                        totalRevenue={cluster.total_revenue}
+                        is_initial_scraped={cluster.is_initial_scraped}
+                        fetchMarketClusters={fetchData}
+                      />
+                    </Grid>
+                  ))}
                 </Grid>
-              </Box>
-            )}
-          </Paper>
+              )}
+            </Box>
+          </>
         )}
       </Container>
-      
-      {/* Extended Add Market Cluster Button */}
-      <Button
-        variant="contained"
-        color="primary"
-        startIcon={<MdAdd size={24} />}
-        onClick={() => navigate('/add-market-cluster')}
-        sx={{
-          position: 'fixed',
-          bottom: 32,
-          right: 32,
-          padding: '12px 24px',
-          borderRadius: '28px',
-          boxShadow: theme.shadows[3],
-          backgroundColor: theme.palette.primary.main,
-          '&:hover': {
-            backgroundColor: theme.palette.primary.dark,
-            transform: 'scale(1.05)',
-            transition: 'all 0.2s ease-in-out',
-            boxShadow: theme.shadows[4],
-          },
-        }}
-      >
-        Add Market Cluster
-      </Button>
     </Box>
   );
 };

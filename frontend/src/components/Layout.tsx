@@ -38,9 +38,9 @@ export default function Layout({ setIsAuthenticated, setUser }: { setIsAuthentic
       <AppBar 
         position="static" 
         sx={{ 
-          background: `linear-gradient(45deg, ${theme.palette.primary.dark} 30%, ${theme.palette.primary.main} 90%)`,
-          boxShadow: theme.shadows[3],
-          borderBottom: `1px solid ${theme.palette.common.white}1A`,
+          background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 100%)`,
+          boxShadow: 'none',
+          borderBottom: `1px solid ${theme.palette.divider}`,
         }}
       >
         <Toolbar 
@@ -71,12 +71,13 @@ export default function Layout({ setIsAuthenticated, setUser }: { setIsAuthentic
                   color="inherit" 
                   component={Link} 
                   to="/dashboard"
-                  startIcon={<FaChartLine />}
+                  startIcon={<FaChartLine style={{ color: theme.palette.secondary.main }} />}
                   sx={{
                     textTransform: "none",
                     fontWeight: 500,
+                    color: theme.palette.common.white,
                     "&:hover": {
-                      backgroundColor: `${theme.palette.common.white}1A`,
+                      backgroundColor: `${theme.palette.secondary.main}15`,
                     }
                   }}
                 >
@@ -90,7 +91,7 @@ export default function Layout({ setIsAuthenticated, setUser }: { setIsAuthentic
           {isLoggedIn && (
             <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
               <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                <IoPersonCircle size={24} style={{ color: theme.palette.common.white }} />
+                <IoPersonCircle size={24} style={{ color: theme.palette.secondary.light }} />
                 <Typography 
                   sx={{ 
                     color: theme.palette.common.white, 
@@ -106,13 +107,13 @@ export default function Layout({ setIsAuthenticated, setUser }: { setIsAuthentic
               {user?.username === "admin" && (
                 <Tooltip title="Admin Panel">
                   <IconButton
-                    color="inherit"
-                    onClick={clickAdminIcon}
                     sx={{
+                      color: theme.palette.secondary.main,
                       "&:hover": {
-                        backgroundColor: `${theme.palette.common.white}1A`,
+                        backgroundColor: `${theme.palette.secondary.main}15`,
                       }
                     }}
+                    onClick={clickAdminIcon}
                   >
                     <FiSettings size={20} />
                   </IconButton>
@@ -121,13 +122,13 @@ export default function Layout({ setIsAuthenticated, setUser }: { setIsAuthentic
 
               <Tooltip title="Logout">
                 <IconButton
-                  color="inherit"
-                  onClick={handleLogout}
                   sx={{
+                    color: theme.palette.secondary.main,
                     "&:hover": {
-                      backgroundColor: `${theme.palette.common.white}1A`,
+                      backgroundColor: `${theme.palette.secondary.main}15`,
                     }
                   }}
+                  onClick={handleLogout}
                 >
                   <MdLogout size={20} />
                 </IconButton>
@@ -141,8 +142,17 @@ export default function Layout({ setIsAuthenticated, setUser }: { setIsAuthentic
         <Outlet />
       </div>
 
-      <Box sx={{ textAlign: "center", padding: 2, backgroundColor: theme.palette.grey[100] }}>
-        <Typography variant="body2">© {new Date().getFullYear()} MarketScope</Typography>
+      <Box 
+        sx={{ 
+          textAlign: "center", 
+          padding: 2, 
+          backgroundColor: (theme) => `${theme.palette.primary.main}05`,
+          borderTop: `1px solid ${theme.palette.divider}`,
+        }}
+      >
+        <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+          © {new Date().getFullYear()} MarketScope
+        </Typography>
       </Box>
     </>
   );

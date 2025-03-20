@@ -190,7 +190,7 @@ export default function Login() {
           {/* Left half: Blue box with title */}
           <Box
             sx={{
-              width: "50%",
+              width: { xs: "100%", md: "50%" },
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
@@ -210,7 +210,7 @@ export default function Login() {
                   color: theme.palette.common.white,
                   fontWeight: "bold",
                   letterSpacing: 1,
-                  fontSize: "2.5rem",
+                  fontSize: { xs: "2rem", md: "2.5rem" },
                 }}
               >
                 MarketScope
@@ -224,7 +224,7 @@ export default function Login() {
           {/* Right half: Login form */}
           <Box
             sx={{
-              width: "50%",
+              width: { xs: "100%", md: "50%" },
               p: 4,
               pt: 4,
               display: "flex",
@@ -238,84 +238,113 @@ export default function Login() {
                 textAlign: "center", 
                 fontWeight: "bold", 
                 color: "primary.main",
+                position: "relative",
+                "&::after": {
+                  content: '""',
+                  position: "absolute",
+                  bottom: -8,
+                  left: "50%",
+                  transform: "translateX(-50%)",
+                  width: "60px",
+                  height: "3px",
+                  backgroundColor: "tertiary.main",
+                  borderRadius: "2px"
+                }
               }}
             >
               Welcome Back!
             </Typography>
-            <Typography variant="body2" sx={{ textAlign: "center", mb: 3, color: "text.secondary" }}>
+            <Typography variant="body2" sx={{ textAlign: "center", mb: 4, color: "text.secondary" }}>
               Please log in with your credentials to continue.
             </Typography>
 
-            <form onSubmit={handleLogin}>
+            <form onSubmit={handleLogin} style={{ width: "100%" }}>
               <TextField
                 fullWidth
                 label="Username"
-                variant="outlined"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                required
-                sx={{ mb: 2 }}
+                sx={{
+                  mb: 2,
+                  "& .MuiOutlinedInput-root": {
+                    "&:hover fieldset": {
+                      borderColor: "secondary.light",
+                    },
+                    "&.Mui-focused fieldset": {
+                      borderColor: "secondary.main",
+                    }
+                  }
+                }}
               />
-
               <TextField
                 fullWidth
                 label="Password"
-                variant="outlined"
                 type={showPassword ? "text" : "password"}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                required
-                sx={{ mb: 3 }}
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position="end">
                       <IconButton
                         onClick={() => setShowPassword(!showPassword)}
                         edge="end"
+                        sx={{ color: "secondary.main" }}
                       >
                         {showPassword ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
                       </IconButton>
                     </InputAdornment>
                   ),
                 }}
+                sx={{
+                  mb: 3,
+                  "& .MuiOutlinedInput-root": {
+                    "&:hover fieldset": {
+                      borderColor: "secondary.light",
+                    },
+                    "&.Mui-focused fieldset": {
+                      borderColor: "secondary.main",
+                    }
+                  }
+                }}
               />
-
               <Button
+                fullWidth
                 type="submit"
                 variant="contained"
-                color="primary"
-                fullWidth
                 disabled={loading}
                 startIcon={<FaSignInAlt />}
                 sx={{
-                  height: 50,
-                  fontSize: 16,
-                  fontWeight: "bold",
-                  textTransform: "none",
-                  background: (theme) => `linear-gradient(45deg, ${theme.palette.primary.dark} 30%, ${theme.palette.primary.main} 90%)`,
-                  boxShadow: (theme) => `0 3px 5px 2px ${theme.palette.primary.main}33`,
+                  mb: 2,
+                  backgroundColor: "secondary.main",
                   "&:hover": {
-                    background: (theme) => `linear-gradient(45deg, ${theme.palette.primary.dark} 30%, ${theme.palette.primary.main} 90%)`,
+                    backgroundColor: "secondary.dark",
                   },
+                  height: "48px",
+                  borderRadius: "8px",
+                  textTransform: "none",
+                  fontSize: "1.1rem"
                 }}
               >
-                {loading ? "Logging in..." : "Sign In"}
+                {loading ? "Signing in..." : "Sign In"}
               </Button>
-            </form>
-
-            <Typography sx={{ mt: 2, textAlign: "center", color: "text.secondary" }}>
-              Don't have an account?{" "}
-              <Link 
-                to="/register" 
-                style={{ 
-                  textDecoration: "none", 
-                  color: theme.palette.primary.main, 
-                  fontWeight: "bold" 
+              <Typography 
+                variant="body2" 
+                sx={{ 
+                  textAlign: "center",
+                  "& a": {
+                    color: "secondary.main",
+                    textDecoration: "none",
+                    fontWeight: "500",
+                    "&:hover": {
+                      color: "secondary.dark",
+                      textDecoration: "underline"
+                    }
+                  }
                 }}
               >
-                Register now
-              </Link>
-            </Typography>
+                Don't have an account? <Link to="/register">Register here</Link>
+              </Typography>
+            </form>
           </Box>
         </Paper>
       </Container>

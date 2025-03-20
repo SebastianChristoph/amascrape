@@ -95,12 +95,15 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
         elevation={1}
         sx={{
           cursor: "pointer",
-          backgroundColor: 'white',
+          backgroundColor: 'background.paper',
           borderRadius: 2,
           overflow: "hidden",
-          transition: 'transform 0.2s',
+          transition: 'transform 0.2s, box-shadow 0.2s',
+          border: '1px solid',
+          borderColor: 'divider',
           '&:hover': {
             transform: 'translateY(-4px)',
+            boxShadow: (theme) => `0 8px 24px ${theme.palette.primary.main}15`,
             '& .delete-button': {
               opacity: 1,
               visibility: 'visible',
@@ -109,7 +112,7 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
         }}
         onClick={onClick}
       >
-        <CardContent sx={{ p: 3 , minHeight: 350}}>
+        <CardContent sx={{ p: 3, minHeight: 350 }}>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 3 }}>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
               <Box
@@ -117,13 +120,13 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
                   width: 45,
                   height: 45,
                   borderRadius: '12px',
-                  backgroundColor: '#e3f2fd',
+                  backgroundColor: (theme) => `${theme.palette.primary.main}15`,
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                 }}
               >
-                <FaLayerGroup size={22} color="#1976d2" />
+                <FaLayerGroup size={22} style={{ color: 'primary.main' }} />
               </Box>
               <Typography variant="h6" color="text.primary" sx={{ fontWeight: 600 }}>
                 {cluster.title}
@@ -135,7 +138,12 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
                   e.stopPropagation();
                   setOpenEditDialog(true);
                 }}
-                sx={{ color: 'primary.main' }}
+                sx={{ 
+                  color: 'secondary.main',
+                  '&:hover': {
+                    backgroundColor: (theme) => `${theme.palette.secondary.main}15`,
+                  }
+                }}
               >
                 <FaEdit size={20} />
               </IconButton>
@@ -150,6 +158,9 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
                   opacity: 0,
                   visibility: 'hidden',
                   transition: 'opacity 0.2s, visibility 0.2s',
+                  '&:hover': {
+                    backgroundColor: (theme) => `${theme.palette.error.main}15`,
+                  }
                 }}
               >
                 <FaTrash size={20} />
@@ -170,9 +181,9 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
                     variant="outlined" 
                     size="small"
                     sx={{ 
-                      borderColor: 'primary.main',
-                      color: 'primary.main',
-                      backgroundColor: '#e3f2fd',
+                      borderColor: 'secondary.main',
+                      color: 'secondary.main',
+                      backgroundColor: (theme) => `${theme.palette.secondary.main}10`,
                       '& .MuiChip-label': {
                         fontWeight: 500,
                       }
@@ -180,7 +191,15 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
                   />
                 ))
               ) : (
-                <Chip label="No markets" color="default" size="small" />
+                <Chip 
+                  label="No markets" 
+                  size="small" 
+                  sx={{
+                    backgroundColor: (theme) => `${theme.palette.tertiary.main}10`,
+                    color: 'tertiary.main',
+                    borderColor: 'tertiary.main'
+                  }}
+                />
               )}
             </Box>
           </Box>
@@ -190,10 +209,10 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
               <Alert 
                 severity="info" 
                 sx={{ 
-                  backgroundColor: '#e3f2fd',
-                  color: 'primary.main',
+                  backgroundColor: (theme) => `${theme.palette.tertiary.main}10`,
+                  color: 'tertiary.main',
                   '& .MuiAlert-icon': {
-                    color: 'primary.main'
+                    color: 'tertiary.main'
                   }
                 }}
               >
@@ -202,7 +221,7 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
               <LinearProgress 
                 sx={{ 
                   mt: 2,
-                  backgroundColor: '#e3f2fd',
+                  backgroundColor: (theme) => `${theme.palette.primary.main}15`,
                   '& .MuiLinearProgress-bar': {
                     backgroundColor: 'primary.main'
                   }
@@ -217,13 +236,13 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
                     width: 45,
                     height: 45,
                     borderRadius: '12px',
-                    backgroundColor: '#e3f2fd',
+                    backgroundColor: (theme) => `${theme.palette.secondary.main}15`,
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                   }}
                 >
-                  <FaDollarSign size={22} color="#1976d2" />
+                  <FaDollarSign size={22} style={{ color: 'secondary.main' }} />
                 </Box>
                 <Box>
                   <Typography variant="body2" color="text.secondary" gutterBottom>
@@ -241,7 +260,7 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
               {totalRevenue > 0 && (
                 <Box sx={{ mt: 2, height: 50 }}>
                   {loadingSparkline ? (
-                    <CircularProgress size={30} sx={{ color: 'primary.main' }} />
+                    <CircularProgress size={30} sx={{ color: 'secondary.main' }} />
                   ) : (
                     <CustomSparkLine data={sparklineData} />
                   )}
@@ -252,67 +271,143 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
         </CardContent>
       </Card>
 
-      <Dialog open={openConfirmDialog} onClose={() => setOpenConfirmDialog(false)}>
-        <DialogTitle>Delete Market Cluster</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            Are you sure you want to delete the market cluster "{cluster.title}"? This action cannot be undone.
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => setOpenConfirmDialog(false)}>Cancel</Button>
-          <Button
-            onClick={async () => {
-              setDeletingCluster(cluster.id);
-              const success = await MarketService.deleteMarketCluster(cluster.id);
-              if (success) {
-                showSnackbar("Market Cluster successfully deleted");
-                fetchMarketClusters();
-              } else {
-                showSnackbar("Error deleting Market Cluster", "error");
-                setDeletingCluster(null);
-              }
-              setOpenConfirmDialog(false);
-            }}
-            color="error"
-            variant="contained"
-          >
-            Delete
-          </Button>
-        </DialogActions>
-      </Dialog>
-
-      <Dialog open={openEditDialog} onClose={() => setOpenEditDialog(false)}>
-        <DialogTitle>Edit Market Cluster</DialogTitle>
+      <Dialog
+        open={openEditDialog}
+        onClose={() => setOpenEditDialog(false)}
+        onClick={(e) => e.stopPropagation()}
+        PaperProps={{
+          sx: {
+            borderRadius: 2,
+            minWidth: 400
+          }
+        }}
+      >
+        <DialogTitle sx={{ 
+          pb: 1,
+          color: 'primary.main',
+          fontWeight: 600
+        }}>
+          Edit Cluster Title
+        </DialogTitle>
         <DialogContent>
           <TextField
             autoFocus
             margin="dense"
-            label="Cluster Title"
+            label="New Title"
             type="text"
             fullWidth
-            variant="outlined"
             value={newTitle}
             onChange={(e) => setNewTitle(e.target.value)}
+            sx={{
+              mt: 2,
+              '& .MuiOutlinedInput-root': {
+                '&:hover fieldset': {
+                  borderColor: 'secondary.light',
+                },
+                '&.Mui-focused fieldset': {
+                  borderColor: 'secondary.main',
+                }
+              }
+            }}
           />
         </DialogContent>
-        <DialogActions>
-          <Button onClick={() => setOpenEditDialog(false)}>Cancel</Button>
+        <DialogActions sx={{ px: 3, pb: 2 }}>
+          <Button 
+            onClick={() => setOpenEditDialog(false)}
+            sx={{ 
+              color: 'text.secondary',
+              '&:hover': {
+                backgroundColor: (theme) => `${theme.palette.tertiary.main}15`,
+              }
+            }}
+          >
+            Cancel
+          </Button>
           <Button
             onClick={async () => {
               try {
                 await MarketService.updateMarketCluster(cluster.id, { title: newTitle });
-                showSnackbar("Market Cluster title updated successfully");
+                showSnackbar("Title updated successfully");
                 fetchMarketClusters();
                 setOpenEditDialog(false);
               } catch (error) {
-                showSnackbar("Error updating Market Cluster title", "error");
+                console.error("Error updating title:", error);
+                showSnackbar("Error updating title", "error");
               }
             }}
-            color="primary"
             variant="contained"
+            sx={{
+              backgroundColor: 'secondary.main',
+              '&:hover': {
+                backgroundColor: 'secondary.dark',
+              }
+            }}
           >
             Save
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      <Dialog
+        open={openConfirmDialog}
+        onClose={() => setOpenConfirmDialog(false)}
+        onClick={(e) => e.stopPropagation()}
+        PaperProps={{
+          sx: {
+            borderRadius: 2,
+            minWidth: 400
+          }
+        }}
+      >
+        <DialogTitle sx={{ 
+          pb: 1,
+          color: 'error.main',
+          fontWeight: 600
+        }}>
+          Delete Cluster
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Are you sure you want to delete this cluster? This action cannot be undone.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions sx={{ px: 3, pb: 2 }}>
+          <Button 
+            onClick={() => setOpenConfirmDialog(false)}
+            sx={{ 
+              color: 'text.secondary',
+              '&:hover': {
+                backgroundColor: (theme) => `${theme.palette.tertiary.main}15`,
+              }
+            }}
+          >
+            Cancel
+          </Button>
+          <Button
+            onClick={async () => {
+              setDeletingCluster(cluster.id);
+              try {
+                await MarketService.deleteMarketCluster(cluster.id);
+                showSnackbar("Cluster deleted successfully");
+                setMarketClusters((prev) =>
+                  prev.filter((c) => c.id !== cluster.id)
+                );
+              } catch (error) {
+                console.error("Error deleting cluster:", error);
+                showSnackbar("Error deleting cluster", "error");
+              }
+              setDeletingCluster(null);
+              setOpenConfirmDialog(false);
+            }}
+            variant="contained"
+            color="error"
+            sx={{
+              '&:hover': {
+                backgroundColor: 'error.dark',
+              }
+            }}
+          >
+            Delete
           </Button>
         </DialogActions>
       </Dialog>
