@@ -411,6 +411,9 @@ const Dashboard: React.FC = () => {
                   </Typography>
                   <Typography variant="h6" color="text.primary" sx={{ fontWeight: 600 }}>
                     ${dashboardData?.total_revenue || '0.00'}
+                    </Typography>
+                    <Typography variant="body2" color="warning" gutterBottom>
+                    Waiting for valid calculation by Alex
                   </Typography>
                 </Box>
               </Paper>
@@ -453,6 +456,9 @@ const Dashboard: React.FC = () => {
                   </Typography>
                   <Typography variant="h6" color="text.primary" sx={{ fontWeight: 600 }}>
                    Sparkline
+                    </Typography>
+                    <Typography variant="body2" color="warning" gutterBottom>
+                    Waiting for valid calculation by Alex
                   </Typography>
                 </Box>
               </Paper>
@@ -495,6 +501,9 @@ const Dashboard: React.FC = () => {
                   </Typography>
                   <Typography variant="h6" color="text.primary" sx={{ fontWeight: 600 }}>
                     {dashboardData?.total_clusters|| '0'}
+                    </Typography>
+                    <Typography variant="body2" color="warning" gutterBottom>
+                    ToDo: Only count ready scraped clusters
                   </Typography>
                 </Box>
               </Paper>
@@ -537,6 +546,9 @@ const Dashboard: React.FC = () => {
                   </Typography>
                   <Typography variant="h6" color="text.primary" sx={{ fontWeight: 600 }}>
                     {dashboardData?.total_unique_products || '0'}
+                    </Typography>
+                    <Typography variant="body2" color="warning" gutterBottom>
+                    ToDo: Get only products from not-scraping clusters
                   </Typography>
                 </Box>
               </Paper>
@@ -624,7 +636,7 @@ const Dashboard: React.FC = () => {
                     <FaLayerGroup size={22} color="#1976d2" />
                   </Box>
                   <Typography variant="h6" color="text.primary" sx={{ fontWeight: 600 }}>
-                    Cluster to build: {activeCluster.clustername}
+                    Cluster to build: {activeCluster.clustername} (Todo: Add cluster type and logo )
                   </Typography>
                 </Box>
 

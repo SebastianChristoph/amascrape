@@ -19,7 +19,7 @@ import {
   TableHead,
   TableRow,
   TextField,
-  Typography
+  Typography,
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import { FiChevronDown } from "react-icons/fi";
@@ -44,28 +44,27 @@ export default function Admin() {
   const [productLogs, setProductLogs] = useState<string[]>([]);
   const [isMarketRunning, setIsMarketRunning] = useState(false);
   const [marketLogs, setMarketLogs] = useState<string[]>([]);
-  
+
   useEffect(() => {
     fetchUsers();
   }, []);
-
 
   useEffect(() => {
     const interval = setInterval(() => {
       checkProductOrchestratorStatus();
       checkMarketOrchestratorStatus();
     }, 5000);
-  
+
     return () => clearInterval(interval);
   }, []);
-  
+
   useEffect(() => {
     if (isProductRunning) {
       const productLogInterval = setInterval(fetchProductLogs, 5000);
       return () => clearInterval(productLogInterval);
     }
   }, [isProductRunning]);
-  
+
   useEffect(() => {
     if (isMarketRunning) {
       const marketLogInterval = setInterval(fetchMarketLogs, 5000);
@@ -74,77 +73,100 @@ export default function Admin() {
   }, [isMarketRunning]);
 
   const checkProductOrchestratorStatus = async () => {
-    const response = await fetch("http://127.0.0.1:9000/scraping/is-product-orchestrator-running",{
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    });
+    const response = await fetch(
+      "http://127.0.0.1:9000/scraping/is-product-orchestrator-running",
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    );
     const data = await response.json();
     setIsProductRunning(data.running);
   };
 
   const checkMarketOrchestratorStatus = async () => {
-    const response = await fetch("http://127.0.0.1:9000/scraping/is-market-orchestrator-running",{
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    });
+    const response = await fetch(
+      "http://127.0.0.1:9000/scraping/is-market-orchestrator-running",
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    );
     const data = await response.json();
     setIsMarketRunning(data.running);
   };
   const fetchProductLogs = async () => {
     try {
-      const response = await fetch("http://127.0.0.1:9000/scraping/get-product-orchestrator-logs", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
-  
+      const response = await fetch(
+        "http://127.0.0.1:9000/scraping/get-product-orchestrator-logs",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+
       const data = await response.json();
-      
+
       if (!Array.isArray(data.logs)) {
-        console.error("Fehler: Produkt-Orchestrator-Logs sind nicht im erwarteten Array-Format!", data);
+        console.error(
+          "Fehler: Produkt-Orchestrator-Logs sind nicht im erwarteten Array-Format!",
+          data
+        );
         return;
       }
-  
+
       console.log("✅ Product Logs:", data.logs); // Debugging
       setProductLogs(data.logs); // Setzt nur die Product-Orchestrator-Logs
     } catch (error) {
-      console.error("❌ Fehler beim Abrufen der Product-Orchestrator-Logs:", error);
-    }
-  };
-  
-  const fetchMarketLogs = async () => {
-    try {
-      const response = await fetch("http://127.0.0.1:9000/scraping/get-market-orchestrator-logs", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
-  
-      const data = await response.json();
-      
-      if (!Array.isArray(data.logs)) {
-        console.error("Fehler: Market-Orchestrator-Logs sind nicht im erwarteten Array-Format!", data);
-        return;
-      }
-  
-      console.log("✅ Market Logs:", data.logs); // Debugging
-      setMarketLogs(data.logs); // Setzt nur die Market-Orchestrator-Logs
-    } catch (error) {
-      console.error("❌ Fehler beim Abrufen der Market-Orchestrator-Logs:", error);
+      console.error(
+        "❌ Fehler beim Abrufen der Product-Orchestrator-Logs:",
+        error
+      );
     }
   };
 
-  
+  const fetchMarketLogs = async () => {
+    try {
+      const response = await fetch(
+        "http://127.0.0.1:9000/scraping/get-market-orchestrator-logs",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+
+      const data = await response.json();
+
+      if (!Array.isArray(data.logs)) {
+        console.error(
+          "Fehler: Market-Orchestrator-Logs sind nicht im erwarteten Array-Format!",
+          data
+        );
+        return;
+      }
+
+      console.log("✅ Market Logs:", data.logs); // Debugging
+      setMarketLogs(data.logs); // Setzt nur die Market-Orchestrator-Logs
+    } catch (error) {
+      console.error(
+        "❌ Fehler beim Abrufen der Market-Orchestrator-Logs:",
+        error
+      );
+    }
+  };
+
   const startProductOrchestrator = async () => {
     try {
       setIsProductRunning(true);
@@ -242,14 +264,17 @@ export default function Admin() {
 
   const handleAddCredits = async (userId: number) => {
     try {
-      const response = await fetch(`http://127.0.0.1:9000/users/admin/add-credits/${userId}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${UserService.getToken()}`,
-        },
-        body: JSON.stringify({ amount: 100 }),
-      });
+      const response = await fetch(
+        `http://127.0.0.1:9000/users/admin/add-credits/${userId}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${UserService.getToken()}`,
+          },
+          body: JSON.stringify({ amount: 100 }),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Fehler beim Hinzufügen der Credits");
@@ -269,7 +294,7 @@ export default function Admin() {
         Admin Panel
       </Typography>
 
-      <Accordion>
+      {/* <Accordion>
         <AccordionSummary expandIcon={<FiChevronDown />}>
           <Typography variant="h6">Product Orchestrator</Typography>
         </AccordionSummary>
@@ -277,35 +302,43 @@ export default function Admin() {
           <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
             {isProductRunning ? <CircularProgress size={24} /> : null}
             <Typography>
-              {isProductRunning ? "Product Orchestrator läuft..." : "Product Orchestrator ist gestoppt."}
+              {isProductRunning
+                ? "Product Orchestrator läuft..."
+                : "Product Orchestrator ist gestoppt."}
             </Typography>
           </Box>
-          <Button 
-            variant="contained" 
-            color="primary" 
-            onClick={startProductOrchestrator} 
-            disabled={isProductRunning} 
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={startProductOrchestrator}
+            disabled={isProductRunning}
             sx={{ mt: 2 }}
           >
             Product Orchestrator starten
           </Button>
           <Paper sx={{ mt: 2, p: 2, maxHeight: 300, overflow: "auto" }}>
-  <Typography variant="h6">Product Orchestrator Logs:</Typography>
-  {productLogs.length === 0 ? (
-    <Typography color="textSecondary">Keine Logs verfügbar</Typography>
-  ) : (
-    productLogs.map((log, i) => (
-      <Typography key={i} variant="body2" sx={{ fontFamily: "monospace" }}>
-        {log}
-      </Typography>
-    ))
-  )}
-</Paper>
+            <Typography variant="h6">Product Orchestrator Logs:</Typography>
+            {productLogs.length === 0 ? (
+              <Typography color="textSecondary">
+                Keine Logs verfügbar
+              </Typography>
+            ) : (
+              productLogs.map((log, i) => (
+                <Typography
+                  key={i}
+                  variant="body2"
+                  sx={{ fontFamily: "monospace" }}
+                >
+                  {log}
+                </Typography>
+              ))
+            )}
+          </Paper>
         </AccordionDetails>
-      </Accordion>
+      </Accordion> */}
 
-        {/* ✅ Market Orchestrator */}
-        <Accordion>
+      {/* ✅ Market Orchestrator */}
+      {/* <Accordion>
         <AccordionSummary expandIcon={<FiChevronDown />}>
           <Typography variant="h6">Market Orchestrator</Typography>
         </AccordionSummary>
@@ -313,32 +346,40 @@ export default function Admin() {
           <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
             {isMarketRunning ? <CircularProgress size={24} /> : null}
             <Typography>
-              {isMarketRunning ? "Market Orchestrator läuft..." : "Market Orchestrator ist gestoppt."}
+              {isMarketRunning
+                ? "Market Orchestrator läuft..."
+                : "Market Orchestrator ist gestoppt."}
             </Typography>
           </Box>
-          <Button 
-            variant="contained" 
-            color="primary" 
-            onClick={startMarketOrchestrator} 
-            disabled={isMarketRunning} 
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={startMarketOrchestrator}
+            disabled={isMarketRunning}
             sx={{ mt: 2 }}
           >
             Market Orchestrator starten
           </Button>
           <Paper sx={{ mt: 2, p: 2, maxHeight: 300, overflow: "auto" }}>
-  <Typography variant="h6">Market Orchestrator Logs:</Typography>
-  {marketLogs.length === 0 ? (
-    <Typography color="textSecondary">Keine Logs verfügbar</Typography>
-  ) : (
-    marketLogs.map((log, i) => (
-      <Typography key={i} variant="body2" sx={{ fontFamily: "monospace" }}>
-        {log}
-      </Typography>
-    ))
-  )}
-</Paper>
+            <Typography variant="h6">Market Orchestrator Logs:</Typography>
+            {marketLogs.length === 0 ? (
+              <Typography color="textSecondary">
+                Keine Logs verfügbar
+              </Typography>
+            ) : (
+              marketLogs.map((log, i) => (
+                <Typography
+                  key={i}
+                  variant="body2"
+                  sx={{ fontFamily: "monospace" }}
+                >
+                  {log}
+                </Typography>
+              ))
+            )}
+          </Paper>
         </AccordionDetails>
-      </Accordion>
+      </Accordion> */}
 
       {/* ✅ Benutzer hinzufügen */}
       <Accordion>
@@ -349,7 +390,6 @@ export default function Admin() {
           <TextField
             label="Username"
             fullWidth
-
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             sx={{ mb: 2 }}
@@ -357,7 +397,6 @@ export default function Admin() {
           <TextField
             label="Email"
             fullWidth
-    
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             sx={{ mb: 2 }}
@@ -365,7 +404,6 @@ export default function Admin() {
           <TextField
             label="Password"
             type="password"
-       
             fullWidth
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -380,7 +418,7 @@ export default function Admin() {
       {/* ✅ Benutzer löschen */}
       <Accordion>
         <AccordionSummary expandIcon={<FiChevronDown />}>
-          <Typography variant="h6">Benutzer löschen</Typography>
+          <Typography variant="h6">Benutzer verwalten</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <TableContainer component={Paper}>
@@ -400,7 +438,7 @@ export default function Admin() {
                     <TableCell>{user.username}</TableCell>
                     <TableCell>{user.email}</TableCell>
                     <TableCell>
-                    <Button
+                      <Button
                         variant="contained"
                         color="success"
                         sx={{ mr: 1 }}

@@ -147,6 +147,7 @@ class MarketService {
   static async startScrapingProcess(newClusterData: {
     keywords: string[];
     clusterName: string | null;
+    clusterType: string | 'dynamic';
   }): Promise<{ success: boolean }> {
     try {
       const token = localStorage.getItem(this.TOKEN_KEY);

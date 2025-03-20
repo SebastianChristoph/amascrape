@@ -1,12 +1,12 @@
 import logging
 import sys
 import time
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 from statistics import mean
 
 import scraper.selenium_config as selenium_config
 from app.database import SessionLocal
-from app.models import Product, ProductChange
+from app.models import Market, MarketCluster, Product, ProductChange, market_products
 from scraper.product_selenium_scraper import AmazonProductScraper
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -26,12 +26,13 @@ logging.basicConfig(
 
 
 class Product_Orchestrator:
-    def __init__(self, just_scrape_3_products=False):
+    def __init__(self, just_scrape_3_products=False, cluster_to_scrape = None):
         """Initialisiert den Orchestrator und setzt den WebDriver einmalig auf."""
         self.just_scrape_3_products = just_scrape_3_products
         self.scraping_times = []
         self.start_time = None
         self.failed_products = []
+        self.cluster_to_scrape = cluster_to_scrape
 
         # 🌍 Globale Log-Datei einrichten
 
@@ -140,6 +141,15 @@ class Product_Orchestrator:
 
         return changes, changed_fields
 
+    def should_skip_product(self, product):
+        """Prüft, ob das Produkt heute bereits gescraped wurde."""
+        if product.last_time_scraped:
+            last_scraped_date = product.last_time_scraped.date()
+            if last_scraped_date == date.today():
+                logging.info(f"⏩ {product.asin} heute bereits gescraped, überspringe...")
+                return True
+        return False
+    
     def update_products(self):
         """Scraped alle Produkte nacheinander und schließt den WebDriver danach."""
         db = SessionLocal()
@@ -150,7 +160,38 @@ class Product_Orchestrator:
         try:
             logging.info("🚀 Starte Product-Update...")
 
-            products = db.query(Product).all()
+            if self.cluster_to_scrape is None:
+                
+                products = db.query(Product).all()
+                logging.info(f"📦 Scrape alle {len(products)} Produkte in DB")
+            else:
+                # Produkte nur aus dem angegebenen Cluster scrapen
+                logging.info(f"🔍 Scrape Produkte für Cluster ID: {self.cluster_to_scrape}")
+
+                # Hole alle Märkte, die zu diesem Cluster gehören
+                markets = db.query(Market).join(
+                    MarketCluster.markets
+                ).filter(
+                    MarketCluster.id == self.cluster_to_scrape
+                ).all()
+
+                if not markets:
+                    logging.warning(f"⚠️ Keine Märkte gefunden für Cluster {self.cluster_to_scrape}")
+                    return
+
+                market_ids = [market.id for market in markets]
+                logging.info(f"🌍 Gefundene Märkte: {market_ids}")
+
+                # Hole alle Produkte, die mit diesen Märkten verknüpft sind (via market_products)
+                products = db.query(Product).join(
+                    market_products, market_products.c.asin == Product.asin
+                ).filter(
+                    market_products.c.market_id.in_(market_ids)
+                ).distinct().all()
+
+                logging.info(f"📦 Gefundene Produkte in Cluster {self.cluster_to_scrape}: {len(products)}")   
+                    
+
             if not products:
                 logging.warning("⚠️ Keine Produkte gefunden.")
                 return
@@ -163,6 +204,10 @@ class Product_Orchestrator:
                 if product.asin in scraped_asins:
                     logging.info(
                         f"⏩ ASIN {product.asin} wurde bereits gescraped, überspringe...")
+                    continue
+
+                # Prüfen, ob heute bereits gescraped wurde
+                if self.should_skip_product(product):
                     continue
 
                 logging.info(
@@ -249,11 +294,6 @@ class Product_Orchestrator:
             total_time = time.time() - self.start_time
             avg_time = mean(self.scraping_times) if self.scraping_times else 0
 
-            # logging.info("\n📊 Scraping Performance Metrics:")
-            # logging.info(f"🕒 Gesamtzeit: {total_time:.2f} Sekunden")
-            # logging.info(f"⚡ Durchschnittliche Zeit pro Produkt: {avg_time:.2f} Sekunden")
-            # logging.info(f"📦 Anzahl gescrapte Produkte: {len(scraped_asins)}")
-            # logging.info(f"Failed products: {len(self.failed_products)}")
 
         except Exception as e:
             logging.critical(

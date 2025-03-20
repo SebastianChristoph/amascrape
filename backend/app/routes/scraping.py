@@ -26,10 +26,10 @@ market_orchestrator_task = None
 market_orchestrator_running = False
 
 
-
 class NewClusterData(BaseModel):
     keywords: List[str]
     clusterName: Optional[str] = None
+    clusterType: Optional[str] = None
 
 
 LOG_FILE_PRODUCT = "scraping_log.txt"
@@ -56,11 +56,12 @@ async def post_scraping(
     """Startet den Scraping-Prozess für einen Nutzer"""
     user_id = current_user.id
     cluster_name = newClusterData.clusterName
+    cluster_type = newClusterData.clusterType
     print(f"🔥 Start Scraping für Nutzer {user_id}, Cluster: {cluster_name}")
 
     scraping_processes[user_id] = {}
     scraping_processes[user_id][cluster_name] = {
-        "status": "processing", "keywords": {}}
+        "status": "processing", "keywords": {},  "cluster_type": cluster_type}
 
     for keyword in newClusterData.keywords:
         market_exists = db.query(Market).filter(
@@ -77,7 +78,8 @@ async def post_scraping(
             asyncio.create_task(scraping_process(
                 keyword, cluster_name, user_id))
 
-    return {"success": True, "message": f"Scraping für {cluster_name} gestartet"}
+    return {"success": True, "message": f"Scraping für {cluster_name} mit type {cluster_type} gestartet"}
+
 
 @router.get("/get-loading-clusters")
 async def get_loading_clusters(
@@ -119,7 +121,11 @@ async def get_loading_clusters(
         ).first()
 
         if not existing_cluster:
-            new_cluster = MarketCluster(title=clustername, user_id=user_id)
+            # 🆕 Default ist "dynamic", falls nicht gesetzt
+            cluster_type = cluster_data.get("cluster_type", "dynamic")
+            new_cluster = MarketCluster(
+                title=clustername, user_id=user_id, cluster_type=cluster_type)
+
             db.add(new_cluster)
 
             for keyword, keyword_data in scraping_processes[user_id][clustername]["keywords"].items():
@@ -187,6 +193,14 @@ async def get_loading_clusters(
             db.commit()
             db.refresh(new_cluster)
 
+         # ✅ Startet den Product Orchestrator asynchron für das Cluster
+
+        print(
+            f"🚀 Starte Product-Orchestrator für Cluster-ID {existing_cluster.id}")
+        loop = asyncio.get_running_loop()
+        loop.run_in_executor(ThreadPoolExecutor(),
+                             run_product_orchestrator, existing_cluster.id, db)
+
         del scraping_processes[user_id]
         return {"active_clusters": []}
 
@@ -220,83 +234,139 @@ def fetch_first_page_data(keyword: str):
     amazon_scraper = AmazonFirstPageScraper(headless=True, show_details=True)
     return amazon_scraper.get_first_page_data(keyword)
 # ✅ Product Orchestrator Start
+
+
 @router.post("/start-product-orchestrator")
 async def start_product_orchestrator(current_user: User = Depends(get_current_user)):
     global orchestrator_task, orchestrator_running
     open(LOG_FILE_PRODUCT, "w").close()
     if not is_admin(current_user):
-        raise HTTPException(status_code=403, detail="Nur Admins dürfen den Product Orchestrator starten.")
+        raise HTTPException(
+            status_code=403, detail="Nur Admins dürfen den Product Orchestrator starten.")
 
     if orchestrator_running:
         return {"success": False, "message": "Product Orchestrator läuft bereits!"}
 
     orchestrator_running = True
     loop = asyncio.get_running_loop()
-    orchestrator_task = loop.run_in_executor(executor, run_product_orchestrator)
+    orchestrator_task = loop.run_in_executor(
+        executor, run_product_orchestrator)
 
     return {"success": True, "message": "Product Orchestrator wurde gestartet!"}
 
-def run_product_orchestrator():
-    global orchestrator_running
+
+
+def run_product_orchestrator(cluster_id: int, db: Session):
+    """Führt den Product Orchestrator für ein bestimmtes Cluster aus und startet danach den Market Orchestrator asynchron."""
     try:
-        orchestrator = Product_Orchestrator(just_scrape_3_products=False)
+        print(f"🔄 Product-Orchestrator gestartet für Cluster {cluster_id}")
+
+        # 🏁 Starte den Product Orchestrator
+        orchestrator = Product_Orchestrator(just_scrape_3_products=False, cluster_to_scrape=cluster_id)
         orchestrator.update_products()
-    finally:
-        orchestrator_running = False
+
+        print(f"✅ Product-Orchestrator abgeschlossen für Cluster {cluster_id}, starte Market-Orchestrator...")
+
+        # 🏁 Starte den Market Orchestrator in einem neuen Thread mit eigenem Event-Loop
+        thread_executor = ThreadPoolExecutor()
+        thread_executor.submit(run_market_orchestrator, cluster_id, db)
+
+    except Exception as e:
+        print(f"❌ Fehler im Product-Orchestrator für Cluster {cluster_id}: {e}")
 
 # ✅ Market Orchestrator Start
+
+
 @router.post("/start-market-orchestrator")
 async def start_market_orchestrator(current_user: User = Depends(get_current_user)):
     global market_orchestrator_task, market_orchestrator_running
-    
+
     if not is_admin(current_user):
-        raise HTTPException(status_code=403, detail="Nur Admins dürfen den Market Orchestrator starten.")
+        raise HTTPException(
+            status_code=403, detail="Nur Admins dürfen den Market Orchestrator starten.")
 
     if market_orchestrator_running:
         return {"success": False, "message": "Market Orchestrator läuft bereits!"}
 
     market_orchestrator_running = True
     loop = asyncio.get_running_loop()
-    market_orchestrator_task = loop.run_in_executor(executor, run_market_orchestrator)
+    market_orchestrator_task = loop.run_in_executor(
+        executor, run_market_orchestrator)
 
     return {"success": True, "message": "Market Orchestrator wurde gestartet!"}
 
-def run_market_orchestrator():
-    global market_orchestrator_running
+
+
+def run_market_orchestrator(cluster_id: int, db: Session):
+    """Führt den Market Orchestrator für ein bestimmtes Cluster aus."""
     try:
-        print("RUUUUUUUUUUUUUUUUUUUUUUUUUN")
-        orchestrator = MarketOrchestrator()
+        print(f"🔄 Market-Orchestrator gestartet für Cluster {cluster_id}")
+
+        # 🏁 Erstelle einen **neuen** Event-Loop für diesen Thread
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+
+        orchestrator = MarketOrchestrator(cluster_to_scrape=cluster_id)
         orchestrator.update_markets()
-    finally:
-        market_orchestrator_running = False
+
+        print(f"✅ Market-Orchestrator abgeschlossen für Cluster {cluster_id}")
+
+        # ✅ Setze is_initial_scraped auf True
+        mark_cluster_as_scraped(cluster_id, db)
+
+    except Exception as e:
+        print(f"❌ Fehler im Market-Orchestrator für Cluster {cluster_id}: {e}")
+
+
+def mark_cluster_as_scraped(cluster_id: int, db: Session):
+    """Setzt is_initial_scraped auf True, wenn der Market-Orchestrator beendet ist."""
+    try:
+        db.query(MarketCluster).filter(MarketCluster.id == cluster_id).update({"is_initial_scraped": True})
+        db.commit()
+        print(f"✅ MarketCluster {cluster_id} wurde als vollständig gescraped markiert.")
+    except Exception as e:
+        print(f"❌ Fehler beim Setzen von is_initial_scraped für Cluster {cluster_id}: {e}")
 
 # ✅ Status-Abfrage für Product Orchestrator
+
+
 @router.get("/is-product-orchestrator-running")
 async def is_product_orchestrator_running(current_user: User = Depends(get_current_user)):
     if not is_admin(current_user):
-        raise HTTPException(status_code=403, detail="Nur Admins dürfen den Status abrufen.")
+        raise HTTPException(
+            status_code=403, detail="Nur Admins dürfen den Status abrufen.")
     return {"running": orchestrator_running}
 
 # ✅ Status-Abfrage für Market Orchestrator
+
+
 @router.get("/is-market-orchestrator-running")
 async def is_market_orchestrator_running(current_user: User = Depends(get_current_user)):
     if not is_admin(current_user):
-        raise HTTPException(status_code=403, detail="Nur Admins dürfen den Status abrufen.")
+        raise HTTPException(
+            status_code=403, detail="Nur Admins dürfen den Status abrufen.")
     return {"running": market_orchestrator_running}
 
 # ✅ Logs für Product Orchestrator abrufen
+
+
 @router.get("/get-product-orchestrator-logs")
 async def get_product_orchestrator_logs(current_user: User = Depends(get_current_user)):
     if not is_admin(current_user):
-        raise HTTPException(status_code=403, detail="Nur Admins dürfen Logs sehen.")
+        raise HTTPException(
+            status_code=403, detail="Nur Admins dürfen Logs sehen.")
     return get_logs(LOG_FILE_PRODUCT)
 
 # ✅ Logs für Market Orchestrator abrufen
+
+
 @router.get("/get-market-orchestrator-logs")
 async def get_market_orchestrator_logs(current_user: User = Depends(get_current_user)):
     if not is_admin(current_user):
-        raise HTTPException(status_code=403, detail="Nur Admins dürfen Logs sehen.")
+        raise HTTPException(
+            status_code=403, detail="Nur Admins dürfen Logs sehen.")
     return get_logs(LOG_FILE_MARKET)
+
 
 def get_logs(log_file):
     if not os.path.exists(log_file):
@@ -307,7 +377,6 @@ def get_logs(log_file):
         return {"logs": logs[-20:]}  # 🔹 Nur die letzten 20 Logs anzeigen
     except Exception as e:
         return {"logs": [f"❌ Fehler beim Abrufen der Logs: {str(e)}"]}
-
 
 
 def is_admin(user: User):

@@ -520,22 +520,26 @@ export default function ClusterDetails() {
   ];
 
   const allowedFields = ["details", "image", "title", "price"];
-  
+
   const filteredColumns = marketCluster.is_initial_scraped
     ? columns // Falls `is_initial_scraped === true`, alle Spalten anzeigen
-    : columns.filter(col => allowedFields.includes(col.field)); // Nur erlaubte Felder beibehalten
-  
+    : columns.filter((col) => allowedFields.includes(col.field)); // Nur erlaubte Felder beibehalten
+
   return (
     <>
       <Paper elevation={1} sx={{ marginBottom: 2, padding: 4 }}>
-        {(!marketCluster.is_initial_scraped) && (
+        {!marketCluster.is_initial_scraped && (
           <Alert severity="warning" sx={{ mb: 2 }}>
             This is a first impression of the market. More detailed data will be
-            available after the initial scraping process (usually takes about one hour).
+            available after the initial scraping process (usually takes about
+            one hour).
           </Alert>
         )}
 
-        <Typography variant="h4" sx={{ marginBottom: 3, color: 'text.primary', fontWeight: 600 }}>
+        <Typography
+          variant="h4"
+          sx={{ marginBottom: 3, color: "text.primary", fontWeight: 600 }}
+        >
           {marketCluster.title}
         </Typography>
 
@@ -602,14 +606,15 @@ export default function ClusterDetails() {
                   elevation={1}
                   sx={{
                     p: 3,
-                    height: '100%',
-                    backgroundColor: 'white',
+                    height: "100%",
+                    backgroundColor: "white",
                     borderRadius: 2,
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 2,transition: 'transform 0.2s',
-                    '&:hover': {
-                      transform: 'translateY(-4px)',
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 2,
+                    transition: "transform 0.2s",
+                    "&:hover": {
+                      transform: "translateY(-4px)",
                     },
                   }}
                 >
@@ -617,29 +622,42 @@ export default function ClusterDetails() {
                     sx={{
                       width: 45,
                       height: 45,
-                      borderRadius: '12px',
-                      backgroundColor: '#e3f2fd',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
+                      borderRadius: "12px",
+                      backgroundColor: "#e3f2fd",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
                     }}
                   >
                     <FaDollarSign size={22} color="#1976d2" />
                   </Box>
                   <Box>
-                      <Typography variant="body2" color="text.secondary" gutterBottom>
-                        Total Revenue
+                    <Typography
+                      variant="body2"
+                      color="text.secondary"
+                      gutterBottom
+                    >
+                      Total Revenue
+                    </Typography>
+
+                    {marketCluster.is_initial_scraped ? (
+                      <Typography
+                        variant="h6"
+                        color="text.primary"
+                        sx={{ fontWeight: 600 }}
+                      >
+                        {formatCurrency(
+                          marketCluster.insights?.total_revenue || 0
+                        )}
                       </Typography>
+                    ) : (
+                      <Typography variant="h2">{<Skeleton />}</Typography>
+                    )}
 
-                      {marketCluster.is_initial_scraped ? (
-                        <Typography variant="h6" color="text.primary" sx={{ fontWeight: 600 }}>
-                          {formatCurrency(marketCluster.insights?.total_revenue || 0)}
-                        </Typography>
-                      ) : (
-                        <Typography variant="h2">{<Skeleton /> }</Typography>
-
-                      )}
-                    </Box>
+                    <Typography variant="body2" color="warning" gutterBottom>
+                      Waiting for valid calculation by Alex
+                    </Typography>
+                  </Box>
                 </Paper>
               </Grid>
 
@@ -649,14 +667,15 @@ export default function ClusterDetails() {
                   elevation={1}
                   sx={{
                     p: 3,
-                    height: '100%',
-                    backgroundColor: 'white',
+                    height: "100%",
+                    backgroundColor: "white",
                     borderRadius: 2,
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 2,transition: 'transform 0.2s',
-                    '&:hover': {
-                      transform: 'translateY(-4px)',
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 2,
+                    transition: "transform 0.2s",
+                    "&:hover": {
+                      transform: "translateY(-4px)",
                     },
                   }}
                 >
@@ -664,21 +683,30 @@ export default function ClusterDetails() {
                     sx={{
                       width: 45,
                       height: 45,
-                      borderRadius: '12px',
-                      backgroundColor: '#e3f2fd',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
+                      borderRadius: "12px",
+                      backgroundColor: "#e3f2fd",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
                     }}
                   >
                     <FaStore size={22} color="#1976d2" />
                   </Box>
                   <Box>
-                    <Typography variant="body2" color="text.secondary" gutterBottom>
+                    <Typography
+                      variant="body2"
+                      color="text.secondary"
+                      gutterBottom
+                    >
                       Markets & Products
                     </Typography>
-                    <Typography variant="h6" color="text.primary" sx={{ fontWeight: 600 }}>
-                      {marketCluster.insights?.total_markets || 0} Markets • {marketCluster.insights?.total_products || 0} Products
+                    <Typography
+                      variant="h6"
+                      color="text.primary"
+                      sx={{ fontWeight: 600 }}
+                    >
+                      {marketCluster.insights?.total_markets || 0} Markets •{" "}
+                      {marketCluster.insights?.total_products || 0} Products
                     </Typography>
                   </Box>
                 </Paper>
@@ -690,14 +718,15 @@ export default function ClusterDetails() {
                   elevation={1}
                   sx={{
                     p: 3,
-                    height: '100%',
-                    backgroundColor: 'white',
+                    height: "100%",
+                    backgroundColor: "white",
                     borderRadius: 2,
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 2,transition: 'transform 0.2s',
-                    '&:hover': {
-                      transform: 'translateY(-4px)',
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 2,
+                    transition: "transform 0.2s",
+                    "&:hover": {
+                      transform: "translateY(-4px)",
                     },
                   }}
                 >
@@ -705,37 +734,52 @@ export default function ClusterDetails() {
                     sx={{
                       width: 45,
                       height: 45,
-                      borderRadius: '12px',
-                      backgroundColor: '#e3f2fd',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
+                      borderRadius: "12px",
+                      backgroundColor: "#e3f2fd",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
                     }}
                   >
                     <FaChartLine size={22} color="#1976d2" />
                   </Box>
                   <Box>
-                    <Typography variant="body2" color="text.secondary" gutterBottom>
+                    <Typography
+                      variant="body2"
+                      color="text.secondary"
+                      gutterBottom
+                    >
                       Average Revenue
                     </Typography>
 
                     {marketCluster.is_initial_scraped ? (
                       <Box>
-                         <Typography variant="body2" sx={{ fontWeight: 500, color: 'text.primary' }}>
-                         Per Market: {formatCurrency(marketCluster.insights?.avg_revenue_per_market || 0)}
-                       </Typography>
-                       <Typography variant="body2" sx={{ fontWeight: 500, color: 'text.primary' }}>
-                         Per Product: {formatCurrency(marketCluster.insights?.avg_revenue_per_product || 0)}
+                        <Typography
+                          variant="body2"
+                          sx={{ fontWeight: 500, color: "text.primary" }}
+                        >
+                          Per Market:{" "}
+                          {formatCurrency(
+                            marketCluster.insights?.avg_revenue_per_market || 0
+                          )}
                         </Typography>
-                        </Box>
-                      ) : (
-                        <Typography variant="h2">{<Skeleton /> }</Typography>
-
+                        <Typography
+                          variant="body2"
+                          sx={{ fontWeight: 500, color: "text.primary" }}
+                        >
+                          Per Product:{" "}
+                          {formatCurrency(
+                            marketCluster.insights?.avg_revenue_per_product || 0
+                          )}
+                        </Typography>
+                      </Box>
+                    ) : (
+                      <Typography variant="h2">{<Skeleton />}</Typography>
                     )}
-                    
 
-
-                   
+                    <Typography variant="body2" color="warning" gutterBottom>
+                      Waiting for valid calculation by Alex
+                    </Typography>
                   </Box>
                 </Paper>
               </Grid>
@@ -754,14 +798,15 @@ export default function ClusterDetails() {
                   elevation={1}
                   sx={{
                     p: 3,
-                    height: '100%',
-                    backgroundColor: 'white',
+                    height: "100%",
+                    backgroundColor: "white",
                     borderRadius: 2,
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 2,transition: 'transform 0.2s',
-                    '&:hover': {
-                      transform: 'translateY(-4px)',
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 2,
+                    transition: "transform 0.2s",
+                    "&:hover": {
+                      transform: "translateY(-4px)",
                     },
                   }}
                 >
@@ -769,31 +814,42 @@ export default function ClusterDetails() {
                     sx={{
                       width: 45,
                       height: 45,
-                      borderRadius: '12px',
-                      backgroundColor: '#e3f2fd',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
+                      borderRadius: "12px",
+                      backgroundColor: "#e3f2fd",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
                     }}
                   >
                     <FaDollarSign size={22} color="#1976d2" />
                   </Box>
                   <Box>
-                    <Typography variant="body2" color="text.secondary" gutterBottom>
+                    <Typography
+                      variant="body2"
+                      color="text.secondary"
+                      gutterBottom
+                    >
                       My Total Revenue
                     </Typography>
 
                     {marketCluster.is_initial_scraped ? (
-                        
-                    <Typography variant="h6" color="text.primary" sx={{ fontWeight: 600 }}>
-                    {formatCurrency(userProductInsights?.total_revenue_user_products || 0)}
-                  </Typography>
-                      ) : (
-                        <Typography variant="h2">{<Skeleton /> }</Typography>
-
+                      <Typography
+                        variant="h6"
+                        color="text.primary"
+                        sx={{ fontWeight: 600 }}
+                      >
+                        {formatCurrency(
+                          userProductInsights?.total_revenue_user_products || 0
+                        )}
+                      </Typography>
+                    ) : (
+                      <Typography variant="h2">{<Skeleton />}</Typography>
                     )}
 
-                  
+                    <Typography variant="body2" color="warning" gutterBottom>
+                      Waiting for valid calculation by Alex (so far it is
+                      productCount*10 to test)
+                    </Typography>
                   </Box>
                 </Paper>
               </Grid>
@@ -804,14 +860,15 @@ export default function ClusterDetails() {
                   elevation={1}
                   sx={{
                     p: 3,
-                    height: '100%',
-                    backgroundColor: 'white',
+                    height: "100%",
+                    backgroundColor: "white",
                     borderRadius: 2,
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 2,transition: 'transform 0.2s',
-                    '&:hover': {
-                      transform: 'translateY(-4px)',
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 2,
+                    transition: "transform 0.2s",
+                    "&:hover": {
+                      transform: "translateY(-4px)",
                     },
                   }}
                 >
@@ -819,21 +876,30 @@ export default function ClusterDetails() {
                     sx={{
                       width: 45,
                       height: 45,
-                      borderRadius: '12px',
-                      backgroundColor: '#e3f2fd',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
+                      borderRadius: "12px",
+                      backgroundColor: "#e3f2fd",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
                     }}
                   >
                     <FaBoxes size={22} color="#1976d2" />
                   </Box>
                   <Box>
-                    <Typography variant="body2" color="text.secondary" gutterBottom>
+                    <Typography
+                      variant="body2"
+                      color="text.secondary"
+                      gutterBottom
+                    >
                       My Products
                     </Typography>
-                    <Typography variant="h6" color="text.primary" sx={{ fontWeight: 600 }}>
-                      {userProductInsights?.user_product_count || 0}
+                    <Typography
+                      variant="h6"
+                      color="text.primary"
+                      sx={{ fontWeight: 600 }}
+                    >
+                      {userProductInsights?.user_products_in_cluster_count ||
+                        -2}
                     </Typography>
                   </Box>
                 </Paper>
@@ -845,14 +911,15 @@ export default function ClusterDetails() {
                   elevation={1}
                   sx={{
                     p: 3,
-                    height: '100%',
-                    backgroundColor: 'white',
+                    height: "100%",
+                    backgroundColor: "white",
                     borderRadius: 2,
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 2,transition: 'transform 0.2s',
-                    '&:hover': {
-                      transform: 'translateY(-4px)',
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 2,
+                    transition: "transform 0.2s",
+                    "&:hover": {
+                      transform: "translateY(-4px)",
                     },
                   }}
                 >
@@ -860,33 +927,36 @@ export default function ClusterDetails() {
                     sx={{
                       width: 45,
                       height: 45,
-                      borderRadius: '12px',
-                      backgroundColor: '#e3f2fd',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
+                      borderRadius: "12px",
+                      backgroundColor: "#e3f2fd",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
                     }}
                   >
                     <FaPercentage size={22} color="#1976d2" />
                   </Box>
                   <Box>
-                    <Typography variant="body2" color="text.secondary" gutterBottom>
+                    <Typography
+                      variant="body2"
+                      color="text.secondary"
+                      gutterBottom
+                    >
                       30-Day Trend
                     </Typography>
 
                     {marketCluster.is_initial_scraped ? (
-                        
-                        <Box sx={{ width: 120, height: 40, mt: 1 }}>
+                      <Box sx={{ width: 120, height: 40, mt: 1 }}>
                         <CustomSparkLine
-                          data={userProductInsights?.sparkline_data_user_products || []}
+                          data={
+                            userProductInsights?.sparkline_data_user_products ||
+                            []
+                          }
                         />
                       </Box>
-                          ) : (
-                            <Typography variant="h2">{<Skeleton /> }</Typography>
-    
+                    ) : (
+                      <Typography variant="h2">{<Skeleton />}</Typography>
                     )}
-                    
-                    
                   </Box>
                 </Paper>
               </Grid>
@@ -896,338 +966,6 @@ export default function ClusterDetails() {
       </Paper>
 
       <Paper elevation={4} sx={{ marginBottom: 2, padding: 4 }}>
-       
-
-        {/* <Grid container spacing={2}>
-          <Grid size={{ xs: 12, sm: 12, md: 4 }}>
-            <Box sx={{ width: "100%", height: 300 }}>
-              {Object.keys(stackedChartData).length === 0 ||
-              Object.values(stackedChartData).every((marketData) =>
-                marketData.every((entry) => entry.value === 0)
-              ) ? (
-                <Box sx={{ height: "100%" }}>
-                  <Typography variant="h6" color="text.secondary" gutterBottom>
-                    Market Development
-                  </Typography>
-                  <Box
-                    sx={{ position: "relative", height: "calc(100% - 40px)" }}
-                  >
-                    <Skeleton
-                      variant="rectangular"
-                      animation="wave"
-                      width="100%"
-                      height="100%"
-                      sx={{
-                        borderRadius: 1,
-                        bgcolor: "grey.100",
-                      }}
-                    />
-                    <Typography
-                      variant="body2"
-                      color="text.secondary"
-                      sx={{
-                        position: "absolute",
-                        top: "50%",
-                        left: "50%",
-                        transform: "translate(-50%, -50%)",
-                        textAlign: "center",
-                        backgroundColor: "rgba(255, 255, 255, 0.8)",
-                        padding: "8px 16px",
-                        borderRadius: 1,
-                      }}
-                    >
-                      Historical market data will be available soon
-                    </Typography>
-                  </Box>
-                </Box>
-              ) : (
-                <Box sx={{ height: "100%" }}>
-                  <Typography variant="h6" color="text.secondary" gutterBottom>
-                    Market Development
-                  </Typography>
-                  <Box sx={{ height: "calc(100% - 40px)" }}>
-                    <CustomStackBars data={stackedChartData} />
-                  </Box>
-                </Box>
-              )}
-            </Box>
-          </Grid>
-          <Grid size={{ xs: 12, sm: 12, md: 8 }}>
-            <Box sx={{ width: "100%", height: 300 }}>
-              {!marketCluster.total_revenue ||
-              marketCluster.total_revenue === 0 ? (
-                <Box sx={{ height: "100%" }}>
-                  <Typography variant="h6" color="text.secondary" gutterBottom>
-                    Market Cluster Insights
-                  </Typography>
-                  <Box
-                    sx={{ position: "relative", height: "calc(100% - 40px)" }}
-                  >
-                    <Skeleton
-                      variant="rectangular"
-                      animation="wave"
-                      width="100%"
-                      height="100%"
-                      sx={{
-                        borderRadius: 1,
-                        bgcolor: "grey.100",
-                      }}
-                    />
-                    <Typography
-                      variant="body2"
-                      color="text.secondary"
-                      sx={{
-                        position: "absolute",
-                        top: "50%",
-                        left: "50%",
-                        transform: "translate(-50%, -50%)",
-                        textAlign: "center",
-                        backgroundColor: "rgba(255, 255, 255, 0.8)",
-                        padding: "8px 16px",
-                        borderRadius: 1,
-                      }}
-                    >
-                      Insights will be available once data scraping is complete
-                    </Typography>
-                  </Box>
-                </Box>
-              ) : (
-                <Box sx={{ height: "100%", overflow: "auto" }}>
-                  <Typography variant="h6" color="text.secondary" gutterBottom>
-                    Market Cluster Insights
-                  </Typography>
-                  <Grid container spacing={4}>
-                    <Grid size={{ xs: 12, sm: 6, md: 6 }}>
-                      <Box
-                        sx={{
-                          display: "flex",
-                          flexDirection: "column",
-                          gap: 2,
-                        }}
-                      >
-                        <Box>
-                          <Box
-                            sx={{
-                              display: "flex",
-                              alignItems: "center",
-                              gap: 1,
-                            }}
-                          >
-                            <FaDollarSign size={16} color="#666" />
-                            <Typography
-                              variant="subtitle2"
-                              color="text.secondary"
-                            >
-                              Total Revenue
-                            </Typography>
-                          </Box>
-                          <Typography variant="h4">
-                            {formatCurrency(
-                              marketCluster.insights?.total_revenue || 0
-                            )}
-                          </Typography>
-                        </Box>
-
-                        <Box>
-                          <Box
-                            sx={{
-                              display: "flex",
-                              alignItems: "center",
-                              gap: 1,
-                            }}
-                          >
-                            <FaStore size={16} color="#666" />
-                            <Typography
-                              variant="subtitle2"
-                              color="text.secondary"
-                            >
-                              Markets & Products
-                            </Typography>
-                          </Box>
-                          <Typography variant="body1">
-                            {marketCluster.insights?.total_markets} Markets •{" "}
-                            {marketCluster.insights?.total_products} Products
-                          </Typography>
-                        </Box>
-
-                        <Box>
-                          <Box
-                            sx={{
-                              display: "flex",
-                              alignItems: "center",
-                              gap: 1,
-                            }}
-                          >
-                            <FaChartLine size={16} color="#666" />
-                            <Typography
-                              variant="subtitle2"
-                              color="text.secondary"
-                            >
-                              Average Revenue
-                            </Typography>
-                          </Box>
-                          <Typography variant="body1">
-                            Per Market:{" "}
-                            {formatCurrency(
-                              marketCluster.insights?.avg_revenue_per_market ||
-                                0
-                            )}
-                          </Typography>
-                          <Typography variant="body1">
-                            Per Product:{" "}
-                            {formatCurrency(
-                              marketCluster.insights?.avg_revenue_per_product ||
-                                0
-                            )}
-                          </Typography>
-                        </Box>
-                      </Box>
-                    </Grid>
-
-                    <Grid size={{ xs: 12, sm: 6, md: 6 }}>
-                      <Box
-                        sx={{
-                          display: "flex",
-                          flexDirection: "column",
-                          gap: 2,
-                        }}
-                      >
-                        <Box>
-                          <Box
-                            sx={{
-                              display: "flex",
-                              alignItems: "center",
-                              gap: 1,
-                            }}
-                          >
-                            <FaTrophy size={16} color="#666" />
-                            <Typography
-                              variant="subtitle2"
-                              color="text.secondary"
-                            >
-                              Top Performers
-                            </Typography>
-                          </Box>
-                          <Typography
-                            variant="body1"
-                            sx={{ fontWeight: "medium" }}
-                          >
-                            Best Market:{" "}
-                            {marketCluster.insights?.top_performing_market ||
-                              "N/A"}
-                          </Typography>
-                          {marketCluster.insights?.top_performing_product
-                            ?.title && (
-                            <Box>
-                              <Typography
-                                variant="body1"
-                                sx={{ fontWeight: "medium" }}
-                              >
-                                Best Product:
-                              </Typography>
-                              <Typography
-                                variant="body2"
-                                sx={{
-                                  wordBreak: "break-word",
-                                  mb: 1,
-                                }}
-                              >
-                                {marketCluster.insights?.top_performing_product
-                                  .title.length > 50
-                                  ? `${marketCluster.insights?.top_performing_product.title.substring(0, 50)}...`
-                                  : marketCluster.insights
-                                      ?.top_performing_product.title}
-                              </Typography>
-                              <Typography
-                                variant="body2"
-                                color="text.secondary"
-                              >
-                                Revenue:{" "}
-                                {formatCurrency(
-                                  marketCluster.insights?.top_performing_product
-                                    .revenue || 0
-                                )}
-                              </Typography>
-                            </Box>
-                          )}
-                        </Box>
-                      </Box>
-                    </Grid>
-                  </Grid>
-                </Box>
-              )}
-            </Box>
-          </Grid>
-        </Grid> */}
-
-        {/* {userProductInsights && (
-          <Paper sx={{ p: 2, mt: 4, mb: 3, backgroundColor: "#f8f9fa" }}>
-            <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-              <Grid container spacing={2}>
-                <Grid size={{ xs: 12 }}>
-                  <Typography
-                    variant="h6"
-                    sx={{ color: "primary.main", fontWeight: 500 }}
-                  >
-                    My Products Overview
-                  </Typography>
-                </Grid>
-                <Grid size={{ xs: 12, md: 4 }}>
-                  <Box sx={{ display: "flex", gap: 1 }}>
-                    <Box sx={{ pt: 0.5 }}>
-                      <FaDollarSign size={16} color="#2196f3" />
-                    </Box>
-                    <Box>
-                      <Typography variant="body2" color="text.secondary">
-                        Total Revenue
-                      </Typography>
-                      <Typography variant="h6">
-                        {formatCurrency(
-                          userProductInsights.total_revenue_user_products
-                        )}
-                      </Typography>
-                    </Box>
-                  </Box>
-                </Grid>
-                <Grid size={{ xs: 12, md: 4 }}>
-                  <Box sx={{ display: "flex", gap: 1 }}>
-                    <Box sx={{ pt: 0.5 }}>
-                      <FaStore size={16} color="#2196f3" />
-                    </Box>
-                    <Box>
-                      <Typography variant="body2" color="text.secondary">
-                        Active Products
-                      </Typography>
-                      <Typography variant="h6">
-                        {userProductInsights.user_product_count}
-                      </Typography>
-                    </Box>
-                  </Box>
-                </Grid>
-                <Grid size={{ xs: 12, md: 4 }}>
-                  <Box sx={{ display: "flex", gap: 1 }}>
-                    <Box sx={{ pt: 0.5 }}>
-                      <FaChartLine size={16} color="#2196f3" />
-                    </Box>
-                    <Box>
-                      <Typography variant="body2" color="text.secondary">
-                        30-Day Trend
-                      </Typography>
-                      <Box sx={{ width: 120, height: 40 }}>
-                        <CustomSparkLine
-                          data={
-                            userProductInsights.sparkline_data_user_products
-                          }
-                        />
-                      </Box>
-                    </Box>
-                  </Box>
-                </Grid>
-              </Grid>
-            </Box>
-          </Paper>
-        )} */}
-
         <Typography
           sx={{
             mt: 4,
@@ -1274,31 +1012,37 @@ export default function ClusterDetails() {
             >
               {!marketCluster.is_initial_scraped ? (
                 <Alert severity="info" sx={{ mb: 3 }}>
-                  Once scraping is complete, market revenue, matreics and product data will be calculated and presented here
+                  Once scraping is complete, market revenue, matreics and
+                  product data will be calculated and presented here
                 </Alert>
               ) : (
                 <>
                   <Grid container spacing={4}>
                     {/* Left side - Market Metrics */}
-                    <Grid size={{ xs: 12, md: 6 }} >
-                      <Typography variant="h6" color="text.secondary" gutterBottom>
+                    <Grid size={{ xs: 12, md: 6 }}>
+                      <Typography
+                        variant="h6"
+                        color="text.secondary"
+                        gutterBottom
+                      >
                         Market Metrics
                       </Typography>
-                      <Grid container spacing={2}  sx={{height: 160}}>
+                      <Grid container spacing={2} sx={{ height: 200 }}>
                         {/* Market Revenue Card */}
                         <Grid size={4}>
                           <Paper
                             elevation={1}
                             sx={{
                               p: 3,
-                              height: '100%',
-                              backgroundColor: 'white',
+                              height: "100%",
+                              backgroundColor: "white",
                               borderRadius: 2,
-                              display: 'flex',
-                              alignItems: 'center',
-                              gap: 2,transition: 'transform 0.2s',
-                              '&:hover': {
-                                transform: 'translateY(-4px)',
+                              display: "flex",
+                              alignItems: "center",
+                              gap: 2,
+                              transition: "transform 0.2s",
+                              "&:hover": {
+                                transform: "translateY(-4px)",
                               },
                             }}
                           >
@@ -1306,27 +1050,46 @@ export default function ClusterDetails() {
                               sx={{
                                 width: 45,
                                 height: 45,
-                                borderRadius: '12px',
-                                backgroundColor: '#e3f2fd',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
+                                borderRadius: "12px",
+                                backgroundColor: "#e3f2fd",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
                               }}
                             >
                               <FaDollarSign size={22} color="#1976d2" />
                             </Box>
                             <Box>
-                              <Typography variant="body2" color="text.secondary" gutterBottom>
+                              <Typography
+                                variant="body2"
+                                color="text.secondary"
+                                gutterBottom
+                              >
                                 Market Revenue
                               </Typography>
-                              <Typography variant="h6" color="text.primary" sx={{ fontWeight: 600 }}>
+                              <Typography
+                                variant="h6"
+                                color="text.primary"
+                                sx={{ fontWeight: 600 }}
+                              >
                                 {formatCurrency(market.revenue_total || 0)}
                               </Typography>
-                              {market.sparkline_data_total_revenue && market.sparkline_data_total_revenue.length > 0 && (
-                                <Box sx={{ width: 120, height: 40, mt: 1 }}>
-                                  <CustomSparkLine data={market.sparkline_data_total_revenue} />
-                                </Box>
-                              )}
+                              {market.sparkline_data_total_revenue &&
+                                market.sparkline_data_total_revenue.length >
+                                  0 && (
+                                  <Box sx={{ width: 120, height: 40, mt: 1 }}>
+                                    <CustomSparkLine
+                                      data={market.sparkline_data_total_revenue}
+                                    />
+                                  </Box>
+                                )}
+                              <Typography
+                                variant="body2"
+                                color="warning"
+                                gutterBottom
+                              >
+                                Waiting for valid calculation by Alex
+                              </Typography>
                             </Box>
                           </Paper>
                         </Grid>
@@ -1337,14 +1100,15 @@ export default function ClusterDetails() {
                             elevation={1}
                             sx={{
                               p: 3,
-                              height: '100%',
-                              backgroundColor: 'white',
+                              height: "100%",
+                              backgroundColor: "white",
                               borderRadius: 2,
-                              display: 'flex',
-                              alignItems: 'center',
-                              gap: 2,transition: 'transform 0.2s',
-                              '&:hover': {
-                                transform: 'translateY(-4px)',
+                              display: "flex",
+                              alignItems: "center",
+                              gap: 2,
+                              transition: "transform 0.2s",
+                              "&:hover": {
+                                transform: "translateY(-4px)",
                               },
                             }}
                           >
@@ -1352,17 +1116,21 @@ export default function ClusterDetails() {
                               sx={{
                                 width: 45,
                                 height: 45,
-                                borderRadius: '12px',
-                                backgroundColor: '#e3f2fd',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
+                                borderRadius: "12px",
+                                backgroundColor: "#e3f2fd",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
                               }}
                             >
                               <FaTrophy size={22} color="#1976d2" />
                             </Box>
                             <Box>
-                              <Typography variant="body2" color="text.secondary" gutterBottom>
+                              <Typography
+                                variant="body2"
+                                color="text.secondary"
+                                gutterBottom
+                              >
                                 Most Expensive
                               </Typography>
                               {(() => {
@@ -1380,10 +1148,19 @@ export default function ClusterDetails() {
                                     rel="noopener noreferrer"
                                     sx={{ textDecoration: "none" }}
                                   >
-                                    <Typography variant="h6" color="text.primary" sx={{ fontWeight: 600 }}>
-                                      {formatCurrency(maxPriceProduct?.price || 0)}
+                                    <Typography
+                                      variant="h6"
+                                      color="text.primary"
+                                      sx={{ fontWeight: 600 }}
+                                    >
+                                      {formatCurrency(
+                                        maxPriceProduct?.price || 0
+                                      )}
                                     </Typography>
-                                    <Typography variant="caption" color="text.secondary">
+                                    <Typography
+                                      variant="caption"
+                                      color="text.secondary"
+                                    >
                                       {maxPriceProduct?.asin || "N/A"}
                                     </Typography>
                                   </Link>
@@ -1399,14 +1176,15 @@ export default function ClusterDetails() {
                             elevation={1}
                             sx={{
                               p: 3,
-                              height: '100%',
-                              backgroundColor: 'white',
+                              height: "100%",
+                              backgroundColor: "white",
                               borderRadius: 2,
-                              display: 'flex',
-                              alignItems: 'center',
-                              gap: 2,transition: 'transform 0.2s',
-                              '&:hover': {
-                                transform: 'translateY(-4px)',
+                              display: "flex",
+                              alignItems: "center",
+                              gap: 2,
+                              transition: "transform 0.2s",
+                              "&:hover": {
+                                transform: "translateY(-4px)",
                               },
                             }}
                           >
@@ -1414,17 +1192,21 @@ export default function ClusterDetails() {
                               sx={{
                                 width: 45,
                                 height: 45,
-                                borderRadius: '12px',
-                                backgroundColor: '#e3f2fd',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
+                                borderRadius: "12px",
+                                backgroundColor: "#e3f2fd",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
                               }}
                             >
                               <FaStore size={22} color="#1976d2" />
                             </Box>
                             <Box>
-                              <Typography variant="body2" color="text.secondary" gutterBottom>
+                              <Typography
+                                variant="body2"
+                                color="text.secondary"
+                                gutterBottom
+                              >
                                 Least Expensive
                               </Typography>
                               {(() => {
@@ -1442,10 +1224,19 @@ export default function ClusterDetails() {
                                     rel="noopener noreferrer"
                                     sx={{ textDecoration: "none" }}
                                   >
-                                    <Typography variant="h6" color="text.primary" sx={{ fontWeight: 600 }}>
-                                      {formatCurrency(minPriceProduct?.price || 0)}
+                                    <Typography
+                                      variant="h6"
+                                      color="text.primary"
+                                      sx={{ fontWeight: 600 }}
+                                    >
+                                      {formatCurrency(
+                                        minPriceProduct?.price || 0
+                                      )}
                                     </Typography>
-                                    <Typography variant="caption" color="text.secondary">
+                                    <Typography
+                                      variant="caption"
+                                      color="text.secondary"
+                                    >
                                       {minPriceProduct?.asin || "N/A"}
                                     </Typography>
                                   </Link>
@@ -1459,10 +1250,14 @@ export default function ClusterDetails() {
 
                     {/* Right side - My Market Share */}
                     <Grid size={{ xs: 12, md: 6 }}>
-                      <Typography variant="h6" color="text.secondary" gutterBottom>
+                      <Typography
+                        variant="h6"
+                        color="text.secondary"
+                        gutterBottom
+                      >
                         My Market Share
                       </Typography>
-                      <Grid container spacing={2}>
+                      <Grid container spacing={2} sx={{ height: 200 }}>
                         {userProductInsights?.markets?.find(
                           (m: any) => m.market_id === market.id
                         ) ? (
@@ -1473,14 +1268,15 @@ export default function ClusterDetails() {
                                 elevation={1}
                                 sx={{
                                   p: 3,
-                                  height: '100%',
-                                  backgroundColor: 'white',
+                                  height: "100%",
+                                  backgroundColor: "white",
                                   borderRadius: 2,
-                                  display: 'flex',
-                                  alignItems: 'center',
-                                  gap: 2,transition: 'transform 0.2s',
-                                  '&:hover': {
-                                    transform: 'translateY(-4px)',
+                                  display: "flex",
+                                  alignItems: "center",
+                                  gap: 2,
+                                  transition: "transform 0.2s",
+                                  "&:hover": {
+                                    transform: "translateY(-4px)",
                                   },
                                 }}
                               >
@@ -1488,42 +1284,53 @@ export default function ClusterDetails() {
                                   sx={{
                                     width: 45,
                                     height: 45,
-                                    borderRadius: '12px',
-                                    backgroundColor: '#e3f2fd',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
+                                    borderRadius: "12px",
+                                    backgroundColor: "#e3f2fd",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
                                   }}
                                 >
                                   <FaBoxes size={22} color="#1976d2" />
                                 </Box>
                                 <Box>
-                                  <Typography variant="body2" color="text.secondary" gutterBottom>
+                                  <Typography
+                                    variant="body2"
+                                    color="text.secondary"
+                                    gutterBottom
+                                  >
                                     Products
                                   </Typography>
-                                  <Typography variant="h6" color="text.primary" sx={{ fontWeight: 600 }}>
-                                    {userProductInsights.markets.find(
-                                      (m: any) => m.market_id === market.id
-                                    )?.user_product_count || 0}
+                                  <Typography
+                                    variant="h6"
+                                    color="text.primary"
+                                    sx={{ fontWeight: 600 }}
+                                  >
+                                    {
+                                      userProductInsights.markets.find(
+                                        (m: any) => m.market_id === market.id
+                                      )?.user_products_in_market_count
+                                    }
                                   </Typography>
                                 </Box>
                               </Paper>
                             </Grid>
 
                             {/* Total Revenue Card */}
-                            <Grid size={4} sx={{height: 160}}>
+                            <Grid size={4}>
                               <Paper
                                 elevation={1}
                                 sx={{
                                   p: 3,
-                                  height: '100%',
-                                  backgroundColor: 'white',
+                                  height: "100%",
+                                  backgroundColor: "white",
                                   borderRadius: 2,
-                                  display: 'flex',
-                                  alignItems: 'center',
-                                  gap: 2,transition: 'transform 0.2s',
-                                  '&:hover': {
-                                    transform: 'translateY(-4px)',
+                                  display: "flex",
+                                  alignItems: "center",
+                                  gap: 2,
+                                  transition: "transform 0.2s",
+                                  "&:hover": {
+                                    transform: "translateY(-4px)",
                                   },
                                 }}
                               >
@@ -1531,25 +1338,40 @@ export default function ClusterDetails() {
                                   sx={{
                                     width: 45,
                                     height: 45,
-                                    borderRadius: '12px',
-                                    backgroundColor: '#e3f2fd',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
+                                    borderRadius: "12px",
+                                    backgroundColor: "#e3f2fd",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
                                   }}
                                 >
                                   <FaDollarSign size={22} color="#1976d2" />
                                 </Box>
                                 <Box>
-                                  <Typography variant="body2" color="text.secondary" gutterBottom>
+                                  <Typography
+                                    variant="body2"
+                                    color="text.secondary"
+                                    gutterBottom
+                                  >
                                     Total Revenue
                                   </Typography>
-                                  <Typography variant="h6" color="text.primary" sx={{ fontWeight: 600 }}>
+                                  <Typography
+                                    variant="h6"
+                                    color="text.primary"
+                                    sx={{ fontWeight: 600 }}
+                                  >
                                     {formatCurrency(
                                       userProductInsights.markets.find(
                                         (m: any) => m.market_id === market.id
                                       )?.total_revenue_user_products || 0
                                     )}
+                                  </Typography>
+                                  <Typography
+                                    variant="body2"
+                                    color="warning"
+                                    gutterBottom
+                                  >
+                                    Waiting for valid calculation by Alex (so far it's productCount*10 to test)
                                   </Typography>
                                 </Box>
                               </Paper>
@@ -1561,15 +1383,18 @@ export default function ClusterDetails() {
                               elevation={1}
                               sx={{
                                 p: 3,
-                                height: '100%',
-                                backgroundColor: '#f5f5f5',
+                                height: "100%",
+                                backgroundColor: "#f5f5f5",
                                 borderRadius: 2,
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
                               }}
                             >
-                              <Typography variant="body1" color="text.secondary">
+                              <Typography
+                                variant="body1"
+                                color="text.secondary"
+                              >
                                 No products in this market yet
                               </Typography>
                             </Paper>
@@ -1605,7 +1430,6 @@ export default function ClusterDetails() {
                             color="primary"
                             size="small"
                             sx={{
-                          
                               borderRadius: "16px",
                               cursor: "pointer",
                               height: "32px",
@@ -1614,12 +1438,13 @@ export default function ClusterDetails() {
                               backgroundColor: "primary.main",
                               color: "white",
                               "&:hover": {
-                                backgroundColor: "primary.dark", transform: 'translateY(-4px)',
+                                backgroundColor: "primary.dark",
+                                transform: "translateY(-4px)",
                               },
                               "& .MuiChip-label": {
                                 padding: "0 12px",
-                              },transition: 'transform 0.2s',
-                  
+                              },
+                              transition: "transform 0.2s",
                             }}
                           />
                         ))}
@@ -1629,36 +1454,36 @@ export default function ClusterDetails() {
               )}
             </Paper>
             <Box sx={{ height: "800px", width: "100%" }}>
-            <DataGrid
-              rows={market.products.map((product: any) => ({
-                id: product.asin,
-                image: product.image,
-                title: product.title,
-                price: product.price,
-                manufacturer: product.manufacturer,
-                store: product.store,
-                mainCategory: product.main_category,
-                mainCategoryRank: product.main_category_rank,
-                secondCategory: product.second_category,
-                secondCategoryRank: product.second_category_rank,
-                blm: product.blm,
-                total: product.total,
-                sparkline_main_rank: product.sparkline_main_rank,
-                sparkline_second_rank: product.sparkline_second_rank,
-                sparkline_price: product.sparkline_price,
-                sparkline_total: product.sparkline_total,
-                sparkline_blm: product.sparkline_blm,
-                isMyProduct: product.isMyProduct, // ✅ Status für Zeilen-Highlight
-              }))}
-              columns={filteredColumns}
-              rowHeight={55}
-              pageSizeOptions={[10, 25, 50, 100]}
-              checkboxSelection={false}
-              getRowClassName={(params) =>
-                params.row.isMyProduct ? "my-product-row" : ""
-              }
-            />
-              </Box>
+              <DataGrid
+                rows={market.products.map((product: any) => ({
+                  id: product.asin,
+                  image: product.image,
+                  title: product.title,
+                  price: product.price,
+                  manufacturer: product.manufacturer,
+                  store: product.store,
+                  mainCategory: product.main_category,
+                  mainCategoryRank: product.main_category_rank,
+                  secondCategory: product.second_category,
+                  secondCategoryRank: product.second_category_rank,
+                  blm: product.blm,
+                  total: product.total,
+                  sparkline_main_rank: product.sparkline_main_rank,
+                  sparkline_second_rank: product.sparkline_second_rank,
+                  sparkline_price: product.sparkline_price,
+                  sparkline_total: product.sparkline_total,
+                  sparkline_blm: product.sparkline_blm,
+                  isMyProduct: product.isMyProduct, // ✅ Status für Zeilen-Highlight
+                }))}
+                columns={filteredColumns}
+                rowHeight={55}
+                pageSizeOptions={[10, 25, 50, 100]}
+                checkboxSelection={false}
+                getRowClassName={(params) =>
+                  params.row.isMyProduct ? "my-product-row" : ""
+                }
+              />
+            </Box>
           </Box>
         ))}
       </Paper>

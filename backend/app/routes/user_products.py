@@ -61,6 +61,7 @@ def get_sparkline_for_user_products(db: Session, user_asins: List[str], field: s
 async def get_user_products_insights(cluster_id: int, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
     """Returns insights for UserProducts within a cluster."""
 
+
     # ✅ Fetch MarketCluster
     cluster = db.query(MarketCluster).filter(MarketCluster.id == cluster_id).first()
     if not cluster:
@@ -68,54 +69,106 @@ async def get_user_products_insights(cluster_id: int, db: Session = Depends(get_
 
     # ✅ Get all markets in the cluster
     markets = (
-    db.query(Market)
-    .join(market_cluster_markets, market_cluster_markets.c.market_id == Market.id)
-    .filter(market_cluster_markets.c.market_cluster_id == cluster_id)
-    .all()
-)
+        db.query(Market)
+        .join(market_cluster_markets, market_cluster_markets.c.market_id == Market.id)
+        .filter(market_cluster_markets.c.market_cluster_id == cluster_id)
+        .all()
+    )
 
     # ✅ Get all UserProducts for this user
     user_products = db.query(UserProduct).filter(UserProduct.user_id == current_user.id).all()
     user_asins = {up.asin for up in user_products}
 
-    # 📊 **Insights Cluster-Level**
-    total_revenue_user_products = 0
-    user_product_count = 0
+    # 📊 **Cluster-Level Insight**
+    user_products_in_cluster = 0  # Gesamtanzahl der UserProducts im Cluster
 
-    product_totals = {}
-
-    # Cluster Data
-    for user_asin in user_asins:
-        latest_change = db.query(ProductChange).filter(ProductChange.asin == user_asin).order_by(ProductChange.change_date.desc()).first()
-        if latest_change and latest_change.total is not None:
-                total_revenue_user_products += latest_change.total
-                user_product_count += 1
-                product_totals[user_asin] = latest_change.total
-
-    print("product_totals_dict:", product_totals)
     market_insights = []
+
     for market in markets:
-        total_revenue_market = 0
-        user_products_in_market = 0
-        for product in market.products:
-            if product.asin in product_totals:
-                user_products_in_market += 1
-                total_revenue_market += product_totals[product.asin]
-                print(f"found my product {product.asin} in market {market.keyword}, add {product_totals[product.asin]} to market total")
+        user_products_in_market = sum(1 for product in market.products if product.asin in user_asins)
         
+        # Falls UserProducts im Market existieren, zähle sie zum Cluster
+        user_products_in_cluster += user_products_in_market
+
+        # Füge Market-Statistik hinzu
         market_insights.append({
             "market_id": market.id,
             "market_name": market.keyword,
-            "total_revenue_user_products": total_revenue_market,
-            "user_product_count": user_products_in_market,
+            "user_products_in_market_count": user_products_in_market,
+            "total_revenue_user_products" : user_products_in_market * 10
         })
 
-
     return {
-        "total_revenue_user_products": total_revenue_user_products,
-        "user_product_count": user_product_count,
-        "markets": market_insights
+        "user_products_in_cluster_count": user_products_in_cluster,
+        "markets": market_insights,
+        "total_revenue_user_products" : user_products_in_cluster * 10
     }
+
+
+
+
+#     # ✅ Fetch MarketCluster
+#     cluster = db.query(MarketCluster).filter(MarketCluster.id == cluster_id).first()
+#     if not cluster:
+#         raise HTTPException(status_code=404, detail="MarketCluster not found")
+
+#     # ✅ Get all markets in the cluster
+#     markets = (
+#     db.query(Market)
+#     .join(market_cluster_markets, market_cluster_markets.c.market_id == Market.id)
+#     .filter(market_cluster_markets.c.market_cluster_id == cluster_id)
+#     .all()
+# )
+
+#     # ✅ Get all UserProducts for this user
+#     user_products = db.query(UserProduct).filter(UserProduct.user_id == current_user.id).all()
+#     user_asins = {up.asin for up in user_products}
+#     print("user_asins:", user_asins)
+
+#     # 📊 **Insights Cluster-Level**
+#     total_revenue_user_products = 0
+#     user_product_cluster_count = 0
+
+#     product_totals = {}
+
+#     # Cluster Data
+#     for user_asin in user_asins:
+#         print("HANDLING", user_asin)
+#         latest_change = db.query(ProductChange).filter(ProductChange.asin == user_asin).order_by(ProductChange.change_date.desc()).first()
+#         if latest_change and latest_change.total is not None:
+#             total_revenue_user_products += latest_change.total
+#             user_product_cluster_count += 1
+#             product_totals[user_asin] = latest_change.total
+#         else:
+#             print("im else")
+#             print(latest_change)
+#             print(latest_change.total)
+
+
+#     print("product_totals_dict:", product_totals)
+#     market_insights = []
+#     for market in markets:
+#         total_revenue_market = 0
+#         user_products_in_market = 0
+#         for product in market.products:
+#             if product.asin in product_totals:
+#                 user_products_in_market += 1
+#                 total_revenue_market += product_totals[product.asin]
+#                 print(f"found my product {product.asin} in market {market.keyword}, add {product_totals[product.asin]} to market total")
+        
+#         market_insights.append({
+#             "market_id": market.id,
+#             "market_name": market.keyword,
+#             "total_revenue_user_products": total_revenue_market,
+#             "user_product_count": user_products_in_market,
+#         })
+
+
+#     return {
+#         "total_revenue_user_products": total_revenue_user_products,
+#         "user_product_count": user_product_cluster_count,
+#         "markets": market_insights
+#     }
 
 
 @router.post("/{asin}")

@@ -10,6 +10,11 @@ import {
   IconButton,
   Tooltip,
   Divider,
+  FormControl,
+  FormLabel,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
 } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import { useEffect, useState } from "react";
@@ -28,6 +33,8 @@ const AddMarketCluster: React.FC = () => {
   const [newKeyword, setNewKeyword] = useState<string>("");
   const [existingClusters, setExistingClusters] = useState<string[]>([]);
   const [isScraping, setIsScraping] = useState<boolean>(false);
+  const [clusterType, setClusterType] = useState<"dynamic" | "static" | "snapshot">("dynamic"); // 🆕 Cluster-Type
+
 
   // Überprüfen, ob der eingegebene Wert eine Liste ist
   const isListInput = newKeyword.includes(",");
@@ -106,6 +113,11 @@ const AddMarketCluster: React.FC = () => {
     setClusterName(e.target.value);
   };
 
+   // ✅ Cluster-Typ ändern
+   const handleClusterTypeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setClusterType(event.target.value as "dynamic" | "static" | "snapshot");
+  };
+
   // ✅ Market Cluster erstellen
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -132,6 +144,7 @@ const AddMarketCluster: React.FC = () => {
       await MarketService.startScrapingProcess({
         clusterName: clusterName.trim(),
         keywords: keywords,
+        clusterType: clusterType,
       });
 
       navigate("/dashboard");
@@ -192,6 +205,23 @@ const AddMarketCluster: React.FC = () => {
                     required
                     placeholder="e.g., Electronics Accessories"
                   />
+                  </Grid>
+                  
+                  
+                {/* 🆕 Cluster Type Selection */}
+                <Grid size={{ xs: 12 }}>
+                  <FormControl component="fieldset">
+                    <FormLabel component="legend">Cluster Type</FormLabel>
+                    <RadioGroup
+                      row
+                      value={clusterType}
+                      onChange={handleClusterTypeChange}
+                    >
+                      <FormControlLabel value="dynamic" control={<Radio />} label="Dynamic" />
+                      <FormControlLabel value="static" control={<Radio />} label="Static" />
+                      <FormControlLabel value="snapshot" control={<Radio />} label="Snapshot" />
+                    </RadioGroup>
+                  </FormControl>
                 </Grid>
 
                 {/* Bulk Input Section */}

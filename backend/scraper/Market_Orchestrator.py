@@ -18,8 +18,9 @@ logging.basicConfig(
     ]
 )
 class MarketOrchestrator:
-    def __init__(self):
+    def __init__(self, cluster_to_scrape=None):
         self.start_time = None
+        self.cluster_to_scrape = cluster_to_scrape
         self.market_times = []
         open(LOG_FILE_MARKET, "w").close()  # ✅ Market-Logs beim Start leeren
         print("MO: cleared file", LOG_FILE_MARKET)
@@ -170,7 +171,23 @@ class MarketOrchestrator:
         skipped_markets = 0
 
         try:
-            markets = db.query(Market).all()
+            if self.cluster_to_scrape is None:
+                logging.info("📊 Scraping für **alle** Märkte in der Datenbank gestartet.")
+                markets = db.query(Market).all()
+            else:
+                logging.info(f"📊 Scraping für Cluster ID {self.cluster_to_scrape} gestartet.")
+                
+                # Hole alle Märkte, die zu diesem Cluster gehören
+                markets = db.query(Market).join(
+                    MarketCluster.markets
+                ).filter(
+                    MarketCluster.id == self.cluster_to_scrape
+                ).all()
+
+                if not markets:
+                    logging.warning(f"⚠️ Keine Märkte gefunden für Cluster {self.cluster_to_scrape}")
+                    return
+            
             total_markets = len(markets)
             
             logging.info(f"🚀 Starte Markt-Update für {total_markets} Märkte...")
