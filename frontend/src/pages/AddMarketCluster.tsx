@@ -221,7 +221,10 @@ const AddMarketCluster: React.FC = () => {
                       <FormControlLabel value="static" control={<Radio />} label="Static" />
                       <FormControlLabel value="snapshot" control={<Radio />} label="Snapshot" />
                     </RadioGroup>
-                  </FormControl>
+                    </FormControl>
+                     <Typography variant="body2" color="warning" gutterBottom>
+                                 Choseable but o logic implemented yet
+                                      </Typography>
                 </Grid>
 
                 {/* Bulk Input Section */}

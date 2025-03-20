@@ -192,6 +192,7 @@ async def get_loading_clusters(
 
             db.commit()
             db.refresh(new_cluster)
+            existing_cluster = new_cluster
 
          # ✅ Startet den Product Orchestrator asynchron für das Cluster
 

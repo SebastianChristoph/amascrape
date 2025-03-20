@@ -43,16 +43,6 @@ ChartJS.register(
   Legend
 );
 
-const chartAnimation = keyframes`
-  0% {
-    opacity: 0;
-    transform: scaleY(0);
-  }
-  100% {
-    opacity: 1;
-    transform: scaleY(1);
-  }
-`;
 
 const pulseAnimation = keyframes`
   0% {
@@ -79,21 +69,7 @@ const robotAnimation = keyframes`
   }
 `;
 
-// SVG Pattern as Base64 to avoid external file dependencies
-const backgroundPattern = `data:image/svg+xml;base64,${btoa(`
-  <svg width="50" height="50" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <pattern id="gridPattern" width="50" height="50" patternUnits="userSpaceOnUse">
-        <path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(33, 150, 243, 0.08)" stroke-width="1.5"/>
-        <circle cx="0" cy="0" r="2" fill="rgba(33, 150, 243, 0.08)"/>
-        <circle cx="50" cy="0" r="2" fill="rgba(33, 150, 243, 0.08)"/>
-        <circle cx="0" cy="50" r="2" fill="rgba(33, 150, 243, 0.08)"/>
-        <circle cx="25" cy="25" r="1.5" fill="rgba(33, 150, 243, 0.08)"/>
-      </pattern>
-    </defs>
-    <rect width="50" height="50" fill="url(#gridPattern)"/>
-  </svg>
-`)}`;
+
 
 const Dashboard: React.FC = () => {
   const navigate = useNavigate();
@@ -104,9 +80,7 @@ const Dashboard: React.FC = () => {
   const [isFetching, setIsFetching] = useState<boolean>(true);
   const [dashboardData, setDashboardData] = useState<any>(null);
   const [chartValues, setChartValues] = useState<number[]>([15, 20, 25, 30, 35, 40]);
-  const animationRef = useRef<number | null>(null);
-  const targetValuesRef = useRef<number[]>([]);
-  const isAnimatingRef = useRef(false);
+
   const [activeCluster, setActiveCluster] = useState<{
     clustername: string;
     status: string;
@@ -210,6 +184,12 @@ const Dashboard: React.FC = () => {
 
   useEffect(() => {
     fetchData();
+  }, []);
+
+  // Fetch data every 20 seconds
+  useEffect(() => {
+    const interval = setInterval(fetchData, 20000);
+    return () => clearInterval(interval);
   }, []);
 
   // ✅ Prüft auf aktive Scraping-Prozesse
