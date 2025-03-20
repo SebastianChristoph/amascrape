@@ -1,7 +1,7 @@
 // src/theme.ts
 import { createTheme } from '@mui/material/styles';
 
-// Erweiterung der Palette (siehe oben)
+// Erweiterung der Palette
 declare module '@mui/material/styles' {
   interface Palette {
     tertiary: Palette['primary'];
@@ -16,22 +16,22 @@ export const lightTheme = createTheme({
   palette: {
     mode: "light",
     primary: { 
-      main: "#1470CC",
-      light: "#4791db",
-      dark: "#0d47a1"
+      main: "#2563EB", // Kräftiges Blau als Hauptfarbe
+      light: "#60A5FA", // Helleres Blau
+      dark: "#1D4ED8" // Dunkleres Blau
     },
     secondary: { 
-      main: "#017D7B",
-      light: "#34a09e",
-      dark: "#005755"
+      main: "#F97316", // Lebhaftes Orange für CTAs
+      light: "#FB923C", // Helleres Orange
+      dark: "#EA580C" // Dunkleres Orange
     },
     tertiary: { 
-      main: "#455A64",
-      light: "#718792",
-      dark: "#1c313a"
+      main: "#8B5CF6", // Lebendiges Violett für Akzente
+      light: "#A78BFA", // Helleres Violett
+      dark: "#7C3AED" // Dunkleres Violett
     },
-    background: { default: "#F5F5F5", paper: "#FFFFFF" }, // Helles Grau & Weiß für Professionalität
-    text: { primary: "#212121", secondary: "#757575" }, // Dunkles Grau für Lesbarkeit
+    background: { default: "#F8FAFC", paper: "#FFFFFF" },
+    text: { primary: "#1E293B", secondary: "#64748B" },
   },
   typography: {
     fontFamily: 'sans-serif',
@@ -66,21 +66,22 @@ export const darkTheme = createTheme({
   palette: {
     mode: 'dark',
     primary: { 
-      main: '#66B6F7',
-      light: '#90caf9',
-      dark: '#42a5f5'
+      main: '#3B82F6', // Helleres Blau für dunklen Modus
+      light: '#60A5FA',
+      dark: '#2563EB'
     },
     secondary: { 
-      main: '#FB958D',
-      light: '#ffb4ae',
-      dark: '#c7766f'
+      main: '#F97316', // Beibehaltung des Orange für Konsistenz
+      light: '#FB923C',
+      dark: '#EA580C'
     },
     tertiary: { 
-      main: '#ff4081',
-      light: '#ff79b0',
-      dark: '#c60055'
+      main: '#A78BFA', // Helleres Violett für bessere Sichtbarkeit
+      light: '#C4B5FD',
+      dark: '#8B5CF6'
     },
-    background: { default: '#2e2e2e', paper: '#1e1e1e' },
+    background: { default: '#0F172A', paper: '#1E293B' },
+    text: { primary: '#F1F5F9', secondary: '#CBD5E1' },
   },
   typography: {
     fontFamily: '"Poppins", sans-serif',

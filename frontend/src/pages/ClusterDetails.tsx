@@ -656,7 +656,7 @@ export default function ClusterDetails() {
                       <Typography variant="h2">{<Skeleton />}</Typography>
                     )}
 
-                    <Typography variant="body2" color="warning" gutterBottom>
+                    <Typography variant="body2" color="text.secondary" gutterBottom>
                       Waiting for valid calculation by Alex
                     </Typography>
                   </Box>
@@ -779,7 +779,7 @@ export default function ClusterDetails() {
                       <Typography variant="h2">{<Skeleton />}</Typography>
                     )}
 
-                    <Typography variant="body2" color="warning" gutterBottom>
+                    <Typography variant="body2" color="text.secondary" gutterBottom>
                       Waiting for valid calculation by Alex
                     </Typography>
                   </Box>
@@ -848,7 +848,7 @@ export default function ClusterDetails() {
                       <Typography variant="h2">{<Skeleton />}</Typography>
                     )}
 
-                    <Typography variant="body2" color="warning" gutterBottom>
+                    <Typography variant="body2" color="text.secondary" gutterBottom>
                       Waiting for valid calculation by Alex (so far it is
                       productCount*10 to test)
                     </Typography>
@@ -1087,7 +1087,7 @@ export default function ClusterDetails() {
                                 )}
                               <Typography
                                 variant="body2"
-                                color="warning"
+                                color="text.secondary"
                                 gutterBottom
                               >
                                 Waiting for valid calculation by Alex
@@ -1370,7 +1370,7 @@ export default function ClusterDetails() {
                                   </Typography>
                                   <Typography
                                     variant="body2"
-                                    color="warning"
+                                    color="text.secondary"
                                     gutterBottom
                                   >
                                     Waiting for valid calculation by Alex (so far it's productCount*10 to test)

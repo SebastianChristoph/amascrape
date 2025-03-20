@@ -1278,3 +1278,166 @@
 2025-03-20 20:06:13,520 [WARNING] ❌ Fehler beim Scrapen von B0DHYMZBP9, aber last_time_scraped wird trotzdem aktualisiert.
 2025-03-20 20:06:13,563 [INFO] 🔍 [84/91]: B07CVNM3JV https://www.amazon.com/dp/B07CVNM3JV?language=en_US
 2025-03-20 20:06:17,631 [WARNING] Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000212D9B71480>: Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte')': /session/372e2a7c44dd4dd54162ee6ed842355c/url
+2025-03-20 21:19:51,755 [INFO] 🚀 Product Orchestrator gestartet.
+2025-03-20 21:19:56,249 [INFO] ✅ Verbindung zu Amazon erfolgreich hergestellt!
+2025-03-20 21:19:57,714 [INFO] 🍪 Setze Cookies...
+2025-03-20 21:19:57,741 [INFO] ✅ Cookies gesetzt!
+2025-03-20 21:19:57,742 [INFO] 🚀 Starte Product-Update...
+2025-03-20 21:19:57,742 [INFO] 🔍 Scrape Produkte für Cluster ID: 1
+2025-03-20 21:19:57,747 [INFO] 🌍 Gefundene Märkte: [1, 2, 3]
+2025-03-20 21:19:57,751 [INFO] 📦 Gefundene Produkte in Cluster 1: 119
+2025-03-20 21:19:57,754 [INFO] 🔍 [1/119]: B008LQT7UY https://www.amazon.com/dp/B008LQT7UY?language=en_US
+2025-03-20 21:20:09,618 [WARNING] ❌ Fehler beim Scrapen von B008LQT7UY, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-20 21:20:09,638 [INFO] 🔍 [2/119]: B009EO0FSU https://www.amazon.com/dp/B009EO0FSU?language=en_US
+2025-03-20 21:20:21,073 [WARNING] ❌ Fehler beim Scrapen von B009EO0FSU, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-20 21:20:21,108 [INFO] 🔍 [3/119]: B0043MV5VO https://www.amazon.com/dp/B0043MV5VO?language=en_US
+2025-03-20 21:20:31,935 [WARNING] ❌ Fehler beim Scrapen von B0043MV5VO, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-20 21:20:31,973 [INFO] 🔍 [4/119]: B0CFM41QJY https://www.amazon.com/dp/B0CFM41QJY?language=en_US
+2025-03-20 21:20:42,006 [WARNING] ❌ Fehler beim Scrapen von B0CFM41QJY, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-20 21:20:42,034 [INFO] 🔍 [5/119]: B07MKKMWWW https://www.amazon.com/dp/B07MKKMWWW?language=en_US
+2025-03-20 21:20:51,957 [WARNING] ❌ Fehler beim Scrapen von B07MKKMWWW, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-20 21:20:51,973 [INFO] 🔍 [6/119]: B0CQPJG4F5 https://www.amazon.com/dp/B0CQPJG4F5?language=en_US
+2025-03-20 21:21:03,195 [WARNING] ❌ Fehler beim Scrapen von B0CQPJG4F5, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-20 21:21:03,226 [INFO] 🔍 [7/119]: B0DCC4R4Q5 https://www.amazon.com/dp/B0DCC4R4Q5?language=en_US
+2025-03-20 21:21:19,969 [WARNING] ❌ Fehler beim Scrapen von B0DCC4R4Q5, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-20 21:21:20,006 [INFO] 🔍 [8/119]: B0CGMH9W3L https://www.amazon.com/dp/B0CGMH9W3L?language=en_US
+2025-03-20 21:21:29,808 [WARNING] ❌ Fehler beim Scrapen von B0CGMH9W3L, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-20 21:21:29,824 [INFO] 🔍 [9/119]: B00DDWZ3EK https://www.amazon.com/dp/B00DDWZ3EK?language=en_US
+2025-03-20 21:21:40,493 [WARNING] ❌ Fehler beim Scrapen von B00DDWZ3EK, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-20 21:21:40,525 [INFO] 🔍 [10/119]: B0DK47Z4VM https://www.amazon.com/dp/B0DK47Z4VM?language=en_US
+2025-03-20 21:21:51,288 [INFO] ⚡ Änderungen erkannt für B0DK47Z4VM: main_category, second_category, blm, total, store, manufacturer
+2025-03-20 21:21:51,324 [INFO] 🔍 [11/119]: B0DY9CGN55 https://www.amazon.com/dp/B0DY9CGN55?language=en_US
+2025-03-20 21:22:00,918 [WARNING] ❌ Fehler beim Scrapen von B0DY9CGN55, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-20 21:22:00,957 [INFO] 🔍 [12/119]: B0DW5B52J8 https://www.amazon.com/dp/B0DW5B52J8?language=en_US
+2025-03-20 21:22:10,203 [WARNING] ❌ Fehler beim Scrapen von B0DW5B52J8, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-20 21:22:10,232 [INFO] 🔍 [13/119]: B0DT257L7X https://www.amazon.com/dp/B0DT257L7X?language=en_US
+2025-03-20 21:22:18,715 [WARNING] ❌ Fehler beim Scrapen von B0DT257L7X, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-20 21:22:18,730 [INFO] 🔍 [14/119]: B0DXWT9H8S https://www.amazon.com/dp/B0DXWT9H8S?language=en_US
+2025-03-20 21:22:28,559 [WARNING] ❌ Fehler beim Scrapen von B0DXWT9H8S, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-20 21:22:28,597 [INFO] 🔍 [15/119]: B0CYNYL4KT https://www.amazon.com/dp/B0CYNYL4KT?language=en_US
+2025-03-20 21:22:38,640 [WARNING] ❌ Fehler beim Scrapen von B0CYNYL4KT, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-20 21:22:38,654 [INFO] 🔍 [16/119]: B0DN2BMHM4 https://www.amazon.com/dp/B0DN2BMHM4?language=en_US
+2025-03-20 21:22:49,133 [INFO] ⚡ Änderungen erkannt für B0DN2BMHM4: main_category, second_category, store, manufacturer
+2025-03-20 21:22:49,152 [INFO] 🔍 [17/119]: B0D6STB5H2 https://www.amazon.com/dp/B0D6STB5H2?language=en_US
+2025-03-20 21:22:58,295 [WARNING] ❌ Fehler beim Scrapen von B0D6STB5H2, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-20 21:22:58,319 [INFO] 🔍 [18/119]: B0CSDF9PSV https://www.amazon.com/dp/B0CSDF9PSV?language=en_US
+2025-03-20 21:23:07,739 [WARNING] ❌ Fehler beim Scrapen von B0CSDF9PSV, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-20 21:23:07,771 [INFO] 🔍 [19/119]: B07X95LTKK https://www.amazon.com/dp/B07X95LTKK?language=en_US
+2025-03-20 21:23:17,590 [WARNING] ❌ Fehler beim Scrapen von B07X95LTKK, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-20 21:23:17,627 [INFO] 🔍 [20/119]: B07PWPVDDN https://www.amazon.com/dp/B07PWPVDDN?language=en_US
+2025-03-20 21:23:26,960 [WARNING] ❌ Fehler beim Scrapen von B07PWPVDDN, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-20 21:23:26,976 [INFO] 🔍 [21/119]: B0CCK4VDRY https://www.amazon.com/dp/B0CCK4VDRY?language=en_US
+2025-03-20 21:23:36,656 [WARNING] ❌ Fehler beim Scrapen von B0CCK4VDRY, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-20 21:23:36,672 [INFO] 🔍 [22/119]: B01E0ZU8LG https://www.amazon.com/dp/B01E0ZU8LG?language=en_US
+2025-03-20 21:23:48,183 [WARNING] ❌ Fehler beim Scrapen von B01E0ZU8LG, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-20 21:23:48,219 [INFO] 🔍 [23/119]: B0CYGC1D7N https://www.amazon.com/dp/B0CYGC1D7N?language=en_US
+2025-03-20 21:23:57,239 [WARNING] ❌ Fehler beim Scrapen von B0CYGC1D7N, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-20 21:23:57,262 [INFO] 🔍 [24/119]: B0C62F4Q4M https://www.amazon.com/dp/B0C62F4Q4M?language=en_US
+2025-03-20 21:24:07,635 [WARNING] ❌ Fehler beim Scrapen von B0C62F4Q4M, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-20 21:24:07,665 [INFO] 🔍 [25/119]: B07SYVRZ5H https://www.amazon.com/dp/B07SYVRZ5H?language=en_US
+2025-03-20 21:24:18,745 [WARNING] ❌ Fehler beim Scrapen von B07SYVRZ5H, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-20 21:24:18,762 [INFO] 🔍 [26/119]: B0CKY1S3FD https://www.amazon.com/dp/B0CKY1S3FD?language=en_US
+2025-03-20 21:24:31,239 [WARNING] ❌ Fehler beim Scrapen von B0CKY1S3FD, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-20 21:24:31,256 [INFO] 🔍 [27/119]: B09VFPJXWH https://www.amazon.com/dp/B09VFPJXWH?language=en_US
+2025-03-20 21:24:40,797 [WARNING] ❌ Fehler beim Scrapen von B09VFPJXWH, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-20 21:24:40,833 [INFO] 🔍 [28/119]: B00M95SA8S https://www.amazon.com/dp/B00M95SA8S?language=en_US
+2025-03-20 21:24:52,375 [WARNING] ❌ Fehler beim Scrapen von B00M95SA8S, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-20 21:24:52,403 [INFO] 🔍 [29/119]: B08WYR8Q5H https://www.amazon.com/dp/B08WYR8Q5H?language=en_US
+2025-03-20 21:25:01,641 [WARNING] ❌ Fehler beim Scrapen von B08WYR8Q5H, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-20 21:25:01,671 [INFO] 🔍 [30/119]: B014N4D6HM https://www.amazon.com/dp/B014N4D6HM?language=en_US
+2025-03-20 21:25:12,036 [WARNING] ❌ Fehler beim Scrapen von B014N4D6HM, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-20 21:25:12,050 [INFO] 🔍 [31/119]: B0CS9LZNV8 https://www.amazon.com/dp/B0CS9LZNV8?language=en_US
+2025-03-20 21:25:21,220 [WARNING] ❌ Fehler beim Scrapen von B0CS9LZNV8, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-20 21:25:21,240 [INFO] 🔍 [32/119]: B0DSL2QSMZ https://www.amazon.com/dp/B0DSL2QSMZ?language=en_US
+2025-03-20 21:25:31,462 [WARNING] ❌ Fehler beim Scrapen von B0DSL2QSMZ, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-20 21:25:31,480 [INFO] 🔍 [33/119]: B07YQKQHL7 https://www.amazon.com/dp/B07YQKQHL7?language=en_US
+2025-03-20 21:25:40,387 [WARNING] ❌ Fehler beim Scrapen von B07YQKQHL7, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-20 21:25:40,420 [INFO] 🔍 [34/119]: B0CS87JN3V https://www.amazon.com/dp/B0CS87JN3V?language=en_US
+2025-03-20 21:25:49,067 [WARNING] ❌ Fehler beim Scrapen von B0CS87JN3V, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-20 21:25:49,105 [INFO] 🔍 [35/119]: B0CXPWMSX6 https://www.amazon.com/dp/B0CXPWMSX6?language=en_US
+2025-03-20 21:26:00,720 [INFO] ⚡ Änderungen erkannt für B0CXPWMSX6: main_category, second_category, blm, total, store
+2025-03-20 21:26:00,756 [INFO] 🔍 [36/119]: B091XY12FL https://www.amazon.com/dp/B091XY12FL?language=en_US
+2025-03-20 21:26:11,015 [WARNING] ❌ Fehler beim Scrapen von B091XY12FL, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-20 21:26:11,031 [INFO] 🔍 [37/119]: B0CS8KJYPC https://www.amazon.com/dp/B0CS8KJYPC?language=en_US
+2025-03-20 21:26:19,317 [WARNING] ❌ Fehler beim Scrapen von B0CS8KJYPC, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-20 21:26:19,337 [INFO] 🔍 [38/119]: B0CB97GT21 https://www.amazon.com/dp/B0CB97GT21?language=en_US
+2025-03-20 21:26:28,559 [WARNING] ❌ Fehler beim Scrapen von B0CB97GT21, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-20 21:26:28,576 [INFO] 🔍 [39/119]: B09TZDDFP5 https://www.amazon.com/dp/B09TZDDFP5?language=en_US
+2025-03-20 21:26:40,761 [INFO] ⚡ Änderungen erkannt für B09TZDDFP5: main_category, second_category, blm, total, store, manufacturer
+2025-03-20 21:26:40,802 [INFO] 🔍 [40/119]: B0BSP3D2JG https://www.amazon.com/dp/B0BSP3D2JG?language=en_US
+2025-03-20 21:26:53,769 [INFO] ⚡ Änderungen erkannt für B0BSP3D2JG: main_category, second_category, blm, total, store, manufacturer
+2025-03-20 21:26:53,809 [INFO] 🔍 [41/119]: B0B296NPS1 https://www.amazon.com/dp/B0B296NPS1?language=en_US
+2025-03-20 21:27:05,016 [INFO] ⚡ Änderungen erkannt für B0B296NPS1: main_category, second_category, store, manufacturer
+2025-03-20 21:27:05,064 [INFO] 🔍 [42/119]: B078KCYLZF https://www.amazon.com/dp/B078KCYLZF?language=en_US
+2025-03-20 21:27:17,532 [INFO] ⚡ Änderungen erkannt für B078KCYLZF: main_category, second_category, blm, total, store
+2025-03-20 21:27:17,563 [INFO] 🔍 [43/119]: B0CSK7CCPT https://www.amazon.com/dp/B0CSK7CCPT?language=en_US
+2025-03-20 21:27:29,714 [INFO] ⚡ Änderungen erkannt für B0CSK7CCPT: main_category, second_category, store
+2025-03-20 21:27:29,748 [INFO] 🔍 [44/119]: B0823LN5KP https://www.amazon.com/dp/B0823LN5KP?language=en_US
+2025-03-20 21:27:41,272 [INFO] ⚡ Änderungen erkannt für B0823LN5KP: main_category, second_category, blm, total, store
+2025-03-20 21:27:41,294 [INFO] 🔍 [45/119]: B0DK8YRVF7 https://www.amazon.com/dp/B0DK8YRVF7?language=en_US
+2025-03-20 21:27:51,170 [INFO] ⚡ Änderungen erkannt für B0DK8YRVF7: main_category, second_category, blm, total, store
+2025-03-20 21:27:51,216 [INFO] 🔍 [46/119]: B0DD77L69G https://www.amazon.com/dp/B0DD77L69G?language=en_US
+2025-03-20 21:28:02,594 [INFO] ⚡ Änderungen erkannt für B0DD77L69G: main_category, second_category, blm, total, store, manufacturer
+2025-03-20 21:28:02,632 [INFO] 🔍 [47/119]: B0BMVHZ4C6 https://www.amazon.com/dp/B0BMVHZ4C6?language=en_US
+2025-03-20 21:28:14,282 [INFO] ⚡ Änderungen erkannt für B0BMVHZ4C6: main_category, second_category, store, manufacturer
+2025-03-20 21:28:14,313 [INFO] 🔍 [48/119]: B0DHXJR2LL https://www.amazon.com/dp/B0DHXJR2LL?language=en_US
+2025-03-20 21:28:25,085 [INFO] ⚡ Änderungen erkannt für B0DHXJR2LL: main_category, second_category, store, manufacturer
+2025-03-20 21:28:25,132 [INFO] 🔍 [49/119]: B0DJDNS35C https://www.amazon.com/dp/B0DJDNS35C?language=en_US
+2025-03-20 21:28:34,828 [WARNING] ❌ Fehler beim Scrapen von B0DJDNS35C, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-20 21:28:34,859 [INFO] 🔍 [50/119]: B09NDYJJV9 https://www.amazon.com/dp/B09NDYJJV9?language=en_US
+2025-03-20 21:28:44,097 [WARNING] ❌ Fehler beim Scrapen von B09NDYJJV9, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-20 21:28:44,114 [INFO] 🔍 [51/119]: B0CX24XXF9 https://www.amazon.com/dp/B0CX24XXF9?language=en_US
+2025-03-20 21:28:53,456 [WARNING] ❌ Fehler beim Scrapen von B0CX24XXF9, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-20 21:28:53,490 [INFO] 🔍 [52/119]: B0DVZRH7GK https://www.amazon.com/dp/B0DVZRH7GK?language=en_US
+2025-03-20 21:29:02,526 [WARNING] ❌ Fehler beim Scrapen von B0DVZRH7GK, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-20 21:29:02,544 [INFO] 🔍 [53/119]: B0DRM7D4G9 https://www.amazon.com/dp/B0DRM7D4G9?language=en_US
+2025-03-20 21:29:11,649 [WARNING] ❌ Fehler beim Scrapen von B0DRM7D4G9, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-20 21:29:11,681 [INFO] 🔍 [54/119]: B0B7SNLG5Z https://www.amazon.com/dp/B0B7SNLG5Z?language=en_US
+2025-03-20 21:29:21,198 [WARNING] ❌ Fehler beim Scrapen von B0B7SNLG5Z, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-20 21:29:21,232 [INFO] 🔍 [55/119]: B0DVZSL86V https://www.amazon.com/dp/B0DVZSL86V?language=en_US
+2025-03-20 21:29:30,494 [WARNING] ❌ Fehler beim Scrapen von B0DVZSL86V, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-20 21:29:30,527 [INFO] 🔍 [56/119]: B0DYGDX5RV https://www.amazon.com/dp/B0DYGDX5RV?language=en_US
+2025-03-20 21:29:39,243 [WARNING] ❌ Fehler beim Scrapen von B0DYGDX5RV, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-20 21:29:39,271 [INFO] 🔍 [57/119]: B07T84V4XQ https://www.amazon.com/dp/B07T84V4XQ?language=en_US
+2025-03-20 21:29:48,172 [WARNING] ❌ Fehler beim Scrapen von B07T84V4XQ, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-20 21:29:48,187 [INFO] 🔍 [58/119]: B08K18HGPH https://www.amazon.com/dp/B08K18HGPH?language=en_US
+2025-03-20 21:29:57,170 [WARNING] ❌ Fehler beim Scrapen von B08K18HGPH, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-20 21:29:57,184 [INFO] 🔍 [59/119]: B0D7DY1PKR https://www.amazon.com/dp/B0D7DY1PKR?language=en_US
+2025-03-20 21:30:05,973 [WARNING] ❌ Fehler beim Scrapen von B0D7DY1PKR, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-20 21:30:06,003 [INFO] 🔍 [60/119]: B0D1QPR6FN https://www.amazon.com/dp/B0D1QPR6FN?language=en_US
+2025-03-20 21:30:14,942 [WARNING] ❌ Fehler beim Scrapen von B0D1QPR6FN, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-20 21:30:14,959 [INFO] 🔍 [61/119]: B0DK7TC3GC https://www.amazon.com/dp/B0DK7TC3GC?language=en_US
+2025-03-20 21:30:24,885 [WARNING] ❌ Fehler beim Scrapen von B0DK7TC3GC, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-20 21:30:24,920 [INFO] 🔍 [62/119]: B0DGVRZQYS https://www.amazon.com/dp/B0DGVRZQYS?language=en_US
+2025-03-20 21:30:35,424 [WARNING] ❌ Fehler beim Scrapen von B0DGVRZQYS, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-20 21:30:35,445 [INFO] 🔍 [63/119]: B0BSNT6M82 https://www.amazon.com/dp/B0BSNT6M82?language=en_US
+2025-03-20 21:30:44,944 [WARNING] ❌ Fehler beim Scrapen von B0BSNT6M82, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-20 21:30:44,964 [INFO] 🔍 [64/119]: B0DFDW8XKQ https://www.amazon.com/dp/B0DFDW8XKQ?language=en_US
+2025-03-20 21:30:54,736 [WARNING] ❌ Fehler beim Scrapen von B0DFDW8XKQ, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-20 21:30:54,793 [INFO] 🔍 [65/119]: B08DL54PY9 https://www.amazon.com/dp/B08DL54PY9?language=en_US
+2025-03-20 21:31:03,914 [WARNING] ❌ Fehler beim Scrapen von B08DL54PY9, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-20 21:31:03,970 [INFO] 🔍 [66/119]: B0D1QNRT4B https://www.amazon.com/dp/B0D1QNRT4B?language=en_US
+2025-03-20 21:31:12,788 [WARNING] ❌ Fehler beim Scrapen von B0D1QNRT4B, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-20 21:31:12,807 [INFO] 🔍 [67/119]: B0DVBKM9BJ https://www.amazon.com/dp/B0DVBKM9BJ?language=en_US
+2025-03-20 21:31:22,645 [WARNING] ❌ Fehler beim Scrapen von B0DVBKM9BJ, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-20 21:31:22,659 [INFO] 🔍 [68/119]: B0D182R9PR https://www.amazon.com/dp/B0D182R9PR?language=en_US
+2025-03-20 21:31:32,263 [WARNING] ❌ Fehler beim Scrapen von B0D182R9PR, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-20 21:31:32,294 [INFO] 🔍 [69/119]: B09NL9K3VZ https://www.amazon.com/dp/B09NL9K3VZ?language=en_US
+2025-03-20 21:31:41,367 [WARNING] ❌ Fehler beim Scrapen von B09NL9K3VZ, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-20 21:31:41,384 [INFO] 🔍 [70/119]: B0D7XYZR3M https://www.amazon.com/dp/B0D7XYZR3M?language=en_US
+2025-03-20 21:31:50,151 [WARNING] ❌ Fehler beim Scrapen von B0D7XYZR3M, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-20 21:31:50,189 [INFO] 🔍 [71/119]: B0DR3JCK5J https://www.amazon.com/dp/B0DR3JCK5J?language=en_US
+2025-03-20 21:31:53,113 [WARNING] ❌ Fehler beim Scrapen von B0DR3JCK5J, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-20 21:31:53,130 [INFO] 🔍 [72/119]: B0DSJQVF1P https://www.amazon.com/dp/B0DSJQVF1P?language=en_US
+2025-03-20 21:31:57,205 [WARNING] Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001F45D574D60>: Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte')': /session/a384b3e59883b35fc45e5ac5f4546a43/url
+2025-03-20 21:32:01,276 [WARNING] Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001F4595644D0>: Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte')': /session/a384b3e59883b35fc45e5ac5f4546a43/url
+2025-03-20 21:32:05,344 [WARNING] Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001F45CF606B0>: Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte')': /session/a384b3e59883b35fc45e5ac5f4546a43/url
+2025-03-20 21:32:09,419 [WARNING] ❌ Fehler beim Scrapen von B0DSJQVF1P, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-20 21:32:09,478 [INFO] 🔍 [73/119]: B09TRGHJPQ https://www.amazon.com/dp/B09TRGHJPQ?language=en_US
+2025-03-20 21:32:13,554 [WARNING] Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001F45CF60C00>: Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte')': /session/a384b3e59883b35fc45e5ac5f4546a43/url
+2025-03-20 21:32:17,628 [WARNING] Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001F45CF63680>: Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte')': /session/a384b3e59883b35fc45e5ac5f4546a43/url
+2025-03-20 21:32:21,711 [WARNING] Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001F45CF63DF0>: Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte')': /session/a384b3e59883b35fc45e5ac5f4546a43/url
+2025-03-20 21:32:25,785 [WARNING] ❌ Fehler beim Scrapen von B09TRGHJPQ, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-20 21:32:25,808 [INFO] 🔍 [74/119]: B0D33WVMKR https://www.amazon.com/dp/B0D33WVMKR?language=en_US
+2025-03-20 21:32:29,881 [WARNING] Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001F45D628490>: Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte')': /session/a384b3e59883b35fc45e5ac5f4546a43/url
+2025-03-20 21:32:33,935 [WARNING] Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001F45D6286B0>: Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte')': /session/a384b3e59883b35fc45e5ac5f4546a43/url

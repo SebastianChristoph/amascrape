@@ -391,7 +391,7 @@ const Dashboard: React.FC = () => {
                   <Typography variant="h6" color="text.primary" sx={{ fontWeight: 600 }}>
                     ${dashboardData?.total_revenue || '0.00'}
                     </Typography>
-                    <Typography variant="body2" color="warning" gutterBottom>
+                    <Typography variant="body2" color="text.secondary" gutterBottom>
                     Waiting for valid calculation by Alex
                   </Typography>
                 </Box>
@@ -436,7 +436,7 @@ const Dashboard: React.FC = () => {
                   <Typography variant="h6" color="text.primary" sx={{ fontWeight: 600 }}>
                    Sparkline
                     </Typography>
-                    <Typography variant="body2" color="warning" gutterBottom>
+                    <Typography variant="body2" color="text.secondary" gutterBottom>
                     Waiting for valid calculation by Alex
                   </Typography>
                 </Box>
@@ -481,7 +481,7 @@ const Dashboard: React.FC = () => {
                   <Typography variant="h6" color="text.primary" sx={{ fontWeight: 600 }}>
                     {dashboardData?.total_clusters|| '0'}
                     </Typography>
-                    <Typography variant="body2" color="warning" gutterBottom>
+                    <Typography variant="body2" color="text.secondary" gutterBottom>
                     ToDo: Only count ready scraped clusters
                   </Typography>
                 </Box>
@@ -526,7 +526,7 @@ const Dashboard: React.FC = () => {
                   <Typography variant="h6" color="text.primary" sx={{ fontWeight: 600 }}>
                     {dashboardData?.total_unique_products || '0'}
                     </Typography>
-                    <Typography variant="body2" color="warning" gutterBottom>
+                    <Typography variant="body2" color="text.secondary" gutterBottom>
                     ToDo: Get only products from not-scraping clusters
                   </Typography>
                 </Box>

@@ -224,7 +224,7 @@ const AddMarketCluster: React.FC = () => {
                       <FormControlLabel value="snapshot" control={<Radio />} label="Snapshot" />
                     </RadioGroup>
                     </FormControl>
-                     <Typography variant="body2" color="warning" gutterBottom>
+                     <Typography variant="body2" color="text.secondary" gutterBottom>
                                  Choseable but no logic implemented yet
                                       </Typography>
                 </Grid>
