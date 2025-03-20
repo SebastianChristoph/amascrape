@@ -47,8 +47,8 @@ class AmazonProductScraper:
             max_key_length = max(len(key)
                                  for key in self.product_info_box_content.keys())
             for key, value in self.product_info_box_content.items():
-                print(
-                    f"\t{key.ljust(max_key_length)} : {value.replace('\n', '')}")
+                cleaned_value = value.replace('\n', '')
+                print(f"\t{key.ljust(max_key_length)} : {cleaned_value}")
 
     def getting_bs_and_rank_data(self) -> dict:
 
