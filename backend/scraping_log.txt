@@ -476,3 +476,4 @@
 2025-03-19 21:16:10,836 [INFO] Failed products: 3
 2025-03-19 21:16:10,837 [INFO] 🔻 Schließe WebDriver...
 2025-03-19 21:16:13,633 [INFO] ✅ WebDriver geschlossen.
+2025-03-20 11:30:56,093 [INFO] ✅ Market Cluster 1 wurde gelöscht.

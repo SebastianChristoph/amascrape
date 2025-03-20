@@ -36,6 +36,7 @@ interface ClusterCardProps {
   setDeletingCluster: React.Dispatch<React.SetStateAction<number | null>>;
   totalRevenue: number;
   fetchMarketClusters: () => void;
+  is_initial_scraped: boolean;
 }
 
 const ClusterCard: React.FC<ClusterCardProps> = ({
@@ -46,6 +47,7 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
   setDeletingCluster,
   totalRevenue,
   fetchMarketClusters,
+  is_initial_scraped
 }) => {
   const { showSnackbar } = useSnackbar();
   const [openEditDialog, setOpenEditDialog] = useState(false);
@@ -183,7 +185,7 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
             </Box>
           </Box>
 
-          {totalRevenue === 0 ? (
+          {!is_initial_scraped ? (
             <Box sx={{ mt: 2 }}>
               <Alert 
                 severity="info" 

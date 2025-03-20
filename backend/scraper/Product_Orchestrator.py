@@ -166,7 +166,7 @@ class Product_Orchestrator:
                     continue
 
                 logging.info(
-                    f"🔍 Überprüfe Produkt [{index}/{total_products}]: {product.asin} https://www.amazon.com/dp/{product.asin}?language=en_US")
+                    f"🔍 [{index}/{total_products}]: {product.asin} https://www.amazon.com/dp/{product.asin}?language=en_US")
 
                 try:
                     product_start_time = time.time()
@@ -231,7 +231,7 @@ class Product_Orchestrator:
                     logging.info(
                         f"⚠️ Fehler, aber last_time_scraped für {product.asin} wurde trotzdem aktualisiert.")
                     self.failed_products.append({
-                        'asin': product.asin,
+                        'asin': f"https://www.amazon.com/dp/{product.asin}?language=en_US",
                         'missing': [str(e)],
                         'timestamp': datetime.now(timezone.utc)
                     })

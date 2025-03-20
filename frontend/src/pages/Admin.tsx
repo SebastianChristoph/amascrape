@@ -240,6 +240,29 @@ export default function Admin() {
     alert(result.message);
   };
 
+  const handleAddCredits = async (userId: number) => {
+    try {
+      const response = await fetch(`http://127.0.0.1:9000/users/admin/add-credits/${userId}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${UserService.getToken()}`,
+        },
+        body: JSON.stringify({ amount: 100 }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Fehler beim Hinzufügen der Credits");
+      }
+
+      alert("100 Credits erfolgreich hinzugefügt!");
+      fetchUsers(); // Aktualisiere die Benutzerliste, um die neue Credit-Anzahl anzuzeigen
+    } catch (error) {
+      console.error("Fehler beim Hinzufügen der Credits:", error);
+      alert("Fehler beim Hinzufügen der Credits");
+    }
+  };
+
   return (
     <Container>
       <Typography variant="h4" gutterBottom>
@@ -377,6 +400,14 @@ export default function Admin() {
                     <TableCell>{user.username}</TableCell>
                     <TableCell>{user.email}</TableCell>
                     <TableCell>
+                    <Button
+                        variant="contained"
+                        color="success"
+                        sx={{ mr: 1 }}
+                        onClick={() => handleAddCredits(user.id)}
+                      >
+                        +100 Credits
+                      </Button>
                       <Button
                         color="error"
                         onClick={() => {

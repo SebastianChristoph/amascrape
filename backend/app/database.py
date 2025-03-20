@@ -1,32 +1,27 @@
 import os
-import random
-import string
-from datetime import datetime, timedelta, timezone
-
 from app.auth import get_password_hash
-from app.models import Base, Market, MarketChange, MarketCluster, Product, ProductChange, User
+from app.models import Base, User
 from dotenv import load_dotenv
-from sqlalchemy import create_engine
-from sqlalchemy.exc import OperationalError
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy.sql import text
 from sqlalchemy import create_engine, event
 from sqlalchemy.engine import Engine
+from sqlalchemy.exc import OperationalError
+from sqlalchemy.orm import sessionmaker
 
-# ✅ Lade Umgebungsvariablen
 load_dotenv()
 
 DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///marketdata.db")  # Standard: SQLite
 if not DATABASE_URL:
     raise ValueError("❌ DATABASE_URL is not set in environment variables!")
 
-print(f"✅ Loaded DATABASE_URL: {DATABASE_URL}")
+if DATABASE_URL.startswith("sqlite"):
+    connect_args = {"check_same_thread": False}
+else:
+    connect_args = {}
 
-# ✅ Datenbank-Verbindung einrichten
-engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
+engine = create_engine(DATABASE_URL, connect_args=connect_args)
+
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
-# ✅ Fix für SQLite: Aktiviert Foreign Key Constraints
 @event.listens_for(Engine, "connect")
 def set_sqlite_pragma(dbapi_connection, connection_record):
     cursor = dbapi_connection.cursor()
@@ -34,26 +29,25 @@ def set_sqlite_pragma(dbapi_connection, connection_record):
     cursor.close()
 
 
-# ✅ Datenbank-Initialisierung
 def init_db():
     """Erstellt die Datenbank-Tabellen nur, wenn sie nicht existieren und fügt den Admin-User hinzu."""
     db = SessionLocal()
     try:
-        # **📌 Stelle sicher, dass alle Tabellen erstellt werden**
         print("📌 Erstelle Datenbank-Tabellen...")
         Base.metadata.create_all(bind=engine)
 
-        # **📌 Admin-User erstellen, falls nicht vorhanden**
+        # Erst Admin erstellen, wenn die Tabellen wirklich existieren
+        print("📌 Überprüfe Admin-User...")
         ensure_admin_user()
 
         print("✅ Datenbank-Initialisierung abgeschlossen.")
+    except OperationalError as e:
+        print(f"❌ Datenbankverbindung fehlgeschlagen: {e}")
     except Exception as e:
         print(f"❌ Fehler beim Initialisieren der Datenbank: {e}")
     finally:
         db.close()
 
-
-# ✅ Stellt eine DB-Session bereit
 def get_db():
     db = SessionLocal()
     try:
@@ -61,7 +55,7 @@ def get_db():
     finally:
         db.close()
 
-# ✅ Admin-User sicherstellen
+
 def ensure_admin_user():
     """Falls der Admin-User nicht existiert, erstelle ihn."""
     db = SessionLocal()
@@ -73,7 +67,7 @@ def ensure_admin_user():
                 username="admin",
                 email="admin@admin.de",
                 hashed_password=get_password_hash("admin"),
-                is_verified=True  # Admin sollte sofort aktiviert sein
+                is_verified=True
             )
             db.add(admin_user)
             db.commit()
@@ -81,7 +75,9 @@ def ensure_admin_user():
         else:
             print("✅ Admin-User existiert bereits.")
     except Exception as e:
+        db.rollback()  # Wichtige Verbesserung!
         print(f"❌ Fehler beim Erstellen des Admin-Users: {e}")
     finally:
         db.close()
+
 

@@ -4,38 +4,34 @@ import {
   Button,
   Card,
   CardContent,
-  CardHeader,
   CircularProgress,
   Container,
   Paper,
-  Typography,
-  Fab,
+  Typography
 } from "@mui/material";
 import Grid from "@mui/material/Grid2";
-import { useEffect, useState, useRef } from "react";
+import { keyframes } from '@mui/system';
+import {
+  CategoryScale,
+  Chart as ChartJS,
+  Legend,
+  LinearScale,
+  LineElement,
+  PointElement,
+  Title,
+  Tooltip
+} from 'chart.js';
+import { useEffect, useRef, useState } from "react";
+import { Line } from 'react-chartjs-2';
 import { AiOutlineCheckCircle } from "react-icons/ai";
-import { GrCluster } from "react-icons/gr";
+import { FaBoxes, FaChartLine, FaDollarSign, FaLayerGroup } from 'react-icons/fa';
 import { MdAdd } from "react-icons/md";
+import { RiRobot2Fill } from 'react-icons/ri';
 import { useNavigate } from "react-router-dom";
+import { commonBackgroundStyle, moveBackgroundKeyframes } from "../components/BackgroundPattern";
 import ClusterCard from "../components/ClusterCard";
 import { useSnackbar } from "../providers/SnackbarProvider";
 import MarketService from "../services/MarketService";
-import CustomSparkLine from "../components/charts/CustomSparkLine";
-import { keyframes } from '@mui/system';
-import { commonBackgroundStyle, moveBackgroundKeyframes } from "../components/BackgroundPattern";
-import { Line } from 'react-chartjs-2';
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
-} from 'chart.js';
-import { FaDollarSign, FaChartLine, FaBoxes, FaLayerGroup } from 'react-icons/fa';
-import { RiRobot2Fill } from 'react-icons/ri';
 
 ChartJS.register(
   CategoryScale,
@@ -360,6 +356,7 @@ const Dashboard: React.FC = () => {
         }}
       >
         {/* Overview Section */}
+        {marketClusters.length > 0 && (
         <Paper elevation={3} sx={{ marginBottom: 2, padding: 4 }}>
           <Typography
             variant="h5"
@@ -455,7 +452,7 @@ const Dashboard: React.FC = () => {
                     30D Revenue Change
                   </Typography>
                   <Typography variant="h6" color="text.primary" sx={{ fontWeight: 600 }}>
-                    {dashboardData?.revenue_change || '0'}%
+                   Sparkline
                   </Typography>
                 </Box>
               </Paper>
@@ -497,7 +494,7 @@ const Dashboard: React.FC = () => {
                     Market Clusters
                   </Typography>
                   <Typography variant="h6" color="text.primary" sx={{ fontWeight: 600 }}>
-                    {dashboardData?.total_markets || '0'}
+                    {dashboardData?.total_clusters|| '0'}
                   </Typography>
                 </Box>
               </Paper>
@@ -545,7 +542,8 @@ const Dashboard: React.FC = () => {
               </Paper>
             </Grid>
           </Grid>
-        </Paper>
+          </Paper>
+          )}
 
         {/* Scraping Status Section */}
         {activeCluster && activeCluster.status === "processing" && (
@@ -677,41 +675,44 @@ const Dashboard: React.FC = () => {
         )}
 
         {/* ✅ Zeigt alle Market-Cluster an */}
-        <Paper elevation={3} sx={{ paddingY: 4, paddingX: 4, mt: 2 }}>
-          <Typography variant="h5" sx={{ mb: 3, backgroundColor: "primary.main", p: 2, color: "white" }}>
-            My Market Clusters
-          </Typography>
+        {marketClusters.length > 0 && (
+          <Paper elevation={3} sx={{ paddingY: 4, paddingX: 4, mt: 2 }}>
+            <Typography variant="h5" sx={{ mb: 3, backgroundColor: "primary.main", p: 2, color: "white" }}>
+              My Market Clusters
+            </Typography>
 
-          {loading ? (
-            <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "200px" }}>
-              <CircularProgress size={80} color="primary" />
-            </Box>
-          ) : (
-            <Box sx={{ flexGrow: 1 }}>
-              <Grid container spacing={3}>
-                {marketClusters.length > 0 ? (
-                  marketClusters.map((cluster) => (
-                    <Grid key={cluster.id} size={{ xs: 12, sm: 12, lg: 6 }}>
-                      <ClusterCard
-                        cluster={cluster}
-                        onClick={() => navigate(`/cluster/${cluster.id}`)}
-                        deletingCluster={deletingCluster}
-                        setMarketClusters={setMarketClusters}
-                        setDeletingCluster={setDeletingCluster}
-                        totalRevenue={cluster.total_revenue}
-                        fetchMarketClusters={fetchData}
-                      />
-                    </Grid>
-                  ))
-                ) : (
-                  <Typography sx={{ textAlign: "center", mt: 4 }} variant="body1">
-                    No market clusters found.
-                  </Typography>
-                )}
-              </Grid>
-            </Box>
-          )}
-        </Paper>
+            {loading ? (
+              <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "200px" }}>
+                <CircularProgress size={80} color="primary" />
+              </Box>
+            ) : (
+              <Box sx={{ flexGrow: 1 }}>
+                <Grid container spacing={3}>
+                  {marketClusters.length > 0 ? (
+                    marketClusters.map((cluster) => (
+                      <Grid key={cluster.id} size={{ xs: 12, sm: 12, lg: 6 }}>
+                        <ClusterCard
+                          cluster={cluster}
+                          onClick={() => navigate(`/cluster/${cluster.id}`)}
+                          deletingCluster={deletingCluster}
+                          setMarketClusters={setMarketClusters}
+                          setDeletingCluster={setDeletingCluster}
+                          totalRevenue={cluster.total_revenue}
+                          is_initial_scraped = {cluster.is_initial_scraped}
+                          fetchMarketClusters={fetchData}
+                        />
+                      </Grid>
+                    ))
+                  ) : (
+                    <Typography sx={{ textAlign: "center", mt: 4 }} variant="body1">
+                      No market clusters found.
+                    </Typography>
+                  )}
+                </Grid>
+              </Box>
+            )}
+          </Paper>
+        )}
       </Container>
       
       {/* Extended Add Market Cluster Button */}

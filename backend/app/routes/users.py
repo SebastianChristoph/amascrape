@@ -207,3 +207,67 @@ def get_all_users(db: Session = Depends(get_db), admin: User = Depends(get_curre
 
     users = db.query(User).all()
     return [{"id": user.id, "username": user.username, "email": user.email} for user in users]
+
+@router.get("/get-credits")
+async def get_credits(
+    current_user: User = Depends(get_current_user)
+):
+    """Gibt die aktuellen Credits des Users zurück."""
+    return {"username": current_user.username, "credits": current_user.credits}
+
+@router.post("/add-credits")
+async def add_credits(
+    amount: int,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
+    """
+    Fügt dem aktuellen Nutzer Credits hinzu oder erlaubt Admins, anderen Credits hinzuzufügen.
+    """
+    if amount <= 0:
+        raise HTTPException(status_code=400, detail="Die Anzahl der Credits muss positiv sein.")
+
+    user = db.query(User).filter(User.id == current_user.id).first()
+    if not user:
+        raise HTTPException(status_code=404, detail="User nicht gefunden!")
+
+    user.credits += amount
+    db.commit()
+    return {"success": True, "message": f"{amount} Credits wurden hinzugefügt!", "new_credits": user.credits}
+
+@router.post("/reduce-credits")
+async def reduce_credits(
+    amount: int,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
+    """
+    Reduziert Credits eines Users, prüft aber vorher, ob genug Credits vorhanden sind.
+    """
+    if amount <= 0:
+        raise HTTPException(status_code=400, detail="Die Anzahl der Credits muss positiv sein.")
+
+    user = db.query(User).filter(User.id == current_user.id).first()
+    if not user:
+        raise HTTPException(status_code=404, detail="User nicht gefunden!")
+
+    if user.credits < amount:
+        return {"success": False, "message": "Nicht genügend Credits!"}
+
+    user.credits -= amount
+    db.commit()
+    return {"success": True, "message": f"{amount} Credits wurden abgezogen!", "remaining_credits": user.credits}
+
+@router.post("/admin/add-credits/{user_id}")
+def add_credits(user_id: int, amount: dict, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
+    """ Fügt einem Benutzer Credits hinzu (nur für Admins) """
+    if not is_admin(current_user):
+        raise HTTPException(status_code=403, detail="Nur Admins können Credits hinzufügen.")
+
+    user = db.query(User).filter(User.id == user_id).first()
+    if not user:
+        raise HTTPException(status_code=404, detail="Benutzer nicht gefunden.")
+
+    user.credits += amount["amount"]
+    db.commit()
+    return {"success": True, "message": f"{amount['amount']} Credits hinzugefügt!"}

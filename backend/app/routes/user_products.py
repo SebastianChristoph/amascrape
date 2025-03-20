@@ -18,9 +18,8 @@ def get_sparkline_for_user_products(db: Session, user_asins: List[str], field: s
     cutoff_date = today - datetime.timedelta(days=30)
 
     if not user_asins:
-        return [0] * 30  # No user products → Empty sparkline
+        return [0] * 30 
     
-    # ✅ Fetch product changes for all user products
     product_changes = (
         db.query(ProductChange)
         .filter(ProductChange.asin.in_(user_asins))
@@ -62,8 +61,6 @@ def get_sparkline_for_user_products(db: Session, user_asins: List[str], field: s
 async def get_user_products_insights(cluster_id: int, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
     """Returns insights for UserProducts within a cluster."""
 
-    print("get insights")
-
     # ✅ Fetch MarketCluster
     cluster = db.query(MarketCluster).filter(MarketCluster.id == cluster_id).first()
     if not cluster:
@@ -81,7 +78,7 @@ async def get_user_products_insights(cluster_id: int, db: Session = Depends(get_
     user_products = db.query(UserProduct).filter(UserProduct.user_id == current_user.id).all()
     user_asins = {up.asin for up in user_products}
 
-    # 📊 **Cluster-Level Insights**
+    # 📊 **Insights Cluster-Level**
     total_revenue_user_products = 0
     user_product_count = 0
 
@@ -95,13 +92,13 @@ async def get_user_products_insights(cluster_id: int, db: Session = Depends(get_
                 user_product_count += 1
                 product_totals[user_asin] = latest_change.total
 
+    print("product_totals_dict:", product_totals)
     market_insights = []
     for market in markets:
         total_revenue_market = 0
         user_products_in_market = 0
         for product in market.products:
-        
-            if product.asin in user_asins:
+            if product.asin in product_totals:
                 user_products_in_market += 1
                 total_revenue_market += product_totals[product.asin]
                 print(f"found my product {product.asin} in market {market.keyword}, add {product_totals[product.asin]} to market total")
@@ -114,47 +111,6 @@ async def get_user_products_insights(cluster_id: int, db: Session = Depends(get_
         })
 
 
-
-        # for product in markets.products:
-        #     print(product.asin)
-
-
-    # for market in markets:
-    #     for product in market.products:
-    #         if product.asin in user_asins:
-
-                
-    #             latest_change = (
-    #                 db.query(ProductChange)
-    #                 .filter(ProductChange.asin == product.asin)
-    #                 .order_by(ProductChange.change_date.desc())  # Neuestes zuerst
-    #                 .first()
-    #             )
-    #             if latest_change and latest_change.total is not None:
-    #                 total_revenue_user_products += latest_change.total
-    #                 user_product_count += 1
-
-
-    # 📊 **Market-Level Insights**
-    # market_insights = []
-    # for market in markets:
-    #     total_revenue_market = 0
-    #     user_product_count_market = 0
-
-    #     for product in market.products:
-    #         if product.asin in user_asins:
-    #             latest_change = (
-    #             db.query(ProductChange)
-    #             .filter(ProductChange.asin == product.asin)
-    #             .order_by(ProductChange.change_date.desc())  # Neuestes zuerst
-    #             .first()
-    #         )
-    #         if latest_change and latest_change.total is not None:
-    #             total_revenue_user_products += latest_change.total
-    #             user_product_count_market += 1
-
-       
-
     return {
         "total_revenue_user_products": total_revenue_user_products,
         "user_product_count": user_product_count,
@@ -162,7 +118,6 @@ async def get_user_products_insights(cluster_id: int, db: Session = Depends(get_
     }
 
 
-# ✅ Produkt als "My Product" markieren
 @router.post("/{asin}")
 async def add_my_product(asin: str, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
     existing_product = db.query(Product).filter(Product.asin == asin).first()
@@ -178,7 +133,6 @@ async def add_my_product(asin: str, db: Session = Depends(get_db), current_user:
     db.commit()
     return {"message": "Product added to My Products"}
 
-# ✅ Produkt aus "My Products" entfernen
 @router.delete("/{asin}")
 async def remove_my_product(asin: str, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
     entry = db.query(UserProduct).filter(UserProduct.user_id == current_user.id, UserProduct.asin == asin).first()
@@ -189,7 +143,7 @@ async def remove_my_product(asin: str, db: Session = Depends(get_db), current_us
     db.commit()
     return {"message": "Product removed from My Products"}
 
-# ✅ Alle "My Products" abrufen
+
 @router.get("/")
 async def get_my_products(db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
     products = db.query(UserProduct).filter(UserProduct.user_id == current_user.id).all()

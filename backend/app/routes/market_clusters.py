@@ -135,20 +135,12 @@ async def get_dashboard_overview(
         ).options(joinedload(MarketCluster.markets)).all()
         
         
-        
         # Calculate total revenue (from clusters with revenue > 0)
-        total_revenue = 0.0
+        total_revenue = 999.99
         clusters_without_revenue = 0
         total_clusters = len(market_clusters)  # Count total clusters
         
-        for cluster in market_clusters:
-            if cluster.total_revenue:
-                total_revenue += float(cluster.total_revenue)
-            else:
-                clusters_without_revenue += 1
-        
       
-        
         # Get market IDs that belong to user's clusters first
         market_ids = db.query(Market.id).join(
             market_cluster_markets
@@ -158,27 +150,14 @@ async def get_dashboard_overview(
             MarketCluster.user_id == current_user.id
         ).subquery()
 
-        # Then get unique products from these markets
-        unique_products_count = db.query(func.count(distinct(ProductChange.asin))).join(
-            MarketChange, MarketChange.market_id.in_(market_ids)
-        ).filter(
-            ProductChange.total.isnot(None)  # Only count products that have been scraped
-        ).scalar() or 0
-        
       
-        
-        # Simplified revenue development data for debugging
-        revenue_data = [int(total_revenue)] * 30  # Just use current total revenue for all 30 days
-        
         response_data = {
             "total_revenue": float(total_revenue),
             "total_clusters": int(total_clusters),  # Changed from total_markets
             "clusters_without_revenue": int(clusters_without_revenue),
-            "total_unique_products": int(unique_products_count),
-            "revenue_development": revenue_data
+            "total_unique_products": 999
         }
-        
-        # print(f"Response data: {response_data}")
+
         return response_data
         
     except Exception as e:
@@ -213,7 +192,9 @@ async def get_market_cluster_details(
             "avg_revenue_per_product": 0,
             "top_performing_market": None,
             "top_performing_product": None
-        }
+        },
+        "is_initial_scraped" : market_cluster.is_initial_scraped,
+        "cluster_type" : market_cluster.cluster_type
     }
 
     total_products = 0

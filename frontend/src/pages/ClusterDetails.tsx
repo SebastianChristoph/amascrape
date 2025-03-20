@@ -519,15 +519,19 @@ export default function ClusterDetails() {
     },
   ];
 
+  const allowedFields = ["details", "image", "title", "price"];
+  
+  const filteredColumns = marketCluster.is_initial_scraped
+    ? columns // Falls `is_initial_scraped === true`, alle Spalten anzeigen
+    : columns.filter(col => allowedFields.includes(col.field)); // Nur erlaubte Felder beibehalten
+  
   return (
     <>
       <Paper elevation={1} sx={{ marginBottom: 2, padding: 4 }}>
-        {(!marketCluster.total_revenue ||
-          marketCluster.total_revenue === 0) && (
-          <Alert severity="info" sx={{ mb: 2 }}>
+        {(!marketCluster.is_initial_scraped) && (
+          <Alert severity="warning" sx={{ mb: 2 }}>
             This is a first impression of the market. More detailed data will be
-            available after the initial scraping process (usually takes about
-            one day).
+            available after the initial scraping process (usually takes about one hour).
           </Alert>
         )}
 
@@ -623,13 +627,19 @@ export default function ClusterDetails() {
                     <FaDollarSign size={22} color="#1976d2" />
                   </Box>
                   <Box>
-                    <Typography variant="body2" color="text.secondary" gutterBottom>
-                      Total Revenue
-                    </Typography>
-                    <Typography variant="h6" color="text.primary" sx={{ fontWeight: 600 }}>
-                      {formatCurrency(marketCluster.insights?.total_revenue || 0)}
-                    </Typography>
-                  </Box>
+                      <Typography variant="body2" color="text.secondary" gutterBottom>
+                        Total Revenue
+                      </Typography>
+
+                      {marketCluster.is_initial_scraped ? (
+                        <Typography variant="h6" color="text.primary" sx={{ fontWeight: 600 }}>
+                          {formatCurrency(marketCluster.insights?.total_revenue || 0)}
+                        </Typography>
+                      ) : (
+                        <Typography variant="h2">{<Skeleton /> }</Typography>
+
+                      )}
+                    </Box>
                 </Paper>
               </Grid>
 
@@ -708,12 +718,24 @@ export default function ClusterDetails() {
                     <Typography variant="body2" color="text.secondary" gutterBottom>
                       Average Revenue
                     </Typography>
-                    <Typography variant="body2" sx={{ fontWeight: 500, color: 'text.primary' }}>
-                      Per Market: {formatCurrency(marketCluster.insights?.avg_revenue_per_market || 0)}
-                    </Typography>
-                    <Typography variant="body2" sx={{ fontWeight: 500, color: 'text.primary' }}>
-                      Per Product: {formatCurrency(marketCluster.insights?.avg_revenue_per_product || 0)}
-                    </Typography>
+
+                    {marketCluster.is_initial_scraped ? (
+                      <Box>
+                         <Typography variant="body2" sx={{ fontWeight: 500, color: 'text.primary' }}>
+                         Per Market: {formatCurrency(marketCluster.insights?.avg_revenue_per_market || 0)}
+                       </Typography>
+                       <Typography variant="body2" sx={{ fontWeight: 500, color: 'text.primary' }}>
+                         Per Product: {formatCurrency(marketCluster.insights?.avg_revenue_per_product || 0)}
+                        </Typography>
+                        </Box>
+                      ) : (
+                        <Typography variant="h2">{<Skeleton /> }</Typography>
+
+                    )}
+                    
+
+
+                   
                   </Box>
                 </Paper>
               </Grid>
@@ -726,7 +748,7 @@ export default function ClusterDetails() {
               My Market Share
             </Typography>
             <Grid container spacing={2}>
-              {/* Total Revenue Card */}
+              {/* My Total Revenue Card */}
               <Grid size={12}>
                 <Paper
                   elevation={1}
@@ -760,9 +782,18 @@ export default function ClusterDetails() {
                     <Typography variant="body2" color="text.secondary" gutterBottom>
                       My Total Revenue
                     </Typography>
+
+                    {marketCluster.is_initial_scraped ? (
+                        
                     <Typography variant="h6" color="text.primary" sx={{ fontWeight: 600 }}>
-                      {formatCurrency(userProductInsights?.total_revenue_user_products || 0)}
-                    </Typography>
+                    {formatCurrency(userProductInsights?.total_revenue_user_products || 0)}
+                  </Typography>
+                      ) : (
+                        <Typography variant="h2">{<Skeleton /> }</Typography>
+
+                    )}
+
+                  
                   </Box>
                 </Paper>
               </Grid>
@@ -799,7 +830,7 @@ export default function ClusterDetails() {
                   </Box>
                   <Box>
                     <Typography variant="body2" color="text.secondary" gutterBottom>
-                      Active Products
+                      My Products
                     </Typography>
                     <Typography variant="h6" color="text.primary" sx={{ fontWeight: 600 }}>
                       {userProductInsights?.user_product_count || 0}
@@ -842,11 +873,20 @@ export default function ClusterDetails() {
                     <Typography variant="body2" color="text.secondary" gutterBottom>
                       30-Day Trend
                     </Typography>
-                    <Box sx={{ width: 120, height: 40, mt: 1 }}>
-                      <CustomSparkLine
-                        data={userProductInsights?.sparkline_data_user_products || []}
-                      />
-                    </Box>
+
+                    {marketCluster.is_initial_scraped ? (
+                        
+                        <Box sx={{ width: 120, height: 40, mt: 1 }}>
+                        <CustomSparkLine
+                          data={userProductInsights?.sparkline_data_user_products || []}
+                        />
+                      </Box>
+                          ) : (
+                            <Typography variant="h2">{<Skeleton /> }</Typography>
+    
+                    )}
+                    
+                    
                   </Box>
                 </Paper>
               </Grid>
@@ -1232,10 +1272,9 @@ export default function ClusterDetails() {
                 borderRadius: 2,
               }}
             >
-              {!market.revenue_total || market.revenue_total === 0 ? (
+              {!marketCluster.is_initial_scraped ? (
                 <Alert severity="info" sx={{ mb: 3 }}>
-                  Market revenue will be calculated once product data scraping
-                  is complete
+                  Once scraping is complete, market revenue, matreics and product data will be calculated and presented here
                 </Alert>
               ) : (
                 <>
@@ -1611,7 +1650,7 @@ export default function ClusterDetails() {
                 sparkline_blm: product.sparkline_blm,
                 isMyProduct: product.isMyProduct, // ✅ Status für Zeilen-Highlight
               }))}
-              columns={columns}
+              columns={filteredColumns}
               rowHeight={55}
               pageSizeOptions={[10, 25, 50, 100]}
               checkboxSelection={false}

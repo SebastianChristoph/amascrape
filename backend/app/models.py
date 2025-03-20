@@ -1,12 +1,11 @@
 from datetime import datetime, timezone
 
-from sqlalchemy import (Boolean, Column, DateTime, Float, ForeignKey, Integer, String,
-                        Table)
+from sqlalchemy import (Boolean, Column, DateTime, Enum, Float, ForeignKey,
+                        Integer, String, Table)
 from sqlalchemy.orm import declarative_base, relationship
 
 Base = declarative_base()
 
-# 📌 Verknüpfungstabelle für Market <-> Product (Many-to-Many)
 market_products = Table(
     "market_products",
     Base.metadata,
@@ -14,7 +13,6 @@ market_products = Table(
     Column("asin", String, ForeignKey("products.asin")),
 )
 
-# 📌 Verknüpfungstabelle für MarketChange <-> Products (Many-to-Many)
 market_change_products = Table(
     "market_change_products",
     Base.metadata,
@@ -22,7 +20,6 @@ market_change_products = Table(
     Column("asin", String, ForeignKey("products.asin")),
 )
 
-# 📌 Verknüpfungstabelle für MarketCluster <-> Markets (Many-to-Many)
 market_cluster_markets = Table(
     "market_cluster_markets",
     Base.metadata,
@@ -30,7 +27,6 @@ market_cluster_markets = Table(
     Column("market_id", Integer, ForeignKey("markets.id")),
 )
 
-# 1️⃣ Users Table
 class User(Base):
     __tablename__ = "users"
 
@@ -41,8 +37,11 @@ class User(Base):
     is_verified = Column(Boolean, default=False)
     verification_token = Column(String(64), unique=True, nullable=True)
     verification_token_expires = Column(DateTime, nullable=True)
+    subscription = Column(Enum("basic", "advanced", "pro",
+                          name="subscription_enum"), default="basic")
+    credits = Column(Integer, default=100)
+    usedFreeCluster = Column(Boolean, default=False)
 
-    # ✅ Beziehung zu MarketCluster fehlt eventuell!
     market_clusters = relationship(
         "MarketCluster",
         back_populates="user",
@@ -50,7 +49,6 @@ class User(Base):
         passive_deletes=True
     )
 
-# 2️⃣ Products Table
 class Product(Base):
     __tablename__ = "products"
 
@@ -73,32 +71,31 @@ class Product(Base):
         passive_deletes=True
     )
 
-
-
-# ✅ Neue Tabelle für die Verknüpfung zwischen User und Product
 class UserProduct(Base):
     __tablename__ = "user_products"
 
-    user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), primary_key=True)
-    asin = Column(String, ForeignKey("products.asin", ondelete="CASCADE"), primary_key=True)
+    user_id = Column(Integer, ForeignKey(
+        "users.id", ondelete="CASCADE"), primary_key=True)
+    asin = Column(String, ForeignKey("products.asin",
+                  ondelete="CASCADE"), primary_key=True)
     added_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
 
     user = relationship("User", back_populates="user_products")
     product = relationship("Product", back_populates="user_products")
-# ✅ Beziehung in User und Product definieren
-User.user_products = relationship("UserProduct", back_populates="user", cascade="all, delete-orphan")
-Product.user_products = relationship("UserProduct", back_populates="product", cascade="all, delete-orphan")
 
 
+User.user_products = relationship(
+    "UserProduct", back_populates="user", cascade="all, delete-orphan")
+Product.user_products = relationship(
+    "UserProduct", back_populates="product", cascade="all, delete-orphan")
 
-# 3️⃣ ProductChanges Table
 
 
 class ProductChange(Base):
     __tablename__ = "product_changes"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    asin = Column(String, ForeignKey("products.asin"), nullable=False)
+    asin = Column(String, ForeignKey("products.asin", ondelete="CASCADE"), nullable=False)
     title = Column(String, nullable=True)
     price = Column(Float, nullable=True)
     main_category = Column(String, nullable=True)
@@ -115,14 +112,14 @@ class ProductChange(Base):
 
     product = relationship("Product", back_populates="product_changes")
 
-# 4️⃣ Markets Table
-
 
 class Market(Base):
     __tablename__ = "markets"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     keyword = Column(String, unique=True, nullable=False)
+    market_type = Column(
+        Enum("snapshot", "dynamic", name="market_type"), default="dynamic")
 
     products = relationship(
         "Product",
@@ -141,57 +138,47 @@ class Market(Base):
         passive_deletes=True
     )
 
-# 5️⃣ MarketChanges Table
-
-
 class MarketChange(Base):
     __tablename__ = "market_changes"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    market_id = Column(Integer, ForeignKey("markets.id"), nullable=False)
+    market_id = Column(Integer, ForeignKey("markets.id", ondelete="CASCADE"), nullable=False)
     total_revenue = Column(Float, nullable=True)
     change_date = Column(DateTime, default=lambda: datetime.now(timezone.utc))
 
-    # Verknüpfte Produkte
     products = relationship(
         "Product", secondary=market_change_products, back_populates="market_changes")
 
-    # Neue und entfernte Produkte als Listen
     new_products = Column(String, nullable=True)  # Kommagetrennte ASINs
     removed_products = Column(String, nullable=True)  # Kommagetrennte ASINs
     changes = Column(String, nullable=True)
-
-    # 📌 NEUE SPALTE: Top-Suggestions als kommagetrennter String
     top_suggestions = Column(String, nullable=True, default="")
 
-    market = relationship("Market", back_populates="market_changes")
 
-    def get_top_suggestions(self):
-        """ Gibt die Liste der Top-Suggestions zurück """
-        return self.top_suggestions.split(",") if self.top_suggestions else []
+    market = relationship("Market", back_populates="market_changes")
 
     def set_top_suggestions(self, suggestions: list):
         """ Speichert eine Liste von Top-Suggestions als kommagetrennten String """
         self.top_suggestions = ",".join(suggestions)
 
-
-# 6️⃣ MarketCluster Table (Verknüpft User mit bis zu 5 Märkten)
 class MarketCluster(Base):
     __tablename__ = "market_clusters"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
+    user_id = Column(Integer, ForeignKey(
+        "users.id", ondelete="CASCADE"), nullable=False)
     title = Column(String, nullable=False)
     total_revenue = Column(Float, nullable=True, default=0.0)
+    cluster_type = Column(Enum("dynamic", "static", "snapshot",
+                          name="cluster_type_enum"), default="dynamic")
+    user = relationship(
+        "User", back_populates="market_clusters", passive_deletes=True)
+    is_initial_scraped = Column(Boolean, default=False)
 
-    # ✅ Stelle sicher, dass diese Beziehung existiert!
-    user = relationship("User", back_populates="market_clusters", passive_deletes=True)
-
-    # ✅ Cascade-Fix: Löscht `market_cluster_markets`, wenn MarketCluster gelöscht wird
     markets = relationship(
         "Market",
         secondary=market_cluster_markets,
         back_populates="market_clusters",
-        cascade="all, delete",  # 🔥 Löscht automatisch Verknüpfungen in `market_cluster_markets`
+        cascade="all, delete", 
         passive_deletes=True
     )
