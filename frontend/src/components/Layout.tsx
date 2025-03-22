@@ -21,13 +21,10 @@ export default function Layout({ setIsAuthenticated, setUser }: { setIsAuthentic
     navigate("/");
   };
 
-  // ✅ Diese Funktion wird aufgerufen, wenn auf das Zahnrad geklickt wird
   const clickAdminIcon = () => {
-    const updatedUser = UserService.getUser(); // Neuen User holen
-    setUser(updatedUser); // In globalen State speichern
-    console.log("Aktueller Benutzer nach Update:", updatedUser);
-
-    navigate("/admin"); // Erst nach /admin navigieren
+    const updatedUser = UserService.getUser();
+    setUser(updatedUser); 
+    navigate("/admin"); 
   };
 
   if (location.pathname === "/") return <Outlet />;

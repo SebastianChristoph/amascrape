@@ -23,7 +23,6 @@ class MarketOrchestrator:
         self.cluster_to_scrape = cluster_to_scrape
         self.market_times = []
         open(LOG_FILE_MARKET, "w").close()  # ✅ Market-Logs beim Start leeren
-        print("MO: cleared file", LOG_FILE_MARKET)
 
     def format_time(self, seconds):
         minutes, seconds = divmod(seconds, 60)

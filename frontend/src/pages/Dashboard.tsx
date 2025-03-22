@@ -21,7 +21,7 @@ import {
   Title,
   Tooltip
 } from 'chart.js';
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Line } from 'react-chartjs-2';
 import { AiOutlineCheckCircle } from "react-icons/ai";
 import { FaBoxes, FaChartLine, FaDollarSign, FaLayerGroup } from 'react-icons/fa';
