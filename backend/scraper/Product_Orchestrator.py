@@ -11,6 +11,8 @@ from scraper.product_selenium_scraper import AmazonProductScraper
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from sqlalchemy.orm import Session
+import uuid
+from selenium.webdriver.chrome.service import Service
 
 LOG_FILE_PRODUCT = "scraping_log.txt"
 
@@ -33,6 +35,8 @@ class Product_Orchestrator:
         self.start_time = None
         self.failed_products = []
         self.cluster_to_scrape = cluster_to_scrape
+        
+
 
         # 🌍 Globale Log-Datei einrichten
 
@@ -58,8 +62,17 @@ class Product_Orchestrator:
         chrome_options.add_argument("--disable-web-security")
         chrome_options.add_argument("--log-level=3")
         chrome_options.add_argument(f"user-agent={selenium_config.user_agent}")
+        
+        unique_id = uuid.uuid4().hex
+        chrome_options.add_argument(f'--user-data-dir=/tmp/chrome-user-data-{cluster_to_scrape}-{unique_id}')
 
-        self.driver = webdriver.Chrome(options=chrome_options)
+        service = Service(executable_path="/usr/bin/chromedriver")  # oder wo dein chromedriver liegt
+        self.driver = webdriver.Chrome(service=service, options=chrome_options)
+
+        print("🔍 WebDriver gestartet mit:", self.driver.capabilities.get("browserName"))
+
+
+        #self.driver = webdriver.Chrome(options=chrome_options)
         self.scraper = AmazonProductScraper(self.driver, show_details=False)
 
         # 🏁 Verbindung testen
