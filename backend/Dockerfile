@@ -19,6 +19,14 @@ RUN GECKO_VERSION=$(curl -sL https://api.github.com/repos/mozilla/geckodriver/re
     && chmod +x /usr/local/bin/geckodriver \
     && rm /tmp/geckodriver.tar.gz
 
+RUN apt-get update && \
+    apt-get install -y firefox-esr \
+    && wget https://github.com/mozilla/geckodriver/releases/download/v0.33.0/geckodriver-v0.33.0-linux64.tar.gz \
+    && tar -xzf geckodriver-v0.33.0-linux64.tar.gz \
+    && mv geckodriver /usr/local/bin/ \
+    && rm geckodriver-v0.33.0-linux64.tar.gz
+
+
 # Python-Abhängigkeiten kopieren und installieren
 COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
