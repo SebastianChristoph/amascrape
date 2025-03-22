@@ -12,7 +12,9 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from sqlalchemy.orm import Session
 import uuid
-from selenium.webdriver.chrome.service import Service
+import shutil
+import logging
+from selenium.webdriver.chrome.service import Service as ChromeService
 
 LOG_FILE_PRODUCT = "scraping_log.txt"
 
@@ -25,6 +27,16 @@ logging.basicConfig(
         logging.StreamHandler(sys.stdout)  # 🔹 In Konsole ausgeben
     ]
 )
+
+def find_chromedriver_path():
+    """Sucht nach dem installierten chromedriver im Systempfad."""
+    path = shutil.which("chromedriver")
+    if path:
+        logging.info(f"✅ Chromedriver gefunden: {path}")
+        return path
+    else:
+        logging.error("❌ Chromedriver wurde nicht gefunden. Bitte sicherstellen, dass er installiert ist und im PATH liegt.")
+        raise FileNotFoundError("Chromedriver wurde nicht gefunden.")
 
 
 class Product_Orchestrator:
@@ -66,9 +78,9 @@ class Product_Orchestrator:
         unique_id = uuid.uuid4().hex
         chrome_options.add_argument(f'--user-data-dir=/tmp/chrome-user-data-{cluster_to_scrape}-{unique_id}')
 
-        service = Service(executable_path="/usr/bin/chromedriver")  # oder wo dein chromedriver liegt
-        self.driver = webdriver.Chrome(service=service, options=chrome_options)
-
+        chrome_path = find_chromedriver_path()
+        chrome_service = ChromeService(executable_path=chrome_path)
+        self.driver = webdriver.Chrome(service=chrome_service, options=chrome_options)
         print("🔍 WebDriver gestartet mit:", self.driver.capabilities.get("browserName"))
 
 
