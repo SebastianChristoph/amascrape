@@ -158,7 +158,6 @@ const Dashboard: React.FC = () => {
         setActiveCluster(null);
         setIsFetching(false);
         fetchData();
-        console.log("keine aktiven scraping market clusters");
       } else if (data.status === "done") {
         showSnackbar("Your cluster is ready to go");
         setActiveCluster(null);

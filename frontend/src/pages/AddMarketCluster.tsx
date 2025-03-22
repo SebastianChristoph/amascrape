@@ -44,8 +44,6 @@ const AddMarketCluster: React.FC = () => {
     const fetchActiveScrapingClusters = async () => {
       try {
         const activeCluster = await MarketService.getActiveScrapingCluster();
-        console.log("[AddMarketCluster] Aktiver Scraping-Prozess:", activeCluster);
-
         if (activeCluster) {
           setIsScraping(true);
         } else {

@@ -1,14 +1,9 @@
-import asyncio
 import os
 from concurrent.futures import ThreadPoolExecutor
-from typing import List
-
-from app.database import SessionLocal, engine, init_db, ensure_admin_user
-from app.routes import chartdata, market_clusters, markets, scraping, users, user_products
+from app.database import init_db, ensure_admin_user
+from app.routes import chartdata, market_clusters, scraping, users, user_products, products
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from sqlalchemy.exc import OperationalError
-from sqlalchemy.sql import text
 
 
 
@@ -42,7 +37,7 @@ app.add_middleware(
 
 # ✅ Router einbinden
 app.include_router(users.router, prefix="/users", tags=["Users"])
-app.include_router(markets.router, prefix="/markets", tags=["Markets"])
+app.include_router(products.router, prefix="/products", tags=["Markets"])
 app.include_router(market_clusters.router, prefix="/market-clusters", tags=["Market Clusters"])
 app.include_router(chartdata.router, prefix="/chartdata", tags=["Chart Data"])
 app.include_router(scraping.router, prefix="/scraping", tags=["Scraping"])

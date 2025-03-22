@@ -40,7 +40,6 @@ class UserService {
     }
   }
 
-   // ✅ Admin kann Benutzer hinzufügen
    static async createUserAsAdmin(username: string, email: string, password: string): Promise<{ success: boolean; message: string }> {
     try {
         const response = await fetch(`${API_URL}/users/admin/create`, {
@@ -65,8 +64,7 @@ class UserService {
 }
 
 
-  // ✅ Admin kann Benutzer löschen
-  static async deleteUser(userId: number): Promise<{ success: boolean; message: string }> {
+  static async deleteUserAsAdmin(userId: number): Promise<{ success: boolean; message: string }> {
     try {
       const response = await fetch(`${API_URL}/users/admin/delete/${userId}`, {
         method: "DELETE",
