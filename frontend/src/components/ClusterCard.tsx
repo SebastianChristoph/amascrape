@@ -65,13 +65,10 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
           );
           if (response.length > 0) {
             setSparklineData(response);
-            console.log("[CLUSTER CARD] Geladene Sparkline-Daten:", response);
           } else {
-            console.error("Keine Sparkline-Daten erhalten.");
             showSnackbar("Fehler beim Laden der Sparkline-Daten.");
           }
         } catch (error) {
-          console.error("Fehler beim Abrufen der Sparkline-Daten:", error);
           showSnackbar("Fehler beim Abrufen der Sparkline-Daten.");
         } finally {
           setLoadingSparkline(false);

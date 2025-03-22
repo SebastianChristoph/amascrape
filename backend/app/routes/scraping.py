@@ -1,16 +1,15 @@
 import asyncio
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
-import os
 from typing import Dict, List, Optional
 
 from app.auth import get_current_user
 from app.database import get_db
 from app.models import (Market, MarketChange, MarketCluster, Product,
                         ProductChange, User)
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends
 from pydantic import BaseModel
-from scraper.Product_Orchestrator import Product_Orchestrator  # ✅ Richtig
+from scraper.Product_Orchestrator import Product_Orchestrator
 
 from scraper.first_page_amazon_scraper import AmazonFirstPageScraper
 from sqlalchemy.orm import Session
@@ -35,7 +34,6 @@ class NewClusterData(BaseModel):
 LOG_FILE_PRODUCT = "scraping_log.txt"
 LOG_FILE_MARKET = "market_scraping_log.txt"
 
-# ✅ Logging-Konfiguration
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(message)s",
@@ -46,41 +44,8 @@ logging.basicConfig(
 
 scraping_processes: Dict[int, Dict[str, Dict[str, Dict[str, any]]]] = {}
 
-
-@router.post("/start-firstpage-scraping-process")
-async def post_scraping(
-    newClusterData: NewClusterData,
-    db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user)
-):
-    """Startet den Scraping-Prozess für einen Nutzer"""
-    user_id = current_user.id
-    cluster_name = newClusterData.clusterName
-    cluster_type = newClusterData.clusterType
-    print(f"🔥 Start Scraping für Nutzer {user_id}, Cluster: {cluster_name}")
-
-    scraping_processes[user_id] = {}
-    scraping_processes[user_id][cluster_name] = {
-        "status": "processing", "keywords": {},  "cluster_type": cluster_type}
-
-    for keyword in newClusterData.keywords:
-        market_exists = db.query(Market).filter(
-            Market.keyword == keyword).first()
-
-        if market_exists:
-            print(f"✅ Market '{keyword}' existiert bereits.")
-            scraping_processes[user_id][cluster_name]["keywords"][keyword] = {
-                "status": "done", "data": {}}
-        else:
-            print(f"🔍 Scraping für neues Keyword: {keyword}")
-            scraping_processes[user_id][cluster_name]["keywords"][keyword] = {
-                "status": "processing", "data": {}}
-            asyncio.create_task(scraping_process(
-                keyword, cluster_name, user_id))
-
-    return {"success": True, "message": f"Scraping für {cluster_name} mit type {cluster_type} gestartet"}
-
-
+## Get all clusters that are first-page-scraped right now
+## TODO: Refactoring
 @router.get("/get-loading-clusters")
 async def get_loading_clusters(
     current_user: User = Depends(get_current_user),
@@ -211,7 +176,41 @@ async def get_loading_clusters(
         "keywords": {kw: data["status"] for kw, data in cluster_data["keywords"].items()}
     }
 
+## START FIRST PAGE SCRAPING FOR CLUSTER
+@router.post("/start-firstpage-scraping-process")
+async def post_scraping(
+    newClusterData: NewClusterData,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
+    """Startet den Scraping-Prozess für einen Nutzer"""
+    user_id = current_user.id
+    cluster_name = newClusterData.clusterName
+    cluster_type = newClusterData.clusterType
+    print(f"🔥 Start Scraping für Nutzer {user_id}, Cluster: {cluster_name}")
 
+    scraping_processes[user_id] = {}
+    scraping_processes[user_id][cluster_name] = {
+        "status": "processing", "keywords": {},  "cluster_type": cluster_type}
+
+    for keyword in newClusterData.keywords:
+        market_exists = db.query(Market).filter(
+            Market.keyword == keyword).first()
+
+        if market_exists:
+            print(f"✅ Market '{keyword}' existiert bereits.")
+            scraping_processes[user_id][cluster_name]["keywords"][keyword] = {
+                "status": "done", "data": {}}
+        else:
+            print(f"🔍 Scraping für neues Keyword: {keyword}")
+            scraping_processes[user_id][cluster_name]["keywords"][keyword] = {
+                "status": "processing", "data": {}}
+            asyncio.create_task(scraping_process(
+                keyword, cluster_name, user_id))
+
+    return {"success": True, "message": f"Scraping für {cluster_name} mit type {cluster_type} gestartet"}
+
+## ASYNC INITIAL FIRST PAGE SCRAPING  WRAPPER
 async def scraping_process(keyword: str, clustername: str, user_id: int):
     """Führt das Scraping für ein Keyword durch"""
     print(f"⏳ Start Scraping ({keyword}) für Nutzer {user_id}")
@@ -229,34 +228,13 @@ async def scraping_process(keyword: str, clustername: str, user_id: int):
     scraping_processes[user_id][clustername]["keywords"][keyword]["data"] = first_page_data
     print(f"✅ Scraping für '{keyword}' abgeschlossen! (Nutzer {user_id})")
 
-
+## INITIAL FIRST PAGE SCRAPING 
 def fetch_first_page_data(keyword: str):
     """Führt das Scraping im Hintergrund aus"""
     amazon_scraper = AmazonFirstPageScraper(headless=True, show_details=True)
     return amazon_scraper.get_first_page_data(keyword)
-# ✅ Product Orchestrator Start
 
-
-@router.post("/start-product-orchestrator")
-async def start_product_orchestrator(current_user: User = Depends(get_current_user)):
-    global orchestrator_task, orchestrator_running
-    open(LOG_FILE_PRODUCT, "w").close()
-    if not is_admin(current_user):
-        raise HTTPException(
-            status_code=403, detail="Nur Admins dürfen den Product Orchestrator starten.")
-
-    if orchestrator_running:
-        return {"success": False, "message": "Product Orchestrator läuft bereits!"}
-
-    orchestrator_running = True
-    loop = asyncio.get_running_loop()
-    orchestrator_task = loop.run_in_executor(
-        executor, run_product_orchestrator)
-
-    return {"success": True, "message": "Product Orchestrator wurde gestartet!"}
-
-
-
+## ASYNC PRODUCT ORCHESTRATOR
 def run_product_orchestrator(cluster_id: int, db: Session):
     """Führt den Product Orchestrator für ein bestimmtes Cluster aus und startet danach den Market Orchestrator asynchron."""
     try:
@@ -275,29 +253,7 @@ def run_product_orchestrator(cluster_id: int, db: Session):
     except Exception as e:
         print(f"❌ Fehler im Product-Orchestrator für Cluster {cluster_id}: {e}")
 
-# ✅ Market Orchestrator Start
-
-
-@router.post("/start-market-orchestrator")
-async def start_market_orchestrator(current_user: User = Depends(get_current_user)):
-    global market_orchestrator_task, market_orchestrator_running
-
-    if not is_admin(current_user):
-        raise HTTPException(
-            status_code=403, detail="Nur Admins dürfen den Market Orchestrator starten.")
-
-    if market_orchestrator_running:
-        return {"success": False, "message": "Market Orchestrator läuft bereits!"}
-
-    market_orchestrator_running = True
-    loop = asyncio.get_running_loop()
-    market_orchestrator_task = loop.run_in_executor(
-        executor, run_market_orchestrator)
-
-    return {"success": True, "message": "Market Orchestrator wurde gestartet!"}
-
-
-
+## ASYNC MARKET ORCHESTRATOR
 def run_market_orchestrator(cluster_id: int, db: Session):
     """Führt den Market Orchestrator für ein bestimmtes Cluster aus."""
     try:
@@ -318,7 +274,6 @@ def run_market_orchestrator(cluster_id: int, db: Session):
     except Exception as e:
         print(f"❌ Fehler im Market-Orchestrator für Cluster {cluster_id}: {e}")
 
-
 def mark_cluster_as_scraped(cluster_id: int, db: Session):
     """Setzt is_initial_scraped auf True, wenn der Market-Orchestrator beendet ist."""
     try:
@@ -327,58 +282,3 @@ def mark_cluster_as_scraped(cluster_id: int, db: Session):
         print(f"✅ MarketCluster {cluster_id} wurde als vollständig gescraped markiert.")
     except Exception as e:
         print(f"❌ Fehler beim Setzen von is_initial_scraped für Cluster {cluster_id}: {e}")
-
-# ✅ Status-Abfrage für Product Orchestrator
-
-
-@router.get("/is-product-orchestrator-running")
-async def is_product_orchestrator_running(current_user: User = Depends(get_current_user)):
-    if not is_admin(current_user):
-        raise HTTPException(
-            status_code=403, detail="Nur Admins dürfen den Status abrufen.")
-    return {"running": orchestrator_running}
-
-# ✅ Status-Abfrage für Market Orchestrator
-
-
-@router.get("/is-market-orchestrator-running")
-async def is_market_orchestrator_running(current_user: User = Depends(get_current_user)):
-    if not is_admin(current_user):
-        raise HTTPException(
-            status_code=403, detail="Nur Admins dürfen den Status abrufen.")
-    return {"running": market_orchestrator_running}
-
-# ✅ Logs für Product Orchestrator abrufen
-
-
-@router.get("/get-product-orchestrator-logs")
-async def get_product_orchestrator_logs(current_user: User = Depends(get_current_user)):
-    if not is_admin(current_user):
-        raise HTTPException(
-            status_code=403, detail="Nur Admins dürfen Logs sehen.")
-    return get_logs(LOG_FILE_PRODUCT)
-
-# ✅ Logs für Market Orchestrator abrufen
-
-
-@router.get("/get-market-orchestrator-logs")
-async def get_market_orchestrator_logs(current_user: User = Depends(get_current_user)):
-    if not is_admin(current_user):
-        raise HTTPException(
-            status_code=403, detail="Nur Admins dürfen Logs sehen.")
-    return get_logs(LOG_FILE_MARKET)
-
-
-def get_logs(log_file):
-    if not os.path.exists(log_file):
-        return {"logs": ["🚫 Keine Logs gefunden!"]}
-    try:
-        with open(log_file, "r", encoding="utf-8") as f:
-            logs = f.readlines()
-        return {"logs": logs[-20:]}  # 🔹 Nur die letzten 20 Logs anzeigen
-    except Exception as e:
-        return {"logs": [f"❌ Fehler beim Abrufen der Logs: {str(e)}"]}
-
-
-def is_admin(user: User):
-    return user.username == "admin"

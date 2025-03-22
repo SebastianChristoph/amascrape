@@ -1278,3 +1278,4 @@
 2025-03-20 20:06:13,520 [WARNING] ❌ Fehler beim Scrapen von B0DHYMZBP9, aber last_time_scraped wird trotzdem aktualisiert.
 2025-03-20 20:06:13,563 [INFO] 🔍 [84/91]: B07CVNM3JV https://www.amazon.com/dp/B07CVNM3JV?language=en_US
 2025-03-20 20:06:17,631 [WARNING] Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000212D9B71480>: Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte')': /session/372e2a7c44dd4dd54162ee6ed842355c/url
+2025-03-22 20:30:07,965 [INFO] ✅ Market Cluster 4 deleted.

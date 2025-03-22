@@ -2,7 +2,6 @@ import {
   Alert,
   Backdrop,
   Box,
-  Button,
   Chip,
   CircularProgress,
   IconButton,
@@ -39,19 +38,6 @@ import ChartDataService from "../services/ChartDataService";
 import MarketService from "../services/MarketService";
 import { FaCheckCircle, FaPlusCircle } from "react-icons/fa";
 
-interface TabPanelProps {
-  children?: React.ReactNode;
-  index: number;
-  value: number;
-}
-
-interface MyProduct {
-  id: string; // oder number, je nach DB
-  title: string;
-  price: number;
-  image: string;
-}
-
 interface ProductType {
   asin: string; // ✅ Ändere 'id' zu 'asin'
   title: string;
@@ -75,7 +61,6 @@ export default function ClusterDetails() {
     Record<string, { date: string; value: number }[]>
   >({});
 
-  const [barChartData, setBarChartData] = useState<any[]>([]);
   const [openBackdrop, setOpenBackdrop] = useState(false);
   const [productChanges, setProductChanges] = useState<any[]>([]);
   const [selectedAsin, setSelectedAsin] = useState<string | null>(null);
@@ -141,7 +126,7 @@ export default function ClusterDetails() {
 
       try {
         // 🔄 Alle API-Anfragen parallel abrufen
-        const [clusterData, stackedData, userInsights, barData, myProducts] =
+        const [clusterData, stackedData, userInsights, myProducts] =
           await Promise.all([
             MarketService.getMarketClusterDetails(Number(clusterId)),
             ChartDataService.GetStackedBarDataForCluster(Number(clusterId)),
@@ -150,7 +135,7 @@ export default function ClusterDetails() {
                 Authorization: `Bearer ${localStorage.getItem(TOKEN_KEY)}`,
               },
             }).then((res) => res.json()),
-            ChartDataService.GetBarChartData(),
+            
             fetch(`${API_URL}/user-products/`, {
               headers: {
                 Authorization: `Bearer ${localStorage.getItem(TOKEN_KEY)}`,
@@ -185,8 +170,6 @@ export default function ClusterDetails() {
           console.log("[DEBUG] stackedData:", stackedData);
           setStackedChartData(transformStackedChartData(stackedData));
         }
-
-        if (barData) setBarChartData(barData.barChart);
       } catch (error) {
         console.error("Error loading data:", error);
       } finally {
