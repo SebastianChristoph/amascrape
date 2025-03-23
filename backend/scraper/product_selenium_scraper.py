@@ -249,42 +249,54 @@ class AmazonProductScraper:
         try:
             # Method 1: Original method
             try:
+                print("\t", '//*[@id="socialProofingAsinFaceout_feature_div"]/div/div')
                 blm_element = self.driver.find_element(By.XPATH, self.web_elements["bought_last_month"])
                 blm_str = blm_element.text
                 blm_str = blm_str.replace("bought", "").replace("K", "000").replace(
                     "k", "000").replace("+", "").replace(" ", "").replace("inpastmonth", "")
+                print("\t", int(blm_str))
                 return int(blm_str)
             except NoSuchElementException:
+                print("\t", "[^  X]")
                 pass
 
             # Method 2: Look for alternative BLM text
             try:
+                print("\t", "//div[contains(text(), 'bought in past month')]")
                 blm_element = self.driver.find_element(By.XPATH, "//div[contains(text(), 'bought in past month')]")
                 blm_str = blm_element.text
                 blm_str = blm_str.replace("bought", "").replace("K", "000").replace(
                     "k", "000").replace("+", "").replace(" ", "").replace("inpastmonth", "")
+                print("\t", int(blm_str))
                 return int(blm_str)
             except NoSuchElementException:
+                print("\t", "[^  X]")
                 pass
 
             # Method 3: Look for social proof section
             try:
+                print("\t", "//div[contains(@class, 'socialProofingAsinFaceout')]")
                 social_proof = self.driver.find_element(By.XPATH, "//div[contains(@class, 'socialProofingAsinFaceout')]")
                 blm_text = social_proof.text
                 match = re.search(r"(\d+)\s*bought", blm_text)
                 if match:
+                    print("\t", int(match.group(1)))
                     return int(match.group(1))
             except NoSuchElementException:
+                print("\t", "[^  X]")
                 pass
 
             # Method 4: Look for purchase frequency
             try:
+                print("\t", "//div[contains(text(), 'purchased')")
                 purchase_freq = self.driver.find_element(By.XPATH, "//div[contains(text(), 'purchased')]")
                 freq_text = purchase_freq.text
                 match = re.search(r"(\d+)\s*purchased", freq_text)
                 if match:
+                    print("\t", int(match.group(1)))
                     return int(match.group(1))
             except NoSuchElementException:
+                print("\t", "[^  X]")
                 pass
 
         except Exception as e:
