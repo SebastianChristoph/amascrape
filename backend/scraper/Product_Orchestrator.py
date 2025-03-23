@@ -1,4 +1,5 @@
 import logging
+import shutil
 import sys
 import time
 from datetime import date, datetime, timezone
@@ -10,9 +11,10 @@ from app.models import Market, MarketCluster, Product, ProductChange, market_pro
 from scraper.product_selenium_scraper import AmazonProductScraper
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-from sqlalchemy.orm import Session
 import uuid
+import platform
 from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
 
 LOG_FILE_PRODUCT = "scraping_log.txt"
 
@@ -65,9 +67,22 @@ class Product_Orchestrator:
         
         unique_id = uuid.uuid4().hex
         chrome_options.add_argument(f'--user-data-dir=/tmp/chrome-user-data-{cluster_to_scrape}-{unique_id}')
+        
+        
+        if platform.system() == "Windows":
+            service = Service(ChromeDriverManager().install())
+        else:
+            chromedriver_path = shutil.which("chromedriver")
+            if chromedriver_path:
+                service = Service(executable_path=chromedriver_path)
+            else:
+                raise FileNotFoundError("❌ Kein chromedriver gefunden – und kein ChromeType verwendet.")
 
-        service = Service(executable_path="/usr/bin/chromedriver")  # oder wo dein chromedriver liegt
+        
+
+        #service = Service(executable_path="/usr/bin/chromedriver")  # oder wo dein chromedriver liegt
         self.driver = webdriver.Chrome(service=service, options=chrome_options)
+        logging.info(f"🔧 Verwende ChromeDriver von: {service.path}")
 
         print("🔍 WebDriver gestartet mit:", self.driver.capabilities.get("browserName"))
 

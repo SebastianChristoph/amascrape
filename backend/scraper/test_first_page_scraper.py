@@ -1,11 +1,15 @@
 import logging
+import shutil
 import time
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 import scraper.selenium_config as selenium_config
 from scraper.first_page_amazon_scraper import AmazonFirstPageScraper
+import platform
+import shutil
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
 
-# Logging-Konfiguration
 logging.basicConfig(level=logging.INFO, format='%(message)s')
 
 def test_first_page(search_query):
@@ -30,9 +34,20 @@ def test_first_page(search_query):
     chrome_options.add_argument(f"user-agent={selenium_config.user_agent}")
     
     try:
-        driver = webdriver.Chrome(options=chrome_options)
+        if platform.system() == "Windows":
+            service = Service(ChromeDriverManager().install())
+        else:
+            chromedriver_path = shutil.which("chromedriver")
+            if chromedriver_path:
+                service = Service(executable_path=chromedriver_path)
+            else:
+                raise FileNotFoundError("❌ Kein chromedriver gefunden – und kein ChromeType verwendet.")
+
+
+        driver = webdriver.Chrome(service=service, options=chrome_options)
+
         scraper = AmazonFirstPageScraper(driver, show_details=True)
-        
+        print(f"🔍 WebDriver gestartet mit: {driver.capabilities.get('browserName')}")
         start_time = time.time()
         search_results = scraper.get_first_page_data(search_query)
         end_time = time.time()
