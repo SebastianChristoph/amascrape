@@ -3,8 +3,8 @@ from typing import List, Optional
 
 from app.auth import get_current_user
 from app.database import get_db
-from app.models import (Market, MarketChange, MarketCluster,
-                        ProductChange, User,
+from app.models import (Market, MarketChange, MarketCluster, Product,
+                        ProductChange, User,market_change_products,
                         market_cluster_markets)
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
@@ -206,6 +206,9 @@ async def get_market_cluster_details(
             MarketChange.market_id == market.id
         ).order_by(MarketChange.change_date.desc()).first()
 
+        if not latest_market_change:
+            continue
+
         if not latest_market_change.products:
             logging.warning(
                 f"⚠️ Kein ProductChange gefunden für Market {market.keyword} (MarketChange ID: {latest_market_change.id})")
@@ -219,62 +222,69 @@ async def get_market_cluster_details(
             "sparkline_data_total_revenue": sparkline_data_total_revenue
         }
 
-        if latest_market_change:
-            market_revenue = latest_market_change.total_revenue or 0
-            market_data["revenue_total"] = market_revenue
-            market_data["top_suggestions"] = latest_market_change.top_suggestions
+        market_revenue = latest_market_change.total_revenue or 0
+        market_data["revenue_total"] = market_revenue
+        market_data["top_suggestions"] = latest_market_change.top_suggestions
 
-            if market_revenue > max_market_revenue:
-                max_market_revenue = market_revenue
-                top_market = market.keyword
+        if market_revenue > max_market_revenue:
+            max_market_revenue = market_revenue
+            top_market = market.keyword
 
-            for product in latest_market_change.products:
-                total_products += 1
-                latest_product_change = db.query(ProductChange).filter(
-                    ProductChange.asin == product.asin
-                ).order_by(ProductChange.change_date.desc()).first()
+        # Neue Query: Nur Produkte mit gültigem Scrape
+        products_with_scrape = (
+            db.query(Product)
+            .join(market_change_products)
+            .filter(
+                market_change_products.c.market_change_id == latest_market_change.id,
+                Product.last_time_scraped.isnot(None)
+            )
+            .all()
+        )
 
-                # Generiere Sparkline-Daten für Preis, Main Category Rank und Second Category Rank
-                sparkline_price = get_sparkline_for_product(
-                    db, product.asin, "price")
-                sparkline_main_rank = get_sparkline_for_product(
-                    db, product.asin, "main_category_rank")
-                sparkline_second_rank = get_sparkline_for_product(
-                    db, product.asin, "second_category_rank")
-                sparkline_total = get_sparkline_for_product(
-                    db, product.asin, "total")
-                sparkline_blm = get_sparkline_for_product(
-                    db, product.asin, "blm")
+        for product in products_with_scrape:
+            total_products += 1
 
-                if latest_product_change and latest_product_change.total:
-                    if latest_product_change.total > top_product["revenue"]:
-                        top_product = {
-                            "asin": product.asin,
-                            "title": latest_product_change.title,
-                            "revenue": latest_product_change.total
-                        }
+            latest_product_change = db.query(ProductChange).filter(
+                ProductChange.asin == product.asin
+            ).order_by(ProductChange.change_date.desc()).first()
 
-                product_data = {
-                    "image": latest_product_change.img_path if latest_product_change and latest_product_change.img_path else None,
-                    "asin": product.asin,
-                    "title": latest_product_change.title if latest_product_change and latest_product_change.title else None,
-                    "price": latest_product_change.price if latest_product_change else None,
-                    "main_category": latest_product_change.main_category if latest_product_change and latest_product_change.main_category else None,
-                    "main_category_rank": latest_product_change.main_category_rank if latest_product_change else None,
-                    "second_category": latest_product_change.second_category if latest_product_change and latest_product_change.second_category else None,
-                    "second_category_rank": latest_product_change.second_category_rank if latest_product_change else None,
-                    "total": latest_product_change.total if latest_product_change else None,
-                    "blm": latest_product_change.blm if latest_product_change else None,
-                    "sparkline_price": sparkline_price,
-                    "sparkline_main_rank": sparkline_main_rank,
-                    "sparkline_second_rank": sparkline_second_rank,
-                    "sparkline_total": sparkline_total,
-                    "sparkline_blm": sparkline_blm,
-                }
+            sparkline_price = get_sparkline_for_product(db, product.asin, "price")
+            sparkline_main_rank = get_sparkline_for_product(db, product.asin, "main_category_rank")
+            sparkline_second_rank = get_sparkline_for_product(db, product.asin, "second_category_rank")
+            sparkline_total = get_sparkline_for_product(db, product.asin, "total")
+            sparkline_blm = get_sparkline_for_product(db, product.asin, "blm")
 
-                market_data["products"].append(product_data)
+            if latest_product_change and latest_product_change.total:
+                if latest_product_change.total > top_product["revenue"]:
+                    top_product = {
+                        "asin": product.asin,
+                        "title": latest_product_change.title,
+                        "revenue": latest_product_change.total
+                    }
+
+            product_data = {
+                "image": latest_product_change.img_path if latest_product_change and latest_product_change.img_path else None,
+                "asin": product.asin,
+                "title": latest_product_change.title if latest_product_change and latest_product_change.title else None,
+                "price": latest_product_change.price if latest_product_change else None,
+                "main_category": latest_product_change.main_category if latest_product_change and latest_product_change.main_category else None,
+                "main_category_rank": latest_product_change.main_category_rank if latest_product_change else None,
+                "second_category": latest_product_change.second_category if latest_product_change and latest_product_change.second_category else None,
+                "second_category_rank": latest_product_change.second_category_rank if latest_product_change else None,
+                "total": latest_product_change.total if latest_product_change else None,
+                "blm": latest_product_change.blm if latest_product_change else None,
+                "sparkline_price": sparkline_price,
+                "sparkline_main_rank": sparkline_main_rank,
+                "sparkline_second_rank": sparkline_second_rank,
+                "sparkline_total": sparkline_total,
+                "sparkline_blm": sparkline_blm,
+            }
+
+            market_data["products"].append(product_data)
 
         response_data["markets"].append(market_data)
+
+
 
     total_revenue = response_data["total_revenue"] or 0
     response_data["insights"].update({
