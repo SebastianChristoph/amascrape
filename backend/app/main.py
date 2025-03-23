@@ -37,7 +37,7 @@ app.add_middleware(
 
 # ✅ Router einbinden
 app.include_router(users.router, prefix="/users", tags=["Users"])
-app.include_router(products.router, prefix="/products", tags=["Markets"])
+app.include_router(products.router, prefix="/products", tags=["Products"])
 app.include_router(market_clusters.router, prefix="/market-clusters", tags=["Market Clusters"])
 app.include_router(chartdata.router, prefix="/chartdata", tags=["Chart Data"])
 app.include_router(scraping.router, prefix="/scraping", tags=["Scraping"])
