@@ -87,10 +87,19 @@ class AmazonProductScraper:
         self.technical_details_box_content = self.get_technical_details_box_content()
 
         # Debug-Ausgabe für Product Info Box Content
+        print("Product Info Box Content:")
         if self.show_details and self.product_info_box_content:
             max_key_length = max(len(key)
                                  for key in self.product_info_box_content.keys())
             for key, value in self.product_info_box_content.items():
+                cleaned_value = value.replace('\n', '')
+                print(f"\t{key.ljust(max_key_length)} : {cleaned_value}")
+        
+        if self.show_details and self.technical_details_box_content:
+            print("Technical Details Box Content:")
+            max_key_length = max(len(key)
+                                 for key in self.technical_details_box_content.keys())
+            for key, value in self.technical_details_box_content.items():
                 cleaned_value = value.replace('\n', '')
                 print(f"\t{key.ljust(max_key_length)} : {cleaned_value}")
 
@@ -341,7 +350,8 @@ class AmazonProductScraper:
             price_str = re.sub(r"\([^)]*\)", "", price_str)
 
             # Entferne alles außer Ziffern, $ und \n
-            cleaned = re.sub(r"[^\d\$\n]", "", price_str)
+            cleaned = re.sub(r"[^\d\$\n\.]", "", price_str)
+
 
             # Sonderfall: Preis über mehrere Zeilen (z. B. "$9\n99")
             match_multiline = re.search(r"\$(\d+)\n(\d{2})", cleaned)
@@ -399,7 +409,58 @@ class AmazonProductScraper:
         return None
 
     def get_technical_details_box_content(self):
+        """Extrahiert technische Produktinformationen aus der Tabelle."""
         technical_info = {}
+        print("get technical info")
+        
+        try:
+            # First try to find the "Technical Details" text
+            technical_details_elements = self.driver.find_elements(By.XPATH, "//*[contains(text(), 'Technical Details')]")
+            
+            if not technical_details_elements:
+                if self.show_details:
+                    print("\t❌ No 'Technical Details' text found on page")
+                return technical_info
+            
+            if self.show_details:
+                print(f"\t✅ Found {len(technical_details_elements)} 'Technical Details' elements")
+            
+            # For each "Technical Details" element, try to find the associated table
+            for element in technical_details_elements:
+                try:
+                    # Try to find the closest table
+                    table = element.find_element(By.XPATH, "./ancestor::div[contains(@class, 'a-section')]//table")
+                    if table:
+                        rows = table.find_elements(By.TAG_NAME, "tr")
+                        if rows:
+                            for row in rows:
+                                try:
+                                    th = row.find_element(By.TAG_NAME, 'th')
+                                    td = row.find_element(By.TAG_NAME, 'td')
+                                    key = th.text.strip()
+                                    value = td.text.strip()
+                                    if key and value:  # Only add if both key and value exist
+                                        technical_info[key] = value
+                                except NoSuchElementException:
+                                    continue
+                            
+                            if technical_info:
+                                if self.show_details:
+                                    print("\t✅ Successfully extracted technical details from table")
+                                return technical_info
+                except NoSuchElementException:
+                    continue
+                except Exception as e:
+                    if self.show_details:
+                        print(f"\t⚠️ Error processing table: {e}")
+                    continue
+            
+            if not technical_info and self.show_details:
+                print("\t⚠️ Found 'Technical Details' text but no valid table data")
+                
+        except Exception as e:
+            if self.show_details:
+                print(f"\t⚠️ Error finding technical details: {e}")
 
         return technical_info
 
@@ -508,6 +569,9 @@ class AmazonProductScraper:
                 manufacturer = self.technical_details_box_content.get(
                 "Manufacturer", None) if self.technical_details_box_content else None
             store = self.get_store()
+            if store == None:
+                store = self.technical_details_box_content.get(
+                "Brand", None) if self.technical_details_box_content else None
             image_path = self.get_image_path()
 
             if title is None or price is None:
