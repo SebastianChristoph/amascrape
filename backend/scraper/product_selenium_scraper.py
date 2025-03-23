@@ -6,6 +6,14 @@ from scraper import selenium_config
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
 
+class OutOfStockException(Exception):
+    """Exception für Produkte, die nicht verfügbar sind."""
+    pass
+class NoSuchPageException(Exception):
+    """Exception für Produkte, die nicht verfügbar sind."""
+    pass
+
+
 
 class AmazonProductScraper:
     def __init__(self, driver, show_details=True):
@@ -16,7 +24,42 @@ class AmazonProductScraper:
         self.asin = ""
         self.url = ""
         self.product_info_box_content = {}
+        self.technical_details_box_content = {}
         self.bs_and_rank_data = {}
+
+    def is_out_of_stock(self) -> bool:
+        if self.show_details:
+            print("🛑 Checking if product is out of stock")
+
+        try:
+            add_to_chart_button = self.driver.find_element(By.XPATH, '//*[@id="add-to-cart-button"]')
+        except:
+            print("\t", "No add to chart button")
+            return True
+    
+
+        try:
+            page_text = self.driver.page_source.lower()
+            if "we couldn't find the" in page_text or "temporarily out of stock" in page_text or "No featured offers available" in page_text:
+                return True
+            return False
+        except Exception as e:
+            print(f"⚠️ Error checking stock status: {e}")
+            return False
+    
+    def does_product_has_page(self) -> bool:
+        if self.show_details:
+            print("🛑 Checking if product has page")
+
+        try:
+            page_text = self.driver.page_source.lower()
+            if "couldn't find the page" in page_text:
+                return False
+            return True
+        except Exception as e:
+            print(f"⚠️ Error checking site online status: {e}")
+            return True
+
 
     def scroll_down(self, duration=5):
         """Simuliert das Scrollen auf der Seite, um Inhalte zu laden."""
@@ -41,6 +84,7 @@ class AmazonProductScraper:
 
         # Produkt-Infos extrahieren
         self.product_info_box_content = self.get_product_infos_box_content()
+        self.technical_details_box_content = self.get_technical_details_box_content()
 
         # Debug-Ausgabe für Product Info Box Content
         if self.show_details and self.product_info_box_content:
@@ -80,9 +124,10 @@ class AmazonProductScraper:
                 second_rank = int(second_rank_text.replace(",", "").strip())
                 second_category = second_category.strip()
 
+            main_category = self.remove_parentheses(main_category).strip()
             data = {
                 "rank_main_category": main_rank,
-                "main_category": main_category.strip(),
+                "main_category": main_category,
                 "rank_second_category": second_rank,
                 "second_category": second_category
             }
@@ -289,19 +334,76 @@ class AmazonProductScraper:
             print(f"   ❌ Error finding image path: {e}")
             return None
 
-    def get_price(self):
-        """Extrahiert den Preis des Produkts."""
+    
+    def extract_price_from_string(self, price_str: str) -> float | None:
         try:
-            price_element = self.driver.find_element(
-                By.XPATH, selenium_config.price_categories["default"])
-            price_str = price_element.text.replace(",", "")
-            match = re.search(r'\$(\d+)[\s\n]*(\d+)', price_str)
-            if match:
-                dollars, cents = match.groups()
+            # Entferne den Klammerinhalt, z. B. ($0.42 / Count)
+            price_str = re.sub(r"\([^)]*\)", "", price_str)
+
+            # Entferne alles außer Ziffern, $ und \n
+            cleaned = re.sub(r"[^\d\$\n]", "", price_str)
+
+            # Sonderfall: Preis über mehrere Zeilen (z. B. "$9\n99")
+            match_multiline = re.search(r"\$(\d+)\n(\d{2})", cleaned)
+            if match_multiline:
+                dollars, cents = match_multiline.groups()
                 return float(f"{dollars}.{cents}")
+
+            # Standardfall: einfacher Preis wie $38.99
+            match_single = re.search(r"\$(\d+)\.(\d{2})", cleaned)
+            if match_single:
+                dollars, cents = match_single.groups()
+                return float(f"{dollars}.{cents}")
+
+            # Fallback: $9 (kein Cent-Teil)
+            match_whole = re.search(r"\$(\d+)", cleaned)
+            if match_whole:
+                return float(match_whole.group(1))
+
         except Exception as e:
-            print(f"   ❌ Error finding price: {e}")
-            return None
+            print(f"⚠️ Fehler beim Parsen des Preises: {e}")
+
+        return None
+
+
+    def remove_parentheses(self, text: str) -> str:
+        """Entfernt alles in runden Klammern inklusive der Klammern selbst."""
+        return re.sub(r"\s*\([^)]*\)", "", text).strip()
+
+    def get_price(self):
+        print("Getting price")
+        """Extrahiert den Preis des Produkts."""
+        x_paths=['//*[@id="apex_offerDisplay_desktop"]', 
+                 '//*[@id="corePriceDisplay_desktop_feature_div"]/div[1]/span[1]', 
+                 '//*[@id="corePrice_feature_div"]/div/div/span[1]/span[2]', 
+                 '//*[@id="corePrice_desktop"]/div/table/tbody/tr/td[2]/span[1]']
+
+        for x_path in x_paths:
+            try:
+                print("\t", x_path)
+                price_element = self.driver.find_element(
+                    By.XPATH, x_path)
+                print("price raw:", price_element.text)
+
+                price = self.extract_price_from_string(price_element.text)
+                if price is not None:
+                    print("\t✅ return Price:", price)
+                    return price
+            except NoSuchElementException:
+                print("\t", "[^  X]")
+                pass
+            except Exception as e:
+                print("Error getting price", e)
+        
+        print(f"   ❌ Error finding price:")
+        return None
+
+    def get_technical_details_box_content(self):
+        technical_info = {}
+
+        return technical_info
+
+
 
     def get_product_infos_box_content(self):
         """Extrahiert Produktinformationen aus der Tabelle oder Liste."""
@@ -314,6 +416,7 @@ class AmazonProductScraper:
             product_info = {item.text.split(":")[0].strip(): item.text.split(":")[1].strip() for item in items if ":" in item.text}
         except NoSuchElementException:
             pass
+       
 
         # Try to get info from the product details table
         try:
@@ -344,13 +447,39 @@ class AmazonProductScraper:
 
         return product_info
 
+    def get_location(self) -> str:
+        print("Get location")
+    
+        try:
+            location = self.driver.find_element(
+                    By.XPATH, '//*[@id="nav-global-location-popover-link"]')
+            location = location.text.replace("Update location", "").replace("\n", "").replace("Delivering to", "").strip()
+            print("\t", location)
+            return location
+        except:
+            print("No location found)")
+    
+    def get_maufacturer(self):
+        try:
+            manufacturer = self.driver.find_element(
+                    By.XPATH, '//*[@id="nav-global-location-popover-link"]')
+            return manufacturer.text
+        except:
+            return None
+
     def get_product_infos(self, asin):
         """Scraped Produktdaten für eine gegebene ASIN."""
         self.asin = asin
         self.url = f"https://www.amazon.com/dp/{self.asin}?language=en_US"
 
         try:
-            self.open_page()  # Hier wieder hinzufügen!
+            self.open_page()
+            location = self.get_location()
+            if self.is_out_of_stock():
+                raise OutOfStockException(f"{self.asin} is out of stock.")
+            
+            if not self.does_product_has_page():
+                raise NoSuchPageException(f"{self.asin} has no page")
 
             bought_last_month = self.get_blm()
             price = self.get_price()
@@ -375,6 +504,9 @@ class AmazonProductScraper:
             variants = self.get_variants()
             manufacturer = self.product_info_box_content.get(
                 "Manufacturer", None) if self.product_info_box_content else None
+            if manufacturer == None:
+                manufacturer = self.technical_details_box_content.get(
+                "Manufacturer", None) if self.technical_details_box_content else None
             store = self.get_store()
             image_path = self.get_image_path()
 
@@ -383,6 +515,7 @@ class AmazonProductScraper:
                 return None
 
             product_dict = {
+                "browser_location" : location,
                 "asin": self.asin,
                 "title": title,
                 "price": price,
@@ -401,15 +534,10 @@ class AmazonProductScraper:
                 "image_url": image_path,
             }
 
-            # max_key_length = max(len(key) for key in product_dict.keys())
-            # for key, value in product_dict.items():
-            #     if isinstance(value, str):
-            #         value = value[:60] + "..." if len(value) > 60 else value
-            #     print(f"\t{key.ljust(max_key_length)} : {value}")
-
+        
             return product_dict
         except Exception as e:
-            print(f"❌ Fehler beim Scrapen von {asin}: {e}")
+            print(f"❌ Product Scrape Fail für {asin}: {e}")
             return None
 
 

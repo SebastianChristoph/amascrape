@@ -15,6 +15,7 @@ import uuid
 import platform
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
+from scraper.product_selenium_scraper import OutOfStockException
 
 LOG_FILE_PRODUCT = "scraping_log.txt"
 
@@ -295,6 +296,16 @@ class Product_Orchestrator:
                     #     f"✅ last_time_scraped für {product.asin} erfolgreich aktualisiert.")
 
                     scraped_asins.add(product.asin)
+
+                except OutOfStockException as e:
+                    logging.warning(f"🚫 Produkt {product.asin} ist out of stock: {e}")
+                    product.last_time_scraped = datetime.now(timezone.utc)
+                    db.commit()
+                    self.failed_products.append({
+                        'asin': product.asin,
+                        'missing': ['Out of stock'],
+                        'timestamp': datetime.now(timezone.utc)
+                    })
 
                 except Exception as e:
                     logging.error(

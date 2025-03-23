@@ -46,7 +46,7 @@ def test_asin(asin):
                 logging.info(f"{key}: {value}")
             logging.info(f"⏳ Dauer des Scraping: {end_time - start_time:.2f} Sekunden")
         else:
-            logging.error("❌ Fehler beim Scrapen des Produkts!")
+            logging.error("❌ Test Fail: Fehler beim Scrapen des Produkts!")
             
     except Exception as e:
         logging.error(f"❌ Fehler: {e}")
