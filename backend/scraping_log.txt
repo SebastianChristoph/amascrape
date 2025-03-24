@@ -2569,3 +2569,1344 @@
 2025-03-23 14:00:41,685 [INFO] ✅ WebDriver geschlossen.
 2025-03-23 14:00:41,689 [INFO] 📊 Scraping für Cluster ID 6 gestartet.
 2025-03-23 14:00:41,697 [WARNING] ⚠️ Keine Märkte gefunden für Cluster 6
+2025-03-24 06:48:19,764 [INFO] 🚀 Product Orchestrator gestartet.
+2025-03-24 06:48:19,765 [INFO] ====== WebDriver manager ======
+2025-03-24 06:48:21,216 [INFO] Get LATEST chromedriver version for google-chrome
+2025-03-24 06:48:21,810 [INFO] Get LATEST chromedriver version for google-chrome
+2025-03-24 06:48:22,252 [INFO] Get LATEST chromedriver version for google-chrome
+2025-03-24 06:48:23,422 [INFO] WebDriver version 134.0.6998.165 selected
+2025-03-24 06:48:23,426 [INFO] Modern chrome version https://storage.googleapis.com/chrome-for-testing-public/134.0.6998.165/win32/chromedriver-win32.zip
+2025-03-24 06:48:23,426 [INFO] About to download new driver from https://storage.googleapis.com/chrome-for-testing-public/134.0.6998.165/win32/chromedriver-win32.zip
+2025-03-24 06:48:24,258 [INFO] Driver downloading response is 200
+2025-03-24 06:48:25,882 [INFO] Get LATEST chromedriver version for google-chrome
+2025-03-24 06:48:27,983 [INFO] Driver has been saved in cache [C:\Users\sebas\.wdm\drivers\chromedriver\win64\134.0.6998.165]
+2025-03-24 06:48:29,918 [INFO] 🔧 Verwende ChromeDriver von: C:\Users\sebas\.wdm\drivers\chromedriver\win64\134.0.6998.165\chromedriver-win32/chromedriver.exe
+2025-03-24 06:48:39,069 [INFO] ✅ Verbindung zu Amazon erfolgreich hergestellt!
+2025-03-24 06:48:40,048 [INFO] 🍪 Setze Cookies...
+2025-03-24 06:48:40,072 [INFO] ✅ Cookies gesetzt!
+2025-03-24 06:48:40,072 [INFO] 🚀 Starte Product-Update...
+2025-03-24 06:48:40,113 [INFO] 📦 Scrape alle 659 Produkte in DB
+2025-03-24 06:48:40,113 [INFO] 🔍 [1/659]: B00GL2HMES https://www.amazon.com/dp/B00GL2HMES?language=en_US
+2025-03-24 06:48:53,288 [INFO] ⚡ Änderungen erkannt für B00GL2HMES: main_category
+2025-03-24 06:48:53,307 [INFO] 🔍 [2/659]: B002DYIZEO https://www.amazon.com/dp/B002DYIZEO?language=en_US
+2025-03-24 06:49:05,262 [INFO] ⚡ Änderungen erkannt für B002DYIZEO: main_category
+2025-03-24 06:49:05,286 [INFO] 🔍 [3/659]: B07978VPPH https://www.amazon.com/dp/B07978VPPH?language=en_US
+2025-03-24 06:49:16,462 [INFO] ⚡ Änderungen erkannt für B07978VPPH: main_category
+2025-03-24 06:49:16,477 [INFO] 🔍 [4/659]: B00E9M4XEE https://www.amazon.com/dp/B00E9M4XEE?language=en_US
+2025-03-24 06:49:27,812 [INFO] ⚡ Änderungen erkannt für B00E9M4XEE: main_category
+2025-03-24 06:49:27,826 [INFO] 🔍 [5/659]: B000GIQS0W https://www.amazon.com/dp/B000GIQS0W?language=en_US
+2025-03-24 06:49:41,971 [INFO] ⚡ Änderungen erkannt für B000GIQS0W: price, main_category, total
+2025-03-24 06:49:41,999 [INFO] 🔍 [6/659]: B0B9YMNYWK https://www.amazon.com/dp/B0B9YMNYWK?language=en_US
+2025-03-24 06:49:53,279 [INFO] ⚡ Änderungen erkannt für B0B9YMNYWK: main_category
+2025-03-24 06:49:53,296 [INFO] 🔍 [7/659]: B0CSMZ882F https://www.amazon.com/dp/B0CSMZ882F?language=en_US
+2025-03-24 06:50:05,511 [INFO] ⚡ Änderungen erkannt für B0CSMZ882F: main_category
+2025-03-24 06:50:05,526 [INFO] 🔍 [8/659]: B09YX7G6JJ https://www.amazon.com/dp/B09YX7G6JJ?language=en_US
+2025-03-24 06:50:15,567 [INFO] ⚡ Änderungen erkannt für B09YX7G6JJ: main_category
+2025-03-24 06:50:15,596 [INFO] 🔍 [9/659]: B0C9GCQX6H https://www.amazon.com/dp/B0C9GCQX6H?language=en_US
+2025-03-24 06:50:26,657 [INFO] ⚡ Änderungen erkannt für B0C9GCQX6H: main_category
+2025-03-24 06:50:26,673 [INFO] 🔍 [10/659]: B09VCTVH98 https://www.amazon.com/dp/B09VCTVH98?language=en_US
+2025-03-24 06:50:38,394 [INFO] ⚡ Änderungen erkannt für B09VCTVH98: main_category
+2025-03-24 06:50:38,411 [INFO] 🔍 [11/659]: B085Z9P87K https://www.amazon.com/dp/B085Z9P87K?language=en_US
+2025-03-24 06:50:48,962 [INFO] ⚡ Änderungen erkannt für B085Z9P87K: main_category
+2025-03-24 06:50:48,976 [INFO] 🔍 [12/659]: B09R5KPNHZ https://www.amazon.com/dp/B09R5KPNHZ?language=en_US
+2025-03-24 06:51:03,288 [INFO] ⚡ Änderungen erkannt für B09R5KPNHZ: main_category, blm, total
+2025-03-24 06:51:03,320 [INFO] 🔍 [13/659]: B00BPS3L8E https://www.amazon.com/dp/B00BPS3L8E?language=en_US
+2025-03-24 06:51:13,687 [INFO] ⚡ Änderungen erkannt für B00BPS3L8E: main_category, blm, total
+2025-03-24 06:51:13,716 [INFO] 🔍 [14/659]: B08DH161T6 https://www.amazon.com/dp/B08DH161T6?language=en_US
+2025-03-24 06:51:25,863 [INFO] ⚡ Änderungen erkannt für B08DH161T6: main_category
+2025-03-24 06:51:25,877 [INFO] 🔍 [15/659]: B01IW245EY https://www.amazon.com/dp/B01IW245EY?language=en_US
+2025-03-24 06:51:37,804 [INFO] ⚡ Änderungen erkannt für B01IW245EY: main_category
+2025-03-24 06:51:37,833 [INFO] 🔍 [16/659]: B0CCJZ248Z https://www.amazon.com/dp/B0CCJZ248Z?language=en_US
+2025-03-24 06:51:49,477 [INFO] ⚡ Änderungen erkannt für B0CCJZ248Z: main_category
+2025-03-24 06:51:49,490 [INFO] 🔍 [17/659]: B0BRNWSMVD https://www.amazon.com/dp/B0BRNWSMVD?language=en_US
+2025-03-24 06:52:00,463 [INFO] ⚡ Änderungen erkannt für B0BRNWSMVD: main_category
+2025-03-24 06:52:00,477 [INFO] 🔍 [18/659]: B0BSXR71QC https://www.amazon.com/dp/B0BSXR71QC?language=en_US
+2025-03-24 06:52:10,473 [INFO] ⚡ Änderungen erkannt für B0BSXR71QC: main_category, blm, total
+2025-03-24 06:52:10,487 [INFO] 🔍 [19/659]: B0B4Z5JM25 https://www.amazon.com/dp/B0B4Z5JM25?language=en_US
+2025-03-24 06:52:22,530 [INFO] ⚡ Änderungen erkannt für B0B4Z5JM25: main_category, blm, total
+2025-03-24 06:52:22,543 [INFO] 🔍 [20/659]: B0BT23VBLJ https://www.amazon.com/dp/B0BT23VBLJ?language=en_US
+2025-03-24 06:52:34,147 [INFO] ⚡ Änderungen erkannt für B0BT23VBLJ: main_category
+2025-03-24 06:52:34,165 [INFO] 🔍 [21/659]: B00QEMY4T6 https://www.amazon.com/dp/B00QEMY4T6?language=en_US
+2025-03-24 06:52:47,327 [INFO] ⚡ Änderungen erkannt für B00QEMY4T6: main_category
+2025-03-24 06:52:47,344 [INFO] 🔍 [22/659]: B0CQ8V7NXS https://www.amazon.com/dp/B0CQ8V7NXS?language=en_US
+2025-03-24 06:52:58,963 [INFO] ⚡ Änderungen erkannt für B0CQ8V7NXS: main_category
+2025-03-24 06:52:58,977 [INFO] 🔍 [23/659]: B016C9GIIK https://www.amazon.com/dp/B016C9GIIK?language=en_US
+2025-03-24 06:53:09,374 [INFO] ⚡ Änderungen erkannt für B016C9GIIK: main_category
+2025-03-24 06:53:09,391 [INFO] 🔍 [24/659]: B0BH9H71LK https://www.amazon.com/dp/B0BH9H71LK?language=en_US
+2025-03-24 06:53:20,362 [INFO] ⚡ Änderungen erkannt für B0BH9H71LK: main_category
+2025-03-24 06:53:20,378 [INFO] 🔍 [25/659]: B01LYFAGXI https://www.amazon.com/dp/B01LYFAGXI?language=en_US
+2025-03-24 06:53:30,646 [INFO] ⚡ Änderungen erkannt für B01LYFAGXI: main_category, blm, total
+2025-03-24 06:53:30,664 [INFO] 🔍 [26/659]: B07M5M5B3S https://www.amazon.com/dp/B07M5M5B3S?language=en_US
+2025-03-24 06:53:41,914 [INFO] ⚡ Änderungen erkannt für B07M5M5B3S: main_category, blm, total
+2025-03-24 06:53:41,937 [INFO] 🔍 [27/659]: B0CXM2PG68 https://www.amazon.com/dp/B0CXM2PG68?language=en_US
+2025-03-24 06:53:53,621 [INFO] ⚡ Änderungen erkannt für B0CXM2PG68: main_category
+2025-03-24 06:53:53,655 [INFO] 🔍 [28/659]: B0BMPLP7K6 https://www.amazon.com/dp/B0BMPLP7K6?language=en_US
+2025-03-24 06:54:03,603 [INFO] ⚡ Änderungen erkannt für B0BMPLP7K6: main_category
+2025-03-24 06:54:03,617 [INFO] 🔍 [29/659]: B09L8KTJ2G https://www.amazon.com/dp/B09L8KTJ2G?language=en_US
+2025-03-24 06:54:14,575 [INFO] ⚡ Änderungen erkannt für B09L8KTJ2G: main_category
+2025-03-24 06:54:14,622 [INFO] 🔍 [30/659]: B0CP9XPYX6 https://www.amazon.com/dp/B0CP9XPYX6?language=en_US
+2025-03-24 06:54:25,655 [INFO] ⚡ Änderungen erkannt für B0CP9XPYX6: main_category
+2025-03-24 06:54:25,677 [INFO] 🔍 [31/659]: B0C9NRW7CP https://www.amazon.com/dp/B0C9NRW7CP?language=en_US
+2025-03-24 06:54:36,879 [INFO] ⚡ Änderungen erkannt für B0C9NRW7CP: main_category
+2025-03-24 06:54:36,908 [INFO] 🔍 [32/659]: B079XCTJJG https://www.amazon.com/dp/B079XCTJJG?language=en_US
+2025-03-24 06:54:47,237 [INFO] ⚡ Änderungen erkannt für B079XCTJJG: main_category
+2025-03-24 06:54:47,271 [INFO] 🔍 [33/659]: B07CKFG53T https://www.amazon.com/dp/B07CKFG53T?language=en_US
+2025-03-24 06:54:58,169 [INFO] ⚡ Änderungen erkannt für B07CKFG53T: main_category
+2025-03-24 06:54:58,197 [INFO] 🔍 [34/659]: B0BLJ51MK7 https://www.amazon.com/dp/B0BLJ51MK7?language=en_US
+2025-03-24 06:55:08,730 [INFO] ⚡ Änderungen erkannt für B0BLJ51MK7: main_category
+2025-03-24 06:55:08,772 [INFO] 🔍 [35/659]: B001181M16 https://www.amazon.com/dp/B001181M16?language=en_US
+2025-03-24 06:55:20,531 [INFO] ⚡ Änderungen erkannt für B001181M16: main_category
+2025-03-24 06:55:20,549 [INFO] 🔍 [36/659]: B0CQD42HPK https://www.amazon.com/dp/B0CQD42HPK?language=en_US
+2025-03-24 06:55:30,731 [INFO] ⚡ Änderungen erkannt für B0CQD42HPK: title changed, main_category, blm, total
+2025-03-24 06:55:30,764 [INFO] 🔍 [37/659]: B086H6366N https://www.amazon.com/dp/B086H6366N?language=en_US
+2025-03-24 06:55:41,888 [INFO] ⚡ Änderungen erkannt für B086H6366N: main_category
+2025-03-24 06:55:41,903 [INFO] 🔍 [38/659]: B0DNK78CPY https://www.amazon.com/dp/B0DNK78CPY?language=en_US
+2025-03-24 06:55:52,792 [INFO] ⚡ Änderungen erkannt für B0DNK78CPY: price, main_category, total
+2025-03-24 06:55:52,805 [INFO] 🔍 [39/659]: B008KMUNRA https://www.amazon.com/dp/B008KMUNRA?language=en_US
+2025-03-24 06:56:03,064 [INFO] ⚡ Änderungen erkannt für B008KMUNRA: main_category
+2025-03-24 06:56:03,095 [INFO] 🔍 [40/659]: B0DHLWBC6J https://www.amazon.com/dp/B0DHLWBC6J?language=en_US
+2025-03-24 06:56:14,085 [INFO] ⚡ Änderungen erkannt für B0DHLWBC6J: main_category, blm, total
+2025-03-24 06:56:14,117 [INFO] 🔍 [41/659]: B0CSWHQ3PN https://www.amazon.com/dp/B0CSWHQ3PN?language=en_US
+2025-03-24 06:56:24,864 [INFO] ⚡ Änderungen erkannt für B0CSWHQ3PN: main_category, blm, total
+2025-03-24 06:56:24,895 [INFO] 🔍 [42/659]: B0CJMP3JZJ https://www.amazon.com/dp/B0CJMP3JZJ?language=en_US
+2025-03-24 06:56:35,528 [INFO] ⚡ Änderungen erkannt für B0CJMP3JZJ: main_category
+2025-03-24 06:56:35,572 [INFO] 🔍 [43/659]: B0CZ1823BM https://www.amazon.com/dp/B0CZ1823BM?language=en_US
+2025-03-24 06:56:47,136 [INFO] ⚡ Änderungen erkannt für B0CZ1823BM: main_category
+2025-03-24 06:56:47,166 [INFO] 🔍 [44/659]: B0BXMPBRJZ https://www.amazon.com/dp/B0BXMPBRJZ?language=en_US
+2025-03-24 06:56:58,406 [INFO] ⚡ Änderungen erkannt für B0BXMPBRJZ: main_category
+2025-03-24 06:56:58,421 [INFO] 🔍 [45/659]: B06WVKGGJB https://www.amazon.com/dp/B06WVKGGJB?language=en_US
+2025-03-24 06:57:08,979 [INFO] ⚡ Änderungen erkannt für B06WVKGGJB: main_category
+2025-03-24 06:57:09,008 [INFO] 🔍 [46/659]: B0BDCV36CX https://www.amazon.com/dp/B0BDCV36CX?language=en_US
+2025-03-24 06:57:19,434 [INFO] ⚡ Änderungen erkannt für B0BDCV36CX: main_category
+2025-03-24 06:57:19,471 [INFO] 🔍 [47/659]: B001KYS2DC https://www.amazon.com/dp/B001KYS2DC?language=en_US
+2025-03-24 06:57:31,941 [INFO] ⚡ Änderungen erkannt für B001KYS2DC: main_category
+2025-03-24 06:57:31,966 [INFO] 🔍 [48/659]: B0C6L85Z16 https://www.amazon.com/dp/B0C6L85Z16?language=en_US
+2025-03-24 06:57:44,632 [INFO] ⚡ Änderungen erkannt für B0C6L85Z16: main_category
+2025-03-24 06:57:44,666 [INFO] 🔍 [49/659]: B002DYIZGC https://www.amazon.com/dp/B002DYIZGC?language=en_US
+2025-03-24 06:57:58,537 [INFO] ⚡ Änderungen erkannt für B002DYIZGC: main_category
+2025-03-24 06:57:58,555 [INFO] 🔍 [50/659]: B0DDB5BWYP https://www.amazon.com/dp/B0DDB5BWYP?language=en_US
+2025-03-24 06:58:10,756 [INFO] ⚡ Änderungen erkannt für B0DDB5BWYP: main_category
+2025-03-24 06:58:10,777 [INFO] 🔍 [51/659]: B005DKV9SE https://www.amazon.com/dp/B005DKV9SE?language=en_US
+2025-03-24 06:58:23,463 [INFO] ⚡ Änderungen erkannt für B005DKV9SE: main_category
+2025-03-24 06:58:23,508 [INFO] 🔍 [52/659]: B0C6WCWJ9P https://www.amazon.com/dp/B0C6WCWJ9P?language=en_US
+2025-03-24 06:58:35,512 [INFO] ⚡ Änderungen erkannt für B0C6WCWJ9P: main_category
+2025-03-24 06:58:35,566 [INFO] 🔍 [53/659]: B0CFWCMBNG https://www.amazon.com/dp/B0CFWCMBNG?language=en_US
+2025-03-24 06:58:49,417 [INFO] ⚡ Änderungen erkannt für B0CFWCMBNG: main_category
+2025-03-24 06:58:49,442 [INFO] 🔍 [54/659]: B0BFZJJY5M https://www.amazon.com/dp/B0BFZJJY5M?language=en_US
+2025-03-24 06:59:03,021 [INFO] ⚡ Änderungen erkannt für B0BFZJJY5M: main_category
+2025-03-24 06:59:03,044 [INFO] 🔍 [55/659]: B00117ZRXQ https://www.amazon.com/dp/B00117ZRXQ?language=en_US
+2025-03-24 06:59:16,729 [INFO] ⚡ Änderungen erkannt für B00117ZRXQ: main_category
+2025-03-24 06:59:16,766 [INFO] 🔍 [56/659]: B0D1DP2D8D https://www.amazon.com/dp/B0D1DP2D8D?language=en_US
+2025-03-24 06:59:28,726 [INFO] ⚡ Änderungen erkannt für B0D1DP2D8D: main_category
+2025-03-24 06:59:28,743 [INFO] 🔍 [57/659]: B0CLSCPZG4 https://www.amazon.com/dp/B0CLSCPZG4?language=en_US
+2025-03-24 06:59:39,994 [INFO] ⚡ Änderungen erkannt für B0CLSCPZG4: main_category
+2025-03-24 06:59:40,043 [INFO] 🔍 [58/659]: B0B9289VLY https://www.amazon.com/dp/B0B9289VLY?language=en_US
+2025-03-24 06:59:52,779 [INFO] ⚡ Änderungen erkannt für B0B9289VLY: main_category
+2025-03-24 06:59:52,816 [INFO] 🔍 [59/659]: B0DJTKMQ2R https://www.amazon.com/dp/B0DJTKMQ2R?language=en_US
+2025-03-24 07:00:05,936 [INFO] ⚡ Änderungen erkannt für B0DJTKMQ2R: main_category
+2025-03-24 07:00:05,982 [INFO] 🔍 [60/659]: B0B6GKMZCL https://www.amazon.com/dp/B0B6GKMZCL?language=en_US
+2025-03-24 07:00:18,112 [INFO] ⚡ Änderungen erkannt für B0B6GKMZCL: main_category
+2025-03-24 07:00:18,146 [INFO] 🔍 [61/659]: B079JWLSH9 https://www.amazon.com/dp/B079JWLSH9?language=en_US
+2025-03-24 07:00:32,203 [INFO] ⚡ Änderungen erkannt für B079JWLSH9: main_category
+2025-03-24 07:00:32,237 [INFO] 🔍 [62/659]: B09Z2XPHFQ https://www.amazon.com/dp/B09Z2XPHFQ?language=en_US
+2025-03-24 07:00:44,743 [INFO] ⚡ Änderungen erkannt für B09Z2XPHFQ: main_category
+2025-03-24 07:00:44,768 [INFO] 🔍 [63/659]: B0045MLCL0 https://www.amazon.com/dp/B0045MLCL0?language=en_US
+2025-03-24 07:00:58,007 [INFO] ⚡ Änderungen erkannt für B0045MLCL0: main_category
+2025-03-24 07:00:58,041 [INFO] 🔍 [64/659]: B0BQ1FZJS6 https://www.amazon.com/dp/B0BQ1FZJS6?language=en_US
+2025-03-24 07:01:11,700 [INFO] ⚡ Änderungen erkannt für B0BQ1FZJS6: price, main_category, total
+2025-03-24 07:01:11,754 [INFO] 🔍 [65/659]: B0C8K2Z6SH https://www.amazon.com/dp/B0C8K2Z6SH?language=en_US
+2025-03-24 07:01:25,705 [INFO] ⚡ Änderungen erkannt für B0C8K2Z6SH: main_category
+2025-03-24 07:01:25,747 [INFO] 🔍 [66/659]: B08VJNTY36 https://www.amazon.com/dp/B08VJNTY36?language=en_US
+2025-03-24 07:01:37,504 [INFO] ⚡ Änderungen erkannt für B08VJNTY36: main_category
+2025-03-24 07:01:37,551 [INFO] 🔍 [67/659]: B0088XS44K https://www.amazon.com/dp/B0088XS44K?language=en_US
+2025-03-24 07:01:48,596 [WARNING] ❌ Fehler beim Scrapen von B0088XS44K, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-24 07:01:48,624 [INFO] 🔍 [68/659]: B0D3GLRGVM https://www.amazon.com/dp/B0D3GLRGVM?language=en_US
+2025-03-24 07:02:01,760 [INFO] ⚡ Änderungen erkannt für B0D3GLRGVM: main_category
+2025-03-24 07:02:01,791 [INFO] 🔍 [69/659]: B099XC3L7R https://www.amazon.com/dp/B099XC3L7R?language=en_US
+2025-03-24 07:02:15,656 [INFO] ⚡ Änderungen erkannt für B099XC3L7R: main_category
+2025-03-24 07:02:15,698 [INFO] 🔍 [70/659]: B0CSZ66LTQ https://www.amazon.com/dp/B0CSZ66LTQ?language=en_US
+2025-03-24 07:02:27,599 [INFO] ⚡ Änderungen erkannt für B0CSZ66LTQ: main_category
+2025-03-24 07:02:27,640 [INFO] 🔍 [71/659]: B081G8V25N https://www.amazon.com/dp/B081G8V25N?language=en_US
+2025-03-24 07:02:40,039 [INFO] ⚡ Änderungen erkannt für B081G8V25N: main_category
+2025-03-24 07:02:40,075 [INFO] 🔍 [72/659]: B0D8KZCLD1 https://www.amazon.com/dp/B0D8KZCLD1?language=en_US
+2025-03-24 07:02:51,790 [INFO] ⚡ Änderungen erkannt für B0D8KZCLD1: main_category
+2025-03-24 07:02:51,827 [INFO] 🔍 [73/659]: B0BT3GTSVW https://www.amazon.com/dp/B0BT3GTSVW?language=en_US
+2025-03-24 07:03:02,863 [INFO] ⚡ Änderungen erkannt für B0BT3GTSVW: main_category
+2025-03-24 07:03:02,910 [INFO] 🔍 [74/659]: B0DCKC5S71 https://www.amazon.com/dp/B0DCKC5S71?language=en_US
+2025-03-24 07:03:15,935 [INFO] ⚡ Änderungen erkannt für B0DCKC5S71: main_category
+2025-03-24 07:03:15,969 [INFO] 🔍 [75/659]: B0D5PX3MZX https://www.amazon.com/dp/B0D5PX3MZX?language=en_US
+2025-03-24 07:03:28,372 [INFO] ⚡ Änderungen erkannt für B0D5PX3MZX: main_category
+2025-03-24 07:03:28,412 [INFO] 🔍 [76/659]: B07TBH84L1 https://www.amazon.com/dp/B07TBH84L1?language=en_US
+2025-03-24 07:03:40,618 [INFO] ⚡ Änderungen erkannt für B07TBH84L1: main_category
+2025-03-24 07:03:40,645 [INFO] 🔍 [77/659]: B0BSXQNLJ4 https://www.amazon.com/dp/B0BSXQNLJ4?language=en_US
+2025-03-24 07:03:51,957 [INFO] ⚡ Änderungen erkannt für B0BSXQNLJ4: main_category
+2025-03-24 07:03:52,008 [INFO] 🔍 [78/659]: B0DHYMZBP9 https://www.amazon.com/dp/B0DHYMZBP9?language=en_US
+2025-03-24 07:04:03,738 [INFO] ⚡ Änderungen erkannt für B0DHYMZBP9: main_category
+2025-03-24 07:04:03,755 [INFO] 🔍 [79/659]: B0D1CTKV5K https://www.amazon.com/dp/B0D1CTKV5K?language=en_US
+2025-03-24 07:04:15,537 [INFO] ⚡ Änderungen erkannt für B0D1CTKV5K: main_category
+2025-03-24 07:04:15,584 [INFO] 🔍 [80/659]: B07CVNM3JV https://www.amazon.com/dp/B07CVNM3JV?language=en_US
+2025-03-24 07:04:26,710 [INFO] ⚡ Änderungen erkannt für B07CVNM3JV: main_category
+2025-03-24 07:04:26,757 [INFO] 🔍 [81/659]: B0018OADEA https://www.amazon.com/dp/B0018OADEA?language=en_US
+2025-03-24 07:04:39,268 [INFO] ⚡ Änderungen erkannt für B0018OADEA: main_category
+2025-03-24 07:04:39,317 [INFO] 🔍 [82/659]: B0C7Y85JJH https://www.amazon.com/dp/B0C7Y85JJH?language=en_US
+2025-03-24 07:04:52,270 [INFO] ⚡ Änderungen erkannt für B0C7Y85JJH: main_category
+2025-03-24 07:04:52,311 [INFO] 🔍 [83/659]: B089HWZL8Z https://www.amazon.com/dp/B089HWZL8Z?language=en_US
+2025-03-24 07:05:05,838 [INFO] ⚡ Änderungen erkannt für B089HWZL8Z: main_category
+2025-03-24 07:05:05,886 [INFO] 🔍 [84/659]: B0BG65459C https://www.amazon.com/dp/B0BG65459C?language=en_US
+2025-03-24 07:05:19,772 [INFO] ⚡ Änderungen erkannt für B0BG65459C: main_category
+2025-03-24 07:05:19,808 [INFO] 🔍 [85/659]: B0BG9QYXLK https://www.amazon.com/dp/B0BG9QYXLK?language=en_US
+2025-03-24 07:05:31,705 [INFO] ⚡ Änderungen erkannt für B0BG9QYXLK: main_category
+2025-03-24 07:05:31,750 [INFO] 🔍 [86/659]: B0DD5PKWMR https://www.amazon.com/dp/B0DD5PKWMR?language=en_US
+2025-03-24 07:05:43,891 [INFO] ⚡ Änderungen erkannt für B0DD5PKWMR: main_category
+2025-03-24 07:05:43,926 [INFO] 🔍 [87/659]: B0D78MM7HK https://www.amazon.com/dp/B0D78MM7HK?language=en_US
+2025-03-24 07:05:55,555 [INFO] ⚡ Änderungen erkannt für B0D78MM7HK: main_category
+2025-03-24 07:05:55,581 [INFO] 🔍 [88/659]: B0BBWMC33H https://www.amazon.com/dp/B0BBWMC33H?language=en_US
+2025-03-24 07:06:06,653 [INFO] ⚡ Änderungen erkannt für B0BBWMC33H: main_category
+2025-03-24 07:06:06,712 [INFO] 🔍 [89/659]: B0DCJ7Y967 https://www.amazon.com/dp/B0DCJ7Y967?language=en_US
+2025-03-24 07:06:18,940 [INFO] ⚡ Änderungen erkannt für B0DCJ7Y967: main_category
+2025-03-24 07:06:18,976 [INFO] 🔍 [90/659]: B0D4PFH1GY https://www.amazon.com/dp/B0D4PFH1GY?language=en_US
+2025-03-24 07:06:31,754 [INFO] ⚡ Änderungen erkannt für B0D4PFH1GY: main_category
+2025-03-24 07:06:31,780 [INFO] 🔍 [91/659]: B0DYV7N76M https://www.amazon.com/dp/B0DYV7N76M?language=en_US
+2025-03-24 07:06:43,972 [INFO] ⚡ Änderungen erkannt für B0DYV7N76M: main_category
+2025-03-24 07:06:44,003 [INFO] 🔍 [92/659]: B0DPDHDLQL https://www.amazon.com/dp/B0DPDHDLQL?language=en_US
+2025-03-24 07:06:55,457 [INFO] ⚡ Änderungen erkannt für B0DPDHDLQL: main_category
+2025-03-24 07:06:55,482 [INFO] 🔍 [93/659]: B0CLS8WY25 https://www.amazon.com/dp/B0CLS8WY25?language=en_US
+2025-03-24 07:07:08,235 [INFO] ⚡ Änderungen erkannt für B0CLS8WY25: main_category
+2025-03-24 07:07:08,281 [INFO] 🔍 [94/659]: B0CSKQVCWF https://www.amazon.com/dp/B0CSKQVCWF?language=en_US
+2025-03-24 07:07:21,302 [INFO] ⚡ Änderungen erkannt für B0CSKQVCWF: main_category
+2025-03-24 07:07:21,326 [INFO] 🔍 [95/659]: B0D6NL5NCX https://www.amazon.com/dp/B0D6NL5NCX?language=en_US
+2025-03-24 07:07:34,601 [INFO] ⚡ Änderungen erkannt für B0D6NL5NCX: main_category
+2025-03-24 07:07:34,641 [INFO] 🔍 [96/659]: B0D2PBKP32 https://www.amazon.com/dp/B0D2PBKP32?language=en_US
+2025-03-24 07:07:47,543 [INFO] ⚡ Änderungen erkannt für B0D2PBKP32: main_category
+2025-03-24 07:07:47,584 [INFO] 🔍 [97/659]: B0CZHCKNC2 https://www.amazon.com/dp/B0CZHCKNC2?language=en_US
+2025-03-24 07:07:59,482 [INFO] ⚡ Änderungen erkannt für B0CZHCKNC2: main_category
+2025-03-24 07:07:59,507 [INFO] 🔍 [98/659]: B0CTHFL4GG https://www.amazon.com/dp/B0CTHFL4GG?language=en_US
+2025-03-24 07:08:10,762 [INFO] ⚡ Änderungen erkannt für B0CTHFL4GG: main_category
+2025-03-24 07:08:10,803 [INFO] 🔍 [99/659]: B0CGDNFNJJ https://www.amazon.com/dp/B0CGDNFNJJ?language=en_US
+2025-03-24 07:08:22,628 [INFO] ⚡ Änderungen erkannt für B0CGDNFNJJ: main_category
+2025-03-24 07:08:22,653 [INFO] 🔍 [100/659]: B0CXMW392H https://www.amazon.com/dp/B0CXMW392H?language=en_US
+2025-03-24 07:08:35,995 [INFO] ⚡ Änderungen erkannt für B0CXMW392H: main_category
+2025-03-24 07:08:36,041 [INFO] 🔍 [101/659]: B0CS9RVX8M https://www.amazon.com/dp/B0CS9RVX8M?language=en_US
+2025-03-24 07:08:47,684 [INFO] ⚡ Änderungen erkannt für B0CS9RVX8M: main_category
+2025-03-24 07:08:47,725 [INFO] 🔍 [102/659]: B0DHYDTZL3 https://www.amazon.com/dp/B0DHYDTZL3?language=en_US
+2025-03-24 07:09:00,260 [INFO] ⚡ Änderungen erkannt für B0DHYDTZL3: main_category
+2025-03-24 07:09:00,301 [INFO] 🔍 [103/659]: B0CM45VWMW https://www.amazon.com/dp/B0CM45VWMW?language=en_US
+2025-03-24 07:09:12,532 [INFO] ⚡ Änderungen erkannt für B0CM45VWMW: main_category
+2025-03-24 07:09:12,576 [INFO] 🔍 [104/659]: B0CZ4JYB9M https://www.amazon.com/dp/B0CZ4JYB9M?language=en_US
+2025-03-24 07:09:24,450 [INFO] ⚡ Änderungen erkannt für B0CZ4JYB9M: main_category
+2025-03-24 07:09:24,493 [INFO] 🔍 [105/659]: B0CNNFF63C https://www.amazon.com/dp/B0CNNFF63C?language=en_US
+2025-03-24 07:09:37,259 [INFO] ⚡ Änderungen erkannt für B0CNNFF63C: main_category
+2025-03-24 07:09:37,299 [INFO] 🔍 [106/659]: B0CVMYCGR5 https://www.amazon.com/dp/B0CVMYCGR5?language=en_US
+2025-03-24 07:09:47,816 [INFO] ⚡ Änderungen erkannt für B0CVMYCGR5: main_category
+2025-03-24 07:09:47,860 [INFO] 🔍 [107/659]: B0B4Z2RTY1 https://www.amazon.com/dp/B0B4Z2RTY1?language=en_US
+2025-03-24 07:10:04,329 [INFO] ⚡ Änderungen erkannt für B0B4Z2RTY1: main_category
+2025-03-24 07:10:04,361 [INFO] 🔍 [108/659]: B0CLXVFZK6 https://www.amazon.com/dp/B0CLXVFZK6?language=en_US
+2025-03-24 07:10:16,418 [INFO] ⚡ Änderungen erkannt für B0CLXVFZK6: main_category, blm, total
+2025-03-24 07:10:16,458 [INFO] 🔍 [109/659]: B0DD11FZV3 https://www.amazon.com/dp/B0DD11FZV3?language=en_US
+2025-03-24 07:10:28,339 [INFO] ⚡ Änderungen erkannt für B0DD11FZV3: main_category
+2025-03-24 07:10:28,372 [INFO] 🔍 [110/659]: B0C8TXLM1T https://www.amazon.com/dp/B0C8TXLM1T?language=en_US
+2025-03-24 07:10:40,778 [INFO] ⚡ Änderungen erkannt für B0C8TXLM1T: main_category
+2025-03-24 07:10:40,818 [INFO] 🔍 [111/659]: B0CP2VG5M8 https://www.amazon.com/dp/B0CP2VG5M8?language=en_US
+2025-03-24 07:10:52,409 [INFO] ⚡ Änderungen erkannt für B0CP2VG5M8: main_category
+2025-03-24 07:10:52,436 [INFO] 🔍 [112/659]: B0BZGDKLFN https://www.amazon.com/dp/B0BZGDKLFN?language=en_US
+2025-03-24 07:11:03,179 [INFO] ⚡ Änderungen erkannt für B0BZGDKLFN: main_category
+2025-03-24 07:11:03,216 [INFO] 🔍 [113/659]: B0CXMGYLYD https://www.amazon.com/dp/B0CXMGYLYD?language=en_US
+2025-03-24 07:11:17,072 [INFO] ⚡ Änderungen erkannt für B0CXMGYLYD: main_category
+2025-03-24 07:11:17,124 [INFO] 🔍 [114/659]: B0D38GFZFH https://www.amazon.com/dp/B0D38GFZFH?language=en_US
+2025-03-24 07:11:28,897 [INFO] ⚡ Änderungen erkannt für B0D38GFZFH: main_category
+2025-03-24 07:11:28,915 [INFO] 🔍 [115/659]: B0DKCBVVXS https://www.amazon.com/dp/B0DKCBVVXS?language=en_US
+2025-03-24 07:11:43,020 [INFO] ⚡ Änderungen erkannt für B0DKCBVVXS: main_category
+2025-03-24 07:11:43,038 [INFO] 🔍 [116/659]: B0DKG1NWDD https://www.amazon.com/dp/B0DKG1NWDD?language=en_US
+2025-03-24 07:11:53,782 [INFO] ⚡ Änderungen erkannt für B0DKG1NWDD: main_category
+2025-03-24 07:11:53,820 [INFO] 🔍 [117/659]: B0DC8R4P7J https://www.amazon.com/dp/B0DC8R4P7J?language=en_US
+2025-03-24 07:12:05,799 [INFO] ⚡ Änderungen erkannt für B0DC8R4P7J: main_category
+2025-03-24 07:12:05,841 [INFO] 🔍 [118/659]: B0DJZ15P2Q https://www.amazon.com/dp/B0DJZ15P2Q?language=en_US
+2025-03-24 07:12:18,215 [INFO] ⚡ Änderungen erkannt für B0DJZ15P2Q: main_category
+2025-03-24 07:12:18,231 [INFO] 🔍 [119/659]: B0DK8P3PVZ https://www.amazon.com/dp/B0DK8P3PVZ?language=en_US
+2025-03-24 07:12:31,178 [INFO] ⚡ Änderungen erkannt für B0DK8P3PVZ: main_category, blm, total
+2025-03-24 07:12:31,219 [INFO] 🔍 [120/659]: B0DHXJ3D2F https://www.amazon.com/dp/B0DHXJ3D2F?language=en_US
+2025-03-24 07:12:43,287 [INFO] ⚡ Änderungen erkannt für B0DHXJ3D2F: main_category
+2025-03-24 07:12:43,323 [INFO] 🔍 [121/659]: B0D7N3D5X9 https://www.amazon.com/dp/B0D7N3D5X9?language=en_US
+2025-03-24 07:12:56,179 [INFO] ⚡ Änderungen erkannt für B0D7N3D5X9: main_category
+2025-03-24 07:12:56,230 [INFO] 🔍 [122/659]: B0CKZWM62J https://www.amazon.com/dp/B0CKZWM62J?language=en_US
+2025-03-24 07:13:09,410 [INFO] ⚡ Änderungen erkannt für B0CKZWM62J: main_category
+2025-03-24 07:13:09,460 [INFO] 🔍 [123/659]: B0C8J4QLNQ https://www.amazon.com/dp/B0C8J4QLNQ?language=en_US
+2025-03-24 07:13:21,588 [INFO] ⚡ Änderungen erkannt für B0C8J4QLNQ: main_category
+2025-03-24 07:13:21,639 [INFO] 🔍 [124/659]: B0CMD1MNS5 https://www.amazon.com/dp/B0CMD1MNS5?language=en_US
+2025-03-24 07:13:34,027 [INFO] ⚡ Änderungen erkannt für B0CMD1MNS5: main_category
+2025-03-24 07:13:34,088 [INFO] 🔍 [125/659]: B0D52C7CMM https://www.amazon.com/dp/B0D52C7CMM?language=en_US
+2025-03-24 07:13:46,083 [INFO] ⚡ Änderungen erkannt für B0D52C7CMM: price, main_category, total
+2025-03-24 07:13:46,133 [INFO] 🔍 [126/659]: B0C6F1Y1PS https://www.amazon.com/dp/B0C6F1Y1PS?language=en_US
+2025-03-24 07:13:58,102 [INFO] ⚡ Änderungen erkannt für B0C6F1Y1PS: main_category
+2025-03-24 07:13:58,119 [INFO] 🔍 [127/659]: B0D15N62P7 https://www.amazon.com/dp/B0D15N62P7?language=en_US
+2025-03-24 07:14:10,680 [INFO] ⚡ Änderungen erkannt für B0D15N62P7: main_category
+2025-03-24 07:14:10,705 [INFO] 🔍 [128/659]: B0DHTZKH11 https://www.amazon.com/dp/B0DHTZKH11?language=en_US
+2025-03-24 07:14:22,468 [INFO] ⚡ Änderungen erkannt für B0DHTZKH11: main_category
+2025-03-24 07:14:22,501 [INFO] 🔍 [129/659]: B0DSH8WM1C https://www.amazon.com/dp/B0DSH8WM1C?language=en_US
+2025-03-24 07:14:35,126 [INFO] ⚡ Änderungen erkannt für B0DSH8WM1C: main_category
+2025-03-24 07:14:35,168 [INFO] 🔍 [130/659]: B0CXHTH33J https://www.amazon.com/dp/B0CXHTH33J?language=en_US
+2025-03-24 07:14:46,018 [INFO] ⚡ Änderungen erkannt für B0CXHTH33J: main_category
+2025-03-24 07:14:46,057 [INFO] 🔍 [131/659]: B0CZRQ8PGB https://www.amazon.com/dp/B0CZRQ8PGB?language=en_US
+2025-03-24 07:14:59,636 [INFO] ⚡ Änderungen erkannt für B0CZRQ8PGB: main_category
+2025-03-24 07:14:59,680 [INFO] 🔍 [132/659]: B0DQ1749D9 https://www.amazon.com/dp/B0DQ1749D9?language=en_US
+2025-03-24 07:15:12,397 [INFO] ⚡ Änderungen erkannt für B0DQ1749D9: main_category
+2025-03-24 07:15:12,437 [INFO] 🔍 [133/659]: B0DJJRRBZP https://www.amazon.com/dp/B0DJJRRBZP?language=en_US
+2025-03-24 07:15:25,259 [INFO] ⚡ Änderungen erkannt für B0DJJRRBZP: main_category
+2025-03-24 07:15:25,289 [INFO] 🔍 [134/659]: B0DJHG68JS https://www.amazon.com/dp/B0DJHG68JS?language=en_US
+2025-03-24 07:15:36,614 [INFO] ⚡ Änderungen erkannt für B0DJHG68JS: main_category
+2025-03-24 07:15:36,665 [INFO] 🔍 [135/659]: B0CK94R8TB https://www.amazon.com/dp/B0CK94R8TB?language=en_US
+2025-03-24 07:15:48,931 [INFO] ⚡ Änderungen erkannt für B0CK94R8TB: main_category
+2025-03-24 07:15:48,967 [INFO] 🔍 [136/659]: B0D17Y34HV https://www.amazon.com/dp/B0D17Y34HV?language=en_US
+2025-03-24 07:16:01,916 [INFO] ⚡ Änderungen erkannt für B0D17Y34HV: main_category
+2025-03-24 07:16:01,942 [INFO] 🔍 [137/659]: B0CVYVFCZJ https://www.amazon.com/dp/B0CVYVFCZJ?language=en_US
+2025-03-24 07:16:14,860 [INFO] ⚡ Änderungen erkannt für B0CVYVFCZJ: main_category
+2025-03-24 07:16:14,895 [INFO] 🔍 [138/659]: B07SMLVGSZ https://www.amazon.com/dp/B07SMLVGSZ?language=en_US
+2025-03-24 07:16:25,097 [WARNING] ❌ Fehler beim Scrapen von B07SMLVGSZ, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-24 07:16:25,117 [INFO] 🔍 [139/659]: B00O1KPESI https://www.amazon.com/dp/B00O1KPESI?language=en_US
+2025-03-24 07:16:38,053 [INFO] ⚡ Änderungen erkannt für B00O1KPESI: main_category, blm, total
+2025-03-24 07:16:38,088 [INFO] 🔍 [140/659]: B0D9PFPMBC https://www.amazon.com/dp/B0D9PFPMBC?language=en_US
+2025-03-24 07:16:49,326 [INFO] ⚡ Änderungen erkannt für B0D9PFPMBC: main_category
+2025-03-24 07:16:49,371 [INFO] 🔍 [141/659]: B094JNLR6B https://www.amazon.com/dp/B094JNLR6B?language=en_US
+2025-03-24 07:16:59,008 [WARNING] ❌ Fehler beim Scrapen von B094JNLR6B, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-24 07:16:59,022 [INFO] 🔍 [142/659]: B0CS1P6DP8 https://www.amazon.com/dp/B0CS1P6DP8?language=en_US
+2025-03-24 07:17:12,606 [INFO] ⚡ Änderungen erkannt für B0CS1P6DP8: main_category
+2025-03-24 07:17:12,648 [INFO] 🔍 [143/659]: B0C2HYJJB6 https://www.amazon.com/dp/B0C2HYJJB6?language=en_US
+2025-03-24 07:17:23,064 [WARNING] ❌ Fehler beim Scrapen von B0C2HYJJB6, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-24 07:17:23,092 [INFO] 🔍 [144/659]: B08KXDMKM7 https://www.amazon.com/dp/B08KXDMKM7?language=en_US
+2025-03-24 07:17:36,701 [INFO] ⚡ Änderungen erkannt für B08KXDMKM7: main_category
+2025-03-24 07:17:36,742 [INFO] 🔍 [145/659]: B000SR5ZEQ https://www.amazon.com/dp/B000SR5ZEQ?language=en_US
+2025-03-24 07:17:47,438 [WARNING] ❌ Fehler beim Scrapen von B000SR5ZEQ, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-24 07:17:47,484 [INFO] 🔍 [146/659]: B0147QJFY4 https://www.amazon.com/dp/B0147QJFY4?language=en_US
+2025-03-24 07:17:56,505 [WARNING] ❌ Fehler beim Scrapen von B0147QJFY4, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-24 07:17:56,526 [INFO] 🔍 [147/659]: B0841RCNRP https://www.amazon.com/dp/B0841RCNRP?language=en_US
+2025-03-24 07:18:06,362 [WARNING] ❌ Fehler beim Scrapen von B0841RCNRP, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-24 07:18:06,415 [INFO] 🔍 [148/659]: B08X14DRC9 https://www.amazon.com/dp/B08X14DRC9?language=en_US
+2025-03-24 07:18:15,679 [WARNING] ❌ Fehler beim Scrapen von B08X14DRC9, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-24 07:18:15,703 [INFO] 🔍 [149/659]: B006CQ1S6Q https://www.amazon.com/dp/B006CQ1S6Q?language=en_US
+2025-03-24 07:18:27,741 [INFO] ⚡ Änderungen erkannt für B006CQ1S6Q: main_category
+2025-03-24 07:18:27,786 [INFO] 🔍 [150/659]: B0BQZZZ15W https://www.amazon.com/dp/B0BQZZZ15W?language=en_US
+2025-03-24 07:18:39,039 [INFO] ⚡ Änderungen erkannt für B0BQZZZ15W: price, main_category, total
+2025-03-24 07:18:39,077 [INFO] 🔍 [151/659]: B0BHF1Q7D1 https://www.amazon.com/dp/B0BHF1Q7D1?language=en_US
+2025-03-24 07:18:51,465 [INFO] ⚡ Änderungen erkannt für B0BHF1Q7D1: main_category
+2025-03-24 07:18:51,508 [INFO] 🔍 [152/659]: B08MHFFX29 https://www.amazon.com/dp/B08MHFFX29?language=en_US
+2025-03-24 07:19:02,471 [INFO] ⚡ Änderungen erkannt für B08MHFFX29: main_category
+2025-03-24 07:19:02,499 [INFO] 🔍 [153/659]: B01MDUMAAK https://www.amazon.com/dp/B01MDUMAAK?language=en_US
+2025-03-24 07:19:13,965 [INFO] ⚡ Änderungen erkannt für B01MDUMAAK: main_category
+2025-03-24 07:19:13,999 [INFO] 🔍 [154/659]: B0016BU7S2 https://www.amazon.com/dp/B0016BU7S2?language=en_US
+2025-03-24 07:19:25,438 [INFO] ⚡ Änderungen erkannt für B0016BU7S2: main_category
+2025-03-24 07:19:25,463 [INFO] 🔍 [155/659]: B00B04BTD2 https://www.amazon.com/dp/B00B04BTD2?language=en_US
+2025-03-24 07:19:37,297 [INFO] ⚡ Änderungen erkannt für B00B04BTD2: main_category
+2025-03-24 07:19:37,351 [INFO] 🔍 [156/659]: B073VXDKGJ https://www.amazon.com/dp/B073VXDKGJ?language=en_US
+2025-03-24 07:19:48,896 [INFO] ⚡ Änderungen erkannt für B073VXDKGJ: main_category
+2025-03-24 07:19:48,926 [INFO] 🔍 [157/659]: B0B4KQWSY9 https://www.amazon.com/dp/B0B4KQWSY9?language=en_US
+2025-03-24 07:19:59,892 [WARNING] ❌ Fehler beim Scrapen von B0B4KQWSY9, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-24 07:19:59,928 [INFO] 🔍 [158/659]: B071R5MWBS https://www.amazon.com/dp/B071R5MWBS?language=en_US
+2025-03-24 07:20:13,100 [INFO] ⚡ Änderungen erkannt für B071R5MWBS: main_category
+2025-03-24 07:20:13,135 [INFO] 🔍 [159/659]: B0BQ2HDBD5 https://www.amazon.com/dp/B0BQ2HDBD5?language=en_US
+2025-03-24 07:20:23,441 [WARNING] ❌ Fehler beim Scrapen von B0BQ2HDBD5, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-24 07:20:23,470 [INFO] 🔍 [160/659]: B07JBHKYPH https://www.amazon.com/dp/B07JBHKYPH?language=en_US
+2025-03-24 07:20:33,156 [WARNING] ❌ Fehler beim Scrapen von B07JBHKYPH, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-24 07:20:33,184 [INFO] 🔍 [161/659]: B078954JHY https://www.amazon.com/dp/B078954JHY?language=en_US
+2025-03-24 07:20:47,568 [INFO] ⚡ Änderungen erkannt für B078954JHY: main_category
+2025-03-24 07:20:47,619 [INFO] 🔍 [162/659]: B083X6MLFG https://www.amazon.com/dp/B083X6MLFG?language=en_US
+2025-03-24 07:20:58,717 [WARNING] ❌ Fehler beim Scrapen von B083X6MLFG, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-24 07:20:58,746 [INFO] 🔍 [163/659]: B0006V6LEW https://www.amazon.com/dp/B0006V6LEW?language=en_US
+2025-03-24 07:21:09,834 [INFO] ⚡ Änderungen erkannt für B0006V6LEW: main_category
+2025-03-24 07:21:09,877 [INFO] 🔍 [164/659]: B0DWDZFY96 https://www.amazon.com/dp/B0DWDZFY96?language=en_US
+2025-03-24 07:21:19,405 [WARNING] ❌ Fehler beim Scrapen von B0DWDZFY96, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-24 07:21:19,450 [INFO] 🔍 [165/659]: B01LF729EQ https://www.amazon.com/dp/B01LF729EQ?language=en_US
+2025-03-24 07:21:30,242 [WARNING] ❌ Fehler beim Scrapen von B01LF729EQ, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-24 07:21:30,280 [INFO] 🔍 [166/659]: B0DSBKYMQG https://www.amazon.com/dp/B0DSBKYMQG?language=en_US
+2025-03-24 07:21:39,803 [WARNING] ❌ Fehler beim Scrapen von B0DSBKYMQG, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-24 07:21:39,836 [INFO] 🔍 [167/659]: B0F1DV3639 https://www.amazon.com/dp/B0F1DV3639?language=en_US
+2025-03-24 07:21:49,495 [INFO] ⚡ Änderungen erkannt für B0F1DV3639: main_category
+2025-03-24 07:21:49,536 [INFO] 🔍 [168/659]: B09KB9XCL9 https://www.amazon.com/dp/B09KB9XCL9?language=en_US
+2025-03-24 07:22:03,715 [INFO] ⚡ Änderungen erkannt für B09KB9XCL9: main_category
+2025-03-24 07:22:03,762 [INFO] 🔍 [169/659]: B092K2TKMJ https://www.amazon.com/dp/B092K2TKMJ?language=en_US
+2025-03-24 07:22:15,336 [INFO] ⚡ Änderungen erkannt für B092K2TKMJ: main_category
+2025-03-24 07:22:15,381 [INFO] 🔍 [170/659]: B0DZ6V38B7 https://www.amazon.com/dp/B0DZ6V38B7?language=en_US
+2025-03-24 07:22:26,283 [INFO] ⚡ Änderungen erkannt für B0DZ6V38B7: main_category
+2025-03-24 07:22:26,333 [INFO] 🔍 [171/659]: B0DY2TCRGN https://www.amazon.com/dp/B0DY2TCRGN?language=en_US
+2025-03-24 07:22:35,893 [INFO] ⚡ Änderungen erkannt für B0DY2TCRGN: main_category
+2025-03-24 07:22:35,938 [INFO] 🔍 [172/659]: B0DGZT77W5 https://www.amazon.com/dp/B0DGZT77W5?language=en_US
+2025-03-24 07:22:47,432 [INFO] ⚡ Änderungen erkannt für B0DGZT77W5: price, main_category, total
+2025-03-24 07:22:47,485 [INFO] 🔍 [173/659]: B0DPH4TLMP https://www.amazon.com/dp/B0DPH4TLMP?language=en_US
+2025-03-24 07:22:59,481 [INFO] ⚡ Änderungen erkannt für B0DPH4TLMP: main_category
+2025-03-24 07:22:59,533 [INFO] 🔍 [174/659]: B00DJQ2C4O https://www.amazon.com/dp/B00DJQ2C4O?language=en_US
+2025-03-24 07:23:12,057 [INFO] ⚡ Änderungen erkannt für B00DJQ2C4O: main_category
+2025-03-24 07:23:12,084 [INFO] 🔍 [175/659]: B09581ZNDQ https://www.amazon.com/dp/B09581ZNDQ?language=en_US
+2025-03-24 07:23:24,700 [INFO] ⚡ Änderungen erkannt für B09581ZNDQ: main_category
+2025-03-24 07:23:24,738 [INFO] 🔍 [176/659]: B0DQ3BSMXF https://www.amazon.com/dp/B0DQ3BSMXF?language=en_US
+2025-03-24 07:23:35,859 [INFO] ⚡ Änderungen erkannt für B0DQ3BSMXF: main_category
+2025-03-24 07:23:35,903 [INFO] 🔍 [177/659]: B0071JHNWG https://www.amazon.com/dp/B0071JHNWG?language=en_US
+2025-03-24 07:23:46,339 [WARNING] ❌ Fehler beim Scrapen von B0071JHNWG, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-24 07:23:46,376 [INFO] 🔍 [178/659]: B09TQ6ZGSL https://www.amazon.com/dp/B09TQ6ZGSL?language=en_US
+2025-03-24 07:23:58,009 [INFO] ⚡ Änderungen erkannt für B09TQ6ZGSL: main_category
+2025-03-24 07:23:58,040 [INFO] 🔍 [179/659]: B00RW5QX8Y https://www.amazon.com/dp/B00RW5QX8Y?language=en_US
+2025-03-24 07:24:08,801 [WARNING] ❌ Fehler beim Scrapen von B00RW5QX8Y, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-24 07:24:08,827 [INFO] 🔍 [180/659]: B09RQ56YMW https://www.amazon.com/dp/B09RQ56YMW?language=en_US
+2025-03-24 07:24:20,570 [INFO] ⚡ Änderungen erkannt für B09RQ56YMW: main_category
+2025-03-24 07:24:20,610 [INFO] 🔍 [181/659]: B0D2JLX9FX https://www.amazon.com/dp/B0D2JLX9FX?language=en_US
+2025-03-24 07:24:31,803 [INFO] ⚡ Änderungen erkannt für B0D2JLX9FX: main_category
+2025-03-24 07:24:31,829 [INFO] 🔍 [182/659]: B00NKUIAWM https://www.amazon.com/dp/B00NKUIAWM?language=en_US
+2025-03-24 07:24:42,849 [INFO] ⚡ Änderungen erkannt für B00NKUIAWM: main_category
+2025-03-24 07:24:42,875 [INFO] 🔍 [183/659]: B0DQXMZ4PR https://www.amazon.com/dp/B0DQXMZ4PR?language=en_US
+2025-03-24 07:24:52,385 [WARNING] ❌ Fehler beim Scrapen von B0DQXMZ4PR, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-24 07:24:52,409 [INFO] 🔍 [184/659]: B0032K1W98 https://www.amazon.com/dp/B0032K1W98?language=en_US
+2025-03-24 07:25:02,003 [WARNING] ❌ Fehler beim Scrapen von B0032K1W98, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-24 07:25:02,051 [INFO] 🔍 [185/659]: B06XRP888W https://www.amazon.com/dp/B06XRP888W?language=en_US
+2025-03-24 07:25:13,392 [INFO] ⚡ Änderungen erkannt für B06XRP888W: main_category
+2025-03-24 07:25:13,432 [INFO] 🔍 [186/659]: B086RF5657 https://www.amazon.com/dp/B086RF5657?language=en_US
+2025-03-24 07:25:26,197 [INFO] ⚡ Änderungen erkannt für B086RF5657: main_category
+2025-03-24 07:25:26,235 [INFO] 🔍 [187/659]: B088YMHLTW https://www.amazon.com/dp/B088YMHLTW?language=en_US
+2025-03-24 07:25:38,241 [INFO] ⚡ Änderungen erkannt für B088YMHLTW: main_category
+2025-03-24 07:25:38,275 [INFO] 🔍 [188/659]: B07WMMBZJZ https://www.amazon.com/dp/B07WMMBZJZ?language=en_US
+2025-03-24 07:25:49,999 [INFO] ⚡ Änderungen erkannt für B07WMMBZJZ: main_category
+2025-03-24 07:25:50,037 [INFO] 🔍 [189/659]: B093969B84 https://www.amazon.com/dp/B093969B84?language=en_US
+2025-03-24 07:26:02,611 [INFO] ⚡ Änderungen erkannt für B093969B84: main_category
+2025-03-24 07:26:02,639 [INFO] 🔍 [190/659]: B093WJ1VP2 https://www.amazon.com/dp/B093WJ1VP2?language=en_US
+2025-03-24 07:26:13,958 [INFO] ⚡ Änderungen erkannt für B093WJ1VP2: main_category
+2025-03-24 07:26:14,007 [INFO] 🔍 [191/659]: B07LB9T8KD https://www.amazon.com/dp/B07LB9T8KD?language=en_US
+2025-03-24 07:26:26,531 [INFO] ⚡ Änderungen erkannt für B07LB9T8KD: main_category
+2025-03-24 07:26:26,576 [INFO] 🔍 [192/659]: B07CH87YRW https://www.amazon.com/dp/B07CH87YRW?language=en_US
+2025-03-24 07:26:39,012 [INFO] ⚡ Änderungen erkannt für B07CH87YRW: main_category, blm, total
+2025-03-24 07:26:39,059 [INFO] 🔍 [193/659]: B00Y1HYX8S https://www.amazon.com/dp/B00Y1HYX8S?language=en_US
+2025-03-24 07:26:51,925 [INFO] ⚡ Änderungen erkannt für B00Y1HYX8S: price, main_category, total
+2025-03-24 07:26:51,963 [INFO] 🔍 [194/659]: B0784G54FT https://www.amazon.com/dp/B0784G54FT?language=en_US
+2025-03-24 07:27:05,664 [INFO] ⚡ Änderungen erkannt für B0784G54FT: main_category
+2025-03-24 07:27:05,707 [INFO] 🔍 [195/659]: B01IJ25GHM https://www.amazon.com/dp/B01IJ25GHM?language=en_US
+2025-03-24 07:27:19,307 [INFO] ⚡ Änderungen erkannt für B01IJ25GHM: main_category
+2025-03-24 07:27:19,348 [INFO] 🔍 [196/659]: B081X3KTGW https://www.amazon.com/dp/B081X3KTGW?language=en_US
+2025-03-24 07:27:32,028 [INFO] ⚡ Änderungen erkannt für B081X3KTGW: price, main_category, total
+2025-03-24 07:27:32,073 [INFO] 🔍 [197/659]: B0883WHZD4 https://www.amazon.com/dp/B0883WHZD4?language=en_US
+2025-03-24 07:27:45,313 [INFO] ⚡ Änderungen erkannt für B0883WHZD4: main_category
+2025-03-24 07:27:45,355 [INFO] 🔍 [198/659]: B07NGV8XMK https://www.amazon.com/dp/B07NGV8XMK?language=en_US
+2025-03-24 07:27:58,207 [INFO] ⚡ Änderungen erkannt für B07NGV8XMK: main_category
+2025-03-24 07:27:58,254 [INFO] 🔍 [199/659]: B0931942R9 https://www.amazon.com/dp/B0931942R9?language=en_US
+2025-03-24 07:28:08,992 [INFO] ⚡ Änderungen erkannt für B0931942R9: main_category
+2025-03-24 07:28:09,040 [INFO] 🔍 [200/659]: B07M7X9MMS https://www.amazon.com/dp/B07M7X9MMS?language=en_US
+2025-03-24 07:28:21,296 [INFO] ⚡ Änderungen erkannt für B07M7X9MMS: main_category
+2025-03-24 07:28:21,339 [INFO] 🔍 [201/659]: B00EDW10GY https://www.amazon.com/dp/B00EDW10GY?language=en_US
+2025-03-24 07:28:33,998 [INFO] ⚡ Änderungen erkannt für B00EDW10GY: price, main_category, total
+2025-03-24 07:28:34,028 [INFO] 🔍 [202/659]: B0CM7HS14N https://www.amazon.com/dp/B0CM7HS14N?language=en_US
+2025-03-24 07:28:46,506 [INFO] ⚡ Änderungen erkannt für B0CM7HS14N: main_category
+2025-03-24 07:28:46,548 [INFO] 🔍 [203/659]: B00942W51C https://www.amazon.com/dp/B00942W51C?language=en_US
+2025-03-24 07:28:58,365 [INFO] ⚡ Änderungen erkannt für B00942W51C: main_category
+2025-03-24 07:28:58,408 [INFO] 🔍 [204/659]: B0CVQYN9W7 https://www.amazon.com/dp/B0CVQYN9W7?language=en_US
+2025-03-24 07:29:09,971 [INFO] ⚡ Änderungen erkannt für B0CVQYN9W7: main_category
+2025-03-24 07:29:09,997 [INFO] 🔍 [205/659]: B01HXNP8O4 https://www.amazon.com/dp/B01HXNP8O4?language=en_US
+2025-03-24 07:29:21,941 [INFO] ⚡ Änderungen erkannt für B01HXNP8O4: main_category
+2025-03-24 07:29:21,980 [INFO] 🔍 [206/659]: B08DFK59MK https://www.amazon.com/dp/B08DFK59MK?language=en_US
+2025-03-24 07:29:33,318 [INFO] ⚡ Änderungen erkannt für B08DFK59MK: main_category
+2025-03-24 07:29:33,348 [INFO] 🔍 [207/659]: B0B42ZMV98 https://www.amazon.com/dp/B0B42ZMV98?language=en_US
+2025-03-24 07:29:44,862 [INFO] ⚡ Änderungen erkannt für B0B42ZMV98: main_category
+2025-03-24 07:29:44,909 [INFO] 🔍 [208/659]: B0CV4N3KHQ https://www.amazon.com/dp/B0CV4N3KHQ?language=en_US
+2025-03-24 07:29:56,889 [INFO] ⚡ Änderungen erkannt für B0CV4N3KHQ: main_category
+2025-03-24 07:29:56,932 [INFO] 🔍 [209/659]: B01ICBXVJK https://www.amazon.com/dp/B01ICBXVJK?language=en_US
+2025-03-24 07:30:09,974 [INFO] ⚡ Änderungen erkannt für B01ICBXVJK: main_category
+2025-03-24 07:30:10,002 [INFO] 🔍 [210/659]: B0DNNYRDTX https://www.amazon.com/dp/B0DNNYRDTX?language=en_US
+2025-03-24 07:30:21,162 [INFO] ⚡ Änderungen erkannt für B0DNNYRDTX: main_category
+2025-03-24 07:30:21,202 [INFO] 🔍 [211/659]: B094VJ8T97 https://www.amazon.com/dp/B094VJ8T97?language=en_US
+2025-03-24 07:30:33,810 [INFO] ⚡ Änderungen erkannt für B094VJ8T97: main_category
+2025-03-24 07:30:33,849 [INFO] 🔍 [212/659]: B07X4BQV5J https://www.amazon.com/dp/B07X4BQV5J?language=en_US
+2025-03-24 07:30:46,678 [INFO] ⚡ Änderungen erkannt für B07X4BQV5J: main_category
+2025-03-24 07:30:46,701 [INFO] 🔍 [213/659]: B09ZVD8NDP https://www.amazon.com/dp/B09ZVD8NDP?language=en_US
+2025-03-24 07:30:57,188 [INFO] ⚡ Änderungen erkannt für B09ZVD8NDP: main_category
+2025-03-24 07:30:57,214 [INFO] 🔍 [214/659]: B094SRR41W https://www.amazon.com/dp/B094SRR41W?language=en_US
+2025-03-24 07:31:10,992 [INFO] ⚡ Änderungen erkannt für B094SRR41W: main_category
+2025-03-24 07:31:11,014 [INFO] 🔍 [215/659]: B086JDPQ3K https://www.amazon.com/dp/B086JDPQ3K?language=en_US
+2025-03-24 07:31:23,275 [INFO] ⚡ Änderungen erkannt für B086JDPQ3K: main_category
+2025-03-24 07:31:23,312 [INFO] 🔍 [216/659]: B0C328B57Q https://www.amazon.com/dp/B0C328B57Q?language=en_US
+2025-03-24 07:31:35,364 [INFO] 🔍 [217/659]: B0847RYJMK https://www.amazon.com/dp/B0847RYJMK?language=en_US
+2025-03-24 07:31:45,930 [WARNING] ❌ Fehler beim Scrapen von B0847RYJMK, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-24 07:31:45,956 [INFO] 🔍 [218/659]: B00G7M8HXW https://www.amazon.com/dp/B00G7M8HXW?language=en_US
+2025-03-24 07:31:57,114 [INFO] ⚡ Änderungen erkannt für B00G7M8HXW: price, main_category
+2025-03-24 07:31:57,167 [INFO] 🔍 [219/659]: B01N16A70T https://www.amazon.com/dp/B01N16A70T?language=en_US
+2025-03-24 07:32:06,852 [WARNING] ❌ Fehler beim Scrapen von B01N16A70T, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-24 07:32:06,899 [INFO] 🔍 [220/659]: B0DRKBLVK8 https://www.amazon.com/dp/B0DRKBLVK8?language=en_US
+2025-03-24 07:32:19,291 [INFO] ⚡ Änderungen erkannt für B0DRKBLVK8: main_category
+2025-03-24 07:32:19,333 [INFO] 🔍 [221/659]: B07QBS83Y3 https://www.amazon.com/dp/B07QBS83Y3?language=en_US
+2025-03-24 07:32:31,188 [INFO] ⚡ Änderungen erkannt für B07QBS83Y3: main_category
+2025-03-24 07:32:31,229 [INFO] 🔍 [222/659]: B09QZSBRLB https://www.amazon.com/dp/B09QZSBRLB?language=en_US
+2025-03-24 07:32:41,790 [INFO] ⚡ Änderungen erkannt für B09QZSBRLB: main_category
+2025-03-24 07:32:41,813 [INFO] 🔍 [223/659]: B0CND7GK55 https://www.amazon.com/dp/B0CND7GK55?language=en_US
+2025-03-24 07:32:53,651 [INFO] ⚡ Änderungen erkannt für B0CND7GK55: main_category
+2025-03-24 07:32:53,673 [INFO] 🔍 [224/659]: B08HSR4DXV https://www.amazon.com/dp/B08HSR4DXV?language=en_US
+2025-03-24 07:33:06,411 [INFO] ⚡ Änderungen erkannt für B08HSR4DXV: main_category
+2025-03-24 07:33:06,451 [INFO] 🔍 [225/659]: B0CND6TMHC https://www.amazon.com/dp/B0CND6TMHC?language=en_US
+2025-03-24 07:33:16,767 [INFO] ⚡ Änderungen erkannt für B0CND6TMHC: main_category
+2025-03-24 07:33:16,797 [INFO] 🔍 [226/659]: B01MAXA255 https://www.amazon.com/dp/B01MAXA255?language=en_US
+2025-03-24 07:33:28,051 [INFO] ⚡ Änderungen erkannt für B01MAXA255: main_category
+2025-03-24 07:33:28,085 [INFO] 🔍 [227/659]: B0749P24CB https://www.amazon.com/dp/B0749P24CB?language=en_US
+2025-03-24 07:33:39,378 [INFO] ⚡ Änderungen erkannt für B0749P24CB: price, main_category, total
+2025-03-24 07:33:39,419 [INFO] 🔍 [228/659]: B0BTD4JH8V https://www.amazon.com/dp/B0BTD4JH8V?language=en_US
+2025-03-24 07:33:50,548 [INFO] ⚡ Änderungen erkannt für B0BTD4JH8V: main_category
+2025-03-24 07:33:50,605 [INFO] 🔍 [229/659]: B0DDCKY3WK https://www.amazon.com/dp/B0DDCKY3WK?language=en_US
+2025-03-24 07:34:01,939 [INFO] ⚡ Änderungen erkannt für B0DDCKY3WK: main_category
+2025-03-24 07:34:01,990 [INFO] 🔍 [230/659]: B0CV5PY88X https://www.amazon.com/dp/B0CV5PY88X?language=en_US
+2025-03-24 07:34:12,875 [INFO] ⚡ Änderungen erkannt für B0CV5PY88X: main_category
+2025-03-24 07:34:12,917 [INFO] 🔍 [231/659]: B0CHMYC2J8 https://www.amazon.com/dp/B0CHMYC2J8?language=en_US
+2025-03-24 07:34:24,966 [INFO] ⚡ Änderungen erkannt für B0CHMYC2J8: main_category
+2025-03-24 07:34:24,988 [INFO] 🔍 [232/659]: B07283TQ9D https://www.amazon.com/dp/B07283TQ9D?language=en_US
+2025-03-24 07:34:38,420 [INFO] ⚡ Änderungen erkannt für B07283TQ9D: price, main_category
+2025-03-24 07:34:38,436 [INFO] 🔍 [233/659]: B09KQ5QV82 https://www.amazon.com/dp/B09KQ5QV82?language=en_US
+2025-03-24 07:34:48,621 [INFO] ⚡ Änderungen erkannt für B09KQ5QV82: main_category
+2025-03-24 07:34:48,638 [INFO] 🔍 [234/659]: B079YZ2RFL https://www.amazon.com/dp/B079YZ2RFL?language=en_US
+2025-03-24 07:35:00,169 [INFO] ⚡ Änderungen erkannt für B079YZ2RFL: main_category
+2025-03-24 07:35:00,213 [INFO] 🔍 [235/659]: B0DLPB1M8H https://www.amazon.com/dp/B0DLPB1M8H?language=en_US
+2025-03-24 07:35:11,426 [INFO] ⚡ Änderungen erkannt für B0DLPB1M8H: main_category, blm, total
+2025-03-24 07:35:11,456 [INFO] 🔍 [236/659]: B0DK5M5B94 https://www.amazon.com/dp/B0DK5M5B94?language=en_US
+2025-03-24 07:35:22,722 [INFO] ⚡ Änderungen erkannt für B0DK5M5B94: main_category
+2025-03-24 07:35:22,765 [INFO] 🔍 [237/659]: B0DFHRZJH2 https://www.amazon.com/dp/B0DFHRZJH2?language=en_US
+2025-03-24 07:35:34,255 [INFO] ⚡ Änderungen erkannt für B0DFHRZJH2: main_category
+2025-03-24 07:35:34,303 [INFO] 🔍 [238/659]: B0DXCH6XSZ https://www.amazon.com/dp/B0DXCH6XSZ?language=en_US
+2025-03-24 07:35:44,545 [INFO] ⚡ Änderungen erkannt für B0DXCH6XSZ: main_category
+2025-03-24 07:35:44,612 [INFO] 🔍 [239/659]: B0DP7VGC13 https://www.amazon.com/dp/B0DP7VGC13?language=en_US
+2025-03-24 07:35:56,044 [INFO] ⚡ Änderungen erkannt für B0DP7VGC13: main_category
+2025-03-24 07:35:56,091 [INFO] 🔍 [240/659]: B07C228K73 https://www.amazon.com/dp/B07C228K73?language=en_US
+2025-03-24 07:36:08,814 [INFO] ⚡ Änderungen erkannt für B07C228K73: main_category
+2025-03-24 07:36:08,843 [INFO] 🔍 [241/659]: B0DHLXC3N1 https://www.amazon.com/dp/B0DHLXC3N1?language=en_US
+2025-03-24 07:36:19,575 [INFO] ⚡ Änderungen erkannt für B0DHLXC3N1: main_category
+2025-03-24 07:36:19,627 [INFO] 🔍 [242/659]: B0DPLSMWWX https://www.amazon.com/dp/B0DPLSMWWX?language=en_US
+2025-03-24 07:36:31,461 [INFO] ⚡ Änderungen erkannt für B0DPLSMWWX: main_category
+2025-03-24 07:36:31,489 [INFO] 🔍 [243/659]: B0D3LVZS59 https://www.amazon.com/dp/B0D3LVZS59?language=en_US
+2025-03-24 07:36:41,597 [INFO] ⚡ Änderungen erkannt für B0D3LVZS59: main_category
+2025-03-24 07:36:41,620 [INFO] 🔍 [244/659]: B0DHQ7J4ZX https://www.amazon.com/dp/B0DHQ7J4ZX?language=en_US
+2025-03-24 07:36:54,367 [INFO] ⚡ Änderungen erkannt für B0DHQ7J4ZX: main_category
+2025-03-24 07:36:54,402 [INFO] 🔍 [245/659]: B0CYGR3RJ2 https://www.amazon.com/dp/B0CYGR3RJ2?language=en_US
+2025-03-24 07:37:04,868 [INFO] ⚡ Änderungen erkannt für B0CYGR3RJ2: main_category
+2025-03-24 07:37:04,911 [INFO] 🔍 [246/659]: B078HMCBLY https://www.amazon.com/dp/B078HMCBLY?language=en_US
+2025-03-24 07:37:15,632 [INFO] ⚡ Änderungen erkannt für B078HMCBLY: main_category
+2025-03-24 07:37:15,673 [INFO] 🔍 [247/659]: B00P7BV3F8 https://www.amazon.com/dp/B00P7BV3F8?language=en_US
+2025-03-24 07:37:26,340 [INFO] ⚡ Änderungen erkannt für B00P7BV3F8: main_category
+2025-03-24 07:37:26,402 [INFO] 🔍 [248/659]: B07P4M1YGN https://www.amazon.com/dp/B07P4M1YGN?language=en_US
+2025-03-24 07:37:38,589 [INFO] ⚡ Änderungen erkannt für B07P4M1YGN: main_category
+2025-03-24 07:37:38,620 [INFO] 🔍 [249/659]: B0DV6QB6MT https://www.amazon.com/dp/B0DV6QB6MT?language=en_US
+2025-03-24 07:37:48,227 [INFO] ⚡ Änderungen erkannt für B0DV6QB6MT: main_category
+2025-03-24 07:37:48,285 [INFO] 🔍 [250/659]: B09Y2HCJFD https://www.amazon.com/dp/B09Y2HCJFD?language=en_US
+2025-03-24 07:37:57,915 [WARNING] ❌ Fehler beim Scrapen von B09Y2HCJFD, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-24 07:37:57,958 [INFO] 🔍 [251/659]: B01HN63W4Y https://www.amazon.com/dp/B01HN63W4Y?language=en_US
+2025-03-24 07:38:09,188 [INFO] ⚡ Änderungen erkannt für B01HN63W4Y: main_category
+2025-03-24 07:38:09,231 [INFO] 🔍 [252/659]: B0DSQ8WQJQ https://www.amazon.com/dp/B0DSQ8WQJQ?language=en_US
+2025-03-24 07:38:19,295 [INFO] ⚡ Änderungen erkannt für B0DSQ8WQJQ: main_category
+2025-03-24 07:38:19,322 [INFO] 🔍 [253/659]: B09DNC8S41 https://www.amazon.com/dp/B09DNC8S41?language=en_US
+2025-03-24 07:38:29,401 [INFO] ⚡ Änderungen erkannt für B09DNC8S41: main_category
+2025-03-24 07:38:29,437 [INFO] 🔍 [254/659]: B09G99QXSQ https://www.amazon.com/dp/B09G99QXSQ?language=en_US
+2025-03-24 07:38:41,474 [INFO] ⚡ Änderungen erkannt für B09G99QXSQ: main_category
+2025-03-24 07:38:41,515 [INFO] 🔍 [255/659]: B0130VTQ64 https://www.amazon.com/dp/B0130VTQ64?language=en_US
+2025-03-24 07:38:52,042 [INFO] ⚡ Änderungen erkannt für B0130VTQ64: main_category
+2025-03-24 07:38:52,069 [INFO] 🔍 [256/659]: B078HW9YKX https://www.amazon.com/dp/B078HW9YKX?language=en_US
+2025-03-24 07:39:02,681 [INFO] ⚡ Änderungen erkannt für B078HW9YKX: main_category
+2025-03-24 07:39:02,743 [INFO] 🔍 [257/659]: B0CPTHJMW3 https://www.amazon.com/dp/B0CPTHJMW3?language=en_US
+2025-03-24 07:39:16,736 [INFO] ⚡ Änderungen erkannt für B0CPTHJMW3: main_category
+2025-03-24 07:39:16,773 [INFO] 🔍 [258/659]: B0D3LTXHX8 https://www.amazon.com/dp/B0D3LTXHX8?language=en_US
+2025-03-24 07:39:27,610 [INFO] ⚡ Änderungen erkannt für B0D3LTXHX8: main_category
+2025-03-24 07:39:27,653 [INFO] 🔍 [259/659]: B078HKGZ9W https://www.amazon.com/dp/B078HKGZ9W?language=en_US
+2025-03-24 07:39:38,070 [INFO] ⚡ Änderungen erkannt für B078HKGZ9W: main_category
+2025-03-24 07:39:38,087 [INFO] 🔍 [260/659]: B07ZBNSBN1 https://www.amazon.com/dp/B07ZBNSBN1?language=en_US
+2025-03-24 07:39:50,165 [INFO] ⚡ Änderungen erkannt für B07ZBNSBN1: main_category
+2025-03-24 07:39:50,196 [INFO] 🔍 [261/659]: B0BYP272T8 https://www.amazon.com/dp/B0BYP272T8?language=en_US
+2025-03-24 07:40:02,084 [INFO] ⚡ Änderungen erkannt für B0BYP272T8: main_category
+2025-03-24 07:40:02,123 [INFO] 🔍 [262/659]: B0C4B1WCYY https://www.amazon.com/dp/B0C4B1WCYY?language=en_US
+2025-03-24 07:40:14,784 [INFO] ⚡ Änderungen erkannt für B0C4B1WCYY: main_category
+2025-03-24 07:40:14,831 [INFO] 🔍 [263/659]: B089PZHRJ6 https://www.amazon.com/dp/B089PZHRJ6?language=en_US
+2025-03-24 07:40:26,455 [INFO] ⚡ Änderungen erkannt für B089PZHRJ6: main_category
+2025-03-24 07:40:26,512 [INFO] 🔍 [264/659]: B0BJY1QXCG https://www.amazon.com/dp/B0BJY1QXCG?language=en_US
+2025-03-24 07:40:36,487 [WARNING] ❌ Fehler beim Scrapen von B0BJY1QXCG, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-24 07:40:36,538 [INFO] 🔍 [265/659]: B09Z38NTSN https://www.amazon.com/dp/B09Z38NTSN?language=en_US
+2025-03-24 07:40:46,349 [WARNING] ❌ Fehler beim Scrapen von B09Z38NTSN, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-24 07:40:46,388 [INFO] 🔍 [266/659]: B01IQ00B04 https://www.amazon.com/dp/B01IQ00B04?language=en_US
+2025-03-24 07:40:57,533 [WARNING] ❌ Fehler beim Scrapen von B01IQ00B04, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-24 07:40:57,563 [INFO] 🔍 [267/659]: B01MRJ7DAJ https://www.amazon.com/dp/B01MRJ7DAJ?language=en_US
+2025-03-24 07:41:07,289 [WARNING] ❌ Fehler beim Scrapen von B01MRJ7DAJ, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-24 07:41:07,333 [INFO] 🔍 [268/659]: B07WCDBNJQ https://www.amazon.com/dp/B07WCDBNJQ?language=en_US
+2025-03-24 07:41:19,554 [INFO] ⚡ Änderungen erkannt für B07WCDBNJQ: main_category
+2025-03-24 07:41:19,588 [INFO] 🔍 [269/659]: B00P6TUO5G https://www.amazon.com/dp/B00P6TUO5G?language=en_US
+2025-03-24 07:41:32,094 [INFO] ⚡ Änderungen erkannt für B00P6TUO5G: main_category
+2025-03-24 07:41:32,136 [INFO] 🔍 [270/659]: B07RTP8R98 https://www.amazon.com/dp/B07RTP8R98?language=en_US
+2025-03-24 07:41:43,169 [INFO] ⚡ Änderungen erkannt für B07RTP8R98: main_category
+2025-03-24 07:41:43,211 [INFO] 🔍 [271/659]: B07BN534X8 https://www.amazon.com/dp/B07BN534X8?language=en_US
+2025-03-24 07:41:55,048 [INFO] ⚡ Änderungen erkannt für B07BN534X8: main_category
+2025-03-24 07:41:55,086 [INFO] 🔍 [272/659]: B001CGX3ZK https://www.amazon.com/dp/B001CGX3ZK?language=en_US
+2025-03-24 07:42:07,284 [INFO] ⚡ Änderungen erkannt für B001CGX3ZK: main_category
+2025-03-24 07:42:07,322 [INFO] 🔍 [273/659]: B07NQB8B2Z https://www.amazon.com/dp/B07NQB8B2Z?language=en_US
+2025-03-24 07:42:20,012 [INFO] ⚡ Änderungen erkannt für B07NQB8B2Z: main_category
+2025-03-24 07:42:20,062 [INFO] 🔍 [274/659]: B0BKTM9TV9 https://www.amazon.com/dp/B0BKTM9TV9?language=en_US
+2025-03-24 07:42:33,869 [INFO] ⚡ Änderungen erkannt für B0BKTM9TV9: main_category
+2025-03-24 07:42:33,941 [INFO] 🔍 [275/659]: B0B85BFP2F https://www.amazon.com/dp/B0B85BFP2F?language=en_US
+2025-03-24 07:42:45,864 [INFO] ⚡ Änderungen erkannt für B0B85BFP2F: main_category
+2025-03-24 07:42:45,908 [INFO] 🔍 [276/659]: B097C5D5FZ https://www.amazon.com/dp/B097C5D5FZ?language=en_US
+2025-03-24 07:42:58,542 [INFO] ⚡ Änderungen erkannt für B097C5D5FZ: main_category, blm, total
+2025-03-24 07:42:58,579 [INFO] 🔍 [277/659]: B07L46RH6P https://www.amazon.com/dp/B07L46RH6P?language=en_US
+2025-03-24 07:43:11,696 [INFO] ⚡ Änderungen erkannt für B07L46RH6P: main_category
+2025-03-24 07:43:11,737 [INFO] 🔍 [278/659]: B07CXZBRZP https://www.amazon.com/dp/B07CXZBRZP?language=en_US
+2025-03-24 07:43:25,444 [INFO] ⚡ Änderungen erkannt für B07CXZBRZP: main_category
+2025-03-24 07:43:25,469 [INFO] 🔍 [279/659]: B0CHBCCMRL https://www.amazon.com/dp/B0CHBCCMRL?language=en_US
+2025-03-24 07:43:37,198 [INFO] ⚡ Änderungen erkannt für B0CHBCCMRL: main_category
+2025-03-24 07:43:37,246 [INFO] 🔍 [280/659]: B0DPLY7VD5 https://www.amazon.com/dp/B0DPLY7VD5?language=en_US
+2025-03-24 07:43:49,635 [INFO] ⚡ Änderungen erkannt für B0DPLY7VD5: main_category
+2025-03-24 07:43:49,682 [INFO] 🔍 [281/659]: B0D5SFWY76 https://www.amazon.com/dp/B0D5SFWY76?language=en_US
+2025-03-24 07:44:02,539 [INFO] ⚡ Änderungen erkannt für B0D5SFWY76: main_category
+2025-03-24 07:44:02,580 [INFO] 🔍 [282/659]: B0B2S9J61W https://www.amazon.com/dp/B0B2S9J61W?language=en_US
+2025-03-24 07:44:13,802 [INFO] ⚡ Änderungen erkannt für B0B2S9J61W: main_category
+2025-03-24 07:44:13,832 [INFO] 🔍 [283/659]: B0BPM5CP2Z https://www.amazon.com/dp/B0BPM5CP2Z?language=en_US
+2025-03-24 07:44:25,752 [INFO] ⚡ Änderungen erkannt für B0BPM5CP2Z: main_category
+2025-03-24 07:44:25,793 [INFO] 🔍 [284/659]: B0C3VJ56CM https://www.amazon.com/dp/B0C3VJ56CM?language=en_US
+2025-03-24 07:44:36,666 [INFO] ⚡ Änderungen erkannt für B0C3VJ56CM: main_category
+2025-03-24 07:44:36,709 [INFO] 🔍 [285/659]: B07SXCFMLZ https://www.amazon.com/dp/B07SXCFMLZ?language=en_US
+2025-03-24 07:44:47,918 [INFO] ⚡ Änderungen erkannt für B07SXCFMLZ: main_category, blm, total
+2025-03-24 07:44:47,944 [INFO] 🔍 [286/659]: B0B8443W63 https://www.amazon.com/dp/B0B8443W63?language=en_US
+2025-03-24 07:45:00,353 [INFO] ⚡ Änderungen erkannt für B0B8443W63: main_category
+2025-03-24 07:45:00,394 [INFO] 🔍 [287/659]: B01NC03V2J https://www.amazon.com/dp/B01NC03V2J?language=en_US
+2025-03-24 07:45:11,861 [INFO] ⚡ Änderungen erkannt für B01NC03V2J: main_category
+2025-03-24 07:45:11,915 [INFO] 🔍 [288/659]: B0BKTSDM9P https://www.amazon.com/dp/B0BKTSDM9P?language=en_US
+2025-03-24 07:45:22,656 [INFO] ⚡ Änderungen erkannt für B0BKTSDM9P: main_category
+2025-03-24 07:45:22,684 [INFO] 🔍 [289/659]: B0C61TDLYK https://www.amazon.com/dp/B0C61TDLYK?language=en_US
+2025-03-24 07:45:34,635 [INFO] ⚡ Änderungen erkannt für B0C61TDLYK: main_category
+2025-03-24 07:45:34,676 [INFO] 🔍 [290/659]: B000S97MAY https://www.amazon.com/dp/B000S97MAY?language=en_US
+2025-03-24 07:45:47,932 [INFO] ⚡ Änderungen erkannt für B000S97MAY: main_category
+2025-03-24 07:45:47,978 [INFO] 🔍 [291/659]: B07BS4YGL5 https://www.amazon.com/dp/B07BS4YGL5?language=en_US
+2025-03-24 07:45:59,212 [WARNING] ❌ Fehler beim Scrapen von B07BS4YGL5, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-24 07:45:59,233 [INFO] 🔍 [292/659]: B073V3S9VW https://www.amazon.com/dp/B073V3S9VW?language=en_US
+2025-03-24 07:46:11,289 [INFO] ⚡ Änderungen erkannt für B073V3S9VW: main_category
+2025-03-24 07:46:11,314 [INFO] 🔍 [293/659]: B07HB88NNC https://www.amazon.com/dp/B07HB88NNC?language=en_US
+2025-03-24 07:46:24,168 [INFO] ⚡ Änderungen erkannt für B07HB88NNC: main_category
+2025-03-24 07:46:24,198 [INFO] 🔍 [294/659]: B00MGV01YQ https://www.amazon.com/dp/B00MGV01YQ?language=en_US
+2025-03-24 07:46:35,604 [WARNING] ❌ Fehler beim Scrapen von B00MGV01YQ, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-24 07:46:35,645 [INFO] 🔍 [295/659]: B005ODJ5TK https://www.amazon.com/dp/B005ODJ5TK?language=en_US
+2025-03-24 07:46:47,216 [INFO] ⚡ Änderungen erkannt für B005ODJ5TK: main_category
+2025-03-24 07:46:47,261 [INFO] 🔍 [296/659]: B0DFMS2JYY https://www.amazon.com/dp/B0DFMS2JYY?language=en_US
+2025-03-24 07:47:00,485 [INFO] ⚡ Änderungen erkannt für B0DFMS2JYY: main_category
+2025-03-24 07:47:00,504 [INFO] 🔍 [297/659]: B07HB663R3 https://www.amazon.com/dp/B07HB663R3?language=en_US
+2025-03-24 07:47:10,989 [INFO] ⚡ Änderungen erkannt für B07HB663R3: main_category
+2025-03-24 07:47:11,012 [INFO] 🔍 [298/659]: B003J8ZT38 https://www.amazon.com/dp/B003J8ZT38?language=en_US
+2025-03-24 07:47:22,293 [INFO] ⚡ Änderungen erkannt für B003J8ZT38: main_category
+2025-03-24 07:47:22,341 [INFO] 🔍 [299/659]: B091MFN5ZH https://www.amazon.com/dp/B091MFN5ZH?language=en_US
+2025-03-24 07:47:34,888 [INFO] ⚡ Änderungen erkannt für B091MFN5ZH: main_category
+2025-03-24 07:47:34,938 [INFO] 🔍 [300/659]: B07X8QT7MM https://www.amazon.com/dp/B07X8QT7MM?language=en_US
+2025-03-24 07:47:45,484 [INFO] ⚡ Änderungen erkannt für B07X8QT7MM: main_category
+2025-03-24 07:47:45,503 [INFO] 🔍 [301/659]: B07Z4K67NZ https://www.amazon.com/dp/B07Z4K67NZ?language=en_US
+2025-03-24 07:47:58,607 [INFO] ⚡ Änderungen erkannt für B07Z4K67NZ: price, main_category, total
+2025-03-24 07:47:58,629 [INFO] 🔍 [302/659]: B0BKTQ4GWS https://www.amazon.com/dp/B0BKTQ4GWS?language=en_US
+2025-03-24 07:48:10,752 [INFO] ⚡ Änderungen erkannt für B0BKTQ4GWS: main_category
+2025-03-24 07:48:10,791 [INFO] 🔍 [303/659]: B008A4RQ5K https://www.amazon.com/dp/B008A4RQ5K?language=en_US
+2025-03-24 07:48:22,107 [INFO] ⚡ Änderungen erkannt für B008A4RQ5K: main_category
+2025-03-24 07:48:22,149 [INFO] 🔍 [304/659]: B075H21PPB https://www.amazon.com/dp/B075H21PPB?language=en_US
+2025-03-24 07:48:33,705 [INFO] ⚡ Änderungen erkannt für B075H21PPB: main_category
+2025-03-24 07:48:33,768 [INFO] 🔍 [305/659]: B01E6L9U9K https://www.amazon.com/dp/B01E6L9U9K?language=en_US
+2025-03-24 07:48:43,568 [INFO] ⚡ Änderungen erkannt für B01E6L9U9K: main_category
+2025-03-24 07:48:43,587 [INFO] 🔍 [306/659]: B0175YEALS https://www.amazon.com/dp/B0175YEALS?language=en_US
+2025-03-24 07:48:53,299 [WARNING] ❌ Fehler beim Scrapen von B0175YEALS, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-24 07:48:53,321 [INFO] 🔍 [307/659]: B0C56BZBX3 https://www.amazon.com/dp/B0C56BZBX3?language=en_US
+2025-03-24 07:49:04,477 [INFO] ⚡ Änderungen erkannt für B0C56BZBX3: main_category
+2025-03-24 07:49:04,523 [INFO] 🔍 [308/659]: B08D6S6J7W https://www.amazon.com/dp/B08D6S6J7W?language=en_US
+2025-03-24 07:49:16,898 [INFO] ⚡ Änderungen erkannt für B08D6S6J7W: main_category
+2025-03-24 07:49:16,952 [INFO] 🔍 [309/659]: B0013G6M8O https://www.amazon.com/dp/B0013G6M8O?language=en_US
+2025-03-24 07:49:29,017 [INFO] ⚡ Änderungen erkannt für B0013G6M8O: price, main_category, total
+2025-03-24 07:49:29,067 [INFO] 🔍 [310/659]: B097JQQS74 https://www.amazon.com/dp/B097JQQS74?language=en_US
+2025-03-24 07:49:41,150 [INFO] ⚡ Änderungen erkannt für B097JQQS74: main_category
+2025-03-24 07:49:41,189 [INFO] 🔍 [311/659]: B086LK1ZVW https://www.amazon.com/dp/B086LK1ZVW?language=en_US
+2025-03-24 07:49:52,893 [INFO] ⚡ Änderungen erkannt für B086LK1ZVW: price, main_category, total
+2025-03-24 07:49:52,931 [INFO] 🔍 [312/659]: B0BL952VJ3 https://www.amazon.com/dp/B0BL952VJ3?language=en_US
+2025-03-24 07:50:04,580 [INFO] ⚡ Änderungen erkannt für B0BL952VJ3: main_category
+2025-03-24 07:50:04,608 [INFO] 🔍 [313/659]: B0CG8WBZ78 https://www.amazon.com/dp/B0CG8WBZ78?language=en_US
+2025-03-24 07:50:16,761 [INFO] ⚡ Änderungen erkannt für B0CG8WBZ78: main_category
+2025-03-24 07:50:16,799 [INFO] 🔍 [314/659]: B0BRNJB7RH https://www.amazon.com/dp/B0BRNJB7RH?language=en_US
+2025-03-24 07:50:27,186 [INFO] ⚡ Änderungen erkannt für B0BRNJB7RH: main_category
+2025-03-24 07:50:27,212 [INFO] 🔍 [315/659]: B08TW27VGN https://www.amazon.com/dp/B08TW27VGN?language=en_US
+2025-03-24 07:50:38,514 [INFO] ⚡ Änderungen erkannt für B08TW27VGN: main_category
+2025-03-24 07:50:38,568 [INFO] 🔍 [316/659]: B007NK0P3C https://www.amazon.com/dp/B007NK0P3C?language=en_US
+2025-03-24 07:50:48,666 [WARNING] ❌ Fehler beim Scrapen von B007NK0P3C, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-24 07:50:48,704 [INFO] 🔍 [317/659]: B08NVSY451 https://www.amazon.com/dp/B08NVSY451?language=en_US
+2025-03-24 07:51:01,155 [INFO] ⚡ Änderungen erkannt für B08NVSY451: main_category
+2025-03-24 07:51:01,197 [INFO] 🔍 [318/659]: B099TCJNND https://www.amazon.com/dp/B099TCJNND?language=en_US
+2025-03-24 07:51:14,452 [INFO] ⚡ Änderungen erkannt für B099TCJNND: main_category
+2025-03-24 07:51:14,509 [INFO] 🔍 [319/659]: B008E70MHW https://www.amazon.com/dp/B008E70MHW?language=en_US
+2025-03-24 07:51:26,310 [INFO] ⚡ Änderungen erkannt für B008E70MHW: main_category
+2025-03-24 07:51:26,357 [INFO] 🔍 [320/659]: B0CNYRCZVC https://www.amazon.com/dp/B0CNYRCZVC?language=en_US
+2025-03-24 07:51:36,924 [INFO] ⚡ Änderungen erkannt für B0CNYRCZVC: main_category
+2025-03-24 07:51:36,966 [INFO] 🔍 [321/659]: B078BSRMR4 https://www.amazon.com/dp/B078BSRMR4?language=en_US
+2025-03-24 07:51:48,105 [INFO] ⚡ Änderungen erkannt für B078BSRMR4: main_category
+2025-03-24 07:51:48,136 [INFO] 🔍 [322/659]: B000V75TQ2 https://www.amazon.com/dp/B000V75TQ2?language=en_US
+2025-03-24 07:51:58,514 [WARNING] ❌ Fehler beim Scrapen von B000V75TQ2, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-24 07:51:58,529 [INFO] 🔍 [323/659]: B0DM69T7TG https://www.amazon.com/dp/B0DM69T7TG?language=en_US
+2025-03-24 07:52:10,333 [INFO] ⚡ Änderungen erkannt für B0DM69T7TG: main_category
+2025-03-24 07:52:10,391 [INFO] 🔍 [324/659]: B06Y2KGF3C https://www.amazon.com/dp/B06Y2KGF3C?language=en_US
+2025-03-24 07:52:21,611 [INFO] ⚡ Änderungen erkannt für B06Y2KGF3C: main_category
+2025-03-24 07:52:21,660 [INFO] 🔍 [325/659]: B09Q3MSMVG https://www.amazon.com/dp/B09Q3MSMVG?language=en_US
+2025-03-24 07:52:31,813 [INFO] ⚡ Änderungen erkannt für B09Q3MSMVG: main_category
+2025-03-24 07:52:31,866 [INFO] 🔍 [326/659]: B000T2HSOU https://www.amazon.com/dp/B000T2HSOU?language=en_US
+2025-03-24 07:52:42,989 [INFO] ⚡ Änderungen erkannt für B000T2HSOU: main_category
+2025-03-24 07:52:43,026 [INFO] 🔍 [327/659]: B006JANSFY https://www.amazon.com/dp/B006JANSFY?language=en_US
+2025-03-24 07:52:53,183 [INFO] ⚡ Änderungen erkannt für B006JANSFY: main_category
+2025-03-24 07:52:53,199 [INFO] 🔍 [328/659]: B0C92LZXRG https://www.amazon.com/dp/B0C92LZXRG?language=en_US
+2025-03-24 07:53:04,714 [INFO] ⚡ Änderungen erkannt für B0C92LZXRG: main_category
+2025-03-24 07:53:04,747 [INFO] 🔍 [329/659]: B01BPHE79G https://www.amazon.com/dp/B01BPHE79G?language=en_US
+2025-03-24 07:53:14,935 [WARNING] ❌ Fehler beim Scrapen von B01BPHE79G, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-24 07:53:14,954 [INFO] 🔍 [330/659]: B082Z8ZGXH https://www.amazon.com/dp/B082Z8ZGXH?language=en_US
+2025-03-24 07:53:27,431 [INFO] ⚡ Änderungen erkannt für B082Z8ZGXH: main_category
+2025-03-24 07:53:27,478 [INFO] 🔍 [331/659]: B00M1XH4IA https://www.amazon.com/dp/B00M1XH4IA?language=en_US
+2025-03-24 07:53:39,636 [INFO] ⚡ Änderungen erkannt für B00M1XH4IA: main_category
+2025-03-24 07:53:39,663 [INFO] 🔍 [332/659]: B077V2C511 https://www.amazon.com/dp/B077V2C511?language=en_US
+2025-03-24 07:53:50,682 [INFO] ⚡ Änderungen erkannt für B077V2C511: main_category
+2025-03-24 07:53:50,730 [INFO] 🔍 [333/659]: B07NY5GKYG https://www.amazon.com/dp/B07NY5GKYG?language=en_US
+2025-03-24 07:54:02,873 [INFO] ⚡ Änderungen erkannt für B07NY5GKYG: main_category
+2025-03-24 07:54:02,890 [INFO] 🔍 [334/659]: B08R7V34BX https://www.amazon.com/dp/B08R7V34BX?language=en_US
+2025-03-24 07:54:16,239 [INFO] ⚡ Änderungen erkannt für B08R7V34BX: main_category
+2025-03-24 07:54:16,260 [INFO] 🔍 [335/659]: B07W9B5K1R https://www.amazon.com/dp/B07W9B5K1R?language=en_US
+2025-03-24 07:54:28,032 [INFO] ⚡ Änderungen erkannt für B07W9B5K1R: main_category
+2025-03-24 07:54:28,053 [INFO] 🔍 [336/659]: B00WC9F7QO https://www.amazon.com/dp/B00WC9F7QO?language=en_US
+2025-03-24 07:54:38,121 [INFO] ⚡ Änderungen erkannt für B00WC9F7QO: main_category
+2025-03-24 07:54:38,139 [INFO] 🔍 [337/659]: B0B2ZCPN2Z https://www.amazon.com/dp/B0B2ZCPN2Z?language=en_US
+2025-03-24 07:54:49,866 [INFO] ⚡ Änderungen erkannt für B0B2ZCPN2Z: main_category
+2025-03-24 07:54:49,908 [INFO] 🔍 [338/659]: B0CR57662J https://www.amazon.com/dp/B0CR57662J?language=en_US
+2025-03-24 07:55:01,934 [INFO] ⚡ Änderungen erkannt für B0CR57662J: main_category
+2025-03-24 07:55:01,974 [INFO] 🔍 [339/659]: B000P72UZG https://www.amazon.com/dp/B000P72UZG?language=en_US
+2025-03-24 07:55:11,499 [WARNING] ❌ Fehler beim Scrapen von B000P72UZG, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-24 07:55:11,536 [INFO] 🔍 [340/659]: B08129TH68 https://www.amazon.com/dp/B08129TH68?language=en_US
+2025-03-24 07:55:24,409 [INFO] ⚡ Änderungen erkannt für B08129TH68: main_category
+2025-03-24 07:55:24,435 [INFO] 🔍 [341/659]: B01D213HL2 https://www.amazon.com/dp/B01D213HL2?language=en_US
+2025-03-24 07:55:36,014 [WARNING] ❌ Fehler beim Scrapen von B01D213HL2, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-24 07:55:36,038 [INFO] 🔍 [342/659]: B0B335CK7G https://www.amazon.com/dp/B0B335CK7G?language=en_US
+2025-03-24 07:55:47,183 [INFO] ⚡ Änderungen erkannt für B0B335CK7G: main_category
+2025-03-24 07:55:47,228 [INFO] 🔍 [343/659]: B001KN3MXI https://www.amazon.com/dp/B001KN3MXI?language=en_US
+2025-03-24 07:56:00,867 [INFO] ⚡ Änderungen erkannt für B001KN3MXI: main_category
+2025-03-24 07:56:00,916 [INFO] 🔍 [344/659]: B0B3M2JKD3 https://www.amazon.com/dp/B0B3M2JKD3?language=en_US
+2025-03-24 07:56:12,093 [INFO] ⚡ Änderungen erkannt für B0B3M2JKD3: price, main_category, second_category, store
+2025-03-24 07:56:12,118 [INFO] 🔍 [345/659]: B075MJ5GQX https://www.amazon.com/dp/B075MJ5GQX?language=en_US
+2025-03-24 07:56:24,302 [INFO] ⚡ Änderungen erkannt für B075MJ5GQX: main_category
+2025-03-24 07:56:24,325 [INFO] 🔍 [346/659]: B088WH5CY4 https://www.amazon.com/dp/B088WH5CY4?language=en_US
+2025-03-24 07:56:35,377 [INFO] ⚡ Änderungen erkannt für B088WH5CY4: price, main_category, second_category, store, manufacturer
+2025-03-24 07:56:35,403 [INFO] 🔍 [347/659]: B0DPWYKQTK https://www.amazon.com/dp/B0DPWYKQTK?language=en_US
+2025-03-24 07:56:46,790 [INFO] ⚡ Änderungen erkannt für B0DPWYKQTK: main_category
+2025-03-24 07:56:46,817 [INFO] 🔍 [348/659]: B0D6FQTNBW https://www.amazon.com/dp/B0D6FQTNBW?language=en_US
+2025-03-24 07:56:58,072 [INFO] ⚡ Änderungen erkannt für B0D6FQTNBW: main_category, blm, total
+2025-03-24 07:56:58,123 [INFO] 🔍 [349/659]: B0DP4DMB3K https://www.amazon.com/dp/B0DP4DMB3K?language=en_US
+2025-03-24 07:57:10,917 [INFO] ⚡ Änderungen erkannt für B0DP4DMB3K: main_category
+2025-03-24 07:57:10,968 [INFO] 🔍 [350/659]: B08GSWNRXW https://www.amazon.com/dp/B08GSWNRXW?language=en_US
+2025-03-24 07:57:22,228 [INFO] ⚡ Änderungen erkannt für B08GSWNRXW: main_category, second_category, store, manufacturer
+2025-03-24 07:57:22,267 [INFO] 🔍 [351/659]: B0DJM7S52P https://www.amazon.com/dp/B0DJM7S52P?language=en_US
+2025-03-24 07:57:34,186 [INFO] ⚡ Änderungen erkannt für B0DJM7S52P: main_category
+2025-03-24 07:57:34,222 [INFO] 🔍 [352/659]: B0DCG495JZ https://www.amazon.com/dp/B0DCG495JZ?language=en_US
+2025-03-24 07:57:46,793 [INFO] ⚡ Änderungen erkannt für B0DCG495JZ: main_category
+2025-03-24 07:57:46,835 [INFO] 🔍 [353/659]: B0CKTZB5RK https://www.amazon.com/dp/B0CKTZB5RK?language=en_US
+2025-03-24 07:57:59,255 [INFO] ⚡ Änderungen erkannt für B0CKTZB5RK: main_category
+2025-03-24 07:57:59,299 [INFO] 🔍 [354/659]: B08YYRM7R6 https://www.amazon.com/dp/B08YYRM7R6?language=en_US
+2025-03-24 07:58:11,809 [INFO] ⚡ Änderungen erkannt für B08YYRM7R6: main_category
+2025-03-24 07:58:11,850 [INFO] 🔍 [355/659]: B07WQJRL86 https://www.amazon.com/dp/B07WQJRL86?language=en_US
+2025-03-24 07:58:24,508 [INFO] ⚡ Änderungen erkannt für B07WQJRL86: main_category
+2025-03-24 07:58:24,553 [INFO] 🔍 [356/659]: B0D46D3TRS https://www.amazon.com/dp/B0D46D3TRS?language=en_US
+2025-03-24 07:58:37,159 [INFO] ⚡ Änderungen erkannt für B0D46D3TRS: main_category, blm, total
+2025-03-24 07:58:37,199 [INFO] 🔍 [357/659]: B0CMF2H5FH https://www.amazon.com/dp/B0CMF2H5FH?language=en_US
+2025-03-24 07:58:49,904 [INFO] ⚡ Änderungen erkannt für B0CMF2H5FH: price, main_category, second_category, store, manufacturer
+2025-03-24 07:58:49,953 [INFO] 🔍 [358/659]: B07XX363JB https://www.amazon.com/dp/B07XX363JB?language=en_US
+2025-03-24 07:59:02,899 [INFO] ⚡ Änderungen erkannt für B07XX363JB: main_category
+2025-03-24 07:59:02,943 [INFO] 🔍 [359/659]: B0CKTZYZ1X https://www.amazon.com/dp/B0CKTZYZ1X?language=en_US
+2025-03-24 07:59:14,861 [INFO] ⚡ Änderungen erkannt für B0CKTZYZ1X: main_category
+2025-03-24 07:59:14,889 [INFO] 🔍 [360/659]: B0CKV1BVZ7 https://www.amazon.com/dp/B0CKV1BVZ7?language=en_US
+2025-03-24 07:59:26,520 [INFO] ⚡ Änderungen erkannt für B0CKV1BVZ7: main_category
+2025-03-24 07:59:26,581 [INFO] 🔍 [361/659]: B07HG4YCW7 https://www.amazon.com/dp/B07HG4YCW7?language=en_US
+2025-03-24 07:59:36,944 [INFO] ⚡ Änderungen erkannt für B07HG4YCW7: price, main_category, second_category, store
+2025-03-24 07:59:36,985 [INFO] 🔍 [362/659]: B0CJTWPF5P https://www.amazon.com/dp/B0CJTWPF5P?language=en_US
+2025-03-24 07:59:48,717 [INFO] ⚡ Änderungen erkannt für B0CJTWPF5P: main_category
+2025-03-24 07:59:48,750 [INFO] 🔍 [363/659]: B0DL5VFYT8 https://www.amazon.com/dp/B0DL5VFYT8?language=en_US
+2025-03-24 08:00:01,068 [INFO] ⚡ Änderungen erkannt für B0DL5VFYT8: main_category
+2025-03-24 08:00:01,090 [INFO] 🔍 [364/659]: B0DPHSX3FY https://www.amazon.com/dp/B0DPHSX3FY?language=en_US
+2025-03-24 08:00:14,078 [INFO] ⚡ Änderungen erkannt für B0DPHSX3FY: main_category
+2025-03-24 08:00:14,122 [INFO] 🔍 [365/659]: B094NY8YGM https://www.amazon.com/dp/B094NY8YGM?language=en_US
+2025-03-24 08:00:25,318 [INFO] ⚡ Änderungen erkannt für B094NY8YGM: main_category, second_category, store, manufacturer
+2025-03-24 08:00:25,355 [INFO] 🔍 [366/659]: B01CYYW5KM https://www.amazon.com/dp/B01CYYW5KM?language=en_US
+2025-03-24 08:00:36,404 [INFO] ⚡ Änderungen erkannt für B01CYYW5KM: main_category
+2025-03-24 08:00:36,449 [INFO] 🔍 [367/659]: B01N337USG https://www.amazon.com/dp/B01N337USG?language=en_US
+2025-03-24 08:00:47,158 [INFO] ⚡ Änderungen erkannt für B01N337USG: price, main_category, second_category, store
+2025-03-24 08:00:47,202 [INFO] 🔍 [368/659]: B0D1R3CKKF https://www.amazon.com/dp/B0D1R3CKKF?language=en_US
+2025-03-24 08:00:58,103 [INFO] ⚡ Änderungen erkannt für B0D1R3CKKF: main_category, second_category, store
+2025-03-24 08:00:58,135 [INFO] 🔍 [369/659]: B0BZKRS96F https://www.amazon.com/dp/B0BZKRS96F?language=en_US
+2025-03-24 08:01:09,140 [INFO] ⚡ Änderungen erkannt für B0BZKRS96F: main_category, second_category, store, manufacturer
+2025-03-24 08:01:09,186 [INFO] 🔍 [370/659]: B07Y36NRXR https://www.amazon.com/dp/B07Y36NRXR?language=en_US
+2025-03-24 08:01:20,618 [INFO] ⚡ Änderungen erkannt für B07Y36NRXR: price, main_category, second_category, store, manufacturer
+2025-03-24 08:01:20,661 [INFO] 🔍 [371/659]: B00RZQ98NC https://www.amazon.com/dp/B00RZQ98NC?language=en_US
+2025-03-24 08:01:33,276 [INFO] ⚡ Änderungen erkannt für B00RZQ98NC: main_category
+2025-03-24 08:01:33,313 [INFO] 🔍 [372/659]: B0DZ1XQ4RL https://www.amazon.com/dp/B0DZ1XQ4RL?language=en_US
+2025-03-24 08:01:45,553 [INFO] ⚡ Änderungen erkannt für B0DZ1XQ4RL: main_category
+2025-03-24 08:01:45,593 [INFO] 🔍 [373/659]: B076JP1Q31 https://www.amazon.com/dp/B076JP1Q31?language=en_US
+2025-03-24 08:01:57,729 [INFO] ⚡ Änderungen erkannt für B076JP1Q31: main_category
+2025-03-24 08:01:57,754 [INFO] 🔍 [374/659]: B0CMCHNYGY https://www.amazon.com/dp/B0CMCHNYGY?language=en_US
+2025-03-24 08:02:11,162 [INFO] ⚡ Änderungen erkannt für B0CMCHNYGY: main_category
+2025-03-24 08:02:11,201 [INFO] 🔍 [375/659]: B098V8L3Z2 https://www.amazon.com/dp/B098V8L3Z2?language=en_US
+2025-03-24 08:02:23,056 [INFO] ⚡ Änderungen erkannt für B098V8L3Z2: main_category
+2025-03-24 08:02:23,090 [INFO] 🔍 [376/659]: B0BFB874WD https://www.amazon.com/dp/B0BFB874WD?language=en_US
+2025-03-24 08:02:33,305 [INFO] ⚡ Änderungen erkannt für B0BFB874WD: main_category, second_category, store, manufacturer
+2025-03-24 08:02:33,322 [INFO] 🔍 [377/659]: B0DMVNRSHZ https://www.amazon.com/dp/B0DMVNRSHZ?language=en_US
+2025-03-24 08:02:46,425 [INFO] ⚡ Änderungen erkannt für B0DMVNRSHZ: main_category
+2025-03-24 08:02:46,448 [INFO] 🔍 [378/659]: B07RGCSNWN https://www.amazon.com/dp/B07RGCSNWN?language=en_US
+2025-03-24 08:02:58,140 [INFO] ⚡ Änderungen erkannt für B07RGCSNWN: main_category, second_category, store
+2025-03-24 08:02:58,177 [INFO] 🔍 [379/659]: B08MVV8TBN https://www.amazon.com/dp/B08MVV8TBN?language=en_US
+2025-03-24 08:03:08,678 [INFO] ⚡ Änderungen erkannt für B08MVV8TBN: price, main_category, second_category, store
+2025-03-24 08:03:08,728 [INFO] 🔍 [380/659]: B0DKX7P1TK https://www.amazon.com/dp/B0DKX7P1TK?language=en_US
+2025-03-24 08:03:18,928 [INFO] ⚡ Änderungen erkannt für B0DKX7P1TK: main_category, second_category, store
+2025-03-24 08:03:18,948 [INFO] 🔍 [381/659]: B0DDGNWDNT https://www.amazon.com/dp/B0DDGNWDNT?language=en_US
+2025-03-24 08:03:29,239 [INFO] ⚡ Änderungen erkannt für B0DDGNWDNT: main_category, second_category, store, manufacturer
+2025-03-24 08:03:29,293 [INFO] 🔍 [382/659]: B01J47191I https://www.amazon.com/dp/B01J47191I?language=en_US
+2025-03-24 08:03:41,426 [INFO] ⚡ Änderungen erkannt für B01J47191I: main_category
+2025-03-24 08:03:41,479 [INFO] 🔍 [383/659]: B0DMW69MH6 https://www.amazon.com/dp/B0DMW69MH6?language=en_US
+2025-03-24 08:03:52,205 [INFO] ⚡ Änderungen erkannt für B0DMW69MH6: main_category, second_category, store, manufacturer
+2025-03-24 08:03:52,246 [INFO] 🔍 [384/659]: B0D1FZ5HYK https://www.amazon.com/dp/B0D1FZ5HYK?language=en_US
+2025-03-24 08:04:02,420 [INFO] ⚡ Änderungen erkannt für B0D1FZ5HYK: main_category, second_category, store, manufacturer
+2025-03-24 08:04:02,445 [INFO] 🔍 [385/659]: B09YTTXRFZ https://www.amazon.com/dp/B09YTTXRFZ?language=en_US
+2025-03-24 08:04:15,246 [INFO] ⚡ Änderungen erkannt für B09YTTXRFZ: main_category
+2025-03-24 08:04:15,287 [INFO] 🔍 [386/659]: B0BQZ732RH https://www.amazon.com/dp/B0BQZ732RH?language=en_US
+2025-03-24 08:04:26,905 [INFO] ⚡ Änderungen erkannt für B0BQZ732RH: main_category, second_category, store, manufacturer
+2025-03-24 08:04:26,926 [INFO] 🔍 [387/659]: B0DFW7MV7W https://www.amazon.com/dp/B0DFW7MV7W?language=en_US
+2025-03-24 08:04:40,172 [INFO] ⚡ Änderungen erkannt für B0DFW7MV7W: main_category
+2025-03-24 08:04:40,212 [INFO] 🔍 [388/659]: B08YYQZ54F https://www.amazon.com/dp/B08YYQZ54F?language=en_US
+2025-03-24 08:04:53,100 [INFO] ⚡ Änderungen erkannt für B08YYQZ54F: main_category
+2025-03-24 08:04:53,142 [INFO] 🔍 [389/659]: B09DSY5XCS https://www.amazon.com/dp/B09DSY5XCS?language=en_US
+2025-03-24 08:05:04,351 [INFO] ⚡ Änderungen erkannt für B09DSY5XCS: main_category, second_category, store, manufacturer
+2025-03-24 08:05:04,384 [INFO] 🔍 [390/659]: B0DG2D3YM8 https://www.amazon.com/dp/B0DG2D3YM8?language=en_US
+2025-03-24 08:05:17,656 [INFO] ⚡ Änderungen erkannt für B0DG2D3YM8: main_category
+2025-03-24 08:05:17,691 [INFO] 🔍 [391/659]: B0D78L563S https://www.amazon.com/dp/B0D78L563S?language=en_US
+2025-03-24 08:05:30,358 [INFO] ⚡ Änderungen erkannt für B0D78L563S: main_category
+2025-03-24 08:05:30,399 [INFO] 🔍 [392/659]: B00VWSB8DM https://www.amazon.com/dp/B00VWSB8DM?language=en_US
+2025-03-24 08:05:42,565 [INFO] ⚡ Änderungen erkannt für B00VWSB8DM: main_category
+2025-03-24 08:05:42,605 [INFO] 🔍 [393/659]: B0DCNDWB96 https://www.amazon.com/dp/B0DCNDWB96?language=en_US
+2025-03-24 08:05:54,834 [INFO] ⚡ Änderungen erkannt für B0DCNDWB96: main_category
+2025-03-24 08:05:54,874 [INFO] 🔍 [394/659]: B0DQCMFMBY https://www.amazon.com/dp/B0DQCMFMBY?language=en_US
+2025-03-24 08:06:07,409 [INFO] ⚡ Änderungen erkannt für B0DQCMFMBY: main_category
+2025-03-24 08:06:07,461 [INFO] 🔍 [395/659]: B08R9J7ZSF https://www.amazon.com/dp/B08R9J7ZSF?language=en_US
+2025-03-24 08:06:20,170 [INFO] ⚡ Änderungen erkannt für B08R9J7ZSF: main_category
+2025-03-24 08:06:20,196 [INFO] 🔍 [396/659]: B0CKLR913G https://www.amazon.com/dp/B0CKLR913G?language=en_US
+2025-03-24 08:06:31,187 [INFO] ⚡ Änderungen erkannt für B0CKLR913G: main_category, second_category, store, manufacturer
+2025-03-24 08:06:31,226 [INFO] 🔍 [397/659]: B07MXRXC14 https://www.amazon.com/dp/B07MXRXC14?language=en_US
+2025-03-24 08:06:41,766 [INFO] ⚡ Änderungen erkannt für B07MXRXC14: main_category, second_category, store
+2025-03-24 08:06:41,827 [INFO] 🔍 [398/659]: B0CZRJWJ4V https://www.amazon.com/dp/B0CZRJWJ4V?language=en_US
+2025-03-24 08:06:54,784 [INFO] ⚡ Änderungen erkannt für B0CZRJWJ4V: main_category
+2025-03-24 08:06:54,832 [INFO] 🔍 [399/659]: B0BCBX9ZF8 https://www.amazon.com/dp/B0BCBX9ZF8?language=en_US
+2025-03-24 08:07:07,296 [INFO] ⚡ Änderungen erkannt für B0BCBX9ZF8: main_category
+2025-03-24 08:07:07,337 [INFO] 🔍 [400/659]: B0CPPLFQKB https://www.amazon.com/dp/B0CPPLFQKB?language=en_US
+2025-03-24 08:07:19,398 [INFO] ⚡ Änderungen erkannt für B0CPPLFQKB: main_category
+2025-03-24 08:07:19,424 [INFO] 🔍 [401/659]: B06XRYQ722 https://www.amazon.com/dp/B06XRYQ722?language=en_US
+2025-03-24 08:07:32,574 [INFO] ⚡ Änderungen erkannt für B06XRYQ722: main_category
+2025-03-24 08:07:32,628 [INFO] 🔍 [402/659]: B0DP5DY2CT https://www.amazon.com/dp/B0DP5DY2CT?language=en_US
+2025-03-24 08:07:44,835 [INFO] ⚡ Änderungen erkannt für B0DP5DY2CT: main_category
+2025-03-24 08:07:44,875 [INFO] 🔍 [403/659]: B07KGGS4SS https://www.amazon.com/dp/B07KGGS4SS?language=en_US
+2025-03-24 08:07:58,182 [INFO] ⚡ Änderungen erkannt für B07KGGS4SS: main_category
+2025-03-24 08:07:58,210 [INFO] 🔍 [404/659]: B076NC6BGP https://www.amazon.com/dp/B076NC6BGP?language=en_US
+2025-03-24 08:08:10,318 [INFO] ⚡ Änderungen erkannt für B076NC6BGP: main_category
+2025-03-24 08:08:10,345 [INFO] 🔍 [405/659]: B08SY6N9TL https://www.amazon.com/dp/B08SY6N9TL?language=en_US
+2025-03-24 08:08:23,284 [INFO] ⚡ Änderungen erkannt für B08SY6N9TL: main_category
+2025-03-24 08:08:23,315 [INFO] 🔍 [406/659]: B002NHIFNW https://www.amazon.com/dp/B002NHIFNW?language=en_US
+2025-03-24 08:08:36,343 [INFO] ⚡ Änderungen erkannt für B002NHIFNW: main_category
+2025-03-24 08:08:36,369 [INFO] 🔍 [407/659]: B06XS446GP https://www.amazon.com/dp/B06XS446GP?language=en_US
+2025-03-24 08:08:48,744 [INFO] ⚡ Änderungen erkannt für B06XS446GP: main_category
+2025-03-24 08:08:48,773 [INFO] 🔍 [408/659]: B086KG6JZ6 https://www.amazon.com/dp/B086KG6JZ6?language=en_US
+2025-03-24 08:09:01,005 [INFO] ⚡ Änderungen erkannt für B086KG6JZ6: main_category
+2025-03-24 08:09:01,030 [INFO] 🔍 [409/659]: B081VRG3NK https://www.amazon.com/dp/B081VRG3NK?language=en_US
+2025-03-24 08:09:13,294 [INFO] ⚡ Änderungen erkannt für B081VRG3NK: main_category
+2025-03-24 08:09:13,312 [INFO] 🔍 [410/659]: B00BE5D2FA https://www.amazon.com/dp/B00BE5D2FA?language=en_US
+2025-03-24 08:09:25,903 [INFO] ⚡ Änderungen erkannt für B00BE5D2FA: main_category
+2025-03-24 08:09:25,969 [INFO] 🔍 [411/659]: B07GYZNDY8 https://www.amazon.com/dp/B07GYZNDY8?language=en_US
+2025-03-24 08:09:39,131 [INFO] ⚡ Änderungen erkannt für B07GYZNDY8: main_category
+2025-03-24 08:09:39,154 [INFO] 🔍 [412/659]: B005X0U43K https://www.amazon.com/dp/B005X0U43K?language=en_US
+2025-03-24 08:09:51,619 [INFO] ⚡ Änderungen erkannt für B005X0U43K: main_category
+2025-03-24 08:09:51,659 [INFO] 🔍 [413/659]: B0DMTV6PZ1 https://www.amazon.com/dp/B0DMTV6PZ1?language=en_US
+2025-03-24 08:10:03,538 [INFO] ⚡ Änderungen erkannt für B0DMTV6PZ1: main_category
+2025-03-24 08:10:03,584 [INFO] 🔍 [414/659]: B07Q1XCM3L https://www.amazon.com/dp/B07Q1XCM3L?language=en_US
+2025-03-24 08:10:16,855 [INFO] ⚡ Änderungen erkannt für B07Q1XCM3L: main_category
+2025-03-24 08:10:16,898 [INFO] 🔍 [415/659]: B092NVZ5K2 https://www.amazon.com/dp/B092NVZ5K2?language=en_US
+2025-03-24 08:10:30,113 [INFO] ⚡ Änderungen erkannt für B092NVZ5K2: main_category
+2025-03-24 08:10:30,142 [INFO] 🔍 [416/659]: B09B1MKT37 https://www.amazon.com/dp/B09B1MKT37?language=en_US
+2025-03-24 08:10:44,728 [INFO] ⚡ Änderungen erkannt für B09B1MKT37: main_category
+2025-03-24 08:10:44,772 [INFO] 🔍 [417/659]: B0DP676C28 https://www.amazon.com/dp/B0DP676C28?language=en_US
+2025-03-24 08:10:56,076 [INFO] ⚡ Änderungen erkannt für B0DP676C28: main_category
+2025-03-24 08:10:56,131 [INFO] 🔍 [418/659]: B0CM7SS5FY https://www.amazon.com/dp/B0CM7SS5FY?language=en_US
+2025-03-24 08:11:07,758 [INFO] ⚡ Änderungen erkannt für B0CM7SS5FY: main_category
+2025-03-24 08:11:07,784 [INFO] 🔍 [419/659]: B075HKJZ2R https://www.amazon.com/dp/B075HKJZ2R?language=en_US
+2025-03-24 08:11:20,957 [INFO] ⚡ Änderungen erkannt für B075HKJZ2R: main_category
+2025-03-24 08:11:21,000 [INFO] 🔍 [420/659]: B0DBM3QNDG https://www.amazon.com/dp/B0DBM3QNDG?language=en_US
+2025-03-24 08:11:33,552 [INFO] ⚡ Änderungen erkannt für B0DBM3QNDG: main_category
+2025-03-24 08:11:33,576 [INFO] 🔍 [421/659]: B08GLPV3V6 https://www.amazon.com/dp/B08GLPV3V6?language=en_US
+2025-03-24 08:11:46,071 [INFO] ⚡ Änderungen erkannt für B08GLPV3V6: main_category
+2025-03-24 08:11:46,113 [INFO] 🔍 [422/659]: B09PHVJ8LV https://www.amazon.com/dp/B09PHVJ8LV?language=en_US
+2025-03-24 08:11:59,103 [INFO] ⚡ Änderungen erkannt für B09PHVJ8LV: main_category
+2025-03-24 08:11:59,154 [INFO] 🔍 [423/659]: B0C8BQDT6R https://www.amazon.com/dp/B0C8BQDT6R?language=en_US
+2025-03-24 08:12:11,764 [INFO] ⚡ Änderungen erkannt für B0C8BQDT6R: main_category
+2025-03-24 08:12:11,790 [INFO] 🔍 [424/659]: B0CZBM6JTY https://www.amazon.com/dp/B0CZBM6JTY?language=en_US
+2025-03-24 08:12:22,682 [WARNING] ❌ Fehler beim Scrapen von B0CZBM6JTY, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-24 08:12:22,705 [INFO] 🔍 [425/659]: B09LHL19VL https://www.amazon.com/dp/B09LHL19VL?language=en_US
+2025-03-24 08:12:37,410 [INFO] ⚡ Änderungen erkannt für B09LHL19VL: main_category
+2025-03-24 08:12:37,460 [INFO] 🔍 [426/659]: B09DNRWYVQ https://www.amazon.com/dp/B09DNRWYVQ?language=en_US
+2025-03-24 08:12:49,895 [INFO] ⚡ Änderungen erkannt für B09DNRWYVQ: main_category
+2025-03-24 08:12:49,925 [INFO] 🔍 [427/659]: B0851K2JVG https://www.amazon.com/dp/B0851K2JVG?language=en_US
+2025-03-24 08:13:02,464 [INFO] ⚡ Änderungen erkannt für B0851K2JVG: main_category
+2025-03-24 08:13:02,502 [INFO] 🔍 [428/659]: B085ZB4K6M https://www.amazon.com/dp/B085ZB4K6M?language=en_US
+2025-03-24 08:13:15,461 [INFO] ⚡ Änderungen erkannt für B085ZB4K6M: main_category
+2025-03-24 08:13:15,500 [INFO] 🔍 [429/659]: B000NNEPJQ https://www.amazon.com/dp/B000NNEPJQ?language=en_US
+2025-03-24 08:13:26,545 [INFO] ⚡ Änderungen erkannt für B000NNEPJQ: price, main_category, total
+2025-03-24 08:13:26,571 [INFO] 🔍 [430/659]: B01N5ONQTT https://www.amazon.com/dp/B01N5ONQTT?language=en_US
+2025-03-24 08:13:39,153 [INFO] ⚡ Änderungen erkannt für B01N5ONQTT: main_category
+2025-03-24 08:13:39,207 [INFO] 🔍 [431/659]: B07WVP81Z7 https://www.amazon.com/dp/B07WVP81Z7?language=en_US
+2025-03-24 08:13:51,263 [INFO] ⚡ Änderungen erkannt für B07WVP81Z7: main_category
+2025-03-24 08:13:51,288 [INFO] 🔍 [432/659]: B005FGN4ZC https://www.amazon.com/dp/B005FGN4ZC?language=en_US
+2025-03-24 08:14:04,914 [INFO] ⚡ Änderungen erkannt für B005FGN4ZC: main_category
+2025-03-24 08:14:04,934 [INFO] 🔍 [433/659]: B0881XD6J9 https://www.amazon.com/dp/B0881XD6J9?language=en_US
+2025-03-24 08:14:18,295 [INFO] ⚡ Änderungen erkannt für B0881XD6J9: main_category
+2025-03-24 08:14:18,337 [INFO] 🔍 [434/659]: B0DJW58G6C https://www.amazon.com/dp/B0DJW58G6C?language=en_US
+2025-03-24 08:14:30,048 [INFO] ⚡ Änderungen erkannt für B0DJW58G6C: main_category
+2025-03-24 08:14:30,089 [INFO] 🔍 [435/659]: B0DD7YQKDH https://www.amazon.com/dp/B0DD7YQKDH?language=en_US
+2025-03-24 08:14:42,077 [INFO] ⚡ Änderungen erkannt für B0DD7YQKDH: main_category, blm, total
+2025-03-24 08:14:42,132 [INFO] 🔍 [436/659]: B0D88NLM9P https://www.amazon.com/dp/B0D88NLM9P?language=en_US
+2025-03-24 08:14:53,706 [INFO] ⚡ Änderungen erkannt für B0D88NLM9P: main_category
+2025-03-24 08:14:53,747 [INFO] 🔍 [437/659]: B0124XEUYC https://www.amazon.com/dp/B0124XEUYC?language=en_US
+2025-03-24 08:15:07,290 [INFO] ⚡ Änderungen erkannt für B0124XEUYC: main_category
+2025-03-24 08:15:07,330 [INFO] 🔍 [438/659]: B07FR2LJYQ https://www.amazon.com/dp/B07FR2LJYQ?language=en_US
+2025-03-24 08:15:18,609 [INFO] ⚡ Änderungen erkannt für B07FR2LJYQ: main_category
+2025-03-24 08:15:18,630 [INFO] 🔍 [439/659]: B075TCYZYR https://www.amazon.com/dp/B075TCYZYR?language=en_US
+2025-03-24 08:15:29,482 [WARNING] ❌ Fehler beim Scrapen von B075TCYZYR, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-24 08:15:29,505 [INFO] 🔍 [440/659]: B0030UUZJI https://www.amazon.com/dp/B0030UUZJI?language=en_US
+2025-03-24 08:15:41,334 [INFO] ⚡ Änderungen erkannt für B0030UUZJI: main_category
+2025-03-24 08:15:41,382 [INFO] 🔍 [441/659]: B004NNCDVY https://www.amazon.com/dp/B004NNCDVY?language=en_US
+2025-03-24 08:15:54,334 [INFO] ⚡ Änderungen erkannt für B004NNCDVY: main_category
+2025-03-24 08:15:54,375 [INFO] 🔍 [442/659]: B09PMVLMWV https://www.amazon.com/dp/B09PMVLMWV?language=en_US
+2025-03-24 08:16:07,409 [INFO] ⚡ Änderungen erkannt für B09PMVLMWV: main_category, manufacturer
+2025-03-24 08:16:07,452 [INFO] 🔍 [443/659]: B006M5ZAMK https://www.amazon.com/dp/B006M5ZAMK?language=en_US
+2025-03-24 08:16:19,175 [INFO] ⚡ Änderungen erkannt für B006M5ZAMK: main_category
+2025-03-24 08:16:19,209 [INFO] 🔍 [444/659]: B081DMM46P https://www.amazon.com/dp/B081DMM46P?language=en_US
+2025-03-24 08:16:33,047 [INFO] ⚡ Änderungen erkannt für B081DMM46P: main_category
+2025-03-24 08:16:33,078 [INFO] 🔍 [445/659]: B0DH5YH8YL https://www.amazon.com/dp/B0DH5YH8YL?language=en_US
+2025-03-24 08:16:44,032 [INFO] ⚡ Änderungen erkannt für B0DH5YH8YL: main_category
+2025-03-24 08:16:44,091 [INFO] 🔍 [446/659]: B08P7TYP2L https://www.amazon.com/dp/B08P7TYP2L?language=en_US
+2025-03-24 08:16:57,681 [INFO] ⚡ Änderungen erkannt für B08P7TYP2L: main_category
+2025-03-24 08:16:57,706 [INFO] 🔍 [447/659]: B01BSE9UKC https://www.amazon.com/dp/B01BSE9UKC?language=en_US
+2025-03-24 08:17:08,843 [INFO] ⚡ Änderungen erkannt für B01BSE9UKC: main_category
+2025-03-24 08:17:08,883 [INFO] 🔍 [448/659]: B07TYD56DY https://www.amazon.com/dp/B07TYD56DY?language=en_US
+2025-03-24 08:17:19,658 [INFO] ⚡ Änderungen erkannt für B07TYD56DY: title changed, price, main_category, second_category, store
+2025-03-24 08:17:19,699 [INFO] 🔍 [449/659]: B00012NDWE https://www.amazon.com/dp/B00012NDWE?language=en_US
+2025-03-24 08:17:31,502 [INFO] ⚡ Änderungen erkannt für B00012NDWE: main_category
+2025-03-24 08:17:31,551 [INFO] 🔍 [450/659]: B0CCCNKD73 https://www.amazon.com/dp/B0CCCNKD73?language=en_US
+2025-03-24 08:17:43,676 [INFO] ⚡ Änderungen erkannt für B0CCCNKD73: main_category
+2025-03-24 08:17:43,707 [INFO] 🔍 [451/659]: B008S0I1Q4 https://www.amazon.com/dp/B008S0I1Q4?language=en_US
+2025-03-24 08:17:56,693 [INFO] ⚡ Änderungen erkannt für B008S0I1Q4: main_category
+2025-03-24 08:17:56,719 [INFO] 🔍 [452/659]: B07RV3BQ45 https://www.amazon.com/dp/B07RV3BQ45?language=en_US
+2025-03-24 08:18:10,417 [INFO] ⚡ Änderungen erkannt für B07RV3BQ45: main_category
+2025-03-24 08:18:10,452 [INFO] 🔍 [453/659]: B0BLP6LK9D https://www.amazon.com/dp/B0BLP6LK9D?language=en_US
+2025-03-24 08:18:22,766 [INFO] ⚡ Änderungen erkannt für B0BLP6LK9D: main_category
+2025-03-24 08:18:22,804 [INFO] 🔍 [454/659]: B07BWMJ8CC https://www.amazon.com/dp/B07BWMJ8CC?language=en_US
+2025-03-24 08:18:35,265 [INFO] ⚡ Änderungen erkannt für B07BWMJ8CC: main_category
+2025-03-24 08:18:35,305 [INFO] 🔍 [455/659]: B07P5W2YVM https://www.amazon.com/dp/B07P5W2YVM?language=en_US
+2025-03-24 08:18:47,818 [INFO] ⚡ Änderungen erkannt für B07P5W2YVM: main_category
+2025-03-24 08:18:47,844 [INFO] 🔍 [456/659]: B0CWMDFCGX https://www.amazon.com/dp/B0CWMDFCGX?language=en_US
+2025-03-24 08:18:59,801 [INFO] ⚡ Änderungen erkannt für B0CWMDFCGX: main_category
+2025-03-24 08:18:59,862 [INFO] 🔍 [457/659]: B0BQPT34V7 https://www.amazon.com/dp/B0BQPT34V7?language=en_US
+2025-03-24 08:19:12,384 [INFO] ⚡ Änderungen erkannt für B0BQPT34V7: main_category
+2025-03-24 08:19:12,431 [INFO] 🔍 [458/659]: B07B12LHWL https://www.amazon.com/dp/B07B12LHWL?language=en_US
+2025-03-24 08:19:25,362 [INFO] ⚡ Änderungen erkannt für B07B12LHWL: main_category
+2025-03-24 08:19:25,390 [INFO] 🔍 [459/659]: B0DCKXJH73 https://www.amazon.com/dp/B0DCKXJH73?language=en_US
+2025-03-24 08:19:38,028 [INFO] ⚡ Änderungen erkannt für B0DCKXJH73: main_category
+2025-03-24 08:19:38,076 [INFO] 🔍 [460/659]: B00E9M4XFI https://www.amazon.com/dp/B00E9M4XFI?language=en_US
+2025-03-24 08:19:51,882 [INFO] ⚡ Änderungen erkannt für B00E9M4XFI: main_category
+2025-03-24 08:19:51,909 [INFO] 🔍 [461/659]: B0DN24CYVK https://www.amazon.com/dp/B0DN24CYVK?language=en_US
+2025-03-24 08:20:03,876 [INFO] ⚡ Änderungen erkannt für B0DN24CYVK: main_category
+2025-03-24 08:20:03,916 [INFO] 🔍 [462/659]: B0CRWV8KCX https://www.amazon.com/dp/B0CRWV8KCX?language=en_US
+2025-03-24 08:20:15,612 [INFO] ⚡ Änderungen erkannt für B0CRWV8KCX: main_category
+2025-03-24 08:20:15,641 [INFO] 🔍 [463/659]: B0BVGD7XT2 https://www.amazon.com/dp/B0BVGD7XT2?language=en_US
+2025-03-24 08:20:27,596 [INFO] ⚡ Änderungen erkannt für B0BVGD7XT2: main_category
+2025-03-24 08:20:27,636 [INFO] 🔍 [464/659]: B0DGG12Q2N https://www.amazon.com/dp/B0DGG12Q2N?language=en_US
+2025-03-24 08:20:39,624 [INFO] ⚡ Änderungen erkannt für B0DGG12Q2N: main_category, blm, total
+2025-03-24 08:20:39,664 [INFO] 🔍 [465/659]: B0D38GFBFN https://www.amazon.com/dp/B0D38GFBFN?language=en_US
+2025-03-24 08:20:51,546 [INFO] ⚡ Änderungen erkannt für B0D38GFBFN: main_category
+2025-03-24 08:20:51,600 [INFO] 🔍 [466/659]: B0CTFNR4SK https://www.amazon.com/dp/B0CTFNR4SK?language=en_US
+2025-03-24 08:21:03,258 [INFO] ⚡ Änderungen erkannt für B0CTFNR4SK: main_category
+2025-03-24 08:21:03,305 [INFO] 🔍 [467/659]: B0DWWVJW77 https://www.amazon.com/dp/B0DWWVJW77?language=en_US
+2025-03-24 08:21:13,110 [WARNING] ❌ Fehler beim Scrapen von B0DWWVJW77, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-24 08:21:13,139 [INFO] 🔍 [468/659]: B0DGWXHJDF https://www.amazon.com/dp/B0DGWXHJDF?language=en_US
+2025-03-24 08:21:25,013 [INFO] ⚡ Änderungen erkannt für B0DGWXHJDF: main_category
+2025-03-24 08:21:25,055 [INFO] 🔍 [469/659]: B0D52BJXQM https://www.amazon.com/dp/B0D52BJXQM?language=en_US
+2025-03-24 08:21:36,933 [INFO] ⚡ Änderungen erkannt für B0D52BJXQM: main_category
+2025-03-24 08:21:36,982 [INFO] 🔍 [470/659]: B0CKM1LJZP https://www.amazon.com/dp/B0CKM1LJZP?language=en_US
+2025-03-24 08:21:46,426 [WARNING] ❌ Fehler beim Scrapen von B0CKM1LJZP, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-24 08:21:46,467 [INFO] 🔍 [471/659]: B003ZWUNRK https://www.amazon.com/dp/B003ZWUNRK?language=en_US
+2025-03-24 08:21:56,119 [WARNING] ❌ Fehler beim Scrapen von B003ZWUNRK, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-24 08:21:56,153 [INFO] 🔍 [472/659]: B07FYYKKQK https://www.amazon.com/dp/B07FYYKKQK?language=en_US
+2025-03-24 08:22:05,143 [WARNING] ❌ Fehler beim Scrapen von B07FYYKKQK, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-24 08:22:05,182 [INFO] 🔍 [473/659]: B0CWMHNLQX https://www.amazon.com/dp/B0CWMHNLQX?language=en_US
+2025-03-24 08:22:18,406 [INFO] ⚡ Änderungen erkannt für B0CWMHNLQX: price, main_category, total
+2025-03-24 08:22:18,422 [INFO] 🔍 [474/659]: B0DZC2L3FX https://www.amazon.com/dp/B0DZC2L3FX?language=en_US
+2025-03-24 08:22:29,409 [INFO] ⚡ Änderungen erkannt für B0DZC2L3FX: main_category
+2025-03-24 08:22:29,448 [INFO] 🔍 [475/659]: B0883XJCDL https://www.amazon.com/dp/B0883XJCDL?language=en_US
+2025-03-24 08:22:41,276 [INFO] ⚡ Änderungen erkannt für B0883XJCDL: main_category
+2025-03-24 08:22:41,301 [INFO] 🔍 [476/659]: B077BZBWJS https://www.amazon.com/dp/B077BZBWJS?language=en_US
+2025-03-24 08:22:54,179 [INFO] ⚡ Änderungen erkannt für B077BZBWJS: main_category
+2025-03-24 08:22:54,221 [INFO] 🔍 [477/659]: B07MMKQHQG https://www.amazon.com/dp/B07MMKQHQG?language=en_US
+2025-03-24 08:23:05,614 [INFO] ⚡ Änderungen erkannt für B07MMKQHQG: main_category
+2025-03-24 08:23:05,670 [INFO] 🔍 [478/659]: B01GTO91WI https://www.amazon.com/dp/B01GTO91WI?language=en_US
+2025-03-24 08:23:17,960 [INFO] ⚡ Änderungen erkannt für B01GTO91WI: main_category
+2025-03-24 08:23:18,003 [INFO] 🔍 [479/659]: B076CS63W6 https://www.amazon.com/dp/B076CS63W6?language=en_US
+2025-03-24 08:23:29,457 [WARNING] ❌ Fehler beim Scrapen von B076CS63W6, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-24 08:23:29,494 [INFO] 🔍 [480/659]: B0DK1QKGMQ https://www.amazon.com/dp/B0DK1QKGMQ?language=en_US
+2025-03-24 08:23:41,438 [INFO] ⚡ Änderungen erkannt für B0DK1QKGMQ: main_category
+2025-03-24 08:23:41,483 [INFO] 🔍 [481/659]: B0DHLXNVLP https://www.amazon.com/dp/B0DHLXNVLP?language=en_US
+2025-03-24 08:23:51,182 [WARNING] ❌ Fehler beim Scrapen von B0DHLXNVLP, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-24 08:23:51,204 [INFO] 🔍 [482/659]: B0DWDX6FNG https://www.amazon.com/dp/B0DWDX6FNG?language=en_US
+2025-03-24 08:24:01,748 [INFO] ⚡ Änderungen erkannt für B0DWDX6FNG: main_category
+2025-03-24 08:24:01,800 [INFO] 🔍 [483/659]: B07FXSZ49R https://www.amazon.com/dp/B07FXSZ49R?language=en_US
+2025-03-24 08:24:11,039 [WARNING] ❌ Fehler beim Scrapen von B07FXSZ49R, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-24 08:24:11,069 [INFO] 🔍 [484/659]: B0BYB75CFT https://www.amazon.com/dp/B0BYB75CFT?language=en_US
+2025-03-24 08:24:23,631 [INFO] ⚡ Änderungen erkannt für B0BYB75CFT: main_category
+2025-03-24 08:24:23,668 [INFO] 🔍 [485/659]: B07B541D8P https://www.amazon.com/dp/B07B541D8P?language=en_US
+2025-03-24 08:24:35,436 [INFO] ⚡ Änderungen erkannt für B07B541D8P: main_category
+2025-03-24 08:24:35,476 [INFO] 🔍 [486/659]: B09GW5X51Y https://www.amazon.com/dp/B09GW5X51Y?language=en_US
+2025-03-24 08:24:47,362 [WARNING] ❌ Fehler beim Scrapen von B09GW5X51Y, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-24 08:24:47,407 [INFO] 🔍 [487/659]: B08272M5K2 https://www.amazon.com/dp/B08272M5K2?language=en_US
+2025-03-24 08:25:00,203 [INFO] ⚡ Änderungen erkannt für B08272M5K2: main_category
+2025-03-24 08:25:00,242 [INFO] 🔍 [488/659]: B00GNEW2K8 https://www.amazon.com/dp/B00GNEW2K8?language=en_US
+2025-03-24 08:25:10,832 [INFO] ⚡ Änderungen erkannt für B00GNEW2K8: main_category
+2025-03-24 08:25:10,852 [INFO] 🔍 [489/659]: B01JXXXL1Y https://www.amazon.com/dp/B01JXXXL1Y?language=en_US
+2025-03-24 08:25:23,070 [INFO] ⚡ Änderungen erkannt für B01JXXXL1Y: main_category
+2025-03-24 08:25:23,104 [INFO] 🔍 [490/659]: B0BKTK91S5 https://www.amazon.com/dp/B0BKTK91S5?language=en_US
+2025-03-24 08:25:33,107 [INFO] ⚡ Änderungen erkannt für B0BKTK91S5: main_category
+2025-03-24 08:25:33,153 [INFO] 🔍 [491/659]: B006JA53OS https://www.amazon.com/dp/B006JA53OS?language=en_US
+2025-03-24 08:25:43,633 [INFO] ⚡ Änderungen erkannt für B006JA53OS: main_category
+2025-03-24 08:25:43,664 [INFO] 🔍 [492/659]: B07YPQ682V https://www.amazon.com/dp/B07YPQ682V?language=en_US
+2025-03-24 08:25:54,496 [INFO] ⚡ Änderungen erkannt für B07YPQ682V: main_category
+2025-03-24 08:25:54,519 [INFO] 🔍 [493/659]: B076JSBK79 https://www.amazon.com/dp/B076JSBK79?language=en_US
+2025-03-24 08:26:06,700 [INFO] ⚡ Änderungen erkannt für B076JSBK79: main_category
+2025-03-24 08:26:06,749 [INFO] 🔍 [494/659]: B0DNP4TV7V https://www.amazon.com/dp/B0DNP4TV7V?language=en_US
+2025-03-24 08:26:16,935 [INFO] ⚡ Änderungen erkannt für B0DNP4TV7V: title changed, price, main_category
+2025-03-24 08:26:16,963 [INFO] 🔍 [495/659]: B0BLT2QG94 https://www.amazon.com/dp/B0BLT2QG94?language=en_US
+2025-03-24 08:26:30,666 [INFO] ⚡ Änderungen erkannt für B0BLT2QG94: main_category
+2025-03-24 08:26:30,691 [INFO] 🔍 [496/659]: B0DDTJDMBQ https://www.amazon.com/dp/B0DDTJDMBQ?language=en_US
+2025-03-24 08:26:43,208 [INFO] ⚡ Änderungen erkannt für B0DDTJDMBQ: main_category
+2025-03-24 08:26:43,240 [INFO] 🔍 [497/659]: B0D1FMZ8HZ https://www.amazon.com/dp/B0D1FMZ8HZ?language=en_US
+2025-03-24 08:26:54,205 [INFO] ⚡ Änderungen erkannt für B0D1FMZ8HZ: title changed, price, main_category, second_category, store, manufacturer
+2025-03-24 08:26:54,262 [INFO] 🔍 [498/659]: B0BNPBCS5Z https://www.amazon.com/dp/B0BNPBCS5Z?language=en_US
+2025-03-24 08:27:05,273 [INFO] ⚡ Änderungen erkannt für B0BNPBCS5Z: title changed, price, main_category, second_category, store, manufacturer
+2025-03-24 08:27:05,324 [INFO] 🔍 [499/659]: B0DFWBWWGL https://www.amazon.com/dp/B0DFWBWWGL?language=en_US
+2025-03-24 08:27:17,993 [INFO] ⚡ Änderungen erkannt für B0DFWBWWGL: main_category
+2025-03-24 08:27:18,024 [INFO] 🔍 [500/659]: B01J471GDY https://www.amazon.com/dp/B01J471GDY?language=en_US
+2025-03-24 08:27:29,890 [INFO] ⚡ Änderungen erkannt für B01J471GDY: main_category
+2025-03-24 08:27:29,916 [INFO] 🔍 [501/659]: B0CZDMXJ9W https://www.amazon.com/dp/B0CZDMXJ9W?language=en_US
+2025-03-24 08:27:42,959 [INFO] ⚡ Änderungen erkannt für B0CZDMXJ9W: main_category
+2025-03-24 08:27:42,994 [INFO] 🔍 [502/659]: B0CSK4DYYH https://www.amazon.com/dp/B0CSK4DYYH?language=en_US
+2025-03-24 08:27:55,286 [INFO] ⚡ Änderungen erkannt für B0CSK4DYYH: main_category
+2025-03-24 08:27:55,331 [INFO] 🔍 [503/659]: B0B4DF73R9 https://www.amazon.com/dp/B0B4DF73R9?language=en_US
+2025-03-24 08:28:06,285 [INFO] ⚡ Änderungen erkannt für B0B4DF73R9: title changed, price, main_category, second_category, store, manufacturer
+2025-03-24 08:28:06,306 [INFO] 🔍 [504/659]: B0CPPM2C2H https://www.amazon.com/dp/B0CPPM2C2H?language=en_US
+2025-03-24 08:28:18,410 [INFO] ⚡ Änderungen erkannt für B0CPPM2C2H: main_category
+2025-03-24 08:28:18,441 [INFO] 🔍 [505/659]: B00A2G67YU https://www.amazon.com/dp/B00A2G67YU?language=en_US
+2025-03-24 08:28:31,527 [INFO] ⚡ Änderungen erkannt für B00A2G67YU: main_category
+2025-03-24 08:28:31,571 [INFO] 🔍 [506/659]: B0DBM4DW3S https://www.amazon.com/dp/B0DBM4DW3S?language=en_US
+2025-03-24 08:28:43,743 [INFO] ⚡ Änderungen erkannt für B0DBM4DW3S: main_category
+2025-03-24 08:28:43,783 [INFO] 🔍 [507/659]: B08G1PHLM3 https://www.amazon.com/dp/B08G1PHLM3?language=en_US
+2025-03-24 08:28:56,206 [INFO] ⚡ Änderungen erkannt für B08G1PHLM3: main_category
+2025-03-24 08:28:56,251 [INFO] 🔍 [508/659]: B0BWRQ8C85 https://www.amazon.com/dp/B0BWRQ8C85?language=en_US
+2025-03-24 08:29:08,041 [INFO] ⚡ Änderungen erkannt für B0BWRQ8C85: main_category
+2025-03-24 08:29:08,089 [INFO] 🔍 [509/659]: B08HR62DTC https://www.amazon.com/dp/B08HR62DTC?language=en_US
+2025-03-24 08:29:19,019 [INFO] ⚡ Änderungen erkannt für B08HR62DTC: main_category
+2025-03-24 08:29:19,041 [INFO] 🔍 [510/659]: B0CCSTMQQW https://www.amazon.com/dp/B0CCSTMQQW?language=en_US
+2025-03-24 08:29:30,771 [INFO] ⚡ Änderungen erkannt für B0CCSTMQQW: main_category
+2025-03-24 08:29:30,819 [INFO] 🔍 [511/659]: B00JUQR51C https://www.amazon.com/dp/B00JUQR51C?language=en_US
+2025-03-24 08:29:41,361 [INFO] ⚡ Änderungen erkannt für B00JUQR51C: main_category
+2025-03-24 08:29:41,390 [INFO] 🔍 [512/659]: B00BL6FUX4 https://www.amazon.com/dp/B00BL6FUX4?language=en_US
+2025-03-24 08:29:52,741 [INFO] ⚡ Änderungen erkannt für B00BL6FUX4: main_category
+2025-03-24 08:29:52,782 [INFO] 🔍 [513/659]: B09GVF6T7B https://www.amazon.com/dp/B09GVF6T7B?language=en_US
+2025-03-24 08:30:04,204 [INFO] ⚡ Änderungen erkannt für B09GVF6T7B: price, main_category, total
+2025-03-24 08:30:04,259 [INFO] 🔍 [514/659]: B0DS1RH5P1 https://www.amazon.com/dp/B0DS1RH5P1?language=en_US
+2025-03-24 08:30:15,712 [INFO] ⚡ Änderungen erkannt für B0DS1RH5P1: title changed, price, main_category, second_category, blm, total, store, manufacturer
+2025-03-24 08:30:15,743 [INFO] 🔍 [515/659]: B0DQF77BKC https://www.amazon.com/dp/B0DQF77BKC?language=en_US
+2025-03-24 08:30:27,493 [INFO] ⚡ Änderungen erkannt für B0DQF77BKC: title changed, price, main_category, second_category, blm, total, store, manufacturer
+2025-03-24 08:30:27,529 [INFO] 🔍 [516/659]: B0DX7846R5 https://www.amazon.com/dp/B0DX7846R5?language=en_US
+2025-03-24 08:30:37,606 [INFO] ⚡ Änderungen erkannt für B0DX7846R5: title changed, price, main_category, second_category, blm, total, store, manufacturer
+2025-03-24 08:30:37,627 [INFO] 🔍 [517/659]: B0CHK24CC4 https://www.amazon.com/dp/B0CHK24CC4?language=en_US
+2025-03-24 08:30:49,073 [INFO] ⚡ Änderungen erkannt für B0CHK24CC4: title changed, price, main_category, second_category, blm, total, store, manufacturer
+2025-03-24 08:30:49,096 [INFO] 🔍 [518/659]: B00IUHNCIW https://www.amazon.com/dp/B00IUHNCIW?language=en_US
+2025-03-24 08:30:59,928 [INFO] ⚡ Änderungen erkannt für B00IUHNCIW: title changed, price, main_category, second_category, blm, total, store, manufacturer
+2025-03-24 08:30:59,949 [INFO] 🔍 [519/659]: B018ITUM5C https://www.amazon.com/dp/B018ITUM5C?language=en_US
+2025-03-24 08:31:11,853 [INFO] ⚡ Änderungen erkannt für B018ITUM5C: title changed, price, main_category, second_category, blm, total, store, manufacturer
+2025-03-24 08:31:11,896 [INFO] 🔍 [520/659]: B0CT96P386 https://www.amazon.com/dp/B0CT96P386?language=en_US
+2025-03-24 08:31:23,688 [INFO] ⚡ Änderungen erkannt für B0CT96P386: title changed, price, main_category, second_category, blm, total, store, manufacturer
+2025-03-24 08:31:23,712 [INFO] 🔍 [521/659]: B099KRBL53 https://www.amazon.com/dp/B099KRBL53?language=en_US
+2025-03-24 08:31:34,482 [INFO] ⚡ Änderungen erkannt für B099KRBL53: title changed, price, main_category, second_category, blm, total, store, manufacturer
+2025-03-24 08:31:34,498 [INFO] 🔍 [522/659]: B00333HCUC https://www.amazon.com/dp/B00333HCUC?language=en_US
+2025-03-24 08:31:46,365 [INFO] ⚡ Änderungen erkannt für B00333HCUC: title changed, price, main_category, second_category, blm, total, store, manufacturer
+2025-03-24 08:31:46,406 [INFO] 🔍 [523/659]: B0BKCVLYGX https://www.amazon.com/dp/B0BKCVLYGX?language=en_US
+2025-03-24 08:31:57,175 [INFO] ⚡ Änderungen erkannt für B0BKCVLYGX: title changed, price, main_category, second_category, blm, total, store, manufacturer
+2025-03-24 08:31:57,211 [INFO] 🔍 [524/659]: B0DLF66MH1 https://www.amazon.com/dp/B0DLF66MH1?language=en_US
+2025-03-24 08:32:07,134 [INFO] ⚡ Änderungen erkannt für B0DLF66MH1: title changed, price, main_category, second_category, blm, total, store, manufacturer
+2025-03-24 08:32:07,177 [INFO] 🔍 [525/659]: B0CXMJCCJC https://www.amazon.com/dp/B0CXMJCCJC?language=en_US
+2025-03-24 08:32:17,946 [INFO] ⚡ Änderungen erkannt für B0CXMJCCJC: title changed, price, main_category, second_category, blm, total, store, manufacturer
+2025-03-24 08:32:17,979 [INFO] 🔍 [526/659]: B0DNT9KK3N https://www.amazon.com/dp/B0DNT9KK3N?language=en_US
+2025-03-24 08:32:29,380 [INFO] ⚡ Änderungen erkannt für B0DNT9KK3N: title changed, price, main_category, second_category, blm, total, store, manufacturer
+2025-03-24 08:32:29,415 [INFO] 🔍 [527/659]: B0DY51JSJN https://www.amazon.com/dp/B0DY51JSJN?language=en_US
+2025-03-24 08:32:39,765 [INFO] ⚡ Änderungen erkannt für B0DY51JSJN: title changed, price, main_category, second_category, store, manufacturer
+2025-03-24 08:32:39,801 [INFO] 🔍 [528/659]: B0CLXV6XFR https://www.amazon.com/dp/B0CLXV6XFR?language=en_US
+2025-03-24 08:32:50,348 [INFO] ⚡ Änderungen erkannt für B0CLXV6XFR: title changed, price, main_category, second_category, blm, total, store, manufacturer
+2025-03-24 08:32:50,387 [INFO] 🔍 [529/659]: B0D94QJ3MF https://www.amazon.com/dp/B0D94QJ3MF?language=en_US
+2025-03-24 08:33:00,473 [INFO] ⚡ Änderungen erkannt für B0D94QJ3MF: title changed, price, main_category, second_category, blm, total, store, manufacturer
+2025-03-24 08:33:00,496 [INFO] 🔍 [530/659]: B0BQC1JK1X https://www.amazon.com/dp/B0BQC1JK1X?language=en_US
+2025-03-24 08:33:09,411 [WARNING] ❌ Fehler beim Scrapen von B0BQC1JK1X, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-24 08:33:09,442 [INFO] 🔍 [531/659]: B07L48VBCT https://www.amazon.com/dp/B07L48VBCT?language=en_US
+2025-03-24 08:33:21,390 [INFO] ⚡ Änderungen erkannt für B07L48VBCT: main_category
+2025-03-24 08:33:21,422 [INFO] 🔍 [532/659]: B0DZSGKTLH https://www.amazon.com/dp/B0DZSGKTLH?language=en_US
+2025-03-24 08:33:31,131 [INFO] ⚡ Änderungen erkannt für B0DZSGKTLH: main_category
+2025-03-24 08:33:31,172 [INFO] 🔍 [533/659]: B000IGAE66 https://www.amazon.com/dp/B000IGAE66?language=en_US
+2025-03-24 08:33:41,266 [INFO] ⚡ Änderungen erkannt für B000IGAE66: main_category
+2025-03-24 08:33:41,292 [INFO] 🔍 [534/659]: B0B431425K https://www.amazon.com/dp/B0B431425K?language=en_US
+2025-03-24 08:33:52,530 [INFO] ⚡ Änderungen erkannt für B0B431425K: main_category
+2025-03-24 08:33:52,566 [INFO] 🔍 [535/659]: B002DUD72I https://www.amazon.com/dp/B002DUD72I?language=en_US
+2025-03-24 08:34:03,679 [INFO] ⚡ Änderungen erkannt für B002DUD72I: price, main_category, blm, total
+2025-03-24 08:34:03,713 [INFO] 🔍 [536/659]: B09B6G35F4 https://www.amazon.com/dp/B09B6G35F4?language=en_US
+2025-03-24 08:34:13,826 [INFO] ⚡ Änderungen erkannt für B09B6G35F4: title changed, price, main_category, second_category, blm, total, store, manufacturer
+2025-03-24 08:34:13,864 [INFO] 🔍 [537/659]: B09JKFVV76 https://www.amazon.com/dp/B09JKFVV76?language=en_US
+2025-03-24 08:34:23,247 [INFO] ⚡ Änderungen erkannt für B09JKFVV76: title changed, price, main_category, second_category, store, manufacturer
+2025-03-24 08:34:23,284 [INFO] 🔍 [538/659]: B07GRLY21Q https://www.amazon.com/dp/B07GRLY21Q?language=en_US
+2025-03-24 08:34:34,107 [INFO] ⚡ Änderungen erkannt für B07GRLY21Q: title changed, price, main_category, second_category, store, manufacturer
+2025-03-24 08:34:34,127 [INFO] 🔍 [539/659]: B0BKPXJZH2 https://www.amazon.com/dp/B0BKPXJZH2?language=en_US
+2025-03-24 08:34:43,167 [INFO] ⚡ Änderungen erkannt für B0BKPXJZH2: title changed, price, main_category, second_category, store, manufacturer
+2025-03-24 08:34:43,205 [INFO] 🔍 [540/659]: B0DHXW4PQ5 https://www.amazon.com/dp/B0DHXW4PQ5?language=en_US
+2025-03-24 08:34:53,818 [INFO] ⚡ Änderungen erkannt für B0DHXW4PQ5: title changed, price, main_category, second_category, store, manufacturer
+2025-03-24 08:34:53,854 [INFO] 🔍 [541/659]: B0DFWGVBNT https://www.amazon.com/dp/B0DFWGVBNT?language=en_US
+2025-03-24 08:35:04,636 [INFO] ⚡ Änderungen erkannt für B0DFWGVBNT: title changed, price, main_category, second_category, store, manufacturer
+2025-03-24 08:35:04,670 [INFO] 🔍 [542/659]: B0DFW9VRMM https://www.amazon.com/dp/B0DFW9VRMM?language=en_US
+2025-03-24 08:35:15,532 [INFO] ⚡ Änderungen erkannt für B0DFW9VRMM: title changed, price, main_category, second_category, store, manufacturer
+2025-03-24 08:35:15,550 [INFO] 🔍 [543/659]: B0DK1LS9K3 https://www.amazon.com/dp/B0DK1LS9K3?language=en_US
+2025-03-24 08:35:26,240 [INFO] ⚡ Änderungen erkannt für B0DK1LS9K3: title changed, price, main_category, second_category, store, manufacturer
+2025-03-24 08:35:26,266 [INFO] 🔍 [544/659]: B0927X3YS8 https://www.amazon.com/dp/B0927X3YS8?language=en_US
+2025-03-24 08:35:37,710 [INFO] ⚡ Änderungen erkannt für B0927X3YS8: title changed, price, main_category, second_category, blm, total, store
+2025-03-24 08:35:37,745 [INFO] 🔍 [545/659]: B0851KHS15 https://www.amazon.com/dp/B0851KHS15?language=en_US
+2025-03-24 08:35:50,197 [INFO] ⚡ Änderungen erkannt für B0851KHS15: title changed, price, main_category, second_category, blm, total, store, manufacturer
+2025-03-24 08:35:50,219 [INFO] 🔍 [546/659]: B0DP5HDT9B https://www.amazon.com/dp/B0DP5HDT9B?language=en_US
+2025-03-24 08:36:00,779 [INFO] ⚡ Änderungen erkannt für B0DP5HDT9B: title changed, price, main_category, second_category, blm, total, store, manufacturer
+2025-03-24 08:36:00,812 [INFO] 🔍 [547/659]: B00U44E3FA https://www.amazon.com/dp/B00U44E3FA?language=en_US
+2025-03-24 08:36:10,885 [INFO] ⚡ Änderungen erkannt für B00U44E3FA: title changed, price, main_category, second_category, blm, total, store, manufacturer
+2025-03-24 08:36:10,901 [INFO] 🔍 [548/659]: B0CCRG3WZY https://www.amazon.com/dp/B0CCRG3WZY?language=en_US
+2025-03-24 08:36:23,490 [INFO] ⚡ Änderungen erkannt für B0CCRG3WZY: title changed, price, main_category, second_category, blm, total, store, manufacturer
+2025-03-24 08:36:23,507 [INFO] 🔍 [549/659]: B08BG98JKT https://www.amazon.com/dp/B08BG98JKT?language=en_US
+2025-03-24 08:36:34,855 [INFO] ⚡ Änderungen erkannt für B08BG98JKT: main_category
+2025-03-24 08:36:34,893 [INFO] 🔍 [550/659]: B07NSHKSXL https://www.amazon.com/dp/B07NSHKSXL?language=en_US
+2025-03-24 08:36:45,294 [INFO] ⚡ Änderungen erkannt für B07NSHKSXL: main_category
+2025-03-24 08:36:45,317 [INFO] 🔍 [551/659]: B0D8S78HYJ https://www.amazon.com/dp/B0D8S78HYJ?language=en_US
+2025-03-24 08:36:56,437 [INFO] ⚡ Änderungen erkannt für B0D8S78HYJ: main_category
+2025-03-24 08:36:56,473 [INFO] 🔍 [552/659]: B094MMNBMW https://www.amazon.com/dp/B094MMNBMW?language=en_US
+2025-03-24 08:37:06,207 [INFO] ⚡ Änderungen erkannt für B094MMNBMW: main_category
+2025-03-24 08:37:06,239 [INFO] 🔍 [553/659]: B09XJWFQ86 https://www.amazon.com/dp/B09XJWFQ86?language=en_US
+2025-03-24 08:37:16,293 [INFO] ⚡ Änderungen erkannt für B09XJWFQ86: main_category
+2025-03-24 08:37:16,341 [INFO] 🔍 [554/659]: B00GPHWWLC https://www.amazon.com/dp/B00GPHWWLC?language=en_US
+2025-03-24 08:37:26,765 [INFO] ⚡ Änderungen erkannt für B00GPHWWLC: main_category
+2025-03-24 08:37:26,802 [INFO] 🔍 [555/659]: B0DDHXC6KM https://www.amazon.com/dp/B0DDHXC6KM?language=en_US
+2025-03-24 08:37:36,378 [INFO] ⚡ Änderungen erkannt für B0DDHXC6KM: main_category
+2025-03-24 08:37:36,425 [INFO] 🔍 [556/659]: B09YDR82P5 https://www.amazon.com/dp/B09YDR82P5?language=en_US
+2025-03-24 08:37:46,353 [INFO] ⚡ Änderungen erkannt für B09YDR82P5: main_category
+2025-03-24 08:37:46,400 [INFO] 🔍 [557/659]: B07KZNLGX4 https://www.amazon.com/dp/B07KZNLGX4?language=en_US
+2025-03-24 08:37:56,651 [INFO] ⚡ Änderungen erkannt für B07KZNLGX4: main_category
+2025-03-24 08:37:56,684 [INFO] 🔍 [558/659]: B0DDHWTQB6 https://www.amazon.com/dp/B0DDHWTQB6?language=en_US
+2025-03-24 08:38:07,262 [INFO] ⚡ Änderungen erkannt für B0DDHWTQB6: main_category
+2025-03-24 08:38:07,296 [INFO] 🔍 [559/659]: B09N34Q8X2 https://www.amazon.com/dp/B09N34Q8X2?language=en_US
+2025-03-24 08:38:16,973 [INFO] ⚡ Änderungen erkannt für B09N34Q8X2: main_category
+2025-03-24 08:38:17,015 [INFO] 🔍 [560/659]: B0DJFZZV1Q https://www.amazon.com/dp/B0DJFZZV1Q?language=en_US
+2025-03-24 08:38:26,840 [INFO] ⚡ Änderungen erkannt für B0DJFZZV1Q: main_category
+2025-03-24 08:38:26,883 [INFO] 🔍 [561/659]: B00ILGGP5Y https://www.amazon.com/dp/B00ILGGP5Y?language=en_US
+2025-03-24 08:38:40,426 [INFO] ⚡ Änderungen erkannt für B00ILGGP5Y: main_category
+2025-03-24 08:38:40,464 [INFO] 🔍 [562/659]: B0D8MW66CS https://www.amazon.com/dp/B0D8MW66CS?language=en_US
+2025-03-24 08:38:50,128 [INFO] ⚡ Änderungen erkannt für B0D8MW66CS: main_category
+2025-03-24 08:38:50,164 [INFO] 🔍 [563/659]: B0DY9PZC4T https://www.amazon.com/dp/B0DY9PZC4T?language=en_US
+2025-03-24 08:38:59,497 [INFO] ⚡ Änderungen erkannt für B0DY9PZC4T: main_category
+2025-03-24 08:38:59,516 [INFO] 🔍 [564/659]: B0C6NPQ7GD https://www.amazon.com/dp/B0C6NPQ7GD?language=en_US
+2025-03-24 08:39:09,855 [INFO] ⚡ Änderungen erkannt für B0C6NPQ7GD: main_category, blm, total
+2025-03-24 08:39:09,877 [INFO] 🔍 [565/659]: B088MJD7MH https://www.amazon.com/dp/B088MJD7MH?language=en_US
+2025-03-24 08:39:20,667 [INFO] ⚡ Änderungen erkannt für B088MJD7MH: price, main_category
+2025-03-24 08:39:20,717 [INFO] 🔍 [566/659]: B07227D8Q8 https://www.amazon.com/dp/B07227D8Q8?language=en_US
+2025-03-24 08:39:31,182 [INFO] ⚡ Änderungen erkannt für B07227D8Q8: main_category
+2025-03-24 08:39:31,219 [INFO] 🔍 [567/659]: B0CQD9W1K7 https://www.amazon.com/dp/B0CQD9W1K7?language=en_US
+2025-03-24 08:39:41,110 [INFO] ⚡ Änderungen erkannt für B0CQD9W1K7: main_category
+2025-03-24 08:39:41,132 [INFO] 🔍 [568/659]: B088MHVHBF https://www.amazon.com/dp/B088MHVHBF?language=en_US
+2025-03-24 08:39:51,749 [INFO] ⚡ Änderungen erkannt für B088MHVHBF: main_category
+2025-03-24 08:39:51,783 [INFO] 🔍 [569/659]: B088MHY82G https://www.amazon.com/dp/B088MHY82G?language=en_US
+2025-03-24 08:40:01,970 [INFO] ⚡ Änderungen erkannt für B088MHY82G: main_category
+2025-03-24 08:40:02,011 [INFO] 🔍 [570/659]: B0D1DS69V9 https://www.amazon.com/dp/B0D1DS69V9?language=en_US
+2025-03-24 08:40:12,745 [INFO] ⚡ Änderungen erkannt für B0D1DS69V9: main_category
+2025-03-24 08:40:12,803 [INFO] 🔍 [571/659]: B0DV1VQZ15 https://www.amazon.com/dp/B0DV1VQZ15?language=en_US
+2025-03-24 08:40:23,100 [INFO] ⚡ Änderungen erkannt für B0DV1VQZ15: main_category
+2025-03-24 08:40:23,130 [INFO] 🔍 [572/659]: B0DS1J9V9K https://www.amazon.com/dp/B0DS1J9V9K?language=en_US
+2025-03-24 08:40:34,278 [INFO] ⚡ Änderungen erkannt für B0DS1J9V9K: main_category
+2025-03-24 08:40:34,299 [INFO] 🔍 [573/659]: B0B38282HG https://www.amazon.com/dp/B0B38282HG?language=en_US
+2025-03-24 08:40:44,315 [INFO] ⚡ Änderungen erkannt für B0B38282HG: main_category
+2025-03-24 08:40:44,369 [INFO] 🔍 [574/659]: B0D7J5R7T6 https://www.amazon.com/dp/B0D7J5R7T6?language=en_US
+2025-03-24 08:40:54,741 [INFO] ⚡ Änderungen erkannt für B0D7J5R7T6: main_category
+2025-03-24 08:40:54,760 [INFO] 🔍 [575/659]: B09VX44KTY https://www.amazon.com/dp/B09VX44KTY?language=en_US
+2025-03-24 08:41:05,025 [INFO] ⚡ Änderungen erkannt für B09VX44KTY: main_category
+2025-03-24 08:41:05,059 [INFO] 🔍 [576/659]: B0CQ4DH22D https://www.amazon.com/dp/B0CQ4DH22D?language=en_US
+2025-03-24 08:41:15,617 [INFO] ⚡ Änderungen erkannt für B0CQ4DH22D: main_category
+2025-03-24 08:41:15,665 [INFO] 🔍 [577/659]: B0DJV7VJHT https://www.amazon.com/dp/B0DJV7VJHT?language=en_US
+2025-03-24 08:41:24,417 [INFO] ⚡ Änderungen erkannt für B0DJV7VJHT: main_category
+2025-03-24 08:41:24,450 [INFO] 🔍 [578/659]: B013SJMUIO https://www.amazon.com/dp/B013SJMUIO?language=en_US
+2025-03-24 08:41:35,851 [INFO] ⚡ Änderungen erkannt für B013SJMUIO: main_category
+2025-03-24 08:41:35,905 [INFO] 🔍 [579/659]: B0BFVBNGX9 https://www.amazon.com/dp/B0BFVBNGX9?language=en_US
+2025-03-24 08:41:47,784 [INFO] ⚡ Änderungen erkannt für B0BFVBNGX9: main_category
+2025-03-24 08:41:47,807 [INFO] 🔍 [580/659]: B0CYQ4ZZ21 https://www.amazon.com/dp/B0CYQ4ZZ21?language=en_US
+2025-03-24 08:41:56,969 [WARNING] ❌ Fehler beim Scrapen von B0CYQ4ZZ21, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-24 08:41:56,985 [INFO] 🔍 [581/659]: B0DGWX84GH https://www.amazon.com/dp/B0DGWX84GH?language=en_US
+2025-03-24 08:42:05,937 [INFO] ⚡ Änderungen erkannt für B0DGWX84GH: main_category
+2025-03-24 08:42:05,971 [INFO] 🔍 [582/659]: B0DM3GCQ6S https://www.amazon.com/dp/B0DM3GCQ6S?language=en_US
+2025-03-24 08:42:14,916 [INFO] ⚡ Änderungen erkannt für B0DM3GCQ6S: main_category
+2025-03-24 08:42:14,953 [INFO] 🔍 [583/659]: B0DWHJ3528 https://www.amazon.com/dp/B0DWHJ3528?language=en_US
+2025-03-24 08:42:24,021 [INFO] ⚡ Änderungen erkannt für B0DWHJ3528: main_category
+2025-03-24 08:42:24,064 [INFO] 🔍 [584/659]: B07C7PVBL1 https://www.amazon.com/dp/B07C7PVBL1?language=en_US
+2025-03-24 08:42:34,874 [INFO] ⚡ Änderungen erkannt für B07C7PVBL1: main_category
+2025-03-24 08:42:34,912 [INFO] 🔍 [585/659]: B07HPD4X43 https://www.amazon.com/dp/B07HPD4X43?language=en_US
+2025-03-24 08:42:42,876 [WARNING] ❌ Fehler beim Scrapen von B07HPD4X43, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-24 08:42:42,910 [INFO] 🔍 [586/659]: B06XHZJ5DW https://www.amazon.com/dp/B06XHZJ5DW?language=en_US
+2025-03-24 08:42:53,256 [INFO] ⚡ Änderungen erkannt für B06XHZJ5DW: price, main_category
+2025-03-24 08:42:53,316 [INFO] 🔍 [587/659]: B0D8MXM69Z https://www.amazon.com/dp/B0D8MXM69Z?language=en_US
+2025-03-24 08:43:02,636 [INFO] ⚡ Änderungen erkannt für B0D8MXM69Z: main_category
+2025-03-24 08:43:02,690 [INFO] 🔍 [588/659]: B0DSVR88G3 https://www.amazon.com/dp/B0DSVR88G3?language=en_US
+2025-03-24 08:43:12,514 [INFO] ⚡ Änderungen erkannt für B0DSVR88G3: main_category
+2025-03-24 08:43:12,536 [INFO] 🔍 [589/659]: B071W58MVW https://www.amazon.com/dp/B071W58MVW?language=en_US
+2025-03-24 08:43:23,095 [INFO] ⚡ Änderungen erkannt für B071W58MVW: main_category
+2025-03-24 08:43:23,126 [INFO] 🔍 [590/659]: B077HZW2FX https://www.amazon.com/dp/B077HZW2FX?language=en_US
+2025-03-24 08:43:34,055 [INFO] ⚡ Änderungen erkannt für B077HZW2FX: main_category
+2025-03-24 08:43:34,092 [INFO] 🔍 [591/659]: B08HR1M6JS https://www.amazon.com/dp/B08HR1M6JS?language=en_US
+2025-03-24 08:43:45,452 [INFO] ⚡ Änderungen erkannt für B08HR1M6JS: main_category
+2025-03-24 08:43:45,493 [INFO] 🔍 [592/659]: B088MJ4DMS https://www.amazon.com/dp/B088MJ4DMS?language=en_US
+2025-03-24 08:43:55,286 [INFO] ⚡ Änderungen erkannt für B088MJ4DMS: main_category
+2025-03-24 08:43:55,325 [INFO] 🔍 [593/659]: B07WSHFSZP https://www.amazon.com/dp/B07WSHFSZP?language=en_US
+2025-03-24 08:44:06,675 [INFO] ⚡ Änderungen erkannt für B07WSHFSZP: main_category
+2025-03-24 08:44:06,733 [INFO] 🔍 [594/659]: B0DGZRZ9NZ https://www.amazon.com/dp/B0DGZRZ9NZ?language=en_US
+2025-03-24 08:44:17,352 [INFO] ⚡ Änderungen erkannt für B0DGZRZ9NZ: price, main_category, total
+2025-03-24 08:44:17,383 [INFO] 🔍 [595/659]: B07MHFTD36 https://www.amazon.com/dp/B07MHFTD36?language=en_US
+2025-03-24 08:44:28,493 [INFO] ⚡ Änderungen erkannt für B07MHFTD36: main_category
+2025-03-24 08:44:28,510 [INFO] 🔍 [596/659]: B088MHJ4P8 https://www.amazon.com/dp/B088MHJ4P8?language=en_US
+2025-03-24 08:44:37,940 [INFO] ⚡ Änderungen erkannt für B088MHJ4P8: main_category
+2025-03-24 08:44:37,980 [INFO] 🔍 [597/659]: B07X37D16H https://www.amazon.com/dp/B07X37D16H?language=en_US
+2025-03-24 08:44:48,999 [INFO] ⚡ Änderungen erkannt für B07X37D16H: main_category
+2025-03-24 08:44:49,039 [INFO] 🔍 [598/659]: B08PQT4CCH https://www.amazon.com/dp/B08PQT4CCH?language=en_US
+2025-03-24 08:44:59,547 [INFO] ⚡ Änderungen erkannt für B08PQT4CCH: main_category
+2025-03-24 08:44:59,590 [INFO] 🔍 [599/659]: B06XZVBS6X https://www.amazon.com/dp/B06XZVBS6X?language=en_US
+2025-03-24 08:45:10,945 [INFO] ⚡ Änderungen erkannt für B06XZVBS6X: main_category
+2025-03-24 08:45:10,990 [INFO] 🔍 [600/659]: B07TXQ55W5 https://www.amazon.com/dp/B07TXQ55W5?language=en_US
+2025-03-24 08:45:21,755 [INFO] ⚡ Änderungen erkannt für B07TXQ55W5: main_category
+2025-03-24 08:45:21,802 [INFO] 🔍 [601/659]: B0CF3HYSHR https://www.amazon.com/dp/B0CF3HYSHR?language=en_US
+2025-03-24 08:45:31,971 [INFO] ⚡ Änderungen erkannt für B0CF3HYSHR: main_category
+2025-03-24 08:45:32,007 [INFO] 🔍 [602/659]: B078WG5YP4 https://www.amazon.com/dp/B078WG5YP4?language=en_US
+2025-03-24 08:45:41,702 [INFO] ⚡ Änderungen erkannt für B078WG5YP4: main_category
+2025-03-24 08:45:41,738 [INFO] 🔍 [603/659]: B00M8M2SKS https://www.amazon.com/dp/B00M8M2SKS?language=en_US
+2025-03-24 08:45:53,361 [INFO] ⚡ Änderungen erkannt für B00M8M2SKS: main_category
+2025-03-24 08:45:53,378 [INFO] 🔍 [604/659]: B0095VQH5M https://www.amazon.com/dp/B0095VQH5M?language=en_US
+2025-03-24 08:46:04,173 [INFO] ⚡ Änderungen erkannt für B0095VQH5M: main_category
+2025-03-24 08:46:04,207 [INFO] 🔍 [605/659]: B07BBF7QMV https://www.amazon.com/dp/B07BBF7QMV?language=en_US
+2025-03-24 08:46:15,316 [INFO] ⚡ Änderungen erkannt für B07BBF7QMV: main_category
+2025-03-24 08:46:15,337 [INFO] 🔍 [606/659]: B072HXD211 https://www.amazon.com/dp/B072HXD211?language=en_US
+2025-03-24 08:46:25,733 [INFO] ⚡ Änderungen erkannt für B072HXD211: main_category
+2025-03-24 08:46:25,774 [INFO] 🔍 [607/659]: B07169YT2Y https://www.amazon.com/dp/B07169YT2Y?language=en_US
+2025-03-24 08:46:36,942 [INFO] ⚡ Änderungen erkannt für B07169YT2Y: main_category
+2025-03-24 08:46:36,960 [INFO] 🔍 [608/659]: B0CCYVR68L https://www.amazon.com/dp/B0CCYVR68L?language=en_US
+2025-03-24 08:46:47,298 [INFO] ⚡ Änderungen erkannt für B0CCYVR68L: main_category
+2025-03-24 08:46:47,343 [INFO] 🔍 [609/659]: B0DFNRJMWW https://www.amazon.com/dp/B0DFNRJMWW?language=en_US
+2025-03-24 08:46:58,273 [INFO] ⚡ Änderungen erkannt für B0DFNRJMWW: main_category, blm, total
+2025-03-24 08:46:58,289 [INFO] 🔍 [610/659]: B086WGWLSX https://www.amazon.com/dp/B086WGWLSX?language=en_US
+2025-03-24 08:47:08,790 [INFO] ⚡ Änderungen erkannt für B086WGWLSX: main_category
+2025-03-24 08:47:08,815 [INFO] 🔍 [611/659]: B07DP7H4PD https://www.amazon.com/dp/B07DP7H4PD?language=en_US
+2025-03-24 08:47:19,319 [INFO] ⚡ Änderungen erkannt für B07DP7H4PD: main_category
+2025-03-24 08:47:19,338 [INFO] 🔍 [612/659]: B07ZZLJM6L https://www.amazon.com/dp/B07ZZLJM6L?language=en_US
+2025-03-24 08:47:29,642 [INFO] ⚡ Änderungen erkannt für B07ZZLJM6L: main_category
+2025-03-24 08:47:29,696 [INFO] 🔍 [613/659]: B0748ZCLX4 https://www.amazon.com/dp/B0748ZCLX4?language=en_US
+2025-03-24 08:47:40,959 [INFO] ⚡ Änderungen erkannt für B0748ZCLX4: price, main_category, total
+2025-03-24 08:47:40,975 [INFO] 🔍 [614/659]: B076CPF943 https://www.amazon.com/dp/B076CPF943?language=en_US
+2025-03-24 08:47:52,233 [INFO] ⚡ Änderungen erkannt für B076CPF943: main_category, blm, total
+2025-03-24 08:47:52,273 [INFO] 🔍 [615/659]: B015HT13H2 https://www.amazon.com/dp/B015HT13H2?language=en_US
+2025-03-24 08:48:02,261 [INFO] ⚡ Änderungen erkannt für B015HT13H2: main_category
+2025-03-24 08:48:02,290 [INFO] 🔍 [616/659]: B00IDCFXG8 https://www.amazon.com/dp/B00IDCFXG8?language=en_US
+2025-03-24 08:48:13,877 [INFO] ⚡ Änderungen erkannt für B00IDCFXG8: main_category
+2025-03-24 08:48:13,909 [INFO] 🔍 [617/659]: B077SFNTSC https://www.amazon.com/dp/B077SFNTSC?language=en_US
+2025-03-24 08:48:25,563 [INFO] ⚡ Änderungen erkannt für B077SFNTSC: main_category
+2025-03-24 08:48:25,595 [INFO] 🔍 [618/659]: B072HQDPP9 https://www.amazon.com/dp/B072HQDPP9?language=en_US
+2025-03-24 08:48:36,709 [INFO] ⚡ Änderungen erkannt für B072HQDPP9: main_category
+2025-03-24 08:48:36,759 [INFO] 🔍 [619/659]: B00IFPVSIK https://www.amazon.com/dp/B00IFPVSIK?language=en_US
+2025-03-24 08:48:46,500 [INFO] ⚡ Änderungen erkannt für B00IFPVSIK: main_category
+2025-03-24 08:48:46,520 [INFO] 🔍 [620/659]: B001SAQCNA https://www.amazon.com/dp/B001SAQCNA?language=en_US
+2025-03-24 08:48:56,784 [INFO] ⚡ Änderungen erkannt für B001SAQCNA: main_category
+2025-03-24 08:48:56,825 [INFO] 🔍 [621/659]: B01C8Z1FW6 https://www.amazon.com/dp/B01C8Z1FW6?language=en_US
+2025-03-24 08:49:07,036 [INFO] ⚡ Änderungen erkannt für B01C8Z1FW6: main_category
+2025-03-24 08:49:07,054 [INFO] 🔍 [622/659]: B07DV3M5PG https://www.amazon.com/dp/B07DV3M5PG?language=en_US
+2025-03-24 08:49:17,683 [INFO] ⚡ Änderungen erkannt für B07DV3M5PG: main_category
+2025-03-24 08:49:17,733 [INFO] 🔍 [623/659]: B00BSZBEAG https://www.amazon.com/dp/B00BSZBEAG?language=en_US
+2025-03-24 08:49:29,134 [INFO] ⚡ Änderungen erkannt für B00BSZBEAG: main_category
+2025-03-24 08:49:29,172 [INFO] 🔍 [624/659]: B00LUSF2VS https://www.amazon.com/dp/B00LUSF2VS?language=en_US
+2025-03-24 08:49:40,975 [INFO] ⚡ Änderungen erkannt für B00LUSF2VS: main_category
+2025-03-24 08:49:40,995 [INFO] 🔍 [625/659]: B0BBPCFS4P https://www.amazon.com/dp/B0BBPCFS4P?language=en_US
+2025-03-24 08:49:51,050 [INFO] ⚡ Änderungen erkannt für B0BBPCFS4P: price, main_category, total
+2025-03-24 08:49:51,084 [INFO] 🔍 [626/659]: B00IEVJZFS https://www.amazon.com/dp/B00IEVJZFS?language=en_US
+2025-03-24 08:50:01,030 [INFO] ⚡ Änderungen erkannt für B00IEVJZFS: main_category
+2025-03-24 08:50:01,071 [INFO] 🔍 [627/659]: B01J4F1E6A https://www.amazon.com/dp/B01J4F1E6A?language=en_US
+2025-03-24 08:50:11,754 [INFO] ⚡ Änderungen erkannt für B01J4F1E6A: main_category
+2025-03-24 08:50:11,771 [INFO] 🔍 [628/659]: B01K31LJC8 https://www.amazon.com/dp/B01K31LJC8?language=en_US
+2025-03-24 08:50:22,883 [INFO] ⚡ Änderungen erkannt für B01K31LJC8: main_category
+2025-03-24 08:50:22,913 [INFO] 🔍 [629/659]: B07TXVSK51 https://www.amazon.com/dp/B07TXVSK51?language=en_US
+2025-03-24 08:50:33,197 [INFO] ⚡ Änderungen erkannt für B07TXVSK51: main_category
+2025-03-24 08:50:33,234 [INFO] 🔍 [630/659]: B0842BTX2D https://www.amazon.com/dp/B0842BTX2D?language=en_US
+2025-03-24 08:50:44,072 [INFO] ⚡ Änderungen erkannt für B0842BTX2D: main_category
+2025-03-24 08:50:44,112 [INFO] 🔍 [631/659]: B09R2LCP2R https://www.amazon.com/dp/B09R2LCP2R?language=en_US
+2025-03-24 08:50:54,172 [INFO] ⚡ Änderungen erkannt für B09R2LCP2R: main_category
+2025-03-24 08:50:54,225 [INFO] 🔍 [632/659]: B00J239SDG https://www.amazon.com/dp/B00J239SDG?language=en_US
+2025-03-24 08:51:04,663 [INFO] ⚡ Änderungen erkannt für B00J239SDG: price, main_category, total
+2025-03-24 08:51:04,704 [INFO] 🔍 [633/659]: B00LNURL94 https://www.amazon.com/dp/B00LNURL94?language=en_US
+2025-03-24 08:51:16,459 [INFO] ⚡ Änderungen erkannt für B00LNURL94: main_category
+2025-03-24 08:51:16,479 [INFO] 🔍 [634/659]: B00QIVB19Y https://www.amazon.com/dp/B00QIVB19Y?language=en_US
+2025-03-24 08:51:27,239 [INFO] ⚡ Änderungen erkannt für B00QIVB19Y: price, main_category, total
+2025-03-24 08:51:27,264 [INFO] 🔍 [635/659]: B008BFYXDG https://www.amazon.com/dp/B008BFYXDG?language=en_US
+2025-03-24 08:51:37,604 [INFO] ⚡ Änderungen erkannt für B008BFYXDG: main_category
+2025-03-24 08:51:37,645 [INFO] 🔍 [636/659]: B010RGPTHU https://www.amazon.com/dp/B010RGPTHU?language=en_US
+2025-03-24 08:51:46,919 [INFO] ⚡ Änderungen erkannt für B010RGPTHU: main_category
+2025-03-24 08:51:46,957 [INFO] 🔍 [637/659]: B0CM694QWH https://www.amazon.com/dp/B0CM694QWH?language=en_US
+2025-03-24 08:51:58,929 [INFO] ⚡ Änderungen erkannt für B0CM694QWH: main_category
+2025-03-24 08:51:58,968 [INFO] 🔍 [638/659]: B00GBP1HV4 https://www.amazon.com/dp/B00GBP1HV4?language=en_US
+2025-03-24 08:52:08,804 [INFO] ⚡ Änderungen erkannt für B00GBP1HV4: main_category
+2025-03-24 08:52:08,845 [INFO] 🔍 [639/659]: B0CCGHZQS2 https://www.amazon.com/dp/B0CCGHZQS2?language=en_US
+2025-03-24 08:52:19,482 [INFO] ⚡ Änderungen erkannt für B0CCGHZQS2: main_category
+2025-03-24 08:52:19,531 [INFO] 🔍 [640/659]: B06XQ2SBV3 https://www.amazon.com/dp/B06XQ2SBV3?language=en_US
+2025-03-24 08:52:30,987 [INFO] ⚡ Änderungen erkannt für B06XQ2SBV3: main_category
+2025-03-24 08:52:31,036 [INFO] 🔍 [641/659]: B076X63YG4 https://www.amazon.com/dp/B076X63YG4?language=en_US
+2025-03-24 08:52:41,618 [INFO] ⚡ Änderungen erkannt für B076X63YG4: price, main_category
+2025-03-24 08:52:41,635 [INFO] 🔍 [642/659]: B082FNC3L9 https://www.amazon.com/dp/B082FNC3L9?language=en_US
+2025-03-24 08:52:52,391 [INFO] ⚡ Änderungen erkannt für B082FNC3L9: main_category
+2025-03-24 08:52:52,416 [INFO] 🔍 [643/659]: B07DDMZPL2 https://www.amazon.com/dp/B07DDMZPL2?language=en_US
+2025-03-24 08:53:02,556 [WARNING] ❌ Fehler beim Scrapen von B07DDMZPL2, aber last_time_scraped wird trotzdem aktualisiert.
+2025-03-24 08:53:02,596 [INFO] 🔍 [644/659]: B078SLF6ZB https://www.amazon.com/dp/B078SLF6ZB?language=en_US
+2025-03-24 08:53:16,242 [INFO] ⚡ Änderungen erkannt für B078SLF6ZB: price, main_category, total
+2025-03-24 08:53:16,291 [INFO] 🔍 [645/659]: B01HJ3R9NQ https://www.amazon.com/dp/B01HJ3R9NQ?language=en_US
+2025-03-24 08:53:26,613 [INFO] ⚡ Änderungen erkannt für B01HJ3R9NQ: title changed, price, main_category, second_category, store
+2025-03-24 08:53:26,647 [INFO] 🔍 [646/659]: B078PQLHX4 https://www.amazon.com/dp/B078PQLHX4?language=en_US
+2025-03-24 08:53:38,610 [INFO] ⚡ Änderungen erkannt für B078PQLHX4: title changed, price, main_category, second_category, blm, total, store, manufacturer
+2025-03-24 08:53:38,653 [INFO] 🔍 [647/659]: B07DBBDPJW https://www.amazon.com/dp/B07DBBDPJW?language=en_US
+2025-03-24 08:53:48,785 [INFO] ⚡ Änderungen erkannt für B07DBBDPJW: title changed, price, main_category, second_category, store, manufacturer
+2025-03-24 08:53:48,804 [INFO] 🔍 [648/659]: B0CBSQ556R https://www.amazon.com/dp/B0CBSQ556R?language=en_US
+2025-03-24 08:53:59,897 [INFO] ⚡ Änderungen erkannt für B0CBSQ556R: title changed, price, main_category, second_category, blm, total, store, manufacturer
+2025-03-24 08:53:59,916 [INFO] 🔍 [649/659]: B01HBSIZPA https://www.amazon.com/dp/B01HBSIZPA?language=en_US
+2025-03-24 08:54:09,523 [INFO] ⚡ Änderungen erkannt für B01HBSIZPA: title changed, price, main_category, second_category, store
+2025-03-24 08:54:09,548 [INFO] 🔍 [650/659]: B0B4BK5BNB https://www.amazon.com/dp/B0B4BK5BNB?language=en_US
+2025-03-24 08:54:18,383 [INFO] ⚡ Änderungen erkannt für B0B4BK5BNB: title changed, price, main_category, second_category, store, manufacturer
+2025-03-24 08:54:18,416 [INFO] 🔍 [651/659]: B0CRSS45SJ https://www.amazon.com/dp/B0CRSS45SJ?language=en_US
+2025-03-24 08:54:29,203 [INFO] ⚡ Änderungen erkannt für B0CRSS45SJ: title changed, price, main_category, second_category, blm, total, store, manufacturer
+2025-03-24 08:54:29,244 [INFO] 🔍 [652/659]: B0BTFT8YR5 https://www.amazon.com/dp/B0BTFT8YR5?language=en_US
+2025-03-24 08:54:41,644 [INFO] ⚡ Änderungen erkannt für B0BTFT8YR5: title changed, price, main_category, second_category, blm, total, store, manufacturer
+2025-03-24 08:54:41,678 [INFO] 🔍 [653/659]: B0DNWFJ552 https://www.amazon.com/dp/B0DNWFJ552?language=en_US
+2025-03-24 08:54:51,869 [INFO] ⚡ Änderungen erkannt für B0DNWFJ552: title changed, price, main_category, second_category, blm, total, store, manufacturer
+2025-03-24 08:54:51,889 [INFO] 🔍 [654/659]: B0CB1JLYS8 https://www.amazon.com/dp/B0CB1JLYS8?language=en_US
+2025-03-24 08:55:03,255 [INFO] ⚡ Änderungen erkannt für B0CB1JLYS8: title changed, price, main_category, second_category, blm, total, store, manufacturer
+2025-03-24 08:55:03,289 [INFO] 🔍 [655/659]: B09VPH8QBQ https://www.amazon.com/dp/B09VPH8QBQ?language=en_US
+2025-03-24 08:55:14,456 [INFO] ⚡ Änderungen erkannt für B09VPH8QBQ: title changed, price, main_category, second_category, blm, total, store, manufacturer
+2025-03-24 08:55:14,512 [INFO] 🔍 [656/659]: B0CK5Z3M89 https://www.amazon.com/dp/B0CK5Z3M89?language=en_US
+2025-03-24 08:55:26,267 [INFO] ⚡ Änderungen erkannt für B0CK5Z3M89: title changed, price, main_category, second_category, store, manufacturer
+2025-03-24 08:55:26,310 [INFO] 🔍 [657/659]: B07BMKD2RX https://www.amazon.com/dp/B07BMKD2RX?language=en_US
+2025-03-24 08:55:37,118 [INFO] ⚡ Änderungen erkannt für B07BMKD2RX: title changed, price, main_category, second_category, blm, total, store, manufacturer
+2025-03-24 08:55:37,156 [INFO] 🔍 [658/659]: B09QRZNQ7F https://www.amazon.com/dp/B09QRZNQ7F?language=en_US
+2025-03-24 08:55:48,062 [INFO] ⚡ Änderungen erkannt für B09QRZNQ7F: title changed, price, main_category, second_category, store, manufacturer
+2025-03-24 08:55:48,098 [INFO] 🔍 [659/659]: B01M7QBXNY https://www.amazon.com/dp/B01M7QBXNY?language=en_US
+2025-03-24 08:56:00,357 [INFO] ⚡ Änderungen erkannt für B01M7QBXNY: title changed, price, main_category, second_category, blm, total, store, manufacturer
+2025-03-24 08:56:00,397 [INFO] 📊 Scraping Performance Metrics:
+2025-03-24 08:56:00,397 [INFO] 🕒 Gesamtzeit: 127m 20s
+2025-03-24 08:56:00,397 [INFO] ⚡ Durchschnittliche Zeit pro Produkt: 11.56 Sekunden
+2025-03-24 08:56:00,397 [INFO] 📦 Anzahl gescrapte Produkte: 659
+2025-03-24 08:56:00,398 [INFO] Failed products: 48
+2025-03-24 08:56:00,398 [INFO] 🔻 Schließe WebDriver...
+2025-03-24 08:56:02,711 [INFO] ✅ WebDriver geschlossen.

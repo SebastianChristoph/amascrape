@@ -13,7 +13,7 @@ def test_asin(asin):
     logging.info(f"Starte Test für ASIN: {asin}")
     
     chrome_options = Options()
-    chrome_options.add_argument("--headless=new")
+    #chrome_options.add_argument("--headless=new")
     chrome_options.add_argument("--disable-gpu")
     chrome_options.add_argument("--window-size=1920,1080")
     chrome_options.add_argument("--no-sandbox")
@@ -46,7 +46,7 @@ def test_asin(asin):
                 logging.info(f"{key}: {value}")
             logging.info(f"⏳ Dauer des Scraping: {end_time - start_time:.2f} Sekunden")
         else:
-            logging.error("❌ Fehler beim Scrapen des Produkts!")
+            logging.error("❌ Test Fail: Fehler beim Scrapen des Produkts!")
             
     except Exception as e:
         logging.error(f"❌ Fehler: {e}")

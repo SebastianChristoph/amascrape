@@ -6,6 +6,14 @@ from scraper import selenium_config
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
 
+class OutOfStockException(Exception):
+    """Exception für Produkte, die nicht verfügbar sind."""
+    pass
+class NoSuchPageException(Exception):
+    """Exception für Produkte, die nicht verfügbar sind."""
+    pass
+
+
 
 class AmazonProductScraper:
     def __init__(self, driver, show_details=True):
@@ -16,7 +24,42 @@ class AmazonProductScraper:
         self.asin = ""
         self.url = ""
         self.product_info_box_content = {}
+        self.technical_details_box_content = {}
         self.bs_and_rank_data = {}
+
+    def is_out_of_stock(self) -> bool:
+        if self.show_details:
+            print("🛑 Checking if product is out of stock")
+
+        try:
+            add_to_chart_button = self.driver.find_element(By.XPATH, '//*[@id="add-to-cart-button"]')
+        except:
+            print("\t", "No add to chart button")
+            return True
+    
+
+        try:
+            page_text = self.driver.page_source.lower()
+            if "we couldn't find the" in page_text or "temporarily out of stock" in page_text or "No featured offers available" in page_text:
+                return True
+            return False
+        except Exception as e:
+            print(f"⚠️ Error checking stock status: {e}")
+            return False
+    
+    def does_product_has_page(self) -> bool:
+        if self.show_details:
+            print("🛑 Checking if product has page")
+
+        try:
+            page_text = self.driver.page_source.lower()
+            if "couldn't find the page" in page_text:
+                return False
+            return True
+        except Exception as e:
+            print(f"⚠️ Error checking site online status: {e}")
+            return True
+
 
     def scroll_down(self, duration=5):
         """Simuliert das Scrollen auf der Seite, um Inhalte zu laden."""
@@ -41,12 +84,22 @@ class AmazonProductScraper:
 
         # Produkt-Infos extrahieren
         self.product_info_box_content = self.get_product_infos_box_content()
+        self.technical_details_box_content = self.get_technical_details_box_content()
 
         # Debug-Ausgabe für Product Info Box Content
+        print("Product Info Box Content:")
         if self.show_details and self.product_info_box_content:
             max_key_length = max(len(key)
                                  for key in self.product_info_box_content.keys())
             for key, value in self.product_info_box_content.items():
+                cleaned_value = value.replace('\n', '')
+                print(f"\t{key.ljust(max_key_length)} : {cleaned_value}")
+        
+        if self.show_details and self.technical_details_box_content:
+            print("Technical Details Box Content:")
+            max_key_length = max(len(key)
+                                 for key in self.technical_details_box_content.keys())
+            for key, value in self.technical_details_box_content.items():
                 cleaned_value = value.replace('\n', '')
                 print(f"\t{key.ljust(max_key_length)} : {cleaned_value}")
 
@@ -80,9 +133,10 @@ class AmazonProductScraper:
                 second_rank = int(second_rank_text.replace(",", "").strip())
                 second_category = second_category.strip()
 
+            main_category = self.remove_parentheses(main_category).strip()
             data = {
                 "rank_main_category": main_rank,
-                "main_category": main_category.strip(),
+                "main_category": main_category,
                 "rank_second_category": second_rank,
                 "second_category": second_category
             }
@@ -193,44 +247,49 @@ class AmazonProductScraper:
             
         # Try multiple ways to get the BLM
         try:
-            # Method 1: Original method
+            # Method 1: Look in the social proofing section for the main product
             try:
-                blm_element = self.driver.find_element(By.XPATH, self.web_elements["bought_last_month"])
-                blm_str = blm_element.text
-                blm_str = blm_str.replace("bought", "").replace("K", "000").replace(
-                    "k", "000").replace("+", "").replace(" ", "").replace("inpastmonth", "")
-                return int(blm_str)
+                print("\t", '//*[@id="socialProofingAsinFaceout_feature_div"]')
+                social_proof_div = self.driver.find_element(By.XPATH, '//*[@id="socialProofingAsinFaceout_feature_div"]')
+                if social_proof_div:
+                    blm_str = social_proof_div.text
+                    if "bought in past month" in blm_str.lower():
+                        blm_str = blm_str.replace("bought", "").replace("K", "000").replace(
+                            "k", "000").replace("+", "").replace(" ", "").replace("inpastmonth", "")
+                        print("\t", int(blm_str))
+                        return int(blm_str)
             except NoSuchElementException:
+                print("\t", "[^  X]")
                 pass
 
-            # Method 2: Look for alternative BLM text
+            # Method 2: Look for BLM in the main product details area only
             try:
-                blm_element = self.driver.find_element(By.XPATH, "//div[contains(text(), 'bought in past month')]")
-                blm_str = blm_element.text
-                blm_str = blm_str.replace("bought", "").replace("K", "000").replace(
-                    "k", "000").replace("+", "").replace(" ", "").replace("inpastmonth", "")
-                return int(blm_str)
+                print("\t", '//*[@id="centerCol"]//div[contains(text(), "bought in past month")]')
+                blm_element = self.driver.find_element(
+                    By.XPATH, '//*[@id="centerCol"]//div[contains(text(), "bought in past month")]')
+                if blm_element:
+                    blm_str = blm_element.text
+                    blm_str = blm_str.replace("bought", "").replace("K", "000").replace(
+                        "k", "000").replace("+", "").replace(" ", "").replace("inpastmonth", "")
+                    print("\t", int(blm_str))
+                    return int(blm_str)
             except NoSuchElementException:
+                print("\t", "[^  X]")
                 pass
 
-            # Method 3: Look for social proof section
+            # Method 3: Look for social proof specifically in the main product area
             try:
-                social_proof = self.driver.find_element(By.XPATH, "//div[contains(@class, 'socialProofingAsinFaceout')]")
-                blm_text = social_proof.text
-                match = re.search(r"(\d+)\s*bought", blm_text)
-                if match:
-                    return int(match.group(1))
+                print("\t", '//*[@id="centerCol"]//div[contains(@class, "socialProofingAsinFaceout")]')
+                social_proof = self.driver.find_element(
+                    By.XPATH, '//*[@id="centerCol"]//div[contains(@class, "socialProofingAsinFaceout")]')
+                if social_proof:
+                    blm_text = social_proof.text
+                    match = re.search(r"(\d+)\s*bought", blm_text)
+                    if match:
+                        print("\t", int(match.group(1)))
+                        return int(match.group(1))
             except NoSuchElementException:
-                pass
-
-            # Method 4: Look for purchase frequency
-            try:
-                purchase_freq = self.driver.find_element(By.XPATH, "//div[contains(text(), 'purchased')]")
-                freq_text = purchase_freq.text
-                match = re.search(r"(\d+)\s*purchased", freq_text)
-                if match:
-                    return int(match.group(1))
-            except NoSuchElementException:
+                print("\t", "[^  X]")
                 pass
 
         except Exception as e:
@@ -289,19 +348,128 @@ class AmazonProductScraper:
             print(f"   ❌ Error finding image path: {e}")
             return None
 
-    def get_price(self):
-        """Extrahiert den Preis des Produkts."""
+    
+    def extract_price_from_string(self, price_str: str) -> float | None:
         try:
-            price_element = self.driver.find_element(
-                By.XPATH, selenium_config.price_categories["default"])
-            price_str = price_element.text.replace(",", "")
-            match = re.search(r'\$(\d+)[\s\n]*(\d+)', price_str)
-            if match:
-                dollars, cents = match.groups()
+            # Entferne den Klammerinhalt, z. B. ($0.42 / Count)
+            price_str = re.sub(r"\([^)]*\)", "", price_str)
+
+            # Entferne alles außer Ziffern, $ und \n
+            cleaned = re.sub(r"[^\d\$\n\.]", "", price_str)
+
+
+            # Sonderfall: Preis über mehrere Zeilen (z. B. "$9\n99")
+            match_multiline = re.search(r"\$(\d+)\n(\d{2})", cleaned)
+            if match_multiline:
+                dollars, cents = match_multiline.groups()
                 return float(f"{dollars}.{cents}")
+
+            # Standardfall: einfacher Preis wie $38.99
+            match_single = re.search(r"\$(\d+)\.(\d{2})", cleaned)
+            if match_single:
+                dollars, cents = match_single.groups()
+                return float(f"{dollars}.{cents}")
+
+            # Fallback: $9 (kein Cent-Teil)
+            match_whole = re.search(r"\$(\d+)", cleaned)
+            if match_whole:
+                return float(match_whole.group(1))
+
         except Exception as e:
-            print(f"   ❌ Error finding price: {e}")
-            return None
+            print(f"⚠️ Fehler beim Parsen des Preises: {e}")
+
+        return None
+
+
+    def remove_parentheses(self, text: str) -> str:
+        """Entfernt alles in runden Klammern inklusive der Klammern selbst."""
+        return re.sub(r"\s*\([^)]*\)", "", text).strip()
+
+    def get_price(self):
+        print("Getting price")
+        """Extrahiert den Preis des Produkts."""
+        x_paths=['//*[@id="apex_offerDisplay_desktop"]', 
+                 '//*[@id="corePriceDisplay_desktop_feature_div"]/div[1]/span[1]', 
+                 '//*[@id="corePrice_feature_div"]/div/div/span[1]/span[2]', 
+                 '//*[@id="corePrice_desktop"]/div/table/tbody/tr/td[2]/span[1]']
+
+        for x_path in x_paths:
+            try:
+                print("\t", x_path)
+                price_element = self.driver.find_element(
+                    By.XPATH, x_path)
+                print("price raw:", price_element.text)
+
+                price = self.extract_price_from_string(price_element.text)
+                if price is not None:
+                    print("\t✅ return Price:", price)
+                    return price
+            except NoSuchElementException:
+                print("\t", "[^  X]")
+                pass
+            except Exception as e:
+                print("Error getting price", e)
+        
+        print(f"   ❌ Error finding price:")
+        return None
+
+    def get_technical_details_box_content(self):
+        """Extrahiert technische Produktinformationen aus der Tabelle."""
+        technical_info = {}
+        print("get technical info")
+        
+        try:
+            # First try to find the "Technical Details" text
+            technical_details_elements = self.driver.find_elements(By.XPATH, "//*[contains(text(), 'Technical Details')]")
+            
+            if not technical_details_elements:
+                # if self.show_details:
+                #     print("\t❌ No 'Technical Details' text found on page")
+                return technical_info
+            
+            if self.show_details:
+                print(f"\t✅ Found {len(technical_details_elements)} 'Technical Details' elements")
+            
+            # For each "Technical Details" element, try to find the associated table
+            for element in technical_details_elements:
+                try:
+                    # Try to find the closest table
+                    table = element.find_element(By.XPATH, "./ancestor::div[contains(@class, 'a-section')]//table")
+                    if table:
+                        rows = table.find_elements(By.TAG_NAME, "tr")
+                        if rows:
+                            for row in rows:
+                                try:
+                                    th = row.find_element(By.TAG_NAME, 'th')
+                                    td = row.find_element(By.TAG_NAME, 'td')
+                                    key = th.text.strip()
+                                    value = td.text.strip()
+                                    if key and value:  # Only add if both key and value exist
+                                        technical_info[key] = value
+                                except NoSuchElementException:
+                                    continue
+                            
+                            if technical_info:
+                                if self.show_details:
+                                    print("\t✅ Successfully extracted technical details from table")
+                                return technical_info
+                except NoSuchElementException:
+                    continue
+                except Exception as e:
+                    if self.show_details:
+                        print(f"\t⚠️ Error processing table: {e}")
+                    continue
+            
+            if not technical_info and self.show_details:
+                print("\t⚠️ Found 'Technical Details' text but no valid table data")
+                
+        except Exception as e:
+            if self.show_details:
+                print(f"\t⚠️ Error finding technical details: {e}")
+
+        return technical_info
+
+
 
     def get_product_infos_box_content(self):
         """Extrahiert Produktinformationen aus der Tabelle oder Liste."""
@@ -314,6 +482,7 @@ class AmazonProductScraper:
             product_info = {item.text.split(":")[0].strip(): item.text.split(":")[1].strip() for item in items if ":" in item.text}
         except NoSuchElementException:
             pass
+       
 
         # Try to get info from the product details table
         try:
@@ -344,13 +513,83 @@ class AmazonProductScraper:
 
         return product_info
 
+    def get_location(self) -> str:
+        print("Get location")
+    
+        try:
+            location = self.driver.find_element(
+                    By.XPATH, '//*[@id="nav-global-location-popover-link"]')
+            location = location.text.replace("Update location", "").replace("\n", "").replace("Delivering to", "").strip()
+            print("\t", location)
+            return location
+        except:
+            print("No location found)")
+    
+    def get_maufacturer(self):
+        try:
+            manufacturer = self.driver.find_element(
+                    By.XPATH, '//*[@id="nav-global-location-popover-link"]')
+            return manufacturer.text
+        except:
+            return None
+
+    def get_breadcrumb_categories(self) -> tuple:
+        """Gets categories from the breadcrumb navigation at the top of the page."""
+        try:
+            # Try multiple XPath selectors for breadcrumb navigation
+            breadcrumb_xpaths = [
+                '//div[@id="wayfinding-breadcrumbs_container"]',
+                '//div[@id="wayfinding-breadcrumbs-container"]',
+                '//div[contains(@class, "a-breadcrumb")]',
+                '//ul[@class="a-unordered-list a-horizontal a-size-small"]',
+                '//div[@class="a-section a-spacing-none a-padding-none"]//a[@class="a-link-normal a-color-tertiary"]'
+            ]
+            
+            for xpath in breadcrumb_xpaths:
+                try:
+                    print(f"\tTrying breadcrumb xpath: {xpath}")
+                    elements = self.driver.find_elements(By.XPATH, xpath)
+                    if elements:
+                        # Get all category text from the elements
+                        categories = []
+                        for element in elements:
+                            text = element.text.strip()
+                            if text and not text.startswith('Back to'):
+                                categories.extend(text.split('\n'))
+                        
+                        # Remove duplicates while preserving order
+                        categories = list(dict.fromkeys(categories))
+                        
+                        if categories:
+                            print(f"\tFound categories: {categories}")
+                            main_category = categories[0]  # First category
+                            second_category = categories[-1]  # Last category
+                            return main_category, second_category
+                except Exception as inner_e:
+                    print(f"\t⚠️ Error with xpath {xpath}: {inner_e}")
+                    continue
+            
+            print("\t❌ No breadcrumb navigation found with any selector")
+            
+        except Exception as e:
+            if self.show_details:
+                print(f"⚠️ Error getting breadcrumb categories: {e}")
+        
+        return None, None
+
     def get_product_infos(self, asin):
         """Scraped Produktdaten für eine gegebene ASIN."""
         self.asin = asin
         self.url = f"https://www.amazon.com/dp/{self.asin}?language=en_US"
 
         try:
-            self.open_page()  # Hier wieder hinzufügen!
+            self.open_page()
+            location = self.get_location()
+            if self.is_out_of_stock():
+                raise OutOfStockException(f"{self.asin} is out of stock.")
+            
+            if not self.does_product_has_page():
+                raise NoSuchPageException(f"{self.asin} has no page")
 
             bought_last_month = self.get_blm()
             price = self.get_price()
@@ -369,13 +608,29 @@ class AmazonProductScraper:
                 for key, value in self.bs_and_rank_data.items():
                     print(f"\t{key.ljust(max_key_length)} : {value}")
 
+            # Get categories from Best Sellers Rank or fallback to breadcrumb
+            main_category = self.bs_and_rank_data.get("main_category")
+            second_category = self.bs_and_rank_data.get("second_category")
+            
+            # If either category is None, try to get from breadcrumb
+            if main_category is None or second_category is None:
+                breadcrumb_main, breadcrumb_second = self.get_breadcrumb_categories()
+                main_category = main_category or breadcrumb_main
+                second_category = second_category or breadcrumb_second
+
             title = self.get_title()
             reviews = self.get_review_count()
             rating = self.get_rating()
             variants = self.get_variants()
             manufacturer = self.product_info_box_content.get(
                 "Manufacturer", None) if self.product_info_box_content else None
+            if manufacturer == None:
+                manufacturer = self.technical_details_box_content.get(
+                "Manufacturer", None) if self.technical_details_box_content else None
             store = self.get_store()
+            if store == None:
+                store = self.technical_details_box_content.get(
+                "Brand", None) if self.technical_details_box_content else None
             image_path = self.get_image_path()
 
             if title is None or price is None:
@@ -383,6 +638,7 @@ class AmazonProductScraper:
                 return None
 
             product_dict = {
+                "browser_location" : location,
                 "asin": self.asin,
                 "title": title,
                 "price": price,
@@ -391,8 +647,8 @@ class AmazonProductScraper:
                 "rank_second_category": self.bs_and_rank_data.get("rank_second_category", None),
                 "review_count": reviews,
                 "rating": rating,
-                "main_category": self.bs_and_rank_data.get("main_category", None),
-                "second_category": self.bs_and_rank_data.get("second_category", None),
+                "main_category": main_category,
+                "second_category": second_category,
                 "blm": bought_last_month,
                 "total": total,
                 "variants": variants,
@@ -401,15 +657,9 @@ class AmazonProductScraper:
                 "image_url": image_path,
             }
 
-            # max_key_length = max(len(key) for key in product_dict.keys())
-            # for key, value in product_dict.items():
-            #     if isinstance(value, str):
-            #         value = value[:60] + "..." if len(value) > 60 else value
-            #     print(f"\t{key.ljust(max_key_length)} : {value}")
-
             return product_dict
         except Exception as e:
-            print(f"❌ Fehler beim Scrapen von {asin}: {e}")
+            print(f"❌ Product Scrape Fail für {asin}: {e}")
             return None
 
 
