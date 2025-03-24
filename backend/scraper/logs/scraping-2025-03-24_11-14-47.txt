@@ -1,0 +1,1146 @@
+2025-03-24 11:14:47,076 [INFO] 🚀 Product Orchestrator gestartet.
+2025-03-24 11:14:47,076 [INFO] 📝 Log-Datei: scraping-2025-03-24_11-14-47.txt
+2025-03-24 11:14:47,076 [INFO] 🧨 Fehlgeschlagene Produkte: fails-2025-03-24_11-14-47.txt
+2025-03-24 11:14:47,077 [INFO] ====== WebDriver manager ======
+2025-03-24 11:14:48,068 [INFO] Get LATEST chromedriver version for google-chrome
+2025-03-24 11:14:48,685 [INFO] Get LATEST chromedriver version for google-chrome
+2025-03-24 11:14:49,157 [INFO] Driver [C:\Users\sebas\.wdm\drivers\chromedriver\win64\134.0.6998.165\chromedriver-win32/chromedriver.exe] found in cache
+2025-03-24 11:14:49,159 [DEBUG] Skipping Selenium Manager; path to chrome driver specified in Service class: C:\Users\sebas\.wdm\drivers\chromedriver\win64\134.0.6998.165\chromedriver-win32/chromedriver.exe
+2025-03-24 11:14:49,166 [DEBUG] Started executable: `C:\Users\sebas\.wdm\drivers\chromedriver\win64\134.0.6998.165\chromedriver-win32/chromedriver.exe` in a child process with pid: 23160 using 0 to output -3
+2025-03-24 11:14:50,229 [INFO] 🔧 Verwende ChromeDriver: C:\Users\sebas\.wdm\drivers\chromedriver\win64\134.0.6998.165\chromedriver-win32/chromedriver.exe
+2025-03-24 11:14:55,942 [INFO] ✅ Verbindung zu Amazon erfolgreich!
+2025-03-24 11:14:57,702 [INFO] 🍪 Cookies erfolgreich gesetzt.
+2025-03-24 11:14:57,703 [INFO] 📦 Starte Produktscraping...
+2025-03-24 11:14:57,724 [INFO] ⏭️ B00GL2HMES wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,724 [INFO] ⏭️ B002DYIZEO wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,724 [INFO] ⏭️ B07978VPPH wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,725 [INFO] ⏭️ B00E9M4XEE wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,725 [INFO] ⏭️ B000GIQS0W wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,725 [INFO] ⏭️ B0B9YMNYWK wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,725 [INFO] ⏭️ B0CSMZ882F wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,725 [INFO] ⏭️ B09YX7G6JJ wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,726 [INFO] ⏭️ B0C9GCQX6H wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,726 [INFO] ⏭️ B09VCTVH98 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,726 [INFO] ⏭️ B085Z9P87K wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,726 [INFO] ⏭️ B09R5KPNHZ wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,726 [INFO] ⏭️ B00BPS3L8E wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,726 [INFO] ⏭️ B08DH161T6 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,727 [INFO] ⏭️ B01IW245EY wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,727 [INFO] ⏭️ B0CCJZ248Z wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,727 [INFO] ⏭️ B0BRNWSMVD wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,727 [INFO] ⏭️ B0BSXR71QC wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,727 [INFO] ⏭️ B0B4Z5JM25 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,728 [INFO] ⏭️ B0BT23VBLJ wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,728 [INFO] ⏭️ B00QEMY4T6 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,728 [INFO] ⏭️ B0CQ8V7NXS wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,728 [INFO] ⏭️ B016C9GIIK wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,728 [INFO] ⏭️ B0BH9H71LK wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,729 [INFO] ⏭️ B01LYFAGXI wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,729 [INFO] ⏭️ B07M5M5B3S wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,729 [INFO] ⏭️ B0CXM2PG68 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,729 [INFO] ⏭️ B0BMPLP7K6 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,729 [INFO] ⏭️ B09L8KTJ2G wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,730 [INFO] ⏭️ B0CP9XPYX6 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,730 [INFO] ⏭️ B0C9NRW7CP wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,730 [INFO] ⏭️ B079XCTJJG wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,730 [INFO] ⏭️ B07CKFG53T wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,730 [INFO] ⏭️ B0BLJ51MK7 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,730 [INFO] ⏭️ B001181M16 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,731 [INFO] ⏭️ B0CQD42HPK wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,731 [INFO] ⏭️ B086H6366N wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,731 [INFO] ⏭️ B0DNK78CPY wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,731 [INFO] ⏭️ B008KMUNRA wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,732 [INFO] ⏭️ B0DHLWBC6J wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,732 [INFO] ⏭️ B0CSWHQ3PN wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,732 [INFO] ⏭️ B0CJMP3JZJ wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,732 [INFO] ⏭️ B0CZ1823BM wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,732 [INFO] ⏭️ B0BXMPBRJZ wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,732 [INFO] ⏭️ B06WVKGGJB wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,733 [INFO] ⏭️ B0BDCV36CX wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,733 [INFO] ⏭️ B001KYS2DC wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,733 [INFO] ⏭️ B0C6L85Z16 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,733 [INFO] ⏭️ B002DYIZGC wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,733 [INFO] ⏭️ B0DDB5BWYP wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,734 [INFO] ⏭️ B005DKV9SE wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,734 [INFO] ⏭️ B0C6WCWJ9P wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,734 [INFO] ⏭️ B0CFWCMBNG wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,734 [INFO] ⏭️ B0BFZJJY5M wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,734 [INFO] ⏭️ B00117ZRXQ wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,735 [INFO] ⏭️ B0D1DP2D8D wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,735 [INFO] ⏭️ B0CLSCPZG4 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,735 [INFO] ⏭️ B0B9289VLY wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,735 [INFO] ⏭️ B0DJTKMQ2R wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,735 [INFO] ⏭️ B0B6GKMZCL wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,735 [INFO] ⏭️ B079JWLSH9 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,735 [INFO] ⏭️ B09Z2XPHFQ wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,735 [INFO] ⏭️ B0045MLCL0 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,735 [INFO] ⏭️ B0BQ1FZJS6 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,735 [INFO] ⏭️ B0C8K2Z6SH wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,735 [INFO] ⏭️ B08VJNTY36 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,735 [INFO] ⏭️ B0088XS44K wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,736 [INFO] ⏭️ B0D3GLRGVM wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,736 [INFO] ⏭️ B099XC3L7R wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,736 [INFO] ⏭️ B0CSZ66LTQ wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,736 [INFO] ⏭️ B081G8V25N wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,736 [INFO] ⏭️ B0D8KZCLD1 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,736 [INFO] ⏭️ B0BT3GTSVW wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,736 [INFO] ⏭️ B0DCKC5S71 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,736 [INFO] ⏭️ B0D5PX3MZX wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,736 [INFO] ⏭️ B07TBH84L1 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,736 [INFO] ⏭️ B0BSXQNLJ4 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,737 [INFO] ⏭️ B0DHYMZBP9 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,737 [INFO] ⏭️ B0D1CTKV5K wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,737 [INFO] ⏭️ B07CVNM3JV wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,737 [INFO] ⏭️ B0018OADEA wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,737 [INFO] ⏭️ B0C7Y85JJH wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,737 [INFO] ⏭️ B089HWZL8Z wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,737 [INFO] ⏭️ B0BG65459C wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,737 [INFO] ⏭️ B0BG9QYXLK wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,737 [INFO] ⏭️ B0DD5PKWMR wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,737 [INFO] ⏭️ B0D78MM7HK wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,737 [INFO] ⏭️ B0BBWMC33H wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,737 [INFO] ⏭️ B0DCJ7Y967 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,737 [INFO] ⏭️ B0D4PFH1GY wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,737 [INFO] ⏭️ B0DYV7N76M wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,738 [INFO] ⏭️ B0DPDHDLQL wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,738 [INFO] ⏭️ B0CLS8WY25 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,738 [INFO] ⏭️ B0CSKQVCWF wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,738 [INFO] ⏭️ B0D6NL5NCX wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,738 [INFO] ⏭️ B0D2PBKP32 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,738 [INFO] ⏭️ B0CZHCKNC2 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,738 [INFO] ⏭️ B0CTHFL4GG wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,738 [INFO] ⏭️ B0CGDNFNJJ wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,738 [INFO] ⏭️ B0CXMW392H wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,738 [INFO] ⏭️ B0CS9RVX8M wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,738 [INFO] ⏭️ B0DHYDTZL3 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,738 [INFO] ⏭️ B0CM45VWMW wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,738 [INFO] ⏭️ B0CZ4JYB9M wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,739 [INFO] ⏭️ B0CNNFF63C wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,739 [INFO] ⏭️ B0CVMYCGR5 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,739 [INFO] ⏭️ B0B4Z2RTY1 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,739 [INFO] ⏭️ B0CLXVFZK6 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,739 [INFO] ⏭️ B0DD11FZV3 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,739 [INFO] ⏭️ B0C8TXLM1T wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,739 [INFO] ⏭️ B0CP2VG5M8 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,739 [INFO] ⏭️ B0BZGDKLFN wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,739 [INFO] ⏭️ B0CXMGYLYD wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,739 [INFO] ⏭️ B0D38GFZFH wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,739 [INFO] ⏭️ B0DKCBVVXS wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,739 [INFO] ⏭️ B0DKG1NWDD wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,739 [INFO] ⏭️ B0DC8R4P7J wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,740 [INFO] ⏭️ B0DJZ15P2Q wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,740 [INFO] ⏭️ B0DK8P3PVZ wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,740 [INFO] ⏭️ B0DHXJ3D2F wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,740 [INFO] ⏭️ B0D7N3D5X9 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,740 [INFO] ⏭️ B0CKZWM62J wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,740 [INFO] ⏭️ B0C8J4QLNQ wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,740 [INFO] ⏭️ B0CMD1MNS5 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,740 [INFO] ⏭️ B0D52C7CMM wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,740 [INFO] ⏭️ B0C6F1Y1PS wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,740 [INFO] ⏭️ B0D15N62P7 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,740 [INFO] ⏭️ B0DHTZKH11 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,740 [INFO] ⏭️ B0DSH8WM1C wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,740 [INFO] ⏭️ B0CXHTH33J wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,740 [INFO] ⏭️ B0CZRQ8PGB wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,741 [INFO] ⏭️ B0DQ1749D9 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,741 [INFO] ⏭️ B0DJJRRBZP wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,741 [INFO] ⏭️ B0DJHG68JS wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,741 [INFO] ⏭️ B0CK94R8TB wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,741 [INFO] ⏭️ B0D17Y34HV wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,741 [INFO] ⏭️ B0CVYVFCZJ wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,741 [INFO] ⏭️ B07SMLVGSZ wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,741 [INFO] ⏭️ B00O1KPESI wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,741 [INFO] ⏭️ B0D9PFPMBC wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,741 [INFO] ⏭️ B094JNLR6B wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,741 [INFO] ⏭️ B0CS1P6DP8 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,741 [INFO] ⏭️ B0C2HYJJB6 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,741 [INFO] ⏭️ B08KXDMKM7 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,741 [INFO] ⏭️ B000SR5ZEQ wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,742 [INFO] ⏭️ B0147QJFY4 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,742 [INFO] ⏭️ B0841RCNRP wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,742 [INFO] ⏭️ B08X14DRC9 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,742 [INFO] ⏭️ B006CQ1S6Q wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,742 [INFO] ⏭️ B0BQZZZ15W wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,742 [INFO] ⏭️ B0BHF1Q7D1 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,742 [INFO] ⏭️ B08MHFFX29 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,742 [INFO] ⏭️ B01MDUMAAK wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,742 [INFO] ⏭️ B0016BU7S2 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,742 [INFO] ⏭️ B00B04BTD2 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,742 [INFO] ⏭️ B073VXDKGJ wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,742 [INFO] ⏭️ B0B4KQWSY9 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,742 [INFO] ⏭️ B071R5MWBS wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,743 [INFO] ⏭️ B0BQ2HDBD5 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,743 [INFO] ⏭️ B07JBHKYPH wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,743 [INFO] ⏭️ B078954JHY wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,743 [INFO] ⏭️ B083X6MLFG wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,743 [INFO] ⏭️ B0006V6LEW wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,743 [INFO] ⏭️ B0DWDZFY96 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,743 [INFO] ⏭️ B01LF729EQ wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,743 [INFO] ⏭️ B0DSBKYMQG wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,743 [INFO] ⏭️ B0F1DV3639 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,743 [INFO] ⏭️ B09KB9XCL9 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,743 [INFO] ⏭️ B092K2TKMJ wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,743 [INFO] ⏭️ B0DZ6V38B7 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,743 [INFO] ⏭️ B0DY2TCRGN wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,743 [INFO] ⏭️ B0DGZT77W5 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,744 [INFO] ⏭️ B0DPH4TLMP wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,744 [INFO] ⏭️ B00DJQ2C4O wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,744 [INFO] ⏭️ B09581ZNDQ wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,744 [INFO] ⏭️ B0DQ3BSMXF wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,744 [INFO] ⏭️ B0071JHNWG wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,744 [INFO] ⏭️ B09TQ6ZGSL wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,744 [INFO] ⏭️ B00RW5QX8Y wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,744 [INFO] ⏭️ B09RQ56YMW wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,744 [INFO] ⏭️ B0D2JLX9FX wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,744 [INFO] ⏭️ B00NKUIAWM wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,744 [INFO] ⏭️ B0DQXMZ4PR wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,744 [INFO] ⏭️ B0032K1W98 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,744 [INFO] ⏭️ B06XRP888W wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,745 [INFO] ⏭️ B086RF5657 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,745 [INFO] ⏭️ B088YMHLTW wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,745 [INFO] ⏭️ B07WMMBZJZ wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,745 [INFO] ⏭️ B093969B84 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,745 [INFO] ⏭️ B093WJ1VP2 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,745 [INFO] ⏭️ B07LB9T8KD wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,745 [INFO] ⏭️ B07CH87YRW wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,745 [INFO] ⏭️ B00Y1HYX8S wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,745 [INFO] ⏭️ B0784G54FT wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,746 [INFO] ⏭️ B01IJ25GHM wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,746 [INFO] ⏭️ B081X3KTGW wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,746 [INFO] ⏭️ B0883WHZD4 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,746 [INFO] ⏭️ B07NGV8XMK wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,747 [INFO] ⏭️ B0931942R9 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,747 [INFO] ⏭️ B07M7X9MMS wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,747 [INFO] ⏭️ B00EDW10GY wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,747 [INFO] ⏭️ B0CM7HS14N wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,747 [INFO] ⏭️ B00942W51C wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,748 [INFO] ⏭️ B0CVQYN9W7 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,748 [INFO] ⏭️ B01HXNP8O4 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,748 [INFO] ⏭️ B08DFK59MK wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,748 [INFO] ⏭️ B0B42ZMV98 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,749 [INFO] ⏭️ B0CV4N3KHQ wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,749 [INFO] ⏭️ B01ICBXVJK wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,749 [INFO] ⏭️ B0DNNYRDTX wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,749 [INFO] ⏭️ B094VJ8T97 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,749 [INFO] ⏭️ B07X4BQV5J wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,750 [INFO] ⏭️ B09ZVD8NDP wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,750 [INFO] ⏭️ B094SRR41W wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,750 [INFO] ⏭️ B086JDPQ3K wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,750 [INFO] ⏭️ B0C328B57Q wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,751 [INFO] ⏭️ B0847RYJMK wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,751 [INFO] ⏭️ B00G7M8HXW wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,751 [INFO] ⏭️ B01N16A70T wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,751 [INFO] ⏭️ B0DRKBLVK8 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,751 [INFO] ⏭️ B07QBS83Y3 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,751 [INFO] ⏭️ B09QZSBRLB wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,751 [INFO] ⏭️ B0CND7GK55 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,751 [INFO] ⏭️ B08HSR4DXV wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,751 [INFO] ⏭️ B0CND6TMHC wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,752 [INFO] ⏭️ B01MAXA255 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,752 [INFO] ⏭️ B0749P24CB wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,752 [INFO] ⏭️ B0BTD4JH8V wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,752 [INFO] ⏭️ B0DDCKY3WK wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,752 [INFO] ⏭️ B0CV5PY88X wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,752 [INFO] ⏭️ B0CHMYC2J8 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,752 [INFO] ⏭️ B07283TQ9D wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,753 [INFO] ⏭️ B09KQ5QV82 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,753 [INFO] ⏭️ B079YZ2RFL wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,753 [INFO] ⏭️ B0DLPB1M8H wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,753 [INFO] ⏭️ B0DK5M5B94 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,753 [INFO] ⏭️ B0DFHRZJH2 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,753 [INFO] ⏭️ B0DXCH6XSZ wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,753 [INFO] ⏭️ B0DP7VGC13 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,753 [INFO] ⏭️ B07C228K73 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,753 [INFO] ⏭️ B0DHLXC3N1 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,753 [INFO] ⏭️ B0DPLSMWWX wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,753 [INFO] ⏭️ B0D3LVZS59 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,754 [INFO] ⏭️ B0DHQ7J4ZX wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,754 [INFO] ⏭️ B0CYGR3RJ2 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,754 [INFO] ⏭️ B078HMCBLY wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,754 [INFO] ⏭️ B00P7BV3F8 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,754 [INFO] ⏭️ B07P4M1YGN wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,754 [INFO] ⏭️ B0DV6QB6MT wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,754 [INFO] ⏭️ B09Y2HCJFD wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,754 [INFO] ⏭️ B01HN63W4Y wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,754 [INFO] ⏭️ B0DSQ8WQJQ wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,754 [INFO] ⏭️ B09DNC8S41 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,754 [INFO] ⏭️ B09G99QXSQ wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,754 [INFO] ⏭️ B0130VTQ64 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,755 [INFO] ⏭️ B078HW9YKX wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,755 [INFO] ⏭️ B0CPTHJMW3 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,755 [INFO] ⏭️ B0D3LTXHX8 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,755 [INFO] ⏭️ B078HKGZ9W wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,755 [INFO] ⏭️ B07ZBNSBN1 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,755 [INFO] ⏭️ B0BYP272T8 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,755 [INFO] ⏭️ B0C4B1WCYY wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,755 [INFO] ⏭️ B089PZHRJ6 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,755 [INFO] ⏭️ B0BJY1QXCG wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,755 [INFO] ⏭️ B09Z38NTSN wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,755 [INFO] ⏭️ B01IQ00B04 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,755 [INFO] ⏭️ B01MRJ7DAJ wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,755 [INFO] ⏭️ B07WCDBNJQ wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,756 [INFO] ⏭️ B00P6TUO5G wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,756 [INFO] ⏭️ B07RTP8R98 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,756 [INFO] ⏭️ B07BN534X8 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,756 [INFO] ⏭️ B001CGX3ZK wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,756 [INFO] ⏭️ B07NQB8B2Z wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,756 [INFO] ⏭️ B0BKTM9TV9 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,756 [INFO] ⏭️ B0B85BFP2F wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,756 [INFO] ⏭️ B097C5D5FZ wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,756 [INFO] ⏭️ B07L46RH6P wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,756 [INFO] ⏭️ B07CXZBRZP wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,756 [INFO] ⏭️ B0CHBCCMRL wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,756 [INFO] ⏭️ B0DPLY7VD5 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,756 [INFO] ⏭️ B0D5SFWY76 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,757 [INFO] ⏭️ B0B2S9J61W wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,757 [INFO] ⏭️ B0BPM5CP2Z wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,757 [INFO] ⏭️ B0C3VJ56CM wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,757 [INFO] ⏭️ B07SXCFMLZ wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,757 [INFO] ⏭️ B0B8443W63 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,757 [INFO] ⏭️ B01NC03V2J wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,757 [INFO] ⏭️ B0BKTSDM9P wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,757 [INFO] ⏭️ B0C61TDLYK wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,757 [INFO] ⏭️ B000S97MAY wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,757 [INFO] ⏭️ B07BS4YGL5 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,757 [INFO] ⏭️ B073V3S9VW wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,757 [INFO] ⏭️ B07HB88NNC wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,757 [INFO] ⏭️ B00MGV01YQ wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,757 [INFO] ⏭️ B005ODJ5TK wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,758 [INFO] ⏭️ B0DFMS2JYY wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,758 [INFO] ⏭️ B07HB663R3 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,758 [INFO] ⏭️ B003J8ZT38 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,758 [INFO] ⏭️ B091MFN5ZH wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,758 [INFO] ⏭️ B07X8QT7MM wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,758 [INFO] ⏭️ B07Z4K67NZ wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,758 [INFO] ⏭️ B0BKTQ4GWS wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,758 [INFO] ⏭️ B008A4RQ5K wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,758 [INFO] ⏭️ B075H21PPB wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,758 [INFO] ⏭️ B01E6L9U9K wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,758 [INFO] ⏭️ B0175YEALS wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,758 [INFO] ⏭️ B0C56BZBX3 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,758 [INFO] ⏭️ B08D6S6J7W wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,758 [INFO] ⏭️ B0013G6M8O wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,759 [INFO] ⏭️ B097JQQS74 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,759 [INFO] ⏭️ B086LK1ZVW wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,759 [INFO] ⏭️ B0BL952VJ3 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,759 [INFO] ⏭️ B0CG8WBZ78 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,759 [INFO] ⏭️ B0BRNJB7RH wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,759 [INFO] ⏭️ B08TW27VGN wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,759 [INFO] ⏭️ B007NK0P3C wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,759 [INFO] ⏭️ B08NVSY451 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,759 [INFO] ⏭️ B099TCJNND wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,759 [INFO] ⏭️ B008E70MHW wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,759 [INFO] ⏭️ B0CNYRCZVC wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,759 [INFO] ⏭️ B078BSRMR4 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,759 [INFO] ⏭️ B000V75TQ2 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,760 [INFO] ⏭️ B0DM69T7TG wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,760 [INFO] ⏭️ B06Y2KGF3C wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,760 [INFO] ⏭️ B09Q3MSMVG wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,760 [INFO] ⏭️ B000T2HSOU wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,760 [INFO] ⏭️ B006JANSFY wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,760 [INFO] ⏭️ B0C92LZXRG wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,760 [INFO] ⏭️ B01BPHE79G wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,760 [INFO] ⏭️ B082Z8ZGXH wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,760 [INFO] ⏭️ B00M1XH4IA wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,760 [INFO] ⏭️ B077V2C511 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,760 [INFO] ⏭️ B07NY5GKYG wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,761 [INFO] ⏭️ B08R7V34BX wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,761 [INFO] ⏭️ B07W9B5K1R wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,761 [INFO] ⏭️ B00WC9F7QO wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,761 [INFO] ⏭️ B0B2ZCPN2Z wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,761 [INFO] ⏭️ B0CR57662J wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,761 [INFO] ⏭️ B000P72UZG wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,762 [INFO] ⏭️ B08129TH68 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,762 [INFO] ⏭️ B01D213HL2 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,762 [INFO] ⏭️ B0B335CK7G wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,762 [INFO] ⏭️ B001KN3MXI wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,762 [INFO] ⏭️ B0B3M2JKD3 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,763 [INFO] ⏭️ B075MJ5GQX wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,763 [INFO] ⏭️ B088WH5CY4 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,763 [INFO] ⏭️ B0DPWYKQTK wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,763 [INFO] ⏭️ B0D6FQTNBW wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,763 [INFO] ⏭️ B0DP4DMB3K wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,763 [INFO] ⏭️ B08GSWNRXW wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,763 [INFO] ⏭️ B0DJM7S52P wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,763 [INFO] ⏭️ B0DCG495JZ wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,764 [INFO] ⏭️ B0CKTZB5RK wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,764 [INFO] ⏭️ B08YYRM7R6 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,764 [INFO] ⏭️ B07WQJRL86 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,764 [INFO] ⏭️ B0D46D3TRS wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,764 [INFO] ⏭️ B0CMF2H5FH wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,764 [INFO] ⏭️ B07XX363JB wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,764 [INFO] ⏭️ B0CKTZYZ1X wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,764 [INFO] ⏭️ B0CKV1BVZ7 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,764 [INFO] ⏭️ B07HG4YCW7 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,764 [INFO] ⏭️ B0CJTWPF5P wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,764 [INFO] ⏭️ B0DL5VFYT8 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,764 [INFO] ⏭️ B0DPHSX3FY wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,765 [INFO] ⏭️ B094NY8YGM wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,765 [INFO] ⏭️ B01CYYW5KM wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,765 [INFO] ⏭️ B01N337USG wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,765 [INFO] ⏭️ B0D1R3CKKF wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,765 [INFO] ⏭️ B0BZKRS96F wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,765 [INFO] ⏭️ B07Y36NRXR wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,765 [INFO] ⏭️ B00RZQ98NC wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,765 [INFO] ⏭️ B0DZ1XQ4RL wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,765 [INFO] ⏭️ B076JP1Q31 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,765 [INFO] ⏭️ B0CMCHNYGY wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,765 [INFO] ⏭️ B098V8L3Z2 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,765 [INFO] ⏭️ B0BFB874WD wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,765 [INFO] ⏭️ B0DMVNRSHZ wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,766 [INFO] ⏭️ B07RGCSNWN wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,766 [INFO] ⏭️ B08MVV8TBN wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,766 [INFO] ⏭️ B0DKX7P1TK wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,766 [INFO] ⏭️ B0DDGNWDNT wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,766 [INFO] ⏭️ B01J47191I wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,766 [INFO] ⏭️ B0DMW69MH6 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,766 [INFO] ⏭️ B0D1FZ5HYK wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,766 [INFO] ⏭️ B09YTTXRFZ wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,766 [INFO] ⏭️ B0BQZ732RH wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,766 [INFO] ⏭️ B0DFW7MV7W wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,766 [INFO] ⏭️ B08YYQZ54F wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,766 [INFO] ⏭️ B09DSY5XCS wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,766 [INFO] ⏭️ B0DG2D3YM8 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,767 [INFO] ⏭️ B0D78L563S wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,767 [INFO] ⏭️ B00VWSB8DM wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,767 [INFO] ⏭️ B0DCNDWB96 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,767 [INFO] ⏭️ B0DQCMFMBY wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,767 [INFO] ⏭️ B08R9J7ZSF wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,767 [INFO] ⏭️ B0CKLR913G wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,767 [INFO] ⏭️ B07MXRXC14 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,767 [INFO] ⏭️ B0CZRJWJ4V wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,767 [INFO] ⏭️ B0BCBX9ZF8 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,767 [INFO] ⏭️ B0CPPLFQKB wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,767 [INFO] ⏭️ B06XRYQ722 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,768 [INFO] ⏭️ B0DP5DY2CT wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,768 [INFO] ⏭️ B07KGGS4SS wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,768 [INFO] ⏭️ B076NC6BGP wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,768 [INFO] ⏭️ B08SY6N9TL wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,768 [INFO] ⏭️ B002NHIFNW wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,768 [INFO] ⏭️ B06XS446GP wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,768 [INFO] ⏭️ B086KG6JZ6 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,768 [INFO] ⏭️ B081VRG3NK wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,768 [INFO] ⏭️ B00BE5D2FA wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,768 [INFO] ⏭️ B07GYZNDY8 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,768 [INFO] ⏭️ B005X0U43K wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,769 [INFO] ⏭️ B0DMTV6PZ1 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,769 [INFO] ⏭️ B07Q1XCM3L wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,769 [INFO] ⏭️ B092NVZ5K2 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,769 [INFO] ⏭️ B09B1MKT37 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,769 [INFO] ⏭️ B0DP676C28 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,769 [INFO] ⏭️ B0CM7SS5FY wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,769 [INFO] ⏭️ B075HKJZ2R wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,769 [INFO] ⏭️ B0DBM3QNDG wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,769 [INFO] ⏭️ B08GLPV3V6 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,769 [INFO] ⏭️ B09PHVJ8LV wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,769 [INFO] ⏭️ B0C8BQDT6R wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,769 [INFO] ⏭️ B0CZBM6JTY wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,770 [INFO] ⏭️ B09LHL19VL wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,770 [INFO] ⏭️ B09DNRWYVQ wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,770 [INFO] ⏭️ B0851K2JVG wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,770 [INFO] ⏭️ B085ZB4K6M wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,770 [INFO] ⏭️ B000NNEPJQ wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,770 [INFO] ⏭️ B01N5ONQTT wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,770 [INFO] ⏭️ B07WVP81Z7 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,770 [INFO] ⏭️ B005FGN4ZC wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,770 [INFO] ⏭️ B0881XD6J9 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,770 [INFO] ⏭️ B0DJW58G6C wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,770 [INFO] ⏭️ B0DD7YQKDH wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,770 [INFO] ⏭️ B0D88NLM9P wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,771 [INFO] ⏭️ B0124XEUYC wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,771 [INFO] ⏭️ B07FR2LJYQ wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,771 [INFO] ⏭️ B075TCYZYR wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,771 [INFO] ⏭️ B0030UUZJI wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,771 [INFO] ⏭️ B004NNCDVY wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,771 [INFO] ⏭️ B09PMVLMWV wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,771 [INFO] ⏭️ B006M5ZAMK wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,771 [INFO] ⏭️ B081DMM46P wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,771 [INFO] ⏭️ B0DH5YH8YL wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,771 [INFO] ⏭️ B08P7TYP2L wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,771 [INFO] ⏭️ B01BSE9UKC wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,771 [INFO] ⏭️ B07TYD56DY wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,772 [INFO] ⏭️ B00012NDWE wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,772 [INFO] ⏭️ B0CCCNKD73 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,772 [INFO] ⏭️ B008S0I1Q4 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,772 [INFO] ⏭️ B07RV3BQ45 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,772 [INFO] ⏭️ B0BLP6LK9D wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,772 [INFO] ⏭️ B07BWMJ8CC wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,772 [INFO] ⏭️ B07P5W2YVM wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,772 [INFO] ⏭️ B0CWMDFCGX wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,772 [INFO] ⏭️ B0BQPT34V7 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,772 [INFO] ⏭️ B07B12LHWL wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,772 [INFO] ⏭️ B0DCKXJH73 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,772 [INFO] ⏭️ B00E9M4XFI wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,772 [INFO] ⏭️ B0DN24CYVK wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,773 [INFO] ⏭️ B0CRWV8KCX wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,773 [INFO] ⏭️ B0BVGD7XT2 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,773 [INFO] ⏭️ B0DGG12Q2N wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,773 [INFO] ⏭️ B0D38GFBFN wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,773 [INFO] ⏭️ B0CTFNR4SK wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,773 [INFO] ⏭️ B0DWWVJW77 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,773 [INFO] ⏭️ B0DGWXHJDF wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,773 [INFO] ⏭️ B0D52BJXQM wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,773 [INFO] ⏭️ B0CKM1LJZP wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,773 [INFO] ⏭️ B003ZWUNRK wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,773 [INFO] ⏭️ B07FYYKKQK wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,773 [INFO] ⏭️ B0CWMHNLQX wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,774 [INFO] ⏭️ B0DZC2L3FX wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,774 [INFO] ⏭️ B0883XJCDL wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,774 [INFO] ⏭️ B077BZBWJS wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,774 [INFO] ⏭️ B07MMKQHQG wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,774 [INFO] ⏭️ B01GTO91WI wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,774 [INFO] ⏭️ B076CS63W6 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,774 [INFO] ⏭️ B0DK1QKGMQ wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,774 [INFO] ⏭️ B0DHLXNVLP wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,774 [INFO] ⏭️ B0DWDX6FNG wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,774 [INFO] ⏭️ B07FXSZ49R wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,774 [INFO] ⏭️ B0BYB75CFT wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,774 [INFO] ⏭️ B07B541D8P wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,774 [INFO] ⏭️ B09GW5X51Y wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,775 [INFO] ⏭️ B08272M5K2 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,775 [INFO] ⏭️ B00GNEW2K8 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,775 [INFO] ⏭️ B01JXXXL1Y wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,775 [INFO] ⏭️ B0BKTK91S5 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,775 [INFO] ⏭️ B006JA53OS wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,775 [INFO] ⏭️ B07YPQ682V wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,775 [INFO] ⏭️ B076JSBK79 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,775 [INFO] ⏭️ B0DNP4TV7V wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,775 [INFO] ⏭️ B0BLT2QG94 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,775 [INFO] ⏭️ B0DDTJDMBQ wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,775 [INFO] ⏭️ B0D1FMZ8HZ wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,775 [INFO] ⏭️ B0BNPBCS5Z wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,775 [INFO] ⏭️ B0DFWBWWGL wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,776 [INFO] ⏭️ B01J471GDY wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,776 [INFO] ⏭️ B0CZDMXJ9W wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,776 [INFO] ⏭️ B0CSK4DYYH wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,776 [INFO] ⏭️ B0B4DF73R9 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,776 [INFO] ⏭️ B0CPPM2C2H wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,776 [INFO] ⏭️ B00A2G67YU wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,776 [INFO] ⏭️ B0DBM4DW3S wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,776 [INFO] ⏭️ B08G1PHLM3 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,776 [INFO] ⏭️ B0BWRQ8C85 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,776 [INFO] ⏭️ B08HR62DTC wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,776 [INFO] ⏭️ B0CCSTMQQW wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,776 [INFO] ⏭️ B00JUQR51C wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,777 [INFO] ⏭️ B00BL6FUX4 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,777 [INFO] ⏭️ B09GVF6T7B wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,778 [INFO] ⏭️ B0DS1RH5P1 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,778 [INFO] ⏭️ B0DQF77BKC wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,779 [INFO] ⏭️ B0DX7846R5 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,780 [INFO] ⏭️ B0CHK24CC4 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,780 [INFO] ⏭️ B00IUHNCIW wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,780 [INFO] ⏭️ B018ITUM5C wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,780 [INFO] ⏭️ B0CT96P386 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,781 [INFO] ⏭️ B099KRBL53 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,781 [INFO] ⏭️ B00333HCUC wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,781 [INFO] ⏭️ B0BKCVLYGX wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,781 [INFO] ⏭️ B0DLF66MH1 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,781 [INFO] ⏭️ B0CXMJCCJC wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,781 [INFO] ⏭️ B0DNT9KK3N wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,781 [INFO] ⏭️ B0DY51JSJN wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,782 [INFO] ⏭️ B0CLXV6XFR wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,782 [INFO] ⏭️ B0D94QJ3MF wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,782 [INFO] ⏭️ B0BQC1JK1X wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,782 [INFO] ⏭️ B07L48VBCT wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,782 [INFO] ⏭️ B0DZSGKTLH wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,783 [INFO] ⏭️ B000IGAE66 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,783 [INFO] ⏭️ B0B431425K wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,783 [INFO] ⏭️ B002DUD72I wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,783 [INFO] ⏭️ B09B6G35F4 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,783 [INFO] ⏭️ B09JKFVV76 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,783 [INFO] ⏭️ B07GRLY21Q wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,783 [INFO] ⏭️ B0BKPXJZH2 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,783 [INFO] ⏭️ B0DHXW4PQ5 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,784 [INFO] ⏭️ B0DFWGVBNT wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,784 [INFO] ⏭️ B0DFW9VRMM wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,784 [INFO] ⏭️ B0DK1LS9K3 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,784 [INFO] ⏭️ B0927X3YS8 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,784 [INFO] ⏭️ B0851KHS15 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,784 [INFO] ⏭️ B0DP5HDT9B wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,784 [INFO] ⏭️ B00U44E3FA wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,784 [INFO] ⏭️ B0CCRG3WZY wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,784 [INFO] ⏭️ B08BG98JKT wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,785 [INFO] ⏭️ B07NSHKSXL wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,785 [INFO] ⏭️ B0D8S78HYJ wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,785 [INFO] ⏭️ B094MMNBMW wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,785 [INFO] ⏭️ B09XJWFQ86 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,785 [INFO] ⏭️ B00GPHWWLC wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,785 [INFO] ⏭️ B0DDHXC6KM wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,785 [INFO] ⏭️ B09YDR82P5 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,785 [INFO] ⏭️ B07KZNLGX4 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,785 [INFO] ⏭️ B0DDHWTQB6 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,786 [INFO] ⏭️ B09N34Q8X2 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,786 [INFO] ⏭️ B0DJFZZV1Q wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,786 [INFO] ⏭️ B00ILGGP5Y wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,786 [INFO] ⏭️ B0D8MW66CS wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,786 [INFO] ⏭️ B0DY9PZC4T wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,786 [INFO] ⏭️ B0C6NPQ7GD wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,786 [INFO] ⏭️ B088MJD7MH wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,786 [INFO] ⏭️ B07227D8Q8 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,786 [INFO] ⏭️ B0CQD9W1K7 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,787 [INFO] ⏭️ B088MHVHBF wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,787 [INFO] ⏭️ B088MHY82G wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,787 [INFO] ⏭️ B0D1DS69V9 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,787 [INFO] ⏭️ B0DV1VQZ15 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,787 [INFO] ⏭️ B0DS1J9V9K wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,787 [INFO] ⏭️ B0B38282HG wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,787 [INFO] ⏭️ B0D7J5R7T6 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,787 [INFO] ⏭️ B09VX44KTY wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,788 [INFO] ⏭️ B0CQ4DH22D wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,788 [INFO] ⏭️ B0DJV7VJHT wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,788 [INFO] ⏭️ B013SJMUIO wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,788 [INFO] ⏭️ B0BFVBNGX9 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,788 [INFO] ⏭️ B0CYQ4ZZ21 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,788 [INFO] ⏭️ B0DGWX84GH wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,788 [INFO] ⏭️ B0DM3GCQ6S wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,788 [INFO] ⏭️ B0DWHJ3528 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,789 [INFO] ⏭️ B07C7PVBL1 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,789 [INFO] ⏭️ B07HPD4X43 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,789 [INFO] ⏭️ B06XHZJ5DW wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,789 [INFO] ⏭️ B0D8MXM69Z wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,789 [INFO] ⏭️ B0DSVR88G3 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,789 [INFO] ⏭️ B071W58MVW wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,789 [INFO] ⏭️ B077HZW2FX wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,789 [INFO] ⏭️ B08HR1M6JS wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,790 [INFO] ⏭️ B088MJ4DMS wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,790 [INFO] ⏭️ B07WSHFSZP wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,790 [INFO] ⏭️ B0DGZRZ9NZ wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,790 [INFO] ⏭️ B07MHFTD36 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,790 [INFO] ⏭️ B088MHJ4P8 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,790 [INFO] ⏭️ B07X37D16H wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,790 [INFO] ⏭️ B08PQT4CCH wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,790 [INFO] ⏭️ B06XZVBS6X wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,790 [INFO] ⏭️ B07TXQ55W5 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,790 [INFO] ⏭️ B0CF3HYSHR wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,791 [INFO] ⏭️ B078WG5YP4 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,791 [INFO] ⏭️ B00M8M2SKS wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,791 [INFO] ⏭️ B0095VQH5M wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,791 [INFO] ⏭️ B07BBF7QMV wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,791 [INFO] ⏭️ B072HXD211 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,791 [INFO] ⏭️ B07169YT2Y wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,791 [INFO] ⏭️ B0CCYVR68L wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,791 [INFO] ⏭️ B0DFNRJMWW wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,791 [INFO] ⏭️ B086WGWLSX wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,791 [INFO] ⏭️ B07DP7H4PD wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,791 [INFO] ⏭️ B07ZZLJM6L wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,791 [INFO] ⏭️ B0748ZCLX4 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,791 [INFO] ⏭️ B076CPF943 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,792 [INFO] ⏭️ B015HT13H2 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,792 [INFO] ⏭️ B00IDCFXG8 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,792 [INFO] ⏭️ B077SFNTSC wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,792 [INFO] ⏭️ B072HQDPP9 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,792 [INFO] ⏭️ B00IFPVSIK wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,792 [INFO] ⏭️ B001SAQCNA wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,792 [INFO] ⏭️ B01C8Z1FW6 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,792 [INFO] ⏭️ B07DV3M5PG wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,792 [INFO] ⏭️ B00BSZBEAG wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,792 [INFO] ⏭️ B00LUSF2VS wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,792 [INFO] ⏭️ B0BBPCFS4P wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,793 [INFO] ⏭️ B00IEVJZFS wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,793 [INFO] ⏭️ B01J4F1E6A wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,793 [INFO] ⏭️ B01K31LJC8 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,793 [INFO] ⏭️ B07TXVSK51 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,793 [INFO] ⏭️ B0842BTX2D wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,793 [INFO] ⏭️ B09R2LCP2R wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,793 [INFO] ⏭️ B00J239SDG wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,793 [INFO] ⏭️ B00LNURL94 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,793 [INFO] ⏭️ B00QIVB19Y wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,793 [INFO] ⏭️ B008BFYXDG wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,793 [INFO] ⏭️ B010RGPTHU wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,793 [INFO] ⏭️ B0CM694QWH wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,793 [INFO] ⏭️ B00GBP1HV4 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,794 [INFO] ⏭️ B0CCGHZQS2 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,794 [INFO] ⏭️ B06XQ2SBV3 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,794 [INFO] ⏭️ B076X63YG4 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,794 [INFO] ⏭️ B082FNC3L9 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,794 [INFO] ⏭️ B07DDMZPL2 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,794 [INFO] ⏭️ B078SLF6ZB wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,794 [INFO] ⏭️ B01HJ3R9NQ wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,794 [INFO] ⏭️ B078PQLHX4 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,794 [INFO] ⏭️ B07DBBDPJW wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,794 [INFO] ⏭️ B0CBSQ556R wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,794 [INFO] ⏭️ B01HBSIZPA wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,794 [INFO] ⏭️ B0B4BK5BNB wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,794 [INFO] ⏭️ B0CRSS45SJ wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,795 [INFO] ⏭️ B0BTFT8YR5 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,795 [INFO] ⏭️ B0DNWFJ552 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,795 [INFO] ⏭️ B0CB1JLYS8 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,795 [INFO] ⏭️ B09VPH8QBQ wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,795 [INFO] ⏭️ B0CK5Z3M89 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,795 [INFO] ⏭️ B07BMKD2RX wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,795 [INFO] ⏭️ B09QRZNQ7F wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,795 [INFO] ⏭️ B01M7QBXNY wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,795 [INFO] ⏭️ B01BVRO7T0 wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,795 [INFO] ⏭️ B0CCJZVJYG wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,795 [INFO] ⏭️ B0B1V1TBYF wurde heute bereits gescraped – überspringe.
+2025-03-24 11:14:57,795 [INFO] 
+
+================================================================================
+2025-03-24 11:14:57,795 [INFO] 📦 [663/685] Scrape Produkt: B0CZXWD9JQ
+2025-03-24 11:14:57,796 [INFO] ================================================================================
+
+2025-03-24 11:14:57,799 [DEBUG] 🌐 Öffne Produktseite: B0CZXWD9JQ (https://www.amazon.com/dp/B0CZXWD9JQ?language=en_US)
+2025-03-24 11:15:02,710 [DEBUG] 📜 Scrolle nach unten für dynamische Inhalte...
+2025-03-24 11:15:08,826 [DEBUG] 📦 Extrahiere Produktinformationen...
+2025-03-24 11:15:09,037 [DEBUG] 🧾 Extrahiere technische Details...
+2025-03-24 11:15:09,048 [DEBUG] 🛑 Prüfe Verfügbarkeit (Out of Stock)
+2025-03-24 11:15:09,195 [DEBUG] 🔍 Prüfe, ob Produktseite existiert
+2025-03-24 11:15:09,330 [DEBUG] 📊 Extrahiere BLM (bought last month)...
+2025-03-24 11:15:09,352 [DEBUG] 💰 Extrahiere Preis...
+2025-03-24 11:15:09,381 [DEBUG] 📈 Extrahiere Bestseller-Rangdaten...
+2025-03-24 11:15:09,400 [DEBUG] 🗣️ Extrahiere Review-Anzahl...
+2025-03-24 11:15:09,400 [DEBUG] ⭐️ Extrahiere Bewertung...
+2025-03-24 11:15:09,400 [DEBUG] 🎨 Extrahiere Varianten...
+2025-03-24 11:15:09,474 [DEBUG] 📍 Extrahiere Standort...
+2025-03-24 11:15:09,490 [INFO] ⚡ Änderungen: 🆕 title, 🆕 price, 🆕 main_category, 🆕 second_category, 🆕 blm, 🆕 total, 🆕 store, 🆕 manufacturer
+2025-03-24 11:15:09,511 [INFO] 
+
+================================================================================
+2025-03-24 11:15:09,511 [INFO] 📦 [664/685] Scrape Produkt: B00333HCUM
+2025-03-24 11:15:09,511 [INFO] ================================================================================
+
+2025-03-24 11:15:09,512 [DEBUG] 🌐 Öffne Produktseite: B00333HCUM (https://www.amazon.com/dp/B00333HCUM?language=en_US)
+2025-03-24 11:15:15,708 [DEBUG] 📜 Scrolle nach unten für dynamische Inhalte...
+2025-03-24 11:15:20,782 [DEBUG] 📦 Extrahiere Produktinformationen...
+2025-03-24 11:15:21,166 [DEBUG] 🧾 Extrahiere technische Details...
+2025-03-24 11:15:21,176 [DEBUG] 🛑 Prüfe Verfügbarkeit (Out of Stock)
+2025-03-24 11:15:21,342 [DEBUG] 🔍 Prüfe, ob Produktseite existiert
+2025-03-24 11:15:21,496 [DEBUG] 📊 Extrahiere BLM (bought last month)...
+2025-03-24 11:15:21,518 [DEBUG] 💰 Extrahiere Preis...
+2025-03-24 11:15:21,537 [DEBUG] 📈 Extrahiere Bestseller-Rangdaten...
+2025-03-24 11:15:21,550 [DEBUG] 🗣️ Extrahiere Review-Anzahl...
+2025-03-24 11:15:21,550 [DEBUG] ⭐️ Extrahiere Bewertung...
+2025-03-24 11:15:21,551 [DEBUG] 🎨 Extrahiere Varianten...
+2025-03-24 11:15:21,612 [DEBUG] 📍 Extrahiere Standort...
+2025-03-24 11:15:21,641 [INFO] ⚡ Änderungen: 🆕 title, 🆕 price, 🆕 main_category, 🆕 second_category, 🆕 blm, 🆕 total, 🆕 store, 🆕 manufacturer
+2025-03-24 11:15:21,663 [INFO] 
+
+================================================================================
+2025-03-24 11:15:21,663 [INFO] 📦 [665/685] Scrape Produkt: B0BTQ33ZG8
+2025-03-24 11:15:21,664 [INFO] ================================================================================
+
+2025-03-24 11:15:21,665 [DEBUG] 🌐 Öffne Produktseite: B0BTQ33ZG8 (https://www.amazon.com/dp/B0BTQ33ZG8?language=en_US)
+2025-03-24 11:15:26,366 [DEBUG] 📜 Scrolle nach unten für dynamische Inhalte...
+2025-03-24 11:15:31,976 [DEBUG] 📦 Extrahiere Produktinformationen...
+2025-03-24 11:15:32,170 [DEBUG] 🧾 Extrahiere technische Details...
+2025-03-24 11:15:32,178 [DEBUG] 🛑 Prüfe Verfügbarkeit (Out of Stock)
+2025-03-24 11:15:32,306 [DEBUG] 🔍 Prüfe, ob Produktseite existiert
+2025-03-24 11:15:32,433 [DEBUG] 📊 Extrahiere BLM (bought last month)...
+2025-03-24 11:15:32,455 [DEBUG] 💰 Extrahiere Preis...
+2025-03-24 11:15:32,474 [DEBUG] 📈 Extrahiere Bestseller-Rangdaten...
+2025-03-24 11:15:32,487 [DEBUG] 🗣️ Extrahiere Review-Anzahl...
+2025-03-24 11:15:32,487 [DEBUG] ⭐️ Extrahiere Bewertung...
+2025-03-24 11:15:32,487 [DEBUG] 🎨 Extrahiere Varianten...
+2025-03-24 11:15:32,549 [DEBUG] 📍 Extrahiere Standort...
+2025-03-24 11:15:32,563 [INFO] ⚡ Änderungen: 🆕 title, 🆕 price, 🆕 main_category, 🆕 second_category, 🆕 blm, 🆕 total, 🆕 store, 🆕 manufacturer
+2025-03-24 11:15:32,577 [INFO] 
+
+================================================================================
+2025-03-24 11:15:32,578 [INFO] 📦 [666/685] Scrape Produkt: B0DFB2Y6X2
+2025-03-24 11:15:32,578 [INFO] ================================================================================
+
+2025-03-24 11:15:32,579 [DEBUG] 🌐 Öffne Produktseite: B0DFB2Y6X2 (https://www.amazon.com/dp/B0DFB2Y6X2?language=en_US)
+2025-03-24 11:15:37,277 [DEBUG] 📜 Scrolle nach unten für dynamische Inhalte...
+2025-03-24 11:15:42,777 [DEBUG] 📦 Extrahiere Produktinformationen...
+2025-03-24 11:15:42,948 [DEBUG] 🧾 Extrahiere technische Details...
+2025-03-24 11:15:42,957 [DEBUG] 🛑 Prüfe Verfügbarkeit (Out of Stock)
+2025-03-24 11:15:43,082 [DEBUG] 🔍 Prüfe, ob Produktseite existiert
+2025-03-24 11:15:43,198 [DEBUG] 📊 Extrahiere BLM (bought last month)...
+2025-03-24 11:15:43,220 [DEBUG] 💰 Extrahiere Preis...
+2025-03-24 11:15:43,239 [DEBUG] 📈 Extrahiere Bestseller-Rangdaten...
+2025-03-24 11:15:43,252 [DEBUG] 🗣️ Extrahiere Review-Anzahl...
+2025-03-24 11:15:43,252 [DEBUG] ⭐️ Extrahiere Bewertung...
+2025-03-24 11:15:43,252 [DEBUG] 🎨 Extrahiere Varianten...
+2025-03-24 11:15:43,628 [DEBUG] 📍 Extrahiere Standort...
+2025-03-24 11:15:43,643 [INFO] ⚡ Änderungen: 🆕 title, 🆕 price, 🆕 main_category, 🆕 second_category, 🆕 blm, 🆕 total, 🆕 store, 🆕 manufacturer
+2025-03-24 11:15:43,658 [INFO] 
+
+================================================================================
+2025-03-24 11:15:43,659 [INFO] 📦 [667/685] Scrape Produkt: B0DK727M19
+2025-03-24 11:15:43,659 [INFO] ================================================================================
+
+2025-03-24 11:15:43,660 [DEBUG] 🌐 Öffne Produktseite: B0DK727M19 (https://www.amazon.com/dp/B0DK727M19?language=en_US)
+2025-03-24 11:15:48,811 [DEBUG] 📜 Scrolle nach unten für dynamische Inhalte...
+2025-03-24 11:15:54,251 [DEBUG] 📦 Extrahiere Produktinformationen...
+2025-03-24 11:15:54,400 [DEBUG] 🧾 Extrahiere technische Details...
+2025-03-24 11:15:54,411 [DEBUG] 🛑 Prüfe Verfügbarkeit (Out of Stock)
+2025-03-24 11:15:54,534 [DEBUG] 🔍 Prüfe, ob Produktseite existiert
+2025-03-24 11:15:54,648 [DEBUG] 📊 Extrahiere BLM (bought last month)...
+2025-03-24 11:15:54,672 [DEBUG] ⚠️ Fehler bei BLM: invalid literal for int() with base 10: ''
+2025-03-24 11:15:54,672 [DEBUG] 💰 Extrahiere Preis...
+2025-03-24 11:15:54,698 [DEBUG] 📈 Extrahiere Bestseller-Rangdaten...
+2025-03-24 11:15:54,719 [DEBUG] 🗣️ Extrahiere Review-Anzahl...
+2025-03-24 11:15:54,719 [DEBUG] ⭐️ Extrahiere Bewertung...
+2025-03-24 11:15:54,719 [DEBUG] 🎨 Extrahiere Varianten...
+2025-03-24 11:15:54,732 [DEBUG] 🟡 Keine Varianten gefunden.
+2025-03-24 11:15:54,765 [DEBUG] 📍 Extrahiere Standort...
+2025-03-24 11:15:54,780 [INFO] ⚡ Änderungen: 🆕 title, 🆕 price, 🆕 main_category, 🆕 second_category, 🆕 store, 🆕 manufacturer
+2025-03-24 11:15:54,796 [INFO] 
+
+================================================================================
+2025-03-24 11:15:54,796 [INFO] 📦 [668/685] Scrape Produkt: B07PSGQH3H
+2025-03-24 11:15:54,797 [INFO] ================================================================================
+
+2025-03-24 11:15:54,798 [DEBUG] 🌐 Öffne Produktseite: B07PSGQH3H (https://www.amazon.com/dp/B07PSGQH3H?language=en_US)
+2025-03-24 11:15:58,631 [DEBUG] 📜 Scrolle nach unten für dynamische Inhalte...
+2025-03-24 11:16:04,438 [DEBUG] 📦 Extrahiere Produktinformationen...
+2025-03-24 11:16:04,570 [DEBUG] 🧾 Extrahiere technische Details...
+2025-03-24 11:16:04,580 [DEBUG] 🛑 Prüfe Verfügbarkeit (Out of Stock)
+2025-03-24 11:16:04,587 [DEBUG] 🚫 Kein 'Add to Cart'-Button gefunden.
+2025-03-24 11:16:04,588 [WARNING] 🚫 B07PSGQH3H ist out of stock: B07PSGQH3H is out of stock.
+2025-03-24 11:16:04,618 [INFO] 
+
+================================================================================
+2025-03-24 11:16:04,619 [INFO] 📦 [669/685] Scrape Produkt: B013OYOWEI
+2025-03-24 11:16:04,619 [INFO] ================================================================================
+
+2025-03-24 11:16:04,620 [DEBUG] 🌐 Öffne Produktseite: B013OYOWEI (https://www.amazon.com/dp/B013OYOWEI?language=en_US)
+2025-03-24 11:16:09,920 [DEBUG] 📜 Scrolle nach unten für dynamische Inhalte...
+2025-03-24 11:16:15,517 [DEBUG] 📦 Extrahiere Produktinformationen...
+2025-03-24 11:16:15,920 [DEBUG] 🧾 Extrahiere technische Details...
+2025-03-24 11:16:15,944 [DEBUG] 🛑 Prüfe Verfügbarkeit (Out of Stock)
+2025-03-24 11:16:16,157 [DEBUG] 🔍 Prüfe, ob Produktseite existiert
+2025-03-24 11:16:16,459 [DEBUG] 📊 Extrahiere BLM (bought last month)...
+2025-03-24 11:16:16,487 [DEBUG] 💰 Extrahiere Preis...
+2025-03-24 11:16:16,535 [DEBUG] 📈 Extrahiere Bestseller-Rangdaten...
+2025-03-24 11:16:16,560 [DEBUG] 🗣️ Extrahiere Review-Anzahl...
+2025-03-24 11:16:16,560 [DEBUG] ⭐️ Extrahiere Bewertung...
+2025-03-24 11:16:16,561 [DEBUG] 🎨 Extrahiere Varianten...
+2025-03-24 11:16:16,576 [DEBUG] 🟡 Keine Varianten gefunden.
+2025-03-24 11:16:16,628 [DEBUG] 📍 Extrahiere Standort...
+2025-03-24 11:16:16,661 [INFO] ⚡ Änderungen: 🆕 title, 🆕 price, 🆕 main_category, 🆕 second_category, 🆕 blm, 🆕 total, 🆕 store, 🆕 manufacturer
+2025-03-24 11:16:16,700 [INFO] 
+
+================================================================================
+2025-03-24 11:16:16,701 [INFO] 📦 [670/685] Scrape Produkt: B0006IJZ9I
+2025-03-24 11:16:16,701 [INFO] ================================================================================
+
+2025-03-24 11:16:16,703 [DEBUG] 🌐 Öffne Produktseite: B0006IJZ9I (https://www.amazon.com/dp/B0006IJZ9I?language=en_US)
+2025-03-24 11:16:22,327 [DEBUG] 📜 Scrolle nach unten für dynamische Inhalte...
+2025-03-24 11:16:27,520 [DEBUG] 📦 Extrahiere Produktinformationen...
+2025-03-24 11:16:28,208 [DEBUG] 🧾 Extrahiere technische Details...
+2025-03-24 11:16:28,225 [DEBUG] 🛑 Prüfe Verfügbarkeit (Out of Stock)
+2025-03-24 11:16:28,417 [DEBUG] 🔍 Prüfe, ob Produktseite existiert
+2025-03-24 11:16:28,590 [DEBUG] 📊 Extrahiere BLM (bought last month)...
+2025-03-24 11:16:28,616 [DEBUG] ⚠️ Fehler bei BLM: invalid literal for int() with base 10: ''
+2025-03-24 11:16:28,617 [DEBUG] 💰 Extrahiere Preis...
+2025-03-24 11:16:28,642 [DEBUG] 📈 Extrahiere Bestseller-Rangdaten...
+2025-03-24 11:16:28,658 [DEBUG] 🗣️ Extrahiere Review-Anzahl...
+2025-03-24 11:16:28,658 [DEBUG] ⭐️ Extrahiere Bewertung...
+2025-03-24 11:16:28,658 [DEBUG] 🎨 Extrahiere Varianten...
+2025-03-24 11:16:28,820 [DEBUG] 📍 Extrahiere Standort...
+2025-03-24 11:16:28,847 [INFO] ⚡ Änderungen: 🆕 title, 🆕 price, 🆕 main_category, 🆕 second_category, 🆕 store, 🆕 manufacturer
+2025-03-24 11:16:28,894 [INFO] 
+
+================================================================================
+2025-03-24 11:16:28,894 [INFO] 📦 [671/685] Scrape Produkt: B0C5MH8YWH
+2025-03-24 11:16:28,895 [INFO] ================================================================================
+
+2025-03-24 11:16:28,896 [DEBUG] 🌐 Öffne Produktseite: B0C5MH8YWH (https://www.amazon.com/dp/B0C5MH8YWH?language=en_US)
+2025-03-24 11:16:33,251 [DEBUG] 📜 Scrolle nach unten für dynamische Inhalte...
+2025-03-24 11:16:39,306 [DEBUG] 📦 Extrahiere Produktinformationen...
+2025-03-24 11:16:39,529 [DEBUG] 🧾 Extrahiere technische Details...
+2025-03-24 11:16:39,539 [DEBUG] 🛑 Prüfe Verfügbarkeit (Out of Stock)
+2025-03-24 11:16:39,720 [DEBUG] 🔍 Prüfe, ob Produktseite existiert
+2025-03-24 11:16:39,910 [DEBUG] 📊 Extrahiere BLM (bought last month)...
+2025-03-24 11:16:39,930 [DEBUG] ⚠️ Fehler bei BLM: invalid literal for int() with base 10: ''
+2025-03-24 11:16:39,931 [DEBUG] 💰 Extrahiere Preis...
+2025-03-24 11:16:39,953 [DEBUG] 📈 Extrahiere Bestseller-Rangdaten...
+2025-03-24 11:16:39,970 [DEBUG] 🗣️ Extrahiere Review-Anzahl...
+2025-03-24 11:16:39,970 [DEBUG] ⭐️ Extrahiere Bewertung...
+2025-03-24 11:16:39,970 [DEBUG] 🎨 Extrahiere Varianten...
+2025-03-24 11:16:40,111 [DEBUG] 📍 Extrahiere Standort...
+2025-03-24 11:16:40,129 [INFO] ⚡ Änderungen: 🆕 title, 🆕 price, 🆕 main_category, 🆕 second_category, 🆕 store, 🆕 manufacturer
+2025-03-24 11:16:40,165 [INFO] 
+
+================================================================================
+2025-03-24 11:16:40,165 [INFO] 📦 [672/685] Scrape Produkt: B0CJTTX212
+2025-03-24 11:16:40,165 [INFO] ================================================================================
+
+2025-03-24 11:16:40,166 [DEBUG] 🌐 Öffne Produktseite: B0CJTTX212 (https://www.amazon.com/dp/B0CJTTX212?language=en_US)
+2025-03-24 11:16:44,760 [DEBUG] 📜 Scrolle nach unten für dynamische Inhalte...
+2025-03-24 11:16:49,918 [DEBUG] 📦 Extrahiere Produktinformationen...
+2025-03-24 11:16:50,132 [DEBUG] 🧾 Extrahiere technische Details...
+2025-03-24 11:16:50,143 [DEBUG] 🛑 Prüfe Verfügbarkeit (Out of Stock)
+2025-03-24 11:16:50,298 [DEBUG] 🔍 Prüfe, ob Produktseite existiert
+2025-03-24 11:16:50,438 [DEBUG] 📊 Extrahiere BLM (bought last month)...
+2025-03-24 11:16:50,458 [DEBUG] 💰 Extrahiere Preis...
+2025-03-24 11:16:50,478 [DEBUG] 📈 Extrahiere Bestseller-Rangdaten...
+2025-03-24 11:16:50,494 [DEBUG] 🗣️ Extrahiere Review-Anzahl...
+2025-03-24 11:16:50,494 [DEBUG] ⭐️ Extrahiere Bewertung...
+2025-03-24 11:16:50,494 [DEBUG] 🎨 Extrahiere Varianten...
+2025-03-24 11:16:50,575 [DEBUG] 📍 Extrahiere Standort...
+2025-03-24 11:16:50,598 [INFO] ⚡ Änderungen: 🆕 title, 🆕 price, 🆕 main_category, 🆕 second_category, 🆕 blm, 🆕 total, 🆕 store, 🆕 manufacturer
+2025-03-24 11:16:50,618 [INFO] 
+
+================================================================================
+2025-03-24 11:16:50,618 [INFO] 📦 [673/685] Scrape Produkt: B0D5QDLX4W
+2025-03-24 11:16:50,618 [INFO] ================================================================================
+
+2025-03-24 11:16:50,619 [DEBUG] 🌐 Öffne Produktseite: B0D5QDLX4W (https://www.amazon.com/dp/B0D5QDLX4W?language=en_US)
+2025-03-24 11:16:55,948 [DEBUG] 📜 Scrolle nach unten für dynamische Inhalte...
+2025-03-24 11:17:01,397 [DEBUG] 📦 Extrahiere Produktinformationen...
+2025-03-24 11:17:01,667 [DEBUG] 🧾 Extrahiere technische Details...
+2025-03-24 11:17:01,684 [DEBUG] 🛑 Prüfe Verfügbarkeit (Out of Stock)
+2025-03-24 11:17:01,814 [DEBUG] 🔍 Prüfe, ob Produktseite existiert
+2025-03-24 11:17:01,940 [DEBUG] 📊 Extrahiere BLM (bought last month)...
+2025-03-24 11:17:01,964 [DEBUG] ⚠️ Fehler bei BLM: invalid literal for int() with base 10: ''
+2025-03-24 11:17:01,964 [DEBUG] 💰 Extrahiere Preis...
+2025-03-24 11:17:01,992 [DEBUG] 📈 Extrahiere Bestseller-Rangdaten...
+2025-03-24 11:17:02,008 [DEBUG] 🗣️ Extrahiere Review-Anzahl...
+2025-03-24 11:17:02,008 [DEBUG] ⭐️ Extrahiere Bewertung...
+2025-03-24 11:17:02,008 [DEBUG] 🎨 Extrahiere Varianten...
+2025-03-24 11:17:02,096 [DEBUG] 📍 Extrahiere Standort...
+2025-03-24 11:17:02,120 [INFO] ⚡ Änderungen: 🆕 title, 🆕 price, 🆕 main_category, 🆕 second_category, 🆕 store, 🆕 manufacturer
+2025-03-24 11:17:02,136 [INFO] 
+
+================================================================================
+2025-03-24 11:17:02,136 [INFO] 📦 [674/685] Scrape Produkt: B0C9TBTTYT
+2025-03-24 11:17:02,136 [INFO] ================================================================================
+
+2025-03-24 11:17:02,138 [DEBUG] 🌐 Öffne Produktseite: B0C9TBTTYT (https://www.amazon.com/dp/B0C9TBTTYT?language=en_US)
+2025-03-24 11:17:05,650 [DEBUG] 📜 Scrolle nach unten für dynamische Inhalte...
+2025-03-24 11:17:11,392 [DEBUG] 📦 Extrahiere Produktinformationen...
+2025-03-24 11:17:11,667 [DEBUG] 🧾 Extrahiere technische Details...
+2025-03-24 11:17:11,677 [DEBUG] 🛑 Prüfe Verfügbarkeit (Out of Stock)
+2025-03-24 11:17:11,808 [DEBUG] 🔍 Prüfe, ob Produktseite existiert
+2025-03-24 11:17:11,937 [DEBUG] 📊 Extrahiere BLM (bought last month)...
+2025-03-24 11:17:11,954 [DEBUG] ⚠️ Fehler bei BLM: invalid literal for int() with base 10: ''
+2025-03-24 11:17:11,954 [DEBUG] 💰 Extrahiere Preis...
+2025-03-24 11:17:12,014 [DEBUG] 📈 Extrahiere Bestseller-Rangdaten...
+2025-03-24 11:17:12,035 [DEBUG] 🗣️ Extrahiere Review-Anzahl...
+2025-03-24 11:17:12,035 [DEBUG] ⭐️ Extrahiere Bewertung...
+2025-03-24 11:17:12,035 [DEBUG] 🎨 Extrahiere Varianten...
+2025-03-24 11:17:12,110 [DEBUG] 📍 Extrahiere Standort...
+2025-03-24 11:17:12,136 [INFO] ⚡ Änderungen: 🆕 title, 🆕 price, 🆕 main_category, 🆕 second_category, 🆕 store, 🆕 manufacturer
+2025-03-24 11:17:12,174 [INFO] 
+
+================================================================================
+2025-03-24 11:17:12,174 [INFO] 📦 [675/685] Scrape Produkt: B0CS6F3W42
+2025-03-24 11:17:12,175 [INFO] ================================================================================
+
+2025-03-24 11:17:12,176 [DEBUG] 🌐 Öffne Produktseite: B0CS6F3W42 (https://www.amazon.com/dp/B0CS6F3W42?language=en_US)
+2025-03-24 11:17:17,336 [DEBUG] 📜 Scrolle nach unten für dynamische Inhalte...
+2025-03-24 11:17:22,351 [DEBUG] 📦 Extrahiere Produktinformationen...
+2025-03-24 11:17:22,797 [DEBUG] 🧾 Extrahiere technische Details...
+2025-03-24 11:17:22,835 [DEBUG] 🛑 Prüfe Verfügbarkeit (Out of Stock)
+2025-03-24 11:17:23,130 [DEBUG] 🔍 Prüfe, ob Produktseite existiert
+2025-03-24 11:17:23,408 [DEBUG] 📊 Extrahiere BLM (bought last month)...
+2025-03-24 11:17:23,458 [DEBUG] 💰 Extrahiere Preis...
+2025-03-24 11:17:23,500 [DEBUG] 📈 Extrahiere Bestseller-Rangdaten...
+2025-03-24 11:17:23,543 [DEBUG] 🗣️ Extrahiere Review-Anzahl...
+2025-03-24 11:17:23,543 [DEBUG] ⭐️ Extrahiere Bewertung...
+2025-03-24 11:17:23,544 [DEBUG] 🎨 Extrahiere Varianten...
+2025-03-24 11:17:23,858 [DEBUG] 📍 Extrahiere Standort...
+2025-03-24 11:17:23,892 [INFO] ⚡ Änderungen: 🆕 title, 🆕 price, 🆕 main_category, 🆕 second_category, 🆕 blm, 🆕 total, 🆕 store, 🆕 manufacturer
+2025-03-24 11:17:23,943 [INFO] 
+
+================================================================================
+2025-03-24 11:17:23,944 [INFO] 📦 [676/685] Scrape Produkt: B098KXTJ9W
+2025-03-24 11:17:23,944 [INFO] ================================================================================
+
+2025-03-24 11:17:23,947 [DEBUG] 🌐 Öffne Produktseite: B098KXTJ9W (https://www.amazon.com/dp/B098KXTJ9W?language=en_US)
+2025-03-24 11:17:27,471 [DEBUG] 📜 Scrolle nach unten für dynamische Inhalte...
+2025-03-24 11:17:32,682 [DEBUG] 📦 Extrahiere Produktinformationen...
+2025-03-24 11:17:32,974 [DEBUG] 🧾 Extrahiere technische Details...
+2025-03-24 11:17:32,983 [DEBUG] 🛑 Prüfe Verfügbarkeit (Out of Stock)
+2025-03-24 11:17:33,097 [DEBUG] 🔍 Prüfe, ob Produktseite existiert
+2025-03-24 11:17:33,212 [DEBUG] 📊 Extrahiere BLM (bought last month)...
+2025-03-24 11:17:33,231 [DEBUG] ⚠️ Fehler bei BLM: invalid literal for int() with base 10: ''
+2025-03-24 11:17:33,231 [DEBUG] 💰 Extrahiere Preis...
+2025-03-24 11:17:33,279 [DEBUG] 📈 Extrahiere Bestseller-Rangdaten...
+2025-03-24 11:17:33,307 [DEBUG] 🗣️ Extrahiere Review-Anzahl...
+2025-03-24 11:17:33,307 [DEBUG] ⭐️ Extrahiere Bewertung...
+2025-03-24 11:17:33,307 [DEBUG] 🎨 Extrahiere Varianten...
+2025-03-24 11:17:33,456 [DEBUG] 📍 Extrahiere Standort...
+2025-03-24 11:17:33,477 [INFO] ⚡ Änderungen: 🆕 title, 🆕 price, 🆕 main_category, 🆕 second_category, 🆕 store, 🆕 manufacturer
+2025-03-24 11:17:33,512 [INFO] 
+
+================================================================================
+2025-03-24 11:17:33,513 [INFO] 📦 [677/685] Scrape Produkt: B0B72JKQ8S
+2025-03-24 11:17:33,513 [INFO] ================================================================================
+
+2025-03-24 11:17:33,514 [DEBUG] 🌐 Öffne Produktseite: B0B72JKQ8S (https://www.amazon.com/dp/B0B72JKQ8S?language=en_US)
+2025-03-24 11:17:38,289 [DEBUG] 📜 Scrolle nach unten für dynamische Inhalte...
+2025-03-24 11:17:43,738 [DEBUG] 📦 Extrahiere Produktinformationen...
+2025-03-24 11:17:43,979 [DEBUG] 🧾 Extrahiere technische Details...
+2025-03-24 11:17:43,993 [DEBUG] 🛑 Prüfe Verfügbarkeit (Out of Stock)
+2025-03-24 11:17:44,119 [DEBUG] 🔍 Prüfe, ob Produktseite existiert
+2025-03-24 11:17:44,243 [DEBUG] 📊 Extrahiere BLM (bought last month)...
+2025-03-24 11:17:44,267 [DEBUG] 💰 Extrahiere Preis...
+2025-03-24 11:17:44,291 [DEBUG] 📈 Extrahiere Bestseller-Rangdaten...
+2025-03-24 11:17:44,308 [DEBUG] 🗣️ Extrahiere Review-Anzahl...
+2025-03-24 11:17:44,308 [DEBUG] ⭐️ Extrahiere Bewertung...
+2025-03-24 11:17:44,308 [DEBUG] 🎨 Extrahiere Varianten...
+2025-03-24 11:17:44,319 [DEBUG] 🟡 Keine Varianten gefunden.
+2025-03-24 11:17:44,354 [DEBUG] 📍 Extrahiere Standort...
+2025-03-24 11:17:44,378 [INFO] ⚡ Änderungen: 🆕 title, 🆕 price, 🆕 main_category, 🆕 second_category, 🆕 blm, 🆕 total, 🆕 store, 🆕 manufacturer
+2025-03-24 11:17:44,398 [INFO] 
+
+================================================================================
+2025-03-24 11:17:44,399 [INFO] 📦 [678/685] Scrape Produkt: B007T8XA1C
+2025-03-24 11:17:44,399 [INFO] ================================================================================
+
+2025-03-24 11:17:44,401 [DEBUG] 🌐 Öffne Produktseite: B007T8XA1C (https://www.amazon.com/dp/B007T8XA1C?language=en_US)
+2025-03-24 11:17:49,062 [DEBUG] 📜 Scrolle nach unten für dynamische Inhalte...
+2025-03-24 11:17:54,573 [DEBUG] 📦 Extrahiere Produktinformationen...
+2025-03-24 11:17:54,814 [DEBUG] 🧾 Extrahiere technische Details...
+2025-03-24 11:17:54,827 [DEBUG] 🛑 Prüfe Verfügbarkeit (Out of Stock)
+2025-03-24 11:17:54,982 [DEBUG] 🔍 Prüfe, ob Produktseite existiert
+2025-03-24 11:17:55,142 [DEBUG] 📊 Extrahiere BLM (bought last month)...
+2025-03-24 11:17:55,163 [DEBUG] 💰 Extrahiere Preis...
+2025-03-24 11:17:55,190 [DEBUG] 📈 Extrahiere Bestseller-Rangdaten...
+2025-03-24 11:17:55,221 [DEBUG] 🗣️ Extrahiere Review-Anzahl...
+2025-03-24 11:17:55,222 [DEBUG] ⭐️ Extrahiere Bewertung...
+2025-03-24 11:17:55,222 [DEBUG] 🎨 Extrahiere Varianten...
+2025-03-24 11:17:55,248 [DEBUG] 🟡 Keine Varianten gefunden.
+2025-03-24 11:17:55,331 [DEBUG] 📍 Extrahiere Standort...
+2025-03-24 11:17:55,376 [INFO] ⚡ Änderungen: 🆕 title, 🆕 price, 🆕 main_category, 🆕 second_category, 🆕 blm, 🆕 total, 🆕 store, 🆕 manufacturer
+2025-03-24 11:17:55,414 [INFO] 
+
+================================================================================
+2025-03-24 11:17:55,414 [INFO] 📦 [679/685] Scrape Produkt: B09VPGQH2P
+2025-03-24 11:17:55,415 [INFO] ================================================================================
+
+2025-03-24 11:17:55,418 [DEBUG] 🌐 Öffne Produktseite: B09VPGQH2P (https://www.amazon.com/dp/B09VPGQH2P?language=en_US)
+2025-03-24 11:18:01,847 [DEBUG] 📜 Scrolle nach unten für dynamische Inhalte...
+2025-03-24 11:18:07,361 [DEBUG] 📦 Extrahiere Produktinformationen...
+2025-03-24 11:18:07,696 [DEBUG] 🧾 Extrahiere technische Details...
+2025-03-24 11:18:07,708 [DEBUG] 🛑 Prüfe Verfügbarkeit (Out of Stock)
+2025-03-24 11:18:07,907 [DEBUG] 🔍 Prüfe, ob Produktseite existiert
+2025-03-24 11:18:08,127 [DEBUG] 📊 Extrahiere BLM (bought last month)...
+2025-03-24 11:18:08,152 [DEBUG] 💰 Extrahiere Preis...
+2025-03-24 11:18:08,172 [DEBUG] 📈 Extrahiere Bestseller-Rangdaten...
+2025-03-24 11:18:08,189 [DEBUG] 🗣️ Extrahiere Review-Anzahl...
+2025-03-24 11:18:08,189 [DEBUG] ⭐️ Extrahiere Bewertung...
+2025-03-24 11:18:08,189 [DEBUG] 🎨 Extrahiere Varianten...
+2025-03-24 11:18:08,288 [DEBUG] 📍 Extrahiere Standort...
+2025-03-24 11:18:08,308 [INFO] ⚡ Änderungen: 🆕 title, 🆕 price, 🆕 main_category, 🆕 second_category, 🆕 blm, 🆕 total, 🆕 store, 🆕 manufacturer
+2025-03-24 11:18:08,327 [INFO] 
+
+================================================================================
+2025-03-24 11:18:08,328 [INFO] 📦 [680/685] Scrape Produkt: B0BTN6J8BK
+2025-03-24 11:18:08,328 [INFO] ================================================================================
+
+2025-03-24 11:18:08,330 [DEBUG] 🌐 Öffne Produktseite: B0BTN6J8BK (https://www.amazon.com/dp/B0BTN6J8BK?language=en_US)
+2025-03-24 11:18:13,323 [DEBUG] 📜 Scrolle nach unten für dynamische Inhalte...
+2025-03-24 11:18:19,523 [DEBUG] 📦 Extrahiere Produktinformationen...
+2025-03-24 11:18:19,824 [DEBUG] 🧾 Extrahiere technische Details...
+2025-03-24 11:18:19,837 [DEBUG] 🛑 Prüfe Verfügbarkeit (Out of Stock)
+2025-03-24 11:18:20,073 [DEBUG] 🔍 Prüfe, ob Produktseite existiert
+2025-03-24 11:18:20,247 [DEBUG] 📊 Extrahiere BLM (bought last month)...
+2025-03-24 11:18:20,269 [DEBUG] 💰 Extrahiere Preis...
+2025-03-24 11:18:20,296 [DEBUG] 📈 Extrahiere Bestseller-Rangdaten...
+2025-03-24 11:18:20,317 [DEBUG] 🗣️ Extrahiere Review-Anzahl...
+2025-03-24 11:18:20,318 [DEBUG] ⭐️ Extrahiere Bewertung...
+2025-03-24 11:18:20,318 [DEBUG] 🎨 Extrahiere Varianten...
+2025-03-24 11:18:20,417 [DEBUG] 📍 Extrahiere Standort...
+2025-03-24 11:18:20,440 [INFO] ⚡ Änderungen: 🆕 title, 🆕 price, 🆕 main_category, 🆕 second_category, 🆕 blm, 🆕 total, 🆕 store, 🆕 manufacturer
+2025-03-24 11:18:20,455 [INFO] 
+
+================================================================================
+2025-03-24 11:18:20,456 [INFO] 📦 [681/685] Scrape Produkt: B07DTJDTGM
+2025-03-24 11:18:20,456 [INFO] ================================================================================
+
+2025-03-24 11:18:20,456 [DEBUG] 🌐 Öffne Produktseite: B07DTJDTGM (https://www.amazon.com/dp/B07DTJDTGM?language=en_US)
+2025-03-24 11:18:25,092 [DEBUG] 📜 Scrolle nach unten für dynamische Inhalte...
+2025-03-24 11:18:31,670 [DEBUG] 📦 Extrahiere Produktinformationen...
+2025-03-24 11:18:31,936 [DEBUG] 🧾 Extrahiere technische Details...
+2025-03-24 11:18:31,954 [DEBUG] 🛑 Prüfe Verfügbarkeit (Out of Stock)
+2025-03-24 11:18:32,100 [DEBUG] 🔍 Prüfe, ob Produktseite existiert
+2025-03-24 11:18:32,227 [DEBUG] 📊 Extrahiere BLM (bought last month)...
+2025-03-24 11:18:32,252 [DEBUG] 💰 Extrahiere Preis...
+2025-03-24 11:18:32,276 [DEBUG] 📈 Extrahiere Bestseller-Rangdaten...
+2025-03-24 11:18:32,297 [DEBUG] 🗣️ Extrahiere Review-Anzahl...
+2025-03-24 11:18:32,298 [DEBUG] ⭐️ Extrahiere Bewertung...
+2025-03-24 11:18:32,298 [DEBUG] 🎨 Extrahiere Varianten...
+2025-03-24 11:18:32,387 [DEBUG] 📍 Extrahiere Standort...
+2025-03-24 11:18:32,406 [INFO] ⚡ Änderungen: 🆕 title, 🆕 price, 🆕 main_category, 🆕 second_category, 🆕 blm, 🆕 total, 🆕 store, 🆕 manufacturer
+2025-03-24 11:18:32,460 [INFO] 
+
+================================================================================
+2025-03-24 11:18:32,461 [INFO] 📦 [682/685] Scrape Produkt: B06XPPLN8T
+2025-03-24 11:18:32,461 [INFO] ================================================================================
+
+2025-03-24 11:18:32,464 [DEBUG] 🌐 Öffne Produktseite: B06XPPLN8T (https://www.amazon.com/dp/B06XPPLN8T?language=en_US)
+2025-03-24 11:18:37,354 [DEBUG] 📜 Scrolle nach unten für dynamische Inhalte...
+2025-03-24 11:18:42,488 [DEBUG] 📦 Extrahiere Produktinformationen...
+2025-03-24 11:18:42,840 [DEBUG] 🧾 Extrahiere technische Details...
+2025-03-24 11:18:42,853 [DEBUG] 🛑 Prüfe Verfügbarkeit (Out of Stock)
+2025-03-24 11:18:43,040 [DEBUG] 🔍 Prüfe, ob Produktseite existiert
+2025-03-24 11:18:43,209 [DEBUG] 📊 Extrahiere BLM (bought last month)...
+2025-03-24 11:18:43,230 [DEBUG] 💰 Extrahiere Preis...
+2025-03-24 11:18:43,252 [DEBUG] 📈 Extrahiere Bestseller-Rangdaten...
+2025-03-24 11:18:43,268 [DEBUG] 🗣️ Extrahiere Review-Anzahl...
+2025-03-24 11:18:43,268 [DEBUG] ⭐️ Extrahiere Bewertung...
+2025-03-24 11:18:43,268 [DEBUG] 🎨 Extrahiere Varianten...
+2025-03-24 11:18:43,399 [DEBUG] 📍 Extrahiere Standort...
+2025-03-24 11:18:43,421 [INFO] ⚡ Änderungen: 🆕 title, 🆕 price, 🆕 main_category, 🆕 second_category, 🆕 blm, 🆕 total, 🆕 store, 🆕 manufacturer
+2025-03-24 11:18:43,439 [INFO] 
+
+================================================================================
+2025-03-24 11:18:43,439 [INFO] 📦 [683/685] Scrape Produkt: B00Z5PTWCM
+2025-03-24 11:18:43,440 [INFO] ================================================================================
+
+2025-03-24 11:18:43,442 [DEBUG] 🌐 Öffne Produktseite: B00Z5PTWCM (https://www.amazon.com/dp/B00Z5PTWCM?language=en_US)
+2025-03-24 11:18:48,972 [DEBUG] 📜 Scrolle nach unten für dynamische Inhalte...
+2025-03-24 11:18:54,505 [DEBUG] 📦 Extrahiere Produktinformationen...
+2025-03-24 11:18:54,723 [DEBUG] 🧾 Extrahiere technische Details...
+2025-03-24 11:18:54,735 [DEBUG] 🛑 Prüfe Verfügbarkeit (Out of Stock)
+2025-03-24 11:18:54,933 [DEBUG] 🔍 Prüfe, ob Produktseite existiert
+2025-03-24 11:18:55,149 [DEBUG] 📊 Extrahiere BLM (bought last month)...
+2025-03-24 11:18:55,177 [DEBUG] 💰 Extrahiere Preis...
+2025-03-24 11:18:55,221 [DEBUG] 📈 Extrahiere Bestseller-Rangdaten...
+2025-03-24 11:18:55,243 [DEBUG] 🗣️ Extrahiere Review-Anzahl...
+2025-03-24 11:18:55,243 [DEBUG] ⭐️ Extrahiere Bewertung...
+2025-03-24 11:18:55,243 [DEBUG] 🎨 Extrahiere Varianten...
+2025-03-24 11:18:55,539 [DEBUG] 📍 Extrahiere Standort...
+2025-03-24 11:18:55,560 [INFO] ⚡ Änderungen: 🆕 title, 🆕 price, 🆕 main_category, 🆕 second_category, 🆕 blm, 🆕 total, 🆕 store, 🆕 manufacturer
+2025-03-24 11:18:55,580 [INFO] 
+
+================================================================================
+2025-03-24 11:18:55,581 [INFO] 📦 [684/685] Scrape Produkt: B0CWPTGDCG
+2025-03-24 11:18:55,581 [INFO] ================================================================================
+
+2025-03-24 11:18:55,582 [DEBUG] 🌐 Öffne Produktseite: B0CWPTGDCG (https://www.amazon.com/dp/B0CWPTGDCG?language=en_US)
+2025-03-24 11:19:00,438 [DEBUG] 📜 Scrolle nach unten für dynamische Inhalte...
+2025-03-24 11:19:05,720 [DEBUG] 📦 Extrahiere Produktinformationen...
+2025-03-24 11:19:05,913 [DEBUG] 🧾 Extrahiere technische Details...
+2025-03-24 11:19:05,927 [DEBUG] 🛑 Prüfe Verfügbarkeit (Out of Stock)
+2025-03-24 11:19:06,377 [DEBUG] 🔍 Prüfe, ob Produktseite existiert
+2025-03-24 11:19:06,581 [DEBUG] 📊 Extrahiere BLM (bought last month)...
+2025-03-24 11:19:06,616 [DEBUG] ⚠️ Fehler bei BLM: invalid literal for int() with base 10: ''
+2025-03-24 11:19:06,617 [DEBUG] 💰 Extrahiere Preis...
+2025-03-24 11:19:06,651 [DEBUG] 📈 Extrahiere Bestseller-Rangdaten...
+2025-03-24 11:19:06,686 [DEBUG] 🗣️ Extrahiere Review-Anzahl...
+2025-03-24 11:19:06,686 [DEBUG] ⭐️ Extrahiere Bewertung...
+2025-03-24 11:19:06,687 [DEBUG] 🎨 Extrahiere Varianten...
+2025-03-24 11:19:06,842 [DEBUG] 📍 Extrahiere Standort...
+2025-03-24 11:19:06,872 [INFO] ⚡ Änderungen: 🆕 title, 🆕 price, 🆕 main_category, 🆕 second_category, 🆕 store, 🆕 manufacturer
+2025-03-24 11:19:06,890 [INFO] 
+
+================================================================================
+2025-03-24 11:19:06,891 [INFO] 📦 [685/685] Scrape Produkt: B071FGT7FL
+2025-03-24 11:19:06,891 [INFO] ================================================================================
+
+2025-03-24 11:19:06,892 [DEBUG] 🌐 Öffne Produktseite: B071FGT7FL (https://www.amazon.com/dp/B071FGT7FL?language=en_US)
+2025-03-24 11:19:11,945 [DEBUG] 📜 Scrolle nach unten für dynamische Inhalte...
+2025-03-24 11:19:17,952 [DEBUG] 📦 Extrahiere Produktinformationen...
+2025-03-24 11:19:18,174 [DEBUG] 🧾 Extrahiere technische Details...
+2025-03-24 11:19:18,188 [DEBUG] 🛑 Prüfe Verfügbarkeit (Out of Stock)
+2025-03-24 11:19:18,360 [DEBUG] 🔍 Prüfe, ob Produktseite existiert
+2025-03-24 11:19:18,519 [DEBUG] 📊 Extrahiere BLM (bought last month)...
+2025-03-24 11:19:18,542 [DEBUG] 💰 Extrahiere Preis...
+2025-03-24 11:19:18,563 [DEBUG] 📈 Extrahiere Bestseller-Rangdaten...
+2025-03-24 11:19:18,580 [DEBUG] 🗣️ Extrahiere Review-Anzahl...
+2025-03-24 11:19:18,580 [DEBUG] ⭐️ Extrahiere Bewertung...
+2025-03-24 11:19:18,580 [DEBUG] 🎨 Extrahiere Varianten...
+2025-03-24 11:19:18,664 [DEBUG] 📍 Extrahiere Standort...
+2025-03-24 11:19:18,691 [INFO] ⚡ Änderungen: 🆕 title, 🆕 price, 🆕 main_category, 🆕 second_category, 🆕 blm, 🆕 total, 🆕 store, 🆕 manufacturer
+2025-03-24 11:19:18,729 [INFO] 📊 Scraping abgeschlossen:
+2025-03-24 11:19:18,729 [INFO] ⏱️ Gesamtzeit: 4m 21s
+2025-03-24 11:19:18,729 [INFO] ⏲️ Durchschnitt pro Produkt: 11.39s
+2025-03-24 11:19:18,730 [INFO] 📦 Erfolgreich: 22
+2025-03-24 11:19:18,730 [INFO] ❌ Fehlgeschlagen: 1
+2025-03-24 11:19:18,730 [INFO] 🔻 Schließe WebDriver...
+2025-03-24 11:19:21,012 [INFO] ✅ WebDriver beendet.

@@ -3,6 +3,8 @@ from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
 from typing import Dict, List, Optional
 
+from fastapi.responses import FileResponse, JSONResponse
+
 from app.auth import get_current_user
 from app.database import get_db
 from app.models import (Market, MarketChange, MarketCluster, Product,
@@ -10,7 +12,7 @@ from app.models import (Market, MarketChange, MarketCluster, Product,
 from fastapi import APIRouter, Depends
 from pydantic import BaseModel
 from scraper.Product_Orchestrator import Product_Orchestrator
-
+from pathlib import Path
 from scraper.first_page_amazon_scraper import AmazonFirstPageScraper
 from sqlalchemy.orm import Session
 import logging
@@ -33,6 +35,9 @@ class NewClusterData(BaseModel):
 
 LOG_FILE_PRODUCT = "scraping_log.txt"
 LOG_FILE_MARKET = "market_scraping_log.txt"
+
+LOGS_DIR = Path(__file__).resolve().parents[2] / "scraper" / "logs"
+
 
 logging.basicConfig(
     level=logging.INFO,
@@ -282,3 +287,28 @@ def mark_cluster_as_scraped(cluster_id: int, db: Session):
         print(f"✅ MarketCluster {cluster_id} wurde als vollständig gescraped markiert.")
     except Exception as e:
         print(f"❌ Fehler beim Setzen von is_initial_scraped für Cluster {cluster_id}: {e}")
+
+# TODO: nur ADMIN
+@router.get("/logs")
+def list_scraping_logs():
+    """
+    Gibt alle .txt Log-Dateien zurück (fails + scraping)
+    """
+    if not LOGS_DIR.exists():
+        print("no logs dir")
+        return []
+    
+    files = sorted([f.name for f in LOGS_DIR.glob("*.txt")], reverse=True)
+    print("files", files)
+    return files
+
+@router.get("/logs/{filename}")
+def get_log_content(filename: str):
+    """
+    Gibt den Inhalt einer bestimmten Log-Datei zurück
+    """
+    file_path = LOGS_DIR / filename
+    if not file_path.exists() or not file_path.is_file():
+        return JSONResponse(status_code=404, content={"error": "Datei nicht gefunden."})
+    
+    return FileResponse(file_path, media_type="text/plain")

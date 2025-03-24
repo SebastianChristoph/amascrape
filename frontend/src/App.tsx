@@ -17,6 +17,7 @@ import UserService from "./services/UserService";
 import { lightTheme } from "./theme";
 import Register from "./pages/Register";
 import Admin from "./pages/Admin";
+import LogViewer from "./pages/LogViewer";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(UserService.isAuthenticated());
@@ -44,6 +45,7 @@ function App() {
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/cluster/:clusterId" element={<ClusterDetails />} />
               <Route path="/add-market-cluster" element={<AddMarketCluster />} />
+              <Route path="/admin/logs/:filename" element={<LogViewer />} />
 
               {/* ✅ Admin-Route mit aktuellem User */}
               <Route

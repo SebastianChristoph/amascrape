@@ -21,7 +21,7 @@ import {
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import { FiChevronDown } from "react-icons/fi";
-
+import { Link } from "react-router-dom";
 import UserService from "../services/UserService";
 
 interface User {
@@ -38,9 +38,16 @@ export default function Admin() {
   const [password, setPassword] = useState("");
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const [openDialog, setOpenDialog] = useState(false);
- 
+
+  // ✅ NEU: Für Logs
+  const [logFiles, setLogFiles] = useState<string[]>([]);
+  const [selectedLogContent, setSelectedLogContent] = useState<string | null>(
+    null
+  );
+
   useEffect(() => {
     fetchUsers();
+    fetchLogFiles();
   }, []);
 
   const fetchUsers = async () => {
@@ -64,6 +71,35 @@ export default function Admin() {
       setUsers([]);
     } finally {
       setLoading(false);
+    }
+  };
+
+  // ✅ NEU: Logs holen
+  const fetchLogFiles = async () => {
+    try {
+      const res = await fetch("http://127.0.0.1:9000/scraping/logs", {
+        headers: { Authorization: `Bearer ${UserService.getToken()}` },
+      });
+      const data = await res.json();
+      setLogFiles(Array.isArray(data) ? data : []);
+    } catch (error) {
+      console.error("Fehler beim Laden der Logs:", error);
+    }
+  };
+
+  const fetchLogContent = async (filename: string) => {
+    try {
+      const res = await fetch(
+        `http://127.0.0.1:9000/scraping/logs/${filename}`,
+        {
+          headers: { Authorization: `Bearer ${UserService.getToken()}` },
+        }
+      );
+      const text = await res.text();
+      setSelectedLogContent(`📄 ${filename}\n\n` + text);
+    } catch (error) {
+      console.error("Fehler beim Laden der Logdatei:", error);
+      setSelectedLogContent("Fehler beim Laden.");
     }
   };
 
@@ -111,12 +147,16 @@ export default function Admin() {
       }
 
       alert("100 Credits erfolgreich hinzugefügt!");
-      fetchUsers(); // Aktualisiere die Benutzerliste, um die neue Credit-Anzahl anzuzeigen
+      fetchUsers();
     } catch (error) {
       console.error("Fehler beim Hinzufügen der Credits:", error);
       alert("Fehler beim Hinzufügen der Credits");
     }
   };
+
+  // 📁 Trenne fails- & scraping-Logs
+  const failLogs = logFiles.filter((f) => f.startsWith("fails-"));
+  const scrapeLogs = logFiles.filter((f) => f.startsWith("scraping-"));
 
   return (
     <Container>
@@ -124,7 +164,7 @@ export default function Admin() {
         Admin Panel
       </Typography>
 
-      {/* ✅ Benutzer hinzufügen */}
+      {/* Benutzer hinzufügen */}
       <Accordion>
         <AccordionSummary expandIcon={<FiChevronDown />}>
           <Typography variant="h6">Benutzer hinzufügen</Typography>
@@ -158,7 +198,7 @@ export default function Admin() {
         </AccordionDetails>
       </Accordion>
 
-      {/* ✅ Benutzer löschen */}
+      {/* Benutzer verwalten */}
       <Accordion>
         <AccordionSummary expandIcon={<FiChevronDown />}>
           <Typography variant="h6">Benutzer verwalten</Typography>
@@ -207,7 +247,53 @@ export default function Admin() {
         </AccordionDetails>
       </Accordion>
 
-      {/* ✅ Bestätigungsdialog für Löschung */}
+      {/* Fail Logs */}
+      <Accordion>
+        <AccordionSummary expandIcon={<FiChevronDown />}>
+          <Typography variant="h6">❌ Fehlgeschlagene Produkte</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Container>
+            <ul>
+              {failLogs.map((file) => (
+                <li key={file}>
+                  <Link
+                    to={`/admin/logs/${file}`}
+                    style={{ textDecoration: "none" }}
+                  >
+                    {file}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </Container>
+        </AccordionDetails>
+      </Accordion>
+
+      {/* Scraping Logs */}
+      <Accordion>
+        <AccordionSummary expandIcon={<FiChevronDown />}>
+          <Typography variant="h6">📜 Scraping-Logs</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Container>
+            <ul>
+              {scrapeLogs.map((file) => (
+                <li key={file}>
+                  <Link
+                    to={`/admin/logs/${file}`}
+                    style={{ textDecoration: "none" }}
+                  >
+                    {file}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </Container>
+        </AccordionDetails>
+      </Accordion>
+
+      {/* Bestätigungsdialog */}
       <Dialog open={openDialog} onClose={() => setOpenDialog(false)}>
         <DialogTitle>Benutzer löschen?</DialogTitle>
         <DialogContent>
