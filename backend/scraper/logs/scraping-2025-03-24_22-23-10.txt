@@ -1,0 +1,26 @@
+2025-03-24 22:23:10,497 [INFO] 🚀 Product Orchestrator gestartet.
+2025-03-24 22:23:10,498 [INFO] 📝 Log-Datei: C:\Users\sebas\Desktop\amascrape\backend\scraper\logs\scraping-2025-03-24_22-23-10.txt
+2025-03-24 22:23:10,500 [INFO] 🧨 Fehlgeschlagene Produkte: C:\Users\sebas\Desktop\amascrape\backend\scraper\logs\fails-2025-03-24_22-23-10.txt
+2025-03-24 22:23:10,502 [INFO] ====== WebDriver manager ======
+2025-03-24 22:23:13,068 [INFO] Get LATEST chromedriver version for google-chrome
+2025-03-24 22:23:14,089 [INFO] Get LATEST chromedriver version for google-chrome
+2025-03-24 22:23:15,078 [INFO] Driver [C:\Users\sebas\.wdm\drivers\chromedriver\win64\134.0.6998.165\chromedriver-win32/chromedriver.exe] found in cache
+2025-03-24 22:23:15,080 [DEBUG] Skipping Selenium Manager; path to chrome driver specified in Service class: C:\Users\sebas\.wdm\drivers\chromedriver\win64\134.0.6998.165\chromedriver-win32/chromedriver.exe
+2025-03-24 22:23:15,097 [DEBUG] Started executable: `C:\Users\sebas\.wdm\drivers\chromedriver\win64\134.0.6998.165\chromedriver-win32/chromedriver.exe` in a child process with pid: 16772 using 0 to output -3
+2025-03-24 22:23:16,364 [INFO] 🔧 Verwende ChromeDriver: C:\Users\sebas\.wdm\drivers\chromedriver\win64\134.0.6998.165\chromedriver-win32/chromedriver.exe
+2025-03-24 22:23:36,559 [INFO] ✅ Verbindung zu Amazon erfolgreich!
+2025-03-24 22:23:41,362 [INFO] 🍪 Cookies erfolgreich gesetzt.
+2025-03-24 22:23:41,363 [INFO] 📦 Starte Produktscraping...
+2025-03-24 22:23:41,488 [INFO] 🔻 Schließe WebDriver...
+2025-03-24 22:23:43,918 [INFO] ✅ WebDriver beendet.
+2025-03-24 22:23:43,918 [WARNING] ALL PRODUCTS ARE SCRAPED TODAY
+2025-03-24 22:23:43,919 [INFO] 📊 Scraping abgeschlossen:
+2025-03-24 22:23:43,919 [INFO] ⏱️ Gesamtzeit: 0m 2s
+2025-03-24 22:23:43,920 [INFO] ⏲️ Durchschnitt pro Produkt: 0.00s
+2025-03-24 22:23:43,922 [INFO] 📦 Erfolgreich: 0
+2025-03-24 22:23:43,922 [INFO] ❌ Fehlgeschlagen: 0
+2025-03-24 22:23:43,924 [INFO] 🔻 Schließe WebDriver...
+2025-03-24 22:23:48,059 [WARNING] Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000147A1009BD0>: Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte')': /session/4379ac7ee138e7ebf0f411a34021572d
+2025-03-24 22:23:52,102 [WARNING] Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000147A1009D10>: Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte')': /session/4379ac7ee138e7ebf0f411a34021572d
+2025-03-24 22:23:56,178 [WARNING] Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000147A13C0C30>: Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte')': /session/4379ac7ee138e7ebf0f411a34021572d
+2025-03-24 22:24:04,312 [INFO] ✅ WebDriver beendet.

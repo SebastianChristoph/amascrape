@@ -1,0 +1,20 @@
+2025-03-24 22:20:29,953 [INFO] 🚀 Product Orchestrator gestartet.
+2025-03-24 22:20:29,955 [INFO] 📝 Log-Datei: C:\Users\sebas\Desktop\amascrape\backend\scraper\logs\scraping-2025-03-24_22-20-29.txt
+2025-03-24 22:20:29,955 [INFO] 🧨 Fehlgeschlagene Produkte: C:\Users\sebas\Desktop\amascrape\backend\scraper\logs\fails-2025-03-24_22-20-29.txt
+2025-03-24 22:20:29,956 [INFO] ====== WebDriver manager ======
+2025-03-24 22:20:34,343 [INFO] Get LATEST chromedriver version for google-chrome
+2025-03-24 22:20:35,292 [INFO] Get LATEST chromedriver version for google-chrome
+2025-03-24 22:20:36,097 [INFO] Driver [C:\Users\sebas\.wdm\drivers\chromedriver\win64\134.0.6998.165\chromedriver-win32/chromedriver.exe] found in cache
+2025-03-24 22:20:36,100 [DEBUG] Skipping Selenium Manager; path to chrome driver specified in Service class: C:\Users\sebas\.wdm\drivers\chromedriver\win64\134.0.6998.165\chromedriver-win32/chromedriver.exe
+2025-03-24 22:20:37,578 [DEBUG] Started executable: `C:\Users\sebas\.wdm\drivers\chromedriver\win64\134.0.6998.165\chromedriver-win32/chromedriver.exe` in a child process with pid: 22232 using 0 to output -3
+2025-03-24 22:20:38,866 [INFO] 🔧 Verwende ChromeDriver: C:\Users\sebas\.wdm\drivers\chromedriver\win64\134.0.6998.165\chromedriver-win32/chromedriver.exe
+2025-03-24 22:20:59,847 [INFO] ✅ Verbindung zu Amazon erfolgreich!
+2025-03-24 22:21:05,379 [INFO] 🍪 Cookies erfolgreich gesetzt.
+2025-03-24 22:21:05,380 [INFO] 📦 Starte Produktscraping...
+2025-03-24 22:21:05,499 [INFO] 📊 Scraping abgeschlossen:
+2025-03-24 22:21:05,500 [INFO] ⏱️ Gesamtzeit: 0m 0s
+2025-03-24 22:21:05,501 [INFO] ⏲️ Durchschnitt pro Produkt: 0.00s
+2025-03-24 22:21:05,502 [INFO] 📦 Erfolgreich: 0
+2025-03-24 22:21:05,502 [INFO] ❌ Fehlgeschlagen: 0
+2025-03-24 22:21:05,503 [INFO] 🔻 Schließe WebDriver...
+2025-03-24 22:21:07,981 [INFO] ✅ WebDriver beendet.

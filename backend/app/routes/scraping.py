@@ -4,7 +4,6 @@ from datetime import datetime, timezone
 from typing import Dict, List, Optional
 
 from fastapi.responses import FileResponse, JSONResponse
-
 from app.auth import get_current_user
 from app.database import get_db
 from app.models import (Market, MarketChange, MarketCluster, Product,
@@ -18,6 +17,7 @@ from sqlalchemy.orm import Session
 import logging
 from scraper.Market_Orchestrator import MarketOrchestrator
 from fastapi import BackgroundTasks, Body
+from app.auth import is_admin
 
 router = APIRouter()
 executor = ThreadPoolExecutor()
@@ -291,10 +291,14 @@ def mark_cluster_as_scraped(cluster_id: int, db: Session):
 
 # TODO: nur ADMIN
 @router.get("/logs")
-def list_scraping_logs():
+def list_scraping_logs(current_user: User = Depends(get_current_user)):
     """
     Gibt alle .txt Log-Dateien zurück (fails + scraping)
     """
+    if current_user.username != "admin":
+        raise JSONResponse(status_code=403, content={"error": "Access only for admins"})
+    else:
+        print("is admiN!")
     if not LOGS_DIR.exists():
         print("no logs dir")
         return []
@@ -304,10 +308,12 @@ def list_scraping_logs():
     return files
 
 @router.get("/logs/{filename}")
-def get_log_content(filename: str):
+def get_log_content(filename: str, current_user: User = Depends(get_current_user)):
     """
     Gibt den Inhalt einer bestimmten Log-Datei zurück
     """
+    if current_user.username != "admin":
+        raise JSONResponse(status_code=403, content={"error": "Access only for admins"})
     file_path = LOGS_DIR / filename
     if not file_path.exists() or not file_path.is_file():
         return JSONResponse(status_code=404, content={"error": "Datei nicht gefunden."})
@@ -318,8 +324,10 @@ def get_log_content(filename: str):
 @router.post("/test-asin")
 async def test_single_asin(
     background_tasks: BackgroundTasks,
-    asin: str = Body(..., embed=True)
+    asin: str = Body(..., embed=True), current_user: User = Depends(get_current_user)
 ):
+    if current_user.username != "admin":
+        raise JSONResponse(status_code=403, content={"error": "Access only for admins"})
     timestamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
     asin_test_logs[asin] = f"🧪 Starte Test für ASIN: {asin} @ {timestamp}\n"
     background_tasks.add_task(run_single_asin_scraper, asin)
@@ -328,10 +336,12 @@ async def test_single_asin(
 @router.get("/test-asin/{asin}")
 def get_single_asin_log(asin: str):
     """Gibt das aktuelle Log für einen ASIN-Test zurück"""
+    if current_user.username != "admin":
+        raise JSONResponse(status_code=403, content={"error": "Access only for admins"})
     return {"log": asin_test_logs.get(asin, "Kein Log gefunden.")}
 
 
-def run_single_asin_scraper(asin: str):
+def run_single_asin_scraper(asin: str, current_user: User = Depends(get_current_user)):
     from selenium import webdriver
     from selenium.webdriver.chrome.options import Options
     import scraper.selenium_config as selenium_config

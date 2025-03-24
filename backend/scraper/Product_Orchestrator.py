@@ -8,6 +8,7 @@ from statistics import mean
 import uuid
 import platform
 
+from sqlalchemy import or_, func
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
@@ -22,6 +23,8 @@ from scraper.product_selenium_scraper import AmazonProductScraper, OutOfStockExc
 
 class Product_Orchestrator:
     def __init__(self, just_scrape_3_products=False, cluster_to_scrape=None, show_details=False):
+
+        
         self.just_scrape_3_products = just_scrape_3_products
         self.scraping_times = []
         self.start_time = None
@@ -158,7 +161,13 @@ class Product_Orchestrator:
             logging.info("📦 Starte Produktscraping...")
 
             if self.cluster_to_scrape is None:
-                products = db.query(Product).all()
+                products = db.query(Product).filter(
+                or_(
+                    Product.last_time_scraped == None,
+                    func.date(Product.last_time_scraped) != date.today()
+                )
+            ).all()
+                
             else:
                 markets = db.query(Market).join(
                     MarketCluster.markets
@@ -179,6 +188,11 @@ class Product_Orchestrator:
                 products = products[:3]
 
             total_products = len(products)
+            if total_products == 0:
+                self.close_driver()
+                logging.warning("ALL PRODUCTS ARE SCRAPED TODAY")
+                return 
+            
             for index, product in enumerate(products, start=1):
                 if product.asin in scraped_asins or self.should_skip_product(product):
                     continue
