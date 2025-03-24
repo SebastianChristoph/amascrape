@@ -32,7 +32,13 @@ def test_asin(asin):
     try:
         driver = webdriver.Chrome(options=chrome_options)
         scraper = AmazonProductScraper(driver, show_details=True)
-        
+        for noisy in ["selenium", "urllib3", "httpcore"]:
+            logging.getLogger(noisy).setLevel(logging.WARNING)
+
+        driver.get("https://www.amazon.com")
+        for cookie in selenium_config.cookies:
+            driver.add_cookie(cookie)
+                    
         start_time = time.time()
         product_data = scraper.get_product_infos(asin)
         end_time = time.time()

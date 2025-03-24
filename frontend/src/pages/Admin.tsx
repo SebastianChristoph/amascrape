@@ -3,6 +3,7 @@ import {
   AccordionDetails,
   AccordionSummary,
   Button,
+  CircularProgress,
   Container,
   Dialog,
   DialogActions,
@@ -38,12 +39,49 @@ export default function Admin() {
   const [password, setPassword] = useState("");
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const [openDialog, setOpenDialog] = useState(false);
+  const [asinToTest, setAsinToTest] = useState("");
+const [asinLog, setAsinLog] = useState<string | null>(null);
+const [isTestingAsin, setIsTestingAsin] = useState(false);
 
   // ✅ NEU: Für Logs
   const [logFiles, setLogFiles] = useState<string[]>([]);
   const [selectedLogContent, setSelectedLogContent] = useState<string | null>(
     null
   );
+
+  const handleAsinTest = async () => {
+    setAsinLog(null);
+    setIsTestingAsin(true);
+    const res = await fetch("http://127.0.0.1:9000/scraping/test-asin", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${UserService.getToken()}`,
+      },
+      body: JSON.stringify({ asin: asinToTest }),
+    });
+  
+    if (!res.ok) {
+      alert("Fehler beim Starten des Scrapers");
+      setIsTestingAsin(false);
+      return;
+    }
+  
+    // Polling starten
+    let tries = 0;
+    const interval = setInterval(async () => {
+      const logRes = await fetch(`http://127.0.0.1:9000/scraping/test-asin/${asinToTest}`, {
+        headers: { Authorization: `Bearer ${UserService.getToken()}` },
+      });
+      const data = await logRes.json();
+      setAsinLog(data.log);
+      tries++;
+      if (data.log.includes("WebDriver geschlossen") || tries > 30) {
+        clearInterval(interval);
+        setIsTestingAsin(false);
+      }
+    }, 2000);
+  };
 
   useEffect(() => {
     fetchUsers();
@@ -292,6 +330,47 @@ export default function Admin() {
           </Container>
         </AccordionDetails>
       </Accordion>
+      <Accordion>
+  <AccordionSummary expandIcon={<FiChevronDown />}>
+    <Typography variant="h6">🧪 Einzel-ASIN testen</Typography>
+  </AccordionSummary>
+  <AccordionDetails>
+    <TextField
+      label="ASIN"
+      fullWidth
+      value={asinToTest}
+      onChange={(e) => setAsinToTest(e.target.value)}
+      sx={{ mb: 2 }}
+    />
+    <Button variant="contained" onClick={handleAsinTest} disabled={isTestingAsin}>
+      {isTestingAsin ? "Scraping läuft..." : "Check"}
+    </Button>
+
+    {isTestingAsin && (
+  <div style={{ display: "flex", alignItems: "center", gap: "1rem", marginTop: "1rem" }}>
+    <CircularProgress size={24} />
+    <Typography variant="body2">Scraping läuft… bitte warten</Typography>
+  </div>
+)}
+
+{asinLog && !isTestingAsin && (
+  <Paper
+    sx={{
+      mt: 2,
+      p: 2,
+      maxHeight: 400,
+      overflow: "auto",
+      whiteSpace: "pre-wrap",
+      backgroundColor: "#f1f1f1",
+    }}
+  >
+    <Typography variant="body2">{asinLog}</Typography>
+  </Paper>
+)}
+
+  </AccordionDetails>
+</Accordion>
+
 
       {/* Bestätigungsdialog */}
       <Dialog open={openDialog} onClose={() => setOpenDialog(false)}>

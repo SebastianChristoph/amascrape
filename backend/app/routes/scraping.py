@@ -17,7 +17,7 @@ from scraper.first_page_amazon_scraper import AmazonFirstPageScraper
 from sqlalchemy.orm import Session
 import logging
 from scraper.Market_Orchestrator import MarketOrchestrator
-
+from fastapi import BackgroundTasks, Body
 
 router = APIRouter()
 executor = ThreadPoolExecutor()
@@ -37,6 +37,7 @@ LOG_FILE_PRODUCT = "scraping_log.txt"
 LOG_FILE_MARKET = "market_scraping_log.txt"
 
 LOGS_DIR = Path(__file__).resolve().parents[2] / "scraper" / "logs"
+asin_test_logs = {}
 
 
 logging.basicConfig(
@@ -312,3 +313,61 @@ def get_log_content(filename: str):
         return JSONResponse(status_code=404, content={"error": "Datei nicht gefunden."})
     
     return FileResponse(file_path, media_type="text/plain")
+
+
+@router.post("/test-asin")
+async def test_single_asin(
+    background_tasks: BackgroundTasks,
+    asin: str = Body(..., embed=True)
+):
+    timestamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    asin_test_logs[asin] = f"🧪 Starte Test für ASIN: {asin} @ {timestamp}\n"
+    background_tasks.add_task(run_single_asin_scraper, asin)
+    return {"message": f"Scraping für ASIN {asin} gestartet"}
+
+@router.get("/test-asin/{asin}")
+def get_single_asin_log(asin: str):
+    """Gibt das aktuelle Log für einen ASIN-Test zurück"""
+    return {"log": asin_test_logs.get(asin, "Kein Log gefunden.")}
+
+
+def run_single_asin_scraper(asin: str):
+    from selenium import webdriver
+    from selenium.webdriver.chrome.options import Options
+    import scraper.selenium_config as selenium_config
+    from scraper.product_selenium_scraper import AmazonProductScraper
+    import traceback
+
+    try:
+        chrome_options = Options()
+        chrome_options.add_argument("--headless=new")
+        chrome_options.add_argument("--disable-gpu")
+        chrome_options.add_argument("--window-size=1920,1080")
+        chrome_options.add_argument(f"user-agent={selenium_config.user_agent}")
+
+        driver = webdriver.Chrome(options=chrome_options)
+        scraper = AmazonProductScraper(driver, show_details=False)
+
+        driver.get("https://www.amazon.com")
+        for cookie in selenium_config.cookies:
+            driver.add_cookie(cookie)
+
+        product_data = scraper.get_product_infos(asin)
+        if product_data:
+            log = "\n✅ Produkt erfolgreich gescraped!\n"
+            for k, v in product_data.items():
+                log += f"{k}: {str(v)[:80]}\n"
+        else:
+            log = "❌ Kein Produkt gefunden oder Scrape fehlgeschlagen."
+
+        asin_test_logs[asin] += log
+
+    except Exception as e:
+        asin_test_logs[asin] += f"\n❌ Fehler:\n{traceback.format_exc()}"
+
+    finally:
+        try:
+            driver.quit()
+        except:
+            pass
+        asin_test_logs[asin] += "\n✅ WebDriver geschlossen.\n"
