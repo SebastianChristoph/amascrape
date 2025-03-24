@@ -3,6 +3,8 @@ from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
 from typing import Dict, List, Optional
 
+from fastapi.responses import FileResponse, JSONResponse
+
 from app.auth import get_current_user
 from app.database import get_db
 from app.models import (Market, MarketChange, MarketCluster, Product,
@@ -10,12 +12,12 @@ from app.models import (Market, MarketChange, MarketCluster, Product,
 from fastapi import APIRouter, Depends
 from pydantic import BaseModel
 from scraper.Product_Orchestrator import Product_Orchestrator
-
+from pathlib import Path
 from scraper.first_page_amazon_scraper import AmazonFirstPageScraper
 from sqlalchemy.orm import Session
 import logging
 from scraper.Market_Orchestrator import MarketOrchestrator
-
+from fastapi import BackgroundTasks, Body
 
 router = APIRouter()
 executor = ThreadPoolExecutor()
@@ -33,6 +35,10 @@ class NewClusterData(BaseModel):
 
 LOG_FILE_PRODUCT = "scraping_log.txt"
 LOG_FILE_MARKET = "market_scraping_log.txt"
+
+LOGS_DIR = Path(__file__).resolve().parents[2] / "scraper" / "logs"
+asin_test_logs = {}
+
 
 logging.basicConfig(
     level=logging.INFO,
@@ -282,3 +288,86 @@ def mark_cluster_as_scraped(cluster_id: int, db: Session):
         print(f"✅ MarketCluster {cluster_id} wurde als vollständig gescraped markiert.")
     except Exception as e:
         print(f"❌ Fehler beim Setzen von is_initial_scraped für Cluster {cluster_id}: {e}")
+
+# TODO: nur ADMIN
+@router.get("/logs")
+def list_scraping_logs():
+    """
+    Gibt alle .txt Log-Dateien zurück (fails + scraping)
+    """
+    if not LOGS_DIR.exists():
+        print("no logs dir")
+        return []
+    
+    files = sorted([f.name for f in LOGS_DIR.glob("*.txt")], reverse=True)
+    print("files", files)
+    return files
+
+@router.get("/logs/{filename}")
+def get_log_content(filename: str):
+    """
+    Gibt den Inhalt einer bestimmten Log-Datei zurück
+    """
+    file_path = LOGS_DIR / filename
+    if not file_path.exists() or not file_path.is_file():
+        return JSONResponse(status_code=404, content={"error": "Datei nicht gefunden."})
+    
+    return FileResponse(file_path, media_type="text/plain")
+
+
+@router.post("/test-asin")
+async def test_single_asin(
+    background_tasks: BackgroundTasks,
+    asin: str = Body(..., embed=True)
+):
+    timestamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    asin_test_logs[asin] = f"🧪 Starte Test für ASIN: {asin} @ {timestamp}\n"
+    background_tasks.add_task(run_single_asin_scraper, asin)
+    return {"message": f"Scraping für ASIN {asin} gestartet"}
+
+@router.get("/test-asin/{asin}")
+def get_single_asin_log(asin: str):
+    """Gibt das aktuelle Log für einen ASIN-Test zurück"""
+    return {"log": asin_test_logs.get(asin, "Kein Log gefunden.")}
+
+
+def run_single_asin_scraper(asin: str):
+    from selenium import webdriver
+    from selenium.webdriver.chrome.options import Options
+    import scraper.selenium_config as selenium_config
+    from scraper.product_selenium_scraper import AmazonProductScraper
+    import traceback
+
+    try:
+        chrome_options = Options()
+        chrome_options.add_argument("--headless=new")
+        chrome_options.add_argument("--disable-gpu")
+        chrome_options.add_argument("--window-size=1920,1080")
+        chrome_options.add_argument(f"user-agent={selenium_config.user_agent}")
+
+        driver = webdriver.Chrome(options=chrome_options)
+        scraper = AmazonProductScraper(driver, show_details=False)
+
+        driver.get("https://www.amazon.com")
+        for cookie in selenium_config.cookies:
+            driver.add_cookie(cookie)
+
+        product_data = scraper.get_product_infos(asin)
+        if product_data:
+            log = "\n✅ Produkt erfolgreich gescraped!\n"
+            for k, v in product_data.items():
+                log += f"{k}: {str(v)[:80]}\n"
+        else:
+            log = "❌ Kein Produkt gefunden oder Scrape fehlgeschlagen."
+
+        asin_test_logs[asin] += log
+
+    except Exception as e:
+        asin_test_logs[asin] += f"\n❌ Fehler:\n{traceback.format_exc()}"
+
+    finally:
+        try:
+            driver.quit()
+        except:
+            pass
+        asin_test_logs[asin] += "\n✅ WebDriver geschlossen.\n"

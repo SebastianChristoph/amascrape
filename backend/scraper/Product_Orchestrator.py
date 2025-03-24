@@ -1,54 +1,67 @@
 import logging
+from pathlib import Path
 import shutil
 import sys
 import time
 from datetime import date, datetime, timezone
 from statistics import mean
+import uuid
+import platform
+
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+from sqlalchemy.orm import Session
 
 import scraper.selenium_config as selenium_config
 from app.database import SessionLocal
 from app.models import Market, MarketCluster, Product, ProductChange, market_products
-from scraper.product_selenium_scraper import AmazonProductScraper
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-import uuid
-import platform
-from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
-from scraper.product_selenium_scraper import OutOfStockException
-
-LOG_FILE_PRODUCT = "scraping_log.txt"
-
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s [%(levelname)s] %(message)s",
-    handlers=[
-        # 🔹 Datei wird überschrieben
-        logging.FileHandler(LOG_FILE_PRODUCT, mode="a", encoding="utf-8"),
-        logging.StreamHandler(sys.stdout)  # 🔹 In Konsole ausgeben
-    ]
-)
+from scraper.product_selenium_scraper import AmazonProductScraper, OutOfStockException
 
 
 class Product_Orchestrator:
-    def __init__(self, just_scrape_3_products=False, cluster_to_scrape = None):
-        """Initialisiert den Orchestrator und setzt den WebDriver einmalig auf."""
+    def __init__(self, just_scrape_3_products=False, cluster_to_scrape=None, show_details=False):
         self.just_scrape_3_products = just_scrape_3_products
         self.scraping_times = []
         self.start_time = None
         self.failed_products = []
         self.cluster_to_scrape = cluster_to_scrape
-        
+        self.show_details = show_details
 
+        # ⏰ Timestamp für Datei-Namen
+        self.timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+        self.log_file = f"scraping-{self.timestamp}.txt"
+        self.fail_file = f"fails-{self.timestamp}.txt"
 
-        # 🌍 Globale Log-Datei einrichten
+        LOGS_DIR = Path(__file__).resolve().parent / "logs"
+        LOGS_DIR.mkdir(exist_ok=True)
 
-        # 🔹 Datei leeren, wenn der Orchestrator startet
-        print("PO: cleared file", LOG_FILE_PRODUCT)
+        self.log_file = LOGS_DIR / f"scraping-{self.timestamp}.txt"
+        self.fail_file = LOGS_DIR / f"fails-{self.timestamp}.txt"
+
+        # 🧾 Logging konfigurieren
+        logging.basicConfig(
+            level=logging.DEBUG if self.show_details else logging.INFO,
+            format="%(asctime)s [%(levelname)s] %(message)s",
+            handlers=[
+                logging.FileHandler(self.log_file, mode="a", encoding="utf-8"),
+                logging.StreamHandler(sys.stdout)
+            ]
+        )
 
         logging.info("🚀 Product Orchestrator gestartet.")
+        logging.info(f"📝 Log-Datei: {self.log_file}")
+        logging.info(f"🧨 Fehlgeschlagene Produkte: {self.fail_file}")
 
-        # 🌍 Chrome WebDriver mit Optionen starten
+         # Entferne DEBUG-Logs von Selenium & Co.
+        logging.getLogger("selenium.webdriver.remote.remote_connection").setLevel(logging.WARNING)
+        logging.getLogger("urllib3").setLevel(logging.WARNING)
+        logging.getLogger("seleniumwire").setLevel(logging.WARNING)
+        logging.getLogger("httpcore").setLevel(logging.WARNING)
+        logging.getLogger("httpx").setLevel(logging.WARNING)
+
+        # 🌍 WebDriver konfigurieren
         chrome_options = Options()
         chrome_options.add_argument("--headless=new")
         chrome_options.add_argument("--disable-gpu")
@@ -65,36 +78,23 @@ class Product_Orchestrator:
         chrome_options.add_argument("--disable-web-security")
         chrome_options.add_argument("--log-level=3")
         chrome_options.add_argument(f"user-agent={selenium_config.user_agent}")
-        
+
         unique_id = uuid.uuid4().hex
         chrome_options.add_argument(f'--user-data-dir=/tmp/chrome-user-data-{cluster_to_scrape}-{unique_id}')
-        
-        
+
         if platform.system() == "Windows":
             service = Service(ChromeDriverManager().install())
         else:
             chromedriver_path = shutil.which("chromedriver")
-            if chromedriver_path:
-                service = Service(executable_path=chromedriver_path)
-            else:
-                raise FileNotFoundError("❌ Kein chromedriver gefunden – und kein ChromeType verwendet.")
+            if not chromedriver_path:
+                raise FileNotFoundError("❌ Kein chromedriver gefunden.")
+            service = Service(executable_path=chromedriver_path)
 
-        
-
-        #service = Service(executable_path="/usr/bin/chromedriver")  # oder wo dein chromedriver liegt
         self.driver = webdriver.Chrome(service=service, options=chrome_options)
-        logging.info(f"🔧 Verwende ChromeDriver von: {service.path}")
+        logging.info(f"🔧 Verwende ChromeDriver: {service.path}")
+        self.scraper = AmazonProductScraper(self.driver, show_details=show_details)
 
-        print("🔍 WebDriver gestartet mit:", self.driver.capabilities.get("browserName"))
-
-
-        #self.driver = webdriver.Chrome(options=chrome_options)
-        self.scraper = AmazonProductScraper(self.driver, show_details=False)
-
-        # 🏁 Verbindung testen
         self.check_connection()
-
-        # 🍪 Cookies setzen
         self.set_cookies()
 
     def format_time(self, seconds):
@@ -102,30 +102,22 @@ class Product_Orchestrator:
         return f"{int(minutes)}m {int(seconds)}s"
 
     def check_connection(self):
-        """Überprüft, ob der WebDriver eine Verbindung herstellen kann."""
         try:
             self.driver.get("https://www.amazon.com")
-            logging.info("✅ Verbindung zu Amazon erfolgreich hergestellt!")
-            return True
+            logging.info("✅ Verbindung zu Amazon erfolgreich!")
         except Exception as e:
-            logging.error(f"❌ Fehler beim Verbinden mit Amazon: {e}")
-            return False
+            logging.error(f"❌ Fehler beim Verbinden: {e}")
 
     def set_cookies(self):
-        """Setzt die gespeicherten Cookies."""
         try:
             self.driver.get("https://www.amazon.com")
-            logging.info("🍪 Setze Cookies...")
             for cookie in selenium_config.cookies:
                 self.driver.add_cookie(cookie)
-            logging.info("✅ Cookies gesetzt!")
-            return True
+            logging.info("🍪 Cookies erfolgreich gesetzt.")
         except Exception as e:
             logging.error(f"❌ Fehler beim Setzen der Cookies: {e}")
-            return False
 
-    def get_latest_product_change(self, db, asin):
-        """Holt den letzten ProductChange für ein Produkt anhand der ASIN."""
+    def get_latest_product_change(self, db: Session, asin):
         return (
             db.query(ProductChange)
             .filter(ProductChange.asin == asin)
@@ -134,232 +126,162 @@ class Product_Orchestrator:
         )
 
     def detect_product_changes(self, old_data, new_data):
-        """Vergleicht alte und neue Produktdaten und gibt Änderungen zurück."""
         changes = []
         changed_fields = {}
-
-        product_fields = [
+        fields = [
             "title", "price", "main_category", "second_category",
             "main_category_rank", "second_category_rank", "img_path",
             "blm", "total", "store", "manufacturer"
         ]
-
-        title_changed = False  # Flag für Titel-Änderung
-
-        for field in product_fields:
-            old_value = getattr(old_data, field, None) if old_data else None
-            new_value = new_data.get(field, None)
-
-            if new_value is None and old_value is not None:
-                continue
-
-            if new_value != old_value:
-                if field == "title":
-                    title_changed = True  # Setze das Flag für Title-Änderung
-                else:
-                    changes.append(
-                        # f"{field} geändert: {old_value} → {new_value}")
-                        f"{field}")
-
-                changed_fields[field] = new_value
-
-        # Falls Title geändert wurde, füge "title changed" hinzu
-        if title_changed:
-            # Titel-Änderung soll am Anfang stehen
-            changes.insert(0, "title changed")
-
+        for field in fields:
+            old = getattr(old_data, field, None) if old_data else None
+            new = new_data.get(field, None)
+            if new != old and new is not None:
+                icon = "🔁" if old else "🆕"
+                changes.append(f"{icon} {field}")
+                changed_fields[field] = new
         return changes, changed_fields
 
     def should_skip_product(self, product):
-        """Prüft, ob das Produkt heute bereits gescraped wurde."""
-        if product.last_time_scraped:
-            last_scraped_date = product.last_time_scraped.date()
-            if last_scraped_date == date.today():
-                logging.info(f"⏩ {product.asin} heute bereits gescraped, überspringe...")
-                return True
+        if product.last_time_scraped and product.last_time_scraped.date() == date.today():
+            logging.info(f"⏭️ {product.asin} wurde heute bereits gescraped – überspringe.")
+            return True
         return False
-    
+
     def update_products(self):
-        """Scraped alle Produkte nacheinander und schließt den WebDriver danach."""
         db = SessionLocal()
         scraped_asins = set()
         self.start_time = time.time()
         self.failed_products = []
 
         try:
-            logging.info("🚀 Starte Product-Update...")
+            logging.info("📦 Starte Produktscraping...")
 
             if self.cluster_to_scrape is None:
-                
                 products = db.query(Product).all()
-                logging.info(f"📦 Scrape alle {len(products)} Produkte in DB")
             else:
-                # Produkte nur aus dem angegebenen Cluster scrapen
-                logging.info(f"🔍 Scrape Produkte für Cluster ID: {self.cluster_to_scrape}")
-
-                # Hole alle Märkte, die zu diesem Cluster gehören
                 markets = db.query(Market).join(
                     MarketCluster.markets
-                ).filter(
-                    MarketCluster.id == self.cluster_to_scrape
-                ).all()
+                ).filter(MarketCluster.id == self.cluster_to_scrape).all()
 
                 if not markets:
-                    logging.warning(f"⚠️ Keine Märkte gefunden für Cluster {self.cluster_to_scrape}")
+                    logging.warning(f"⚠️ Keine Märkte im Cluster {self.cluster_to_scrape}")
                     return
 
                 market_ids = [market.id for market in markets]
-                logging.info(f"🌍 Gefundene Märkte: {market_ids}")
-
-                # Hole alle Produkte, die mit diesen Märkten verknüpft sind (via market_products)
                 products = db.query(Product).join(
                     market_products, market_products.c.asin == Product.asin
                 ).filter(
                     market_products.c.market_id.in_(market_ids)
                 ).distinct().all()
 
-                logging.info(f"📦 Gefundene Produkte in Cluster {self.cluster_to_scrape}: {len(products)}")   
-                    
-
-            if not products:
-                logging.warning("⚠️ Keine Produkte gefunden.")
-                return
-
             if self.just_scrape_3_products:
                 products = products[:3]
 
             total_products = len(products)
             for index, product in enumerate(products, start=1):
-                if product.asin in scraped_asins:
-                    logging.info(
-                        f"⏩ ASIN {product.asin} wurde bereits gescraped, überspringe...")
+                if product.asin in scraped_asins or self.should_skip_product(product):
                     continue
 
-                # Prüfen, ob heute bereits gescraped wurde
-                if self.should_skip_product(product):
-                    continue
-
-                logging.info(
-                    f"🔍 [{index}/{total_products}]: {product.asin} https://www.amazon.com/dp/{product.asin}?language=en_US")
+                logging.info("\n\n" + "="*80)
+                logging.info(f"📦 [{index}/{total_products}] Scrape Produkt: {product.asin}")
+                logging.info("="*80 + "\n")
 
                 try:
-                    product_start_time = time.time()
-                    last_product_change = self.get_latest_product_change(
-                        db, product.asin)
-                    new_data = self.scraper.get_product_infos(product.asin)
-                    product_end_time = time.time()
-                    self.scraping_times.append(
-                        product_end_time - product_start_time)
+                    start = time.time()
+                    last = self.get_latest_product_change(db, product.asin)
+                    data = self.scraper.get_product_infos(product.asin)
+                    self.scraping_times.append(time.time() - start)
 
-                    if not new_data:
-                        logging.warning(
-                            f"❌ Fehler beim Scrapen von {product.asin}, aber last_time_scraped wird trotzdem aktualisiert.")
+                    if not data:
+                        reason = "Complete scrape failed"
+                        logging.warning(f"❌ {reason} für {product.asin}")
                         self.failed_products.append({
                             'asin': product.asin,
-                            'missing': ['Complete scrape failed'],
-                            'timestamp': datetime.now(timezone.utc)
+                            'url': f"https://www.amazon.com/dp/{product.asin}?language=en_US",
+                            'missing': [reason],
+                            'context': "Scraper returned None"
                         })
                     else:
-                        changes, changed_fields = self.detect_product_changes(
-                            last_product_change, new_data)
-
+                        changes, _ = self.detect_product_changes(last, data)
                         if changes:
-                            logging.info(
-                                f"⚡ Änderungen erkannt für {product.asin}: {', '.join(changes)}")
-                            new_product_change = ProductChange(
+                            logging.info(f"⚡ Änderungen: {', '.join(changes)}")
+
+                            pc = ProductChange(
                                 asin=product.asin,
-                                title=new_data.get("title"),
-                                price=new_data.get("price"),
-                                main_category=new_data.get("main_category"),
-                                second_category=new_data.get(
-                                    "second_category"),
-                                main_category_rank=new_data.get(
-                                    "rank_main_category"),
-                                second_category_rank=new_data.get(
-                                    "rank_second_category"),
-                                img_path=new_data.get("image_url"),
-                                blm=new_data.get("blm"),
-                                total=new_data.get("total"),
-                                store=new_data.get("store"),
-                                manufacturer=new_data.get("manufacturer"),
+                                title=data.get("title"),
+                                price=data.get("price"),
+                                main_category=data.get("main_category"),
+                                second_category=data.get("second_category"),
+                                main_category_rank=data.get("rank_main_category"),
+                                second_category_rank=data.get("rank_second_category"),
+                                img_path=data.get("image_url"),
+                                blm=data.get("blm"),
+                                total=data.get("total"),
+                                store=data.get("store"),
+                                manufacturer=data.get("manufacturer"),
                                 change_date=datetime.now(timezone.utc),
                                 changes=" | ".join(changes)
                             )
-
-                            db.add(new_product_change)
-                            product.product_changes.append(new_product_change)
+                            db.add(pc)
+                            product.product_changes.append(pc)
 
                     product.last_time_scraped = datetime.now(timezone.utc)
                     db.commit()
-
-                    # logging.info(
-                    #     f"✅ last_time_scraped für {product.asin} erfolgreich aktualisiert.")
-
                     scraped_asins.add(product.asin)
 
                 except OutOfStockException as e:
-                    logging.warning(f"🚫 Produkt {product.asin} ist out of stock: {e}")
+                    logging.warning(f"🚫 {product.asin} ist out of stock: {e}")
                     product.last_time_scraped = datetime.now(timezone.utc)
                     db.commit()
                     self.failed_products.append({
                         'asin': product.asin,
-                        'missing': ['Out of stock'],
-                        'timestamp': datetime.now(timezone.utc)
+                        'url': f"https://www.amazon.com/dp/{product.asin}",
+                        'missing': ["Out of stock"],
+                        'context': str(e)
                     })
 
                 except Exception as e:
-                    logging.error(
-                        f"❌ Fehler beim Scrapen von {product.asin}: {e}")
+                    logging.error(f"❌ Fehler bei {product.asin}: {e}")
                     product.last_time_scraped = datetime.now(timezone.utc)
                     db.commit()
-                    logging.info(
-                        f"⚠️ Fehler, aber last_time_scraped für {product.asin} wurde trotzdem aktualisiert.")
                     self.failed_products.append({
-                        'asin': f"https://www.amazon.com/dp/{product.asin}?language=en_US",
-                        'missing': [str(e)],
-                        'timestamp': datetime.now(timezone.utc)
+                        'asin': product.asin,
+                        'url': f"https://www.amazon.com/dp/{product.asin}",
+                        'missing': ["Exception"],
+                        'context': str(e)
                     })
 
-            # Write failed products to file
+            # Fehler-Log schreiben
             if self.failed_products:
-                with open('fails.txt', 'a') as f:
-                    f.write(
-                        f"\n--- Scraping session {datetime.now(timezone.utc)} ---\n")
+                with open(self.fail_file, 'a', encoding='utf-8') as f:
+                    f.write(f"❌ Scraping Fehler – {datetime.now()}\n")
+                    f.write("=" * 60 + "\n")
                     for fail in self.failed_products:
-                        f.write(
-                            f"ASIN: {fail['asin']}, Missing: {', '.join(fail['missing'])}, Time: {fail['timestamp']}\n")
+                        f.write(f"🧾 ASIN: {fail['asin']}\n")
+                        f.write(f"🔗 URL: {fail['url']}\n")
+                        f.write(f"🚫 Grund: {', '.join(fail['missing'])}\n")
+                        f.write(f"⚠️ Kontext: {fail.get('context', 'Unbekannter Fehler')}\n")
+                        f.write("-" * 60 + "\n\n")
 
-            # Print timing statistics
+        finally:
             total_time = time.time() - self.start_time
             avg_time = mean(self.scraping_times) if self.scraping_times else 0
-
-
-        except Exception as e:
-            logging.critical(
-                f"❌ Schwerwiegender Fehler im Product-Update: {e}")
-        finally:
-           # Gesamtzeit berechnen
-            end_time = time.time()
-            total_time = end_time - self.start_time
-            avg_time = mean(self.scraping_times) if self.scraping_times else 0
-
-            logging.info("📊 Scraping Performance Metrics:")
-            logging.info(f"🕒 Gesamtzeit: {self.format_time(total_time)}")
-            logging.info(
-                f"⚡ Durchschnittliche Zeit pro Produkt: {avg_time:.2f} Sekunden")
-            logging.info(f"📦 Anzahl gescrapte Produkte: {len(scraped_asins)}")
-            logging.info(f"Failed products: {len(self.failed_products)}")
+            logging.info("📊 Scraping abgeschlossen:")
+            logging.info(f"⏱️ Gesamtzeit: {self.format_time(total_time)}")
+            logging.info(f"⏲️ Durchschnitt pro Produkt: {avg_time:.2f}s")
+            logging.info(f"📦 Erfolgreich: {len(scraped_asins)}")
+            logging.info(f"❌ Fehlgeschlagen: {len(self.failed_products)}")
 
             db.close()
             self.close_driver()
 
     def close_driver(self):
-        """Schließt den WebDriver nach dem Scraping."""
         logging.info("🔻 Schließe WebDriver...")
         self.driver.quit()
-        logging.info("✅ WebDriver geschlossen.")
+        logging.info("✅ WebDriver beendet.")
 
 
 if __name__ == "__main__":
-    orchestrator = Product_Orchestrator(just_scrape_3_products=False)
+    orchestrator = Product_Orchestrator(just_scrape_3_products=False, show_details=True)
     orchestrator.update_products()
