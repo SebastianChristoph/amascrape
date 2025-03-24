@@ -423,8 +423,8 @@ class AmazonProductScraper:
             technical_details_elements = self.driver.find_elements(By.XPATH, "//*[contains(text(), 'Technical Details')]")
             
             if not technical_details_elements:
-                if self.show_details:
-                    print("\t❌ No 'Technical Details' text found on page")
+                # if self.show_details:
+                #     print("\t❌ No 'Technical Details' text found on page")
                 return technical_info
             
             if self.show_details:
