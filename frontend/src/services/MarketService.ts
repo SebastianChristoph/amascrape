@@ -252,6 +252,35 @@ class MarketService {
       return [];
     }
   }
+
+  static async addAsinToMarket(
+    asin: string,
+    marketId: number
+  ): Promise<{ success: boolean; message?: string }> {
+    try {
+      const token = localStorage.getItem(this.TOKEN_KEY);
+      const response = await fetch(`${API_URL}/market-clusters/add-asin`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ asin, market_id: marketId }),
+      });
+  
+      if (!response.ok) {
+        const errText = await response.text();
+        throw new Error(`Failed to add ASIN: ${errText}`);
+      }
+  
+      const data = await response.json();
+      return { success: true, message: data.message };
+    } catch (error) {
+      console.error("[MarketService] Add ASIN error:", formatError(error));
+      return { success: false, message: formatError(error) };
+    }
+  }
+  
 }
 
 export default MarketService;

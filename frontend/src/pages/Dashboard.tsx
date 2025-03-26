@@ -6,6 +6,7 @@ import {
   CardContent,
   CircularProgress,
   Container,
+  Divider,
   Paper,
   Typography
 } from "@mui/material";
@@ -25,7 +26,7 @@ import { useEffect, useState } from "react";
 import { Line } from 'react-chartjs-2';
 import { AiOutlineCheckCircle } from "react-icons/ai";
 import { FaBoxes, FaChartLine, FaDollarSign, FaLayerGroup } from 'react-icons/fa';
-import { MdAdd } from "react-icons/md";
+import { MdAdd, MdWarningAmber } from "react-icons/md";
 import { RiRobot2Fill } from 'react-icons/ri';
 import { useNavigate } from "react-router-dom";
 import { commonBackgroundStyle, moveBackgroundKeyframes } from "../components/BackgroundPattern";
@@ -691,6 +692,7 @@ const Dashboard: React.FC = () => {
                           totalRevenue={cluster.total_revenue}
                           is_initial_scraped = {cluster.is_initial_scraped}
                           fetchMarketClusters={fetchData}
+                       
                         />
                       </Grid>
                     ))
@@ -704,6 +706,8 @@ const Dashboard: React.FC = () => {
             )}
           </Paper>
         )}
+
+        
       </Container>
       
       {/* Extended Add Market Cluster Button */}
@@ -730,7 +734,37 @@ const Dashboard: React.FC = () => {
       >
         Add Market Cluster
       </Button>
+
+      <Box sx={{ mt: 4, p: 2, textAlign: "center" }}>
+        <Divider sx={{ mb: 2 }} />
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: 1,
+            mb: 1,
+          }}
+        >
+          <MdWarningAmber size={20} color="#f57c00" />
+          <Typography
+            variant="subtitle2"
+            color="text.secondary"
+            fontWeight={600}
+          >
+            Important Notice
+          </Typography>
+        </Box>
+        <Typography variant="body2" color="text.secondary">
+          <strong>* Disclaimer:</strong> This tool exclusively supports and
+          analyzes products from the U.S. Amazon marketplace (
+          <em>amazon.com</em>). Data, rankings, and insights are limited to the
+          U.S. region and may not reflect availability or performance in other
+          countries.
+        </Typography>
+      </Box>
     </Box>
+    
   );
 };
 

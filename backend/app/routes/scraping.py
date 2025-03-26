@@ -334,7 +334,7 @@ async def test_single_asin(
     return {"message": f"Scraping für ASIN {asin} gestartet"}
 
 @router.get("/test-asin/{asin}")
-def get_single_asin_log(asin: str):
+def get_single_asin_log(asin: str, current_user: User = Depends(get_current_user)):
     """Gibt das aktuelle Log für einen ASIN-Test zurück"""
     if current_user.username != "admin":
         raise JSONResponse(status_code=403, content={"error": "Access only for admins"})

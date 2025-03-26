@@ -54,8 +54,7 @@ class Product_Orchestrator:
         )
 
         logging.info("🚀 Product Orchestrator gestartet.")
-        logging.info(f"📝 Log-Datei: {self.log_file}")
-        logging.info(f"🧨 Fehlgeschlagene Produkte: {self.fail_file}")
+      
 
          # Entferne DEBUG-Logs von Selenium & Co.
         logging.getLogger("selenium.webdriver.remote.remote_connection").setLevel(logging.WARNING)
@@ -219,7 +218,7 @@ class Product_Orchestrator:
                     else:
                         changes, _ = self.detect_product_changes(last, data)
                         if changes:
-                            logging.info(f"⚡ Änderungen: {', '.join(changes)}")
+                            logging.info(f" ⚡ Änderungen: {', '.join(changes)}")
 
                             pc = ProductChange(
                                 asin=product.asin,
@@ -281,11 +280,13 @@ class Product_Orchestrator:
         finally:
             total_time = time.time() - self.start_time
             avg_time = mean(self.scraping_times) if self.scraping_times else 0
-            logging.info("📊 Scraping abgeschlossen:")
+            logging.info("\n📊 Scraping abgeschlossen:")
             logging.info(f"⏱️ Gesamtzeit: {self.format_time(total_time)}")
             logging.info(f"⏲️ Durchschnitt pro Produkt: {avg_time:.2f}s")
             logging.info(f"📦 Erfolgreich: {len(scraped_asins)}")
             logging.info(f"❌ Fehlgeschlagen: {len(self.failed_products)}")
+            logging.info(f"📝 Log-Datei: {self.log_file}")
+            logging.info(f"🧨 Fehlgeschlagene Produkte: {self.fail_file}")
 
             db.close()
             self.close_driver()

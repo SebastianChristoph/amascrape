@@ -250,8 +250,8 @@ async def get_sparkline_data_for_market_cluster(cluster_id: int, db: Session = D
             if current_date in latest_market_values_per_day[market.id]:
                 last_market_values[market.id] = latest_market_values_per_day[market.id][current_date]
                 #print(f"✅ Markt {market.id} - Letzter Wert für {current_date}: {last_market_values[market.id]}")
-            else:
-                print(f"⚠️ Markt {market.id} - Keine Änderung für {current_date}, behalte letzten Wert: {last_market_values[market.id]}")
+            # else:
+            #     print(f"⚠️ Markt {market.id} - Keine Änderung für {current_date}, behalte letzten Wert: {last_market_values[market.id]}")
 
             # Summe für das Cluster
             total_revenue += last_market_values[market.id]

@@ -23,12 +23,17 @@ import { useSnackbar } from "../providers/SnackbarProvider";
 import ChartDataService from "../services/ChartDataService";
 import MarketService from "../services/MarketService";
 import CustomSparkLine from "./charts/CustomSparkLine";
+import { iconMap, fallbackIcon } from "../utils/iconUtils";
+
 
 interface ClusterCardProps {
   cluster: {
     id: number;
     title: string;
+    cluster_type: string;
     markets: string[];
+   
+
   };
   onClick: () => void;
   deletingCluster: number | null;
@@ -47,7 +52,8 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
   setDeletingCluster,
   totalRevenue,
   fetchMarketClusters,
-  is_initial_scraped
+  is_initial_scraped,
+
 }) => {
   const { showSnackbar } = useSnackbar();
   const [openEditDialog, setOpenEditDialog] = useState(false);
@@ -55,6 +61,12 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
   const [openConfirmDialog, setOpenConfirmDialog] = useState(false);
   const [sparklineData, setSparklineData] = useState<number[]>([]);
   const [loadingSparkline, setLoadingSparkline] = useState<boolean>(true);
+
+
+  const cleanKey = (cluster.cluster_type ?? "").trim();
+
+
+  const IconComponent = iconMap[cleanKey] || fallbackIcon;
 
   useEffect(() => {
     async function fetchSparklineData() {
@@ -108,7 +120,7 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
       >
         <CardContent sx={{ p: 3 , minHeight: 350}}>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 3 }}>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+            <Box sx={{ display: 'flex', alignItems: 'center',  gap: 2 }}>
               <Box
                 sx={{
                   width: 45,
@@ -120,12 +132,16 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
                   justifyContent: 'center',
                 }}
               >
-                <FaLayerGroup size={22} color="#1976d2" />
+               
+                <IconComponent size={22} color="#1976d2" />
+          
               </Box>
               <Typography variant="h6" color="text.primary" sx={{ fontWeight: 600 }}>
                 {cluster.title}
               </Typography>
+             
             </Box>
+            
             <Box sx={{ display: 'flex', gap: 1 }}>
               <IconButton 
                 onClick={(e) => {
@@ -154,6 +170,10 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
             </Box>
           </Box>
 
+          <Typography variant="body2" color="text.secondary">
+                 {cluster.cluster_type} cluster
+              </Typography>
+         
           <Box sx={{ mb: 3 }}>
             <Typography variant="body2" color="text.secondary" gutterBottom>
               Included markets:

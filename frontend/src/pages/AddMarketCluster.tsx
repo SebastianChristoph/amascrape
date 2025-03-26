@@ -19,10 +19,13 @@ import {
 import Grid from "@mui/material/Grid2";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { MdAdd, MdDelete, MdInfo } from "react-icons/md";
+import { MdAdd, MdDelete, MdInfo, MdWarningAmber } from "react-icons/md";
 import { useSnackbar } from "../providers/SnackbarProvider";
 import MarketService from "../services/MarketService";
-import { commonBackgroundStyle, moveBackgroundKeyframes } from "../components/BackgroundPattern";
+import {
+  commonBackgroundStyle,
+  moveBackgroundKeyframes,
+} from "../components/BackgroundPattern";
 
 const AddMarketCluster: React.FC = () => {
   const navigate = useNavigate();
@@ -33,8 +36,9 @@ const AddMarketCluster: React.FC = () => {
   const [newKeyword, setNewKeyword] = useState<string>("");
   const [existingClusters, setExistingClusters] = useState<string[]>([]);
   const [isScraping, setIsScraping] = useState<boolean>(false);
-  const [clusterType, setClusterType] = useState<"dynamic" | "static" | "snapshot">("dynamic"); // 🆕 Cluster-Type
-
+  const [clusterType, setClusterType] = useState<
+    "dynamic" | "static" | "snapshot"
+  >("dynamic"); // 🆕 Cluster-Type
 
   // Überprüfen, ob der eingegebene Wert eine Liste ist
   const isListInput = newKeyword.includes(",");
@@ -71,7 +75,9 @@ const AddMarketCluster: React.FC = () => {
       try {
         const data = await MarketService.GetMarketClusters();
         if (Array.isArray(data)) {
-          setExistingClusters(data.map((cluster: any) => cluster.title.toLowerCase()));
+          setExistingClusters(
+            data.map((cluster: any) => cluster.title.toLowerCase())
+          );
         }
       } catch (error) {
         console.error("Fehler beim Laden der Market-Cluster:", error);
@@ -84,7 +90,9 @@ const AddMarketCluster: React.FC = () => {
 
   // ✅ Keyword(s) hinzufügen
   const handleAddKeyword = () => {
-    let newKeywords = newKeyword.split(",").map((kw) => kw.trim().toLowerCase());
+    let newKeywords = newKeyword
+      .split(",")
+      .map((kw) => kw.trim().toLowerCase());
     newKeywords = newKeywords.filter((kw) => kw !== ""); // Entferne leere Einträge
 
     if (newKeywords.length === 0) return;
@@ -96,7 +104,9 @@ const AddMarketCluster: React.FC = () => {
     }
 
     // Füge neue Keywords hinzu, falls sie noch nicht existieren
-    const uniqueNewKeywords = newKeywords.filter((kw) => !keywords.includes(kw));
+    const uniqueNewKeywords = newKeywords.filter(
+      (kw) => !keywords.includes(kw)
+    );
     setKeywords([...keywords, ...uniqueNewKeywords]);
     setNewKeyword("");
   };
@@ -111,8 +121,10 @@ const AddMarketCluster: React.FC = () => {
     setClusterName(e.target.value);
   };
 
-   // ✅ Cluster-Typ ändern
-   const handleClusterTypeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  // ✅ Cluster-Typ ändern
+  const handleClusterTypeChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     setClusterType(event.target.value as "dynamic" | "static" | "snapshot");
   };
 
@@ -181,13 +193,15 @@ const AddMarketCluster: React.FC = () => {
             Create New Market Cluster
           </Typography>
           <Typography variant="body1" color="text.secondary" sx={{ mb: 4 }}>
-            Define your market cluster by adding keywords. You can add them one by one or use a comma-separated list.
+            Define your market cluster* by adding keywords. You can add them one
+            by one or use a comma-separated list.
           </Typography>
 
           {/* ✅ Falls Scraping läuft, zeige eine Warnung an */}
           {isScraping ? (
             <Alert severity="warning" sx={{ mb: 4 }}>
-              🚧 Ein Scraping-Prozess läuft bereits. Warte, bis dieser abgeschlossen ist, bevor du einen neuen Cluster erstellst.
+              🚧 Ein Scraping-Prozess läuft bereits. Warte, bis dieser
+              abgeschlossen ist, bevor du einen neuen Cluster erstellst.
             </Alert>
           ) : (
             <form onSubmit={handleSubmit}>
@@ -203,9 +217,8 @@ const AddMarketCluster: React.FC = () => {
                     required
                     placeholder="e.g., Electronics Accessories"
                   />
-                  </Grid>
-                  
-                  
+                </Grid>
+
                 {/* 🆕 Cluster Type Selection */}
                 <Grid size={{ xs: 12 }}>
                   <FormControl component="fieldset">
@@ -215,20 +228,42 @@ const AddMarketCluster: React.FC = () => {
                       value={clusterType}
                       onChange={handleClusterTypeChange}
                     >
-                      <FormControlLabel value="dynamic" control={<Radio />} label="Dynamic" />
-                      <FormControlLabel value="static" control={<Radio />} label="Static" />
-                      <FormControlLabel value="snapshot" control={<Radio />} label="Snapshot" />
+                      <FormControlLabel
+                        value="dynamic"
+                        control={<Radio />}
+                        label="Dynamic"
+                      />
+                      <FormControlLabel
+                        value="static"
+                        control={<Radio />}
+                        label="Static"
+                      />
+                      <FormControlLabel
+                        value="snapshot"
+                        control={<Radio />}
+                        label="Snapshot"
+                      />
                     </RadioGroup>
-                    </FormControl>
-                     <Typography variant="body2" color="warning" gutterBottom>
-                                 Choseable but o logic implemented yet
-                                      </Typography>
+                  </FormControl>
+                  <Typography variant="body2" color="warning" gutterBottom>
+                    Choseable but o logic implemented yet
+                  </Typography>
                 </Grid>
 
                 {/* Bulk Input Section */}
                 <Grid size={{ xs: 12 }}>
-                  <Paper elevation={2} sx={{ p: 2, backgroundColor: "background.paper" }}>
-                    <Box sx={{ display: "flex", alignItems: "center", gap: 1, mb: 2 }}>
+                  <Paper
+                    elevation={2}
+                    sx={{ p: 2, backgroundColor: "background.paper" }}
+                  >
+                    <Box
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 1,
+                        mb: 2,
+                      }}
+                    >
                       <Typography variant="subtitle1" sx={{ fontWeight: 500 }}>
                         Bulk Add Keywords
                       </Typography>
@@ -254,8 +289,8 @@ const AddMarketCluster: React.FC = () => {
                         startIcon={<MdAdd />}
                         disabled={!newKeyword.trim()}
                         sx={{
-                          minWidth: '120px',
-                          whiteSpace: 'nowrap'
+                          minWidth: "120px",
+                          whiteSpace: "nowrap",
                         }}
                       >
                         {isListInput ? "Add List" : "Add"}
@@ -267,12 +302,16 @@ const AddMarketCluster: React.FC = () => {
                 {/* Keywords List */}
                 <Grid size={{ xs: 12 }}>
                   <Paper elevation={2} sx={{ p: 2 }}>
-                    <Typography variant="subtitle1" sx={{ mb: 2, fontWeight: 500 }}>
+                    <Typography
+                      variant="subtitle1"
+                      sx={{ mb: 2, fontWeight: 500 }}
+                    >
                       Added Keywords ({keywords.length}/5)
                     </Typography>
                     {keywords.length === 0 ? (
                       <Alert severity="info">
-                        No keywords added yet. Add keywords using the form above or use the bulk input option.
+                        No keywords added yet. Add keywords using the form above
+                        or use the bulk input option.
                       </Alert>
                     ) : (
                       <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
@@ -306,7 +345,9 @@ const AddMarketCluster: React.FC = () => {
 
                 {/* Submit Button */}
                 <Grid size={{ xs: 12 }}>
-                  <Box sx={{ display: "flex", justifyContent: "flex-end", gap: 2 }}>
+                  <Box
+                    sx={{ display: "flex", justifyContent: "flex-end", gap: 2 }}
+                  >
                     <Button
                       variant="outlined"
                       onClick={() => navigate("/dashboard")}
@@ -328,6 +369,37 @@ const AddMarketCluster: React.FC = () => {
           )}
         </Paper>
       </Container>
+
+      {/* Legal Disclaimer */}
+
+      <Box sx={{ mt: 4, p: 2, textAlign: "center" }}>
+        <Divider sx={{ mb: 2 }} />
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: 1,
+            mb: 1,
+          }}
+        >
+          <MdWarningAmber size={20} color="#f57c00" />
+          <Typography
+            variant="subtitle2"
+            color="text.secondary"
+            fontWeight={600}
+          >
+            Important Notice
+          </Typography>
+        </Box>
+        <Typography variant="body2" color="text.secondary">
+          <strong>* Disclaimer:</strong> This tool exclusively supports and
+          analyzes products from the U.S. Amazon marketplace (
+          <em>amazon.com</em>). Data, rankings, and insights are limited to the
+          U.S. region and may not reflect availability or performance in other
+          countries.
+        </Typography>
+      </Box>
     </Box>
   );
 };

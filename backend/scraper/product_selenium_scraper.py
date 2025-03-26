@@ -52,7 +52,7 @@ class AmazonProductScraper:
                 return True
             return False
         except Exception as e:
-            self.log(f"⚠️ Fehler beim Prüfen auf Lagerbestand: {e}")
+            self.log(f"\t⚠️ Fehler beim Prüfen auf Lagerbestand: {e}")
             return False
 
     def does_product_has_page(self) -> bool:
@@ -60,7 +60,7 @@ class AmazonProductScraper:
         try:
             return "couldn't find the page" not in self.driver.page_source.lower()
         except Exception as e:
-            self.log(f"⚠️ Fehler beim Prüfen auf Seitenexistenz: {e}")
+            self.log(f"\t⚠️ Fehler beim Prüfen auf Seitenexistenz: {e}")
             return True
 
     def scroll_down(self, duration=5):
@@ -105,7 +105,7 @@ class AmazonProductScraper:
                 "second_category": second_category
             }
         except Exception as e:
-            self.log(f"❌ Fehler beim Extrahieren von Rangdaten: {e}")
+            self.log(f"\t❌ Fehler beim Extrahieren von Rangdaten: {e}")
             return None
 
     def get_rating(self) -> float | None:
@@ -122,7 +122,7 @@ class AmazonProductScraper:
         except NoSuchElementException:
             pass
         except Exception as e:
-            self.log(f"⚠️ Fehler bei Bewertung: {e}")
+            self.log(f"⚠️ \tFehler bei Bewertung: {e}")
         return None
 
     def get_review_count(self) -> int:
@@ -138,7 +138,7 @@ class AmazonProductScraper:
             if match:
                 return int(match.group(1).replace(",", ""))
         except Exception as e:
-            self.log(f"⚠️ Fehler bei Reviews: {e}")
+            self.log(f"\t⚠️ Fehler bei Reviews: {e}")
         return None
 
     def get_blm(self) -> int:
@@ -157,7 +157,7 @@ class AmazonProductScraper:
                 except NoSuchElementException:
                     continue
         except Exception as e:
-            self.log(f"⚠️ Fehler bei BLM: {e}")
+            self.log(f"\t⚠️ Fehler bei BLM: {e}")
         return None
 
     def get_store(self) -> str:
@@ -183,7 +183,7 @@ class AmazonProductScraper:
         try:
             return self.driver.find_element(By.XPATH, self.web_elements["title"]).text
         except Exception as e:
-            self.log(f"❌ Fehler beim Titel: {e}")
+            self.log(f"\t❌ Fehler beim Titel: {e}")
             return None
 
     def get_image_path(self):
@@ -191,7 +191,7 @@ class AmazonProductScraper:
             img = self.driver.find_element(By.XPATH, '//*[@id="imgTagWrapperId"]//img')
             return img.get_attribute("src")
         except Exception as e:
-            self.log(f"❌ Fehler beim Bildpfad: {e}")
+            self.log(f"\t❌ Fehler beim Bildpfad: {e}")
             return None
 
     def extract_price_from_string(self, price_str: str) -> float | None:
@@ -208,7 +208,7 @@ class AmazonProductScraper:
             if match_whole:
                 return float(match_whole.group(1))
         except Exception as e:
-            self.log(f"⚠️ Fehler beim Preis-Parsen: {e}")
+            self.log(f"\t⚠️ Fehler beim Preis-Parsen: {e}")
         return None
 
     def get_price(self):
@@ -227,7 +227,7 @@ class AmazonProductScraper:
                     return price
             except NoSuchElementException:
                 continue
-        self.log("❌ Kein Preis gefunden.")
+        self.log("\t❌ Kein Preis gefunden.")
         return None
 
     def get_technical_details_box_content(self):
@@ -247,7 +247,7 @@ class AmazonProductScraper:
                 except:
                     continue
         except Exception as e:
-            self.log(f"⚠️ Fehler bei technischen Details: {e}")
+            self.log(f"\t⚠️ Fehler bei technischen Details: {e}")
         return info
 
     def get_product_infos_box_content(self):
@@ -274,7 +274,7 @@ class AmazonProductScraper:
             location = self.driver.find_element(By.XPATH, '//*[@id="nav-global-location-popover-link"]').text
             return location.replace("Update location", "").replace("Delivering to", "").replace("\n", "").strip()
         except:
-            self.log("⚠️ Kein Standort gefunden.")
+            self.log("\t⚠️ Kein Standort gefunden.")
             return None
 
     def get_breadcrumb_categories(self) -> tuple:
@@ -337,10 +337,9 @@ class AmazonProductScraper:
         location = self.get_location()
 
         if not title or price is None:
-            self.log("⚠️ Produkt hat keinen Titel oder Preis – abbrechen.")
+            self.log("\t⚠️ Produkt hat keinen Titel oder Preis – abbrechen.")
             return None
-
-        return {
+        data = {
             "browser_location": location,
             "asin": self.asin,
             "title": title,
@@ -359,3 +358,6 @@ class AmazonProductScraper:
             "store": store,
             "image_url": image_path,
         }
+        # if self.show_details: 
+        #     print(data)
+        return data

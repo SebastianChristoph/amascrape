@@ -2,6 +2,7 @@ import {
   Alert,
   Backdrop,
   Box,
+  Button,
   Chip,
   CircularProgress,
   IconButton,
@@ -37,6 +38,7 @@ import CustomStackBars from "../components/charts/CustomStackChart";
 import ChartDataService from "../services/ChartDataService";
 import MarketService from "../services/MarketService";
 import { FaCheckCircle, FaPlusCircle } from "react-icons/fa";
+import { useSnackbar } from "../providers/SnackbarProvider";
 
 interface ProductType {
   asin: string; // ✅ Ändere 'id' zu 'asin'
@@ -59,12 +61,19 @@ export default function ClusterDetails() {
   const [tabIndex, setTabIndex] = useState(0);
   const [stackedChartData, setStackedChartData] = useState<
     Record<string, { date: string; value: number }[]>
-  >({});
+    >({});
+   const { showSnackbar } = useSnackbar();
 
   const [openBackdrop, setOpenBackdrop] = useState(false);
   const [productChanges, setProductChanges] = useState<any[]>([]);
   const [selectedAsin, setSelectedAsin] = useState<string | null>(null);
   const [userProductInsights, setUserProductInsights] = useState<any>(null);
+
+  const [addAsinDialogOpen, setAddAsinDialogOpen] = useState(false);
+  const [newAsin, setNewAsin] = useState("");
+  const [addingAsin, setAddingAsin] = useState(false);
+  const [asinError, setAsinError] = useState<string | null>(null);
+
 
   const API_URL = "http://localhost:9000"; // ✅ API Basis-URL
   const TOKEN_KEY = "token"; // ✅ Konstanter Schlüssel für den Token
@@ -76,6 +85,9 @@ export default function ClusterDetails() {
       currency: "USD",
     }).format(value);
   };
+
+  const isValidAsin = (asin: string) => /^B[A-Z0-9]{9}$/.test(asin.trim().toUpperCase());
+
 
   const formatNumber = (value: number | null) => {
     if (value === null || value === undefined) return "-";
@@ -135,7 +147,7 @@ export default function ClusterDetails() {
                 Authorization: `Bearer ${localStorage.getItem(TOKEN_KEY)}`,
               },
             }).then((res) => res.json()),
-            
+
             fetch(`${API_URL}/user-products/`, {
               headers: {
                 Authorization: `Bearer ${localStorage.getItem(TOKEN_KEY)}`,
@@ -523,7 +535,7 @@ export default function ClusterDetails() {
           variant="h4"
           sx={{ marginBottom: 3, color: "text.primary", fontWeight: 600 }}
         >
-          {marketCluster.title}
+          {marketCluster.title} [{marketCluster.cluster_type}]
         </Typography>
 
         <Grid container spacing={4}>
@@ -1354,7 +1366,8 @@ export default function ClusterDetails() {
                                     color="warning"
                                     gutterBottom
                                   >
-                                    Waiting for valid calculation by Alex (so far it's productCount*10 to test)
+                                    Waiting for valid calculation by Alex (so
+                                    far it's productCount*10 to test)
                                   </Typography>
                                 </Box>
                               </Paper>
@@ -1386,6 +1399,9 @@ export default function ClusterDetails() {
                       </Grid>
                     </Grid>
                   </Grid>
+                  <Box
+                    sx={{ display: "flex", justifyContent: "flex-end", mb: 2 }}
+                  ></Box>
 
                   {/* Top Suggestions - Full Width */}
                   <Box sx={{ mt: 4 }}>
@@ -1433,9 +1449,31 @@ export default function ClusterDetails() {
                         ))}
                     </Box>
                   </Box>
+
+                
                 </>
               )}
             </Paper>
+
+            <Button 
+                    onClick={() => {
+                      setNewAsin("");
+                      setAddAsinDialogOpen(true);
+                    }}
+                    sx={{
+                      padding: 1,
+                      marginTop: 1,
+                      width: "100%"
+                      }}
+                      
+                       color="secondary"
+            variant="contained"
+                  >
+                    Add Individual ASIN to Market
+                  </Button>
+            <Typography>TODO: Recalculate Total Revenue?</Typography>
+            
+
             <Box sx={{ height: "800px", width: "100%" }}>
               <DataGrid
                 rows={market.products.map((product: any) => ({
@@ -1471,7 +1509,11 @@ export default function ClusterDetails() {
         ))}
       </Paper>
 
-      <Backdrop open={openBackdrop} onClick={handleCloseBackdrop}>
+      <Backdrop
+        open={openBackdrop}
+        onClick={handleCloseBackdrop}
+        sx={{ zIndex: 9999, color: "#fff" }}
+      >
         <TableContainer
           component={Paper}
           sx={{ maxWidth: "80vw", maxHeight: "80vh", overflowY: "auto" }}
@@ -1522,6 +1564,161 @@ export default function ClusterDetails() {
           </Table>
         </TableContainer>
       </Backdrop>
+
+      {addAsinDialogOpen && (
+        <Backdrop open={true} sx={{ zIndex: 9999, color: "#fff" }}>
+          <Paper
+            elevation={4}
+            sx={{
+              p: 4,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: 3,
+              width: 400,
+              textAlign: "center",
+            }}
+          >
+            <Typography variant="h6" sx={{ fontWeight: 600 }}>
+              Add Product to Market
+            </Typography>
+
+            <Typography variant="body2" color="text.secondary">
+              You can manually add a product by entering its valid ASIN. Our system
+              will scrape the product data and include it in the selected
+              market.
+            </Typography>
+
+            <input
+  type="text"
+  value={newAsin}
+  onChange={(e) => {
+    const value = e.target.value;
+    setNewAsin(value);
+    if (!isValidAsin(value)) {
+      setAsinError("ASIN must start with 'B' and be exactly 10 characters.");
+    } else {
+      setAsinError(null);
+    }
+  }}
+  placeholder="Enter ASIN (e.g. B07N4M94ZP)"
+  style={{
+    padding: "10px",
+    width: "100%",
+    borderRadius: "6px",
+    border: asinError ? "2px solid red" : "1px solid #ccc",
+    fontSize: "16px",
+  }}
+  disabled={addingAsin}
+/>
+
+{asinError && (
+  <Typography
+    variant="caption"
+    color="error"
+    sx={{ mt: -1, mb: 1, textAlign: "left", width: "100%" }}
+  >
+    {asinError}
+  </Typography>
+)}
+
+
+            <Typography variant="caption" color="text.secondary" sx={{ mt: 1 }}>
+              ⏱️ This usually takes under 1 minute to complete.
+            </Typography>
+
+            {addingAsin ? (
+              <Backdrop open={addingAsin} sx={{ zIndex: 1301, color: "#fff" }}>
+                <CircularProgress color="inherit" />
+              </Backdrop>
+            ) : (
+              <Box sx={{ display: "flex", gap: 2 }}>
+                  <button
+                    disabled={!isValidAsin(newAsin) || addingAsin}
+                    
+                  onClick={async () => {
+                    if (!newAsin) return;
+                    setAddingAsin(true);
+                    const activeMarketId = marketCluster.markets[tabIndex].id;
+
+                    const result = await MarketService.addAsinToMarket(
+                      newAsin,
+                      activeMarketId
+                    );
+
+                    if (result.success) {
+                      let retries = 0;
+                      const maxRetries = 15;
+                      const pollForNewProduct = async () => {
+                        retries += 1;
+                        const updatedData =
+                          await MarketService.getMarketClusterDetails(
+                            Number(clusterId)
+                          );
+                        const targetMarket = updatedData.markets.find(
+                          (m: any) => m.id === activeMarketId
+                        );
+                        const productFound = targetMarket?.products.find(
+                          (p: any) => p.asin === newAsin.toUpperCase()
+                        );
+
+                        if (productFound) {
+                          setMarketCluster(updatedData);
+                          setAddAsinDialogOpen(false);
+                          setAddingAsin(false);
+                          setNewAsin(""); // ✅ reset field
+                          showSnackbar("✅  Product successfully added to the market");
+                        } else if (retries < maxRetries) {
+                          setTimeout(pollForNewProduct, 4000);
+                        } else {
+                          setAddingAsin(false);
+                          alert(
+                            "⚠️ Product could not be confirmed after several attempts."
+                          );
+                        }
+                      };
+
+                      pollForNewProduct();
+                    } else {
+                      alert(result.message || "Something went wrong.");
+                      setAddingAsin(false);
+                    }
+                  }}
+                  style={{
+                    padding: "8px 20px",
+                    backgroundColor: !isValidAsin(newAsin) ? "#ccc" : "#1976d2",
+                    color: "white",
+                    borderRadius: "6px",
+                    fontWeight: "bold",
+                    border: "none",
+                    cursor: !isValidAsin(newAsin) ? "not-allowed" : "pointer",
+                  }}
+                >
+                  Confirm
+                </button>
+
+                <button
+                  onClick={() => {
+                    setAddAsinDialogOpen(false);
+                    setNewAsin(""); // ✅ reset field
+                  }}
+                  disabled={addingAsin}
+                  style={{
+                    padding: "8px 20px",
+                    backgroundColor: addingAsin ? "#eee" : "#ccc",
+                    borderRadius: "6px",
+                    fontWeight: "bold",
+                    border: "none",
+                    cursor: "pointer",
+                  }}
+                >
+                  Cancel
+                </button>
+              </Box>
+            )}
+          </Paper>
+        </Backdrop>
+      )}
     </>
   );
 }

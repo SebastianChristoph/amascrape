@@ -1,3 +1,4 @@
+from datetime import datetime, timezone
 import logging
 from typing import List, Optional
 
@@ -6,10 +7,17 @@ from app.database import get_db
 from app.models import (Market, MarketChange, MarketCluster, Product,
                         ProductChange, User,market_change_products,
                         market_cluster_markets)
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException
 from pydantic import BaseModel
 from sqlalchemy import delete
 from sqlalchemy.orm import Session, joinedload
+
+# Importiere deinen Scraper
+from scraper.product_selenium_scraper import AmazonProductScraper
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+import scraper.selenium_config as selenium_config
+from app.database import SessionLocal
 
 router = APIRouter()
 
@@ -20,6 +28,7 @@ class MarketClusterResponse(BaseModel):
     markets: List[str]
     total_revenue: Optional[float]
     is_initial_scraped: bool
+    cluster_type: str
 
     class Config:
         from_attributes = True  # ✅ Neuer Name in Pydantic 2
@@ -40,6 +49,123 @@ class DashboardOverviewResponse(BaseModel):
 
     class Config:
         from_attributes = True
+
+class AddAsinRequest(BaseModel):
+    asin: str
+    market_id: int
+
+@router.post("/add-asin")
+async def add_individual_asin_to_market(
+    request: AddAsinRequest,
+    background_tasks: BackgroundTasks,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
+    asin = request.asin.strip().upper()
+    market_id = request.market_id
+
+    market = db.query(Market).filter(Market.id == market_id).first()
+    if not market:
+        raise HTTPException(status_code=404, detail="Market not found")
+
+    def run_scraper_and_insert():
+      # Falls nicht vorhanden, importieren
+        db_in_task = SessionLocal()
+
+        try:
+            # Scraper Teil (wie gehabt)
+            options = Options()
+            options.add_argument("--headless=new")
+            options.add_argument("--disable-gpu")
+            options.add_argument("--window-size=1920,1080")
+            options.add_argument(f"user-agent={selenium_config.user_agent}")
+
+            driver = webdriver.Chrome(options=options)
+            scraper = AmazonProductScraper(driver, show_details=True)
+            driver.get("https://www.amazon.com")
+            for cookie in selenium_config.cookies:
+                driver.add_cookie(cookie)
+
+            product_data = scraper.get_product_infos(asin)
+            driver.quit()
+
+            if not product_data:
+                raise Exception("Scraper returned no data")
+
+            # 💡 Session-internal neu laden
+            market_in_task = db_in_task.query(Market).filter(Market.id == market_id).first()
+            if not market_in_task:
+                raise Exception("Market not found (in task)")
+
+            # Product
+            product = db_in_task.query(Product).filter(Product.asin == asin).first()
+            if not product:
+                product = Product(
+                    asin=asin,
+                    last_time_scraped=datetime.now(timezone.utc)
+                )
+                db_in_task.add(product)
+                db_in_task.commit()
+                db_in_task.refresh(product)
+            else:
+                product.last_time_scraped = datetime.now(timezone.utc)
+                db_in_task.commit()
+
+
+            # Verknüpfen mit Market
+            if product not in market_in_task.products:
+                market_in_task.products.append(product)
+
+            # ProductChange
+            new_product_change = ProductChange(
+                asin=asin,
+                title=product_data.get("title"),
+                price=product_data.get("price"),
+                main_category=product_data.get("main_category"),
+                second_category=product_data.get("second_category"),
+                main_category_rank=product_data.get("rank_main_category"),
+                second_category_rank=product_data.get("rank_second_category"),
+                img_path=product_data.get("image_url"),
+                change_date=datetime.now(timezone.utc),
+                changes="Added via individual ASIN input",
+                blm=product_data.get("blm"),
+                total=product_data.get("total"),
+                store=product_data.get("store"),
+                manufacturer=product_data.get("manufacturer"),
+            )
+
+            db_in_task.add(new_product_change)
+            db_in_task.commit()
+            db_in_task.refresh(new_product_change)
+
+          # Produkt an den letzten MarketChange anhängen
+            latest_market_change = db_in_task.query(MarketChange).filter(
+                MarketChange.market_id == market_in_task.id
+            ).order_by(MarketChange.change_date.desc()).first()
+
+            if latest_market_change:
+                # Verknüpfung prüfen
+                if product not in latest_market_change.products:
+                    latest_market_change.products.append(product)
+                    db_in_task.commit()
+                    logging.info(f"✅ ASIN {asin} mit MarketChange {latest_market_change.id} verknüpft.")
+                else:
+                    logging.info(f"ℹ️ ASIN {asin} war bereits mit MarketChange {latest_market_change.id} verknüpft.")
+
+
+            db_in_task.commit()
+            print(f"✅ ASIN {asin} erfolgreich hinzugefügt zu Market {market_id}")
+
+        except Exception as e:
+            logging.error(f"❌ Fehler beim Hinzufügen von ASIN {asin}: {e}")
+            db_in_task.rollback()
+
+        finally:
+            db_in_task.close()
+
+    background_tasks.add_task(run_scraper_and_insert)
+
+    return {"message": f"ASIN {asin} wird hinzugefügt und gescraped..."}
 
 ## UPDATE CLUSTER
 @router.put("/update/{cluster_id}", response_model=dict)
@@ -114,7 +240,8 @@ async def get_user_market_clusters(
             markets=[market.keyword for market in cluster.markets] if cluster.markets else [
                 "Keine Märkte"],
             total_revenue=cluster.total_revenue,
-            is_initial_scraped=cluster.is_initial_scraped
+            is_initial_scraped=cluster.is_initial_scraped,
+            cluster_type = cluster.cluster_type
         )
         for cluster in market_clusters
     ]
