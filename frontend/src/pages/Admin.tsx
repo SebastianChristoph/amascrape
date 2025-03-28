@@ -40,8 +40,8 @@ export default function Admin() {
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const [openDialog, setOpenDialog] = useState(false);
   const [asinToTest, setAsinToTest] = useState("");
-const [asinLog, setAsinLog] = useState<string | null>(null);
-const [isTestingAsin, setIsTestingAsin] = useState(false);
+  const [asinLog, setAsinLog] = useState<string | null>(null);
+  const [isTestingAsin, setIsTestingAsin] = useState(false);
 
   // ✅ NEU: Für Logs
   const [logFiles, setLogFiles] = useState<string[]>([]);
@@ -60,19 +60,22 @@ const [isTestingAsin, setIsTestingAsin] = useState(false);
       },
       body: JSON.stringify({ asin: asinToTest }),
     });
-  
+
     if (!res.ok) {
       alert("Fehler beim Starten des Scrapers");
       setIsTestingAsin(false);
       return;
     }
-  
+
     // Polling starten
     let tries = 0;
     const interval = setInterval(async () => {
-      const logRes = await fetch(`http://127.0.0.1:9000/scraping/test-asin/${asinToTest}`, {
-        headers: { Authorization: `Bearer ${UserService.getToken()}` },
-      });
+      const logRes = await fetch(
+        `http://127.0.0.1:9000/scraping/test-asin/${asinToTest}`,
+        {
+          headers: { Authorization: `Bearer ${UserService.getToken()}` },
+        }
+      );
       const data = await logRes.json();
       setAsinLog(data.log);
       tries++;
@@ -195,6 +198,7 @@ const [isTestingAsin, setIsTestingAsin] = useState(false);
   // 📁 Trenne fails- & scraping-Logs
   const failLogs = logFiles.filter((f) => f.startsWith("fails-"));
   const scrapeLogs = logFiles.filter((f) => f.startsWith("scraping-"));
+  const warningLogs = logFiles.filter((f) => f.startsWith("warnings-"));
 
   return (
     <Container>
@@ -331,46 +335,80 @@ const [isTestingAsin, setIsTestingAsin] = useState(false);
         </AccordionDetails>
       </Accordion>
       <Accordion>
-  <AccordionSummary expandIcon={<FiChevronDown />}>
-    <Typography variant="h6">🧪 Einzel-ASIN testen</Typography>
-  </AccordionSummary>
-  <AccordionDetails>
-    <TextField
-      label="ASIN"
-      fullWidth
-      value={asinToTest}
-      onChange={(e) => setAsinToTest(e.target.value)}
-      sx={{ mb: 2 }}
-    />
-    <Button variant="contained" onClick={handleAsinTest} disabled={isTestingAsin}>
-      {isTestingAsin ? "Scraping läuft..." : "Check"}
-    </Button>
+        <AccordionSummary expandIcon={<FiChevronDown />}>
+          <Typography variant="h6">🧪 Einzel-ASIN testen</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <TextField
+            label="ASIN"
+            fullWidth
+            value={asinToTest}
+            onChange={(e) => setAsinToTest(e.target.value)}
+            sx={{ mb: 2 }}
+          />
+          <Button
+            variant="contained"
+            onClick={handleAsinTest}
+            disabled={isTestingAsin}
+          >
+            {isTestingAsin ? "Scraping läuft..." : "Check"}
+          </Button>
 
-    {isTestingAsin && (
-  <div style={{ display: "flex", alignItems: "center", gap: "1rem", marginTop: "1rem" }}>
-    <CircularProgress size={24} />
-    <Typography variant="body2">Scraping läuft… bitte warten</Typography>
-  </div>
-)}
+          {isTestingAsin && (
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "1rem",
+                marginTop: "1rem",
+              }}
+            >
+              <CircularProgress size={24} />
+              <Typography variant="body2">
+                Scraping läuft… bitte warten
+              </Typography>
+            </div>
+          )}
 
-{asinLog && !isTestingAsin && (
-  <Paper
-    sx={{
-      mt: 2,
-      p: 2,
-      maxHeight: 400,
-      overflow: "auto",
-      whiteSpace: "pre-wrap",
-      backgroundColor: "#f1f1f1",
-    }}
-  >
-    <Typography variant="body2">{asinLog}</Typography>
-  </Paper>
-)}
+          {asinLog && !isTestingAsin && (
+            <Paper
+              sx={{
+                mt: 2,
+                p: 2,
+                maxHeight: 400,
+                overflow: "auto",
+                whiteSpace: "pre-wrap",
+                backgroundColor: "#f1f1f1",
+              }}
+            >
+              <Typography variant="body2">{asinLog}</Typography>
+            </Paper>
+          )}
+        </AccordionDetails>
+      </Accordion>
 
-  </AccordionDetails>
-</Accordion>
-
+      {/* Warning Logs */}
+      <Accordion>
+        <AccordionSummary expandIcon={<FiChevronDown />}>
+          <Typography variant="h6">⚠️ Warnungen beim Scraping</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Container>
+            <ul>
+              {warningLogs.map((file) => (
+                <li key={file}>
+                  <Link
+                    to={`/admin/logs/${file}`}
+                    style={{ textDecoration: "none" }}
+                  >
+                    {file}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </Container>
+        </AccordionDetails>
+      </Accordion>
 
       {/* Bestätigungsdialog */}
       <Dialog open={openDialog} onClose={() => setOpenDialog(false)}>

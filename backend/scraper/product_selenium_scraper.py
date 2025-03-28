@@ -32,6 +32,9 @@ class AmazonProductScraper:
         logging.getLogger("httpcore").setLevel(logging.WARNING)
         logging.getLogger("httpx").setLevel(logging.WARNING)
 
+        self.warning_callback = None
+
+
 
 
     def log(self, message):
@@ -81,7 +84,15 @@ class AmazonProductScraper:
     def getting_bs_and_rank_data(self) -> dict:
         self.log("📈 Extrahiere Bestseller-Rangdaten...")
         if not self.product_info_box_content.get("Best Sellers Rank"):
-            self.log("⚠️ Keine Rank-Informationen vorhanden.")
+            self.log("\t⚠️ Keine Rank-Informationen in Product-Info-Box vorhanden.")
+            if self.warning_callback:
+                self.warning_callback(
+                    self.asin,
+                    self.url,
+                    "\t⚠️ Keine Rank-Informationen in Product-Info-Box vorhanden.",
+                    self.get_location(),
+                    warning_type="rank_in_product_box_missing"
+                )
             return None
         try:
             rank_text = self.product_info_box_content["Best Sellers Rank"]
@@ -104,9 +115,19 @@ class AmazonProductScraper:
                 "rank_second_category": second_rank,
                 "second_category": second_category
             }
+        
         except Exception as e:
             self.log(f"\t❌ Fehler beim Extrahieren von Rangdaten: {e}")
+            if self.warning_callback:
+                self.warning_callback(
+                    self.asin,
+                    self.url,
+                    f"\t❌ Fehler beim Extrahieren von Rangdaten: {e}",
+                    self.get_location(),
+                    warning_type="rank"
+                )
             return None
+
 
     def get_rating(self) -> float | None:
         self.log("⭐️ Extrahiere Bewertung...")
@@ -123,7 +144,16 @@ class AmazonProductScraper:
             pass
         except Exception as e:
             self.log(f"⚠️ \tFehler bei Bewertung: {e}")
-        return None
+            if self.warning_callback:
+                self.warning_callback(
+                    self.asin,
+                    self.url,
+                    f"⚠️ \tFehler bei Bewertung: {e}",
+                    self.get_location(),
+                     warning_type="reviews"
+                )
+            return None
+         
 
     def get_review_count(self) -> int:
         self.log("🗣️ Extrahiere Review-Anzahl...")
@@ -139,7 +169,17 @@ class AmazonProductScraper:
                 return int(match.group(1).replace(",", ""))
         except Exception as e:
             self.log(f"\t⚠️ Fehler bei Reviews: {e}")
-        return None
+            if self.warning_callback:
+                self.warning_callback(
+                    self.asin,
+                    self.url,
+                    f"\t⚠️ Fehler bei Reviews: {e}",
+                    self.get_location(),
+                     warning_type="review_count"
+                )
+            return None
+
+
 
     def get_blm(self) -> int:
         self.log("📊 Extrahiere BLM (bought last month)...")
@@ -156,9 +196,20 @@ class AmazonProductScraper:
                     return int(text)
                 except NoSuchElementException:
                     continue
+
         except Exception as e:
             self.log(f"\t⚠️ Fehler bei BLM: {e}")
-        return None
+            if self.warning_callback:
+                self.warning_callback(
+                    self.asin,
+                    self.url,
+                    f"Fehler bei BLM: {e}",
+                    self.get_location(),
+                     warning_type="blm"
+                )
+            return None
+
+
 
     def get_store(self) -> str:
         try:
@@ -182,8 +233,17 @@ class AmazonProductScraper:
     def get_title(self):
         try:
             return self.driver.find_element(By.XPATH, self.web_elements["title"]).text
+       
         except Exception as e:
             self.log(f"\t❌ Fehler beim Titel: {e}")
+            if self.warning_callback:
+                self.warning_callback(
+                    self.asin,
+                    self.url,
+                    f"\t❌ Fehler beim Titel: {e}",
+                    self.get_location(), 
+                    warning_type="title"
+                )
             return None
 
     def get_image_path(self):
@@ -192,8 +252,16 @@ class AmazonProductScraper:
             return img.get_attribute("src")
         except Exception as e:
             self.log(f"\t❌ Fehler beim Bildpfad: {e}")
+            if self.warning_callback:
+                self.warning_callback(
+                    self.asin,
+                    self.url,
+                    f"\t❌ Fehler beim Bildpfad: {e}",
+                    self.get_location(),
+                     warning_type="img"
+                )
             return None
-
+           
     def extract_price_from_string(self, price_str: str) -> float | None:
         try:
             price_str = re.sub(r"\([^)]*\)", "", price_str)
@@ -207,9 +275,20 @@ class AmazonProductScraper:
             match_whole = re.search(r"\$(\d+)", cleaned)
             if match_whole:
                 return float(match_whole.group(1))
+      
         except Exception as e:
             self.log(f"\t⚠️ Fehler beim Preis-Parsen: {e}")
-        return None
+            if self.warning_callback:
+                self.warning_callback(
+                    self.asin,
+                    self.url,
+                    f"\t⚠️ Fehler beim Preis-Parsen: {e}",
+                    self.get_location(),
+                    warning_type="price_parsing"
+                )
+            return None
+
+
 
     def get_price(self):
         self.log("💰 Extrahiere Preis...")
@@ -228,6 +307,14 @@ class AmazonProductScraper:
             except NoSuchElementException:
                 continue
         self.log("\t❌ Kein Preis gefunden.")
+        if self.warning_callback:
+            self.warning_callback(
+                self.asin,
+                self.url,
+                "\t❌ Kein Preis gefunden.",
+                self.get_location(),
+                 warning_type="price"
+            )
         return None
 
     def get_technical_details_box_content(self):
@@ -246,8 +333,11 @@ class AmazonProductScraper:
                             info[key] = value
                 except:
                     continue
+
+
         except Exception as e:
             self.log(f"\t⚠️ Fehler bei technischen Details: {e}")
+            return None
         return info
 
     def get_product_infos_box_content(self):
@@ -338,6 +428,17 @@ class AmazonProductScraper:
 
         if not title or price is None:
             self.log("\t⚠️ Produkt hat keinen Titel oder Preis – abbrechen.")
+            
+            if self.warning_callback:
+                self.warning_callback(
+                    self.asin,
+                    self.url,
+                    "\t⚠️ Produkt hat keinen Titel oder Preis – abbrechen.",
+                    self.get_location(),
+                    warning_type="essential_data"
+                )
+
+
             return None
         data = {
             "browser_location": location,
