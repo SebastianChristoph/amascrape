@@ -14,10 +14,11 @@ import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import { SnackbarProvider } from "./providers/SnackbarProvider";
 import UserService from "./services/UserService";
-import { lightTheme } from "./theme";
+import { lightTheme, darkTheme } from "./theme";
 import Register from "./pages/Register";
 import Admin from "./pages/Admin";
 import LogViewer from "./pages/LogViewer";
+
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(UserService.isAuthenticated());
@@ -29,7 +30,7 @@ function App() {
   }, []);
 
   return (
-    <ThemeProvider theme={lightTheme}>
+    <ThemeProvider theme={darkTheme}>
       <CssBaseline />
       <SnackbarProvider>
         <Router>

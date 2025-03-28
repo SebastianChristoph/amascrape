@@ -4,10 +4,10 @@ import { createTheme } from '@mui/material/styles';
 // Erweiterung der Palette (siehe oben)
 declare module '@mui/material/styles' {
   interface Palette {
-    tertiary: Palette['primary'];
+    accent: Palette['primary'];
     }
   interface PaletteOptions {
-    tertiary?: PaletteOptions['primary'];
+    accent?: PaletteOptions['primary'];
   }
 }
 
@@ -17,7 +17,7 @@ export const lightTheme = createTheme({
     mode: "light",
     primary: { main: "#1470CC" }, // Seriöses Blau
     secondary: { main: "#017D7B" }, // Professionelles Orange für Akzente
-    tertiary: { main: "#455A64" }, // Dezentes Grau-Blau für zusätzliche Elemente
+    accent: { main: "#455A64" }, // Dezentes Grau-Blau für zusätzliche Elemente
     background: { default: "#F5F5F5", paper: "#FFFFFF" }, // Helles Grau & Weiß für Professionalität
     text: { primary: "#212121", secondary: "#757575" }, // Dunkles Grau für Lesbarkeit
   },
@@ -26,7 +26,7 @@ export const lightTheme = createTheme({
     h1: {
       fontSize: "2.5rem",
       fontWeight: 700,
-      color: "#212121",
+      color: "#FFFFFF",
     },
     h2: {
       fontSize: "2rem",
@@ -50,27 +50,39 @@ export const lightTheme = createTheme({
 });
 
 // Dark-Theme
+
 export const darkTheme = createTheme({
   palette: {
-    mode: 'dark',
-    primary: { main: '#66B6F7' },
-    secondary: { main: '#FB958D' },
-    tertiary: { main: '#ff4081' },
-    background: { default: '#2e2e2e', paper: '#1e1e1e' },
+    primary: { main: "#6C72FF" },  // mattes lila
+    secondary: { main: "#57C3FF" },  // leichtes hellblau
+    accent: { main: "#D16109" }, // 
+    background: { default: "#080F25", paper: "#101935" }, // Paper dunkles blau
+    text: { primary: "#AEB9E1", secondary: "#FFFFFF" }, // leichtes lila / weiß
   },
   typography: {
-    fontFamily: '"Poppins", sans-serif',
+    fontFamily: 'sans-serif',
     h1: {
-      fontSize: '2.5rem',
+      fontSize: "1.8rem",
       fontWeight: 700,
+      color: "#FFFFFF",
     },
     h2: {
-      fontSize: '2rem',
+      fontSize: "1.6rem",
       fontWeight: 600,
+      // color: "#212121",
     },
     h3: {
-      fontSize: '1.75rem',
+      fontSize: "1.4rem",
       fontWeight: 500,
+      // color: "#212121",
+    },
+    body1: {
+      fontSize: "1rem",
+      // color: "#424242", // Dunkleres Grau für normalen Text
+    },
+    button: {
+      textTransform: "none", // Verhindert Großbuchstaben in Buttons
+      fontWeight: 600,
     },
   },
 });

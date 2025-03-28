@@ -8,10 +8,10 @@ import {
   Container,
   Divider,
   Paper,
-  Typography
+  Typography,
 } from "@mui/material";
 import Grid from "@mui/material/Grid2";
-import { keyframes } from '@mui/system';
+import { keyframes } from "@mui/system";
 import {
   CategoryScale,
   Chart as ChartJS,
@@ -20,19 +20,31 @@ import {
   LineElement,
   PointElement,
   Title,
-  Tooltip
-} from 'chart.js';
+  Tooltip,
+} from "chart.js";
 import { useEffect, useState } from "react";
-import { Line } from 'react-chartjs-2';
+import { Line } from "react-chartjs-2";
 import { AiOutlineCheckCircle } from "react-icons/ai";
-import { FaBoxes, FaChartLine, FaDollarSign, FaLayerGroup } from 'react-icons/fa';
+import {
+  FaBox,
+  FaBoxes,
+  FaChartLine,
+  FaDollarSign,
+  FaLayerGroup,
+} from "react-icons/fa";
 import { MdAdd, MdWarningAmber } from "react-icons/md";
-import { RiRobot2Fill } from 'react-icons/ri';
+import { RiRobot2Fill } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
-import { commonBackgroundStyle, moveBackgroundKeyframes } from "../components/BackgroundPattern";
-import ClusterCard from "../components/ClusterCard";
+import {
+  commonBackgroundStyle,
+  moveBackgroundKeyframes,
+} from "../components/BackgroundPattern";
+
+import ClusterCard from "../components/dashboard/ClusterCard";
 import { useSnackbar } from "../providers/SnackbarProvider";
 import MarketService from "../services/MarketService";
+import { useTheme } from "@mui/material/styles";
+import StatCardLarge from "../components/dashboard/StatCardLarge";
 
 ChartJS.register(
   CategoryScale,
@@ -43,7 +55,6 @@ ChartJS.register(
   Tooltip,
   Legend
 );
-
 
 const pulseAnimation = keyframes`
   0% {
@@ -70,8 +81,6 @@ const robotAnimation = keyframes`
   }
 `;
 
-
-
 const Dashboard: React.FC = () => {
   const navigate = useNavigate();
   const { showSnackbar } = useSnackbar();
@@ -80,7 +89,10 @@ const Dashboard: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [isFetching, setIsFetching] = useState<boolean>(true);
   const [dashboardData, setDashboardData] = useState<any>(null);
-  const [chartValues, setChartValues] = useState<number[]>([15, 20, 25, 30, 35, 40]);
+  const [chartValues, setChartValues] = useState<number[]>([
+    15, 20, 25, 30, 35, 40,
+  ]);
+  const theme = useTheme();
 
   const [activeCluster, setActiveCluster] = useState<{
     clustername: string;
@@ -93,7 +105,7 @@ const Dashboard: React.FC = () => {
     return chartValues.map((currentValue, index) => {
       // 30% chance of a small decrease, 70% chance of increase
       const isDecrease = Math.random() < 0.3;
-      
+
       if (isDecrease) {
         // Small decrease (max 15% down)
         const decrease = currentValue * (Math.random() * 0.15);
@@ -104,13 +116,15 @@ const Dashboard: React.FC = () => {
         const maxGrowth = 12; // Maximum growth
         const growth = minGrowth + Math.random() * (maxGrowth - minGrowth);
         const newValue = currentValue + growth;
-        
+
         // Reset if too high, but ensure new value is higher than previous point (if exists)
         if (newValue > 90) {
           const baseValue = 15;
-          return index === 0 ? baseValue : Math.max(chartValues[index - 1] + 2, baseValue);
+          return index === 0
+            ? baseValue
+            : Math.max(chartValues[index - 1] + 2, baseValue);
         }
-        
+
         return newValue;
       }
     });
@@ -131,15 +145,15 @@ const Dashboard: React.FC = () => {
     try {
       const [clustersData, overviewData] = await Promise.all([
         MarketService.GetMarketClusters(),
-        MarketService.getDashboardOverview()
+        MarketService.getDashboardOverview(),
       ]);
 
       if (clustersData) {
-        console.log("[DEBUG] ClusterData:", clustersData)
+        console.log("[DEBUG] ClusterData:", clustersData);
         setMarketClusters(clustersData);
       }
       if (overviewData) {
-        console.log("[DEBUG] OverviewData:", overviewData)
+        console.log("[DEBUG] OverviewData:", overviewData);
         setDashboardData(overviewData);
       }
     } catch (error) {
@@ -203,19 +217,19 @@ const Dashboard: React.FC = () => {
 
   if (marketClusters.length === 0 && !isFetching) {
     const chartData = {
-      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+      labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
       datasets: [
         {
-          label: 'Market Growth',
+          label: "Market Growth",
           data: chartValues,
-          borderColor: 'white',
-          backgroundColor: 'rgba(255, 255, 255, 0.1)',
+          borderColor: "white",
+          backgroundColor: "rgba(255, 255, 255, 0.1)",
           tension: 0.3,
           fill: true,
           pointRadius: 4,
-          pointBackgroundColor: 'white',
-        }
-      ]
+          pointBackgroundColor: "white",
+        },
+      ],
     };
 
     const chartOptions = {
@@ -223,28 +237,28 @@ const Dashboard: React.FC = () => {
       maintainAspectRatio: false,
       animation: {
         duration: 1500,
-        easing: 'easeInOutQuart' as const,
+        easing: "easeInOutQuart" as const,
       },
       scales: {
         y: {
           beginAtZero: true,
           max: 100,
           grid: {
-            color: 'rgba(255, 255, 255, 0.1)',
+            color: "rgba(255, 255, 255, 0.1)",
           },
           ticks: {
             display: false,
           },
           border: {
-            display: false
-          }
+            display: false,
+          },
         },
         x: {
           grid: {
-            color: 'rgba(255, 255, 255, 0.1)',
+            color: "rgba(255, 255, 255, 0.1)",
           },
           ticks: {
-            color: 'white',
+            color: "white",
           },
         },
       },
@@ -258,10 +272,10 @@ const Dashboard: React.FC = () => {
     return (
       <Box
         sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          minHeight: 'calc(100vh - 64px)',
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          minHeight: "calc(100vh - 64px)",
           p: 3,
         }}
       >
@@ -270,11 +284,11 @@ const Dashboard: React.FC = () => {
           sx={{
             p: 4,
             maxWidth: 600,
-            width: '100%',
-            background: 'linear-gradient(135deg, #1976d2 0%, #2196f3 100%)',
-            color: 'white',
+            width: "100%",
+            background: "linear-gradient(135deg, #1976d2 0%, #2196f3 100%)",
+            color: "white",
             borderRadius: 2,
-            textAlign: 'center',
+            textAlign: "center",
           }}
         >
           <Box
@@ -288,20 +302,21 @@ const Dashboard: React.FC = () => {
           <Typography variant="h4" gutterBottom>
             Welcome to MarketScope
           </Typography>
-          <Typography variant="body1" sx={{ mb: 4, color: 'white' }}>
-            You haven't created any market clusters yet. Start your journey by creating your first one!
+          <Typography variant="body1" sx={{ mb: 4, color: "white" }}>
+            You haven't created any market clusters yet. Start your journey by
+            creating your first one!
           </Typography>
           <Button
             variant="contained"
             color="secondary"
             size="large"
-            onClick={() => navigate('/add-market-cluster')}
+            onClick={() => navigate("/add-market-cluster")}
             sx={{
-              backgroundColor: 'white',
-              color: 'primary.main',
+              backgroundColor: "white",
+              color: "primary.main",
               animation: `${pulseAnimation} 2s infinite`,
-              '&:hover': {
-                backgroundColor: 'grey.100',
+              "&:hover": {
+                backgroundColor: "grey.100",
               },
             }}
           >
@@ -316,317 +331,173 @@ const Dashboard: React.FC = () => {
     <Box
       sx={{
         minHeight: "100vh",
-        position: "relative",
-        overflow: "hidden",
-        backgroundColor: "#f8f9fa",
-        "&::before": {
-          ...commonBackgroundStyle,
-          opacity: 0.6,
-          filter: "contrast(100%)",
-        },
-        "@keyframes moveBackground": moveBackgroundKeyframes,
+        backgroundColor: "primary",
+        display: "flex",
+        flexDirection: "column",
+        gap: 12,
       }}
     >
-      <Container 
-        maxWidth="lg" 
-        sx={{ 
-          position: "relative",
-          zIndex: 1,
-          py: 4
-        }}
-      >
-        {/* Overview Section */}
-        {marketClusters.length > 0 && (
-        <Paper elevation={3} sx={{ marginBottom: 2, padding: 4 }}>
-          <Typography
-            variant="h5"
-            sx={{
-              mb: 4,
-              backgroundColor: "primary.main",
-              color: "white",
-              padding: 2,
-            }}
-          >
-            Market Clusters Overview
-          </Typography>
+      {/* Overview Section */}
+      {marketClusters.length > 0 && (
+        <Box>
+          <Typography variant="h1">Market Clusters Overview</Typography>
           <Typography variant="subtitle1" sx={{ mb: 3 }}>
             Here is a quick snapshot of your Total markets Revenue development
           </Typography>
-          
+
           <Grid container spacing={3}>
-            {/* Total 30D Revenue Card */}
             <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-              <Paper
-                elevation={1}
-                sx={{
-                  p: 3,
-                  height: '100%',
-                  backgroundColor: 'white',
-                  borderRadius: 2,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: 2,
-                  transition: 'transform 0.2s',
-                  '&:hover': {
-                    transform: 'translateY(-4px)',
-                  },
-                }}
-              >
-                <Box
-                  sx={{
-                    width: 45,
-                    height: 45,
-                    borderRadius: '12px',
-                    backgroundColor: '#e3f2fd',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                  }}
-                >
-                  <FaDollarSign size={22} color="#1976d2" />
-                </Box>
-                <Box>
-                  <Typography variant="body2" color="text.secondary" gutterBottom>
-                    Total 30D Revenue
-                  </Typography>
-                  <Typography variant="h6" color="text.primary" sx={{ fontWeight: 600 }}>
-                    ${dashboardData?.total_revenue || '0.00'}
-                    </Typography>
-                    <Typography variant="body2" color="warning" gutterBottom>
-                    Waiting for valid calculation by Alex
-                  </Typography>
-                </Box>
-              </Paper>
+              <StatCardLarge
+                iconKey="static"
+                title="30D Revenue Change"
+                value={dashboardData?.total_revenue || "0.00"}
+                cardId="DDD1"
+                isCurrency
+              />
             </Grid>
 
-            {/* 30D Revenue Change Card */}
             <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-              <Paper
-                elevation={1}
-                sx={{
-                  p: 3,
-                  height: '100%',
-                  backgroundColor: 'white',
-                  borderRadius: 2,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: 2,
-                  transition: 'transform 0.2s',
-                  '&:hover': {
-                    transform: 'translateY(-4px)',
-                  },
-                }}
-              >
-                <Box
-                  sx={{
-                    width: 45,
-                    height: 45,
-                    borderRadius: '12px',
-                    backgroundColor: '#e3f2fd',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                  }}
-                >
-                  <FaChartLine size={22} color="#1976d2" />
-                </Box>
-                <Box>
-                  <Typography variant="body2" color="text.secondary" gutterBottom>
-                    30D Revenue Change
-                  </Typography>
-                  <Typography variant="h6" color="text.primary" sx={{ fontWeight: 600 }}>
-                   Sparkline
-                    </Typography>
-                    <Typography variant="body2" color="warning" gutterBottom>
-                    Waiting for valid calculation by Alex
-                  </Typography>
-                </Box>
-              </Paper>
+              <StatCardLarge
+                iconKey="static"
+                title="30D Revenue Change"
+                value={dashboardData?.total_clusters || "0"}
+                cardId="DDD2"
+              />
             </Grid>
 
-            {/* Number of Market Clusters Card */}
             <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-              <Paper
-                elevation={1}
-                sx={{
-                  p: 3,
-                  height: '100%',
-                  backgroundColor: 'white',
-                  borderRadius: 2,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: 2,
-                  transition: 'transform 0.2s',
-                  '&:hover': {
-                    transform: 'translateY(-4px)',
-                  },
-                }}
+              <StatCardLarge
+                iconKey="static"
+                title="Market Clusters"
+                value={dashboardData?.total_clusters || "0"}
+                cardId="DDD3"
+              />
+            </Grid>
+
+            <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+              <StatCardLarge
+                iconKey="static"
+                title="Tracked Products"
+                value={dashboardData?.total_unique_products || "0"}
+                cardId="DDD4"
+              />
+            </Grid>
+          </Grid>
+        </Box>
+      )}
+
+      {/* Scraping Status Section */}
+      {activeCluster && activeCluster.status === "processing" && (
+        <Paper
+          elevation={1}
+          sx={{
+            p: 3,
+            mt: 2,
+            borderRadius: 2,
+            backgroundColor: "white",
+          }}
+        >
+          {/* Header with animated robot */}
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: 2,
+              mb: 3,
+            }}
+          >
+            <Box
+              sx={{
+                width: 45,
+                height: 45,
+                borderRadius: "12px",
+                backgroundColor: "#e3f2fd",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                animation: `${robotAnimation} 2s ease-in-out infinite`,
+              }}
+            >
+              <RiRobot2Fill size={24} color="#1976d2" />
+            </Box>
+            <Typography
+              variant="h6"
+              color="text.primary"
+              sx={{ fontWeight: 600 }}
+            >
+              Our robots are scraping for you...
+            </Typography>
+          </Box>
+
+          <Alert
+            severity="info"
+            sx={{
+              mb: 3,
+              backgroundColor: "#e3f2fd",
+              color: "primary.main",
+              "& .MuiAlert-icon": {
+                color: "primary.main",
+              },
+            }}
+          >
+            We are scraping your markets to get a first impression of your
+            cluster. This usually takes some minutes. You can come back later,
+            inspect your other clusters or have a coffee.
+          </Alert>
+
+          {/* Active Cluster Card */}
+          <Card
+            elevation={1}
+            sx={{
+              backgroundColor: "white",
+              borderRadius: 2,
+              border: "1px solid",
+              borderColor: "divider",
+            }}
+          >
+            <CardContent sx={{ p: 3 }}>
+              {/* Cluster Header */}
+              <Box
+                sx={{ display: "flex", alignItems: "center", gap: 2, mb: 3 }}
               >
                 <Box
                   sx={{
                     width: 45,
                     height: 45,
-                    borderRadius: '12px',
-                    backgroundColor: '#e3f2fd',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
+                    borderRadius: "12px",
+                    backgroundColor: "#e3f2fd",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
                   }}
                 >
                   <FaLayerGroup size={22} color="#1976d2" />
                 </Box>
-                <Box>
-                  <Typography variant="body2" color="text.secondary" gutterBottom>
-                    Market Clusters
-                  </Typography>
-                  <Typography variant="h6" color="text.primary" sx={{ fontWeight: 600 }}>
-                    {dashboardData?.total_clusters|| '0'}
-                    </Typography>
-                    <Typography variant="body2" color="warning" gutterBottom>
-                    ToDo: Only count ready scraped clusters
-                  </Typography>
-                </Box>
-              </Paper>
-            </Grid>
+                <Typography
+                  variant="h6"
+                  color="text.primary"
+                  sx={{ fontWeight: 600 }}
+                >
+                  Cluster to build: {activeCluster.clustername} (Todo: Add
+                  cluster type and logo )
+                </Typography>
+              </Box>
 
-            {/* Number of Tracked Products Card */}
-            <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-              <Paper
-                elevation={1}
-                sx={{
-                  p: 3,
-                  height: '100%',
-                  backgroundColor: 'white',
-                  borderRadius: 2,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: 2,
-                  transition: 'transform 0.2s',
-                  '&:hover': {
-                    transform: 'translateY(-4px)',
-                  },
-                }}
-              >
+              {/* Scraping Status */}
+              <Box>
+                <Typography variant="body2" color="text.secondary" gutterBottom>
+                  Scraping status:
+                </Typography>
                 <Box
                   sx={{
-                    width: 45,
-                    height: 45,
-                    borderRadius: '12px',
-                    backgroundColor: '#e3f2fd',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: 2,
+                    mt: 1,
                   }}
                 >
-                  <FaBoxes size={22} color="#1976d2" />
-                </Box>
-                <Box>
-                  <Typography variant="body2" color="text.secondary" gutterBottom>
-                    Tracked Products
-                  </Typography>
-                  <Typography variant="h6" color="text.primary" sx={{ fontWeight: 600 }}>
-                    {dashboardData?.total_unique_products || '0'}
-                    </Typography>
-                    <Typography variant="body2" color="warning" gutterBottom>
-                    ToDo: Get only products from not-scraping clusters
-                  </Typography>
-                </Box>
-              </Paper>
-            </Grid>
-          </Grid>
-          </Paper>
-          )}
-
-        {/* Scraping Status Section */}
-        {activeCluster && activeCluster.status === "processing" && (
-          <Paper 
-            elevation={1} 
-            sx={{ 
-              p: 3,
-              mt: 2,
-              borderRadius: 2,
-              backgroundColor: 'white',
-            }}
-          >
-            {/* Header with animated robot */}
-            <Box sx={{ 
-              display: "flex", 
-              alignItems: "center", 
-              gap: 2,
-              mb: 3,
-            }}>
-              <Box
-                sx={{
-                  width: 45,
-                  height: 45,
-                  borderRadius: '12px',
-                  backgroundColor: '#e3f2fd',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  animation: `${robotAnimation} 2s ease-in-out infinite`,
-                }}
-              >
-                <RiRobot2Fill size={24} color="#1976d2" />
-              </Box>
-              <Typography variant="h6" color="text.primary" sx={{ fontWeight: 600 }}>
-                Our robots are scraping for you...
-              </Typography>
-            </Box>
-
-            <Alert 
-              severity="info" 
-              sx={{ 
-                mb: 3,
-                backgroundColor: '#e3f2fd',
-                color: 'primary.main',
-                '& .MuiAlert-icon': {
-                  color: 'primary.main'
-                }
-              }}
-            >
-              We are scraping your markets to get a first impression of your cluster. 
-              This usually takes some minutes. You can come back later, inspect your other clusters or have a coffee.
-            </Alert>
-
-            {/* Active Cluster Card */}
-            <Card
-              elevation={1}
-              sx={{
-                backgroundColor: 'white',
-                borderRadius: 2,
-                border: '1px solid',
-                borderColor: 'divider',
-              }}
-            >
-              <CardContent sx={{ p: 3 }}>
-                {/* Cluster Header */}
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 3 }}>
-                  <Box
-                    sx={{
-                      width: 45,
-                      height: 45,
-                      borderRadius: '12px',
-                      backgroundColor: '#e3f2fd',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}
-                  >
-                    <FaLayerGroup size={22} color="#1976d2" />
-                  </Box>
-                  <Typography variant="h6" color="text.primary" sx={{ fontWeight: 600 }}>
-                    Cluster to build: {activeCluster.clustername} (Todo: Add cluster type and logo )
-                  </Typography>
-                </Box>
-
-                {/* Scraping Status */}
-                <Box>
-                  <Typography variant="body2" color="text.secondary" gutterBottom>
-                    Scraping status:
-                  </Typography>
-                  <Box sx={{ display: "flex", flexDirection: "column", gap: 2, mt: 1 }}>
-                    {Object.entries(activeCluster.keywords).map(([keyword, status]) => (
+                  {Object.entries(activeCluster.keywords).map(
+                    ([keyword, status]) => (
                       <Box
                         key={keyword}
                         sx={{
@@ -635,7 +506,8 @@ const Dashboard: React.FC = () => {
                           gap: 2,
                           p: 2,
                           borderRadius: 1,
-                          backgroundColor: status === "done" ? '#e8f5e9' : '#e3f2fd',
+                          backgroundColor:
+                            status === "done" ? "#e8f5e9" : "#e3f2fd",
                         }}
                       >
                         <Box sx={{ minWidth: 24 }}>
@@ -648,92 +520,102 @@ const Dashboard: React.FC = () => {
                             />
                           )}
                         </Box>
-                        <Typography 
-                          variant="body2" 
-                          sx={{ 
-                            color: status === "done" ? '#2e7d32' : 'primary.main',
-                            fontWeight: 500
+                        <Typography
+                          variant="body2"
+                          sx={{
+                            color:
+                              status === "done" ? "#2e7d32" : "primary.main",
+                            fontWeight: 500,
                           }}
                         >
                           {keyword}
                         </Typography>
                       </Box>
-                    ))}
-                  </Box>
+                    )
+                  )}
                 </Box>
-              </CardContent>
-            </Card>
-          </Paper>
-        )}
+              </Box>
+            </CardContent>
+          </Card>
+        </Paper>
+      )}
 
-        {/* ✅ Zeigt alle Market-Cluster an */}
-        {marketClusters.length > 0 && (
-          <Paper elevation={3} sx={{ paddingY: 4, paddingX: 4, mt: 2 }}>
-            <Typography variant="h5" sx={{ mb: 3, backgroundColor: "primary.main", p: 2, color: "white" }}>
+      {/* Market Clustrs */}
+      {marketClusters.length > 0 && (
+        <Box>
+          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+            <Typography variant="h1" sx={{ mb: 4 }}>
               My Market Clusters
             </Typography>
 
-            {loading ? (
-              <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "200px" }}>
-                <CircularProgress size={80} color="primary" />
-              </Box>
-            ) : (
-              <Box sx={{ flexGrow: 1 }}>
-                <Grid container spacing={3}>
-                  {marketClusters.length > 0 ? (
-                    marketClusters.map((cluster) => (
-                      <Grid key={cluster.id} size={{ xs: 12, sm: 12, lg: 6 }}>
-                        <ClusterCard
-                          cluster={cluster}
-                          onClick={() => navigate(`/cluster/${cluster.id}`)}
-                          deletingCluster={deletingCluster}
-                          setMarketClusters={setMarketClusters}
-                          setDeletingCluster={setDeletingCluster}
-                          totalRevenue={cluster.total_revenue}
-                          is_initial_scraped = {cluster.is_initial_scraped}
-                          fetchMarketClusters={fetchData}
-                       
-                        />
-                      </Grid>
-                    ))
-                  ) : (
-                    <Typography sx={{ textAlign: "center", mt: 4 }} variant="body1">
-                      No market clusters found.
-                    </Typography>
-                  )}
-                </Grid>
-              </Box>
-            )}
-          </Paper>
-        )}
+            <Button
+              variant="contained"
+              color="primary"
+              startIcon={<MdAdd size={24} />}
+              onClick={() => navigate("/add-market-cluster")}
+              sx={{
+                // position: "fixed",
+                // bottom: 32,
+                // right: 32,
+                padding: "12px 24px",
+                height: "50px",
+                boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+                backgroundColor: "primary.main",
+                "&:hover": {
+                  backgroundColor: "primary.dark",
+                  transform: "scale(1.05)",
+                  transition: "all 0.2s ease-in-out",
+                  boxShadow: "0 6px 16px rgba(0,0,0,0.2)",
+                },
+              }}
+            >
+              Add Market Cluster
+            </Button>
+          </Box>
+          {loading ? (
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                minHeight: "200px",
+              }}
+            >
+              <CircularProgress size={80} color="primary" />
+            </Box>
+          ) : (
+            <Box sx={{ flexGrow: 1 }}>
+              <Grid container spacing={3}>
+                {marketClusters.length > 0 ? (
+                  marketClusters.map((cluster) => (
+                    <Grid key={cluster.id} size={{ xs: 12, sm: 6, lg: 4 }}>
+                      <ClusterCard
+                        cluster={cluster}
+                        onClick={() => navigate(`/cluster/${cluster.id}`)}
+                        deletingCluster={deletingCluster}
+                        setMarketClusters={setMarketClusters}
+                        setDeletingCluster={setDeletingCluster}
+                        totalRevenue={cluster.total_revenue}
+                        is_initial_scraped={cluster.is_initial_scraped}
+                        fetchMarketClusters={fetchData}
+                      />
+                    </Grid>
+                  ))
+                ) : (
+                  <Typography
+                    sx={{ textAlign: "center", mt: 4 }}
+                    variant="body1"
+                  >
+                    No market clusters found.
+                  </Typography>
+                )}
+              </Grid>
+            </Box>
+          )}
+        </Box>
+      )}
 
-        
-      </Container>
-      
       {/* Extended Add Market Cluster Button */}
-      <Button
-        variant="contained"
-        color="primary"
-        startIcon={<MdAdd size={24} />}
-        onClick={() => navigate('/add-market-cluster')}
-        sx={{
-          position: 'fixed',
-          bottom: 32,
-          right: 32,
-          padding: '12px 24px',
-          borderRadius: '28px',
-          boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
-          backgroundColor: 'primary.main',
-          '&:hover': {
-            backgroundColor: 'primary.dark',
-            transform: 'scale(1.05)',
-            transition: 'all 0.2s ease-in-out',
-            boxShadow: '0 6px 16px rgba(0,0,0,0.2)',
-          },
-        }}
-      >
-        Add Market Cluster
-      </Button>
 
       <Box sx={{ mt: 4, p: 2, textAlign: "center" }}>
         <Divider sx={{ mb: 2 }} />
@@ -764,7 +646,6 @@ const Dashboard: React.FC = () => {
         </Typography>
       </Box>
     </Box>
-    
   );
 };
 

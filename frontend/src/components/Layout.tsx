@@ -1,4 +1,4 @@
-import { AppBar, Toolbar, Button, Box, Typography, Tooltip, IconButton, Avatar } from "@mui/material";
+import { Box, Typography, Tooltip, IconButton, Button } from "@mui/material";
 import { Outlet, Link, useLocation, useNavigate } from "react-router-dom";
 import UserService from "../services/UserService";
 import { useState } from "react";
@@ -23,123 +23,94 @@ export default function Layout({ setIsAuthenticated, setUser }: { setIsAuthentic
 
   const clickAdminIcon = () => {
     const updatedUser = UserService.getUser();
-    setUser(updatedUser); 
-    navigate("/admin"); 
+    setUser(updatedUser);
+    navigate("/admin");
   };
 
   if (location.pathname === "/") return <Outlet />;
 
   return (
-    <>
-      <AppBar 
-        position="static" 
-        sx={{ 
-          background: "linear-gradient(45deg, #1976d2 30%, #2196f3 90%)",
-          boxShadow: "0 3px 5px 2px rgba(33, 150, 243, .3)",
-          borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
+    <Box sx={{ display: "flex", height: "100vh" }}>
+      
+      {/* Sidebar */}
+      <Box
+        sx={{
+          width: 200,
+          background: "background.primary",
+          color: "white",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          py: 2,
+          justifyContent: "space-between",
+          boxShadow: "1px 0 4px rgba(255, 255, 255, 0.1)",
+          zIndex: 1,
         }}
       >
-        <Toolbar 
-          sx={{ 
-            display: "flex", 
-            justifyContent: "space-between",
-            minHeight: "64px !important",
-            px: { xs: 2, sm: 4 },
-          }}
-        >
-          {/* Logo & App Name */}
-          <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-            <AiFillAmazonCircle size={32} style={{ color: "white" }} />
-            <Typography 
-              variant="h6" 
-              sx={{ 
-                fontWeight: "bold", 
-                color: "white",
-                letterSpacing: 0.5,
-                display: { xs: "none", sm: "block" }
-              }}
-            >
-              MarketScope
-            </Typography>
-            {isLoggedIn && (
-              <Box sx={{ display: "flex", alignItems: "center", gap: 1, ml: 2 }}>
-                <Button 
-                  color="inherit" 
-                  component={Link} 
-                  to="/dashboard"
-                  startIcon={<FaChartLine />}
-                  sx={{
-                    textTransform: "none",
-                    fontWeight: 500,
-                    "&:hover": {
-                      backgroundColor: "rgba(255, 255, 255, 0.1)",
-                    }
-                  }}
-                >
-                  Dashboard
-                </Button>
-              </Box>
-            )}
-          </Box>
+        {/* Top: Logo & App Name */}
+        <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 1 }}>
+          <AiFillAmazonCircle size={32} />
+          <Typography variant="caption" sx={{ fontWeight: "bold", textAlign: "center" }}>
+            MarketScope
+          </Typography>
+        </Box>
 
-          {/* User Info & Actions */}
-          {isLoggedIn && (
-            <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-              <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                <IoPersonCircle size={24} style={{ color: "white" }} />
-                <Typography 
-                  sx={{ 
-                    color: "white", 
-                    fontWeight: 500,
-                    display: { xs: "none", sm: "block" }
-                  }} 
-                  variant="body2"
-                >
+        {/* Middle: Navigation */}
+        {isLoggedIn && (
+          <Box sx={{ display: "flex", flexDirection: "column", gap: 2, alignItems: "center" }}>
+            <Tooltip title="Dashboard" placement="right">
+              <IconButton component={Link} to="/dashboard" sx={{ color: "white" }}>
+                <FaChartLine size={20} />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title="My Wallet" placement="right">
+              <IconButton component={Link} to="/wallet" sx={{ color: "white" }}>
+                💰
+              </IconButton>
+            </Tooltip>
+          </Box>
+        )}
+
+        {/* Bottom: User Info, Admin, Logout */}
+        {isLoggedIn && (
+          <Box sx={{ display: "flex", flexDirection: "column", gap: 1, alignItems: "center" }}>
+            <Tooltip title={user?.username} placement="right">
+              <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                <IoPersonCircle size={22} />
+                <Typography variant="caption" sx={{ display: "block", fontSize: "0.65rem" }}>
                   {user?.username}
                 </Typography>
               </Box>
+            </Tooltip>
 
-              {user?.username === "admin" && (
-                <Tooltip title="Admin Panel">
-                  <IconButton
-                    color="inherit"
-                    onClick={clickAdminIcon}
-                    sx={{
-                      "&:hover": {
-                        backgroundColor: "rgba(255, 255, 255, 0.1)",
-                      }
-                    }}
-                  >
-                    <FiSettings size={20} />
-                  </IconButton>
-                </Tooltip>
-              )}
-
-              <Tooltip title="Logout">
-                <IconButton
-                  color="inherit"
-                  onClick={handleLogout}
-                  sx={{
-                    "&:hover": {
-                      backgroundColor: "rgba(255, 255, 255, 0.1)",
-                    }
-                  }}
-                >
-                  <MdLogout size={20} />
+            {user?.username === "admin" && (
+              <Tooltip title="Admin Panel" placement="right">
+                <IconButton onClick={clickAdminIcon} sx={{ color: "white" }}>
+                  <FiSettings size={18} />
                 </IconButton>
               </Tooltip>
-            </Box>
-          )}
-        </Toolbar>
-      </AppBar>
+            )}
 
-      <div className="main-content">
-        <Outlet />
-      </div>
-
-      <Box sx={{ textAlign: "center", padding: 2, backgroundColor: "#f5f5f5" }}>
-        <Typography variant="body2">© {new Date().getFullYear()} MarketScope</Typography>
+            <Tooltip title="Logout" placement="right">
+              <IconButton onClick={handleLogout} sx={{ color: "white" }}>
+                <MdLogout size={20} />
+              </IconButton>
+            </Tooltip>
+          </Box>
+        )}
       </Box>
-    </>
+
+      {/* Main Content */}
+      <Box sx={{ flexGrow: 1, overflowY: "auto", display: "flex", flexDirection: "column" }}>
+        <Box sx={{ flexGrow: 1, padding: 8 }}>
+          <Outlet />
+        </Box>
+
+        {/* Footer */}
+        <Box sx={{ textAlign: "center", padding: 2, backgroundColor: "background.main" }}>
+          <Typography variant="body2">© {new Date().getFullYear()} MarketScope</Typography>
+        </Box>
+      </Box>
+    </Box>
   );
 }

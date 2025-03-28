@@ -19,12 +19,12 @@ import {
 import { motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import { FaLayerGroup, FaDollarSign, FaEdit, FaTrash } from "react-icons/fa";
-import { useSnackbar } from "../providers/SnackbarProvider";
-import ChartDataService from "../services/ChartDataService";
-import MarketService from "../services/MarketService";
-import CustomSparkLine from "./charts/CustomSparkLine";
-import { iconMap, fallbackIcon } from "../utils/iconUtils";
-
+import { useSnackbar } from "../../providers/SnackbarProvider";
+import ChartDataService from "../../services/ChartDataService";
+import MarketService from "../../services/MarketService";
+import CustomSparkLine from "../charts/CustomSparkLine";
+import { iconMap, fallbackIcon } from "../../utils/iconUtils";
+import { useTheme } from "@mui/material/styles";
 
 interface ClusterCardProps {
   cluster: {
@@ -32,8 +32,6 @@ interface ClusterCardProps {
     title: string;
     cluster_type: string;
     markets: string[];
-   
-
   };
   onClick: () => void;
   deletingCluster: number | null;
@@ -53,7 +51,6 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
   totalRevenue,
   fetchMarketClusters,
   is_initial_scraped,
-
 }) => {
   const { showSnackbar } = useSnackbar();
   const [openEditDialog, setOpenEditDialog] = useState(false);
@@ -62,9 +59,8 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
   const [sparklineData, setSparklineData] = useState<number[]>([]);
   const [loadingSparkline, setLoadingSparkline] = useState<boolean>(true);
 
-
   const cleanKey = (cluster.cluster_type ?? "").trim();
-
+  const theme = useTheme();
 
   const IconComponent = iconMap[cleanKey] || fallbackIcon;
 
@@ -104,95 +100,107 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
         elevation={1}
         sx={{
           cursor: "pointer",
-          backgroundColor: 'white',
+          backgroundColor: "background.paper",
+          border: "1px solid rgba(255, 255, 255, 0.25)",
           borderRadius: 2,
           overflow: "hidden",
-          transition: 'transform 0.2s',
-          '&:hover': {
-            transform: 'translateY(-4px)',
-            '& .delete-button': {
+          transition: "transform 0.4s",
+          "&:hover": {
+            transform: "translateY(-10px)",
+            "& .delete-button": {
               opacity: 1,
-              visibility: 'visible',
+              visibility: "visible",
             },
           },
         }}
         onClick={onClick}
       >
-        <CardContent sx={{ p: 3 , minHeight: 350}}>
-          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 3 }}>
-            <Box sx={{ display: 'flex', alignItems: 'center',  gap: 2 }}>
+        <CardContent sx={{ p: 3, minHeight: 350 }}>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "flex-start",
+              mb: 3,
+            }}
+          >
+            <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
               <Box
                 sx={{
                   width: 45,
                   height: 45,
-                  borderRadius: '12px',
-                  backgroundColor: '#e3f2fd',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
+                  borderRadius: "12px",
+                  backgroundColor: "rgba(255, 255, 255, 0.1)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
                 }}
               >
-               
-                <IconComponent size={22} color="#1976d2" />
-          
+                <IconComponent size={22} color={theme.palette.secondary.main} />
               </Box>
-              <Typography variant="h6" color="text.primary" sx={{ fontWeight: 600 }}>
-                {cluster.title}
-              </Typography>
-             
-            </Box>
-            
-            <Box sx={{ display: 'flex', gap: 1 }}>
-              <IconButton 
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setOpenEditDialog(true);
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
                 }}
-                sx={{ color: 'primary.main' }}
               >
-                <FaEdit size={20} />
-              </IconButton>
+                <Typography
+                  variant="h3"
+                  color="text.primary"
+                  sx={{ fontWeight: 600 }}
+                >
+                  {cluster.title}
+                </Typography>
+                <Typography variant="body2" color="text.primary">
+                  {cluster.cluster_type}
+                </Typography>
+              </Box>
+            </Box>
+
+            <Box sx={{ display: "flex", gap: 1 }}>
               <IconButton
                 className="delete-button"
                 onClick={(e) => {
                   e.stopPropagation();
                   setOpenConfirmDialog(true);
                 }}
-                sx={{ 
-                  color: 'error.main',
+                sx={{
+                  color: "error.main",
                   opacity: 0,
-                  visibility: 'hidden',
-                  transition: 'opacity 0.2s, visibility 0.2s',
+                  visibility: "hidden",
+                  transition: "opacity 0.2s, visibility 0.2s",
                 }}
               >
-                <FaTrash size={20} />
+                <FaTrash size={20} color={theme.palette.primary.main}/>
+              </IconButton>
+              <IconButton
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setOpenEditDialog(true);
+                }}
+                sx={{ color: "primary.main" }}
+              >
+                <FaEdit size={20} color={theme.palette.secondary.main}/>
               </IconButton>
             </Box>
           </Box>
 
-          <Typography variant="body2" color="text.secondary">
-                 {cluster.cluster_type} cluster
-              </Typography>
-         
           <Box sx={{ mb: 3 }}>
-            <Typography variant="body2" color="text.secondary" gutterBottom>
+            <Typography variant="body2" color="text.primary" gutterBottom>
               Included markets:
             </Typography>
             <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
               {Array.isArray(cluster.markets) && cluster.markets.length > 0 ? (
                 cluster.markets.map((market, index) => (
-                  <Chip 
-                    key={index} 
-                    label={market} 
-                    variant="outlined" 
+                  <Chip
+                    key={index}
+                    label={market}
+                    variant="outlined"
                     size="small"
-                    sx={{ 
-                      borderColor: 'primary.main',
-                      color: 'primary.main',
-                      backgroundColor: '#e3f2fd',
-                      '& .MuiChip-label': {
-                        fontWeight: 500,
-                      }
+                    sx={{
+                      borderColor: "secondary.main",
+                      color: "text.main",
+                      
                     }}
                   />
                 ))
@@ -204,49 +212,60 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
 
           {!is_initial_scraped ? (
             <Box sx={{ mt: 2 }}>
-              <Alert 
-                severity="info" 
-                sx={{ 
-                  backgroundColor: '#e3f2fd',
-                  color: 'primary.main',
-                  '& .MuiAlert-icon': {
-                    color: 'primary.main'
-                  }
+              <Alert
+                severity="info"
+                sx={{
+                  backgroundColor: "#e3f2fd",
+                  color: "primary.main",
+                  "& .MuiAlert-icon": {
+                    color: "primary.main",
+                  },
                 }}
               >
-                Markets and Products wait for initial scraping, please come back later or click for a first impression
+                Markets and Products wait for initial scraping, please come back
+                later or click for a first impression
               </Alert>
-              <LinearProgress 
-                sx={{ 
+              <LinearProgress
+                sx={{
                   mt: 2,
-                  backgroundColor: '#e3f2fd',
-                  '& .MuiLinearProgress-bar': {
-                    backgroundColor: 'primary.main'
-                  }
-                }} 
+                  backgroundColor: "#e3f2fd",
+                  "& .MuiLinearProgress-bar": {
+                    backgroundColor: "primary.main",
+                  },
+                }}
               />
             </Box>
           ) : (
             <Box>
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
+              <Box
+                sx={{ display: "flex", alignItems: "center", gap: 2, mb: 2 }}
+              >
                 <Box
                   sx={{
                     width: 45,
                     height: 45,
-                    borderRadius: '12px',
-                    backgroundColor: '#e3f2fd',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
+                    borderRadius: "12px",
+                    backgroundColor: "rgba(255, 255, 255, 0.1)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
                   }}
                 >
-                  <FaDollarSign size={22} color="#1976d2" />
+                  <FaDollarSign size={22} color={theme.palette.secondary.main}/>
                 </Box>
                 <Box>
-                  <Typography variant="body2" color="text.secondary" gutterBottom>
+                  <Typography
+                    variant="body2"
+                    color="text.secondary"
+                    gutterBottom
+                  >
                     Total Revenue
                   </Typography>
-                  <Typography variant="h6" color="text.primary" sx={{ fontWeight: 600 }}>
+                  <Typography
+                    variant="h1"
+                    color="text.primary"
+                    sx={{ fontWeight: 600 }}
+                  >
                     {new Intl.NumberFormat("en-US", {
                       style: "currency",
                       currency: "USD",
@@ -258,7 +277,10 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
               {totalRevenue > 0 && (
                 <Box sx={{ mt: 2, height: 50 }}>
                   {loadingSparkline ? (
-                    <CircularProgress size={30} sx={{ color: 'primary.main' }} />
+                    <CircularProgress
+                      size={30}
+                      sx={{ color: "primary.main" }}
+                    />
                   ) : (
                     <CustomSparkLine data={sparklineData} />
                   )}
@@ -269,11 +291,15 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
         </CardContent>
       </Card>
 
-      <Dialog open={openConfirmDialog} onClose={() => setOpenConfirmDialog(false)}>
+      <Dialog
+        open={openConfirmDialog}
+        onClose={() => setOpenConfirmDialog(false)}
+      >
         <DialogTitle>Delete Market Cluster</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Are you sure you want to delete the market cluster "{cluster.title}"? This action cannot be undone.
+            Are you sure you want to delete the market cluster "{cluster.title}
+            "? This action cannot be undone.
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -281,7 +307,9 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
           <Button
             onClick={async () => {
               setDeletingCluster(cluster.id);
-              const success = await MarketService.deleteMarketCluster(cluster.id);
+              const success = await MarketService.deleteMarketCluster(
+                cluster.id
+              );
               if (success) {
                 showSnackbar("Market Cluster successfully deleted");
                 fetchMarketClusters();
@@ -318,7 +346,9 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
           <Button
             onClick={async () => {
               try {
-                await MarketService.updateMarketCluster(cluster.id, { title: newTitle });
+                await MarketService.updateMarketCluster(cluster.id, {
+                  title: newTitle,
+                });
                 showSnackbar("Market Cluster title updated successfully");
                 fetchMarketClusters();
                 setOpenEditDialog(false);
