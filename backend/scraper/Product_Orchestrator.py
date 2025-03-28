@@ -20,6 +20,7 @@ from app.database import SessionLocal
 from app.models import Market, MarketCluster, Product, ProductChange, market_products
 from scraper.product_selenium_scraper import AmazonProductScraper, OutOfStockException
 
+from collections import Counter
 
 class Product_Orchestrator:
     def __init__(self, just_scrape_3_products=False, cluster_to_scrape=None, show_details=False):
@@ -42,6 +43,9 @@ class Product_Orchestrator:
 
         self.log_file = LOGS_DIR / f"scraping-{self.timestamp}.txt"
         self.fail_file = LOGS_DIR / f"fails-{self.timestamp}.txt"
+        self.warning_products = []
+        self.warning_file = LOGS_DIR / f"warnings-{self.timestamp}.txt"
+
 
         # 🧾 Logging konfigurieren
         logging.basicConfig(
@@ -95,9 +99,53 @@ class Product_Orchestrator:
         self.driver = webdriver.Chrome(service=service, options=chrome_options)
         logging.info(f"🔧 Verwende ChromeDriver: {service.path}")
         self.scraper = AmazonProductScraper(self.driver, show_details=show_details)
+        self.scraper.warning_callback = self.add_warning
+
 
         self.check_connection()
         self.set_cookies()
+
+    def add_warning(self, asin, url, message, location=None,  warning_type="unknown"):
+        self.warning_products.append({
+            'asin': asin,
+            'url': url,
+            'message': message,
+            'location': location or "Unknown",
+            'type': warning_type
+        })
+
+    def write_warning_file(self):
+
+        with open(self.warning_file, 'w', encoding='utf-8') as f:
+            f.write(f"⚠️ Warnungen beim Scraping – {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+            f.write("=" * 60 + "\n")
+
+            counter = Counter(w["type"] for w in self.warning_products)
+            f.write(f"🧾 Übersicht:\n")
+            f.write(f"  • {len(self.warning_products)} Produkte betroffen\n")
+            f.write(f"  • {sum(counter.values())} Warnungen insgesamt\n")
+            for category, count in counter.most_common():
+                f.write(f"    - {count} × {category.upper()}\n")
+            f.write("\n" + "=" * 60 + "\n\n")
+
+            for warn in self.warning_products:
+                f.write(f"🧾 ASIN: {warn['asin']}\n")
+                f.write(f"🔗 URL: {warn['url']}\n")
+                f.write(f"⚠️ Fehler: {warn['message']}\n")
+                f.write(f"📍 Location: {warn.get('location', 'Unknown')}\n")
+                f.write(f"🔖 Typ: {warn.get('type', 'unknown')}\n")
+                f.write("-" * 60 + "\n\n")
+
+
+    
+    def summarize_warnings(self):
+        counter = Counter(w["type"] for w in self.warning_products)
+        total = sum(counter.values())
+        summary_lines = [f"⚠️ {total} Warnungen insgesamt:"]
+        for category, count in counter.most_common():
+            summary_lines.append(f"  • {count} × {category.upper()}")
+        return "\n".join(summary_lines)
+
 
     def format_time(self, seconds):
         minutes, seconds = divmod(seconds, 60)
@@ -280,6 +328,8 @@ class Product_Orchestrator:
         finally:
             total_time = time.time() - self.start_time
             avg_time = mean(self.scraping_times) if self.scraping_times else 0
+            logging.info("##############################################################################")
+            logging.info("##############################################################################")
             logging.info("\n📊 Scraping abgeschlossen:")
             logging.info(f"⏱️ Gesamtzeit: {self.format_time(total_time)}")
             logging.info(f"⏲️ Durchschnitt pro Produkt: {avg_time:.2f}s")
@@ -287,9 +337,17 @@ class Product_Orchestrator:
             logging.info(f"❌ Fehlgeschlagen: {len(self.failed_products)}")
             logging.info(f"📝 Log-Datei: {self.log_file}")
             logging.info(f"🧨 Fehlgeschlagene Produkte: {self.fail_file}")
+            if self.warning_products:
+                logging.info(f"⚠️ Warnungen: {len(self.warning_products)} Produkte betroffen")
+                logging.info(self.summarize_warnings())
+                logging.info(f"📄 Warnings-Log: {self.warning_file}")
+                self.write_warning_file()
 
             db.close()
             self.close_driver()
+
+           
+
 
     def close_driver(self):
         logging.info("🔻 Schließe WebDriver...")
