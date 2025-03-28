@@ -55,7 +55,7 @@ export const darkTheme = createTheme({
   palette: {
     primary: { main: "#6C72FF" },  // mattes lila
     secondary: { main: "#57C3FF" },  // leichtes hellblau
-    accent: { main: "#D16109" }, // 
+    accent: { main: "#02AFAC" }, // 
     background: { default: "#080F25", paper: "#101935" }, // Paper dunkles blau
     text: { primary: "#AEB9E1", secondary: "#FFFFFF" }, // leichtes lila / weiß
   },

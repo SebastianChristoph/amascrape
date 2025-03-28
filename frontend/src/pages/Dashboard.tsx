@@ -285,7 +285,7 @@ const Dashboard: React.FC = () => {
             p: 4,
             maxWidth: 600,
             width: "100%",
-            background: "linear-gradient(135deg, #1976d2 0%, #2196f3 100%)",
+            background: "linear-gradient(135deg, #0D1B2A 0%, #143a63 100%)",
             color: "white",
             borderRadius: 2,
             textAlign: "center",
@@ -560,7 +560,7 @@ const Dashboard: React.FC = () => {
                 padding: "12px 24px",
                 height: "50px",
                 boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
-                backgroundColor: "primary.main",
+                backgroundColor: theme.palette.accent.main,
                 "&:hover": {
                   backgroundColor: "primary.dark",
                   transform: "scale(1.05)",
@@ -637,7 +637,7 @@ const Dashboard: React.FC = () => {
             Important Notice
           </Typography>
         </Box>
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant="body2" color="text.primary">
           <strong>* Disclaimer:</strong> This tool exclusively supports and
           analyzes products from the U.S. Amazon marketplace (
           <em>amazon.com</em>). Data, rankings, and insights are limited to the

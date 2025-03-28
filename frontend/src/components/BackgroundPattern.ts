@@ -25,7 +25,7 @@ export const commonBackgroundStyle = {
   backgroundImage: `url("${backgroundPattern}")`,
   backgroundRepeat: "repeat",
   transform: "rotate(-10deg) scale(1.2)",
-  animation: "moveBackground 120s linear infinite",
+  animation: "moveBackground 40s linear infinite",
   zIndex: 0,
 };
 

@@ -47,7 +47,12 @@ export default function LogViewer() {
             maxHeight: "70vh",
             overflow: "auto",
             whiteSpace: "pre-wrap",
-            backgroundColor: "#f7f7f7",
+              backgroundColor: "background",
+              color: "white",
+              "& a": {
+                color: "white",
+                textDecoration: "underline", // optional
+              },
           }}
         >
           <Typography

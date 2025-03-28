@@ -15,8 +15,11 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { IoIosAnalytics } from "react-icons/io";
 import { FaSignInAlt } from "react-icons/fa";
 import LoginService from "../services/LoginService";
-import { commonBackgroundStyle, moveBackgroundKeyframes } from "../components/BackgroundPattern";
-import { Line } from 'react-chartjs-2';
+import {
+  commonBackgroundStyle,
+  moveBackgroundKeyframes,
+} from "../components/BackgroundPattern";
+import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -25,8 +28,8 @@ import {
   LineElement,
   Title,
   Tooltip,
-  Legend
-} from 'chart.js';
+  Legend,
+} from "chart.js";
 
 ChartJS.register(
   CategoryScale,
@@ -46,31 +49,25 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [chartValues, setChartValues] = useState<number[]>([15, 20, 25, 30, 35, 40]);
+  const [chartValues, setChartValues] = useState<number[]>([
+    15, 20, 25, 30, 35, 40,
+  ]);
 
-  // Function to generate new values with overall upward trend but allowing some decreases
   const generateGrowingValues = () => {
     return chartValues.map((currentValue, index) => {
-      // 30% chance of a small decrease, 70% chance of increase
       const isDecrease = Math.random() < 0.3;
-      
       if (isDecrease) {
-        // Small decrease (max 15% down)
         const decrease = currentValue * (Math.random() * 0.15);
         return Math.max(15, currentValue - decrease);
       } else {
-        // Normal growth pattern
-        const minGrowth = 1; // Minimum growth
-        const maxGrowth = 12; // Maximum growth
-        const growth = minGrowth + Math.random() * (maxGrowth - minGrowth);
+        const growth = 1 + Math.random() * (12 - 1);
         const newValue = currentValue + growth;
-        
-        // Reset if too high, but ensure new value is higher than previous point (if exists)
         if (newValue > 90) {
           const baseValue = 15;
-          return index === 0 ? baseValue : Math.max(chartValues[index - 1] + 2, baseValue);
+          return index === 0
+            ? baseValue
+            : Math.max(chartValues[index - 1] + 2, baseValue);
         }
-        
         return newValue;
       }
     });
@@ -80,24 +77,23 @@ export default function Login() {
     const timer = setInterval(() => {
       setChartValues(generateGrowingValues());
     }, 2500);
-
     return () => clearInterval(timer);
   }, []);
 
   const chartData = {
-    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
     datasets: [
       {
-        label: 'Market Growth',
+        label: "Market Growth",
         data: chartValues,
-        borderColor: 'white',
-        backgroundColor: 'rgba(255, 255, 255, 0.1)',
+        borderColor: "white",
+        backgroundColor: "rgba(255, 255, 255, 0.1)",
         tension: 0.3,
         fill: true,
         pointRadius: 4,
-        pointBackgroundColor: 'white',
-      }
-    ]
+        pointBackgroundColor: "white",
+      },
+    ],
   };
 
   const chartOptions = {
@@ -105,50 +101,34 @@ export default function Login() {
     maintainAspectRatio: false,
     animation: {
       duration: 1500,
-      easing: 'easeInOutQuart' as const,
+      easing: "easeInOutQuart" as const,
     },
     scales: {
       y: {
         beginAtZero: true,
         max: 100,
-        grid: {
-          color: 'rgba(255, 255, 255, 0.1)',
-        },
-        ticks: {
-          display: false,
-        },
-        border: {
-          display: false
-        }
+        grid: { color: "rgba(255, 255, 255, 0.1)" },
+        ticks: { display: false },
+        border: { display: false },
       },
       x: {
-        grid: {
-          color: 'rgba(255, 255, 255, 0.1)',
-        },
-        ticks: {
-          color: 'white',
-        },
+        grid: { color: "rgba(255, 255, 255, 0.1)" },
+        ticks: { color: "white" },
       },
     },
     plugins: {
-      legend: {
-        display: false,
-      },
+      legend: { display: false },
     },
   };
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-
     const success = await LoginService.authenticate(username, password);
     setLoading(false);
-
-    if (success) {
-      navigate("/dashboard");
-    } else {
-      showSnackbar("Login failed. Please check your credentials.", "error");
-    }
+    success
+      ? navigate("/dashboard")
+      : showSnackbar("Login failed. Please check your credentials.", "error");
   };
 
   return (
@@ -157,7 +137,7 @@ export default function Login() {
         minHeight: "100vh",
         position: "relative",
         overflow: "hidden",
-        backgroundColor: "#f8f9fa",
+        backgroundColor: "#080F25",
         "&::before": {
           ...commonBackgroundStyle,
           opacity: 0.8,
@@ -166,12 +146,15 @@ export default function Login() {
         "@keyframes moveBackground": moveBackgroundKeyframes,
       }}
     >
-      <Container maxWidth="lg" sx={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        minHeight: '100vh'
-      }}>
+      <Container
+        maxWidth="lg"
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          minHeight: "100vh",
+        }}
+      >
         <Paper
           elevation={6}
           sx={{
@@ -180,26 +163,24 @@ export default function Login() {
             display: "flex",
             borderRadius: 3,
             overflow: "hidden",
-            background: "linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.85) 100%)",
+            background: "#101935",
             backdropFilter: "blur(10px)",
             boxShadow: "0 8px 32px rgba(0,0,0,0.1)",
           }}
         >
-          {/* Left half: Blue box with title */}
+          {/* Left: Chart & Logo */}
           <Box
             sx={{
               width: "50%",
-              backgroundColor: "#0096FF",
+              background: "linear-gradient(135deg, #0D1B2A 0%, #143a63 100%)",
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-              background: "linear-gradient(45deg, #1976d2 30%, #2196f3 90%)",
-              position: "relative",
               padding: 3,
               pt: 8,
             }}
           >
-            <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
+            <Box sx={{ display: "flex", alignItems: "center", mb: 3 }}>
               <Box sx={{ mt: 0.5, mr: 1 }}>
                 <IoIosAnalytics size={40} color="white" />
               </Box>
@@ -220,7 +201,7 @@ export default function Login() {
             </Box>
           </Box>
 
-          {/* Right half: Login form */}
+          {/* Right: Form */}
           <Box
             sx={{
               width: "50%",
@@ -232,16 +213,19 @@ export default function Login() {
           >
             <Typography
               variant="h5"
-              sx={{ 
-                mb: 2, 
-                textAlign: "center", 
-                fontWeight: "bold", 
-                color: "primary.main",
+              sx={{
+                mb: 2,
+                textAlign: "center",
+                fontWeight: "bold",
+                color: "#E0E7FF",
               }}
             >
               Welcome Back!
             </Typography>
-            <Typography variant="body2" sx={{ textAlign: "center", mb: 3, color: "text.secondary" }}>
+            <Typography
+              variant="body2"
+              sx={{ textAlign: "center", mb: 3, color: "#AAB4D4" }}
+            >
               Please log in with your credentials to continue.
             </Typography>
 
@@ -249,30 +233,35 @@ export default function Login() {
               <TextField
                 fullWidth
                 label="Username"
-                variant="outlined"
+                variant="filled"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 required
-                sx={{ mb: 2 }}
+              
               />
 
               <TextField
                 fullWidth
                 label="Password"
-                variant="outlined"
+                variant="filled"
                 type={showPassword ? "text" : "password"}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                sx={{ mb: 3 }}
+            
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position="end">
                       <IconButton
                         onClick={() => setShowPassword(!showPassword)}
                         edge="end"
+                        sx={{ color: "#E0E7FF" }}
                       >
-                        {showPassword ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
+                        {showPassword ? (
+                          <AiOutlineEyeInvisible />
+                        ) : (
+                          <AiOutlineEye />
+                        )}
                       </IconButton>
                     </InputAdornment>
                   ),
@@ -282,7 +271,6 @@ export default function Login() {
               <Button
                 type="submit"
                 variant="contained"
-                color="primary"
                 fullWidth
                 disabled={loading}
                 startIcon={<FaSignInAlt />}
@@ -291,10 +279,10 @@ export default function Login() {
                   fontSize: 16,
                   fontWeight: "bold",
                   textTransform: "none",
-                  background: "linear-gradient(45deg, #1976d2 30%, #2196f3 90%)",
+                  background: "linear-gradient(45deg, #0D1B2A 30%, #1E88E5 90%)",
                   boxShadow: "0 3px 5px 2px rgba(33, 150, 243, .3)",
                   "&:hover": {
-                    background: "linear-gradient(45deg, #1565c0 30%, #1976d2 90%)",
+                    background: "linear-gradient(45deg, #143a63 30%, #1976d2 90%)",
                   },
                 }}
               >
@@ -302,9 +290,22 @@ export default function Login() {
               </Button>
             </form>
 
-            <Typography sx={{ mt: 2, textAlign: "center", color: "text.secondary" }}>
+            <Typography
+              sx={{
+                mt: 2,
+                textAlign: "center",
+                color: "#AAB4D4",
+              }}
+            >
               Don't have an account?{" "}
-              <Link to="/register" style={{ textDecoration: "none", color: "#1976d2", fontWeight: "bold" }}>
+              <Link
+                to="/register"
+                style={{
+                  textDecoration: "none",
+                  color: "#1E88E5",
+                  fontWeight: "bold",
+                }}
+              >
                 Register now
               </Link>
             </Typography>
