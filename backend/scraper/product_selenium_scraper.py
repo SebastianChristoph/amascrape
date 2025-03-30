@@ -440,6 +440,7 @@ class AmazonProductScraper:
 
 
             return None
+        
         data = {
             "browser_location": location,
             "asin": self.asin,

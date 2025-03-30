@@ -1,0 +1,308 @@
+⚠️ Warnungen beim Scraping – 2025-03-28 20:39:05
+============================================================
+🧾 Übersicht:
+  • 39 Produkte betroffen
+  • 39 Warnungen insgesamt
+    - 38 × BLM
+    - 1 × REVIEW_COUNT
+
+============================================================
+
+🧾 ASIN: B07CWMGQC5
+🔗 URL: https://www.amazon.com/dp/B07CWMGQC5?language=en_US
+⚠️ Fehler: Fehler bei BLM: invalid literal for int() with base 10: ''
+📍 Location: Bell Gardens 90201
+🔖 Typ: blm
+------------------------------------------------------------
+
+🧾 ASIN: B094PPPR3R
+🔗 URL: https://www.amazon.com/dp/B094PPPR3R?language=en_US
+⚠️ Fehler: Fehler bei BLM: invalid literal for int() with base 10: ''
+📍 Location: Bell Gardens 90201
+🔖 Typ: blm
+------------------------------------------------------------
+
+🧾 ASIN: B0C88SK9T9
+🔗 URL: https://www.amazon.com/dp/B0C88SK9T9?language=en_US
+⚠️ Fehler: Fehler bei BLM: invalid literal for int() with base 10: ''
+📍 Location: Bell Gardens 90201
+🔖 Typ: blm
+------------------------------------------------------------
+
+🧾 ASIN: B0CXXHD733
+🔗 URL: https://www.amazon.com/dp/B0CXXHD733?language=en_US
+⚠️ Fehler: Fehler bei BLM: invalid literal for int() with base 10: ''
+📍 Location: Bell Gardens 90201
+🔖 Typ: blm
+------------------------------------------------------------
+
+🧾 ASIN: B09T5SYCSM
+🔗 URL: https://www.amazon.com/dp/B09T5SYCSM?language=en_US
+⚠️ Fehler: Fehler bei BLM: invalid literal for int() with base 10: ''
+📍 Location: Bell Gardens 90201
+🔖 Typ: blm
+------------------------------------------------------------
+
+🧾 ASIN: B0CBBLRLFG
+🔗 URL: https://www.amazon.com/dp/B0CBBLRLFG?language=en_US
+⚠️ Fehler: Fehler bei BLM: invalid literal for int() with base 10: ''
+📍 Location: Bell Gardens 90201
+🔖 Typ: blm
+------------------------------------------------------------
+
+🧾 ASIN: B08134M14B
+🔗 URL: https://www.amazon.com/dp/B08134M14B?language=en_US
+⚠️ Fehler: Fehler bei BLM: invalid literal for int() with base 10: ''
+📍 Location: Bell Gardens 90201
+🔖 Typ: blm
+------------------------------------------------------------
+
+🧾 ASIN: B09BQSZYW4
+🔗 URL: https://www.amazon.com/dp/B09BQSZYW4?language=en_US
+⚠️ Fehler: Fehler bei BLM: invalid literal for int() with base 10: ''
+📍 Location: Bell Gardens 90201
+🔖 Typ: blm
+------------------------------------------------------------
+
+🧾 ASIN: B07T213YFM
+🔗 URL: https://www.amazon.com/dp/B07T213YFM?language=en_US
+⚠️ Fehler: Fehler bei BLM: invalid literal for int() with base 10: ''
+📍 Location: Bell Gardens 90201
+🔖 Typ: blm
+------------------------------------------------------------
+
+🧾 ASIN: B08239SSY9
+🔗 URL: https://www.amazon.com/dp/B08239SSY9?language=en_US
+⚠️ Fehler: Fehler bei BLM: invalid literal for int() with base 10: ''
+📍 Location: Bell Gardens 90201
+🔖 Typ: blm
+------------------------------------------------------------
+
+🧾 ASIN: B0CSYDM8BM
+🔗 URL: https://www.amazon.com/dp/B0CSYDM8BM?language=en_US
+⚠️ Fehler: Fehler bei BLM: invalid literal for int() with base 10: ''
+📍 Location: Bell Gardens 90201
+🔖 Typ: blm
+------------------------------------------------------------
+
+🧾 ASIN: B083K9NFS8
+🔗 URL: https://www.amazon.com/dp/B083K9NFS8?language=en_US
+⚠️ Fehler: Fehler bei BLM: invalid literal for int() with base 10: ''
+📍 Location: Bell Gardens 90201
+🔖 Typ: blm
+------------------------------------------------------------
+
+🧾 ASIN: B07CPVF7L6
+🔗 URL: https://www.amazon.com/dp/B07CPVF7L6?language=en_US
+⚠️ Fehler: Fehler bei BLM: invalid literal for int() with base 10: ''
+📍 Location: Bell Gardens 90201
+🔖 Typ: blm
+------------------------------------------------------------
+
+🧾 ASIN: B0CT8JMMHL
+🔗 URL: https://www.amazon.com/dp/B0CT8JMMHL?language=en_US
+⚠️ Fehler: Fehler bei BLM: invalid literal for int() with base 10: ''
+📍 Location: Bell Gardens 90201
+🔖 Typ: blm
+------------------------------------------------------------
+
+🧾 ASIN: B08R5YDTD1
+🔗 URL: https://www.amazon.com/dp/B08R5YDTD1?language=en_US
+⚠️ Fehler: Fehler bei BLM: invalid literal for int() with base 10: ''
+📍 Location: Bell Gardens 90201
+🔖 Typ: blm
+------------------------------------------------------------
+
+🧾 ASIN: B08QSKMSL4
+🔗 URL: https://www.amazon.com/dp/B08QSKMSL4?language=en_US
+⚠️ Fehler: Fehler bei BLM: invalid literal for int() with base 10: ''
+📍 Location: Bell Gardens 90201
+🔖 Typ: blm
+------------------------------------------------------------
+
+🧾 ASIN: B00MX8ZWXC
+🔗 URL: https://www.amazon.com/dp/B00MX8ZWXC?language=en_US
+⚠️ Fehler: Fehler bei BLM: invalid literal for int() with base 10: ''
+📍 Location: Bell Gardens 90201
+🔖 Typ: blm
+------------------------------------------------------------
+
+🧾 ASIN: B09QCH6SW3
+🔗 URL: https://www.amazon.com/dp/B09QCH6SW3?language=en_US
+⚠️ Fehler: Fehler bei BLM: invalid literal for int() with base 10: ''
+📍 Location: Bell Gardens 90201
+🔖 Typ: blm
+------------------------------------------------------------
+
+🧾 ASIN: B08FL5TP7S
+🔗 URL: https://www.amazon.com/dp/B08FL5TP7S?language=en_US
+⚠️ Fehler: Fehler bei BLM: invalid literal for int() with base 10: ''
+📍 Location: Bell Gardens 90201
+🔖 Typ: blm
+------------------------------------------------------------
+
+🧾 ASIN: B0B5696YGZ
+🔗 URL: https://www.amazon.com/dp/B0B5696YGZ?language=en_US
+⚠️ Fehler: Fehler bei BLM: invalid literal for int() with base 10: ''
+📍 Location: Bell Gardens 90201
+🔖 Typ: blm
+------------------------------------------------------------
+
+🧾 ASIN: B01LZNHEKS
+🔗 URL: https://www.amazon.com/dp/B01LZNHEKS?language=en_US
+⚠️ Fehler: Fehler bei BLM: invalid literal for int() with base 10: ''
+📍 Location: Bell Gardens 90201
+🔖 Typ: blm
+------------------------------------------------------------
+
+🧾 ASIN: B0CQNWH5JZ
+🔗 URL: https://www.amazon.com/dp/B0CQNWH5JZ?language=en_US
+⚠️ Fehler: Fehler bei BLM: invalid literal for int() with base 10: ''
+📍 Location: Bell Gardens 90201
+🔖 Typ: blm
+------------------------------------------------------------
+
+🧾 ASIN: B07CKQDRZ6
+🔗 URL: https://www.amazon.com/dp/B07CKQDRZ6?language=en_US
+⚠️ Fehler: Fehler bei BLM: invalid literal for int() with base 10: ''
+📍 Location: Bell Gardens 90201
+🔖 Typ: blm
+------------------------------------------------------------
+
+🧾 ASIN: B0DPJWD74R
+🔗 URL: https://www.amazon.com/dp/B0DPJWD74R?language=en_US
+⚠️ Fehler: 	⚠️ Fehler bei Reviews: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@id="acrCustomerReviewLink"]"}
+  (Session info: chrome=134.0.6998.167); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+	GetHandleVerifier [0x00D8C7F3+24435]
+	(No symbol) [0x00D12074]
+	(No symbol) [0x00BE06E3]
+	(No symbol) [0x00C28B39]
+	(No symbol) [0x00C28E8B]
+	(No symbol) [0x00C71AC2]
+	(No symbol) [0x00C4D804]
+	(No symbol) [0x00C6F20A]
+	(No symbol) [0x00C4D5B6]
+	(No symbol) [0x00C1C54F]
+	(No symbol) [0x00C1D894]
+	GetHandleVerifier [0x010970A3+3213347]
+	GetHandleVerifier [0x010AB0C9+3295305]
+	GetHandleVerifier [0x010A558C+3271948]
+	GetHandleVerifier [0x00E27360+658144]
+	(No symbol) [0x00D1B27D]
+	(No symbol) [0x00D18208]
+	(No symbol) [0x00D183A9]
+	(No symbol) [0x00D0AAC0]
+	BaseThreadInitThunk [0x76485D49+25]
+	RtlInitializeExceptionChain [0x7773CF0B+107]
+	RtlGetAppContainerNamedObjectPath [0x7773CE91+561]
+
+📍 Location: Bell Gardens 90201
+🔖 Typ: review_count
+------------------------------------------------------------
+
+🧾 ASIN: B09JCBGL3P
+🔗 URL: https://www.amazon.com/dp/B09JCBGL3P?language=en_US
+⚠️ Fehler: Fehler bei BLM: invalid literal for int() with base 10: ''
+📍 Location: Bell Gardens 90201
+🔖 Typ: blm
+------------------------------------------------------------
+
+🧾 ASIN: B096T2MPQH
+🔗 URL: https://www.amazon.com/dp/B096T2MPQH?language=en_US
+⚠️ Fehler: Fehler bei BLM: invalid literal for int() with base 10: ''
+📍 Location: Bell Gardens 90201
+🔖 Typ: blm
+------------------------------------------------------------
+
+🧾 ASIN: B09FFQB39Q
+🔗 URL: https://www.amazon.com/dp/B09FFQB39Q?language=en_US
+⚠️ Fehler: Fehler bei BLM: invalid literal for int() with base 10: ''
+📍 Location: Bell Gardens 90201
+🔖 Typ: blm
+------------------------------------------------------------
+
+🧾 ASIN: B07ZG9FV3G
+🔗 URL: https://www.amazon.com/dp/B07ZG9FV3G?language=en_US
+⚠️ Fehler: Fehler bei BLM: invalid literal for int() with base 10: ''
+📍 Location: Bell Gardens 90201
+🔖 Typ: blm
+------------------------------------------------------------
+
+🧾 ASIN: B08XLDX5M2
+🔗 URL: https://www.amazon.com/dp/B08XLDX5M2?language=en_US
+⚠️ Fehler: Fehler bei BLM: invalid literal for int() with base 10: ''
+📍 Location: Bell Gardens 90201
+🔖 Typ: blm
+------------------------------------------------------------
+
+🧾 ASIN: B0B1H64YQH
+🔗 URL: https://www.amazon.com/dp/B0B1H64YQH?language=en_US
+⚠️ Fehler: Fehler bei BLM: invalid literal for int() with base 10: ''
+📍 Location: Bell Gardens 90201
+🔖 Typ: blm
+------------------------------------------------------------
+
+🧾 ASIN: B07XT8HNFV
+🔗 URL: https://www.amazon.com/dp/B07XT8HNFV?language=en_US
+⚠️ Fehler: Fehler bei BLM: invalid literal for int() with base 10: ''
+📍 Location: Bell Gardens 90201
+🔖 Typ: blm
+------------------------------------------------------------
+
+🧾 ASIN: B09HYCPS5V
+🔗 URL: https://www.amazon.com/dp/B09HYCPS5V?language=en_US
+⚠️ Fehler: Fehler bei BLM: invalid literal for int() with base 10: ''
+📍 Location: Bell Gardens 90201
+🔖 Typ: blm
+------------------------------------------------------------
+
+🧾 ASIN: B09R6R78Z1
+🔗 URL: https://www.amazon.com/dp/B09R6R78Z1?language=en_US
+⚠️ Fehler: Fehler bei BLM: invalid literal for int() with base 10: ''
+📍 Location: Bell Gardens 90201
+🔖 Typ: blm
+------------------------------------------------------------
+
+🧾 ASIN: B0DMSBG8NY
+🔗 URL: https://www.amazon.com/dp/B0DMSBG8NY?language=en_US
+⚠️ Fehler: Fehler bei BLM: invalid literal for int() with base 10: ''
+📍 Location: Bell Gardens 90201
+🔖 Typ: blm
+------------------------------------------------------------
+
+🧾 ASIN: B0BSHDPNLM
+🔗 URL: https://www.amazon.com/dp/B0BSHDPNLM?language=en_US
+⚠️ Fehler: Fehler bei BLM: invalid literal for int() with base 10: ''
+📍 Location: Bell Gardens 90201
+🔖 Typ: blm
+------------------------------------------------------------
+
+🧾 ASIN: B0DCHW9P3R
+🔗 URL: https://www.amazon.com/dp/B0DCHW9P3R?language=en_US
+⚠️ Fehler: Fehler bei BLM: invalid literal for int() with base 10: ''
+📍 Location: Bell Gardens 90201
+🔖 Typ: blm
+------------------------------------------------------------
+
+🧾 ASIN: B0B1JQ65C6
+🔗 URL: https://www.amazon.com/dp/B0B1JQ65C6?language=en_US
+⚠️ Fehler: Fehler bei BLM: invalid literal for int() with base 10: ''
+📍 Location: Bell Gardens 90201
+🔖 Typ: blm
+------------------------------------------------------------
+
+🧾 ASIN: B0CNPQKVC9
+🔗 URL: https://www.amazon.com/dp/B0CNPQKVC9?language=en_US
+⚠️ Fehler: Fehler bei BLM: invalid literal for int() with base 10: ''
+📍 Location: Bell Gardens 90201
+🔖 Typ: blm
+------------------------------------------------------------
+
+🧾 ASIN: B07Q3YTL2N
+🔗 URL: https://www.amazon.com/dp/B07Q3YTL2N?language=en_US
+⚠️ Fehler: Fehler bei BLM: invalid literal for int() with base 10: ''
+📍 Location: Bell Gardens 90201
+🔖 Typ: blm
+------------------------------------------------------------
+

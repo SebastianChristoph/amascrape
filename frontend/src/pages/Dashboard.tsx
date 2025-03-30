@@ -5,10 +5,9 @@ import {
   Card,
   CardContent,
   CircularProgress,
-  Container,
   Divider,
   Paper,
-  Typography,
+  Typography
 } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import { keyframes } from "@mui/system";
@@ -26,25 +25,17 @@ import { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
 import { AiOutlineCheckCircle } from "react-icons/ai";
 import {
-  FaBox,
-  FaBoxes,
-  FaChartLine,
-  FaDollarSign,
   FaLayerGroup,
 } from "react-icons/fa";
 import { MdAdd, MdWarningAmber } from "react-icons/md";
 import { RiRobot2Fill } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
-import {
-  commonBackgroundStyle,
-  moveBackgroundKeyframes,
-} from "../components/BackgroundPattern";
 
+import { useTheme } from "@mui/material/styles";
 import ClusterCard from "../components/dashboard/ClusterCard";
+import StatCardLarge from "../components/dashboard/StatCardLarge";
 import { useSnackbar } from "../providers/SnackbarProvider";
 import MarketService from "../services/MarketService";
-import { useTheme } from "@mui/material/styles";
-import StatCardLarge from "../components/dashboard/StatCardLarge";
 
 ChartJS.register(
   CategoryScale,
@@ -341,9 +332,11 @@ const Dashboard: React.FC = () => {
       {marketClusters.length > 0 && (
         <Box>
           <Typography variant="h1">Market Clusters Overview</Typography>
+      
           <Typography variant="subtitle1" sx={{ mb: 3 }}>
             Here is a quick snapshot of your Total markets Revenue development
           </Typography>
+         
 
           <Grid container spacing={3}>
             <Grid size={{ xs: 12, sm: 6, md: 3 }}>
@@ -547,6 +540,7 @@ const Dashboard: React.FC = () => {
             <Typography variant="h1" sx={{ mb: 4 }}>
               My Market Clusters
             </Typography>
+            
 
             <Button
               variant="contained"
@@ -571,7 +565,9 @@ const Dashboard: React.FC = () => {
             >
               Add Market Cluster
             </Button>
+           
           </Box>
+        
           {loading ? (
             <Box
               sx={{

@@ -112,6 +112,9 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
               visibility: "visible",
             },
           },
+           "&:hover .card-id": {
+                    opacity: 1,
+                  },
         }}
         onClick={onClick}
       >
@@ -288,6 +291,20 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
               )}
             </Box>
           )}
+
+            <Typography
+                      className="card-id"
+                      sx={{
+                        fontSize: 10,
+                        color: "gray",
+                        textAlign: "end",
+                        opacity: 0,
+                        transition: "opacity 0.3s ease-in-out",
+                      }}
+                    >
+                      Card-Id: DDD5
+          </Typography>
+          
         </CardContent>
       </Card>
 

@@ -24,13 +24,24 @@ function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(UserService.isAuthenticated());
   const [user, setUser] = useState(UserService.getUser());
 
+    // Theme Mode
+    const [mode, setMode] = useState<"light" | "dark">(() => {
+      return (localStorage.getItem("themeMode") as "light" | "dark") || "dark";
+    });
+  
+    const toggleTheme = () => {
+      const newMode = mode === "light" ? "dark" : "light";
+      setMode(newMode);
+      localStorage.setItem("themeMode", newMode);
+    };
+
   useEffect(() => {
     setIsAuthenticated(UserService.isAuthenticated());
     setUser(UserService.getUser());
   }, []);
 
   return (
-    <ThemeProvider theme={darkTheme}>
+    <ThemeProvider theme={mode === "light" ? lightTheme : darkTheme}>
       <CssBaseline />
       <SnackbarProvider>
         <Router>
@@ -41,14 +52,21 @@ function App() {
             />
             <Route path="/register" element={<Register />} />
 
-            {/* ✅ setUser wird an Layout weitergegeben */}
-            <Route element={<Layout setIsAuthenticated={setIsAuthenticated} setUser={setUser} />}>
+            {/* ✨ Theme-Controls werden an Layout weitergereicht */}
+            <Route
+              element={
+                <Layout
+                  setIsAuthenticated={setIsAuthenticated}
+                  setUser={setUser}
+                  mode={mode}
+                  toggleTheme={toggleTheme}
+                />
+              }
+            >
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/cluster/:clusterId" element={<ClusterDetails />} />
               <Route path="/add-market-cluster" element={<AddMarketCluster />} />
               <Route path="/admin/logs/:filename" element={<LogViewer />} />
-
-              {/* ✅ Admin-Route mit aktuellem User */}
               <Route
                 path="/admin"
                 element={user?.username === "admin" ? <Admin /> : <Navigate to="/dashboard" />}

@@ -15,39 +15,94 @@ declare module '@mui/material/styles' {
 export const lightTheme = createTheme({
   palette: {
     mode: "light",
-    primary: { main: "#1470CC" }, // Seriöses Blau
-    secondary: { main: "#017D7B" }, // Professionelles Orange für Akzente
-    accent: { main: "#455A64" }, // Dezentes Grau-Blau für zusätzliche Elemente
-    background: { default: "#F5F5F5", paper: "#FFFFFF" }, // Helles Grau & Weiß für Professionalität
-    text: { primary: "#212121", secondary: "#757575" }, // Dunkles Grau für Lesbarkeit
+
+    primary: {
+      main: "#1565C0",     // kräftiges Blau für Hauptaktionen
+      light: "#5E92F3",    // für Hover-Zustände
+      dark: "#003c8f",     // für aktive oder gedrückte Zustände
+      contrastText: "#FFFFFF",
+    },
+
+    secondary: {
+      main: "#00897B",     // Türkisgrün für sekundäre Aktionen
+      light: "#4DB6AC",
+      dark: "#005B4F",
+      contrastText: "#FFFFFF",
+    },
+
+    accent: {
+      main: "#ff8c1a",     // sanftes Grau-Blau für dekorative Elemente
+      light: "#CFD8DC",
+      dark: "#455A64",
+      contrastText: "#FFFFFF",
+    },
+
+    background: {
+      default: "#FAFAFA",  // sehr helles Grau für Hauptfläche
+      paper: "#ffffff",    // Karten, modale Fenster etc.
+    },
+
+    text: {
+      primary: "#000000",  // leicht abgeschwächtes Schwarz für Titel, Haupttext
+      secondary: "#000000",// etwas helleres Grau für Nebentext
+      disabled: "#BDBDBD", // deaktivierter Text
+    },
+
+    divider: "#E0E0E0",     // dezente Linien, z.B. bei <Divider />
   },
+
   typography: {
-    fontFamily: 'sans-serif',
+    fontFamily: "Roboto, sans-serif",
+
     h1: {
-      fontSize: "2.5rem",
+      fontSize: "2.25rem",
       fontWeight: 700,
-      color: "#FFFFFF",
+      color: "#1A1A1A",
     },
     h2: {
-      fontSize: "2rem",
+      fontSize: "1.75rem",
       fontWeight: 600,
-      color: "#212121",
+      color: "#1A1A1A",
     },
     h3: {
-      fontSize: "1.75rem",
+      fontSize: "1.5rem",
       fontWeight: 500,
       color: "#212121",
     },
     body1: {
       fontSize: "1rem",
-      color: "#424242", // Dunkleres Grau für normalen Text
+      lineHeight: 1.6,
+      color: "#424242",
+    },
+    body2: {
+      fontSize: "0.875rem",
+      lineHeight: 1.5,
+      color: "#616161",
     },
     button: {
-      textTransform: "none", // Verhindert Großbuchstaben in Buttons
+      textTransform: "none",
       fontWeight: 600,
     },
   },
+
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          borderRadius: 8,
+        },
+      },
+    },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          borderRadius: 12,
+        },
+      },
+    },
+  },
 });
+
 
 // Dark-Theme
 
