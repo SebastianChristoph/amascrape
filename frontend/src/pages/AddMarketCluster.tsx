@@ -26,7 +26,7 @@ import {
   commonBackgroundStyle,
   moveBackgroundKeyframes,
 } from "../components/BackgroundPattern";
-
+import { useTheme } from "@mui/material/styles";
 const AddMarketCluster: React.FC = () => {
   const navigate = useNavigate();
   const { showSnackbar } = useSnackbar();
@@ -42,7 +42,7 @@ const AddMarketCluster: React.FC = () => {
 
   // Überprüfen, ob der eingegebene Wert eine Liste ist
   const isListInput = newKeyword.includes(",");
-
+  const theme = useTheme();
   // ✅ Automatisches Fetching für aktive Scraping-Prozesse
   useEffect(() => {
     const fetchActiveScrapingClusters = async () => {
@@ -170,29 +170,13 @@ const AddMarketCluster: React.FC = () => {
         minHeight: "100vh",
         position: "relative",
         overflow: "hidden",
-        backgroundColor: "#f8f9fa",
-        "&::before": {
-          ...commonBackgroundStyle,
-          opacity: 0.6,
-          filter: "contrast(100%)",
-        },
-        "@keyframes moveBackground": moveBackgroundKeyframes,
+        backgroundColor: "background.default",
       }}
     >
       <Container maxWidth="lg" sx={{ position: "relative", zIndex: 1, py: 4 }}>
-        <Paper elevation={3} sx={{ p: 4, mt: 4 }}>
-          <Typography
-            variant="h4"
-            sx={{
-              mb: 4,
-              backgroundColor: "primary.main",
-              color: "white",
-              padding: 2,
-            }}
-          >
-            Create New Market Cluster
-          </Typography>
-          <Typography variant="body1" color="text.secondary" sx={{ mb: 4 }}>
+        <Box>
+          <Typography variant="h1">Create New Market Cluster</Typography>
+          <Typography variant="body1" color="text.primary" sx={{ mb: 4 }}>
             Define your market cluster* by adding keywords. You can add them one
             by one or use a comma-separated list.
           </Typography>
@@ -207,19 +191,37 @@ const AddMarketCluster: React.FC = () => {
             <form onSubmit={handleSubmit}>
               <Grid container spacing={4}>
                 {/* Cluster Name Section */}
-                <Grid size={{ xs: 12 }}>
-                  <TextField
-                    fullWidth
-                    label="Cluster Title"
-                    variant="outlined"
-                    value={clusterName}
-                    onChange={handleTitleChange}
-                    required
-                    placeholder="e.g., Electronics Accessories"
-                  />
-                </Grid>
 
-                {/* 🆕 Cluster Type Selection */}
+                <Paper
+                  elevation={2}
+                  sx={{
+                    width: "100%",
+                    p: 2,
+                    backgroundColor: "background.paper", border: "1px solid rgba(255, 255, 255, 0.25)",
+                  }}
+                >
+                  <Grid size={{ xs: 12 }}>
+                    <TextField
+                      fullWidth
+                      label="Cluster Title"
+                      variant="filled"
+                      value={clusterName}
+                      onChange={handleTitleChange}
+                      required
+                      placeholder="e.g., Electronics Accessories"
+                    />
+                  </Grid>
+                </Paper>
+
+                  {/* 🆕 Cluster Type Selection */}
+                  <Paper
+                  elevation={2}
+                  sx={{
+                    width: "100%",
+                    p: 2,
+                    backgroundColor: "background.paper",  border: "1px solid rgba(255, 255, 255, 0.25)",
+                  }}
+                >
                 <Grid size={{ xs: 12 }}>
                   <FormControl component="fieldset">
                     <FormLabel component="legend">Cluster Type</FormLabel>
@@ -245,16 +247,16 @@ const AddMarketCluster: React.FC = () => {
                       />
                     </RadioGroup>
                   </FormControl>
-                  <Typography variant="body2" color="warning" gutterBottom>
-                    Choseable but o logic implemented yet
+                  <Typography variant="body2" color="text.default" gutterBottom>
+                    Choseable but no logic implemented yet
                   </Typography>
                 </Grid>
-
+</Paper>
                 {/* Bulk Input Section */}
                 <Grid size={{ xs: 12 }}>
                   <Paper
                     elevation={2}
-                    sx={{ p: 2, backgroundColor: "background.paper" }}
+                    sx={{ p: 2, backgroundColor: "background.paper",  border: "1px solid rgba(255, 255, 255, 0.25)", }}
                   >
                     <Box
                       sx={{
@@ -268,8 +270,8 @@ const AddMarketCluster: React.FC = () => {
                         Bulk Add Keywords
                       </Typography>
                       <Tooltip title="Enter multiple keywords separated by commas">
-                        <IconButton size="small">
-                          <MdInfo />
+                        <IconButton size="small"  >
+                          <MdInfo color={theme.palette.secondary.main}/>
                         </IconButton>
                       </Tooltip>
                     </Box>
@@ -301,7 +303,7 @@ const AddMarketCluster: React.FC = () => {
 
                 {/* Keywords List */}
                 <Grid size={{ xs: 12 }}>
-                  <Paper elevation={2} sx={{ p: 2 }}>
+                  <Paper elevation={2} sx={{ p: 2 ,  border: "1px solid rgba(255, 255, 255, 0.25)",}}>
                     <Typography
                       variant="subtitle1"
                       sx={{ mb: 2, fontWeight: 500 }}
@@ -309,7 +311,7 @@ const AddMarketCluster: React.FC = () => {
                       Added Keywords ({keywords.length}/5)
                     </Typography>
                     {keywords.length === 0 ? (
-                      <Alert severity="info">
+                      <Alert variant="outlined" severity="warning">
                         No keywords added yet. Add keywords using the form above
                         or use the bulk input option.
                       </Alert>
@@ -324,11 +326,12 @@ const AddMarketCluster: React.FC = () => {
                               display: "flex",
                               alignItems: "center",
                               gap: 1,
-                              backgroundColor: "primary.main",
-                              color: "white",
+                              backgroundColor: "background.paper",
+                              color: theme.palette.text.secondary,
+                              border: "1px solid rgba(255, 255, 255, 0.25)",
                             }}
                           >
-                            <Typography variant="body2">{keyword}</Typography>
+                            <Typography variant="h6">{keyword}</Typography>
                             <IconButton
                               size="small"
                               onClick={() => handleRemoveKeyword(keyword)}
@@ -367,7 +370,7 @@ const AddMarketCluster: React.FC = () => {
               </Grid>
             </form>
           )}
-        </Paper>
+        </Box>
       </Container>
 
       {/* Legal Disclaimer */}
@@ -392,7 +395,7 @@ const AddMarketCluster: React.FC = () => {
             Important Notice
           </Typography>
         </Box>
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant="body2" color="text.primary">
           <strong>* Disclaimer:</strong> This tool exclusively supports and
           analyzes products from the U.S. Amazon marketplace (
           <em>amazon.com</em>). Data, rankings, and insights are limited to the

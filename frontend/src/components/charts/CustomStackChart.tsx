@@ -41,7 +41,7 @@ export default function CustomStackBars({ data }: CustomStackBarsProps) {
       }))}
       xAxis={[{ scaleType: "band", dataKey: "date" }]}
       slotProps={{ legend: { hidden: false } }}
-      height={300}
+      height={245}
     />
   );
   

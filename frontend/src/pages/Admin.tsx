@@ -202,7 +202,7 @@ export default function Admin() {
 
   return (
     <Container>
-      <Typography variant="h4" gutterBottom>
+      <Typography variant="h1" gutterBottom>
         Admin Panel
       </Typography>
 
@@ -214,6 +214,7 @@ export default function Admin() {
         <AccordionDetails>
           <TextField
             label="Username"
+            variant="filled"
             fullWidth
             value={username}
             onChange={(e) => setUsername(e.target.value)}
@@ -221,6 +222,7 @@ export default function Admin() {
           />
           <TextField
             label="Email"
+            variant="filled"
             fullWidth
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -229,6 +231,7 @@ export default function Admin() {
           <TextField
             label="Password"
             type="password"
+            variant="filled"
             fullWidth
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -301,7 +304,7 @@ export default function Admin() {
                 <li key={file}>
                   <Link
                     to={`/admin/logs/${file}`}
-                    style={{ textDecoration: "none" }}
+                    style={{ textDecoration: "none", color: "white" }}
                   >
                     {file}
                   </Link>
@@ -324,7 +327,7 @@ export default function Admin() {
                 <li key={file}>
                   <Link
                     to={`/admin/logs/${file}`}
-                    style={{ textDecoration: "none" }}
+                    style={{ textDecoration: "none", color: "white" }}
                   >
                     {file}
                   </Link>
