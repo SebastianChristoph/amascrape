@@ -12,7 +12,7 @@ interface StatCardProps {
   value: string | number;
   cardId?: string;
   isCurrency?: boolean;
-  hasSparkline?: boolean
+  hasSparkline?: boolean;
 }
 
 const StatCardLarge: React.FC<StatCardProps> = ({
@@ -21,7 +21,7 @@ const StatCardLarge: React.FC<StatCardProps> = ({
   value,
   cardId,
   isCurrency = false,
-  hasSparkline = false
+  hasSparkline = false,
 }) => {
   const theme = useTheme();
   const IconComponent = iconMap[iconKey] || fallbackIcon;
@@ -80,8 +80,18 @@ const StatCardLarge: React.FC<StatCardProps> = ({
         <Typography variant="body2" fontWeight={500}>
           {title}
         </Typography>
+      </Box>
 
-        {cardId && (
+      <Grid container spacing={4}>
+        <Grid size={{ xs: 12, md: 7 }}>
+          <Typography
+            variant="h1"
+            color="text.secondary"
+            sx={{ fontWeight: 600, fontSize: "2rem" }}
+          >
+            {formattedValue}
+          </Typography>
+          {cardId && (
           <Typography
             className="card-id"
             sx={{
@@ -95,17 +105,6 @@ const StatCardLarge: React.FC<StatCardProps> = ({
             Card-Id: {cardId}
           </Typography>
         )}
-      </Box>
-
-      <Grid container spacing={4}>
-        <Grid size={{ xs: 12, md: 7 }}>
-        <Typography
-          variant="h1"
-          color="text.secondary"
-          sx={{ fontWeight: 600, fontSize: "2rem" }}
-        >
-          {formattedValue}
-        </Typography>
         </Grid>
 
         {hasSparkline && (
@@ -117,9 +116,7 @@ const StatCardLarge: React.FC<StatCardProps> = ({
         )}
       </Grid>
 
-      <Box>
-      
-      </Box>
+     
     </Paper>
   );
 };

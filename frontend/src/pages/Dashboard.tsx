@@ -150,6 +150,16 @@ const Dashboard: React.FC = () => {
         gap: 12,
       }}
     >
+        {/* Development Preview Accordion */}
+        <Box sx={{ mt: 4 }}>
+        <ScrapingProcessDashboard
+          activeCluster={{
+            clustername: "Test Market Cluster",
+            status: "processing",
+          }}
+        />
+      </Box>
+      
       {/* Overview Section */}
       {marketClusters.length > 0 && (
         <DashboardInsights dashboardData={dashboardData} />
@@ -180,15 +190,7 @@ const Dashboard: React.FC = () => {
         </Box>
       )}
 
-      {/* Development Preview Accordion */}
-      <Box sx={{ mt: 4 }}>
-        <ScrapingProcessDashboard
-          activeCluster={{
-            clustername: "Test Market Cluster",
-            status: "processing",
-          }}
-        />
-      </Box>
+    
     </Box>
   );
 };
