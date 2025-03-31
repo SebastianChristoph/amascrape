@@ -22,7 +22,6 @@ import {
   Tooltip,
 } from "chart.js";
 import { useEffect, useState } from "react";
-import { Line } from "react-chartjs-2";
 import { AiOutlineCheckCircle } from "react-icons/ai";
 import {
   FaLayerGroup,
@@ -33,6 +32,8 @@ import { useNavigate } from "react-router-dom";
 
 import { useTheme } from "@mui/material/styles";
 import ClusterCard from "../components/dashboard/ClusterCard";
+import DashboardInsights from "../components/dashboard/DashboardInsights";
+import FirstMarketCluster from "../components/dashboard/FirstMarketCluster";
 import StatCardLarge from "../components/dashboard/StatCardLarge";
 import { useSnackbar } from "../providers/SnackbarProvider";
 import MarketService from "../services/MarketService";
@@ -46,18 +47,6 @@ ChartJS.register(
   Tooltip,
   Legend
 );
-
-const pulseAnimation = keyframes`
-  0% {
-    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4);
-  }
-  70% {
-    box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
-  }
-`;
 
 // Add robot animation keyframes
 const robotAnimation = keyframes`
@@ -80,9 +69,6 @@ const Dashboard: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [isFetching, setIsFetching] = useState<boolean>(true);
   const [dashboardData, setDashboardData] = useState<any>(null);
-  const [chartValues, setChartValues] = useState<number[]>([
-    15, 20, 25, 30, 35, 40,
-  ]);
   const theme = useTheme();
 
   const [activeCluster, setActiveCluster] = useState<{
@@ -90,46 +76,6 @@ const Dashboard: React.FC = () => {
     status: string;
     keywords: { [keyword: string]: string };
   } | null>(null);
-
-  // Function to generate new values with overall upward trend but allowing some decreases
-  const generateGrowingValues = () => {
-    return chartValues.map((currentValue, index) => {
-      // 30% chance of a small decrease, 70% chance of increase
-      const isDecrease = Math.random() < 0.3;
-
-      if (isDecrease) {
-        // Small decrease (max 15% down)
-        const decrease = currentValue * (Math.random() * 0.15);
-        return Math.max(15, currentValue - decrease);
-      } else {
-        // Normal growth pattern
-        const minGrowth = 1; // Minimum growth
-        const maxGrowth = 12; // Maximum growth
-        const growth = minGrowth + Math.random() * (maxGrowth - minGrowth);
-        const newValue = currentValue + growth;
-
-        // Reset if too high, but ensure new value is higher than previous point (if exists)
-        if (newValue > 90) {
-          const baseValue = 15;
-          return index === 0
-            ? baseValue
-            : Math.max(chartValues[index - 1] + 2, baseValue);
-        }
-
-        return newValue;
-      }
-    });
-  };
-
-  useEffect(() => {
-    if (marketClusters.length === 0 && !isFetching) {
-      const timer = setInterval(() => {
-        setChartValues(generateGrowingValues());
-      }, 2500);
-
-      return () => clearInterval(timer);
-    }
-  }, [marketClusters.length, isFetching]);
 
   // Fetch all data
   const fetchData = async () => {
@@ -207,115 +153,7 @@ const Dashboard: React.FC = () => {
   }, [isFetching]);
 
   if (marketClusters.length === 0 && !isFetching) {
-    const chartData = {
-      labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
-      datasets: [
-        {
-          label: "Market Growth",
-          data: chartValues,
-          borderColor: "white",
-          backgroundColor: "rgba(255, 255, 255, 0.1)",
-          tension: 0.3,
-          fill: true,
-          pointRadius: 4,
-          pointBackgroundColor: "white",
-        },
-      ],
-    };
-
-    const chartOptions = {
-      responsive: true,
-      maintainAspectRatio: false,
-      animation: {
-        duration: 1500,
-        easing: "easeInOutQuart" as const,
-      },
-      scales: {
-        y: {
-          beginAtZero: true,
-          max: 100,
-          grid: {
-            color: "rgba(255, 255, 255, 0.1)",
-          },
-          ticks: {
-            display: false,
-          },
-          border: {
-            display: false,
-          },
-        },
-        x: {
-          grid: {
-            color: "rgba(255, 255, 255, 0.1)",
-          },
-          ticks: {
-            color: "white",
-          },
-        },
-      },
-      plugins: {
-        legend: {
-          display: false,
-        },
-      },
-    };
-
-    return (
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          minHeight: "calc(100vh - 64px)",
-          p: 3,
-        }}
-      >
-        <Paper
-          elevation={3}
-          sx={{
-            p: 4,
-            maxWidth: 600,
-            width: "100%",
-            background: "linear-gradient(135deg, #0D1B2A 0%, #143a63 100%)",
-            color: "white",
-            borderRadius: 2,
-            textAlign: "center",
-          }}
-        >
-          <Box
-            sx={{
-              height: 200,
-              mb: 3,
-            }}
-          >
-            <Line data={chartData} options={chartOptions} />
-          </Box>
-          <Typography variant="h4" gutterBottom>
-            Welcome to MarketScope
-          </Typography>
-          <Typography variant="body1" sx={{ mb: 4, color: "white" }}>
-            You haven't created any market clusters yet. Start your journey by
-            creating your first one!
-          </Typography>
-          <Button
-            variant="contained"
-            color="secondary"
-            size="large"
-            onClick={() => navigate("/add-market-cluster")}
-            sx={{
-              backgroundColor: "white",
-              color: "primary.main",
-              animation: `${pulseAnimation} 2s infinite`,
-              "&:hover": {
-                backgroundColor: "grey.100",
-              },
-            }}
-          >
-            Create Your First Market Cluster
-          </Button>
-        </Paper>
-      </Box>
-    );
+    return <FirstMarketCluster />;
   }
 
   return (
@@ -330,54 +168,7 @@ const Dashboard: React.FC = () => {
     >
       {/* Overview Section */}
       {marketClusters.length > 0 && (
-        <Box>
-          <Typography variant="h1">Market Clusters Overview</Typography>
-      
-          <Typography variant="subtitle1" sx={{ mb: 3 }}>
-            Here is a quick snapshot of your Total markets Revenue development
-          </Typography>
-         
-
-          <Grid container spacing={3}>
-            <Grid size={{ xs: 12, sm: 4, md: 3 }}>
-              <StatCardLarge
-                iconKey="static"
-                title="30D Revenue Change"
-                value={dashboardData?.total_revenue || "0.00"}
-                cardId="DDD1"
-                isCurrency
-                hasSparkline
-              />
-            </Grid>
-
-            <Grid size={{ xs: 6, sm: 4, md: 2 }}>
-              <StatCardLarge
-                iconKey="static"
-                title="Total Clusters"
-                value={dashboardData?.total_clusters || "0"}
-                cardId="DDD2"
-              />
-            </Grid>
-
-            <Grid size={{ xs: 6, sm: 4, md: 2 }}>
-              <StatCardLarge
-                iconKey="static"
-                title="Market Clusters"
-                value={dashboardData?.total_clusters || "0"}
-                cardId="DDD3"
-              />
-            </Grid>
-
-            <Grid size={{ xs: 6, sm: 4, md: 2 }}>
-              <StatCardLarge
-                iconKey="static"
-                title="Tracked Products"
-                value={dashboardData?.total_unique_products || "0"}
-                cardId="DDD4"
-              />
-            </Grid>
-          </Grid>
-        </Box>
+        <DashboardInsights dashboardData={dashboardData} />
       )}
 
       {/* Scraping Status Section */}
@@ -549,9 +340,6 @@ const Dashboard: React.FC = () => {
               startIcon={<MdAdd size={24} />}
               onClick={() => navigate("/add-market-cluster")}
               sx={{
-                // position: "fixed",
-                // bottom: 32,
-                // right: 32,
                 padding: "12px 24px",
                 height: "50px",
                 boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
