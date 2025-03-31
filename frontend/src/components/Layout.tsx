@@ -10,6 +10,7 @@ import {
   IoAddCircleSharp,
   IoPersonCircle,
   IoWalletSharp,
+  IoInformationCircle,
 } from "react-icons/io5";
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 import { MdDarkMode, MdLightMode } from "react-icons/md";
@@ -163,6 +164,36 @@ export default function Layout({
                   <IoAddCircleSharp size={20} style={{ minWidth: 24, color: theme.palette.accent.main }} />
                   {drawerOpen && (
                     <Typography variant="body2" sx={{ color: "#FFFFFF" }}>Add Cluster</Typography>
+                  )}
+                </Box>
+              </Tooltip>
+
+              <Tooltip
+                title="Cluster Information"
+                placement="right"
+                disableHoverListener={drawerOpen}
+              >
+                <Box
+                  component={Link}
+                  to="/cluster-info"
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: drawerOpen ? 1.5 : 0,
+                    px: 2,
+                    py: 1.2,
+                    borderRadius: 2,
+                    color: "#FFFFFF",
+                    textDecoration: "none",
+                    justifyContent: drawerOpen ? "flex-start" : "center",
+                    "&:hover": {
+                      backgroundColor: "rgba(255,255,255,0.1)",
+                    },
+                  }}
+                >
+                  <IoInformationCircle size={20} style={{ minWidth: 24, color: theme.palette.accent.main }} />
+                  {drawerOpen && (
+                    <Typography variant="body2" sx={{ color: "#FFFFFF" }}>Cluster Info</Typography>
                   )}
                 </Box>
               </Tooltip>

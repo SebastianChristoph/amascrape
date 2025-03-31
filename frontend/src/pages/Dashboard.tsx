@@ -33,18 +33,6 @@ ChartJS.register(
   Legend
 );
 
-// Add robot animation keyframes
-const robotAnimation = keyframes`
-  0% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-  100% {
-    transform: translateY(0px);
-  }
-`;
 
 const Dashboard: React.FC = () => {
   const navigate = useNavigate();

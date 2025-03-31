@@ -18,6 +18,7 @@ import { lightTheme, darkTheme } from "./theme";
 import Register from "./pages/Register";
 import Admin from "./pages/Admin";
 import LogViewer from "./pages/LogViewer";
+import ClusterInfo from "./pages/ClusterInfo";
 
 
 function App() {
@@ -66,6 +67,7 @@ function App() {
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/cluster/:clusterId" element={<ClusterDetails />} />
               <Route path="/add-market-cluster" element={<AddMarketCluster />} />
+              <Route path="/cluster-info" element={<ClusterInfo />} />
               <Route path="/admin/logs/:filename" element={<LogViewer />} />
               <Route
                 path="/admin"
