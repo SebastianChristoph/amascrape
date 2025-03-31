@@ -15,73 +15,74 @@ declare module '@mui/material/styles' {
 export const lightTheme = createTheme({
   palette: {
     mode: "light",
-
+    
     primary: {
-      main: "#1565C0",     // kräftiges Blau für Hauptaktionen
-      light: "#5E92F3",    // für Hover-Zustände
-      dark: "#003c8f",     // für aktive oder gedrückte Zustände
+      main: "#2563EB",     // Modern blue - primary brand color
+      light: "#60A5FA",    // Lighter blue for hover states
+      dark: "#1D4ED8",     // Darker blue for active states
       contrastText: "#FFFFFF",
     },
 
     secondary: {
-      main: "#00897B",     // Türkisgrün für sekundäre Aktionen
-      light: "#4DB6AC",
-      dark: "#005B4F",
+      main: "#059669",     // Professional green - for success states
+      light: "#34D399",
+      dark: "#047857",
       contrastText: "#FFFFFF",
     },
 
     accent: {
-      main: "#ff8c1a",     // sanftes Grau-Blau für dekorative Elemente
-      light: "#CFD8DC",
-      dark: "#455A64",
+      main: "#F59E0B",     // Warm orange - for highlights and icons
+      light: "#FBBF24",
+      dark: "#D97706",
       contrastText: "#FFFFFF",
     },
 
     background: {
-      default: "#FAFAFA",  // sehr helles Grau für Hauptfläche
-      paper: "#ffffff",    // Karten, modale Fenster etc.
+      default: "#F8FAFC",  // Very light gray for main background
+      paper: "#FFFFFF",    // Pure white for cards and surfaces
     },
 
     text: {
-      primary: "#000000",  // leicht abgeschwächtes Schwarz für Titel, Haupttext
-      secondary: "#000000",// etwas helleres Grau für Nebentext
-      disabled: "#BDBDBD", // deaktivierter Text
+      primary: "#1E293B",  // Dark slate for primary text
+      secondary: "#64748B", // Medium gray for secondary text
+      disabled: "#94A3B8", // Light gray for disabled text
     },
 
-    divider: "#E0E0E0",     // dezente Linien, z.B. bei <Divider />
+    divider: "#E2E8F0",    // Light gray for dividers
   },
 
   typography: {
-    fontFamily: "Roboto, sans-serif",
-
+    fontFamily: "Inter, system-ui, -apple-system, sans-serif",
+    
     h1: {
       fontSize: "2.25rem",
       fontWeight: 700,
-      color: "#1A1A1A",
+      letterSpacing: "-0.025em",
     },
     h2: {
-      fontSize: "1.75rem",
+      fontSize: "1.875rem",
       fontWeight: 600,
-      color: "#1A1A1A",
+      letterSpacing: "-0.025em",
     },
     h3: {
       fontSize: "1.5rem",
-      fontWeight: 500,
-      color: "#212121",
+      fontWeight: 600,
+      letterSpacing: "-0.025em",
     },
     body1: {
       fontSize: "1rem",
-      lineHeight: 1.6,
-      color: "#424242",
+      lineHeight: 1.5,
+      letterSpacing: "0.01em",
     },
     body2: {
       fontSize: "0.875rem",
       lineHeight: 1.5,
-      color: "#616161",
+      letterSpacing: "0.01em",
     },
     button: {
       textTransform: "none",
       fontWeight: 600,
+      letterSpacing: "0.025em",
     },
   },
 
@@ -90,6 +91,8 @@ export const lightTheme = createTheme({
       styleOverrides: {
         root: {
           borderRadius: 8,
+          padding: "8px 16px",
+          fontSize: "0.875rem",
         },
       },
     },
@@ -97,15 +100,46 @@ export const lightTheme = createTheme({
       styleOverrides: {
         root: {
           borderRadius: 12,
+          boxShadow: "0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06)",
         },
       },
     },
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          borderRadius: 12,
+          boxShadow: "0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06)",
+        },
+      },
+    },
+    MuiDrawer: {
+      styleOverrides: {
+        paper: {
+          backgroundColor: "#1E293B",
+          color: "#FFFFFF",
+        }
+      }
+    },
+    MuiTypography: {
+      defaultProps: {
+        variantMapping: {
+          body2: 'div',
+        },
+      },
+      styleOverrides: {
+        root: {
+          '&[class*="MuiTypography-root"]': {
+            '&[style*="color: white"]': {
+              color: "#FFFFFF !important",
+            }
+          }
+        }
+      }
+    }
   },
 });
 
-
 // Dark-Theme
-
 export const darkTheme = createTheme({
   palette: {
     mode: "dark",
