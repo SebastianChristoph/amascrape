@@ -1,236 +1,314 @@
-2025-03-30 17:05:18,593 [INFO] 📊 Scraping für **alle** Märkte in der Datenbank gestartet.
-2025-03-30 17:05:18,629 [INFO] 🚀 Starte Markt-Update für 14 Märkte...
-2025-03-30 17:05:18,630 [INFO]  ------------------------------------------------------------ 
-2025-03-30 17:05:18,630 [INFO] [1/14] Verarbeite Markt: creatine
-2025-03-30 17:05:18,630 [INFO] 🔍 Suche letzten MarketChange für Market ID 1...
-2025-03-30 17:05:18,639 [INFO] 💰 Berechne total_revenue für Market: creatine
-2025-03-30 17:05:18,749 [INFO] 🏆 Gesamtumsatz für creatine: 13609587.00€
-2025-03-30 17:05:18,750 [INFO] 🔍 Scraping market: creatine
-2025-03-30 17:06:05,362 [INFO] ✅ Scraping abgeschlossen für creatine in 46.61 Sekunden
-2025-03-30 17:06:05,362 [INFO] 🔎 Vergleiche alte und neue Daten für MarketChange ID 102
-2025-03-30 17:06:05,363 [INFO] ✅ Neue Produkte gefunden!
-2025-03-30 17:06:05,363 [INFO] ⚠️ Entfernte Produkte: B06ZYRC9NT, B0BQPT34V7, B010VEAXUG, B09SBQW7KV, B0CCCNKD73, B008S0I1Q4, B099KRBL53, B019ZVU9QO, B0C7YGBKT4
-2025-03-30 17:06:05,363 [INFO] ⚡ Erstelle neuen MarketChange für creatine
-2025-03-30 17:06:05,378 [INFO] 📢 Aktualisiere MarketChange für creatine...
-2025-03-30 17:06:09,469 [INFO] 🆕 Neues Produkt B00IP2I94O wird erstellt.
-2025-03-30 17:06:09,493 [INFO] 🆕 Neues Produkt B0DJDQCJX2 wird erstellt.
-2025-03-30 17:06:09,528 [INFO] ✅ MarketChange für creatine aktualisiert.
-2025-03-30 17:06:09,529 [INFO]  ------------------------------------------------------------ 
-2025-03-30 17:06:09,530 [INFO] [2/14] Verarbeite Markt: creatine pills
-2025-03-30 17:06:09,530 [INFO] 🔍 Suche letzten MarketChange für Market ID 2...
-2025-03-30 17:06:09,532 [INFO] 💰 Berechne total_revenue für Market: creatine pills
-2025-03-30 17:06:09,594 [INFO] 🏆 Gesamtumsatz für creatine pills: 1685372.00€
-2025-03-30 17:06:09,594 [INFO] 🔍 Scraping market: creatine pills
-2025-03-30 17:06:41,935 [INFO] ✅ Scraping abgeschlossen für creatine pills in 32.34 Sekunden
-2025-03-30 17:06:41,935 [INFO] 🔎 Vergleiche alte und neue Daten für MarketChange ID 103
-2025-03-30 17:06:41,936 [INFO] ✅ Neue Produkte gefunden!
-2025-03-30 17:06:41,936 [INFO] ⚠️ Entfernte Produkte: B0B9HWN8S9, B0DJTKMQ2R, B00DLWONF2
-2025-03-30 17:06:41,936 [INFO] ⚠️ Änderungen in den Top-Suchvorschlägen erkannt!
-2025-03-30 17:06:41,936 [INFO] ⚡ Erstelle neuen MarketChange für creatine pills
-2025-03-30 17:06:41,947 [INFO] 📢 Aktualisiere MarketChange für creatine pills...
-2025-03-30 17:06:41,984 [INFO] ✅ MarketChange für creatine pills aktualisiert.
-2025-03-30 17:06:41,984 [INFO]  ------------------------------------------------------------ 
-2025-03-30 17:06:41,985 [INFO] [3/14] Verarbeite Markt: creatine gummies
-2025-03-30 17:06:41,985 [INFO] 🔍 Suche letzten MarketChange für Market ID 3...
-2025-03-30 17:06:41,987 [INFO] 💰 Berechne total_revenue für Market: creatine gummies
-2025-03-30 17:06:42,043 [INFO] 🏆 Gesamtumsatz für creatine gummies: 3213241.50€
-2025-03-30 17:06:42,043 [INFO] 🔍 Scraping market: creatine gummies
-2025-03-30 17:07:14,077 [INFO] ✅ Scraping abgeschlossen für creatine gummies in 32.03 Sekunden
-2025-03-30 17:07:14,077 [INFO] 🔎 Vergleiche alte und neue Daten für MarketChange ID 104
-2025-03-30 17:07:14,078 [INFO] ✅ Neue Produkte gefunden!
-2025-03-30 17:07:14,078 [INFO] ⚠️ Entfernte Produkte: B0BZGDKLFN, B0CXMW392H, B0CTFNR4SK, B0DQ1749D9
-2025-03-30 17:07:14,079 [INFO] ⚠️ Änderungen in den Top-Suchvorschlägen erkannt!
-2025-03-30 17:07:14,079 [INFO] ⚡ Erstelle neuen MarketChange für creatine gummies
-2025-03-30 17:07:14,115 [INFO] 📢 Aktualisiere MarketChange für creatine gummies...
-2025-03-30 17:07:14,147 [INFO] 🆕 Neues Produkt B0CXMTFMPN wird erstellt.
-2025-03-30 17:07:14,185 [INFO] 🆕 Neues Produkt B0DZCY7CZ1 wird erstellt.
-2025-03-30 17:07:14,241 [INFO] ✅ MarketChange für creatine gummies aktualisiert.
-2025-03-30 17:07:14,242 [INFO]  ------------------------------------------------------------ 
-2025-03-30 17:07:14,243 [INFO] [4/14] Verarbeite Markt: banana bread
-2025-03-30 17:07:14,244 [INFO] 🔍 Suche letzten MarketChange für Market ID 4...
-2025-03-30 17:07:14,247 [INFO] 💰 Berechne total_revenue für Market: banana bread
-2025-03-30 17:07:14,362 [INFO] 🏆 Gesamtumsatz für banana bread: 377130.50€
-2025-03-30 17:07:14,363 [INFO] 🔍 Scraping market: banana bread
-2025-03-30 17:07:47,279 [INFO] ✅ Scraping abgeschlossen für banana bread in 32.92 Sekunden
-2025-03-30 17:07:47,279 [INFO] 🔎 Vergleiche alte und neue Daten für MarketChange ID 105
-2025-03-30 17:07:47,279 [INFO] ✅ Neue Produkte gefunden!
-2025-03-30 17:07:47,280 [INFO] ⚠️ Entfernte Produkte: B08BLXN4HK, B0CKM1LJZP, B0D2JLX9FX, B09RQ56YMW
-2025-03-30 17:07:47,280 [INFO] ⚠️ Änderungen in den Top-Suchvorschlägen erkannt!
-2025-03-30 17:07:47,280 [INFO] ⚡ Erstelle neuen MarketChange für banana bread
-2025-03-30 17:07:47,293 [INFO] 📢 Aktualisiere MarketChange für banana bread...
-2025-03-30 17:07:47,316 [INFO] 🆕 Neues Produkt B086542525 wird erstellt.
-2025-03-30 17:07:47,337 [INFO] 🆕 Neues Produkt B0957YHW2T wird erstellt.
-2025-03-30 17:07:47,444 [INFO] ✅ MarketChange für banana bread aktualisiert.
-2025-03-30 17:07:47,445 [INFO]  ------------------------------------------------------------ 
-2025-03-30 17:07:47,446 [INFO] [5/14] Verarbeite Markt: banana powder
-2025-03-30 17:07:47,446 [INFO] 🔍 Suche letzten MarketChange für Market ID 5...
-2025-03-30 17:07:47,449 [INFO] 💰 Berechne total_revenue für Market: banana powder
-2025-03-30 17:07:47,512 [INFO] 🏆 Gesamtumsatz für banana powder: 133356.00€
-2025-03-30 17:07:47,512 [INFO] 🔍 Scraping market: banana powder
-2025-03-30 17:08:30,624 [INFO] ✅ Scraping abgeschlossen für banana powder in 43.11 Sekunden
-2025-03-30 17:08:30,624 [INFO] 🔎 Vergleiche alte und neue Daten für MarketChange ID 106
-2025-03-30 17:08:30,625 [INFO] ✅ Neue Produkte gefunden!
-2025-03-30 17:08:30,625 [INFO] ⚠️ Entfernte Produkte: B0BTD4JH8V
-2025-03-30 17:08:30,625 [INFO] ⚠️ Änderungen in den Top-Suchvorschlägen erkannt!
-2025-03-30 17:08:30,625 [INFO] ⚡ Erstelle neuen MarketChange für banana powder
-2025-03-30 17:08:30,644 [INFO] 📢 Aktualisiere MarketChange für banana powder...
-2025-03-30 17:08:46,940 [INFO] ✅ MarketChange für banana powder aktualisiert.
-2025-03-30 17:08:46,941 [INFO]  ------------------------------------------------------------ 
-2025-03-30 17:08:46,942 [INFO] [6/14] Verarbeite Markt: avocado powder
-2025-03-30 17:08:46,942 [INFO] 🔍 Suche letzten MarketChange für Market ID 6...
-2025-03-30 17:08:46,946 [INFO] 💰 Berechne total_revenue für Market: avocado powder
-2025-03-30 17:08:47,023 [INFO] 🏆 Gesamtumsatz für avocado powder: 519678.50€
-2025-03-30 17:08:47,024 [INFO] 🔍 Scraping market: avocado powder
-2025-03-30 17:09:31,377 [INFO] ✅ Scraping abgeschlossen für avocado powder in 44.35 Sekunden
-2025-03-30 17:09:31,377 [INFO] 🔎 Vergleiche alte und neue Daten für MarketChange ID 107
-2025-03-30 17:09:31,377 [INFO] ✅ Neue Produkte gefunden!
-2025-03-30 17:09:31,377 [INFO] ⚠️ Entfernte Produkte: B07BN534X8, B0006IJZ9I, B0DWHG4JXN
-2025-03-30 17:09:31,377 [INFO] ⚡ Erstelle neuen MarketChange für avocado powder
-2025-03-30 17:09:31,389 [INFO] 📢 Aktualisiere MarketChange für avocado powder...
-2025-03-30 17:09:31,427 [INFO] ✅ MarketChange für avocado powder aktualisiert.
-2025-03-30 17:09:31,427 [INFO]  ------------------------------------------------------------ 
-2025-03-30 17:09:31,428 [INFO] [7/14] Verarbeite Markt: avocado creme
-2025-03-30 17:09:31,428 [INFO] 🔍 Suche letzten MarketChange für Market ID 7...
-2025-03-30 17:09:31,430 [INFO] 💰 Berechne total_revenue für Market: avocado creme
-2025-03-30 17:09:31,479 [INFO] 🏆 Gesamtumsatz für avocado creme: 721860.00€
-2025-03-30 17:09:31,479 [INFO] 🔍 Scraping market: avocado creme
-2025-03-30 17:10:12,214 [INFO] ✅ Scraping abgeschlossen für avocado creme in 40.73 Sekunden
-2025-03-30 17:10:12,215 [INFO] 🔎 Vergleiche alte und neue Daten für MarketChange ID 108
-2025-03-30 17:10:12,215 [INFO] ✅ Neue Produkte gefunden!
-2025-03-30 17:10:12,215 [INFO] ⚡ Erstelle neuen MarketChange für avocado creme
-2025-03-30 17:10:12,228 [INFO] 📢 Aktualisiere MarketChange für avocado creme...
-2025-03-30 17:10:12,262 [INFO] ✅ MarketChange für avocado creme aktualisiert.
-2025-03-30 17:10:12,263 [INFO]  ------------------------------------------------------------ 
-2025-03-30 17:10:12,263 [INFO] [8/14] Verarbeite Markt: washable pants
-2025-03-30 17:10:12,263 [INFO] 🔍 Suche letzten MarketChange für Market ID 8...
-2025-03-30 17:10:12,265 [INFO] ⚠️ Noch keine Scraping-Daten für washable pants. Warte auf Product Orchestrator.
-2025-03-30 17:10:12,265 [INFO]  ------------------------------------------------------------ 
-2025-03-30 17:10:12,265 [INFO] [9/14] Verarbeite Markt: washable underwear
-2025-03-30 17:10:12,266 [INFO] 🔍 Suche letzten MarketChange für Market ID 9...
-2025-03-30 17:10:12,267 [INFO] 💰 Berechne total_revenue für Market: washable underwear
-2025-03-30 17:10:12,314 [INFO] 🏆 Gesamtumsatz für washable underwear: 373249.50€
-2025-03-30 17:10:12,315 [INFO] 🔍 Scraping market: washable underwear
-2025-03-30 17:10:43,846 [INFO] ✅ Scraping abgeschlossen für washable underwear in 31.53 Sekunden
-2025-03-30 17:10:43,846 [INFO] 🔎 Vergleiche alte und neue Daten für MarketChange ID 109
-2025-03-30 17:10:43,847 [INFO] ✅ Neue Produkte gefunden!
-2025-03-30 17:10:43,847 [INFO] ⚠️ Entfernte Produkte: B0DHXW4PQ5, B0DZ1XQ4RL, B01J47191I, B08YYRM7R6, B0C9TCYV6J
-2025-03-30 17:10:43,847 [INFO] ⚠️ Änderungen in den Top-Suchvorschlägen erkannt!
-2025-03-30 17:10:43,848 [INFO] ⚡ Erstelle neuen MarketChange für washable underwear
-2025-03-30 17:10:43,862 [INFO] 📢 Aktualisiere MarketChange für washable underwear...
-2025-03-30 17:10:43,870 [INFO] 🆕 Neues Produkt B0D78JXBZX wird erstellt.
-2025-03-30 17:10:43,887 [INFO] 🆕 Neues Produkt B0DBTFHLJD wird erstellt.
-2025-03-30 17:10:43,909 [INFO] 🆕 Neues Produkt B0DD7L2N8Q wird erstellt.
-2025-03-30 17:10:43,926 [INFO] 🆕 Neues Produkt B0DJ56YBWS wird erstellt.
-2025-03-30 17:10:43,955 [INFO] ✅ MarketChange für washable underwear aktualisiert.
-2025-03-30 17:10:43,955 [INFO]  ------------------------------------------------------------ 
-2025-03-30 17:10:43,956 [INFO] [10/14] Verarbeite Markt: underpad
-2025-03-30 17:10:43,956 [INFO] 🔍 Suche letzten MarketChange für Market ID 10...
-2025-03-30 17:10:43,957 [INFO] 💰 Berechne total_revenue für Market: underpad
-2025-03-30 17:10:43,988 [INFO] 🏆 Gesamtumsatz für underpad: 5443641.00€
-2025-03-30 17:10:43,988 [INFO] 🔍 Scraping market: underpad
-2025-03-30 17:11:24,901 [WARNING] ❌ Scraping fehlgeschlagen für underpad
-2025-03-30 17:11:24,902 [INFO] 🔎 Vergleiche alte und neue Daten für MarketChange ID 110
-2025-03-30 17:11:24,902 [ERROR] ❌ Fehler beim Verarbeiten von Markt underpad: 'NoneType' object is not subscriptable
-2025-03-30 17:11:24,902 [INFO]  ------------------------------------------------------------ 
-2025-03-30 17:11:24,904 [INFO] [11/14] Verarbeite Markt: coconut seeds
-2025-03-30 17:11:24,904 [INFO] 🔍 Suche letzten MarketChange für Market ID 11...
-2025-03-30 17:11:24,906 [INFO] 💰 Berechne total_revenue für Market: coconut seeds
-2025-03-30 17:11:24,974 [INFO] 🏆 Gesamtumsatz für coconut seeds: 282948.00€
-2025-03-30 17:11:24,975 [INFO] 🔍 Scraping market: coconut seeds
-2025-03-30 17:12:08,241 [INFO] ✅ Scraping abgeschlossen für coconut seeds in 43.26 Sekunden
-2025-03-30 17:12:08,242 [INFO] 🔎 Vergleiche alte und neue Daten für MarketChange ID 111
-2025-03-30 17:12:08,242 [INFO] ✅ Neue Produkte gefunden!
-2025-03-30 17:12:08,243 [INFO] ⚠️ Entfernte Produkte: B07WHTWFND, B083XQ87N9, B0CK5Z3M89, B09VPGQH2P
-2025-03-30 17:12:08,243 [INFO] ⚡ Erstelle neuen MarketChange für coconut seeds
-2025-03-30 17:12:08,280 [INFO] 📢 Aktualisiere MarketChange für coconut seeds...
-2025-03-30 17:12:08,300 [INFO] 🆕 Neues Produkt B0812D7M75 wird erstellt.
-2025-03-30 17:12:08,332 [INFO] ✅ MarketChange für coconut seeds aktualisiert.
-2025-03-30 17:12:08,332 [INFO]  ------------------------------------------------------------ 
-2025-03-30 17:12:08,333 [INFO] [12/14] Verarbeite Markt: coconut powder
-2025-03-30 17:12:08,333 [INFO] 🔍 Suche letzten MarketChange für Market ID 12...
-2025-03-30 17:12:08,335 [INFO] 💰 Berechne total_revenue für Market: coconut powder
-2025-03-30 17:12:08,364 [INFO] 🏆 Gesamtumsatz für coconut powder: 464620.00€
-2025-03-30 17:12:08,365 [INFO] 🔍 Scraping market: coconut powder
-2025-03-30 17:12:39,844 [INFO] ✅ Scraping abgeschlossen für coconut powder in 31.48 Sekunden
-2025-03-30 17:12:39,844 [INFO] 🔎 Vergleiche alte und neue Daten für MarketChange ID 112
-2025-03-30 17:12:39,844 [INFO] ✅ Neue Produkte gefunden!
-2025-03-30 17:12:39,845 [INFO] ⚠️ Entfernte Produkte: B06XPPLN8T, B076X63YG4
-2025-03-30 17:12:39,845 [INFO] ⚠️ Änderungen in den Top-Suchvorschlägen erkannt!
-2025-03-30 17:12:39,845 [INFO] ⚡ Erstelle neuen MarketChange für coconut powder
-2025-03-30 17:12:39,858 [INFO] 📢 Aktualisiere MarketChange für coconut powder...
-2025-03-30 17:13:04,286 [INFO] ✅ MarketChange für coconut powder aktualisiert.
-2025-03-30 17:13:04,286 [INFO]  ------------------------------------------------------------ 
-2025-03-30 17:13:04,287 [INFO] [13/14] Verarbeite Markt: bike helmets
-2025-03-30 17:13:04,288 [INFO] 🔍 Suche letzten MarketChange für Market ID 13...
-2025-03-30 17:13:04,289 [INFO] 💰 Berechne total_revenue für Market: bike helmets
-2025-03-30 17:13:04,366 [INFO] 🏆 Gesamtumsatz für bike helmets: 310466.50€
-2025-03-30 17:13:04,366 [INFO] 🔍 Scraping market: bike helmets
-2025-03-30 17:13:46,281 [INFO] ✅ Scraping abgeschlossen für bike helmets in 41.91 Sekunden
-2025-03-30 17:13:46,282 [INFO] 🔎 Vergleiche alte und neue Daten für MarketChange ID 113
-2025-03-30 17:13:46,282 [INFO] ✅ Neue Produkte gefunden!
-2025-03-30 17:13:46,282 [INFO] ⚠️ Entfernte Produkte: B0863BWWFY, B0CW2N3Z3C, B09R6K6DGY, B07CKQDRZ6, B09FFQB39Q, B0CT8HW471
-2025-03-30 17:13:46,282 [INFO] ⚠️ Änderungen in den Top-Suchvorschlägen erkannt!
-2025-03-30 17:13:46,283 [INFO] ⚡ Erstelle neuen MarketChange für bike helmets
-2025-03-30 17:13:46,299 [INFO] 📢 Aktualisiere MarketChange für bike helmets...
-2025-03-30 17:13:46,302 [INFO] 🆕 Neues Produkt B07J4D4TP1 wird erstellt.
-2025-03-30 17:13:46,364 [INFO] 🆕 Neues Produkt B084GDMK7W wird erstellt.
-2025-03-30 17:13:46,422 [INFO] ✅ MarketChange für bike helmets aktualisiert.
-2025-03-30 17:13:46,422 [INFO]  ------------------------------------------------------------ 
-2025-03-30 17:13:46,423 [INFO] [14/14] Verarbeite Markt: bike helmet
-2025-03-30 17:13:46,423 [INFO] 🔍 Suche letzten MarketChange für Market ID 14...
-2025-03-30 17:13:46,428 [INFO] 💰 Berechne total_revenue für Market: bike helmet
-2025-03-30 17:13:46,504 [INFO] 🏆 Gesamtumsatz für bike helmet: 296499.00€
-2025-03-30 17:13:46,504 [INFO] 🔍 Scraping market: bike helmet
-2025-03-30 17:14:18,701 [INFO] ✅ Scraping abgeschlossen für bike helmet in 32.20 Sekunden
-2025-03-30 17:14:18,701 [INFO] 🔎 Vergleiche alte und neue Daten für MarketChange ID 114
-2025-03-30 17:14:18,702 [INFO] ✅ Neue Produkte gefunden!
-2025-03-30 17:14:18,702 [INFO] ⚠️ Entfernte Produkte: B077VYDVDY, B07WML4HJ5, B0CW2N3Z3C, B00MV594KO, B0D49F6H7M, B0CXXHD733, B0BSHDPNLM, B09T5SYCSM, B09HYCPS5V, B094PPPR3R, B07YPYHHRJ, B08977B6X8, B09JCBGL3P, B07CKQDRZ6, B0CT8HW471
-2025-03-30 17:14:18,702 [INFO] ⚡ Erstelle neuen MarketChange für bike helmet
-2025-03-30 17:14:18,730 [INFO] 📢 Aktualisiere MarketChange für bike helmet...
-2025-03-30 17:14:18,744 [INFO] 🆕 Neues Produkt B0CQX5C4JL wird erstellt.
-2025-03-30 17:14:18,763 [INFO] 🆕 Neues Produkt B07YQ3MPTG wird erstellt.
-2025-03-30 17:14:18,781 [INFO] 🆕 Neues Produkt B094PVJ875 wird erstellt.
-2025-03-30 17:14:18,799 [INFO] 🆕 Neues Produkt B095XBWDB1 wird erstellt.
-2025-03-30 17:14:18,816 [INFO] 🆕 Neues Produkt B0BSVNXP2D wird erstellt.
-2025-03-30 17:14:18,835 [INFO] 🆕 Neues Produkt B072C3S429 wird erstellt.
-2025-03-30 17:14:18,851 [INFO] 🆕 Neues Produkt B078GTYCZ9 wird erstellt.
-2025-03-30 17:14:18,867 [INFO] 🆕 Neues Produkt B07C7BY8R7 wird erstellt.
-2025-03-30 17:14:18,885 [INFO] 🆕 Neues Produkt B07BQS9W27 wird erstellt.
-2025-03-30 17:14:18,901 [INFO] 🆕 Neues Produkt B07WG6X632 wird erstellt.
-2025-03-30 17:14:18,930 [INFO] ✅ MarketChange für bike helmet aktualisiert.
-2025-03-30 17:14:18,930 [INFO] 🔄 Aktualisiere total_revenue für alle MarketCluster...
-2025-03-30 17:14:18,933 [INFO] 🔍 Suche letzten MarketChange für Market ID 1...
-2025-03-30 17:14:18,933 [INFO] 🔍 Suche letzten MarketChange für Market ID 1...
-2025-03-30 17:14:18,934 [INFO] 🔍 Suche letzten MarketChange für Market ID 2...
-2025-03-30 17:14:18,934 [INFO] 🔍 Suche letzten MarketChange für Market ID 2...
-2025-03-30 17:14:18,935 [INFO] 🔍 Suche letzten MarketChange für Market ID 3...
-2025-03-30 17:14:18,935 [INFO] 🔍 Suche letzten MarketChange für Market ID 3...
-2025-03-30 17:14:18,936 [INFO] 🏆 MarketCluster 'Creatine Market Dynamic' aktualisiert: 18508200.50€
-2025-03-30 17:14:18,936 [INFO] 🔍 Suche letzten MarketChange für Market ID 4...
-2025-03-30 17:14:18,937 [INFO] 🔍 Suche letzten MarketChange für Market ID 4...
-2025-03-30 17:14:18,938 [INFO] 🔍 Suche letzten MarketChange für Market ID 5...
-2025-03-30 17:14:18,938 [INFO] 🔍 Suche letzten MarketChange für Market ID 5...
-2025-03-30 17:14:18,939 [INFO] 🏆 MarketCluster 'Banana Market Static' aktualisiert: 510486.50€
-2025-03-30 17:14:18,939 [INFO] 🔍 Suche letzten MarketChange für Market ID 6...
-2025-03-30 17:14:18,940 [INFO] 🔍 Suche letzten MarketChange für Market ID 6...
-2025-03-30 17:14:18,940 [INFO] 🔍 Suche letzten MarketChange für Market ID 7...
-2025-03-30 17:14:18,941 [INFO] 🔍 Suche letzten MarketChange für Market ID 7...
-2025-03-30 17:14:18,941 [INFO] 🏆 MarketCluster 'Avocado Market Snapshot' aktualisiert: 1241538.50€
-2025-03-30 17:14:18,942 [INFO] 🔍 Suche letzten MarketChange für Market ID 11...
-2025-03-30 17:14:18,943 [INFO] 🔍 Suche letzten MarketChange für Market ID 11...
-2025-03-30 17:14:18,944 [INFO] 🔍 Suche letzten MarketChange für Market ID 12...
-2025-03-30 17:14:18,945 [INFO] 🔍 Suche letzten MarketChange für Market ID 12...
-2025-03-30 17:14:18,946 [INFO] 🏆 MarketCluster 'Coco Market Cluster' aktualisiert: 747568.00€
-2025-03-30 17:14:18,947 [INFO] 🔍 Suche letzten MarketChange für Market ID 13...
-2025-03-30 17:14:18,948 [INFO] 🔍 Suche letzten MarketChange für Market ID 13...
-2025-03-30 17:14:18,948 [INFO] 🔍 Suche letzten MarketChange für Market ID 14...
-2025-03-30 17:14:18,949 [INFO] 🔍 Suche letzten MarketChange für Market ID 14...
-2025-03-30 17:14:18,950 [INFO] 🏆 MarketCluster 'bike cluster' aktualisiert: 606965.50€
-2025-03-30 17:14:18,961 [INFO] -----------------------------------------------------------------
-2025-03-30 17:14:18,961 [INFO] -----------------------------------------------------------------
-2025-03-30 17:14:18,961 [INFO] 📊 Scraping Performance Metrics:
-2025-03-30 17:14:18,962 [INFO] 🕒 Gesamtzeit: 9m 0s
-2025-03-30 17:14:18,962 [INFO] ⚡ Durchschnittliche Zeit pro Markt: 37.71 Sekunden
-2025-03-30 17:14:18,962 [INFO] 📦 Erfolgreich aktualisiert: 12/14
-2025-03-30 17:14:18,962 [INFO] ❌ Fehlgeschlagene Märkte: 1
-2025-03-30 17:14:18,963 [INFO] 📦 Skipped Märkte: 1
+2025-03-31 11:55:41,178 [INFO] 📊 Scraping für **alle** Märkte in der Datenbank gestartet.
+2025-03-31 11:55:41,198 [INFO] 🚀 Starte Markt-Update für 14 Märkte...
+2025-03-31 11:55:41,199 [INFO]  ------------------------------------------------------------ 
+2025-03-31 11:55:41,199 [INFO] [1/14] Verarbeite Markt: creatine
+2025-03-31 11:55:41,199 [INFO] 🔍 Suche letzten MarketChange für Market ID 1...
+2025-03-31 11:55:41,203 [INFO] 💰 Berechne total_revenue für Market: creatine
+2025-03-31 11:55:41,241 [INFO] 🏆 Gesamtumsatz für creatine: 13888836.00€
+2025-03-31 11:55:41,241 [INFO] 🔍 Scraping market: creatine
+2025-03-31 11:56:13,865 [INFO] ✅ Scraping abgeschlossen für creatine in 32.62 Sekunden
+2025-03-31 11:56:13,865 [INFO] 🔎 Vergleiche alte und neue Daten für MarketChange ID 115
+2025-03-31 11:56:13,865 [INFO] ✅ Neue Produkte gefunden!
+2025-03-31 11:56:13,866 [INFO] ⚠️ Entfernte Produkte: B018ITUM5C, B07BWMJ8CC, B00IP2I94O, B0CRL99K4F, B0CLS8WY25, B09SBFDZRK, B0DJDQCJX2, B00GL2HMES, B0B1V1TBYF, B0BT23VBLJ, B0DNK78CPY
+2025-03-31 11:56:13,866 [INFO] ⚡ Erstelle neuen MarketChange für creatine
+2025-03-31 11:56:13,884 [INFO] 📢 Aktualisiere MarketChange für creatine...
+2025-03-31 11:56:17,933 [INFO] 🆕 Neues Produkt B01M3SO70X wird erstellt.
+2025-03-31 11:56:17,980 [INFO] 🆕 Neues Produkt B0186H4VMG wird erstellt.
+2025-03-31 11:56:18,016 [INFO] ✅ MarketChange für creatine aktualisiert.
+2025-03-31 11:56:18,017 [INFO]  ------------------------------------------------------------ 
+2025-03-31 11:56:18,017 [INFO] [2/14] Verarbeite Markt: creatine pills
+2025-03-31 11:56:18,018 [INFO] 🔍 Suche letzten MarketChange für Market ID 2...
+2025-03-31 11:56:18,019 [INFO] 💰 Berechne total_revenue für Market: creatine pills
+2025-03-31 11:56:18,054 [INFO] 🏆 Gesamtumsatz für creatine pills: 1629866.00€
+2025-03-31 11:56:18,054 [INFO] 🔍 Scraping market: creatine pills
+2025-03-31 11:56:46,758 [INFO] ✅ Scraping abgeschlossen für creatine pills in 28.70 Sekunden
+2025-03-31 11:56:46,759 [INFO] 🔎 Vergleiche alte und neue Daten für MarketChange ID 116
+2025-03-31 11:56:46,760 [INFO] ✅ Neue Produkte gefunden!
+2025-03-31 11:56:46,760 [INFO] ⚠️ Entfernte Produkte: B005C7V8U2, B002DYIZGC, B09MZV4LCS, B0D78MM7HK, B0B6GKMZCL, B0DD5PKWMR
+2025-03-31 11:56:46,761 [INFO] ⚠️ Änderungen in den Top-Suchvorschlägen erkannt!
+2025-03-31 11:56:46,761 [INFO] ⚡ Erstelle neuen MarketChange für creatine pills
+2025-03-31 11:56:46,802 [INFO] 📢 Aktualisiere MarketChange für creatine pills...
+2025-03-31 11:56:46,862 [INFO] 🆕 Neues Produkt B0924PFYN9 wird erstellt.
+2025-03-31 11:56:46,898 [INFO] 🆕 Neues Produkt B008KMUGK4 wird erstellt.
+2025-03-31 11:56:46,930 [INFO] 🆕 Neues Produkt B0CS33H8YW wird erstellt.
+2025-03-31 11:56:46,982 [INFO] ✅ MarketChange für creatine pills aktualisiert.
+2025-03-31 11:56:46,982 [INFO]  ------------------------------------------------------------ 
+2025-03-31 11:56:46,984 [INFO] [3/14] Verarbeite Markt: creatine gummies
+2025-03-31 11:56:46,984 [INFO] 🔍 Suche letzten MarketChange für Market ID 3...
+2025-03-31 11:56:46,986 [INFO] 💰 Berechne total_revenue für Market: creatine gummies
+2025-03-31 11:56:47,058 [INFO] 🏆 Gesamtumsatz für creatine gummies: 3599949.50€
+2025-03-31 11:56:47,058 [INFO] 🔍 Scraping market: creatine gummies
+2025-03-31 11:57:15,188 [INFO] ✅ Scraping abgeschlossen für creatine gummies in 28.13 Sekunden
+2025-03-31 11:57:15,188 [INFO] 🔎 Vergleiche alte und neue Daten für MarketChange ID 117
+2025-03-31 11:57:15,188 [INFO] ✅ Neue Produkte gefunden!
+2025-03-31 11:57:15,188 [INFO] ⚠️ Entfernte Produkte: B0DWWVJW77, B0DJVVDZZ8, B0CXMTFMPN, B0CPNYGN2D, B0DZCY7CZ1, B0CT8YDM7S, B0DDCGL46D
+2025-03-31 11:57:15,189 [INFO] ⚠️ Änderungen in den Top-Suchvorschlägen erkannt!
+2025-03-31 11:57:15,189 [INFO] ⚡ Erstelle neuen MarketChange für creatine gummies
+2025-03-31 11:57:15,216 [INFO] 📢 Aktualisiere MarketChange für creatine gummies...
+2025-03-31 11:57:15,230 [INFO] 🆕 Neues Produkt B0CYWQXPX6 wird erstellt.
+2025-03-31 11:57:15,265 [INFO] ✅ MarketChange für creatine gummies aktualisiert.
+2025-03-31 11:57:15,265 [INFO]  ------------------------------------------------------------ 
+2025-03-31 11:57:15,266 [INFO] [4/14] Verarbeite Markt: banana bread
+2025-03-31 11:57:15,266 [INFO] 🔍 Suche letzten MarketChange für Market ID 4...
+2025-03-31 11:57:15,268 [INFO] 💰 Berechne total_revenue für Market: banana bread
+2025-03-31 11:57:15,303 [INFO] 🏆 Gesamtumsatz für banana bread: 552588.00€
+2025-03-31 11:57:15,303 [INFO] 🔍 Scraping market: banana bread
+2025-03-31 11:57:43,904 [INFO] ✅ Scraping abgeschlossen für banana bread in 28.60 Sekunden
+2025-03-31 11:57:43,905 [INFO] 🔎 Vergleiche alte und neue Daten für MarketChange ID 118
+2025-03-31 11:57:43,906 [INFO] ✅ Neue Produkte gefunden!
+2025-03-31 11:57:43,906 [INFO] ⚠️ Entfernte Produkte: B08X14DRC9, B0BQC1JK1X, B0071JHNWG, B0957YHW2T, B00DJQ2C4O, B086542525
+2025-03-31 11:57:43,907 [INFO] ⚠️ Änderungen in den Top-Suchvorschlägen erkannt!
+2025-03-31 11:57:43,907 [INFO] ⚡ Erstelle neuen MarketChange für banana bread
+2025-03-31 11:57:43,943 [INFO] 📢 Aktualisiere MarketChange für banana bread...
+2025-03-31 11:57:43,986 [INFO] 🆕 Neues Produkt B01BNIP1JW wird erstellt.
+2025-03-31 11:57:56,242 [INFO] ✅ MarketChange für banana bread aktualisiert.
+2025-03-31 11:57:56,243 [INFO]  ------------------------------------------------------------ 
+2025-03-31 11:57:56,243 [INFO] [5/14] Verarbeite Markt: banana powder
+2025-03-31 11:57:56,244 [INFO] 🔍 Suche letzten MarketChange für Market ID 5...
+2025-03-31 11:57:56,245 [INFO] 💰 Berechne total_revenue für Market: banana powder
+2025-03-31 11:57:56,287 [INFO] 🏆 Gesamtumsatz für banana powder: 140300.50€
+2025-03-31 11:57:56,287 [INFO] 🔍 Scraping market: banana powder
+2025-03-31 11:58:31,355 [INFO] ✅ Scraping abgeschlossen für banana powder in 35.07 Sekunden
+2025-03-31 11:58:31,355 [INFO] 🔎 Vergleiche alte und neue Daten für MarketChange ID 119
+2025-03-31 11:58:31,355 [INFO] ⚠️ Entfernte Produkte: B076CS63W6, B0CHMYC2J8, B0883WHZD4, B0B431425K, B08HSR4DXV
+2025-03-31 11:58:31,355 [INFO] ⚠️ Änderungen in den Top-Suchvorschlägen erkannt!
+2025-03-31 11:58:31,356 [INFO] ⚡ Erstelle neuen MarketChange für banana powder
+2025-03-31 11:58:31,401 [INFO] 📢 Aktualisiere MarketChange für banana powder...
+2025-03-31 11:58:31,415 [INFO] ✅ MarketChange für banana powder aktualisiert.
+2025-03-31 11:58:31,416 [INFO]  ------------------------------------------------------------ 
+2025-03-31 11:58:31,417 [INFO] [6/14] Verarbeite Markt: avocado powder
+2025-03-31 11:58:31,417 [INFO] 🔍 Suche letzten MarketChange für Market ID 6...
+2025-03-31 11:58:31,418 [INFO] 💰 Berechne total_revenue für Market: avocado powder
+2025-03-31 11:58:31,481 [INFO] 🏆 Gesamtumsatz für avocado powder: 547658.00€
+2025-03-31 11:58:31,482 [INFO] 🔍 Scraping market: avocado powder
+2025-03-31 11:58:59,136 [INFO] ✅ Scraping abgeschlossen für avocado powder in 27.65 Sekunden
+2025-03-31 11:58:59,137 [INFO] 🔎 Vergleiche alte und neue Daten für MarketChange ID 120
+2025-03-31 11:58:59,137 [INFO] ✅ Neue Produkte gefunden!
+2025-03-31 11:58:59,137 [INFO] ⚠️ Entfernte Produkte: B097C5D5FZ, B0DXCH6XSZ, B07WCDBNJQ
+2025-03-31 11:58:59,137 [INFO] ⚠️ Änderungen in den Top-Suchvorschlägen erkannt!
+2025-03-31 11:58:59,138 [INFO] ⚡ Erstelle neuen MarketChange für avocado powder
+2025-03-31 11:58:59,152 [INFO] 📢 Aktualisiere MarketChange für avocado powder...
+2025-03-31 11:58:59,169 [INFO] 🆕 Neues Produkt B07YQY7TYC wird erstellt.
+2025-03-31 11:58:59,201 [INFO] ✅ MarketChange für avocado powder aktualisiert.
+2025-03-31 11:58:59,201 [INFO]  ------------------------------------------------------------ 
+2025-03-31 11:58:59,202 [INFO] [7/14] Verarbeite Markt: avocado creme
+2025-03-31 11:58:59,203 [INFO] 🔍 Suche letzten MarketChange für Market ID 7...
+2025-03-31 11:58:59,204 [INFO] 💰 Berechne total_revenue für Market: avocado creme
+2025-03-31 11:58:59,253 [INFO] 🏆 Gesamtumsatz für avocado creme: 724359.00€
+2025-03-31 11:58:59,254 [INFO] 🔍 Scraping market: avocado creme
+2025-03-31 11:59:28,562 [INFO] ✅ Scraping abgeschlossen für avocado creme in 29.31 Sekunden
+2025-03-31 11:59:28,562 [INFO] 🔎 Vergleiche alte und neue Daten für MarketChange ID 121
+2025-03-31 11:59:28,563 [INFO] ✅ Neue Produkte gefunden!
+2025-03-31 11:59:28,563 [INFO] ⚠️ Entfernte Produkte: B0751GVM5P, B0CG8WBZ78, B08DHJTP8X, B0DM69T7TG
+2025-03-31 11:59:28,563 [INFO] ⚡ Erstelle neuen MarketChange für avocado creme
+2025-03-31 11:59:28,577 [INFO] 📢 Aktualisiere MarketChange für avocado creme...
+2025-03-31 11:59:28,610 [INFO] ✅ MarketChange für avocado creme aktualisiert.
+2025-03-31 11:59:28,610 [INFO]  ------------------------------------------------------------ 
+2025-03-31 11:59:28,611 [INFO] [8/14] Verarbeite Markt: washable pants
+2025-03-31 11:59:28,611 [INFO] 🔍 Suche letzten MarketChange für Market ID 8...
+2025-03-31 11:59:28,613 [INFO] ⚠️ Noch keine Scraping-Daten für washable pants. Warte auf Product Orchestrator.
+2025-03-31 11:59:28,613 [INFO]  ------------------------------------------------------------ 
+2025-03-31 11:59:28,614 [INFO] [9/14] Verarbeite Markt: washable underwear
+2025-03-31 11:59:28,614 [INFO] 🔍 Suche letzten MarketChange für Market ID 9...
+2025-03-31 11:59:28,615 [INFO] 💰 Berechne total_revenue für Market: washable underwear
+2025-03-31 11:59:28,691 [INFO] 🏆 Gesamtumsatz für washable underwear: 379347.00€
+2025-03-31 11:59:28,691 [INFO] 🔍 Scraping market: washable underwear
+2025-03-31 11:59:57,197 [INFO] ✅ Scraping abgeschlossen für washable underwear in 28.51 Sekunden
+2025-03-31 11:59:57,197 [INFO] 🔎 Vergleiche alte und neue Daten für MarketChange ID 122
+2025-03-31 11:59:57,198 [INFO] ✅ Neue Produkte gefunden!
+2025-03-31 11:59:57,198 [INFO] ⚠️ Entfernte Produkte: B0DD7L2N8Q, B0CRYHH39V, B0DMVNRSHZ, B0D78JXBZX, B0DJ56YBWS, B0DFWGVBNT, B00RZQDGJO, B0BNPBCS5Z
+2025-03-31 11:59:57,199 [INFO] ⚠️ Änderungen in den Top-Suchvorschlägen erkannt!
+2025-03-31 11:59:57,200 [INFO] ⚡ Erstelle neuen MarketChange für washable underwear
+2025-03-31 11:59:57,262 [INFO] 📢 Aktualisiere MarketChange für washable underwear...
+2025-03-31 11:59:57,285 [INFO] 🆕 Neues Produkt B0DSSV4TR2 wird erstellt.
+2025-03-31 11:59:57,356 [INFO] 🆕 Neues Produkt B0BKQ43FMR wird erstellt.
+2025-03-31 11:59:57,389 [INFO] 🆕 Neues Produkt B0D9R4Q1PH wird erstellt.
+2025-03-31 11:59:57,425 [INFO] 🆕 Neues Produkt B0D457ZFMY wird erstellt.
+2025-03-31 11:59:57,481 [INFO] ✅ MarketChange für washable underwear aktualisiert.
+2025-03-31 11:59:57,482 [INFO]  ------------------------------------------------------------ 
+2025-03-31 11:59:57,484 [INFO] [10/14] Verarbeite Markt: underpad
+2025-03-31 11:59:57,484 [INFO] 🔍 Suche letzten MarketChange für Market ID 10...
+2025-03-31 11:59:57,489 [INFO] 💰 Berechne total_revenue für Market: underpad
+2025-03-31 11:59:57,542 [INFO] 🏆 Gesamtumsatz für underpad: 5461603.00€
+2025-03-31 11:59:57,542 [INFO] 🔍 Scraping market: underpad
+2025-03-31 12:00:27,606 [INFO] ✅ Scraping abgeschlossen für underpad in 30.06 Sekunden
+2025-03-31 12:00:27,607 [INFO] 🔎 Vergleiche alte und neue Daten für MarketChange ID 110
+2025-03-31 12:00:27,607 [INFO] ✅ Neue Produkte gefunden!
+2025-03-31 12:00:27,608 [INFO] ⚠️ Entfernte Produkte: B0DP6356M9, B0DP4R6W71, B0851K2JVG, B0DP6V3KQ3
+2025-03-31 12:00:27,608 [INFO] ⚠️ Änderungen in den Top-Suchvorschlägen erkannt!
+2025-03-31 12:00:27,609 [INFO] ⚡ Erstelle neuen MarketChange für underpad
+2025-03-31 12:00:27,640 [INFO] 📢 Aktualisiere MarketChange für underpad...
+2025-03-31 12:00:27,657 [INFO] 🆕 Neues Produkt B078PYKRWT wird erstellt.
+2025-03-31 12:00:48,040 [INFO] 🆕 Neues Produkt B07XYFV6XR wird erstellt.
+2025-03-31 12:00:48,071 [INFO] ✅ MarketChange für underpad aktualisiert.
+2025-03-31 12:00:48,071 [INFO]  ------------------------------------------------------------ 
+2025-03-31 12:00:48,072 [INFO] [11/14] Verarbeite Markt: coconut seeds
+2025-03-31 12:00:48,072 [INFO] 🔍 Suche letzten MarketChange für Market ID 11...
+2025-03-31 12:00:48,074 [INFO] 💰 Berechne total_revenue für Market: coconut seeds
+2025-03-31 12:00:48,103 [INFO] 🏆 Gesamtumsatz für coconut seeds: 463370.00€
+2025-03-31 12:00:48,103 [INFO] 🔍 Scraping market: coconut seeds
+2025-03-31 12:01:17,207 [INFO] ✅ Scraping abgeschlossen für coconut seeds in 29.10 Sekunden
+2025-03-31 12:01:17,208 [INFO] 🔎 Vergleiche alte und neue Daten für MarketChange ID 123
+2025-03-31 12:01:17,208 [INFO] ✅ Neue Produkte gefunden!
+2025-03-31 12:01:17,209 [INFO] ⚠️ Entfernte Produkte: B004IWYB0Q, B0812D7M75
+2025-03-31 12:01:17,209 [INFO] ⚡ Erstelle neuen MarketChange für coconut seeds
+2025-03-31 12:01:17,223 [INFO] 📢 Aktualisiere MarketChange für coconut seeds...
+2025-03-31 12:01:17,259 [INFO] ✅ MarketChange für coconut seeds aktualisiert.
+2025-03-31 12:01:17,259 [INFO]  ------------------------------------------------------------ 
+2025-03-31 12:01:17,260 [INFO] [12/14] Verarbeite Markt: coconut powder
+2025-03-31 12:01:17,260 [INFO] 🔍 Suche letzten MarketChange für Market ID 12...
+2025-03-31 12:01:17,262 [INFO] 💰 Berechne total_revenue für Market: coconut powder
+2025-03-31 12:01:17,293 [INFO] 🏆 Gesamtumsatz für coconut powder: 461469.50€
+2025-03-31 12:01:17,293 [INFO] 🔍 Scraping market: coconut powder
+2025-03-31 12:01:46,338 [INFO] ✅ Scraping abgeschlossen für coconut powder in 29.04 Sekunden
+2025-03-31 12:01:46,338 [INFO] 🔎 Vergleiche alte und neue Daten für MarketChange ID 124
+2025-03-31 12:01:46,339 [INFO] ✅ Neue Produkte gefunden!
+2025-03-31 12:01:46,339 [INFO] ⚠️ Entfernte Produkte: B01C8Z1H88, B06XQ2SBV3
+2025-03-31 12:01:46,339 [INFO] ⚠️ Änderungen in den Top-Suchvorschlägen erkannt!
+2025-03-31 12:01:46,340 [INFO] ⚡ Erstelle neuen MarketChange für coconut powder
+2025-03-31 12:01:46,372 [INFO] 📢 Aktualisiere MarketChange für coconut powder...
+2025-03-31 12:01:46,420 [INFO] ✅ MarketChange für coconut powder aktualisiert.
+2025-03-31 12:01:46,420 [INFO]  ------------------------------------------------------------ 
+2025-03-31 12:01:46,422 [INFO] [13/14] Verarbeite Markt: bike helmets
+2025-03-31 12:01:46,422 [INFO] 🔍 Suche letzten MarketChange für Market ID 13...
+2025-03-31 12:01:46,428 [INFO] 💰 Berechne total_revenue für Market: bike helmets
+2025-03-31 12:01:46,566 [INFO] 🏆 Gesamtumsatz für bike helmets: 337923.50€
+2025-03-31 12:01:46,567 [INFO] 🔍 Scraping market: bike helmets
+2025-03-31 12:02:18,528 [INFO] ✅ Scraping abgeschlossen für bike helmets in 31.96 Sekunden
+2025-03-31 12:02:18,528 [INFO] 🔎 Vergleiche alte und neue Daten für MarketChange ID 125
+2025-03-31 12:02:18,528 [INFO] ✅ Neue Produkte gefunden!
+2025-03-31 12:02:18,528 [INFO] ⚠️ Entfernte Produkte: B0BHXSGBYW, B078893N66, B0CW2HK746, B07J4D4TP1, B084GDMK7W, B0B1JQ65C6, B0B9H2G5LR
+2025-03-31 12:02:18,529 [INFO] ⚠️ Änderungen in den Top-Suchvorschlägen erkannt!
+2025-03-31 12:02:18,529 [INFO] ⚡ Erstelle neuen MarketChange für bike helmets
+2025-03-31 12:02:18,561 [INFO] 📢 Aktualisiere MarketChange für bike helmets...
+2025-03-31 12:02:18,572 [INFO] 🆕 Neues Produkt B0B9GYMDWP wird erstellt.
+2025-03-31 12:02:18,590 [INFO] 🆕 Neues Produkt B0B1JPS1NP wird erstellt.
+2025-03-31 12:02:18,637 [INFO] 🆕 Neues Produkt B08ZKMFHC9 wird erstellt.
+2025-03-31 12:02:18,657 [INFO] 🆕 Neues Produkt B09XJ7WQB4 wird erstellt.
+2025-03-31 12:02:18,673 [INFO] 🆕 Neues Produkt B09MW1WPFN wird erstellt.
+2025-03-31 12:02:18,704 [INFO] ✅ MarketChange für bike helmets aktualisiert.
+2025-03-31 12:02:18,704 [INFO]  ------------------------------------------------------------ 
+2025-03-31 12:02:18,705 [INFO] [14/14] Verarbeite Markt: bike helmet
+2025-03-31 12:02:18,705 [INFO] 🔍 Suche letzten MarketChange für Market ID 14...
+2025-03-31 12:02:18,707 [INFO] 💰 Berechne total_revenue für Market: bike helmet
+2025-03-31 12:02:18,754 [INFO] 🏆 Gesamtumsatz für bike helmet: 267233.50€
+2025-03-31 12:02:18,755 [INFO] 🔍 Scraping market: bike helmet
+2025-03-31 12:02:47,186 [INFO] ✅ Scraping abgeschlossen für bike helmet in 28.43 Sekunden
+2025-03-31 12:02:47,186 [INFO] 🔎 Vergleiche alte und neue Daten für MarketChange ID 126
+2025-03-31 12:02:47,186 [INFO] ✅ Neue Produkte gefunden!
+2025-03-31 12:02:47,186 [INFO] ⚠️ Entfernte Produkte: B094PVJ875, B0988PV7JW, B07C7BY8R7, B0B5696YGZ, B07BQS9W27, B08QSKMSL4, B0BSVNXP2D, B078GTYCZ9, B095XBWDB1, B072C3S429, B0CW2HK746, B07J4D4TP1, B07WG6X632, B0B1JQ65C6
+2025-03-31 12:02:47,187 [INFO] ⚡ Erstelle neuen MarketChange für bike helmet
+2025-03-31 12:02:47,242 [INFO] 📢 Aktualisiere MarketChange für bike helmet...
+2025-03-31 12:02:47,249 [INFO] 🆕 Neues Produkt B0DCHZR5FB wird erstellt.
+2025-03-31 12:02:47,275 [INFO] 🆕 Neues Produkt B07Y5G51JC wird erstellt.
+2025-03-31 12:02:47,298 [INFO] 🆕 Neues Produkt B0928KRCK6 wird erstellt.
+2025-03-31 12:02:47,316 [INFO] 🆕 Neues Produkt B0BHXT1XNK wird erstellt.
+2025-03-31 12:02:47,350 [INFO] ✅ MarketChange für bike helmet aktualisiert.
+2025-03-31 12:02:47,351 [INFO] 🔄 Aktualisiere total_revenue für alle MarketCluster...
+2025-03-31 12:02:47,353 [INFO] 🔍 Suche letzten MarketChange für Market ID 1...
+2025-03-31 12:02:47,354 [INFO] 🔍 Suche letzten MarketChange für Market ID 1...
+2025-03-31 12:02:47,355 [INFO] 🔍 Suche letzten MarketChange für Market ID 2...
+2025-03-31 12:02:47,355 [INFO] 🔍 Suche letzten MarketChange für Market ID 2...
+2025-03-31 12:02:47,356 [INFO] 🔍 Suche letzten MarketChange für Market ID 3...
+2025-03-31 12:02:47,356 [INFO] 🔍 Suche letzten MarketChange für Market ID 3...
+2025-03-31 12:02:47,357 [INFO] 🏆 MarketCluster 'Creatine Market Dynamic' aktualisiert: 19118651.50€
+2025-03-31 12:02:47,358 [INFO] 🔍 Suche letzten MarketChange für Market ID 4...
+2025-03-31 12:02:47,359 [INFO] 🔍 Suche letzten MarketChange für Market ID 4...
+2025-03-31 12:02:47,359 [INFO] 🔍 Suche letzten MarketChange für Market ID 5...
+2025-03-31 12:02:47,360 [INFO] 🔍 Suche letzten MarketChange für Market ID 5...
+2025-03-31 12:02:47,360 [INFO] 🏆 MarketCluster 'Banana Market Static' aktualisiert: 692888.50€
+2025-03-31 12:02:47,361 [INFO] 🔍 Suche letzten MarketChange für Market ID 6...
+2025-03-31 12:02:47,362 [INFO] 🔍 Suche letzten MarketChange für Market ID 6...
+2025-03-31 12:02:47,362 [INFO] 🔍 Suche letzten MarketChange für Market ID 7...
+2025-03-31 12:02:47,363 [INFO] 🔍 Suche letzten MarketChange für Market ID 7...
+2025-03-31 12:02:47,363 [INFO] 🏆 MarketCluster 'Avocado Market Snapshot' aktualisiert: 1272017.00€
+2025-03-31 12:02:47,364 [INFO] 🔍 Suche letzten MarketChange für Market ID 11...
+2025-03-31 12:02:47,365 [INFO] 🔍 Suche letzten MarketChange für Market ID 11...
+2025-03-31 12:02:47,366 [INFO] 🔍 Suche letzten MarketChange für Market ID 12...
+2025-03-31 12:02:47,367 [INFO] 🔍 Suche letzten MarketChange für Market ID 12...
+2025-03-31 12:02:47,367 [INFO] 🏆 MarketCluster 'Coco Market Cluster' aktualisiert: 924839.50€
+2025-03-31 12:02:47,368 [INFO] 🔍 Suche letzten MarketChange für Market ID 13...
+2025-03-31 12:02:47,368 [INFO] 🔍 Suche letzten MarketChange für Market ID 13...
+2025-03-31 12:02:47,369 [INFO] 🔍 Suche letzten MarketChange für Market ID 14...
+2025-03-31 12:02:47,370 [INFO] 🔍 Suche letzten MarketChange für Market ID 14...
+2025-03-31 12:02:47,370 [INFO] 🏆 MarketCluster 'bike cluster' aktualisiert: 605157.00€
+2025-03-31 12:02:47,383 [INFO] -----------------------------------------------------------------
+2025-03-31 12:02:47,384 [INFO] -----------------------------------------------------------------
+2025-03-31 12:02:47,384 [INFO] 📊 Scraping Performance Metrics:
+2025-03-31 12:02:47,384 [INFO] 🕒 Gesamtzeit: 7m 6s
+2025-03-31 12:02:47,384 [INFO] ⚡ Durchschnittliche Zeit pro Markt: 29.78 Sekunden
+2025-03-31 12:02:47,385 [INFO] 📦 Erfolgreich aktualisiert: 13/14
+2025-03-31 12:02:47,385 [INFO] ❌ Fehlgeschlagene Märkte: 0
+2025-03-31 12:02:47,385 [INFO] 📦 Skipped Märkte: 1
+2025-03-31 12:29:10,221 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 12:30:51,918 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 12:30:58,120 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 12:31:16,353 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 12:31:26,265 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 12:31:54,881 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 12:32:02,377 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 12:33:14,059 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 12:36:06,589 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 12:37:03,434 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 12:37:06,261 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 12:37:56,212 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 12:38:11,349 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 12:38:24,902 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 12:38:53,118 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 12:42:52,266 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 12:43:12,138 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 12:43:20,086 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 12:43:57,693 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 12:44:03,476 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 12:45:12,112 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 12:47:17,489 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 12:48:34,748 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 12:48:43,438 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 13:17:21,677 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 13:17:36,665 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 13:17:54,536 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 13:18:06,305 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 13:19:33,474 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 13:22:27,055 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 13:23:15,742 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 13:24:04,171 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 13:24:47,384 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 13:29:52,627 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 13:30:08,579 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 13:30:21,500 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 13:31:07,273 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 13:31:35,237 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 13:31:41,797 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 13:34:03,025 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 13:34:45,960 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 13:36:11,005 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 13:36:35,494 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 13:36:38,892 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 13:37:08,255 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 13:37:51,713 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 13:38:47,545 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 13:38:55,726 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 13:39:34,144 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 13:40:40,992 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 13:42:10,279 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 13:42:15,116 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 13:44:58,667 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 13:45:25,239 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 13:45:52,523 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 13:46:19,688 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 13:46:29,469 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 13:47:04,816 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 13:47:13,583 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 13:48:41,113 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 13:49:16,619 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 13:49:46,977 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 13:50:13,897 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 13:50:31,486 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 13:51:41,433 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 13:52:06,719 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 13:53:24,151 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 13:54:18,034 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 13:54:31,769 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 13:55:16,202 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 13:56:11,527 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)
+2025-03-31 13:56:26,735 [WARNING] ⚠️ Kein ProductChange gefunden für Market banana powder (MarketChange ID: 131)

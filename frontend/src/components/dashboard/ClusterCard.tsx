@@ -5,7 +5,6 @@ import {
   Card,
   CardContent,
   Chip,
-  CircularProgress,
   Dialog,
   DialogActions,
   DialogContent,
@@ -17,15 +16,14 @@ import {
   Typography,
 } from "@mui/material";
 import { motion } from "framer-motion";
-import React, { useEffect, useState } from "react";
-import { FaLayerGroup, FaDollarSign, FaEdit, FaTrash } from "react-icons/fa";
+import React, { useState } from "react";
 import { useSnackbar } from "../../providers/SnackbarProvider";
-import ChartDataService from "../../services/ChartDataService";
 import MarketService from "../../services/MarketService";
 import CustomSparkLine from "../charts/CustomSparkLine";
 import { iconMap, fallbackIcon } from "../../utils/iconUtils";
 import { useTheme } from "@mui/material/styles";
-
+import { FaDollarSign, FaEdit, FaTrash } from "react-icons/fa";
+import Grid from "@mui/material/Grid2";
 interface ClusterCardProps {
   cluster: {
     id: number;
@@ -56,35 +54,11 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
   const [openEditDialog, setOpenEditDialog] = useState(false);
   const [newTitle, setNewTitle] = useState(cluster.title);
   const [openConfirmDialog, setOpenConfirmDialog] = useState(false);
-  const [sparklineData, setSparklineData] = useState<number[]>([]);
-  const [loadingSparkline, setLoadingSparkline] = useState<boolean>(true);
 
   const cleanKey = (cluster.cluster_type ?? "").trim();
   const theme = useTheme();
 
   const IconComponent = iconMap[cleanKey] || fallbackIcon;
-
-  useEffect(() => {
-    async function fetchSparklineData() {
-      if (totalRevenue > 0) {
-        try {
-          const response = await ChartDataService.GetSparklineForMarketCluster(
-            cluster.id
-          );
-          if (response.length > 0) {
-            setSparklineData(response);
-          } else {
-            showSnackbar("Fehler beim Laden der Sparkline-Daten.");
-          }
-        } catch (error) {
-          showSnackbar("Fehler beim Abrufen der Sparkline-Daten.");
-        } finally {
-          setLoadingSparkline(false);
-        }
-      }
-    }
-    fetchSparklineData();
-  }, [cluster.id, totalRevenue]);
 
   return (
     <motion.div
@@ -99,6 +73,7 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
       <Card
         elevation={1}
         sx={{
+          flex: 1,
           cursor: "pointer",
           backgroundColor: "background.paper",
           border: "1px solid rgba(255, 255, 255, 0.25)",
@@ -112,13 +87,13 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
               visibility: "visible",
             },
           },
-           "&:hover .card-id": {
-                    opacity: 1,
-                  },
+          "&:hover .card-id": {
+            opacity: 1,
+          },
         }}
         onClick={onClick}
       >
-        <CardContent sx={{ p: 3, minHeight: 350 }}>
+        <CardContent sx={{ p: 3, minHeight: 300 }}>
           <Box
             sx={{
               display: "flex",
@@ -174,7 +149,7 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
                   transition: "opacity 0.2s, visibility 0.2s",
                 }}
               >
-                <FaTrash size={20} color={theme.palette.primary.main}/>
+                <FaTrash size={20} color={theme.palette.primary.main} />
               </IconButton>
               <IconButton
                 onClick={(e) => {
@@ -183,7 +158,7 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
                 }}
                 sx={{ color: "primary.main" }}
               >
-                <FaEdit size={20} color={theme.palette.secondary.main}/>
+                <FaEdit size={20} color={theme.palette.secondary.main} />
               </IconButton>
             </Box>
           </Box>
@@ -192,7 +167,9 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
             <Typography variant="body2" color="text.primary" gutterBottom>
               Included markets:
             </Typography>
-            <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
+            <Box
+              sx={{ display: "flex", flexWrap: "wrap", gap: 1, minHeight: 60 }}
+            >
               {Array.isArray(cluster.markets) && cluster.markets.length > 0 ? (
                 cluster.markets.map((market, index) => (
                   <Chip
@@ -203,7 +180,6 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
                     sx={{
                       borderColor: "secondary.main",
                       color: "text.main",
-                      
                     }}
                   />
                 ))
@@ -254,57 +230,59 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
                     justifyContent: "center",
                   }}
                 >
-                  <FaDollarSign size={22} color={theme.palette.secondary.main}/>
+                  <FaDollarSign
+                    size={22}
+                    color={theme.palette.secondary.main}
+                  />
                 </Box>
-                <Box>
-                  <Typography
-                    variant="body2"
-                    color="text.secondary"
-                    gutterBottom
-                  >
-                    Total Revenue
-                  </Typography>
-                  <Typography
-                    variant="h1"
-                    color="text.primary"
-                    sx={{ fontWeight: 600 }}
-                  >
-                    {new Intl.NumberFormat("en-US", {
-                      style: "currency",
-                      currency: "USD",
-                    }).format(Number(totalRevenue))}
-                  </Typography>
-                </Box>
-              </Box>
 
-              {totalRevenue > 0 && (
-                <Box sx={{ mt: 2, height: 50 }}>
-                  {loadingSparkline ? (
-                    <CircularProgress
-                      size={30}
-                      sx={{ color: "primary.main" }}
-                    />
-                  ) : (
-                    <CustomSparkLine data={sparklineData} />
-                  )}
-                </Box>
-              )}
+                <Grid container spacing={4}>
+                  <Grid size={{ md: 12, lg: 6 }}>
+                    <Typography
+                      variant="body2"
+                      color="text.secondary"
+                      gutterBottom
+                    >
+                      Total Revenue
+                    </Typography>
+                    <Typography
+                      variant="h1"
+                      color="text.primary"
+                      sx={{ fontWeight: 600 }}
+                    >
+                      {new Intl.NumberFormat("en-US", {
+                        style: "currency",
+                        currency: "USD",
+                      }).format(Number(totalRevenue))}
+                    </Typography>
+                  </Grid>
+
+                  <Grid size={{ md: 12, lg: 6 }}>
+                    {totalRevenue > 0 && (
+                      <Box sx={{ mt: 2, height: 50 }}>
+                        <CustomSparkLine />
+                      </Box>
+                    )}
+                  </Grid>
+                </Grid>
+
+                <Box></Box>
+              </Box>
             </Box>
           )}
 
-            <Typography
-                      className="card-id"
-                      sx={{
-                        fontSize: 10,
-                        color: "gray",
-                        textAlign: "end",
-                        opacity: 0,
-                        transition: "opacity 0.3s ease-in-out",
-                      }}
-                    >
-                      Card-Id: DDD5
+          <Typography
+            className="card-id"
+            sx={{
+              fontSize: 10,
+              color: "gray",
+              textAlign: "end",
+              opacity: 0,
+              transition: "opacity 0.3s ease-in-out",
+            }}
+          >
+            Card-Id: DDD5
           </Typography>
-          
         </CardContent>
       </Card>
 

@@ -119,7 +119,6 @@ class MarketService {
       return {
         total_revenue: 0,
         total_markets: 0,
-        clusters_without_revenue: 0,
         total_unique_products: 0,
         revenue_development: new Array(30).fill(0),
       };

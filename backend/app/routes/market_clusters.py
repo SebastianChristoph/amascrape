@@ -1,12 +1,13 @@
 from datetime import datetime, timezone
 import logging
+import random
 from typing import List, Optional
 
 from app.auth import get_current_user
 from app.database import get_db
 from app.models import (Market, MarketChange, MarketCluster, Product,
                         ProductChange, User,market_change_products,
-                        market_cluster_markets)
+                        market_cluster_markets, market_products)
 from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException
 from pydantic import BaseModel
 from sqlalchemy import delete
@@ -18,6 +19,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 import scraper.selenium_config as selenium_config
 from app.database import SessionLocal
+from sqlalchemy import func, distinct
 
 router = APIRouter()
 
@@ -246,7 +248,7 @@ async def get_user_market_clusters(
         for cluster in market_clusters
     ]
 
-## GET DASHBOARD DATA
+## GET DASHBOARD INSIGHT DATA
 @router.get("/dashboard-overview")
 async def get_dashboard_overview(
     db: Session = Depends(get_db),
@@ -254,18 +256,18 @@ async def get_dashboard_overview(
 ):
 
     try:
-        # Get all market clusters for the user with their markets
         market_clusters = db.query(MarketCluster).filter(
             MarketCluster.user_id == current_user.id
         ).options(joinedload(MarketCluster.markets)).all()
 
-        # Calculate total revenue (from clusters with revenue > 0)
-        total_revenue = 999.99
-        clusters_without_revenue = 0
-        total_clusters = len(market_clusters)  # Count total clusters
+        # DDD1
+        total_revenue = -1
+    
+        # DDD3
+        total_clusters = len(market_clusters)
 
-        # Get market IDs that belong to user's clusters first
-        market_ids = db.query(Market.id).join(
+        ### DDD4
+        market_ids_subquery = db.query(Market.id).join(
             market_cluster_markets
         ).join(
             MarketCluster
@@ -273,12 +275,17 @@ async def get_dashboard_overview(
             MarketCluster.user_id == current_user.id
         ).subquery()
 
+
+        total_products = db.query(func.count(distinct(Product.asin))).join(
+            market_products, Product.asin == market_products.c.asin
+        ).filter(
+            market_products.c.market_id.in_(market_ids_subquery)
+        ).scalar()
+
         response_data = {
             "total_revenue": float(total_revenue),
-            # Changed from total_markets
             "total_clusters": int(total_clusters),
-            "clusters_without_revenue": int(clusters_without_revenue),
-            "total_unique_products": 999
+            "total_unique_products": total_products
         }
 
         return response_data
@@ -305,13 +312,14 @@ async def get_market_cluster_details(
         raise HTTPException(
             status_code=404, detail="MarketCluster nicht gefunden")
 
+    
+    #CD 1
     response_data = {
         "id": market_cluster.id,
         "title": market_cluster.title,
         "markets": [],
-        "total_revenue": market_cluster.total_revenue,
         "insights": {
-            "total_revenue": market_cluster.total_revenue,
+            "total_revenue": -1,
             "total_markets": len(market_cluster.markets),
             "total_products": 0,
             "avg_revenue_per_market": 0,
@@ -323,7 +331,7 @@ async def get_market_cluster_details(
         "cluster_type": market_cluster.cluster_type
     }
 
-    total_products = 0
+    total_products = []
     max_market_revenue = 0
     top_market = None
     top_product = {"asin": None, "title": None, "revenue": 0}
@@ -340,16 +348,14 @@ async def get_market_cluster_details(
             logging.warning(
                 f"⚠️ Kein ProductChange gefunden für Market {market.keyword} (MarketChange ID: {latest_market_change.id})")
 
-        sparkline_data_total_revenue = get_sparkline_for_market(
-            db=db, id=market.id, field="total_revenue")
         market_data = {
             "id": market.id,
             "keyword": market.keyword,
             "products": [],
-            "sparkline_data_total_revenue": sparkline_data_total_revenue
         }
 
-        market_revenue = latest_market_change.total_revenue or 0
+        # DDM1
+        market_revenue = -1
         market_data["revenue_total"] = market_revenue
         market_data["top_suggestions"] = latest_market_change.top_suggestions
 
@@ -369,17 +375,14 @@ async def get_market_cluster_details(
         )
 
         for product in products_with_scrape:
-            total_products += 1
+            if not product.asin in total_products:
+                total_products.append(product.asin)
 
             latest_product_change = db.query(ProductChange).filter(
                 ProductChange.asin == product.asin
             ).order_by(ProductChange.change_date.desc()).first()
 
-            sparkline_price = get_sparkline_for_product(db, product.asin, "price")
-            sparkline_main_rank = get_sparkline_for_product(db, product.asin, "main_category_rank")
-            sparkline_second_rank = get_sparkline_for_product(db, product.asin, "second_category_rank")
-            sparkline_total = get_sparkline_for_product(db, product.asin, "total")
-            sparkline_blm = get_sparkline_for_product(db, product.asin, "blm")
+         
 
             if latest_product_change and latest_product_change.total:
                 if latest_product_change.total > top_product["revenue"]:
@@ -400,35 +403,29 @@ async def get_market_cluster_details(
                 "second_category_rank": latest_product_change.second_category_rank if latest_product_change else None,
                 "total": latest_product_change.total if latest_product_change else None,
                 "blm": latest_product_change.blm if latest_product_change else None,
-                "sparkline_price": sparkline_price,
-                "sparkline_main_rank": sparkline_main_rank,
-                "sparkline_second_rank": sparkline_second_rank,
-                "sparkline_total": sparkline_total,
-                "sparkline_blm": sparkline_blm,
+                "store": latest_product_change.store if latest_product_change else None,
+                "manufacturer": latest_product_change.manufacturer if latest_product_change else None,
+             
             }
 
             market_data["products"].append(product_data)
-
+        # DDM2
+        market_data["products_in_market_count"] = len(product_data)
+        # DDM3
+        market_data["avg_blm"] = -1
         response_data["markets"].append(market_data)
 
 
-
-    total_revenue = response_data["total_revenue"] or 0
+    # CD1
+    # has to be implemented
+    market_cluster_total_revenue = -1
     response_data["insights"].update({
-        "total_products": total_products,
-        "avg_revenue_per_market": round(total_revenue / len(market_cluster.markets) if len(market_cluster.markets) > 0 else 0, 2),
-        "avg_revenue_per_product": round(total_revenue / total_products if total_products > 0 else 0, 2),
+        "total_products": len(total_products),
+        "total_revenue": market_cluster_total_revenue,
+        "avg_revenue_per_market": round(market_cluster_total_revenue / len(market_cluster.markets) if len(market_cluster.markets) > 0 else 0, 2),
+        "avg_revenue_per_product": round(market_cluster_total_revenue / len(total_products) if len(total_products) > 0 else 0, 2),
         "top_performing_market": top_market,
         "top_performing_product": top_product
     })
 
     return response_data
-
-
-def get_sparkline_for_product(db: Session, asin: str, field: str) -> List[int]:
-    """Generiert Sparkline-Daten für ein bestimmtes Produktfeld (Preis, Rank, etc.)."""
-    return [0] * 30
-
-
-def get_sparkline_for_market(db: Session, id: int, field: str) -> List[int]:
-    return [0] * 30

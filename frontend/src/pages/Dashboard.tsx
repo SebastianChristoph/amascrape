@@ -346,13 +346,14 @@ const Dashboard: React.FC = () => {
                 value={dashboardData?.total_revenue || "0.00"}
                 cardId="DDD1"
                 isCurrency
+                hasSparkline
               />
             </Grid>
 
             <Grid size={{ xs: 12, sm: 6, md: 3 }}>
               <StatCardLarge
                 iconKey="static"
-                title="30D Revenue Change"
+                title="Total Clusters"
                 value={dashboardData?.total_clusters || "0"}
                 cardId="DDD2"
               />

@@ -17,6 +17,7 @@ import {
   TableHead,
   TableRow,
   Tabs,
+  Tooltip,
   Typography,
 } from "@mui/material";
 import Grid from "@mui/material/Grid2";
@@ -36,6 +37,7 @@ import { IoStatsChart } from "react-icons/io5";
 import MetricCardLarge from "../components/details/MetricCardLarge";
 import MetricCardSmall from "../components/details/MetricCardSmall";
 import PrimaryLineDivider from "../components/PrimaryLineDivider";
+import { MdBookmarkAdd, MdBookmarkRemove } from "react-icons/md";
 interface ProductType {
   asin: string; // ✅ Ändere 'id' zu 'asin'
   title: string;
@@ -63,7 +65,7 @@ export default function ClusterDetails() {
   const [openBackdrop, setOpenBackdrop] = useState(false);
   const [productChanges, setProductChanges] = useState<any[]>([]);
   const [selectedAsin, setSelectedAsin] = useState<string | null>(null);
-  const [userProductInsights, setUserProductInsights] = useState<any>(null);
+  const [userProducts, setUserProducts] = useState<any>(null);
 
   const [addAsinDialogOpen, setAddAsinDialogOpen] = useState(false);
   const [newAsin, setNewAsin] = useState("");
@@ -136,7 +138,7 @@ export default function ClusterDetails() {
 
       try {
         // 🔄 Alle API-Anfragen parallel abrufen
-        const [clusterData, stackedData, userInsights, myProducts] =
+        const [clusterData, stackedData, userProducts, myProducts] =
           await Promise.all([
             MarketService.getMarketClusterDetails(Number(clusterId)),
             ChartDataService.GetStackedBarDataForCluster(Number(clusterId)),
@@ -153,10 +155,10 @@ export default function ClusterDetails() {
             }).then((res) => res.json()), // ✅ My Products abrufen
           ]);
 
-        if (userInsights) {
-          console.log("[DEBUG] userInsights:", userInsights);
+        if (userProducts) {
+          console.log("[DEBUG] userProducts:", userProducts);
 
-          setUserProductInsights(userInsights);
+          setUserProducts(userProducts);
         }
 
         if (clusterData) {
@@ -201,7 +203,7 @@ export default function ClusterDetails() {
         }
       );
       const data = await response.json();
-      setUserProductInsights(data);
+      setUserProducts(data);
     } catch (error) {
       console.error("Error fetching user product insights:", error);
     }
@@ -304,42 +306,53 @@ export default function ClusterDetails() {
       headerName: "Details",
       width: 30,
       renderCell: (params) => (
-        <IconButton
-          onClick={() => handleShowDetails(params.row.id)}
-          sx={{ padding: 0, color: "primary.main" }}
-        >
-          <FaRegEye size={20} />
-        </IconButton>
+        <Tooltip title="Get Product Insights">
+          <IconButton
+            onClick={() => handleShowDetails(params.row.id)}
+            sx={{ padding: 0, color: "primary.main" }}
+          >
+            <FaRegEye size={20} />
+          </IconButton>
+        </Tooltip>
       ),
     },
     {
       field: "myProduct",
       headerName: "My Product",
-      width: 150,
-      renderCell: (params) => (
-        <span
-          onClick={() => toggleMyProduct(params.row.id)}
-          style={{
-            cursor: "pointer",
-            fontSize: "0.8rem",
-            display: "flex",
-            alignItems: "center",
-            color: params.row.isMyProduct ? "green" : "blue",
-          }}
-        >
-          {params.row.isMyProduct ? (
-            <>
-              <FaCheckCircle style={{ marginRight: 4 }} />
-              Remove from my product
-            </>
-          ) : (
-            <>
-              <FaPlusCircle style={{ marginRight: 4 }} />
-              This is my product
-            </>
-          )}
-        </span>
-      ),
+      width: 50,
+      renderCell: (params) => {
+        return (
+          <Box>
+            <span
+              onClick={() => toggleMyProduct(params.row.id)}
+              style={{
+                cursor: "pointer",
+                fontSize: "0.8rem",
+                display: "flex",
+                alignItems: "center",
+                color: params.row.isMyProduct
+                  ? "theme.palette.accent.main"
+                  : "theme.palette.primary.main",
+                marginTop: 16,
+              }}
+            >
+              {params.row.isMyProduct ? (
+                <>
+                  <Tooltip title="Remove from My Products">
+                    <MdBookmarkRemove size={20} />
+                  </Tooltip>
+                </>
+              ) : (
+                <>
+                  <Tooltip title="Add to My Products">
+                    <MdBookmarkAdd size={20} />
+                  </Tooltip>
+                </>
+              )}
+            </span>
+          </Box>
+        );
+      },
     },
     {
       field: "image",
@@ -385,13 +398,11 @@ export default function ClusterDetails() {
       field: "chart_price",
       headerName: "Price Trend",
       width: 100,
-      renderCell: (params) => {
-        return params.row.sparkline_price ? (
+      renderCell: () => {
+        return (
           <Box sx={{ mt: 0 }}>
-            <CustomSparkLine data={params.row.sparkline_price} />
+            <CustomSparkLine />
           </Box>
-        ) : (
-          <Chip label="No Data" color="default" size="small" />
         );
       },
     },
@@ -425,14 +436,11 @@ export default function ClusterDetails() {
       field: "chart_main_rank",
       headerName: "Main Rank Trend",
       width: 100,
-      renderCell: (params) => {
-        return params.row.sparkline_main_rank &&
-          params.row.sparkline_main_rank.length > 0 ? (
+      renderCell: () => {
+        return (
           <Box sx={{ mt: 0 }}>
-            <CustomSparkLine data={params.row.sparkline_main_rank} />
+            <CustomSparkLine />
           </Box>
-        ) : (
-          <Chip label="No Data" color="default" size="small" />
         );
       },
     },
@@ -452,13 +460,11 @@ export default function ClusterDetails() {
       field: "chart_second_rank",
       headerName: "Second Rank Trend",
       width: 100,
-      renderCell: (params) => {
-        return params.row.sparkline_second_rank ? (
+      renderCell: () => {
+        return (
           <Box sx={{ mt: 0 }}>
-            <CustomSparkLine data={params.row.sparkline_second_rank} />
+            <CustomSparkLine />
           </Box>
-        ) : (
-          <Chip label="No Data" color="default" size="small" />
         );
       },
     },
@@ -479,13 +485,11 @@ export default function ClusterDetails() {
       field: "chart_blm",
       headerName: "BLM Trend",
       width: 100,
-      renderCell: (params) => {
-        return params.row.sparkline_price ? (
+      renderCell: () => {
+        return (
           <Box sx={{ mt: 0 }}>
-            <CustomSparkLine data={params.row.sparkline_blm} />
+            <CustomSparkLine />
           </Box>
-        ) : (
-          <Chip label="No Data" color="default" size="small" />
         );
       },
     },
@@ -493,13 +497,11 @@ export default function ClusterDetails() {
       field: "chart_total",
       headerName: "Total Trend",
       width: 100,
-      renderCell: (params) => {
-        return params.row.sparkline_price ? (
+      renderCell: () => {
+        return (
           <Box sx={{ mt: 0 }}>
-            <CustomSparkLine data={params.row.sparkline_total} />
+            <CustomSparkLine />
           </Box>
-        ) : (
-          <Chip label="No Data" color="default" size="small" />
         );
       },
     },
@@ -512,7 +514,7 @@ export default function ClusterDetails() {
     },
   ];
 
-  const allowedFields = ["details", "image", "title", "price"];
+  const allowedFields = ["details", "image", "asin", "title", "price"];
 
   const filteredColumns = marketCluster.is_initial_scraped
     ? columns // Falls `is_initial_scraped === true`, alle Spalten anzeigen
@@ -559,7 +561,6 @@ export default function ClusterDetails() {
         </Box>
         {/* Cluster Insights */}
         <Grid container spacing={4}>
-          {/* Market Development Chart - 1/3 width */}
           <Grid size={{ xs: 12, md: 4 }}>
             <Paper
               elevation={1}
@@ -658,7 +659,7 @@ export default function ClusterDetails() {
               <MetricCardLarge
                 iconKey="insight"
                 title="Cluster Insights"
-                value="123"
+                value={marketCluster.insights.total_revenue}
                 cardId="CD1"
                 isCurrency
               />
@@ -667,13 +668,13 @@ export default function ClusterDetails() {
                 <MetricCardSmall
                   iconKey="markets"
                   title="Markets"
-                  value="123"
+                  value={marketCluster.insights.total_markets}
                   cardId="CDD1"
                 />
                 <MetricCardSmall
                   iconKey="products"
-                  title="Products"
-                  value="123"
+                  title="Tracked Products"
+                  value={marketCluster.insights.total_products}
                   cardId="CDD2"
                 />
               </Box>
@@ -698,25 +699,26 @@ export default function ClusterDetails() {
             <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
               <MetricCardLarge
                 iconKey="products"
-                title="My Products"
-                value="123"
+                title="My Products Insights"
+                value={userProducts.total_revenue_user_products}
                 cardId="CD2"
                 isCurrency
+                hasSparkline
               />
 
               <Box sx={{ display: "flex", gap: 1, width: "100%" }}>
                 <MetricCardSmall
                   iconKey="percent"
                   title="Marketshare"
-                  value="0.45%"
+                  value={`${userProducts.marketshare}%`}
                   cardId="CDD5"
                 />
               </Box>
               <Box sx={{ display: "flex", gap: 1, width: "100%" }}>
                 <MetricCardSmall
                   iconKey="products"
-                  title="Products"
-                  value="123"
+                  title="My Products in Cluster"
+                  value={userProducts.user_products_in_cluster_count}
                   cardId="CDD6"
                 />
                 <MetricCardSmall
@@ -745,19 +747,14 @@ export default function ClusterDetails() {
             >
               <IconMarkets size={22} color={theme.palette.secondary.main} />
             </Box>
-            
+
             <Typography variant="h1">
               Markets in {marketCluster.title}
             </Typography>
-           
           </Box>
           <PrimaryLineDivider />
 
-          
-        
-
-
-          <Box sx={{ borderBottom: 1, borderColor: "divider" , mt:6}}>
+          <Box sx={{ borderBottom: 1, borderColor: "divider", mt: 6 }}>
             <Tabs value={tabIndex} onChange={handleTabChange}>
               {marketCluster.markets.map((market: any, index: number) => (
                 <Tab
@@ -786,9 +783,10 @@ export default function ClusterDetails() {
                     <MetricCardLarge
                       iconKey="insight"
                       title="Market Insights"
-                      value="123"
+                      value={market.revenue_total}
                       cardId="DDM1"
                       isCurrency
+                      hasSparkline
                     />
                   </Box>
                 </Grid>
@@ -805,37 +803,44 @@ export default function ClusterDetails() {
                   >
                     <MetricCardSmall
                       iconKey="products"
-                      title="Products"
-                      value="123"
+                      title="Tracked Products"
+                      value={market.products_in_market_count}
                       cardId="DDM2"
                     />
                     <MetricCardSmall
                       iconKey="static"
                       title="AVG"
-                      value="123"
+                      value={market.avg_blm}
                       cardId="DDM3"
                     />
                   </Box>
                 </Grid>
 
-                <Grid size={{ xs: 12, md: 2 }} sx={{ display: "flex" }}>
-                  <Box>
+                <Grid size={{ xs: 12, md: 3 }} sx={{ display: "flex" }}>
+                  <Box sx={{ flex: 1 }}>
                     <MetricCardLarge
                       iconKey="products"
-                      title="My Products"
-                      value="123"
+                      title="My Products Insights"
+                      value={
+                        userProducts["markets"][index][
+                          "total_revenue_user_products"
+                        ]
+                      }
                       cardId="DDM4"
                       isCurrency
+                      hasSparkline
                     />
                   </Box>
                 </Grid>
-                <Grid size={{ xs: 12, md: 3 }} sx={{ display: "flex" }}>
+                <Grid size={{ xs: 12, md: 2 }} sx={{ display: "flex" }}>
                   <Box sx={{ flex: 1 }}>
                     <MetricCardLarge
                       iconKey="percent"
                       title="My Marketshare"
-                      value="3,52%"
+                      value={userProducts["markets"][index]["marketshare"]}
                       cardId="DDM5"
+                      isCurrency
+                      hasSparkline
                     />
                   </Box>
                 </Grid>
@@ -852,8 +857,12 @@ export default function ClusterDetails() {
                   >
                     <MetricCardSmall
                       iconKey="products"
-                      title="Products"
-                      value="123"
+                      title="My Products in Market"
+                      value={
+                        userProducts["markets"][index][
+                          "user_products_in_market_count"
+                        ]
+                      }
                       cardId="DDM6"
                     />
                     <MetricCardSmall
@@ -929,7 +938,7 @@ export default function ClusterDetails() {
                 Add Individual ASIN to Market
               </Button> */}
 
-              <Box sx={{ height: "800px", width: "100%", mt: 4 }}>
+              <Box sx={{ width: "100%", mt: 4 }}>
                 <DataGrid
                   rows={market.products.map((product: any) => ({
                     id: product.asin,
@@ -944,12 +953,7 @@ export default function ClusterDetails() {
                     secondCategoryRank: product.second_category_rank,
                     blm: product.blm,
                     total: product.total,
-                    sparkline_main_rank: product.sparkline_main_rank,
-                    sparkline_second_rank: product.sparkline_second_rank,
-                    sparkline_price: product.sparkline_price,
-                    sparkline_total: product.sparkline_total,
-                    sparkline_blm: product.sparkline_blm,
-                    isMyProduct: product.isMyProduct, // ✅ Status für Zeilen-Highlight
+                    isMyProduct: product.isMyProduct,
                   }))}
                   columns={filteredColumns}
                   rowHeight={55}
@@ -1119,6 +1123,7 @@ export default function ClusterDetails() {
 
                         if (productFound) {
                           setMarketCluster(updatedData);
+                          console.log(marketCluster);
                           setAddAsinDialogOpen(false);
                           setAddingAsin(false);
                           setNewAsin(""); // ✅ reset field
