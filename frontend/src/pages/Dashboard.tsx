@@ -1,18 +1,7 @@
 import {
-  Alert,
   Box,
-  Button,
-  Card,
-  CardContent,
   CircularProgress,
-  Divider,
-  Paper,
-  Typography,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails
 } from "@mui/material";
-import Grid from "@mui/material/Grid2";
 import { keyframes } from "@mui/system";
 import {
   CategoryScale,
@@ -25,25 +14,21 @@ import {
   Tooltip,
 } from "chart.js";
 import { useEffect, useState } from "react";
-import { AiOutlineCheckCircle } from "react-icons/ai";
-import {
-  FaLayerGroup,
-  FaChevronDown
-} from "react-icons/fa";
-import { MdAdd, MdWarningAmber } from "react-icons/md";
-import { RiRobot2Fill } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
-
 import { useTheme } from "@mui/material/styles";
+
 import ClusterCard from "../components/dashboard/ClusterCard";
 import DashboardInsights from "../components/dashboard/DashboardInsights";
 import FirstMarketCluster from "../components/dashboard/FirstMarketCluster";
 import ScrapingProcessDashboard from "../components/dashboard/ScrapingProcessDashboard";
-import StatCardLarge from "../components/dashboard/StatCardLarge";
 import AddMarketClusterButton from "../components/dashboard/AddMarketClusterButton";
 import Disclaimer from "../components/Disclaimer";
 import { useSnackbar } from "../providers/SnackbarProvider";
 import MarketService from "../services/MarketService";
+import LoadingState from "../components/dashboard/LoadingState";
+import MarketClustersGrid from "../components/dashboard/MarketClustersGrid";
+import HeaderSection from "../components/dashboard/HeaderSection";
+import EmptyState from "../components/dashboard/EmptyState";
 
 ChartJS.register(
   CategoryScale,
@@ -182,74 +167,35 @@ const Dashboard: React.FC = () => {
         <ScrapingProcessDashboard activeCluster={activeCluster} />
       )}
 
-      {/* Market Clustrs */}
+      {/* Market Clusters */}
       {marketClusters.length > 0 && (
         <Box>
-          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-            <Typography variant="h1" sx={{ mb: 4 }}>
-              My Market Clusters
-            </Typography>
-            
-            <AddMarketClusterButton />
-          </Box>
+          <HeaderSection />
         
           {loading ? (
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                minHeight: "200px",
-              }}
-            >
-              <CircularProgress size={80} color="primary" />
-            </Box>
+            <LoadingState />
           ) : (
-            <Box sx={{ flexGrow: 1 }}>
-              <Grid container spacing={3}>
-                {marketClusters.length > 0 ? (
-                  marketClusters.map((cluster) => (
-                    <Grid key={cluster.id} size={{ xs: 12, sm: 6, lg: 4 }}>
-                      <ClusterCard
-                        cluster={cluster}
-                        onClick={() => navigate(`/cluster/${cluster.id}`)}
-                        deletingCluster={deletingCluster}
-                        setMarketClusters={setMarketClusters}
-                        setDeletingCluster={setDeletingCluster}
-                        totalRevenue={cluster.total_revenue}
-                        is_initial_scraped={cluster.is_initial_scraped}
-                        fetchMarketClusters={fetchData}
-                      />
-                    </Grid>
-                  ))
-                ) : (
-                  <Typography
-                    sx={{ textAlign: "center", mt: 4 }}
-                    variant="body1"
-                  >
-                    No market clusters found.
-                  </Typography>
-                )}
-              </Grid>
-            </Box>
+            <MarketClustersGrid
+              marketClusters={marketClusters}
+              onClusterClick={(id) => navigate(`/cluster/${id}`)}
+              deletingCluster={deletingCluster}
+              setMarketClusters={setMarketClusters}
+              setDeletingCluster={setDeletingCluster}
+              fetchMarketClusters={fetchData}
+            />
           )}
         </Box>
       )}
 
-      {/* Extended Add Market Cluster Button */}
-
       {/* Development Preview Accordion */}
       <Box sx={{ mt: 4 }}>
-       
-            <ScrapingProcessDashboard 
-              activeCluster={{
-                clustername: "Test Market Cluster",
-                status: "processing",
-              }} 
-            />
+        <ScrapingProcessDashboard 
+          activeCluster={{
+            clustername: "Test Market Cluster",
+            status: "processing",
+          }} 
+        />
       </Box>
-
-      <Disclaimer />
     </Box>
   );
 };
