@@ -7,7 +7,10 @@ import {
   CircularProgress,
   Divider,
   Paper,
-  Typography
+  Typography,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails
 } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import { keyframes } from "@mui/system";
@@ -25,6 +28,7 @@ import { useEffect, useState } from "react";
 import { AiOutlineCheckCircle } from "react-icons/ai";
 import {
   FaLayerGroup,
+  FaChevronDown
 } from "react-icons/fa";
 import { MdAdd, MdWarningAmber } from "react-icons/md";
 import { RiRobot2Fill } from "react-icons/ri";
@@ -77,7 +81,6 @@ const Dashboard: React.FC = () => {
   const [activeCluster, setActiveCluster] = useState<{
     clustername: string;
     status: string;
-    keywords: { [keyword: string]: string };
   } | null>(null);
 
   // Fetch all data
@@ -234,6 +237,17 @@ const Dashboard: React.FC = () => {
       )}
 
       {/* Extended Add Market Cluster Button */}
+
+      {/* Development Preview Accordion */}
+      <Box sx={{ mt: 4 }}>
+       
+            <ScrapingProcessDashboard 
+              activeCluster={{
+                clustername: "Test Market Cluster",
+                status: "processing",
+              }} 
+            />
+      </Box>
 
       <Disclaimer />
     </Box>

@@ -1,18 +1,12 @@
 import * as React from 'react';
 import {
-  Alert,
   Box,
-  Card,
-  CardContent,
-  CircularProgress,
   Paper,
   Typography
 } from "@mui/material";
 import { keyframes } from "@mui/system";
-import { AiOutlineCheckCircle } from "react-icons/ai";
-import { FaLayerGroup } from "react-icons/fa";
+import { useTheme } from "@mui/material/styles";
 import { RiRobot2Fill } from "react-icons/ri";
-
 // Add robot animation keyframes
 const robotAnimation = keyframes`
   0% {
@@ -26,165 +20,159 @@ const robotAnimation = keyframes`
   }
 `;
 
+// Add data stream animation
+const dataStreamAnimation = keyframes`
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+`;
+
+
+
+// Add pulse animation
+const pulseAnimation = keyframes`
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.3);
+  }
+  100% {
+    transform: scale(1);
+  }
+`;
+
 interface ScrapingProcessDashboardProps {
   activeCluster: {
     clustername: string;
     status: string;
-    keywords: { [keyword: string]: string };
   };
 }
 
 const ScrapingProcessDashboard: React.FC<ScrapingProcessDashboardProps> = ({ activeCluster }) => {
+  const theme = useTheme();
+
   return (
     <Paper
-      elevation={1}
+      elevation={3}
       sx={{
-        p: 3,
+        p: 2,
         mt: 2,
         borderRadius: 2,
-        backgroundColor: "white",
+        backgroundColor: theme.palette.background.paper,
+        border: `1px solid ${theme.palette.primary.main}`,
+        position: 'relative',
+        overflow: 'hidden'
       }}
     >
-      {/* Header with animated robot */}
+      {/* Background Data Streams */}
+      {[...Array(5)].map((_, index) => (
+        <Box
+          key={index}
+          sx={{
+            position: 'absolute',
+            right: `${index * 40 + 20}px`,
+            width: '1px',
+            height: '40px',
+            background: `linear-gradient(180deg, 
+              ${theme.palette.primary.main}20 0%, 
+              ${theme.palette.primary.main} 50%,
+              ${theme.palette.primary.main}20 100%)`,
+            animation: `${dataStreamAnimation} 4s ease-in-out infinite`,
+            animationDelay: `${index * 0.4}s`,
+          }}
+        />
+      ))}
+      {[...Array(3)].map((_, index) => (
+        <Box
+          key={`short-${index}`}
+          sx={{
+            position: 'absolute',
+            right: `${index * 25 + 180}px`,
+            width: '1px',
+            height: '20px',
+            background: `linear-gradient(180deg, 
+              ${theme.palette.primary.main}20 0%, 
+              ${theme.palette.primary.main} 50%,
+              ${theme.palette.primary.main}20 100%)`,
+            animation: `${dataStreamAnimation} 1.5s ease-in-out infinite`,
+            animationDelay: `${index * 0.3}s`,
+          }}
+        />
+      ))}
+
       <Box
         sx={{
           display: "flex",
           alignItems: "center",
           gap: 2,
-          mb: 3,
+          position: 'relative',
+          zIndex: 1
         }}
       >
         <Box
           sx={{
-            width: 45,
-            height: 45,
+            width: 40,
+            height: 40,
             borderRadius: "12px",
-            backgroundColor: "#e3f2fd",
+            backgroundColor: theme.palette.primary.main,
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            animation: `${robotAnimation} 2s ease-in-out infinite`,
+            animation: `${robotAnimation} 1.5s ease-in-out infinite`,
           }}
         >
-          <RiRobot2Fill size={24} color="#1976d2" />
+          <RiRobot2Fill size={20} color={theme.palette.common.white} />
         </Box>
-        <Typography
-          variant="h6"
-          color="text.primary"
-          sx={{ fontWeight: 600 }}
-        >
-          Our robots are scraping for you...
-        </Typography>
-      </Box>
 
-      <Alert
-        severity="info"
-        sx={{
-          mb: 3,
-          backgroundColor: "#e3f2fd",
-          color: "primary.main",
-          "& .MuiAlert-icon": {
-            color: "primary.main",
-          },
-        }}
-      >
-        We are scraping your markets to get a first impression of your
-        cluster. This usually takes some minutes. You can come back later,
-        inspect your other clusters or have a coffee.
-      </Alert>
-
-      {/* Active Cluster Card */}
-      <Card
-        elevation={1}
-        sx={{
-          backgroundColor: "white",
-          borderRadius: 2,
-          border: "1px solid",
-          borderColor: "divider",
-        }}
-      >
-        <CardContent sx={{ p: 3 }}>
-          {/* Cluster Header */}
-          <Box
-            sx={{ display: "flex", alignItems: "center", gap: 2, mb: 3 }}
-          >
-            <Box
-              sx={{
-                width: 45,
-                height: 45,
-                borderRadius: "12px",
-                backgroundColor: "#e3f2fd",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <FaLayerGroup size={22} color="#1976d2" />
-            </Box>
+        <Box sx={{ flex: 1 }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
             <Typography
-              variant="h6"
-              color="text.primary"
-              sx={{ fontWeight: 600 }}
-            >
-              Cluster to build: {activeCluster.clustername} (Todo: Add
-              cluster type and logo )
-            </Typography>
-          </Box>
-
-          {/* Scraping Status */}
-          <Box>
-            <Typography variant="body2" color="text.secondary" gutterBottom>
-              Scraping status:
-            </Typography>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                gap: 2,
-                mt: 1,
+              variant="subtitle1"
+              sx={{ 
+                fontWeight: 600, 
+                mb: 0.5,
+                color: theme.palette.text.primary
               }}
             >
-              {Object.entries(activeCluster.keywords).map(
-                ([keyword, status]) => (
-                  <Box
-                    key={keyword}
-                    sx={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: 2,
-                      p: 2,
-                      borderRadius: 1,
-                      backgroundColor:
-                        status === "done" ? "#e8f5e9" : "#e3f2fd",
-                    }}
-                  >
-                    <Box sx={{ minWidth: 24 }}>
-                      {status === "done" ? (
-                        <AiOutlineCheckCircle size={20} color="#2e7d32" />
-                      ) : (
-                        <CircularProgress
-                          size={20}
-                          sx={{ color: "primary.main" }}
-                        />
-                      )}
-                    </Box>
-                    <Typography
-                      variant="body2"
-                      sx={{
-                        color:
-                          status === "done" ? "#2e7d32" : "primary.main",
-                        fontWeight: 500,
-                      }}
-                    >
-                      {keyword}
-                    </Typography>
-                  </Box>
-                )
-              )}
+              Scraping cluster: {activeCluster.clustername}
+            </Typography>
+            <Box 
+              sx={{
+                animation: `${pulseAnimation} 1.5s ease-in-out infinite`,
+                display: 'flex',
+                alignItems: 'center'
+              }}
+            >
+              
             </Box>
           </Box>
-        </CardContent>
-      </Card>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+            <Typography
+              variant="body2"
+              sx={{ 
+                fontWeight: 500,
+                color: theme.palette.text.secondary,
+                display: 'flex',
+                alignItems: 'center',
+                gap: 1
+              }}
+            >
+              This may take a few minutes...
+            </Typography>
+          
+           
+          </Box>
+        </Box>
+      </Box>
     </Paper>
   );
 };
