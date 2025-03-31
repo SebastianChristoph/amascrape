@@ -42,6 +42,7 @@ import ClusterInsights from "../components/details/ClusterInsights";
 import MarketInsights from "../components/details/MarketInsights";
 import TopSuggestions from "../components/details/TopSuggestions";
 import ProductDetailTable from "../components/details/ProductDetailTable";
+import AddAsinToMarketsDialog from "../components/details/AddAsinToMarketsDialog";
 
 interface ProductType {
   asin: string; // ✅ Ändere 'id' zu 'asin'
@@ -667,161 +668,70 @@ export default function ClusterDetails() {
       </Backdrop>
 
       {addAsinDialogOpen && (
-        <Backdrop open={true} sx={{ zIndex: 9999, color: "#fff" }}>
-          <Paper
-            elevation={4}
-            sx={{
-              p: 4,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              gap: 3,
-              width: 400,
-              textAlign: "center",
-            }}
-          >
-            <Typography variant="h6" sx={{ fontWeight: 600 }}>
-              Add Product to Market
-            </Typography>
+        <AddAsinToMarketsDialog
+          open={addAsinDialogOpen}
+          newAsin={newAsin}
+          setNewAsin={setNewAsin}
+          asinError={asinError}
+          setAsinError={setAsinError}
+          addingAsin={addingAsin}
+          isValidAsin={isValidAsin}
+          onConfirm={async () => {
+            if (!newAsin) return;
+            setAddingAsin(true);
+            const activeMarketId = marketCluster.markets[tabIndex].id;
 
-            <Typography variant="body2" color="text.secondary">
-              You can manually add a product by entering its valid ASIN. Our
-              system will scrape the product data and include it in the selected
-              market.
-            </Typography>
+            const result = await MarketService.addAsinToMarket(
+              newAsin,
+              activeMarketId
+            );
 
-            <input
-              type="text"
-              value={newAsin}
-              onChange={(e) => {
-                const value = e.target.value;
-                setNewAsin(value);
-                if (!isValidAsin(value)) {
-                  setAsinError(
-                    "ASIN must start with 'B' and be exactly 10 characters."
+            if (result.success) {
+              let retries = 0;
+              const maxRetries = 15;
+              const pollForNewProduct = async () => {
+                retries += 1;
+                const updatedData =
+                  await MarketService.getMarketClusterDetails(
+                    Number(clusterId)
                   );
+                const targetMarket = updatedData.markets.find(
+                  (m: any) => m.id === activeMarketId
+                );
+                const productFound = targetMarket?.products.find(
+                  (p: any) => p.asin === newAsin.toUpperCase()
+                );
+
+                if (productFound) {
+                  setMarketCluster(updatedData);
+                  console.log(marketCluster);
+                  setAddAsinDialogOpen(false);
+                  setAddingAsin(false);
+                  setNewAsin(""); // ✅ reset field
+                  showSnackbar(
+                    "✅  Product successfully added to the market"
+                  );
+                } else if (retries < maxRetries) {
+                  setTimeout(pollForNewProduct, 4000);
                 } else {
-                  setAsinError(null);
+                  setAddingAsin(false);
+                  alert(
+                    "⚠️ Product could not be confirmed after several attempts."
+                  );
                 }
-              }}
-              placeholder="Enter ASIN (e.g. B07N4M94ZP)"
-              style={{
-                padding: "10px",
-                width: "100%",
-                borderRadius: "6px",
-                border: asinError ? "2px solid red" : "1px solid #ccc",
-                fontSize: "16px",
-              }}
-              disabled={addingAsin}
-            />
+              };
 
-            {asinError && (
-              <Typography
-                variant="caption"
-                color="error"
-                sx={{ mt: -1, mb: 1, textAlign: "left", width: "100%" }}
-              >
-                {asinError}
-              </Typography>
-            )}
-
-            <Typography variant="caption" color="text.secondary" sx={{ mt: 1 }}>
-              ⏱️ This usually takes under 1 minute to complete.
-            </Typography>
-
-            {addingAsin ? (
-              <Backdrop open={addingAsin} sx={{ zIndex: 1301, color: "#fff" }}>
-                <CircularProgress color="inherit" />
-              </Backdrop>
-            ) : (
-              <Box sx={{ display: "flex", gap: 2 }}>
-                <button
-                  disabled={!isValidAsin(newAsin) || addingAsin}
-                  onClick={async () => {
-                    if (!newAsin) return;
-                    setAddingAsin(true);
-                    const activeMarketId = marketCluster.markets[tabIndex].id;
-
-                    const result = await MarketService.addAsinToMarket(
-                      newAsin,
-                      activeMarketId
-                    );
-
-                    if (result.success) {
-                      let retries = 0;
-                      const maxRetries = 15;
-                      const pollForNewProduct = async () => {
-                        retries += 1;
-                        const updatedData =
-                          await MarketService.getMarketClusterDetails(
-                            Number(clusterId)
-                          );
-                        const targetMarket = updatedData.markets.find(
-                          (m: any) => m.id === activeMarketId
-                        );
-                        const productFound = targetMarket?.products.find(
-                          (p: any) => p.asin === newAsin.toUpperCase()
-                        );
-
-                        if (productFound) {
-                          setMarketCluster(updatedData);
-                          console.log(marketCluster);
-                          setAddAsinDialogOpen(false);
-                          setAddingAsin(false);
-                          setNewAsin(""); // ✅ reset field
-                          showSnackbar(
-                            "✅  Product successfully added to the market"
-                          );
-                        } else if (retries < maxRetries) {
-                          setTimeout(pollForNewProduct, 4000);
-                        } else {
-                          setAddingAsin(false);
-                          alert(
-                            "⚠️ Product could not be confirmed after several attempts."
-                          );
-                        }
-                      };
-
-                      pollForNewProduct();
-                    } else {
-                      alert(result.message || "Something went wrong.");
-                      setAddingAsin(false);
-                    }
-                  }}
-                  style={{
-                    padding: "8px 20px",
-                    backgroundColor: !isValidAsin(newAsin) ? "#ccc" : "#1976d2",
-                    color: "white",
-                    borderRadius: "6px",
-                    fontWeight: "bold",
-                    border: "none",
-                    cursor: !isValidAsin(newAsin) ? "not-allowed" : "pointer",
-                  }}
-                >
-                  Confirm
-                </button>
-
-                <button
-                  onClick={() => {
-                    setAddAsinDialogOpen(false);
-                    setNewAsin(""); // ✅ reset field
-                  }}
-                  disabled={addingAsin}
-                  style={{
-                    padding: "8px 20px",
-                    backgroundColor: addingAsin ? "#eee" : "#ccc",
-                    borderRadius: "6px",
-                    fontWeight: "bold",
-                    border: "none",
-                    cursor: "pointer",
-                  }}
-                >
-                  Cancel
-                </button>
-              </Box>
-            )}
-          </Paper>
-        </Backdrop>
+              pollForNewProduct();
+            } else {
+              alert(result.message || "Something went wrong.");
+              setAddingAsin(false);
+            }
+          }}
+          onCancel={() => {
+            setAddAsinDialogOpen(false);
+            setNewAsin(""); // ✅ reset field
+          }}
+        />
       )}
     </>
   );
