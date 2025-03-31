@@ -18,11 +18,27 @@ const AddMarketClusterButton: React.FC = () => {
         height: "50px",
         boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
         backgroundColor: theme.palette.accent.main,
+        animation: "pulse 2s infinite",
+        "@keyframes pulse": {
+          "0%": {
+            transform: "scale(1)",
+            boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+          },
+          "50%": {
+            transform: "scale(1.02)",
+            boxShadow: "0 6px 16px rgba(0,0,0,0.2)",
+          },
+          "100%": {
+            transform: "scale(1)",
+            boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+          },
+        },
         "&:hover": {
           backgroundColor: "primary.dark",
           transform: "scale(1.05)",
           transition: "all 0.2s ease-in-out",
           boxShadow: "0 6px 16px rgba(0,0,0,0.2)",
+          animation: "none",
         },
       }}
     >

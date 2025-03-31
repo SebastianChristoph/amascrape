@@ -316,7 +316,7 @@ const AddMarketCluster: React.FC = () => {
                         value={newKeyword}
                         onChange={(e) => setNewKeyword(e.target.value)}
                         placeholder={CLUSTER_CONSTANTS.PLACEHOLDERS.KEYWORDS}
-                        variant="outlined"
+                          variant="filled"
                         size="small"
                       />
                       <Button
