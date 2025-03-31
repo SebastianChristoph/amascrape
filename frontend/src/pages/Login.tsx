@@ -9,28 +9,28 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import { useState, useEffect } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
-import { useSnackbar } from "../providers/SnackbarProvider";
+import {
+  CategoryScale,
+  Chart as ChartJS,
+  Legend,
+  LinearScale,
+  LineElement,
+  PointElement,
+  Title,
+  Tooltip,
+} from "chart.js";
+import { useEffect, useState } from "react";
+import { Line } from "react-chartjs-2";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import { IoIosAnalytics } from "react-icons/io";
 import { FaSignInAlt } from "react-icons/fa";
-import LoginService from "../services/LoginService";
+import { IoIosAnalytics } from "react-icons/io";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   commonBackgroundStyle,
   moveBackgroundKeyframes,
 } from "../components/BackgroundPattern";
-import { Line } from "react-chartjs-2";
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-} from "chart.js";
+import { useSnackbar } from "../providers/SnackbarProvider";
+import LoginService from "../services/LoginService";
 
 ChartJS.register(
   CategoryScale,
@@ -226,7 +226,11 @@ export default function Login() {
             </Typography>
             <Typography
               variant="body2"
-              sx={{ textAlign: "center", mb: 3, color: theme.palette.text.secondary }}
+              sx={{
+                textAlign: "center",
+                mb: 3,
+                color: theme.palette.text.secondary,
+              }}
             >
               Please log in with your credentials to continue.
             </Typography>
@@ -241,27 +245,27 @@ export default function Login() {
                 required
                 sx={{
                   mb: 2,
-                  '& .MuiFilledInput-root': {
+                  "& .MuiFilledInput-root": {
                     backgroundColor: `${theme.palette.background.default}`,
-                    '&:hover': {
+                    "&:hover": {
                       backgroundColor: `${theme.palette.background.default}`,
                     },
-                    '&.Mui-focused': {
+                    "&.Mui-focused": {
                       backgroundColor: `${theme.palette.background.default}`,
                     },
-                    '&:before': {
+                    "&:before": {
                       borderBottomColor: theme.palette.text.secondary,
                     },
-                    '&:hover:before': {
+                    "&:hover:before": {
                       borderBottomColor: theme.palette.primary.main,
                     },
-                    '& input': {
+                    "& input": {
                       color: theme.palette.text.primary,
                     },
                   },
-                  '& .MuiInputLabel-root': {
+                  "& .MuiInputLabel-root": {
                     color: theme.palette.text.secondary,
-                    '&.Mui-focused': {
+                    "&.Mui-focused": {
                       color: theme.palette.primary.main,
                     },
                   },
@@ -278,27 +282,27 @@ export default function Login() {
                 required
                 sx={{
                   mb: 3,
-                  '& .MuiFilledInput-root': {
+                  "& .MuiFilledInput-root": {
                     backgroundColor: `${theme.palette.background.default}`,
-                    '&:hover': {
+                    "&:hover": {
                       backgroundColor: `${theme.palette.background.default}`,
                     },
-                    '&.Mui-focused': {
+                    "&.Mui-focused": {
                       backgroundColor: `${theme.palette.background.default}`,
                     },
-                    '&:before': {
+                    "&:before": {
                       borderBottomColor: theme.palette.text.secondary,
                     },
-                    '&:hover:before': {
+                    "&:hover:before": {
                       borderBottomColor: theme.palette.primary.main,
                     },
-                    '& input': {
+                    "& input": {
                       color: theme.palette.text.primary,
                     },
                   },
-                  '& .MuiInputLabel-root': {
+                  "& .MuiInputLabel-root": {
                     color: theme.palette.text.secondary,
-                    '&.Mui-focused': {
+                    "&.Mui-focused": {
                       color: theme.palette.primary.main,
                     },
                   },

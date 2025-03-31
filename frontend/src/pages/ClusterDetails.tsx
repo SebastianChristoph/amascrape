@@ -2,48 +2,27 @@ import {
   Alert,
   Backdrop,
   Box,
-  Button,
   Chip,
   CircularProgress,
-  IconButton,
-  Link,
   Paper,
-  Skeleton,
   Tab,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
   Tabs,
-  Tooltip,
   Typography,
 } from "@mui/material";
-import Grid from "@mui/material/Grid2";
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import { useEffect, useState } from "react";
-import { FaRegEye, FaSearch } from "react-icons/fa";
-import { useParams } from "react-router-dom";
-import CustomSparkLine from "../components/charts/CustomSparkLine";
-import CustomStackBars from "../components/charts/CustomStackChart";
-import ChartDataService from "../services/ChartDataService";
-import MarketService from "../services/MarketService";
-import { FaCheckCircle, FaPlusCircle } from "react-icons/fa";
-import { useSnackbar } from "../providers/SnackbarProvider";
-import { iconMap, fallbackIcon } from "../utils/iconUtils";
 import { useTheme } from "@mui/material/styles";
-import { IoStatsChart } from "react-icons/io5";
-import MetricCardLarge from "../components/details/MetricCardLarge";
-import MetricCardSmall from "../components/details/MetricCardSmall";
-import PrimaryLineDivider from "../components/PrimaryLineDivider";
-import { MdBookmarkAdd, MdBookmarkRemove } from "react-icons/md";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import AddAsinToMarketsDialog from "../components/details/AddAsinToMarketsDialog";
 import ClusterInsights from "../components/details/ClusterInsights";
 import MarketInsights from "../components/details/MarketInsights";
-import TopSuggestions from "../components/details/TopSuggestions";
-import ProductDetailTable from "../components/details/ProductDetailTable";
-import AddAsinToMarketsDialog from "../components/details/AddAsinToMarketsDialog";
 import ProductDataGrid from "../components/details/ProductDataGrid";
+import ProductDetailTable from "../components/details/ProductDetailTable";
+import TopSuggestions from "../components/details/TopSuggestions";
+import PrimaryLineDivider from "../components/PrimaryLineDivider";
+import { useSnackbar } from "../providers/SnackbarProvider";
+import ChartDataService from "../services/ChartDataService";
+import MarketService from "../services/MarketService";
+import { fallbackIcon, iconMap } from "../utils/iconUtils";
 
 interface ProductType {
   asin: string; // ✅ Ändere 'id' zu 'asin'
@@ -452,10 +431,9 @@ export default function ClusterDetails() {
               const maxRetries = 15;
               const pollForNewProduct = async () => {
                 retries += 1;
-                const updatedData =
-                  await MarketService.getMarketClusterDetails(
-                    Number(clusterId)
-                  );
+                const updatedData = await MarketService.getMarketClusterDetails(
+                  Number(clusterId)
+                );
                 const targetMarket = updatedData.markets.find(
                   (m: any) => m.id === activeMarketId
                 );
@@ -469,9 +447,7 @@ export default function ClusterDetails() {
                   setAddAsinDialogOpen(false);
                   setAddingAsin(false);
                   setNewAsin(""); // ✅ reset field
-                  showSnackbar(
-                    "✅  Product successfully added to the market"
-                  );
+                  showSnackbar("✅  Product successfully added to the market");
                 } else if (retries < maxRetries) {
                   setTimeout(pollForNewProduct, 4000);
                 } else {

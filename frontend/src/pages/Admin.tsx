@@ -306,9 +306,9 @@ export default function Admin() {
                 <li key={file}>
                   <Link
                     to={`/admin/logs/${file}`}
-                    style={{ 
-                      textDecoration: "none", 
-                      color: theme.palette.text.primary 
+                    style={{
+                      textDecoration: "none",
+                      color: theme.palette.text.primary,
                     }}
                   >
                     {file}
@@ -332,9 +332,9 @@ export default function Admin() {
                 <li key={file}>
                   <Link
                     to={`/admin/logs/${file}`}
-                    style={{ 
-                      textDecoration: "none", 
-                      color: theme.palette.text.primary 
+                    style={{
+                      textDecoration: "none",
+                      color: theme.palette.text.primary,
                     }}
                   >
                     {file}
@@ -389,12 +389,14 @@ export default function Admin() {
                 maxHeight: 400,
                 overflow: "auto",
                 whiteSpace: "pre-wrap",
-                backgroundColor: theme.palette.mode === 'light' 
-                  ? '#F8FAFC'  // Light theme background
-                  : '#1E293B', // Dark theme background
-                color: theme.palette.mode === 'light'
-                  ? '#1E293B'  // Dark text for light theme
-                  : '#F8FAFC', // Light text for dark theme
+                backgroundColor:
+                  theme.palette.mode === "light"
+                    ? "#F8FAFC" // Light theme background
+                    : "#1E293B", // Dark theme background
+                color:
+                  theme.palette.mode === "light"
+                    ? "#1E293B" // Dark text for light theme
+                    : "#F8FAFC", // Light text for dark theme
               }}
             >
               <Typography variant="body2">{asinLog}</Typography>
@@ -415,9 +417,9 @@ export default function Admin() {
                 <li key={file}>
                   <Link
                     to={`/admin/logs/${file}`}
-                    style={{ 
-                      textDecoration: "none", 
-                      color: theme.palette.text.primary 
+                    style={{
+                      textDecoration: "none",
+                      color: theme.palette.text.primary,
                     }}
                   >
                     {file}

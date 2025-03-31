@@ -1,7 +1,5 @@
-import {
-  Box,
-  CircularProgress,
-} from "@mui/material";
+import { Box } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 import { keyframes } from "@mui/system";
 import {
   CategoryScale,
@@ -15,20 +13,15 @@ import {
 } from "chart.js";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useTheme } from "@mui/material/styles";
 
-import ClusterCard from "../components/dashboard/ClusterCard";
 import DashboardInsights from "../components/dashboard/DashboardInsights";
 import FirstMarketCluster from "../components/dashboard/FirstMarketCluster";
-import ScrapingProcessDashboard from "../components/dashboard/ScrapingProcessDashboard";
-import AddMarketClusterButton from "../components/dashboard/AddMarketClusterButton";
-import Disclaimer from "../components/Disclaimer";
-import { useSnackbar } from "../providers/SnackbarProvider";
-import MarketService from "../services/MarketService";
+import HeaderSection from "../components/dashboard/HeaderSection";
 import LoadingState from "../components/dashboard/LoadingState";
 import MarketClustersGrid from "../components/dashboard/MarketClustersGrid";
-import HeaderSection from "../components/dashboard/HeaderSection";
-import EmptyState from "../components/dashboard/EmptyState";
+import ScrapingProcessDashboard from "../components/dashboard/ScrapingProcessDashboard";
+import { useSnackbar } from "../providers/SnackbarProvider";
+import MarketService from "../services/MarketService";
 
 ChartJS.register(
   CategoryScale,
@@ -171,7 +164,7 @@ const Dashboard: React.FC = () => {
       {marketClusters.length > 0 && (
         <Box>
           <HeaderSection />
-        
+
           {loading ? (
             <LoadingState />
           ) : (
@@ -189,11 +182,11 @@ const Dashboard: React.FC = () => {
 
       {/* Development Preview Accordion */}
       <Box sx={{ mt: 4 }}>
-        <ScrapingProcessDashboard 
+        <ScrapingProcessDashboard
           activeCluster={{
             clustername: "Test Market Cluster",
             status: "processing",
-          }} 
+          }}
         />
       </Box>
     </Box>

@@ -1,7 +1,13 @@
-import { useParams } from "react-router-dom";
+import {
+  Button,
+  CircularProgress,
+  Container,
+  Paper,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import { useEffect, useState } from "react";
-import { Container, Typography, Paper, CircularProgress, Button, useTheme } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import UserService from "../services/UserService";
 
 export default function LogViewer() {
@@ -15,10 +21,13 @@ export default function LogViewer() {
 
     const fetchContent = async () => {
       try {
-        const res = await fetch(`http://127.0.0.1:9000/scraping/logs/${filename}`, {
-          headers: { Authorization: `Bearer ${UserService.getToken()}` },
-        });
-          
+        const res = await fetch(
+          `http://127.0.0.1:9000/scraping/logs/${filename}`,
+          {
+            headers: { Authorization: `Bearer ${UserService.getToken()}` },
+          }
+        );
+
         const text = await res.text();
         setContent(text);
       } catch (error) {
@@ -33,12 +42,7 @@ export default function LogViewer() {
 
   return (
     <Container sx={{ mt: 4 }}>
-      <Button 
-        variant="contained" 
-        component={Link} 
-        to="/admin" 
-        sx={{ mb: 2 }}
-      >
+      <Button variant="contained" component={Link} to="/admin" sx={{ mb: 2 }}>
         ← Zurück zum Admin-Panel
       </Button>
       <Typography variant="h5" gutterBottom>
@@ -54,12 +58,14 @@ export default function LogViewer() {
             maxHeight: "70vh",
             overflow: "auto",
             whiteSpace: "pre-wrap",
-            backgroundColor: theme.palette.mode === 'light' 
-              ? '#F8FAFC'  // Light theme background
-              : '#1E293B', // Dark theme background
-            color: theme.palette.mode === 'light'
-              ? '#1E293B'  // Dark text for light theme
-              : '#F8FAFC', // Light text for dark theme
+            backgroundColor:
+              theme.palette.mode === "light"
+                ? "#F8FAFC" // Light theme background
+                : "#1E293B", // Dark theme background
+            color:
+              theme.palette.mode === "light"
+                ? "#1E293B" // Dark text for light theme
+                : "#F8FAFC", // Light text for dark theme
             borderRadius: 2,
             border: `1px solid ${theme.palette.divider}`,
             "& a": {
@@ -67,23 +73,24 @@ export default function LogViewer() {
               textDecoration: "underline",
               "&:hover": {
                 color: theme.palette.primary.dark,
-              }
+              },
             },
           }}
         >
           <Typography
             component="pre"
             sx={{
-              fontFamily: 'Consolas, Monaco, monospace',
-              fontSize: '0.875rem',
+              fontFamily: "Consolas, Monaco, monospace",
+              fontSize: "0.875rem",
               lineHeight: 1.5,
               margin: 0,
-              color: 'inherit',
+              color: "inherit",
             }}
             dangerouslySetInnerHTML={{
               __html: (content as string).replace(
                 /(https?:\/\/[^\s]+)/g,
-                (url) => `<a href="${url}" target="_blank" rel="noopener noreferrer">${url}</a>`
+                (url) =>
+                  `<a href="${url}" target="_blank" rel="noopener noreferrer">${url}</a>`
               ),
             }}
           />
