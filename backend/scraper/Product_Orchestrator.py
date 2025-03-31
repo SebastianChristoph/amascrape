@@ -187,8 +187,7 @@ class Product_Orchestrator:
             old = getattr(old_data, field, None) if old_data else None
             new = new_data.get(field, None)
             if new != old and new is not None:
-                icon = "🔁" if old else "🆕"
-                changes.append(f"{icon} {field}")
+                changes.append(f"{field}")
                 changed_fields[field] = new
         return changes, changed_fields
 
