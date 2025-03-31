@@ -19,6 +19,7 @@ import {
   TableRow,
   TextField,
   Typography,
+  useTheme,
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import { FiChevronDown } from "react-icons/fi";
@@ -32,6 +33,7 @@ interface User {
 }
 
 export default function Admin() {
+  const theme = useTheme();
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
   const [username, setUsername] = useState("");
@@ -201,8 +203,8 @@ export default function Admin() {
   const warningLogs = logFiles.filter((f) => f.startsWith("warnings-"));
 
   return (
-    <Container>
-      <Typography variant="h1" gutterBottom>
+    <Container sx={{ py: 4 }}>
+      <Typography variant="h4" gutterBottom>
         Admin Panel
       </Typography>
 
@@ -304,7 +306,10 @@ export default function Admin() {
                 <li key={file}>
                   <Link
                     to={`/admin/logs/${file}`}
-                    style={{ textDecoration: "none", color: "white" }}
+                    style={{ 
+                      textDecoration: "none", 
+                      color: theme.palette.text.primary 
+                    }}
                   >
                     {file}
                   </Link>
@@ -327,7 +332,10 @@ export default function Admin() {
                 <li key={file}>
                   <Link
                     to={`/admin/logs/${file}`}
-                    style={{ textDecoration: "none", color: "white" }}
+                    style={{ 
+                      textDecoration: "none", 
+                      color: theme.palette.text.primary 
+                    }}
                   >
                     {file}
                   </Link>
@@ -381,7 +389,12 @@ export default function Admin() {
                 maxHeight: 400,
                 overflow: "auto",
                 whiteSpace: "pre-wrap",
-                backgroundColor: "#f1f1f1",
+                backgroundColor: theme.palette.mode === 'light' 
+                  ? '#F8FAFC'  // Light theme background
+                  : '#1E293B', // Dark theme background
+                color: theme.palette.mode === 'light'
+                  ? '#1E293B'  // Dark text for light theme
+                  : '#F8FAFC', // Light text for dark theme
               }}
             >
               <Typography variant="body2">{asinLog}</Typography>
@@ -402,7 +415,10 @@ export default function Admin() {
                 <li key={file}>
                   <Link
                     to={`/admin/logs/${file}`}
-                    style={{ textDecoration: "none" }}
+                    style={{ 
+                      textDecoration: "none", 
+                      color: theme.palette.text.primary 
+                    }}
                   >
                     {file}
                   </Link>
