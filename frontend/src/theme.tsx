@@ -108,11 +108,18 @@ export const lightTheme = createTheme({
 
 export const darkTheme = createTheme({
   palette: {
+    mode: "dark",
     primary: { main: "#6C72FF" },  // mattes lila
     secondary: { main: "#57C3FF" },  // leichtes hellblau
     accent: { main: "#02AFAC" }, // 
-    background: { default: "#080F25", paper: "#101935" }, // Paper dunkles blau
-    text: { primary: "#AEB9E1", secondary: "#FFFFFF" }, // leichtes lila / weiß
+    background: { 
+      default: "#080F25", 
+      paper: "#101935" 
+    },
+    text: { 
+      primary: "#AEB9E1", 
+      secondary: "#8B95BC"  // angepasst für besseren Kontrast
+    },
   },
   typography: {
     fontFamily: 'sans-serif',
@@ -124,20 +131,34 @@ export const darkTheme = createTheme({
     h2: {
       fontSize: "1.6rem",
       fontWeight: 600,
-      // color: "#212121",
     },
     h3: {
       fontSize: "1.4rem",
       fontWeight: 500,
-      // color: "#212121",
     },
     body1: {
       fontSize: "1rem",
-      // color: "#424242", // Dunkleres Grau für normalen Text
     },
     button: {
-      textTransform: "none", // Verhindert Großbuchstaben in Buttons
+      textTransform: "none",
       fontWeight: 600,
+    },
+  },
+  components: {
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          '& .MuiFilledInput-root': {
+            backgroundColor: '#080F25',
+            '&:hover': {
+              backgroundColor: '#080F25',
+            },
+            '&.Mui-focused': {
+              backgroundColor: '#080F25',
+            },
+          },
+        },
+      },
     },
   },
 });

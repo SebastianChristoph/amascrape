@@ -1,4 +1,4 @@
-import { Box, Button, Paper, Typography } from "@mui/material";
+import { Box, Button, Paper, Typography, Grid } from "@mui/material";
 import { keyframes } from "@mui/system";
 import { Line } from "react-chartjs-2";
 import { useNavigate } from "react-router-dom";
@@ -36,8 +36,38 @@ const pulseAnimation = keyframes`
   }
 `;
 
+const slideInAnimation = keyframes`
+  0% {
+    opacity: 0;
+    transform: perspective(1000px) rotateY(-90deg) translateX(100px) scale(0.5);
+    transform-origin: right center;
+  }
+  100% {
+    opacity: 1;
+    transform: perspective(1000px) rotateY(0) translateX(0) scale(1);
+    transform-origin: right center;
+  }
+`;
+
+const unfoldAnimation = keyframes`
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) scaleX(0.1) scaleY(0.5);
+    transform-origin: left center;
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateX(-30%) scaleX(0.6) scaleY(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scaleX(1) scaleY(1);
+  }
+`;
+
 const FirstMarketCluster: React.FC = () => {
   const navigate = useNavigate();
+  const [isHovering, setIsHovering] = useState(false);
   const [chartValues, setChartValues] = useState<number[]>([
     15, 20, 25, 30, 35, 40,
   ]);
@@ -136,57 +166,123 @@ const FirstMarketCluster: React.FC = () => {
   return (
     <Box
       sx={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        minHeight: "calc(100vh - 64px)",
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        minHeight: 'calc(100vh - 64px)',
         p: 3,
+        position: 'relative',
       }}
     >
-      <Paper
-        elevation={3}
-        sx={{
-          p: 4,
-          maxWidth: 600,
-          width: "100%",
-          background: "linear-gradient(135deg, #0D1B2A 0%, #143a63 100%)",
-          color: "white",
-          borderRadius: 2,
-          textAlign: "center",
-        }}
-      >
-        <Box
+      <Grid container spacing={2} justifyContent="center" alignItems="center">
+        <Grid xs={12} md={6}>
+          <Paper
+            elevation={3}
+            onMouseEnter={() => setIsHovering(true)}
+            onMouseLeave={() => setIsHovering(false)}
+            sx={{
+              p: 4,
+              maxWidth: 600,
+              width: "100%",
+              background: "linear-gradient(135deg, #0D1B2A 0%, #143a63 100%)",
+              color: "white",
+              borderRadius: 2,
+              textAlign: "center",
+              position: 'relative',
+              zIndex: 1,
+            }}
+          >
+            <Box sx={{ height: 200, mb: 3 }}>
+              <Line data={chartData} options={chartOptions} />
+            </Box>
+            <Typography variant="h4" gutterBottom>
+              Welcome to MarketScope
+            </Typography>
+            <Typography variant="body1" sx={{ mb: 4, color: "white" }}>
+              You haven't created any market clusters yet. Start your journey by creating your first one!
+            </Typography>
+            <Button
+              variant="contained"
+              color="secondary"
+              size="large"
+              onClick={() => navigate("/add-market-cluster")}
+              sx={{
+                backgroundColor: "white",
+                color: "primary.main",
+                animation: `${pulseAnimation} 2s infinite`,
+                "&:hover": {
+                  backgroundColor: "grey.100",
+                },
+              }}
+            >
+              Create Your First Market Cluster
+            </Button>
+          </Paper>
+        </Grid>
+        
+        <Grid 
+          xs={12} 
+          md={4}
           sx={{
-            height: 200,
-            mb: 3,
+            position: { xs: 'relative', md: 'absolute' },
+            right: { xs: 'auto', md: '20px' },
+            top: '50%',
+            transform: 'translateY(-50%)',
+            opacity: isHovering ? 1 : 0,
+            visibility: isHovering ? 'visible' : 'hidden',
+            transition: 'all 0.4s ease-in-out',
+            pointerEvents: isHovering ? 'auto' : 'none',
           }}
         >
-          <Line data={chartData} options={chartOptions} />
-        </Box>
-        <Typography variant="h4" gutterBottom>
-          Welcome to MarketScope
-        </Typography>
-        <Typography variant="body1" sx={{ mb: 4, color: "white" }}>
-          You haven't created any market clusters yet. Start your journey by
-          creating your first one!
-        </Typography>
-        <Button
-          variant="contained"
-          color="secondary"
-          size="large"
-          onClick={() => navigate("/add-market-cluster")}
-          sx={{
-            backgroundColor: "white",
-            color: "primary.main",
-            animation: `${pulseAnimation} 2s infinite`,
-            "&:hover": {
-              backgroundColor: "grey.100",
-            },
-          }}
-        >
-          Create Your First Market Cluster
-        </Button>
-      </Paper>
+          <Paper
+            elevation={4}
+            sx={{
+              p: 3,
+              background: 'linear-gradient(135deg, #143a63 0%, #0D1B2A 100%)',
+              color: 'white',
+              borderRadius: 2,
+              maxWidth: '100%',
+              backdropFilter: 'blur(10px)',
+              border: '1px solid rgba(255, 255, 255, 0.1)',
+              boxShadow: '0 10px 30px -10px rgba(0,0,0,0.5)',
+              transform: isHovering ? 'scale(1)' : 'scale(0.98)',
+              transition: 'transform 0.4s ease-in-out',
+              position: 'relative',
+              '&::before': {
+                content: '""',
+                position: 'absolute',
+                top: '50%',
+                left: '-8px',
+                width: '16px',
+                height: '16px',
+                background: 'linear-gradient(135deg, #143a63 0%, #0D1B2A 100%)',
+                transform: 'translateY(-50%) rotate(45deg)',
+                borderLeft: '1px solid rgba(255, 255, 255, 0.1)',
+                borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+              }
+            }}
+          >
+            <Typography variant="h5" gutterBottom>
+              What is a Market Cluster?
+            </Typography>
+            <Typography variant="body1" sx={{ mb: 2 }}>
+              A Market Cluster is a powerful tool that helps you group and analyze related market segments together.
+            </Typography>
+            <Typography variant="body2" sx={{ mb: 2 }}>
+              • Group similar markets together
+            </Typography>
+            <Typography variant="body2" sx={{ mb: 2 }}>
+              • Track performance metrics
+            </Typography>
+            <Typography variant="body2" sx={{ mb: 2 }}>
+              • Identify market trends
+            </Typography>
+            <Typography variant="body2">
+              • Make data-driven decisions
+            </Typography>
+          </Paper>
+        </Grid>
+      </Grid>
     </Box>
   );
 };
