@@ -8,52 +8,6 @@ from sqlalchemy.orm import Session
 
 router = APIRouter()
 
-# def get_sparkline_for_user_products(db: Session, user_asins: List[str], field: str) -> List[int]:
-#     """Generates sparkline data for all UserProducts within a cluster."""
-    
-#     today = datetime.datetime.now(datetime.timezone.utc).date()  # ✅ Fix hier!
-#     cutoff_date = today - datetime.timedelta(days=30)
-
-#     if not user_asins:
-#         return [0] * 30 
-    
-#     product_changes = (
-#         db.query(ProductChange)
-#         .filter(ProductChange.asin.in_(user_asins))
-#         .order_by(ProductChange.change_date.asc())
-#         .all()
-#     )
-
-#     if not product_changes:
-#         return [0] * 30  
-
-#     valid_changes = [change for change in product_changes if getattr(change, field, None) is not None]
-
-#     if not valid_changes:
-#         return [0] * 30  
-
-#     first_valid_change = valid_changes[0]
-#     first_valid_date = first_valid_change.change_date.date()
-#     first_valid_value = getattr(first_valid_change, field)
-
-#     start_date = max(first_valid_date, cutoff_date)
-
-#     date_list = [(start_date + datetime.timedelta(days=i)).strftime("%Y-%m-%d") for i in range((today - start_date).days + 1)]
-#     changes_dict = {change.change_date.strftime("%Y-%m-%d"): getattr(change, field) for change in valid_changes}
-
-#     filled_data = []
-#     last_value = first_valid_value
-
-#     for date in date_list:
-#         if date in changes_dict:
-#             last_value = changes_dict[date]
-#         filled_data.append(int(last_value) if last_value is not None else 0)
-
-#     if len(filled_data) == 1:
-#         filled_data.append(filled_data[0])
-
-#     return filled_data
-
 @router.get("/insights/{cluster_id}")
 async def get_user_products_insights(cluster_id: int, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
     """Returns insights for UserProducts within a cluster."""
@@ -82,9 +36,11 @@ async def get_user_products_insights(cluster_id: int, db: Session = Depends(get_
     market_insights = []
 
     for market in markets:
+        # DDM6
         user_products_in_market = sum(1 for product in market.products if product.asin in user_asins)
         
         # Falls UserProducts im Market existieren, zähle sie zum Cluster
+        # CDD6
         user_products_in_cluster += user_products_in_market
 
         # Füge Market-Statistik hinzu
@@ -92,13 +48,20 @@ async def get_user_products_insights(cluster_id: int, db: Session = Depends(get_
             "market_id": market.id,
             "market_name": market.keyword,
             "user_products_in_market_count": user_products_in_market,
-            "total_revenue_user_products" : user_products_in_market * 10
+            # DDM4
+            "total_revenue_user_products" : -1,
+            # DDM5
+            "marketshare" : -1
         })
 
+    # CD1
+    # CDD5
+    # has to be implemented
     return {
         "user_products_in_cluster_count": user_products_in_cluster,
         "markets": market_insights,
-        "total_revenue_user_products" : user_products_in_cluster * 10
+        "total_revenue_user_products" : -1,
+        "marketshare" : -1
     }
 
 

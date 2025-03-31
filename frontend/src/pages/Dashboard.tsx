@@ -339,26 +339,27 @@ const Dashboard: React.FC = () => {
          
 
           <Grid container spacing={3}>
-            <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+            <Grid size={{ xs: 12, sm: 4, md: 3 }}>
               <StatCardLarge
                 iconKey="static"
                 title="30D Revenue Change"
                 value={dashboardData?.total_revenue || "0.00"}
                 cardId="DDD1"
                 isCurrency
+                hasSparkline
               />
             </Grid>
 
-            <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+            <Grid size={{ xs: 6, sm: 4, md: 2 }}>
               <StatCardLarge
                 iconKey="static"
-                title="30D Revenue Change"
+                title="Total Clusters"
                 value={dashboardData?.total_clusters || "0"}
                 cardId="DDD2"
               />
             </Grid>
 
-            <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+            <Grid size={{ xs: 6, sm: 4, md: 2 }}>
               <StatCardLarge
                 iconKey="static"
                 title="Market Clusters"
@@ -367,7 +368,7 @@ const Dashboard: React.FC = () => {
               />
             </Grid>
 
-            <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+            <Grid size={{ xs: 6, sm: 4, md: 2 }}>
               <StatCardLarge
                 iconKey="static"
                 title="Tracked Products"

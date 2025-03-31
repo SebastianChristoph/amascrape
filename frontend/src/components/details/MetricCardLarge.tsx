@@ -5,6 +5,7 @@ import { Box, Paper, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { iconMap, fallbackIcon } from "../../utils/iconUtils";
 import Grid from "@mui/material/Grid2";
+import CustomSparkLine from "../charts/CustomSparkLine";
 
 interface StatCardProps {
   iconKey: string;
@@ -12,6 +13,7 @@ interface StatCardProps {
   value: string | number;
   cardId?: string;
   isCurrency?: boolean;
+  hasSparkline?: boolean;
 }
 
 const MetricCardLarge: React.FC<StatCardProps> = ({
@@ -20,6 +22,7 @@ const MetricCardLarge: React.FC<StatCardProps> = ({
   value,
   cardId,
   isCurrency = false,
+  hasSparkline = false,
 }) => {
   const theme = useTheme();
   const IconComponent = iconMap[iconKey] || fallbackIcon;
@@ -97,12 +100,8 @@ const MetricCardLarge: React.FC<StatCardProps> = ({
       </Box>
 
       <Grid container spacing={4}>
-              <Grid size={{ xs: 12, md: 6 }}>
-              <Typography
-            variant="body2"
-            color="text.primary"
-           
-          >
+        <Grid size={{ xs: 12, md: 7 }}>
+          <Typography variant="body2" color="text.primary">
             Total Revenue
           </Typography>
           <Typography
@@ -114,11 +113,13 @@ const MetricCardLarge: React.FC<StatCardProps> = ({
           </Typography>
         </Grid>
 
-        <Grid size={{ xs: 12, md: 6 }}>
-          <Typography variant="body2" color="text.secondary">
-            Sparkline
-          </Typography>
-        </Grid>
+        {hasSparkline && (
+          <Grid size={{ xs: 12, md: 5 }}>
+            <Typography variant="body2" color="text.secondary">
+              <CustomSparkLine />
+            </Typography>
+          </Grid>
+        )}
       </Grid>
     </Paper>
   );

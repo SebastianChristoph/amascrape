@@ -4,13 +4,15 @@ import React from "react";
 import { Box, Paper, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { iconMap, fallbackIcon } from "../../utils/iconUtils";
-
+import CustomSparkLine from "../charts/CustomSparkLine";
+import Grid from "@mui/material/Grid2";
 interface StatCardProps {
   iconKey: string;
   title: string;
   value: string | number;
   cardId?: string;
   isCurrency?: boolean;
+  hasSparkline?: boolean
 }
 
 const StatCardLarge: React.FC<StatCardProps> = ({
@@ -19,6 +21,7 @@ const StatCardLarge: React.FC<StatCardProps> = ({
   value,
   cardId,
   isCurrency = false,
+  hasSparkline = false
 }) => {
   const theme = useTheme();
   const IconComponent = iconMap[iconKey] || fallbackIcon;
@@ -94,7 +97,8 @@ const StatCardLarge: React.FC<StatCardProps> = ({
         )}
       </Box>
 
-      <Box>
+      <Grid container spacing={4}>
+        <Grid size={{ xs: 12, md: 7 }}>
         <Typography
           variant="h1"
           color="text.secondary"
@@ -102,6 +106,19 @@ const StatCardLarge: React.FC<StatCardProps> = ({
         >
           {formattedValue}
         </Typography>
+        </Grid>
+
+        {hasSparkline && (
+          <Grid size={{ xs: 12, md: 5 }}>
+            <Typography variant="body2" color="text.secondary">
+              <CustomSparkLine />
+            </Typography>
+          </Grid>
+        )}
+      </Grid>
+
+      <Box>
+      
       </Box>
     </Paper>
   );
