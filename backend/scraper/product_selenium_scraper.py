@@ -77,7 +77,7 @@ class AmazonProductScraper:
     def open_page(self):
         self.log(f"🌐 Öffne Produktseite: {self.asin} ({self.url})")
         self.driver.get(self.url)
-        self.scroll_down()
+        #self.scroll_down()
         self.product_info_box_content = self.get_product_infos_box_content()
         self.technical_details_box_content = self.get_technical_details_box_content()
 
