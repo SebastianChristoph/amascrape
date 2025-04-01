@@ -189,32 +189,7 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
             </Box>
           </Box>
 
-          {!is_initial_scraped ? (
-            <Box sx={{ mt: 2 }}>
-              <Alert
-                severity="info"
-                sx={{
-                  backgroundColor: "#e3f2fd",
-                  color: "primary.main",
-                  "& .MuiAlert-icon": {
-                    color: "primary.main",
-                  },
-                }}
-              >
-                Markets and Products wait for initial scraping, please come back
-                later or click for a first impression
-              </Alert>
-              <LinearProgress
-                sx={{
-                  mt: 2,
-                  backgroundColor: "#e3f2fd",
-                  "& .MuiLinearProgress-bar": {
-                    backgroundColor: "primary.main",
-                  },
-                }}
-              />
-            </Box>
-          ) : (
+         
             <Box>
               <Box
                 sx={{ display: "flex", alignItems: "center", gap: 2, mb: 2 }}
@@ -269,8 +244,7 @@ const ClusterCard: React.FC<ClusterCardProps> = ({
                 <Box></Box>
               </Box>
             </Box>
-          )}
-
+        
           <Typography
             className="card-id"
             sx={{

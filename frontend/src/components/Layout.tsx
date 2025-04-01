@@ -10,11 +10,12 @@ import {
   IoAddCircleSharp,
   IoPersonCircle,
   IoWalletSharp,
+  IoInformationCircle,
 } from "react-icons/io5";
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 import { MdDarkMode, MdLightMode } from "react-icons/md";
 import { useTheme } from "@mui/material/styles";
-
+import { RiFolderInfoLine } from "react-icons/ri";
 
 export default function Layout({
   setIsAuthenticated,
@@ -60,8 +61,7 @@ export default function Layout({
         sx={{
           width: drawerOpen ? 240 : 72,
           transition: "width 0.3s",
-          backgroundColor: "primary",
-          color: "white",
+          backgroundColor: "#1E293B",
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
@@ -81,7 +81,7 @@ export default function Layout({
               mb: 2,
             }}
           >
-            <IconButton onClick={toggleDrawer} sx={{ color: "white" }}>
+            <IconButton onClick={toggleDrawer} sx={{ color: "#FFFFFF" }}>
               {drawerOpen ? <BiChevronLeft style={{  color: theme.palette.accent.main }} /> : <BiChevronRight style={{  color: theme.palette.accent.main }} />}
             </IconButton>
           </Box>
@@ -100,7 +100,7 @@ export default function Layout({
               <AiFillAmazonCircle size={20} style={{ minWidth: 24, color: theme.palette.accent.main }} />
             )}
             {drawerOpen && (
-              <Typography variant="h6" fontWeight="bold" sx={{ color: theme.palette.accent.main }}>
+              <Typography variant="h6" fontWeight="bold" sx={{ color: "#FFFFFF" }}>
                 MarketScope
               </Typography>
             )}
@@ -123,17 +123,17 @@ export default function Layout({
                     px: 2,
                     py: 1.2,
                     borderRadius: 2,
-                    color: "white",
+                    color: "#FFFFFF",
                     textDecoration: "none",
                     justifyContent: drawerOpen ? "flex-start" : "center",
                     "&:hover": {
-                      backgroundColor: "rgba(255,255,255,0.05)",
+                      backgroundColor: "rgba(255,255,255,0.1)",
                     },
                   }}
                 >
                   <FaChartLine size={20} style={{ minWidth: 24, color: theme.palette.accent.main }} />
                   {drawerOpen && (
-                    <Typography variant="body2">Dashboard</Typography>
+                    <Typography variant="body2" sx={{ color: "#FFFFFF" }}>Dashboard</Typography>
                   )}
                 </Box>
               </Tooltip>
@@ -153,17 +153,47 @@ export default function Layout({
                     px: 2,
                     py: 1.2,
                     borderRadius: 2,
-                    color: "white",
+                    color: "#FFFFFF",
                     textDecoration: "none",
                     justifyContent: drawerOpen ? "flex-start" : "center",
                     "&:hover": {
-                      backgroundColor: "rgba(255,255,255,0.05)",
+                      backgroundColor: "rgba(255,255,255,0.1)",
                     },
                   }}
                 >
                   <IoAddCircleSharp size={20} style={{ minWidth: 24, color: theme.palette.accent.main }} />
                   {drawerOpen && (
-                    <Typography variant="body2">Add Cluster</Typography>
+                    <Typography variant="body2" sx={{ color: "#FFFFFF" }}>Add Cluster</Typography>
+                  )}
+                </Box>
+              </Tooltip>
+
+              <Tooltip
+                title="Cluster Information"
+                placement="right"
+                disableHoverListener={drawerOpen}
+              >
+                <Box
+                  component={Link}
+                  to="/cluster-info"
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: drawerOpen ? 1.5 : 0,
+                    px: 2,
+                    py: 1.2,
+                    borderRadius: 2,
+                    color: "#FFFFFF",
+                    textDecoration: "none",
+                    justifyContent: drawerOpen ? "flex-start" : "center",
+                    "&:hover": {
+                      backgroundColor: "rgba(255,255,255,0.1)",
+                    },
+                  }}
+                >
+                  <RiFolderInfoLine size={20} style={{ minWidth: 24, color: theme.palette.accent.main }} />
+                  {drawerOpen && (
+                    <Typography variant="body2" sx={{ color: "#FFFFFF" }}>Cluster Info</Typography>
                   )}
                 </Box>
               </Tooltip>
@@ -183,17 +213,17 @@ export default function Layout({
                     px: 2,
                     py: 1.2,
                     borderRadius: 2,
-                    color: "white",
+                    color: "#FFFFFF",
                     textDecoration: "none",
                     justifyContent: drawerOpen ? "flex-start" : "center",
                     "&:hover": {
-                      backgroundColor: "rgba(255,255,255,0.05)",
+                      backgroundColor: "rgba(255,255,255,0.1)",
                     },
                   }}
                 >
                   <IoWalletSharp size={20} style={{ minWidth: 24, color: theme.palette.accent.main }} />
                   {drawerOpen && (
-                    <Typography variant="body2">My Wallet</Typography>
+                    <Typography variant="body2" sx={{ color: "#FFFFFF" }}>My Wallet</Typography>
                   )}
                 </Box>
               </Tooltip>
@@ -216,7 +246,7 @@ export default function Layout({
               <IoPersonCircle size={20} style={{ minWidth: 24, color: theme.palette.accent.main }} />
               {drawerOpen && (
                 <Box>
-                  <Typography variant="body2" fontWeight={600}>
+                  <Typography variant="body2" fontWeight={600} sx={{ color: "#FFFFFF" }}>
                     {user?.username}
                   </Typography>
                 </Box>
@@ -236,13 +266,13 @@ export default function Layout({
                   cursor: "pointer",
                   justifyContent: drawerOpen ? "flex-start" : "center",
                   "&:hover": {
-                    backgroundColor: "rgba(255,255,255,0.05)",
+                    backgroundColor: "rgba(255,255,255,0.1)",
                   },
                 }}
               >
                 <FiSettings size={20} style={{ minWidth: 24, color: theme.palette.accent.main }} />
                 {drawerOpen && (
-                  <Typography variant="body2">Admin Panel</Typography>
+                  <Typography variant="body2" sx={{ color: "#FFFFFF" }}>Admin Panel</Typography>
                 )}
               </Box>
             )}
@@ -259,7 +289,7 @@ export default function Layout({
                 cursor: "pointer",
                 justifyContent: drawerOpen ? "flex-start" : "center",
                 "&:hover": {
-                  backgroundColor: "rgba(255,255,255,0.05)",
+                  backgroundColor: "rgba(255,255,255,0.1)",
                 },
               }}
             >
@@ -269,7 +299,7 @@ export default function Layout({
                 <MdLightMode size={20} style={{ minWidth: 24, color: theme.palette.accent.main }} />
               )}
               {drawerOpen && (
-                <Typography variant="body2">
+                <Typography variant="body2" sx={{ color: "#FFFFFF" }}>
                   {mode === "light" ? "Dark Mode" : "Light Mode"}
                 </Typography>
               )}
@@ -287,12 +317,12 @@ export default function Layout({
                 cursor: "pointer",
                 justifyContent: drawerOpen ? "flex-start" : "center",
                 "&:hover": {
-                  backgroundColor: "rgba(255,255,255,0.05)",
+                  backgroundColor: "rgba(255,255,255,0.1)",
                 },
               }}
             >
-              <MdLogout size={20} style={{ minWidth: 24 , color: theme.palette.accent.main}} />
-              {drawerOpen && <Typography variant="body2">Logout</Typography>}
+              <MdLogout size={20} style={{ minWidth: 24, color: theme.palette.accent.main }} />
+              {drawerOpen && <Typography variant="body2" sx={{ color: "#FFFFFF" }}>Logout</Typography>}
             </Box>
           </Box>
         )}

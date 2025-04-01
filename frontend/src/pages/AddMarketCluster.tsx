@@ -2,72 +2,71 @@ import {
   Alert,
   Box,
   Button,
-  Chip,
   Container,
+  IconButton,
   Paper,
   TextField,
-  Typography,
-  IconButton,
   Tooltip,
-  Divider,
-  FormControl,
-  FormLabel,
-  RadioGroup,
-  FormControlLabel,
-  Radio,
+  Typography,
 } from "@mui/material";
 import Grid from "@mui/material/Grid2";
+import { useTheme } from "@mui/material/styles";
 import { useEffect, useState } from "react";
+import { FaBullseye, FaCamera, FaCube } from "react-icons/fa";
+import { MdAdd, MdDelete, MdInfo } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
-import { MdAdd, MdDelete, MdInfo, MdWarningAmber } from "react-icons/md";
+import ClusterTypeCard from "../components/ClusterTypeCard";
+import ClusterTypeDialog from "../components/ClusterTypeDialog";
+import Disclaimer from "../components/Disclaimer";
 import { useSnackbar } from "../providers/SnackbarProvider";
 import MarketService from "../services/MarketService";
-import {
-  commonBackgroundStyle,
-  moveBackgroundKeyframes,
-} from "../components/BackgroundPattern";
-import { useTheme } from "@mui/material/styles";
+import { CLUSTER_CONSTANTS } from "../utils/constants";
+import { validateClusterName, validateKeywords } from "../utils/formValidation";
+import { validateAndFormatKeywords } from "../utils/keywordUtils";
+
 const AddMarketCluster: React.FC = () => {
   const navigate = useNavigate();
   const { showSnackbar } = useSnackbar();
+  const theme = useTheme();
 
   const [clusterName, setClusterName] = useState<string>("");
   const [keywords, setKeywords] = useState<string[]>([]);
   const [newKeyword, setNewKeyword] = useState<string>("");
   const [existingClusters, setExistingClusters] = useState<string[]>([]);
-  const [isScraping, setIsScraping] = useState<boolean>(false);
   const [clusterType, setClusterType] = useState<
     "dynamic" | "static" | "snapshot"
-  >("dynamic"); // 🆕 Cluster-Type
+  >("dynamic");
+  const [openDialog, setOpenDialog] = useState<
+    "dynamic" | "static" | "snapshot" | null
+  >(null);
 
-  // Überprüfen, ob der eingegebene Wert eine Liste ist
   const isListInput = newKeyword.includes(",");
-  const theme = useTheme();
+
   // ✅ Automatisches Fetching für aktive Scraping-Prozesse
-  useEffect(() => {
-    const fetchActiveScrapingClusters = async () => {
-      try {
-        const activeCluster = await MarketService.getActiveScrapingCluster();
-        if (activeCluster) {
-          setIsScraping(true);
-        } else {
-          if (isScraping) {
-            showSnackbar("✅ Active cluster available");
-          }
-          setIsScraping(false);
-        }
-      } catch (error) {
-        console.error("Fehler beim Abrufen aktiver Scraping-Prozesse:", error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchActiveScrapingClusters = async () => {
+  //     try {
+  //       const activeCluster = await MarketService.getActiveScrapingCluster();
+  //       if (activeCluster) {
+  //         setIsScraping(true);
+  //       } else {
+  //         if (isScraping) {
+  //           showSnackbar(CLUSTER_CONSTANTS.MESSAGES.SCRAPING_COMPLETE);
+  //         }
+  //         setIsScraping(false);
+  //       }
+  //     } catch (error) {
+  //       console.error("Fehler beim Abrufen aktiver Scraping-Prozesse:", error);
+  //     }
+  //   };
 
-    fetchActiveScrapingClusters();
+  //   fetchActiveScrapingClusters();
 
-    if (isScraping) {
-      const interval = setInterval(fetchActiveScrapingClusters, 3000);
-      return () => clearInterval(interval);
-    }
-  }, [isScraping, showSnackbar]);
+  //   if (isScraping) {
+  //     const interval = setInterval(fetchActiveScrapingClusters, 3000);
+  //     return () => clearInterval(interval);
+  //   }
+  // }, [isScraping, showSnackbar]);
 
   // ✅ Lädt existierende Market-Cluster
   useEffect(() => {
@@ -90,24 +89,15 @@ const AddMarketCluster: React.FC = () => {
 
   // ✅ Keyword(s) hinzufügen
   const handleAddKeyword = () => {
-    let newKeywords = newKeyword
-      .split(",")
-      .map((kw) => kw.trim().toLowerCase());
-    newKeywords = newKeywords.filter((kw) => kw !== ""); // Entferne leere Einträge
+    const newKeywords = newKeyword.split(",").map((kw) => kw.trim());
+    const validationResult = validateAndFormatKeywords(newKeywords, keywords);
 
-    if (newKeywords.length === 0) return;
-
-    // Prüfe, ob bereits zu viele Keywords existieren
-    if (keywords.length + newKeywords.length > 5) {
-      showSnackbar("❌ Maximal 5 Keywords erlaubt.");
+    if (!validationResult.isValid) {
+      showSnackbar(validationResult.error || "");
       return;
     }
 
-    // Füge neue Keywords hinzu, falls sie noch nicht existieren
-    const uniqueNewKeywords = newKeywords.filter(
-      (kw) => !keywords.includes(kw)
-    );
-    setKeywords([...keywords, ...uniqueNewKeywords]);
+    setKeywords([...keywords, ...validationResult.formattedKeywords]);
     setNewKeyword("");
   };
 
@@ -122,10 +112,21 @@ const AddMarketCluster: React.FC = () => {
   };
 
   // ✅ Cluster-Typ ändern
-  const handleClusterTypeChange = (
-    event: React.ChangeEvent<HTMLInputElement>
+  const handleClusterTypeChange = (type: "dynamic" | "static" | "snapshot") => {
+    setClusterType(type);
+  };
+
+  // Prevent card click when clicking details button
+  const handleDetailsClick = (
+    event: React.MouseEvent,
+    type: "dynamic" | "static" | "snapshot"
   ) => {
-    setClusterType(event.target.value as "dynamic" | "static" | "snapshot");
+    event.stopPropagation();
+    setOpenDialog(type);
+  };
+
+  const handleCloseDialog = () => {
+    setOpenDialog(null);
   };
 
   // ✅ Market Cluster erstellen
@@ -133,20 +134,15 @@ const AddMarketCluster: React.FC = () => {
     event.preventDefault();
     console.clear();
 
-    if (!clusterName.trim()) {
-      showSnackbar("Bitte gib einen Cluster-Titel ein.");
+    const nameValidation = validateClusterName(clusterName, existingClusters);
+    if (!nameValidation.isValid) {
+      showSnackbar(nameValidation.error || "");
       return;
     }
 
-    const titleLower = clusterName.trim().toLowerCase();
-
-    if (existingClusters.includes(titleLower)) {
-      showSnackbar("❌ Ein Market Cluster mit diesem Titel existiert bereits!");
-      return;
-    }
-
-    if (keywords.length === 0) {
-      showSnackbar("❌ Cluster braucht mindestens 1 Keyword");
+    const keywordsValidation = validateKeywords(keywords);
+    if (!keywordsValidation.isValid) {
+      showSnackbar(keywordsValidation.error || "");
       return;
     }
 
@@ -173,31 +169,25 @@ const AddMarketCluster: React.FC = () => {
         backgroundColor: "background.default",
       }}
     >
-      <Container maxWidth="lg" sx={{ position: "relative", zIndex: 1, py: 4 }}>
+      <Container maxWidth="xl" sx={{ position: "relative", zIndex: 1, py: 4 }}>
         <Box>
-          <Typography variant="h1">Create New Market Cluster</Typography>
+          <Typography variant="h1">{CLUSTER_CONSTANTS.TITLES.PAGE}</Typography>
           <Typography variant="body1" color="text.primary" sx={{ mb: 4 }}>
             Define your market cluster* by adding keywords. You can add them one
             by one or use a comma-separated list.
           </Typography>
 
-          {/* ✅ Falls Scraping läuft, zeige eine Warnung an */}
-          {isScraping ? (
-            <Alert severity="warning" sx={{ mb: 4 }}>
-              🚧 Ein Scraping-Prozess läuft bereits. Warte, bis dieser
-              abgeschlossen ist, bevor du einen neuen Cluster erstellst.
-            </Alert>
-          ) : (
+          
             <form onSubmit={handleSubmit}>
               <Grid container spacing={4}>
                 {/* Cluster Name Section */}
-
                 <Paper
                   elevation={2}
                   sx={{
                     width: "100%",
                     p: 2,
-                    backgroundColor: "background.paper", border: "1px solid rgba(255, 255, 255, 0.25)",
+                    backgroundColor: "background.paper",
+                    border: "1px solid rgba(255, 255, 255, 0.25)",
                   }}
                 >
                   <Grid size={{ xs: 12 }}>
@@ -208,55 +198,94 @@ const AddMarketCluster: React.FC = () => {
                       value={clusterName}
                       onChange={handleTitleChange}
                       required
-                      placeholder="e.g., Electronics Accessories"
+                      placeholder={CLUSTER_CONSTANTS.PLACEHOLDERS.CLUSTER_TITLE}
                     />
                   </Grid>
                 </Paper>
 
-                  {/* 🆕 Cluster Type Selection */}
-                  <Paper
+                {/* Cluster Type Selection */}
+                <Paper
                   elevation={2}
                   sx={{
                     width: "100%",
-                    p: 2,
-                    backgroundColor: "background.paper",  border: "1px solid rgba(255, 255, 255, 0.25)",
+                    p: 3,
+                    backgroundColor: "background.paper",
+                    border: "1px solid rgba(255, 255, 255, 0.25)",
                   }}
                 >
-                <Grid size={{ xs: 12 }}>
-                  <FormControl component="fieldset">
-                    <FormLabel component="legend">Cluster Type</FormLabel>
-                    <RadioGroup
-                      row
-                      value={clusterType}
-                      onChange={handleClusterTypeChange}
-                    >
-                      <FormControlLabel
-                        value="dynamic"
-                        control={<Radio />}
-                        label="Dynamic"
+                  <Grid container spacing={3}>
+                    <Grid size={{ xs: 12, md: 4 }}>
+                      <ClusterTypeCard
+                        type="dynamic"
+                        icon={
+                          <FaBullseye
+                            size={30}
+                            color={theme.palette.secondary.main}
+                          />
+                        }
+                        title="Dynamic"
+                        description="Real-time market tracking with continuous updates and trend analysis"
+                        isSelected={clusterType === "dynamic"}
+                        onClick={() => handleClusterTypeChange("dynamic")}
+                        onDetailsClick={(e) => handleDetailsClick(e, "dynamic")}
                       />
-                      <FormControlLabel
-                        value="static"
-                        control={<Radio />}
-                        label="Static"
+                    </Grid>
+
+                    <Grid size={{ xs: 12, md: 4 }}>
+                      <ClusterTypeCard
+                        type="static"
+                        icon={
+                          <FaCube
+                            size={30}
+                            color={theme.palette.secondary.main}
+                          />
+                        }
+                        title="Static"
+                        description="Fixed market analysis with manual update control"
+                        isSelected={clusterType === "static"}
+                        onClick={() => handleClusterTypeChange("static")}
+                        onDetailsClick={(e) => handleDetailsClick(e, "static")}
                       />
-                      <FormControlLabel
-                        value="snapshot"
-                        control={<Radio />}
-                        label="Snapshot"
+                    </Grid>
+
+                    <Grid size={{ xs: 12, md: 4 }}>
+                      <ClusterTypeCard
+                        type="snapshot"
+                        icon={
+                          <FaCamera
+                            size={30}
+                            color={theme.palette.secondary.main}
+                          />
+                        }
+                        title="Snapshot"
+                        description="One-time market capture for point-in-time analysis"
+                        isSelected={clusterType === "snapshot"}
+                        onClick={() => handleClusterTypeChange("snapshot")}
+                        onDetailsClick={(e) =>
+                          handleDetailsClick(e, "snapshot")
+                        }
                       />
-                    </RadioGroup>
-                  </FormControl>
-                  <Typography variant="body2" color="text.default" gutterBottom>
-                    Choseable but no logic implemented yet
+                    </Grid>
+                  </Grid>
+
+                  <Typography
+                    variant="body2"
+                    color="text.secondary"
+                    sx={{ mt: 2, textAlign: "center" }}
+                  >
+                    {CLUSTER_CONSTANTS.MESSAGES.CLUSTER_TYPE_NOT_IMPLEMENTED}
                   </Typography>
-                </Grid>
-</Paper>
+                </Paper>
+
                 {/* Bulk Input Section */}
                 <Grid size={{ xs: 12 }}>
                   <Paper
                     elevation={2}
-                    sx={{ p: 2, backgroundColor: "background.paper",  border: "1px solid rgba(255, 255, 255, 0.25)", }}
+                    sx={{
+                      p: 2,
+                      backgroundColor: "background.paper",
+                      border: "1px solid rgba(255, 255, 255, 0.25)",
+                    }}
                   >
                     <Box
                       sx={{
@@ -267,11 +296,11 @@ const AddMarketCluster: React.FC = () => {
                       }}
                     >
                       <Typography variant="subtitle1" sx={{ fontWeight: 500 }}>
-                        Bulk Add Keywords
+                        {CLUSTER_CONSTANTS.TITLES.BULK_INPUT}
                       </Typography>
                       <Tooltip title="Enter multiple keywords separated by commas">
-                        <IconButton size="small"  >
-                          <MdInfo color={theme.palette.secondary.main}/>
+                        <IconButton size="small">
+                          <MdInfo color={theme.palette.secondary.main} />
                         </IconButton>
                       </Tooltip>
                     </Box>
@@ -281,8 +310,8 @@ const AddMarketCluster: React.FC = () => {
                         label="Comma-separated keywords"
                         value={newKeyword}
                         onChange={(e) => setNewKeyword(e.target.value)}
-                        placeholder="e.g., wireless earbuds, bluetooth headphones, portable speakers"
-                        variant="outlined"
+                        placeholder={CLUSTER_CONSTANTS.PLACEHOLDERS.KEYWORDS}
+                          variant="filled"
                         size="small"
                       />
                       <Button
@@ -303,17 +332,20 @@ const AddMarketCluster: React.FC = () => {
 
                 {/* Keywords List */}
                 <Grid size={{ xs: 12 }}>
-                  <Paper elevation={2} sx={{ p: 2 ,  border: "1px solid rgba(255, 255, 255, 0.25)",}}>
+                  <Paper
+                    elevation={2}
+                    sx={{ p: 2, border: "1px solid rgba(255, 255, 255, 0.25)" }}
+                  >
                     <Typography
                       variant="subtitle1"
                       sx={{ mb: 2, fontWeight: 500 }}
                     >
-                      Added Keywords ({keywords.length}/5)
+                      {CLUSTER_CONSTANTS.TITLES.KEYWORDS_LIST} (
+                      {keywords.length}/{CLUSTER_CONSTANTS.MAX_KEYWORDS})
                     </Typography>
                     {keywords.length === 0 ? (
                       <Alert variant="outlined" severity="warning">
-                        No keywords added yet. Add keywords using the form above
-                        or use the bulk input option.
+                        {CLUSTER_CONSTANTS.MESSAGES.NO_KEYWORDS}
                       </Alert>
                     ) : (
                       <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
@@ -369,40 +401,17 @@ const AddMarketCluster: React.FC = () => {
                 </Grid>
               </Grid>
             </form>
-          )}
+        
         </Box>
       </Container>
 
-      {/* Legal Disclaimer */}
+      <Disclaimer />
 
-      <Box sx={{ mt: 4, p: 2, textAlign: "center" }}>
-        <Divider sx={{ mb: 2 }} />
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            gap: 1,
-            mb: 1,
-          }}
-        >
-          <MdWarningAmber size={20} color="#f57c00" />
-          <Typography
-            variant="subtitle2"
-            color="text.secondary"
-            fontWeight={600}
-          >
-            Important Notice
-          </Typography>
-        </Box>
-        <Typography variant="body2" color="text.primary">
-          <strong>* Disclaimer:</strong> This tool exclusively supports and
-          analyzes products from the U.S. Amazon marketplace (
-          <em>amazon.com</em>). Data, rankings, and insights are limited to the
-          U.S. region and may not reflect availability or performance in other
-          countries.
-        </Typography>
-      </Box>
+      <ClusterTypeDialog
+        open={openDialog !== null}
+        onClose={handleCloseDialog}
+        type={openDialog}
+      />
     </Box>
   );
 };

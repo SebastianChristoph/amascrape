@@ -5,39 +5,27 @@ import {
   Button,
   Chip,
   CircularProgress,
-  IconButton,
   Link,
   Paper,
-  Skeleton,
   Tab,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
   Tabs,
-  Tooltip,
   Typography,
 } from "@mui/material";
-import Grid from "@mui/material/Grid2";
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { useTheme } from "@mui/material/styles";
 import { useEffect, useState } from "react";
-import { FaRegEye, FaSearch } from "react-icons/fa";
 import { useParams } from "react-router-dom";
-import CustomSparkLine from "../components/charts/CustomSparkLine";
-import CustomStackBars from "../components/charts/CustomStackChart";
+import AddAsinToMarketsDialog from "../components/details/AddAsinToMarketsDialog";
+import ClusterInsights from "../components/details/ClusterInsights";
+import MarketInsights from "../components/details/MarketInsights";
+import ProductDataGrid from "../components/details/ProductDataGrid";
+import ProductDetailTable from "../components/details/ProductDetailTable";
+import TopSuggestions from "../components/details/TopSuggestions";
+import PrimaryLineDivider from "../components/PrimaryLineDivider";
+import { useSnackbar } from "../providers/SnackbarProvider";
 import ChartDataService from "../services/ChartDataService";
 import MarketService from "../services/MarketService";
-import { FaCheckCircle, FaPlusCircle } from "react-icons/fa";
-import { useSnackbar } from "../providers/SnackbarProvider";
-import { iconMap, fallbackIcon } from "../utils/iconUtils";
-import { useTheme } from "@mui/material/styles";
-import { IoStatsChart } from "react-icons/io5";
-import MetricCardLarge from "../components/details/MetricCardLarge";
-import MetricCardSmall from "../components/details/MetricCardSmall";
-import PrimaryLineDivider from "../components/PrimaryLineDivider";
-import { MdBookmarkAdd, MdBookmarkRemove } from "react-icons/md";
+import { fallbackIcon, iconMap } from "../utils/iconUtils";
+
 interface ProductType {
   asin: string; // ✅ Ändere 'id' zu 'asin'
   title: string;
@@ -300,238 +288,14 @@ export default function ClusterDetails() {
     }
   };
 
-  const columns: GridColDef[] = [
-    {
-      field: "details",
-      headerName: "Details",
-      width: 30,
-      renderCell: (params) => (
-        <Tooltip title="Get Product Insights">
-          <IconButton
-            onClick={() => handleShowDetails(params.row.id)}
-            sx={{ padding: 0, color: "primary.main" }}
-          >
-            <FaRegEye size={20} />
-          </IconButton>
-        </Tooltip>
-      ),
-    },
-    {
-      field: "myProduct",
-      headerName: "My Product",
-      width: 50,
-      renderCell: (params) => {
-        return (
-          <Box>
-            <span
-              onClick={() => toggleMyProduct(params.row.id)}
-              style={{
-                cursor: "pointer",
-                fontSize: "0.8rem",
-                display: "flex",
-                alignItems: "center",
-                color: params.row.isMyProduct
-                  ? "theme.palette.accent.main"
-                  : "theme.palette.primary.main",
-                marginTop: 16,
-              }}
-            >
-              {params.row.isMyProduct ? (
-                <>
-                  <Tooltip title="Remove from My Products">
-                    <MdBookmarkRemove size={20} />
-                  </Tooltip>
-                </>
-              ) : (
-                <>
-                  <Tooltip title="Add to My Products">
-                    <MdBookmarkAdd size={20} />
-                  </Tooltip>
-                </>
-              )}
-            </span>
-          </Box>
-        );
-      },
-    },
-    {
-      field: "image",
-      headerName: "Image",
-      width: 40,
-      renderCell: (params) =>
-        params.value ? (
-          <Link
-            href={`https://www.amazon.com/dp/${params.row.id}?language=en_US`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img
-              src={params.value}
-              alt="Product"
-              style={{ width: "100%", objectFit: "fill", cursor: "pointer" }}
-            />
-          </Link>
-        ) : (
-          <Chip label="No Image" color="default" size="small" />
-        ),
-    },
-    {
-      field: "id",
-      headerName: "ASIN",
-      width: 150,
-      renderCell: (params) =>
-        params.value ? (
-          <Link
-            href={`https://www.amazon.com/dp/${params.value}?language=en_US`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {params.value}
-          </Link>
-        ) : (
-          <Chip label="No ASIN" color="default" size="small" />
-        ),
-    },
-    { field: "title", headerName: "Title", width: 400 },
-
-    {
-      field: "chart_price",
-      headerName: "Price Trend",
-      width: 100,
-      renderCell: () => {
-        return (
-          <Box sx={{ mt: 0 }}>
-            <CustomSparkLine />
-          </Box>
-        );
-      },
-    },
-    {
-      field: "price",
-      headerName: "Price",
-      type: "number",
-      width: 120,
-      renderCell: (params) => renderWithNoData(params.value, formatCurrency),
-    },
-    {
-      field: "store",
-      headerName: "Store",
-      width: 120,
-      renderCell: (params) => renderWithNoData(params.value),
-    },
-    {
-      field: "manufacturer",
-      headerName: "Manufacturer/Brand",
-      width: 120,
-      renderCell: (params) => renderWithNoData(params.value),
-    },
-
-    {
-      field: "mainCategory",
-      headerName: "Main Category",
-      width: 200,
-      renderCell: (params) => renderWithNoData(params.value),
-    },
-    {
-      field: "chart_main_rank",
-      headerName: "Main Rank Trend",
-      width: 100,
-      renderCell: () => {
-        return (
-          <Box sx={{ mt: 0 }}>
-            <CustomSparkLine />
-          </Box>
-        );
-      },
-    },
-    {
-      field: "mainCategoryRank",
-      headerName: "Rank Main",
-      width: 100,
-      renderCell: (params) => renderWithNoData(params.value, formatNumber),
-    },
-    {
-      field: "secondCategory",
-      headerName: "Sub Category",
-      width: 200,
-      renderCell: (params) => renderWithNoData(params.value),
-    },
-    {
-      field: "chart_second_rank",
-      headerName: "Second Rank Trend",
-      width: 100,
-      renderCell: () => {
-        return (
-          <Box sx={{ mt: 0 }}>
-            <CustomSparkLine />
-          </Box>
-        );
-      },
-    },
-    {
-      field: "secondCategoryRank",
-      headerName: "Sub Rank",
-      width: 100,
-      renderCell: (params) => renderWithNoData(params.value, formatNumber),
-    },
-    {
-      field: "blm",
-      headerName: "Bought Last Month",
-      type: "number",
-      width: 130,
-      renderCell: (params) => renderWithNoData(params.value, formatNumber),
-    },
-    {
-      field: "chart_blm",
-      headerName: "BLM Trend",
-      width: 100,
-      renderCell: () => {
-        return (
-          <Box sx={{ mt: 0 }}>
-            <CustomSparkLine />
-          </Box>
-        );
-      },
-    },
-    {
-      field: "chart_total",
-      headerName: "Total Trend",
-      width: 100,
-      renderCell: () => {
-        return (
-          <Box sx={{ mt: 0 }}>
-            <CustomSparkLine />
-          </Box>
-        );
-      },
-    },
-    {
-      field: "total",
-      headerName: "Total Revenue",
-      type: "number",
-      width: 150,
-      renderCell: (params) => renderWithNoData(params.value, formatCurrency),
-    },
-  ];
-
-  const allowedFields = ["details", "image", "asin", "title", "price"];
-
-  const filteredColumns = marketCluster.is_initial_scraped
-    ? columns // Falls `is_initial_scraped === true`, alle Spalten anzeigen
-    : columns.filter((col) => allowedFields.includes(col.field)); // Nur erlaubte Felder beibehalten
-
   return (
     <>
       <Box sx={{ display: "flex", flexDirection: "column", gap: 4 }}>
-        {!marketCluster.is_initial_scraped && (
-          <Alert severity="warning" sx={{ mb: 2 }}>
-            This is a first impression of the market. More detailed data will be
-            available after the initial scraping process (usually takes about
-            one hour).
-          </Alert>
-        )}
-
+      
         <Box>
+        <Button variant="outlined" component="a" href="/dashboard" sx={{ mb: 2, fontSize: "0.6rem" , color: theme.palette.text.primary }}>
+        ← Back to Dashboard
+      </Button>
           <Box sx={{ display: "flex", gap: 2, alignItems: "baseline" }}>
             <Box
               sx={{
@@ -560,177 +324,11 @@ export default function ClusterDetails() {
           <PrimaryLineDivider />
         </Box>
         {/* Cluster Insights */}
-        <Grid container spacing={4}>
-          <Grid size={{ xs: 12, md: 4 }}>
-            <Paper
-              elevation={1}
-              sx={{
-                p: 2,
-                // height: "100%",
-                backgroundColor: "background.paper",
-                borderRadius: 2,
-                display: "flex",
-                flexDirection: "column",
-                gap: 2,
-                transition: "transform 0.2s",
-                "&:hover": {
-                  transform: "translateY(-4px)",
-                },
-                "&:hover .card-id": {
-                  opacity: 1,
-                },
-                border: "1px solid rgba(255, 255, 255, 0.25)",
-              }}
-            >
-              <Box
-                sx={{
-                  display: "flex",
-                  alignItems: "baseline",
-                  justifyContent: "flex-start",
-                  gap: 2,
-                }}
-              >
-                <Box
-                  sx={{
-                    width: 45,
-                    height: 45,
-                    borderRadius: "12px",
-                    backgroundColor: "rgba(255, 255, 255, 0.1)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <IoStatsChart
-                    size={22}
-                    color={theme.palette.secondary.main}
-                  />
-                </Box>
-                <Typography variant="h6" color="text.secondary" gutterBottom>
-                  30D Trend
-                </Typography>
-              </Box>
-              <Box>
-                {Object.keys(stackedChartData).length === 0 ||
-                Object.values(stackedChartData).every((marketData) =>
-                  marketData.every((entry) => entry.value === 0)
-                ) ? (
-                  <Box>
-                    <Box sx={{ position: "relative" }}>
-                      <Skeleton
-                        variant="rectangular"
-                        animation="wave"
-                        width="100%"
-                        height="100%"
-                        sx={{
-                          borderRadius: 1,
-                          bgcolor: "grey.100",
-                        }}
-                      />
-                      <Typography
-                        variant="body2"
-                        color="text.secondary"
-                        sx={{
-                          position: "absolute",
-                          top: "50%",
-                          left: "50%",
-                          transform: "translate(-50%, -50%)",
-                          textAlign: "center",
-                          backgroundColor: "rgba(255, 255, 255, 0.8)",
-                          padding: "8px 16px",
-                          borderRadius: 1,
-                        }}
-                      >
-                        Historical market data will be available soon
-                      </Typography>
-                    </Box>
-                  </Box>
-                ) : (
-                  <Box>
-                    <CustomStackBars data={stackedChartData} />
-                  </Box>
-                )}
-              </Box>
-            </Paper>
-          </Grid>
-
-          <Grid size={{ xs: 12, md: 4 }}>
-            <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-              <MetricCardLarge
-                iconKey="insight"
-                title="Cluster Insights"
-                value={marketCluster.insights.total_revenue}
-                cardId="CD1"
-                isCurrency
-              />
-
-              <Box sx={{ display: "flex", gap: 1, width: "100%" }}>
-                <MetricCardSmall
-                  iconKey="markets"
-                  title="Markets"
-                  value={marketCluster.insights.total_markets}
-                  cardId="CDD1"
-                />
-                <MetricCardSmall
-                  iconKey="products"
-                  title="Tracked Products"
-                  value={marketCluster.insights.total_products}
-                  cardId="CDD2"
-                />
-              </Box>
-              <Box sx={{ display: "flex", gap: 1, width: "100%" }}>
-                <MetricCardSmall
-                  iconKey="static"
-                  title="Metric3"
-                  value="123"
-                  cardId="CDD3"
-                />
-                <MetricCardSmall
-                  iconKey="static"
-                  title="Metric4"
-                  value="123"
-                  cardId="CDD4"
-                />
-              </Box>
-            </Box>
-          </Grid>
-
-          <Grid size={{ xs: 12, md: 4 }}>
-            <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-              <MetricCardLarge
-                iconKey="products"
-                title="My Products Insights"
-                value={userProducts.total_revenue_user_products}
-                cardId="CD2"
-                isCurrency
-                hasSparkline
-              />
-
-              <Box sx={{ display: "flex", gap: 1, width: "100%" }}>
-                <MetricCardSmall
-                  iconKey="percent"
-                  title="Marketshare"
-                  value={`${userProducts.marketshare}%`}
-                  cardId="CDD5"
-                />
-              </Box>
-              <Box sx={{ display: "flex", gap: 1, width: "100%" }}>
-                <MetricCardSmall
-                  iconKey="products"
-                  title="My Products in Cluster"
-                  value={userProducts.user_products_in_cluster_count}
-                  cardId="CDD6"
-                />
-                <MetricCardSmall
-                  iconKey="static"
-                  title="Metric3"
-                  value="123"
-                  cardId="CDD7"
-                />
-              </Box>
-            </Box>
-          </Grid>
-        </Grid>
+        <ClusterInsights
+          stackedChartData={stackedChartData}
+          marketCluster={marketCluster}
+          userProducts={userProducts}
+        />
 
         <Box sx={{ mt: 8 }}>
           <Box sx={{ display: "flex", gap: 2, alignItems: "baseline", mb: 4 }}>
@@ -777,193 +375,21 @@ export default function ClusterDetails() {
               }}
             >
               {/* Market Insights */}
-              <Grid container spacing={2} alignItems="stretch">
-                <Grid size={{ xs: 12, md: 3 }} sx={{ display: "flex" }}>
-                  <Box sx={{ flex: 1 }}>
-                    <MetricCardLarge
-                      iconKey="insight"
-                      title="Market Insights"
-                      value={market.revenue_total}
-                      cardId="DDM1"
-                      isCurrency
-                      hasSparkline
-                    />
-                  </Box>
-                </Grid>
+              <MarketInsights
+                market={market}
+                userProducts={userProducts}
+                index={index}
+              />
 
-                <Grid size={{ xs: 12, md: 2 }} sx={{ display: "flex" }}>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "column",
-                      gap: 1,
-                      width: "100%",
-                      flex: 1,
-                    }}
-                  >
-                    <MetricCardSmall
-                      iconKey="products"
-                      title="Tracked Products"
-                      value={market.products_in_market_count}
-                      cardId="DDM2"
-                    />
-                    <MetricCardSmall
-                      iconKey="static"
-                      title="AVG"
-                      value={market.avg_blm}
-                      cardId="DDM3"
-                    />
-                  </Box>
-                </Grid>
+              {/* Top Suggestions */}
+              <TopSuggestions suggestions={market.top_suggestions} />
 
-                <Grid size={{ xs: 12, md: 3 }} sx={{ display: "flex" }}>
-                  <Box sx={{ flex: 1 }}>
-                    <MetricCardLarge
-                      iconKey="products"
-                      title="My Products Insights"
-                      value={
-                        userProducts["markets"][index][
-                          "total_revenue_user_products"
-                        ]
-                      }
-                      cardId="DDM4"
-                      isCurrency
-                      hasSparkline
-                    />
-                  </Box>
-                </Grid>
-                <Grid size={{ xs: 12, md: 2 }} sx={{ display: "flex" }}>
-                  <Box sx={{ flex: 1 }}>
-                    <MetricCardLarge
-                      iconKey="percent"
-                      title="My Marketshare"
-                      value={userProducts["markets"][index]["marketshare"]}
-                      cardId="DDM5"
-                      isCurrency
-                      hasSparkline
-                    />
-                  </Box>
-                </Grid>
-
-                <Grid size={{ xs: 12, md: 2 }} sx={{ display: "flex" }}>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "column",
-                      gap: 1,
-                      width: "100%",
-                      flex: 1,
-                    }}
-                  >
-                    <MetricCardSmall
-                      iconKey="products"
-                      title="My Products in Market"
-                      value={
-                        userProducts["markets"][index][
-                          "user_products_in_market_count"
-                        ]
-                      }
-                      cardId="DDM6"
-                    />
-                    <MetricCardSmall
-                      iconKey="static"
-                      title="Metric2"
-                      value="123"
-                      cardId="DDM7"
-                    />
-                  </Box>
-                </Grid>
-              </Grid>
-
-              {/* Top Suggestions - Full Width */}
-              <Box sx={{ mt: 4 }}>
-                <Typography
-                  variant="h6"
-                  color="text.secondary"
-                  sx={{
-                    mb: 2,
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 1,
-                  }}
-                >
-                  <FaSearch size={16} />
-                  Top Suggestions
-                </Typography>
-                <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
-                  {market.top_suggestions
-                    .split(",")
-                    .map((suggestion: string, idx: number) => (
-                      <Chip
-                        key={idx}
-                        label={suggestion.trim()}
-                        variant="outlined"
-                        color="primary"
-                        size="small"
-                        sx={{
-                          borderRadius: "16px",
-
-                          height: "32px",
-                          fontSize: "0.875rem",
-                          fontWeight: 400,
-                          borderColor: "secondary.main",
-                          color: "text.secondary",
-                          "&:hover": {
-                            backgroundColor: "primary.dark",
-                            transform: "translateY(-4px)",
-                          },
-                          "& .MuiChip-label": {
-                            padding: "0 12px",
-                          },
-                          transition: "transform 0.2s",
-                        }}
-                      />
-                    ))}
-                </Box>
-              </Box>
-
-              {/* <Button
-                onClick={() => {
-                  setNewAsin("");
-                  setAddAsinDialogOpen(true);
-                }}
-                sx={{
-                  padding: 1,
-                  marginTop: 1,
-                  width: "100%",
-                }}
-                color="secondary"
-                variant="contained"
-              >
-                Add Individual ASIN to Market
-              </Button> */}
-
-              <Box sx={{ width: "100%", mt: 4 }}>
-                <DataGrid
-                  rows={market.products.map((product: any) => ({
-                    id: product.asin,
-                    image: product.image,
-                    title: product.title,
-                    price: product.price,
-                    manufacturer: product.manufacturer,
-                    store: product.store,
-                    mainCategory: product.main_category,
-                    mainCategoryRank: product.main_category_rank,
-                    secondCategory: product.second_category,
-                    secondCategoryRank: product.second_category_rank,
-                    blm: product.blm,
-                    total: product.total,
-                    isMyProduct: product.isMyProduct,
-                  }))}
-                  columns={filteredColumns}
-                  rowHeight={55}
-                  pageSizeOptions={[10, 25, 50, 100]}
-                  checkboxSelection={false}
-                  getRowClassName={(params) =>
-                    params.row.isMyProduct ? "my-product-row" : ""
-                  }
-                />
-              </Box>
+              <ProductDataGrid
+                products={market.products}
+                onShowDetails={handleShowDetails}
+                onToggleMyProduct={toggleMyProduct}
+                isInitialScraped={marketCluster.is_initial_scraped}
+              />
             </Box>
           ))}
         </Box>
@@ -973,213 +399,74 @@ export default function ClusterDetails() {
         onClick={handleCloseBackdrop}
         sx={{ zIndex: 9999, color: "#fff" }}
       >
-        <TableContainer
-          component={Paper}
-          sx={{ maxWidth: "80vw", maxHeight: "80vh", overflowY: "auto" }}
-        >
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>Change Date</TableCell>
-                <TableCell>Title</TableCell>
-                <TableCell>Price</TableCell>
-                <TableCell>Main Category</TableCell>
-                <TableCell>Sub Category</TableCell>
-                <TableCell>Rank (Main)</TableCell>
-                <TableCell>Rank (Sub)</TableCell>
-                <TableCell>BLM</TableCell>
-                <TableCell>Total Revenue</TableCell>
-                <TableCell>Changes</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {productChanges.length > 0 ? (
-                productChanges.map((change, index) => (
-                  <TableRow key={index}>
-                    <TableCell>{change.change_date}</TableCell>
-                    <TableCell>{change.title || "-"}</TableCell>
-                    <TableCell>
-                      {change.price ? formatCurrency(change.price) : "-"}
-                    </TableCell>
-                    <TableCell>{change.main_category || "-"}</TableCell>
-                    <TableCell>{change.second_category || "-"}</TableCell>
-                    <TableCell>{change.main_category_rank || "-"}</TableCell>
-                    <TableCell>{change.second_category_rank || "-"}</TableCell>
-                    <TableCell>{change.blm || "-"}</TableCell>
-                    <TableCell>
-                      {change.total ? formatCurrency(change.total) : "-"}
-                    </TableCell>
-                    <TableCell>{change.changes || "-"}</TableCell>
-                  </TableRow>
-                ))
-              ) : (
-                <TableRow>
-                  <TableCell colSpan={10} align="center">
-                    No Product Changes Found
-                  </TableCell>
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </TableContainer>
+        <ProductDetailTable
+          productChanges={productChanges}
+          formatCurrency={formatCurrency}
+        />
       </Backdrop>
 
       {addAsinDialogOpen && (
-        <Backdrop open={true} sx={{ zIndex: 9999, color: "#fff" }}>
-          <Paper
-            elevation={4}
-            sx={{
-              p: 4,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              gap: 3,
-              width: 400,
-              textAlign: "center",
-            }}
-          >
-            <Typography variant="h6" sx={{ fontWeight: 600 }}>
-              Add Product to Market
-            </Typography>
+        <AddAsinToMarketsDialog
+          open={addAsinDialogOpen}
+          newAsin={newAsin}
+          setNewAsin={setNewAsin}
+          asinError={asinError}
+          setAsinError={setAsinError}
+          addingAsin={addingAsin}
+          isValidAsin={isValidAsin}
+          onConfirm={async () => {
+            if (!newAsin) return;
+            setAddingAsin(true);
+            const activeMarketId = marketCluster.markets[tabIndex].id;
 
-            <Typography variant="body2" color="text.secondary">
-              You can manually add a product by entering its valid ASIN. Our
-              system will scrape the product data and include it in the selected
-              market.
-            </Typography>
+            const result = await MarketService.addAsinToMarket(
+              newAsin,
+              activeMarketId
+            );
 
-            <input
-              type="text"
-              value={newAsin}
-              onChange={(e) => {
-                const value = e.target.value;
-                setNewAsin(value);
-                if (!isValidAsin(value)) {
-                  setAsinError(
-                    "ASIN must start with 'B' and be exactly 10 characters."
-                  );
+            if (result.success) {
+              let retries = 0;
+              const maxRetries = 15;
+              const pollForNewProduct = async () => {
+                retries += 1;
+                const updatedData = await MarketService.getMarketClusterDetails(
+                  Number(clusterId)
+                );
+                const targetMarket = updatedData.markets.find(
+                  (m: any) => m.id === activeMarketId
+                );
+                const productFound = targetMarket?.products.find(
+                  (p: any) => p.asin === newAsin.toUpperCase()
+                );
+
+                if (productFound) {
+                  setMarketCluster(updatedData);
+                  console.log(marketCluster);
+                  setAddAsinDialogOpen(false);
+                  setAddingAsin(false);
+                  setNewAsin(""); // ✅ reset field
+                  showSnackbar("✅  Product successfully added to the market");
+                } else if (retries < maxRetries) {
+                  setTimeout(pollForNewProduct, 4000);
                 } else {
-                  setAsinError(null);
+                  setAddingAsin(false);
+                  alert(
+                    "⚠️ Product could not be confirmed after several attempts."
+                  );
                 }
-              }}
-              placeholder="Enter ASIN (e.g. B07N4M94ZP)"
-              style={{
-                padding: "10px",
-                width: "100%",
-                borderRadius: "6px",
-                border: asinError ? "2px solid red" : "1px solid #ccc",
-                fontSize: "16px",
-              }}
-              disabled={addingAsin}
-            />
+              };
 
-            {asinError && (
-              <Typography
-                variant="caption"
-                color="error"
-                sx={{ mt: -1, mb: 1, textAlign: "left", width: "100%" }}
-              >
-                {asinError}
-              </Typography>
-            )}
-
-            <Typography variant="caption" color="text.secondary" sx={{ mt: 1 }}>
-              ⏱️ This usually takes under 1 minute to complete.
-            </Typography>
-
-            {addingAsin ? (
-              <Backdrop open={addingAsin} sx={{ zIndex: 1301, color: "#fff" }}>
-                <CircularProgress color="inherit" />
-              </Backdrop>
-            ) : (
-              <Box sx={{ display: "flex", gap: 2 }}>
-                <button
-                  disabled={!isValidAsin(newAsin) || addingAsin}
-                  onClick={async () => {
-                    if (!newAsin) return;
-                    setAddingAsin(true);
-                    const activeMarketId = marketCluster.markets[tabIndex].id;
-
-                    const result = await MarketService.addAsinToMarket(
-                      newAsin,
-                      activeMarketId
-                    );
-
-                    if (result.success) {
-                      let retries = 0;
-                      const maxRetries = 15;
-                      const pollForNewProduct = async () => {
-                        retries += 1;
-                        const updatedData =
-                          await MarketService.getMarketClusterDetails(
-                            Number(clusterId)
-                          );
-                        const targetMarket = updatedData.markets.find(
-                          (m: any) => m.id === activeMarketId
-                        );
-                        const productFound = targetMarket?.products.find(
-                          (p: any) => p.asin === newAsin.toUpperCase()
-                        );
-
-                        if (productFound) {
-                          setMarketCluster(updatedData);
-                          console.log(marketCluster);
-                          setAddAsinDialogOpen(false);
-                          setAddingAsin(false);
-                          setNewAsin(""); // ✅ reset field
-                          showSnackbar(
-                            "✅  Product successfully added to the market"
-                          );
-                        } else if (retries < maxRetries) {
-                          setTimeout(pollForNewProduct, 4000);
-                        } else {
-                          setAddingAsin(false);
-                          alert(
-                            "⚠️ Product could not be confirmed after several attempts."
-                          );
-                        }
-                      };
-
-                      pollForNewProduct();
-                    } else {
-                      alert(result.message || "Something went wrong.");
-                      setAddingAsin(false);
-                    }
-                  }}
-                  style={{
-                    padding: "8px 20px",
-                    backgroundColor: !isValidAsin(newAsin) ? "#ccc" : "#1976d2",
-                    color: "white",
-                    borderRadius: "6px",
-                    fontWeight: "bold",
-                    border: "none",
-                    cursor: !isValidAsin(newAsin) ? "not-allowed" : "pointer",
-                  }}
-                >
-                  Confirm
-                </button>
-
-                <button
-                  onClick={() => {
-                    setAddAsinDialogOpen(false);
-                    setNewAsin(""); // ✅ reset field
-                  }}
-                  disabled={addingAsin}
-                  style={{
-                    padding: "8px 20px",
-                    backgroundColor: addingAsin ? "#eee" : "#ccc",
-                    borderRadius: "6px",
-                    fontWeight: "bold",
-                    border: "none",
-                    cursor: "pointer",
-                  }}
-                >
-                  Cancel
-                </button>
-              </Box>
-            )}
-          </Paper>
-        </Backdrop>
+              pollForNewProduct();
+            } else {
+              alert(result.message || "Something went wrong.");
+              setAddingAsin(false);
+            }
+          }}
+          onCancel={() => {
+            setAddAsinDialogOpen(false);
+            setNewAsin(""); // ✅ reset field
+          }}
+        />
       )}
     </>
   );
