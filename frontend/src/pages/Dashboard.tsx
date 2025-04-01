@@ -1,6 +1,4 @@
 import { Box } from "@mui/material";
-import { useTheme } from "@mui/material/styles";
-import { keyframes } from "@mui/system";
 import {
   CategoryScale,
   Chart as ChartJS,
@@ -33,98 +31,68 @@ ChartJS.register(
   Legend
 );
 
+// [Imports bleiben wie gehabt...]
 
 const Dashboard: React.FC = () => {
   const navigate = useNavigate();
   const { showSnackbar } = useSnackbar();
   const [marketClusters, setMarketClusters] = useState<any[]>([]);
+  const [loadingClusters, setLoadingClusters] = useState<any[]>([]);
   const [deletingCluster, setDeletingCluster] = useState<number | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
-  const [isFetching, setIsFetching] = useState<boolean>(true);
   const [dashboardData, setDashboardData] = useState<any>(null);
-  const theme = useTheme();
 
-  const [activeCluster, setActiveCluster] = useState<{
-    clustername: string;
-    status: string;
-  } | null>(null);
-
-  // Fetch all data
   const fetchData = async () => {
     try {
       const [clustersData, overviewData] = await Promise.all([
         MarketService.GetMarketClusters(),
         MarketService.getDashboardOverview(),
       ]);
-
       if (clustersData) {
-        console.log("[DEBUG] ClusterData:", clustersData);
         setMarketClusters(clustersData);
+        console.log("CLUSTER DATA");
+        console.log(clustersData);
       }
       if (overviewData) {
-        console.log("[DEBUG] OverviewData:", overviewData);
         setDashboardData(overviewData);
+        console.log("OVERVIEW DATA");
+        console.log(overviewData);
       }
     } catch (error) {
       console.error("[Dashboard] Data fetch error:", error);
       showSnackbar("Error loading dashboard data", "error");
     } finally {
       setLoading(false);
-      setIsFetching(false);
     }
   };
 
-  // ✅ Holt aktive Scraping-Prozesse und lädt die Keywords nach
-  const fetchActiveScrapingCluster = async () => {
+  const fetchLoadingClusters = async () => {
     try {
-      const data = await MarketService.getActiveScrapingCluster();
-      if (!data) {
-        setActiveCluster(null);
-        setIsFetching(false);
-        fetchData();
-      } else if (data.status === "done") {
-        showSnackbar("Your cluster is ready to go");
-        setActiveCluster(null);
-        setIsFetching(false);
-        fetchData();
-      } else if (data.status === "error") {
-        showSnackbar(
-          `Error scraping your new cluster '${activeCluster?.clustername}' !`,
-          "error"
-        );
-        setIsFetching(false);
-        setTimeout(fetchData, 6000);
-      } else {
-        setActiveCluster(data);
-        console.log("data active clusters:", data);
-        setIsFetching(true);
-      }
+      console.log("GET LOADING CLUSTERS");
+      const data = await MarketService.getLoadingClusters();
+      console.log(data);
+      setLoadingClusters(data ?? []);
     } catch (error) {
-      console.error("[Dashboard] Active cluster error:", error);
-      setIsFetching(false);
+      console.error("[Dashboard] Error fetching loading clusters:", error);
     }
   };
 
+  // 🔁 Beim ersten Laden: normale Clusterdaten + laufende Scrapes holen
   useEffect(() => {
     fetchData();
+    fetchLoadingClusters();
   }, []);
 
-  // Fetch data every 20 seconds
+  // 🔄 Poll alle 5 Sekunden, solange noch Clusters nicht fertig sind
   useEffect(() => {
-    const interval = setInterval(fetchData, 20000);
+    if (loadingClusters.length === 0) return;
+    const interval = setInterval(() => {
+      fetchLoadingClusters();
+    }, 20000);
     return () => clearInterval(interval);
-  }, []);
+  }, [loadingClusters]);
 
-  // ✅ Prüft auf aktive Scraping-Prozesse
-  useEffect(() => {
-    fetchActiveScrapingCluster();
-    if (isFetching) {
-      const interval = setInterval(fetchActiveScrapingCluster, 3000);
-      return () => clearInterval(interval);
-    }
-  }, [isFetching]);
-
-  if (marketClusters.length === 0 && !isFetching) {
+  if (marketClusters.length === 0 && loadingClusters.length === 0 && !loading) {
     return <FirstMarketCluster />;
   }
 
@@ -138,31 +106,27 @@ const Dashboard: React.FC = () => {
         gap: 12,
       }}
     >
-        {/* Development Preview Accordion */}
-        <Box sx={{ mt: 4 }}>
-        <ScrapingProcessDashboard
-          activeCluster={{
-            clustername: "Test Market Cluster",
-            status: "processing",
-          }}
-        />
-      </Box>
-      
-      {/* Overview Section */}
+      {/* ⏳ Laufende Cluster */}
+      {loadingClusters.map((cluster) => (
+        <Box sx={{ mt: 4 }} key={cluster.id}>
+          <ScrapingProcessDashboard
+            activeCluster={{
+              clustername: cluster.title,
+              status: "processing",
+            }}
+          />
+        </Box>
+      ))}
+
+      {/* 📊 Übersicht */}
       {marketClusters.length > 0 && (
         <DashboardInsights dashboardData={dashboardData} />
       )}
 
-      {/* Scraping Status Section */}
-      {activeCluster && activeCluster.status === "processing" && (
-        <ScrapingProcessDashboard activeCluster={activeCluster} />
-      )}
-
-      {/* Market Clusters */}
+      {/* ✅ Fertige Cluster anzeigen */}
       {marketClusters.length > 0 && (
         <Box>
           <HeaderSection />
-
           {loading ? (
             <LoadingState />
           ) : (
@@ -177,8 +141,6 @@ const Dashboard: React.FC = () => {
           )}
         </Box>
       )}
-
-    
     </Box>
   );
 };

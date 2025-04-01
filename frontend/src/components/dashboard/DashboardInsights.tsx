@@ -6,6 +6,7 @@ interface DashboardInsightsProps {
   dashboardData: {
     total_revenue?: string;
     total_clusters?: string;
+    total_markets?: string;
     total_unique_products?: string;
   };
 }
@@ -23,7 +24,7 @@ const DashboardInsights: React.FC<DashboardInsightsProps> = ({ dashboardData }) 
       <Grid container spacing={3}>
         <Grid size={{ xs: 12, sm: 4, md: 3 }}>
           <StatCardLarge
-            iconKey="static"
+            iconKey="dollar"
             title="30D Revenue Change"
             value={dashboardData?.total_revenue || "0.00"}
             cardId="DDD1"
@@ -34,7 +35,7 @@ const DashboardInsights: React.FC<DashboardInsightsProps> = ({ dashboardData }) 
 
         <Grid size={{ xs: 6, sm: 4, md: 2 }}>
           <StatCardLarge
-            iconKey="static"
+            iconKey="clusters"
             title="Total Clusters"
             value={dashboardData?.total_clusters || "0"}
             cardId="DDD2"
@@ -43,16 +44,16 @@ const DashboardInsights: React.FC<DashboardInsightsProps> = ({ dashboardData }) 
 
         <Grid size={{ xs: 6, sm: 4, md: 2 }}>
           <StatCardLarge
-            iconKey="static"
-            title="Market Clusters"
-            value={dashboardData?.total_clusters || "0"}
+            iconKey="markets"
+            title="Markets"
+            value={dashboardData?.total_markets || "0"}
             cardId="DDD3"
           />
         </Grid>
 
         <Grid size={{ xs: 6, sm: 4, md: 2 }}>
           <StatCardLarge
-            iconKey="static"
+            iconKey="products"
             title="Tracked Products"
             value={dashboardData?.total_unique_products || "0"}
             cardId="DDD4"

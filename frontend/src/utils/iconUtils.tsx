@@ -1,14 +1,11 @@
 // utils/iconUtils.tsx
-import { FaLayerGroup, FaDollarSign, FaEdit, FaTrash, FaQuestionCircle, FaBox, FaEye } from "react-icons/fa";
 import { IconType } from "react-icons";
-import { FaBullseye } from "react-icons/fa";
+import { FaBox, FaBullseye, FaDollarSign, FaEdit, FaEye, FaLayerGroup, FaQuestionCircle, FaTrash } from "react-icons/fa";
 
-import { FaCube } from "react-icons/fa";
-import { FaCamera } from "react-icons/fa";
-import { AiFillProduct } from "react-icons/ai";
-import { GrCluster } from "react-icons/gr";
-import { LuCirclePercent } from "react-icons/lu";
+import { AiOutlineCluster } from "react-icons/ai";
 import { BsBoxes } from "react-icons/bs";
+import { FaCamera, FaCube } from "react-icons/fa";
+import { GrCluster } from "react-icons/gr";
 import { TbPercentage70 } from "react-icons/tb";
 
 export const iconMap: Record<string, IconType> = {
@@ -24,7 +21,8 @@ export const iconMap: Record<string, IconType> = {
   product: FaCube, 
   products: BsBoxes, 
   insight: FaEye , 
-  percent: TbPercentage70  , 
+  percent: TbPercentage70,
+  clusters: AiOutlineCluster 
   // weitere Icons hier hinzufügen
 };
 

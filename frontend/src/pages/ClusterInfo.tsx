@@ -94,21 +94,15 @@ const ClusterInfo: React.FC = () => {
   return (
     <Container maxWidth="xl" sx={{ position: "relative", zIndex: 1, py: 4 }}>
       
-      <Box sx={{ 
-        display: 'flex',
-        alignItems: 'center',
-        gap: 2,
-        mb: 4,
-        mt: 4,
-        px: 4
-      }}>
-        <IoInformationCircle size={32} style={{ color: theme.palette.text.primary }} />
-        <Typography variant="h4" component="h1" sx={{ color: theme.palette.text.primary }}>
-          Cluster Information
-        </Typography>
+      <Box>
+        
+        <Typography variant="h1">Cluster Info</Typography>
+        <Typography variant="body1" color="text.primary" sx={{ mb: 4 }}>
+            Have some information and good text here
+          </Typography>
       </Box>
 
-      <Box sx={{ px: 4 }}>
+      <Box>
         <Grid container spacing={4}>
           {/* MarketCluster Structure Section */}
           <Grid size={{ xs: 12, md: 9 }}>
@@ -117,7 +111,7 @@ const ClusterInfo: React.FC = () => {
                 display: 'flex', 
                 alignItems: 'center', 
                 gap: 1,
-                color: theme.palette.text.primary
+                color: theme.palette.text.secondary
               }}>
                 <IoLayers size={24} />
                 MarketCluster Structure
@@ -249,7 +243,7 @@ const ClusterInfo: React.FC = () => {
                 display: 'flex', 
                 alignItems: 'center', 
                 gap: 1,
-                color: theme.palette.text.primary
+                color: theme.palette.text.secondary
               }}>
                 <IoLayers size={24} />
                 Cluster Types
@@ -263,12 +257,13 @@ const ClusterInfo: React.FC = () => {
                   backgroundColor: theme.palette.background.default,
                   border: `1px solid ${theme.palette.divider}`,
                 }}>
-                  <Typography variant="subtitle1" color="primary" gutterBottom sx={{
+                  <Typography variant="subtitle1" gutterBottom sx={{
                     display: 'flex',
                     alignItems: 'center',
-                    gap: 1
+                    gap: 1,
+                    color: theme.palette.text.secondary
                   }}>
-                    <DynamicIcon size={20} />
+                    <DynamicIcon size={20}   color={theme.palette.primary.main}/>
                     Dynamic Cluster
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
@@ -286,9 +281,10 @@ const ClusterInfo: React.FC = () => {
                   <Typography variant="subtitle1" color="primary" gutterBottom sx={{
                     display: 'flex',
                     alignItems: 'center',
-                    gap: 1
+                    gap: 1,
+                    color: theme.palette.text.secondary
                   }}>
-                    <StaticIcon size={20} />
+                    <StaticIcon size={20}   color={theme.palette.primary.main}/>
                     Static Cluster
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
@@ -306,9 +302,10 @@ const ClusterInfo: React.FC = () => {
                   <Typography variant="subtitle1" color="primary" gutterBottom sx={{
                     display: 'flex',
                     alignItems: 'center',
-                    gap: 1
+                    gap: 1,
+                    color: theme.palette.text.secondary
                   }}>
-                    <SnapshotIcon size={20} />
+                    <SnapshotIcon size={20}   color={theme.palette.primary.main} />
                     Snapshot Cluster
                   </Typography>
                   <Typography variant="body2" color="text.secondary">

@@ -9,9 +9,12 @@ from sqlalchemy.orm import Session
 router = APIRouter()
 
 @router.get("/insights/{cluster_id}")
-async def get_user_products_insights(cluster_id: int, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
+async def get_user_products_insights(
+    cluster_id: int,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
     """Returns insights for UserProducts within a cluster."""
-
 
     # ✅ Fetch MarketCluster
     cluster = db.query(MarketCluster).filter(MarketCluster.id == cluster_id).first()
@@ -30,39 +33,40 @@ async def get_user_products_insights(cluster_id: int, db: Session = Depends(get_
     user_products = db.query(UserProduct).filter(UserProduct.user_id == current_user.id).all()
     user_asins = {up.asin for up in user_products}
 
-    # 📊 **Cluster-Level Insight**
-    user_products_in_cluster = 0  # Gesamtanzahl der UserProducts im Cluster
+    # 📦 Alle ASINs im Cluster sammeln
+    cluster_asins = {
+        product.asin
+        for market in markets
+        for product in market.products
+    }
 
+    # ✂️ Nur ASINs, die auch in den UserProducts sind
+    user_products_in_cluster_asins = cluster_asins.intersection(user_asins)
+    user_products_in_cluster_count = len(user_products_in_cluster_asins)
+
+    # 📊 Insights pro Market
     market_insights = []
-
     for market in markets:
-        # DDM6
-        user_products_in_market = sum(1 for product in market.products if product.asin in user_asins)
-        
-        # Falls UserProducts im Market existieren, zähle sie zum Cluster
-        # CDD6
-        user_products_in_cluster += user_products_in_market
+        user_products_in_market = sum(
+            1 for product in market.products if product.asin in user_asins
+        )
 
-        # Füge Market-Statistik hinzu
         market_insights.append({
             "market_id": market.id,
             "market_name": market.keyword,
             "user_products_in_market_count": user_products_in_market,
-            # DDM4
-            "total_revenue_user_products" : -1,
-            # DDM5
-            "marketshare" : -1
+            "total_revenue_user_products": -1,  # DDM4 placeholder
+            "marketshare": -1                   # DDM5 placeholder
         })
 
-    # CD1
-    # CDD5
-    # has to be implemented
+    # 📈 Gesamtergebnis zurückgeben
     return {
-        "user_products_in_cluster_count": user_products_in_cluster,
+        "user_products_in_cluster_count": user_products_in_cluster_count,
         "markets": market_insights,
-        "total_revenue_user_products" : -1,
-        "marketshare" : -1
+        "total_revenue_user_products": -1,  # CD1 placeholder
+        "marketshare": -1                   # CDD5 placeholder
     }
+
 
 
 ## ADD PRODUCT TO USERPRODUCTS

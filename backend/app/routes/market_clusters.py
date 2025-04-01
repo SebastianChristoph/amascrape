@@ -257,14 +257,22 @@ async def get_dashboard_overview(
 
     try:
         market_clusters = db.query(MarketCluster).filter(
-            MarketCluster.user_id == current_user.id
+        MarketCluster.user_id == current_user.id,
+        MarketCluster.is_initial_scraped == True
         ).options(joinedload(MarketCluster.markets)).all()
 
         # DDD1
         total_revenue = -1
     
-        # DDD3
+        # DDD2
         total_clusters = len(market_clusters)
+
+        # DDD3
+        total_markets = len({
+            market.id
+            for cluster in market_clusters
+            for market in cluster.markets
+        })
 
         ### DDD4
         market_ids_subquery = db.query(Market.id).join(
@@ -285,6 +293,7 @@ async def get_dashboard_overview(
         response_data = {
             "total_revenue": float(total_revenue),
             "total_clusters": int(total_clusters),
+            "total_markets": int(total_markets), 
             "total_unique_products": total_products
         }
 
@@ -306,6 +315,7 @@ async def get_market_cluster_details(
     market_cluster = db.query(MarketCluster).filter(
         MarketCluster.id == cluster_id,
         MarketCluster.user_id == current_user.id,
+        MarketCluster.is_initial_scraped == True
     ).options(joinedload(MarketCluster.markets)).first()
 
     if not market_cluster:
@@ -344,9 +354,9 @@ async def get_market_cluster_details(
         if not latest_market_change:
             continue
 
-        if not latest_market_change.products:
-            logging.warning(
-                f"⚠️ Kein ProductChange gefunden für Market {market.keyword} (MarketChange ID: {latest_market_change.id})")
+        # if not latest_market_change.products:
+        #     logging.warning(
+        #         f"⚠️ Kein ProductChange gefunden für Market {market.keyword} (MarketChange ID: {latest_market_change.id})")
 
         market_data = {
             "id": market.id,

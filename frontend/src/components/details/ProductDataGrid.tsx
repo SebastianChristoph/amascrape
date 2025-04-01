@@ -6,7 +6,7 @@ import {
   Tooltip,
 } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import { FaRegEye } from "react-icons/fa";
+import { FaExternalLinkAlt, FaRegEye } from "react-icons/fa";
 import { MdBookmarkAdd, MdBookmarkRemove } from "react-icons/md";
 import CustomSparkLine from "../charts/CustomSparkLine";
 
@@ -127,10 +127,13 @@ export default function ProductDataGrid({
       renderCell: (params) =>
         params.value ? (
           <Link
+            
             href={`https://www.amazon.com/dp/${params.value}?language=en_US`}
             target="_blank"
             rel="noopener noreferrer"
+            sx={{ textDecoration: "none", color: "inherit" }}
           >
+            <FaExternalLinkAlt size={12} />{" "}
             {params.value}
           </Link>
         ) : (
@@ -263,7 +266,7 @@ export default function ProductDataGrid({
     : columns.filter((col) => allowedFields.includes(col.field));
 
   return (
-    <Box sx={{ width: "100%" }}>
+    <Box sx={{ width: "100%", mt:4 }}>
       <DataGrid
         rows={products.map((product: any) => ({
           id: product.asin,

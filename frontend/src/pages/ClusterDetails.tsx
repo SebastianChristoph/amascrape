@@ -2,8 +2,10 @@ import {
   Alert,
   Backdrop,
   Box,
+  Button,
   Chip,
   CircularProgress,
+  Link,
   Paper,
   Tab,
   Tabs,
@@ -289,15 +291,11 @@ export default function ClusterDetails() {
   return (
     <>
       <Box sx={{ display: "flex", flexDirection: "column", gap: 4 }}>
-        {!marketCluster.is_initial_scraped && (
-          <Alert severity="warning" sx={{ mb: 2 }}>
-            This is a first impression of the market. More detailed data will be
-            available after the initial scraping process (usually takes about
-            one hour).
-          </Alert>
-        )}
-
+      
         <Box>
+        <Button variant="outlined" component="a" href="/dashboard" sx={{ mb: 2, fontSize: "0.6rem" , color: theme.palette.text.primary }}>
+        ← Back to Dashboard
+      </Button>
           <Box sx={{ display: "flex", gap: 2, alignItems: "baseline" }}>
             <Box
               sx={{

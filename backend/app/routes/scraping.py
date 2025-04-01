@@ -48,237 +48,178 @@ logging.basicConfig(
     ]
 )
 
-scraping_processes: Dict[int, Dict[str, Dict[str, Dict[str, any]]]] = {}
+@router.post("/start-firstpage-scraping-process")
+async def start_firstpage_scraping(
+    newClusterData: NewClusterData,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
+    cluster_name = newClusterData.clusterName or "Unnamed Cluster"
+    cluster_type = newClusterData.clusterType or "dynamic"
 
-## Get all clusters that are first-page-scraped right now
-## TODO: Refactoring
+    # Cluster anlegen
+    new_cluster = MarketCluster(
+        title=cluster_name,
+        user_id=current_user.id,
+        cluster_type=cluster_type
+    )
+    db.add(new_cluster)
+    db.commit()
+    db.refresh(new_cluster)
+
+    for keyword in newClusterData.keywords:
+        market = db.query(Market).filter(Market.keyword == keyword).first()
+
+        if not market:
+            market = Market(keyword=keyword)
+            db.add(market)
+            db.commit()
+            db.refresh(market)
+
+            # First Page Scraping ausführen (async im Hintergrund)
+            await perform_first_page_scrape(market, new_cluster, db)
+        
+        new_cluster.markets.append(market)
+
+    db.commit()
+
+    # Orchestratoren starten
+    loop = asyncio.get_running_loop()
+    loop.run_in_executor(executor, run_product_orchestrator, new_cluster.id)
+
+    return {"message": f"Cluster '{cluster_name}' mit Scraping gestartet."}
+
+async def perform_first_page_scrape(market: Market, cluster: MarketCluster, db: Session):
+    loop = asyncio.get_running_loop()
+    data = await loop.run_in_executor(executor, fetch_first_page_data, market.keyword)
+
+    product_data_list = data.get("first_page_products", [])
+    top_suggestions = data.get("top_search_suggestions", [])
+
+    market_change = MarketChange(
+        market_id=market.id,
+        change_date=datetime.now(timezone.utc),
+        new_products=",".join([p["asin"] for p in product_data_list])
+    )
+    market_change.set_top_suggestions(top_suggestions)
+    db.add(market_change)
+
+    for product_data in product_data_list:
+        product = db.query(Product).filter(Product.asin == product_data["asin"]).first()
+
+        if not product:
+            product = Product(asin=product_data["asin"])
+            db.add(product)
+            db.commit()
+            db.refresh(product)
+
+        market.products.append(product)
+        market_change.products.append(product)
+
+        product_change = ProductChange(
+            asin=product.asin,
+            title=product_data.get("title"),
+            price=product_data.get("price"),
+            main_category=product_data.get("main_category"),
+            second_category=product_data.get("second_category"),
+            main_category_rank=product_data.get("main_category_rank"),
+            second_category_rank=product_data.get("second_category_rank"),
+            img_path=product_data.get("image"),
+            change_date=datetime.now(timezone.utc),
+            changes="Initial creation"
+        )
+        db.add(product_change)
+        db.commit()
+
+        product.product_changes.append(product_change)
+
+    db.commit()
+
 @router.get("/get-loading-clusters")
 async def get_loading_clusters(
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):
-    """Gibt den Status der laufenden Scraping-Prozesse zurück"""
-    user_id = current_user.id
-    if user_id not in scraping_processes or not scraping_processes[user_id]:
-        return {"active_clusters": []}
-
-    clustername, cluster_data = next(iter(scraping_processes[user_id].items()))
-
-    # ✅ Prüfen, ob Fehler vorliegen
-    has_errors = any(
-        data["status"] == "error" for data in cluster_data["keywords"].values())
-
-    if has_errors:
-        cluster_data["status"] = "error"
-        active_cluster = {
-            "clustername": clustername,
-            "status": "error",
-            "keywords": {kw: data["status"] for kw, data in cluster_data["keywords"].items()}
+    clusters = db.query(MarketCluster).filter(
+        MarketCluster.user_id == current_user.id,
+        MarketCluster.is_initial_scraped == False
+    ).all()
+    return [
+        {
+            "id": cluster.id,
+            "title": cluster.title,
+            "status": "initial_scraping",
+            "cluster_type": cluster.cluster_type
         }
-        scraping_processes[user_id] = {}  # Reset Scraping-Prozess
-        return active_cluster
+        for cluster in clusters
+    ]
 
-    # ✅ Prüfen, ob alle Keywords fertig sind
-    all_done = all(
-        status["status"] == "done" for status in cluster_data["keywords"].values())
-
-    if all_done:
-        scraping_processes[user_id][clustername]["status"] = "done"
-        print(
-            f"✅ Alle Keywords für '{clustername}' fertig! -> Datenbank schreiben")
-
-        existing_cluster = db.query(MarketCluster).filter(
-            MarketCluster.title == clustername, MarketCluster.user_id == user_id
-        ).first()
-
-        if not existing_cluster:
-            # 🆕 Default ist "dynamic", falls nicht gesetzt
-            cluster_type = cluster_data.get("cluster_type", "dynamic")
-            new_cluster = MarketCluster(
-                title=clustername, user_id=user_id, cluster_type=cluster_type)
-
-            db.add(new_cluster)
-
-            for keyword, keyword_data in scraping_processes[user_id][clustername]["keywords"].items():
-                existing_market = db.query(Market).filter(
-                    Market.keyword == keyword).first()
-
-                if existing_market:
-                    new_cluster.markets.append(existing_market)
-                    continue
-
-                new_market = Market(keyword=keyword)
-                db.add(new_market)
-                db.commit()
-                db.refresh(new_market)
-                new_cluster.markets.append(new_market)
-
-                product_data_list = keyword_data["data"].get(
-                    "first_page_products", [])
-                top_suggestions = keyword_data["data"].get(
-                    "top_search_suggestions", [])
-
-                new_market_change = MarketChange(
-                    market_id=new_market.id,
-                    change_date=datetime.now(timezone.utc),
-                    new_products=",".join(
-                        [p["asin"] for p in product_data_list]) if product_data_list else "",
-                )
-                new_market_change.set_top_suggestions(top_suggestions)
-                db.add(new_market_change)
-
-                for product_data in product_data_list:
-                    existing_product = db.query(Product).filter(
-                        Product.asin == product_data["asin"]).first()
-
-                    if not existing_product:
-                        new_product = Product(asin=product_data["asin"])
-                        db.add(new_product)
-                        db.commit()
-                        db.refresh(new_product)
-
-                        new_market.products.append(new_product)
-                        new_market_change.products.append(new_product)
-
-                        new_product_change = ProductChange(
-                            asin=new_product.asin,
-                            title=product_data.get("title"),
-                            price=product_data.get("price"),
-                            main_category=product_data.get("main_category"),
-                            second_category=product_data.get(
-                                "second_category"),
-                            main_category_rank=product_data.get(
-                                "main_category_rank"),
-                            second_category_rank=product_data.get(
-                                "second_category_rank"),
-                            img_path=product_data.get("image"),
-                            change_date=datetime.now(timezone.utc),
-                            changes="Initial creation",
-                        )
-                        db.add(new_product_change)
-                        db.commit()
-                        db.refresh(new_product_change)
-
-                        new_product.product_changes.append(new_product_change)
-
-            db.commit()
-            db.refresh(new_cluster)
-            existing_cluster = new_cluster
-
-         # ✅ Startet den Product Orchestrator asynchron für das Cluster
-
-        print(
-            f"🚀 Starte Product-Orchestrator für Cluster-ID {existing_cluster.id}")
-        loop = asyncio.get_running_loop()
-        loop.run_in_executor(ThreadPoolExecutor(),
-                             run_product_orchestrator, existing_cluster.id, db)
-
-        del scraping_processes[user_id]
-        return {"active_clusters": []}
-
-    return {
-        "clustername": clustername,
-        "status": cluster_data["status"],
-        "keywords": {kw: data["status"] for kw, data in cluster_data["keywords"].items()}
-    }
-
-## START FIRST PAGE SCRAPING FOR CLUSTER
-@router.post("/start-firstpage-scraping-process")
-async def post_scraping(
-    newClusterData: NewClusterData,
-    db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user)
-):
-    """Startet den Scraping-Prozess für einen Nutzer"""
-    user_id = current_user.id
-    cluster_name = newClusterData.clusterName
-    cluster_type = newClusterData.clusterType
-    print(f"🔥 Start Scraping für Nutzer {user_id}, Cluster: {cluster_name}")
-
-    scraping_processes[user_id] = {}
-    scraping_processes[user_id][cluster_name] = {
-        "status": "processing", "keywords": {},  "cluster_type": cluster_type}
-
-    for keyword in newClusterData.keywords:
-        market_exists = db.query(Market).filter(
-            Market.keyword == keyword).first()
-
-        if market_exists:
-            print(f"✅ Market '{keyword}' existiert bereits.")
-            scraping_processes[user_id][cluster_name]["keywords"][keyword] = {
-                "status": "done", "data": {}}
-        else:
-            print(f"🔍 Scraping für neues Keyword: {keyword}")
-            scraping_processes[user_id][cluster_name]["keywords"][keyword] = {
-                "status": "processing", "data": {}}
-            asyncio.create_task(scraping_process(
-                keyword, cluster_name, user_id))
-
-    return {"success": True, "message": f"Scraping für {cluster_name} mit type {cluster_type} gestartet"}
-
-## ASYNC INITIAL FIRST PAGE SCRAPING  WRAPPER
-async def scraping_process(keyword: str, clustername: str, user_id: int):
-    """Führt das Scraping für ein Keyword durch"""
-    print(f"⏳ Start Scraping ({keyword}) für Nutzer {user_id}")
-
-    loop = asyncio.get_running_loop()
-    first_page_data = await loop.run_in_executor(executor, fetch_first_page_data, keyword)
-
-    if not first_page_data:
-        first_page_data = {"first_page_products": [],
-                           "top_search_suggestions": []}
-        scraping_processes[user_id][clustername]["keywords"][keyword]["status"] = "error"
-    else:
-        scraping_processes[user_id][clustername]["keywords"][keyword]["status"] = "done"
-
-    scraping_processes[user_id][clustername]["keywords"][keyword]["data"] = first_page_data
-    print(f"✅ Scraping für '{keyword}' abgeschlossen! (Nutzer {user_id})")
-
-## INITIAL FIRST PAGE SCRAPING 
 def fetch_first_page_data(keyword: str):
-    """Führt das Scraping im Hintergrund aus"""
-    amazon_scraper = AmazonFirstPageScraper(headless=True, show_details=True)
-    return amazon_scraper.get_first_page_data(keyword)
+    scraper = AmazonFirstPageScraper(headless=True, show_details=True)
+    return scraper.get_first_page_data(keyword)
 
-## ASYNC PRODUCT ORCHESTRATOR
-def run_product_orchestrator(cluster_id: int, db: Session):
-    """Führt den Product Orchestrator für ein bestimmtes Cluster aus und startet danach den Market Orchestrator asynchron."""
+def run_product_orchestrator(cluster_id: int):
     try:
-        print(f"🔄 Product-Orchestrator gestartet für Cluster {cluster_id}")
-
-        # 🏁 Starte den Product Orchestrator
         orchestrator = Product_Orchestrator(just_scrape_3_products=False, cluster_to_scrape=cluster_id)
         orchestrator.update_products()
-
-        print(f"✅ Product-Orchestrator abgeschlossen für Cluster {cluster_id}, starte Market-Orchestrator...")
-
-        # 🏁 Starte den Market Orchestrator in einem neuen Thread mit eigenem Event-Loop
-        thread_executor = ThreadPoolExecutor()
-        thread_executor.submit(run_market_orchestrator, cluster_id, db)
-
+        run_market_orchestrator(cluster_id)
     except Exception as e:
         print(f"❌ Fehler im Product-Orchestrator für Cluster {cluster_id}: {e}")
 
-## ASYNC MARKET ORCHESTRATOR
-def run_market_orchestrator(cluster_id: int, db: Session):
-    """Führt den Market Orchestrator für ein bestimmtes Cluster aus."""
+def run_market_orchestrator(cluster_id: int):
     try:
-        print(f"🔄 Market-Orchestrator gestartet für Cluster {cluster_id}")
-
-        # 🏁 Erstelle einen **neuen** Event-Loop für diesen Thread
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
-
         orchestrator = MarketOrchestrator(cluster_to_scrape=cluster_id)
         orchestrator.update_markets()
 
-        print(f"✅ Market-Orchestrator abgeschlossen für Cluster {cluster_id}")
-
-        # ✅ Setze is_initial_scraped auf True
-        mark_cluster_as_scraped(cluster_id, db)
-
+        # Cluster als gescraped markieren
+        db = next(get_db())
+        db.query(MarketCluster).filter(MarketCluster.id == cluster_id).update({"is_initial_scraped": True})
+        db.commit()
     except Exception as e:
         print(f"❌ Fehler im Market-Orchestrator für Cluster {cluster_id}: {e}")
+
+
+## ASYNC PRODUCT ORCHESTRATOR
+# def run_product_orchestrator(cluster_id: int, db: Session):
+#     """Führt den Product Orchestrator für ein bestimmtes Cluster aus und startet danach den Market Orchestrator asynchron."""
+#     try:
+#         print(f"🔄 Product-Orchestrator gestartet für Cluster {cluster_id}")
+
+#         # 🏁 Starte den Product Orchestrator
+#         orchestrator = Product_Orchestrator(just_scrape_3_products=False, cluster_to_scrape=cluster_id)
+#         orchestrator.update_products()
+
+#         print(f"✅ Product-Orchestrator abgeschlossen für Cluster {cluster_id}, starte Market-Orchestrator...")
+
+#         # 🏁 Starte den Market Orchestrator in einem neuen Thread mit eigenem Event-Loop
+#         thread_executor = ThreadPoolExecutor()
+#         thread_executor.submit(run_market_orchestrator, cluster_id, db)
+
+#     except Exception as e:
+#         print(f"❌ Fehler im Product-Orchestrator für Cluster {cluster_id}: {e}")
+
+# ## ASYNC MARKET ORCHESTRATOR
+# def run_market_orchestrator(cluster_id: int, db: Session):
+#     """Führt den Market Orchestrator für ein bestimmtes Cluster aus."""
+#     try:
+#         print(f"🔄 Market-Orchestrator gestartet für Cluster {cluster_id}")
+
+#         # 🏁 Erstelle einen **neuen** Event-Loop für diesen Thread
+#         loop = asyncio.new_event_loop()
+#         asyncio.set_event_loop(loop)
+
+#         orchestrator = MarketOrchestrator(cluster_to_scrape=cluster_id)
+#         orchestrator.update_markets()
+
+#         print(f"✅ Market-Orchestrator abgeschlossen für Cluster {cluster_id}")
+
+#         # ✅ Setze is_initial_scraped auf True
+#         mark_cluster_as_scraped(cluster_id, db)
+
+#     except Exception as e:
+#         print(f"❌ Fehler im Market-Orchestrator für Cluster {cluster_id}: {e}")
 
 def mark_cluster_as_scraped(cluster_id: int, db: Session):
     """Setzt is_initial_scraped auf True, wenn der Market-Orchestrator beendet ist."""

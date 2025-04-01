@@ -72,7 +72,7 @@ export default function ClusterInsights({
               marketData.every((entry) => entry.value === 0)
             ) ? (
               <Box>
-                <Box sx={{ position: "relative" }}>
+                <Box sx={{ position: "relative", height: 245 }}>
                   <Skeleton
                     variant="rectangular"
                     animation="wave"
@@ -80,7 +80,7 @@ export default function ClusterInsights({
                     height="100%"
                     sx={{
                       borderRadius: 1,
-                      bgcolor: "grey.100",
+                      bgcolor: "gray.100",
                     }}
                   />
                   <Typography
@@ -92,7 +92,7 @@ export default function ClusterInsights({
                       left: "50%",
                       transform: "translate(-50%, -50%)",
                       textAlign: "center",
-                      backgroundColor: "rgba(255, 255, 255, 0.8)",
+                      // backgroundColor: "rgba(255, 255, 255, 0.8)",
                       padding: "8px 16px",
                       borderRadius: 1,
                     }}
@@ -102,7 +102,7 @@ export default function ClusterInsights({
                 </Box>
               </Box>
             ) : (
-              <Box>
+                <Box sx={{width: "80%", ml: 8}}>
                 <CustomStackBars data={stackedChartData} />
               </Box>
             )}

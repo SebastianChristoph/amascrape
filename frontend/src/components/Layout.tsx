@@ -15,7 +15,7 @@ import {
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 import { MdDarkMode, MdLightMode } from "react-icons/md";
 import { useTheme } from "@mui/material/styles";
-
+import { RiFolderInfoLine } from "react-icons/ri";
 
 export default function Layout({
   setIsAuthenticated,
@@ -191,7 +191,7 @@ export default function Layout({
                     },
                   }}
                 >
-                  <IoInformationCircle size={20} style={{ minWidth: 24, color: theme.palette.accent.main }} />
+                  <RiFolderInfoLine size={20} style={{ minWidth: 24, color: theme.palette.accent.main }} />
                   {drawerOpen && (
                     <Typography variant="body2" sx={{ color: "#FFFFFF" }}>Cluster Info</Typography>
                   )}

@@ -152,7 +152,7 @@ export const darkTheme = createTheme({
     },
     text: { 
       primary: "#AEB9E1", 
-      secondary: "#8B95BC"  // angepasst für besseren Kontrast
+      secondary: "#ced3e3"  // angepasst für besseren Kontrast
     },
   },
   typography: {

@@ -33,7 +33,6 @@ const AddMarketCluster: React.FC = () => {
   const [keywords, setKeywords] = useState<string[]>([]);
   const [newKeyword, setNewKeyword] = useState<string>("");
   const [existingClusters, setExistingClusters] = useState<string[]>([]);
-  const [isScraping, setIsScraping] = useState<boolean>(false);
   const [clusterType, setClusterType] = useState<
     "dynamic" | "static" | "snapshot"
   >("dynamic");
@@ -44,30 +43,30 @@ const AddMarketCluster: React.FC = () => {
   const isListInput = newKeyword.includes(",");
 
   // ✅ Automatisches Fetching für aktive Scraping-Prozesse
-  useEffect(() => {
-    const fetchActiveScrapingClusters = async () => {
-      try {
-        const activeCluster = await MarketService.getActiveScrapingCluster();
-        if (activeCluster) {
-          setIsScraping(true);
-        } else {
-          if (isScraping) {
-            showSnackbar(CLUSTER_CONSTANTS.MESSAGES.SCRAPING_COMPLETE);
-          }
-          setIsScraping(false);
-        }
-      } catch (error) {
-        console.error("Fehler beim Abrufen aktiver Scraping-Prozesse:", error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchActiveScrapingClusters = async () => {
+  //     try {
+  //       const activeCluster = await MarketService.getActiveScrapingCluster();
+  //       if (activeCluster) {
+  //         setIsScraping(true);
+  //       } else {
+  //         if (isScraping) {
+  //           showSnackbar(CLUSTER_CONSTANTS.MESSAGES.SCRAPING_COMPLETE);
+  //         }
+  //         setIsScraping(false);
+  //       }
+  //     } catch (error) {
+  //       console.error("Fehler beim Abrufen aktiver Scraping-Prozesse:", error);
+  //     }
+  //   };
 
-    fetchActiveScrapingClusters();
+  //   fetchActiveScrapingClusters();
 
-    if (isScraping) {
-      const interval = setInterval(fetchActiveScrapingClusters, 3000);
-      return () => clearInterval(interval);
-    }
-  }, [isScraping, showSnackbar]);
+  //   if (isScraping) {
+  //     const interval = setInterval(fetchActiveScrapingClusters, 3000);
+  //     return () => clearInterval(interval);
+  //   }
+  // }, [isScraping, showSnackbar]);
 
   // ✅ Lädt existierende Market-Cluster
   useEffect(() => {
@@ -170,7 +169,7 @@ const AddMarketCluster: React.FC = () => {
         backgroundColor: "background.default",
       }}
     >
-      <Container maxWidth="lg" sx={{ position: "relative", zIndex: 1, py: 4 }}>
+      <Container maxWidth="xl" sx={{ position: "relative", zIndex: 1, py: 4 }}>
         <Box>
           <Typography variant="h1">{CLUSTER_CONSTANTS.TITLES.PAGE}</Typography>
           <Typography variant="body1" color="text.primary" sx={{ mb: 4 }}>
@@ -178,11 +177,7 @@ const AddMarketCluster: React.FC = () => {
             by one or use a comma-separated list.
           </Typography>
 
-          {isScraping ? (
-            <Alert severity="warning" sx={{ mb: 4 }}>
-              {CLUSTER_CONSTANTS.MESSAGES.SCRAPING_ACTIVE}
-            </Alert>
-          ) : (
+          
             <form onSubmit={handleSubmit}>
               <Grid container spacing={4}>
                 {/* Cluster Name Section */}
@@ -406,7 +401,7 @@ const AddMarketCluster: React.FC = () => {
                 </Grid>
               </Grid>
             </form>
-          )}
+        
         </Box>
       </Container>
 

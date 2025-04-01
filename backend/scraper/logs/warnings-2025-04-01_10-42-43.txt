@@ -1,0 +1,99 @@
+⚠️ Warnungen beim Scraping – 2025-04-01 10:57:26
+============================================================
+🧾 Übersicht:
+  • 9 Produkte betroffen
+  • 9 Warnungen insgesamt
+    - 7 × BLM
+    - 1 × RANK_IN_PRODUCT_BOX_MISSING
+    - 1 × REVIEW_COUNT
+
+============================================================
+
+🧾 ASIN: B0DDC7QJ43
+🔗 URL: https://www.amazon.com/dp/B0DDC7QJ43?language=en_US
+⚠️ Fehler: Fehler bei BLM: invalid literal for int() with base 10: ''
+📍 Location: Los Angeles 90031
+🔖 Typ: blm
+------------------------------------------------------------
+
+🧾 ASIN: B07XB3KYRY
+🔗 URL: https://www.amazon.com/dp/B07XB3KYRY?language=en_US
+⚠️ Fehler: 	⚠️ Keine Rank-Informationen in Product-Info-Box vorhanden.
+📍 Location: Los Angeles 90031
+🔖 Typ: rank_in_product_box_missing
+------------------------------------------------------------
+
+🧾 ASIN: B0F16C7S5M
+🔗 URL: https://www.amazon.com/dp/B0F16C7S5M?language=en_US
+⚠️ Fehler: Fehler bei BLM: invalid literal for int() with base 10: ''
+📍 Location: Los Angeles 90031
+🔖 Typ: blm
+------------------------------------------------------------
+
+🧾 ASIN: B0F16C7S5M
+🔗 URL: https://www.amazon.com/dp/B0F16C7S5M?language=en_US
+⚠️ Fehler: 	⚠️ Fehler bei Reviews: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@id="acrCustomerReviewLink"]"}
+  (Session info: chrome=134.0.6998.178); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+	GetHandleVerifier [0x0085C7F3+24435]
+	(No symbol) [0x007E2074]
+	(No symbol) [0x006B06E3]
+	(No symbol) [0x006F8B39]
+	(No symbol) [0x006F8E8B]
+	(No symbol) [0x00741AC2]
+	(No symbol) [0x0071D804]
+	(No symbol) [0x0073F20A]
+	(No symbol) [0x0071D5B6]
+	(No symbol) [0x006EC54F]
+	(No symbol) [0x006ED894]
+	GetHandleVerifier [0x00B670A3+3213347]
+	GetHandleVerifier [0x00B7B0C9+3295305]
+	GetHandleVerifier [0x00B7558C+3271948]
+	GetHandleVerifier [0x008F7360+658144]
+	(No symbol) [0x007EB27D]
+	(No symbol) [0x007E8208]
+	(No symbol) [0x007E83A9]
+	(No symbol) [0x007DAAC0]
+	BaseThreadInitThunk [0x75EB5D49+25]
+	RtlInitializeExceptionChain [0x7723CF0B+107]
+	RtlGetAppContainerNamedObjectPath [0x7723CE91+561]
+
+📍 Location: Los Angeles 90031
+🔖 Typ: review_count
+------------------------------------------------------------
+
+🧾 ASIN: B01DUY71UE
+🔗 URL: https://www.amazon.com/dp/B01DUY71UE?language=en_US
+⚠️ Fehler: Fehler bei BLM: invalid literal for int() with base 10: ''
+📍 Location: Los Angeles 90031
+🔖 Typ: blm
+------------------------------------------------------------
+
+🧾 ASIN: B0CJWV1GWS
+🔗 URL: https://www.amazon.com/dp/B0CJWV1GWS?language=en_US
+⚠️ Fehler: Fehler bei BLM: invalid literal for int() with base 10: ''
+📍 Location: Los Angeles 90031
+🔖 Typ: blm
+------------------------------------------------------------
+
+🧾 ASIN: B0CXF92L7P
+🔗 URL: https://www.amazon.com/dp/B0CXF92L7P?language=en_US
+⚠️ Fehler: Fehler bei BLM: invalid literal for int() with base 10: ''
+📍 Location: Los Angeles 90031
+🔖 Typ: blm
+------------------------------------------------------------
+
+🧾 ASIN: B09N543M6W
+🔗 URL: https://www.amazon.com/dp/B09N543M6W?language=en_US
+⚠️ Fehler: Fehler bei BLM: invalid literal for int() with base 10: ''
+📍 Location: Los Angeles 90031
+🔖 Typ: blm
+------------------------------------------------------------
+
+🧾 ASIN: B0C723257X
+🔗 URL: https://www.amazon.com/dp/B0C723257X?language=en_US
+⚠️ Fehler: Fehler bei BLM: invalid literal for int() with base 10: ''
+📍 Location: Los Angeles 90031
+🔖 Typ: blm
+------------------------------------------------------------
+

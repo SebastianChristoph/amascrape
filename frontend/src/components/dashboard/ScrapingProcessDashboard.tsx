@@ -143,7 +143,7 @@ const ScrapingProcessDashboard: React.FC<ScrapingProcessDashboardProps> = ({ act
                 color: theme.palette.text.primary
               }}
             >
-              Scraping cluster: {activeCluster.clustername}
+              Scraping your new Market Cluster: {activeCluster.clustername}
             </Typography>
             <Box 
               sx={{
@@ -166,7 +166,7 @@ const ScrapingProcessDashboard: React.FC<ScrapingProcessDashboardProps> = ({ act
                 gap: 1
               }}
             >
-              This may take a few minutes...
+              This may take one hour.
             </Typography>
           
            
