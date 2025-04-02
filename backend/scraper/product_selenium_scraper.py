@@ -77,7 +77,7 @@ class AmazonProductScraper:
     def open_page(self):
         self.log(f"🌐 Öffne Produktseite: {self.asin} ({self.url})")
         self.driver.get(self.url)
-        self.scroll_down()
+        #self.scroll_down()
         self.product_info_box_content = self.get_product_infos_box_content()
         self.technical_details_box_content = self.get_technical_details_box_content()
 
@@ -108,13 +108,14 @@ class AmazonProductScraper:
                 second_category = second_category.strip()
 
             main_category = self.remove_parentheses(main_category).strip()
-
-            return {
+            dict = {
                 "rank_main_category": main_rank,
                 "main_category": main_category,
                 "rank_second_category": second_rank,
                 "second_category": second_category
             }
+          
+            return dict
         
         except Exception as e:
             self.log(f"\t❌ Fehler beim Extrahieren von Rangdaten: {e}")
@@ -447,8 +448,8 @@ class AmazonProductScraper:
             "title": title,
             "price": price,
             "manufacturer": manufacturer,
-            "rank_main_category": self.bs_and_rank_data.get("rank_main_category"),
-            "rank_second_category": self.bs_and_rank_data.get("rank_second_category"),
+            "main_category_rank": self.bs_and_rank_data.get("rank_main_category"),
+            "second_category_rank": self.bs_and_rank_data.get("rank_second_category"),
             "review_count": reviews,
             "rating": rating,
             "main_category": main_category,
@@ -460,6 +461,5 @@ class AmazonProductScraper:
             "store": store,
             "image_url": image_path,
         }
-        # if self.show_details: 
-        #     print(data)
+        
         return data

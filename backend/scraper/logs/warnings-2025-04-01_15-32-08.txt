@@ -1,0 +1,122 @@
+⚠️ Warnungen beim Scraping – 2025-04-01 15:35:40
+============================================================
+🧾 Übersicht:
+  • 16 Produkte betroffen
+  • 16 Warnungen insgesamt
+    - 15 × BLM
+    - 1 × REVIEWS
+
+============================================================
+
+🧾 ASIN: B0BV8XTKFR
+🔗 URL: https://www.amazon.com/dp/B0BV8XTKFR?language=en_US
+⚠️ Fehler: Fehler bei BLM: invalid literal for int() with base 10: ''
+📍 Location: Los Angeles 90031
+🔖 Typ: blm
+------------------------------------------------------------
+
+🧾 ASIN: B0009YSVW6
+🔗 URL: https://www.amazon.com/dp/B0009YSVW6?language=en_US
+⚠️ Fehler: Fehler bei BLM: invalid literal for int() with base 10: ''
+📍 Location: Los Angeles 90031
+🔖 Typ: blm
+------------------------------------------------------------
+
+🧾 ASIN: B0D1R48K3Q
+🔗 URL: https://www.amazon.com/dp/B0D1R48K3Q?language=en_US
+⚠️ Fehler: Fehler bei BLM: invalid literal for int() with base 10: ''
+📍 Location: Los Angeles 90031
+🔖 Typ: blm
+------------------------------------------------------------
+
+🧾 ASIN: B0DMVPYYHN
+🔗 URL: https://www.amazon.com/dp/B0DMVPYYHN?language=en_US
+⚠️ Fehler: Fehler bei BLM: invalid literal for int() with base 10: ''
+📍 Location: Los Angeles 90031
+🔖 Typ: blm
+------------------------------------------------------------
+
+🧾 ASIN: B0DP4FCG51
+🔗 URL: https://www.amazon.com/dp/B0DP4FCG51?language=en_US
+⚠️ Fehler: Fehler bei BLM: invalid literal for int() with base 10: ''
+📍 Location: Los Angeles 90031
+🔖 Typ: blm
+------------------------------------------------------------
+
+🧾 ASIN: B0CRYL2H96
+🔗 URL: https://www.amazon.com/dp/B0CRYL2H96?language=en_US
+⚠️ Fehler: Fehler bei BLM: invalid literal for int() with base 10: ''
+📍 Location: Los Angeles 90031
+🔖 Typ: blm
+------------------------------------------------------------
+
+🧾 ASIN: B0DWTCDWSB
+🔗 URL: https://www.amazon.com/dp/B0DWTCDWSB?language=en_US
+⚠️ Fehler: Fehler bei BLM: invalid literal for int() with base 10: ''
+📍 Location: Los Angeles 90031
+🔖 Typ: blm
+------------------------------------------------------------
+
+🧾 ASIN: B0DWTCDWSB
+🔗 URL: https://www.amazon.com/dp/B0DWTCDWSB?language=en_US
+⚠️ Fehler: ⚠️ 	Fehler bei Bewertung: could not convert string to float: '5 o'
+📍 Location: Los Angeles 90031
+🔖 Typ: reviews
+------------------------------------------------------------
+
+🧾 ASIN: B096LZZ2PW
+🔗 URL: https://www.amazon.com/dp/B096LZZ2PW?language=en_US
+⚠️ Fehler: Fehler bei BLM: invalid literal for int() with base 10: ''
+📍 Location: Los Angeles 90031
+🔖 Typ: blm
+------------------------------------------------------------
+
+🧾 ASIN: B0D49JBBXM
+🔗 URL: https://www.amazon.com/dp/B0D49JBBXM?language=en_US
+⚠️ Fehler: Fehler bei BLM: invalid literal for int() with base 10: ''
+📍 Location: Los Angeles 90031
+🔖 Typ: blm
+------------------------------------------------------------
+
+🧾 ASIN: B0929GMQ2J
+🔗 URL: https://www.amazon.com/dp/B0929GMQ2J?language=en_US
+⚠️ Fehler: Fehler bei BLM: invalid literal for int() with base 10: ''
+📍 Location: Los Angeles 90031
+🔖 Typ: blm
+------------------------------------------------------------
+
+🧾 ASIN: B0B1HGRH9L
+🔗 URL: https://www.amazon.com/dp/B0B1HGRH9L?language=en_US
+⚠️ Fehler: Fehler bei BLM: invalid literal for int() with base 10: ''
+📍 Location: Los Angeles 90031
+🔖 Typ: blm
+------------------------------------------------------------
+
+🧾 ASIN: B096T2C64W
+🔗 URL: https://www.amazon.com/dp/B096T2C64W?language=en_US
+⚠️ Fehler: Fehler bei BLM: invalid literal for int() with base 10: ''
+📍 Location: Los Angeles 90031
+🔖 Typ: blm
+------------------------------------------------------------
+
+🧾 ASIN: B07WG6Z79W
+🔗 URL: https://www.amazon.com/dp/B07WG6Z79W?language=en_US
+⚠️ Fehler: Fehler bei BLM: invalid literal for int() with base 10: ''
+📍 Location: Los Angeles 90031
+🔖 Typ: blm
+------------------------------------------------------------
+
+🧾 ASIN: B07SHS4VKR
+🔗 URL: https://www.amazon.com/dp/B07SHS4VKR?language=en_US
+⚠️ Fehler: Fehler bei BLM: invalid literal for int() with base 10: ''
+📍 Location: Los Angeles 90031
+🔖 Typ: blm
+------------------------------------------------------------
+
+🧾 ASIN: B0C4X1B71W
+🔗 URL: https://www.amazon.com/dp/B0C4X1B71W?language=en_US
+⚠️ Fehler: Fehler bei BLM: invalid literal for int() with base 10: ''
+📍 Location: Los Angeles 90031
+🔖 Typ: blm
+------------------------------------------------------------
+

@@ -254,7 +254,7 @@ class Product_Orchestrator:
 
                 logging.info("\n\n" + "="*80)
                 logging.info(f"📦 [{index}/{total_products}] Scrape Produkt: {product.asin}")
-                logging.info("="*80 + "\n")
+                if self.show_details: logging.info("="*80 + "\n")
 
                 try:
                     start = time.time()
@@ -364,5 +364,5 @@ class Product_Orchestrator:
 
 
 if __name__ == "__main__":
-    orchestrator = Product_Orchestrator(just_scrape_3_products=False, show_details=True)
+    orchestrator = Product_Orchestrator(just_scrape_3_products=False, show_details=False)
     orchestrator.update_products()

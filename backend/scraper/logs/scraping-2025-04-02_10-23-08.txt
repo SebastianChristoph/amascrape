@@ -1,0 +1,61 @@
+2025-04-02 10:23:08,075 [INFO] 🚀 Product Orchestrator gestartet.
+2025-04-02 10:23:08,076 [INFO] ====== WebDriver manager ======
+2025-04-02 10:23:09,082 [INFO] Get LATEST chromedriver version for google-chrome
+2025-04-02 10:23:09,531 [INFO] Get LATEST chromedriver version for google-chrome
+2025-04-02 10:23:09,883 [INFO] Driver [C:\Users\sebas\.wdm\drivers\chromedriver\win64\135.0.7049.42\chromedriver-win32/chromedriver.exe] found in cache
+2025-04-02 10:23:09,885 [DEBUG] Skipping Selenium Manager; path to chrome driver specified in Service class: C:\Users\sebas\.wdm\drivers\chromedriver\win64\135.0.7049.42\chromedriver-win32/chromedriver.exe
+2025-04-02 10:23:09,893 [DEBUG] Started executable: `C:\Users\sebas\.wdm\drivers\chromedriver\win64\135.0.7049.42\chromedriver-win32/chromedriver.exe` in a child process with pid: 27264 using 0 to output -3
+2025-04-02 10:23:10,997 [INFO] 🔧 Verwende ChromeDriver: C:\Users\sebas\.wdm\drivers\chromedriver\win64\135.0.7049.42\chromedriver-win32/chromedriver.exe
+2025-04-02 10:23:17,232 [INFO] ✅ Verbindung zu Amazon erfolgreich!
+2025-04-02 10:23:19,140 [INFO] 🍪 Cookies erfolgreich gesetzt.
+2025-04-02 10:23:19,140 [INFO] 📦 Starte Produktscraping...
+2025-04-02 10:23:19,166 [INFO] 
+
+================================================================================
+2025-04-02 10:23:19,166 [INFO] 📦 [1/1078] Scrape Produkt: B002DYIZEO
+2025-04-02 10:23:19,167 [INFO] ================================================================================
+
+2025-04-02 10:23:19,171 [DEBUG] 🌐 Öffne Produktseite: B002DYIZEO (https://www.amazon.com/dp/B002DYIZEO?language=en_US)
+2025-04-02 10:23:25,755 [DEBUG] 📦 Extrahiere Produktinformationen...
+2025-04-02 10:23:26,292 [DEBUG] 🧾 Extrahiere technische Details...
+2025-04-02 10:23:26,309 [DEBUG] 🛑 Prüfe Verfügbarkeit (Out of Stock)
+2025-04-02 10:23:26,573 [DEBUG] 🔍 Prüfe, ob Produktseite existiert
+2025-04-02 10:23:26,831 [DEBUG] 📊 Extrahiere BLM (bought last month)...
+2025-04-02 10:23:26,854 [DEBUG] 💰 Extrahiere Preis...
+2025-04-02 10:23:26,879 [DEBUG] 📈 Extrahiere Bestseller-Rangdaten...
+2025-04-02 10:23:26,879 [DEBUG] {'rank_main_category': 40, 'main_category': 'Health & Household', 'rank_second_category': 2, 'second_category': 'Creatine Nutritional Supplements'}
+2025-04-02 10:23:26,899 [DEBUG] 🗣️ Extrahiere Review-Anzahl...
+2025-04-02 10:23:26,900 [DEBUG] ⭐️ Extrahiere Bewertung...
+2025-04-02 10:23:26,900 [DEBUG] 🎨 Extrahiere Varianten...
+2025-04-02 10:23:26,985 [DEBUG] 📍 Extrahiere Standort...
+2025-04-02 10:23:27,006 [DEBUG] Vergleiche Feld 'title': OLD=Optimum Nutrition Micronized Creatine Monohydrate Powder, Unflavored, 120 Servings, 600 Grams (Packaging May Vary) (<class 'str'>) vs NEW=Optimum Nutrition Micronized Creatine Monohydrate Powder, Unflavored, 120 Servings, 600 Grams (Packaging May Vary) (<class 'str'>)
+2025-04-02 10:23:27,007 [DEBUG] Vergleiche Feld 'price': OLD=27.99 (<class 'float'>) vs NEW=27.99 (<class 'float'>)
+2025-04-02 10:23:27,007 [DEBUG] Vergleiche Feld 'main_category': OLD=Health & Household (<class 'str'>) vs NEW=Health & Household (<class 'str'>)
+2025-04-02 10:23:27,007 [DEBUG] Vergleiche Feld 'second_category': OLD=Creatine Nutritional Supplements (<class 'str'>) vs NEW=Creatine Nutritional Supplements (<class 'str'>)
+2025-04-02 10:23:27,007 [DEBUG] Vergleiche Feld 'main_category_rank': OLD=39 (<class 'int'>) vs NEW=None (<class 'NoneType'>)
+2025-04-02 10:23:27,007 [DEBUG] Vergleiche Feld 'second_category_rank': OLD=2 (<class 'int'>) vs NEW=None (<class 'NoneType'>)
+2025-04-02 10:23:27,007 [DEBUG] Vergleiche Feld 'img_path': OLD=https://m.media-amazon.com/images/I/711TibIXALL._AC_SX679_.jpg (<class 'str'>) vs NEW=None (<class 'NoneType'>)
+2025-04-02 10:23:27,007 [DEBUG] Vergleiche Feld 'blm': OLD=70000 (<class 'int'>) vs NEW=70000 (<class 'int'>)
+2025-04-02 10:23:27,008 [DEBUG] Vergleiche Feld 'total': OLD=1959300.0 (<class 'float'>) vs NEW=1959300.0 (<class 'float'>)
+2025-04-02 10:23:27,008 [DEBUG] Vergleiche Feld 'store': OLD=Optimum Nutrition (<class 'str'>) vs NEW=Optimum Nutrition (<class 'str'>)
+2025-04-02 10:23:27,008 [DEBUG] Vergleiche Feld 'manufacturer': OLD=Glanbia Performance Nutrition (<class 'str'>) vs NEW=Glanbia Performance Nutrition (<class 'str'>)
+2025-04-02 10:23:27,042 [INFO] 
+
+================================================================================
+2025-04-02 10:23:27,043 [INFO] 📦 [2/1078] Scrape Produkt: B07978VPPH
+2025-04-02 10:23:27,043 [INFO] ================================================================================
+
+2025-04-02 10:23:27,045 [DEBUG] 🌐 Öffne Produktseite: B07978VPPH (https://www.amazon.com/dp/B07978VPPH?language=en_US)
+2025-04-02 10:23:27,532 [INFO] ##############################################################################
+2025-04-02 10:23:27,532 [INFO] ##############################################################################
+2025-04-02 10:23:27,532 [INFO] 
+📊 Scraping abgeschlossen:
+2025-04-02 10:23:27,533 [INFO] ⏱️ Gesamtzeit: 0m 8s
+2025-04-02 10:23:27,533 [INFO] ⏲️ Durchschnitt pro Produkt: 7.84s
+2025-04-02 10:23:27,533 [INFO] 📦 Erfolgreich: 1
+2025-04-02 10:23:27,533 [INFO] ❌ Fehlgeschlagen: 0
+2025-04-02 10:23:27,533 [INFO] 📝 Log-Datei: C:\Users\sebas\Desktop\amascrape\backend\scraper\logs\scraping-2025-04-02_10-23-08.txt
+2025-04-02 10:23:27,533 [INFO] 🧨 Fehlgeschlagene Produkte: C:\Users\sebas\Desktop\amascrape\backend\scraper\logs\fails-2025-04-02_10-23-08.txt
+2025-04-02 10:23:27,534 [INFO] 🔻 Schließe WebDriver...
+2025-04-02 10:23:31,612 [WARNING] Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000021E0E066710>: Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte')': /session/8403a1e6d625ce9c66418da2a9e73819
+2025-04-02 10:23:35,685 [WARNING] Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000021E0E066990>: Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte')': /session/8403a1e6d625ce9c66418da2a9e73819

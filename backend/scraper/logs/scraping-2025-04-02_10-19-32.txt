@@ -1,0 +1,65 @@
+2025-04-02 10:19:32,916 [INFO] 🚀 Product Orchestrator gestartet.
+2025-04-02 10:19:32,917 [INFO] ====== WebDriver manager ======
+2025-04-02 10:19:33,931 [INFO] Get LATEST chromedriver version for google-chrome
+2025-04-02 10:19:34,422 [INFO] Get LATEST chromedriver version for google-chrome
+2025-04-02 10:19:34,745 [INFO] There is no [win64] chromedriver "135.0.7049.42" for browser google-chrome "135.0.7049" in cache
+2025-04-02 10:19:34,745 [INFO] Get LATEST chromedriver version for google-chrome
+2025-04-02 10:19:35,662 [INFO] WebDriver version 135.0.7049.42 selected
+2025-04-02 10:19:35,683 [INFO] Modern chrome version https://storage.googleapis.com/chrome-for-testing-public/135.0.7049.42/win32/chromedriver-win32.zip
+2025-04-02 10:19:35,683 [INFO] About to download new driver from https://storage.googleapis.com/chrome-for-testing-public/135.0.7049.42/win32/chromedriver-win32.zip
+2025-04-02 10:19:36,115 [INFO] Driver downloading response is 200
+2025-04-02 10:19:37,663 [INFO] Get LATEST chromedriver version for google-chrome
+2025-04-02 10:19:39,404 [INFO] Driver has been saved in cache [C:\Users\sebas\.wdm\drivers\chromedriver\win64\135.0.7049.42]
+2025-04-02 10:19:39,418 [DEBUG] Skipping Selenium Manager; path to chrome driver specified in Service class: C:\Users\sebas\.wdm\drivers\chromedriver\win64\135.0.7049.42\chromedriver-win32/chromedriver.exe
+2025-04-02 10:19:39,633 [DEBUG] Started executable: `C:\Users\sebas\.wdm\drivers\chromedriver\win64\135.0.7049.42\chromedriver-win32/chromedriver.exe` in a child process with pid: 1704 using 0 to output -3
+2025-04-02 10:19:40,745 [INFO] 🔧 Verwende ChromeDriver: C:\Users\sebas\.wdm\drivers\chromedriver\win64\135.0.7049.42\chromedriver-win32/chromedriver.exe
+2025-04-02 10:19:46,737 [INFO] ✅ Verbindung zu Amazon erfolgreich!
+2025-04-02 10:19:49,463 [INFO] 🍪 Cookies erfolgreich gesetzt.
+2025-04-02 10:19:49,463 [INFO] 📦 Starte Produktscraping...
+2025-04-02 10:19:49,486 [INFO] 
+
+================================================================================
+2025-04-02 10:19:49,486 [INFO] 📦 [1/1079] Scrape Produkt: B00GL2HMES
+2025-04-02 10:19:49,486 [INFO] ================================================================================
+
+2025-04-02 10:19:49,491 [DEBUG] 🌐 Öffne Produktseite: B00GL2HMES (https://www.amazon.com/dp/B00GL2HMES?language=en_US)
+2025-04-02 10:19:57,156 [DEBUG] 📦 Extrahiere Produktinformationen...
+2025-04-02 10:19:57,589 [DEBUG] 🧾 Extrahiere technische Details...
+2025-04-02 10:19:57,649 [DEBUG] 🛑 Prüfe Verfügbarkeit (Out of Stock)
+2025-04-02 10:19:57,912 [DEBUG] 🔍 Prüfe, ob Produktseite existiert
+2025-04-02 10:19:58,125 [DEBUG] 📊 Extrahiere BLM (bought last month)...
+2025-04-02 10:19:58,164 [DEBUG] 💰 Extrahiere Preis...
+2025-04-02 10:19:58,191 [DEBUG] 📈 Extrahiere Bestseller-Rangdaten...
+2025-04-02 10:19:58,224 [DEBUG] 🗣️ Extrahiere Review-Anzahl...
+2025-04-02 10:19:58,225 [DEBUG] ⭐️ Extrahiere Bewertung...
+2025-04-02 10:19:58,225 [DEBUG] 🎨 Extrahiere Varianten...
+2025-04-02 10:19:58,406 [DEBUG] 📍 Extrahiere Standort...
+2025-04-02 10:19:58,434 [DEBUG] Vergleiche Feld 'title': OLD=Nutricost Creatine Monohydrate Micronized Powder 500G, 5000mg Per Serv (5g) - 100 Servings, 17.9 Oz (<class 'str'>) vs NEW=Nutricost Creatine Monohydrate Micronized Powder 500G, 5000mg Per Serv (5g) - 100 Servings, 17.9 Oz (<class 'str'>)
+2025-04-02 10:19:58,434 [DEBUG] Vergleiche Feld 'price': OLD=21.5 (<class 'float'>) vs NEW=21.5 (<class 'float'>)
+2025-04-02 10:19:58,434 [DEBUG] Vergleiche Feld 'main_category': OLD=Health & Household (<class 'str'>) vs NEW=Health & Household (<class 'str'>)
+2025-04-02 10:19:58,435 [DEBUG] Vergleiche Feld 'second_category': OLD=Creatine Nutritional Supplements (<class 'str'>) vs NEW=Creatine Nutritional Supplements (<class 'str'>)
+2025-04-02 10:19:58,435 [DEBUG] Vergleiche Feld 'main_category_rank': OLD=23 (<class 'int'>) vs NEW=None (<class 'NoneType'>)
+2025-04-02 10:19:58,435 [DEBUG] Vergleiche Feld 'second_category_rank': OLD=1 (<class 'int'>) vs NEW=None (<class 'NoneType'>)
+2025-04-02 10:19:58,435 [DEBUG] Vergleiche Feld 'img_path': OLD=https://m.media-amazon.com/images/I/61WkUwQ3UEL._AC_SY879_.jpg (<class 'str'>) vs NEW=None (<class 'NoneType'>)
+2025-04-02 10:19:58,435 [DEBUG] Vergleiche Feld 'blm': OLD=100000 (<class 'int'>) vs NEW=100000 (<class 'int'>)
+2025-04-02 10:19:58,436 [DEBUG] Vergleiche Feld 'total': OLD=2150000.0 (<class 'float'>) vs NEW=2150000.0 (<class 'float'>)
+2025-04-02 10:19:58,436 [DEBUG] Vergleiche Feld 'store': OLD=Nutricost (<class 'str'>) vs NEW=Nutricost (<class 'str'>)
+2025-04-02 10:19:58,436 [DEBUG] Vergleiche Feld 'manufacturer': OLD=Nutricost (<class 'str'>) vs NEW=Nutricost (<class 'str'>)
+2025-04-02 10:19:58,455 [INFO] 
+
+================================================================================
+2025-04-02 10:19:58,455 [INFO] 📦 [2/1079] Scrape Produkt: B002DYIZEO
+2025-04-02 10:19:58,455 [INFO] ================================================================================
+
+2025-04-02 10:19:58,456 [DEBUG] 🌐 Öffne Produktseite: B002DYIZEO (https://www.amazon.com/dp/B002DYIZEO?language=en_US)
+2025-04-02 10:20:03,441 [INFO] ##############################################################################
+2025-04-02 10:20:03,442 [INFO] ##############################################################################
+2025-04-02 10:20:03,442 [INFO] 
+📊 Scraping abgeschlossen:
+2025-04-02 10:20:03,442 [INFO] ⏱️ Gesamtzeit: 0m 13s
+2025-04-02 10:20:03,442 [INFO] ⏲️ Durchschnitt pro Produkt: 8.95s
+2025-04-02 10:20:03,442 [INFO] 📦 Erfolgreich: 1
+2025-04-02 10:20:03,442 [INFO] ❌ Fehlgeschlagen: 0
+2025-04-02 10:20:03,443 [INFO] 📝 Log-Datei: C:\Users\sebas\Desktop\amascrape\backend\scraper\logs\scraping-2025-04-02_10-19-32.txt
+2025-04-02 10:20:03,443 [INFO] 🧨 Fehlgeschlagene Produkte: C:\Users\sebas\Desktop\amascrape\backend\scraper\logs\fails-2025-04-02_10-19-32.txt
+2025-04-02 10:20:03,443 [INFO] 🔻 Schließe WebDriver...
