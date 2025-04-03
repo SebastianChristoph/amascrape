@@ -144,11 +144,11 @@ export default function ProductDataGrid({
     {
       field: "chart_price",
       headerName: "Price Trend",
-      width: 100,
-      renderCell: () => {
+      width: 120,
+      renderCell: (params) => {
         return (
           <Box sx={{ mt: 0 }}>
-            <CustomSparkLine />
+            <CustomSparkLine data={params.row.sparkline_price} />
           </Box>
         );
       },
@@ -182,10 +182,10 @@ export default function ProductDataGrid({
       field: "chart_main_rank",
       headerName: "Main Rank Trend",
       width: 100,
-      renderCell: () => {
+      renderCell: (params) => {
         return (
           <Box sx={{ mt: 0 }}>
-            <CustomSparkLine />
+              <CustomSparkLine data={params.row.sparkline_main_category_rank} />
           </Box>
         );
       },
@@ -206,10 +206,10 @@ export default function ProductDataGrid({
       field: "chart_second_rank",
       headerName: "Second Rank Trend",
       width: 100,
-      renderCell: () => {
+      renderCell: (params) => {
         return (
           <Box sx={{ mt: 0 }}>
-            <CustomSparkLine />
+              <CustomSparkLine data={params.row.sparkline_second_category_rank} />
           </Box>
         );
       },
@@ -220,33 +220,29 @@ export default function ProductDataGrid({
       width: 100,
       renderCell: (params) => renderWithNoData(params.value, formatNumber),
     },
+  
     {
       field: "blm",
       headerName: "Bought Last Month",
       type: "number",
       width: 130,
-      renderCell: (params) => renderWithNoData(params.value, formatNumber),
-    },
-    {
-      field: "chart_blm",
-      headerName: "BLM Trend",
-      width: 100,
-      renderCell: () => {
-        return (
-          <Box sx={{ mt: 0 }}>
-            <CustomSparkLine />
-          </Box>
-        );
+      renderCell: (params) => {
+        const value = params.value;
+        if (value === 0) {
+          return "<50";
+        }
+        return renderWithNoData(value, formatNumber);
       },
     },
+    
     {
       field: "chart_total",
       headerName: "Total Trend",
       width: 100,
-      renderCell: () => {
+      renderCell: (params) => {
         return (
           <Box sx={{ mt: 0 }}>
-            <CustomSparkLine />
+             <CustomSparkLine data={params.row.sparkline_total} />
           </Box>
         );
       },
@@ -256,15 +252,18 @@ export default function ProductDataGrid({
       headerName: "Total Revenue",
       type: "number",
       width: 150,
-      renderCell: (params) => renderWithNoData(params.value, formatCurrency),
+      renderCell: (params) => {
+        const value = params.value;
+        if (value === 0) {
+          return "no calc possible";
+        }
+        return renderWithNoData(value, formatCurrency);
+      },
     },
+    
   ];
 
-  const allowedFields = ["details", "image", "asin", "title", "price"];
-  const filteredColumns = isInitialScraped
-    ? columns
-    : columns.filter((col) => allowedFields.includes(col.field));
-
+ 
   return (
     <Box sx={{ width: "100%", mt:4 }}>
       <DataGrid
@@ -282,8 +281,13 @@ export default function ProductDataGrid({
           blm: product.blm,
           total: product.total,
           isMyProduct: product.isMyProduct,
+          sparkline_price: product.sparkline_data_price,
+          sparkline_blm: product.sparkline_data_blm,
+          sparkline_main_category_rank: product.sparkline_data_main_category_rank,
+          sparkline_second_category_rank: product.sparkline_data_second_category_rank,
+          sparkline_total: product.sparkline_data_total,
         }))}
-        columns={filteredColumns}
+        columns={columns}
         rowHeight={55}
         pageSizeOptions={[10, 25, 50, 100]}
         checkboxSelection={false}

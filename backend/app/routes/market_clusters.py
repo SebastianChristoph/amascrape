@@ -125,8 +125,8 @@ async def add_individual_asin_to_market(
                 price=product_data.get("price"),
                 main_category=product_data.get("main_category"),
                 second_category=product_data.get("second_category"),
-                main_category_rank=product_data.get("rank_main_category"),
-                second_category_rank=product_data.get("rank_second_category"),
+                main_category_rank=product_data.get("main_category_rank"),
+                second_category_rank=product_data.get("second_category_rank"),
                 img_path=product_data.get("image_url"),
                 change_date=datetime.now(timezone.utc),
                 changes="Added via individual ASIN input",
@@ -415,6 +415,11 @@ async def get_market_cluster_details(
                 "blm": latest_product_change.blm if latest_product_change else None,
                 "store": latest_product_change.store if latest_product_change else None,
                 "manufacturer": latest_product_change.manufacturer if latest_product_change else None,
+                "sparkline_data_price": get_sparkline_data_for_field(product, "price", db),
+                 "sparkline_data_main_category_rank": get_sparkline_data_for_field(product, "main_category_rank", db),
+                  "sparkline_data_second_category_rank": get_sparkline_data_for_field(product, "second_category_rank", db),
+                   "sparkline_data_blm": get_sparkline_data_for_field(product, "blm", db),
+                    "sparkline_data_total": get_sparkline_data_for_field(product, "total", db),
              
             }
 
@@ -439,3 +444,67 @@ async def get_market_cluster_details(
     })
 
     return response_data
+
+from datetime import datetime, timedelta
+from sqlalchemy.orm import Session
+from app.models import ProductChange
+
+def get_sparkline_data_for_field(product, field: str, db: Session):
+    # Hole alle ProductChanges für das gegebene Produkt und das gewünschte Feld
+    product_changes = db.query(ProductChange).filter(ProductChange.asin == product.asin).order_by(ProductChange.change_date).all()
+
+    if not product_changes:
+        return []
+
+    # Bestimme das heutige Datum
+    today = datetime.now()
+
+    # Initialisiere die Liste für die letzten 30 Tage
+    sparkline_data = [None] * 30  # 30 Tage, initial mit None
+
+    # Bestimme die letzten 30 Tage
+    last_30_days = [today - timedelta(days=i) for i in range(30)]
+
+    # Funktion zum Füllen der Lücken in den Daten
+    def fill_data_for_day(day, value):
+        index = (today - day).days
+        if 0 <= index < 30:
+            sparkline_data[index] = value
+
+    # Variable für den letzten gültigen Wert
+    last_valid_value = None
+
+    # Durchlaufe alle ProductChanges und fülle die Daten
+    for change in product_changes:
+        field_value = getattr(change, field)
+
+        # Überspringe null-Werte
+        if field_value is None:
+            continue
+
+        # Wenn der Wert gültig ist, setze den letzten gültigen Wert
+        last_valid_value = field_value
+
+        # Fülle für alle Tage von dem Change-Datum bis heute
+        days_diff = (today - change.change_date).days
+        if days_diff < 30:
+            # Fülle alle Tage, die zwischen diesem Change und heute liegen
+            for i in range(days_diff + 1):
+                fill_data_for_day(today - timedelta(days=i), field_value)
+
+    # Wenn es immer noch null-Werte gibt, fülle sie mit dem letzten gültigen Wert
+    for i in range(30):
+        if sparkline_data[i] is None and last_valid_value is not None:
+            sparkline_data[i] = last_valid_value
+
+    # Falls das Produkt weniger als 30 Tage existiert, fülle die Anfangstage mit dem ersten validen Wert
+    if len(product_changes) > 0 and sparkline_data[0] is None and last_valid_value is not None:
+        first_valid_change = next((change for change in product_changes if getattr(change, field) is not None), None)
+        if first_valid_change:
+            first_valid_value = getattr(first_valid_change, field)
+            for i in range(30):
+                if sparkline_data[i] is None:
+                    sparkline_data[i] = first_valid_value
+
+    return sparkline_data
+

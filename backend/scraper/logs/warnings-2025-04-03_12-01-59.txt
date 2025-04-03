@@ -1,0 +1,183 @@
+⚠️ Warnungen beim Scraping – 2025-04-03 12:04:14
+============================================================
+🧾 Übersicht:
+  • 21 Produkte betroffen
+  • 21 Warnungen insgesamt
+    - 14 × TECHNICAL_INFO_MISSING
+    - 6 × BLM
+    - 1 × REVIEW_COUNT
+
+============================================================
+
+🧾 ASIN: B0CQN29QCQ
+🔗 URL: https://www.amazon.com/dp/B0CQN29QCQ?language=en_US
+⚠️ Fehler: 	⚠️ Keine technischen Details gefunden.
+📍 Location: Los Angeles 90031
+🔖 Typ: technical_info_missing
+------------------------------------------------------------
+
+🧾 ASIN: B0CQ8VN3XZ
+🔗 URL: https://www.amazon.com/dp/B0CQ8VN3XZ?language=en_US
+⚠️ Fehler: 	⚠️ Keine technischen Details gefunden.
+📍 Location: Los Angeles 90031
+🔖 Typ: technical_info_missing
+------------------------------------------------------------
+
+🧾 ASIN: B0D9C6V5ZF
+🔗 URL: https://www.amazon.com/dp/B0D9C6V5ZF?language=en_US
+⚠️ Fehler: 	⚠️ Keine technischen Details gefunden.
+📍 Location: Los Angeles 90031
+🔖 Typ: technical_info_missing
+------------------------------------------------------------
+
+🧾 ASIN: B0CNH7LBTR
+🔗 URL: https://www.amazon.com/dp/B0CNH7LBTR?language=en_US
+⚠️ Fehler: 	⚠️ Keine technischen Details gefunden.
+📍 Location: Los Angeles 90031
+🔖 Typ: technical_info_missing
+------------------------------------------------------------
+
+🧾 ASIN: B0DKJCHGQ7
+🔗 URL: https://www.amazon.com/dp/B0DKJCHGQ7?language=en_US
+⚠️ Fehler: 	⚠️ Keine technischen Details gefunden.
+📍 Location: Los Angeles 90031
+🔖 Typ: technical_info_missing
+------------------------------------------------------------
+
+🧾 ASIN: B0DKJCHGQ7
+🔗 URL: https://www.amazon.com/dp/B0DKJCHGQ7?language=en_US
+⚠️ Fehler: 	⚠️ Fehler bei Reviews: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@id="acrCustomerReviewLink"]"}
+  (Session info: chrome=135.0.7049.41); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+	GetHandleVerifier [0x00E25413+60691]
+	GetHandleVerifier [0x00E25454+60756]
+	(No symbol) [0x00C50693]
+	(No symbol) [0x00C98660]
+	(No symbol) [0x00C989FB]
+	(No symbol) [0x00CE0EE2]
+	(No symbol) [0x00CBD0A4]
+	(No symbol) [0x00CDE6FB]
+	(No symbol) [0x00CBCE56]
+	(No symbol) [0x00C8C5F3]
+	(No symbol) [0x00C8D444]
+	GetHandleVerifier [0x0106BBC3+2446531]
+	GetHandleVerifier [0x01067198+2427544]
+	GetHandleVerifier [0x01082D5E+2541150]
+	GetHandleVerifier [0x00E3C3C5+154821]
+	GetHandleVerifier [0x00E42BED+181485]
+	GetHandleVerifier [0x00E2CC48+91464]
+	GetHandleVerifier [0x00E2CDF0+91888]
+	GetHandleVerifier [0x00E17980+4736]
+	BaseThreadInitThunk [0x75655D49+25]
+	RtlInitializeExceptionChain [0x7796CF0B+107]
+	RtlGetAppContainerNamedObjectPath [0x7796CE91+561]
+
+📍 Location: Los Angeles 90031
+🔖 Typ: review_count
+------------------------------------------------------------
+
+🧾 ASIN: B094XMNRQP
+🔗 URL: https://www.amazon.com/dp/B094XMNRQP?language=en_US
+⚠️ Fehler: 	⚠️ Keine technischen Details gefunden.
+📍 Location: Los Angeles 90031
+🔖 Typ: technical_info_missing
+------------------------------------------------------------
+
+🧾 ASIN: B09JMTR82C
+🔗 URL: https://www.amazon.com/dp/B09JMTR82C?language=en_US
+⚠️ Fehler: 	⚠️ Keine technischen Details gefunden.
+📍 Location: Los Angeles 90031
+🔖 Typ: technical_info_missing
+------------------------------------------------------------
+
+🧾 ASIN: B09JMTR82C
+🔗 URL: https://www.amazon.com/dp/B09JMTR82C?language=en_US
+⚠️ Fehler: Fehler bei BLM: invalid literal for int() with base 10: ''
+📍 Location: Los Angeles 90031
+🔖 Typ: blm
+------------------------------------------------------------
+
+🧾 ASIN: B00WX1UBH6
+🔗 URL: https://www.amazon.com/dp/B00WX1UBH6?language=en_US
+⚠️ Fehler: 	⚠️ Keine technischen Details gefunden.
+📍 Location: Los Angeles 90031
+🔖 Typ: technical_info_missing
+------------------------------------------------------------
+
+🧾 ASIN: B0DFKV1GS2
+🔗 URL: https://www.amazon.com/dp/B0DFKV1GS2?language=en_US
+⚠️ Fehler: 	⚠️ Keine technischen Details gefunden.
+📍 Location: Los Angeles 90031
+🔖 Typ: technical_info_missing
+------------------------------------------------------------
+
+🧾 ASIN: B09YTSBPVC
+🔗 URL: https://www.amazon.com/dp/B09YTSBPVC?language=en_US
+⚠️ Fehler: 	⚠️ Keine technischen Details gefunden.
+📍 Location: Los Angeles 90031
+🔖 Typ: technical_info_missing
+------------------------------------------------------------
+
+🧾 ASIN: B00VWSBCN8
+🔗 URL: https://www.amazon.com/dp/B00VWSBCN8?language=en_US
+⚠️ Fehler: 	⚠️ Keine technischen Details gefunden.
+📍 Location: Los Angeles 90031
+🔖 Typ: technical_info_missing
+------------------------------------------------------------
+
+🧾 ASIN: B0CS64JWTT
+🔗 URL: https://www.amazon.com/dp/B0CS64JWTT?language=en_US
+⚠️ Fehler: 	⚠️ Keine technischen Details gefunden.
+📍 Location: Los Angeles 90031
+🔖 Typ: technical_info_missing
+------------------------------------------------------------
+
+🧾 ASIN: B0DP6QN28F
+🔗 URL: https://www.amazon.com/dp/B0DP6QN28F?language=en_US
+⚠️ Fehler: 	⚠️ Keine technischen Details gefunden.
+📍 Location: Los Angeles 90031
+🔖 Typ: technical_info_missing
+------------------------------------------------------------
+
+🧾 ASIN: B075RPD9ZV
+🔗 URL: https://www.amazon.com/dp/B075RPD9ZV?language=en_US
+⚠️ Fehler: Fehler bei BLM: invalid literal for int() with base 10: ''
+📍 Location: Los Angeles 90031
+🔖 Typ: blm
+------------------------------------------------------------
+
+🧾 ASIN: B096T1B3CM
+🔗 URL: https://www.amazon.com/dp/B096T1B3CM?language=en_US
+⚠️ Fehler: Fehler bei BLM: invalid literal for int() with base 10: ''
+📍 Location: Los Angeles 90031
+🔖 Typ: blm
+------------------------------------------------------------
+
+🧾 ASIN: B0BYRXNQJ5
+🔗 URL: https://www.amazon.com/dp/B0BYRXNQJ5?language=en_US
+⚠️ Fehler: Fehler bei BLM: invalid literal for int() with base 10: ''
+📍 Location: Los Angeles 90031
+🔖 Typ: blm
+------------------------------------------------------------
+
+🧾 ASIN: B07TJQBB5W
+🔗 URL: https://www.amazon.com/dp/B07TJQBB5W?language=en_US
+⚠️ Fehler: Fehler bei BLM: invalid literal for int() with base 10: ''
+📍 Location: Los Angeles 90031
+🔖 Typ: blm
+------------------------------------------------------------
+
+🧾 ASIN: B0C885J35P
+🔗 URL: https://www.amazon.com/dp/B0C885J35P?language=en_US
+⚠️ Fehler: Fehler bei BLM: invalid literal for int() with base 10: ''
+📍 Location: Los Angeles 90031
+🔖 Typ: blm
+------------------------------------------------------------
+
+🧾 ASIN: B07D3NGF7C
+🔗 URL: https://www.amazon.com/dp/B07D3NGF7C?language=en_US
+⚠️ Fehler: 	⚠️ Keine technischen Details gefunden.
+📍 Location: Los Angeles 90031
+🔖 Typ: technical_info_missing
+------------------------------------------------------------
+
