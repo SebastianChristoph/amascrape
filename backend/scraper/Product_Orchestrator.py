@@ -174,15 +174,14 @@ class Product_Orchestrator:
             .order_by(ProductChange.change_date.desc())
             .first()
         )
-
     def detect_product_changes(self, old_data, new_data):
         changes = []
         changed_fields = {}
 
         fields = [
             "title", "price", "main_category", "second_category",
-            "main_category_rank", "second_category_rank", "img_path",
-            "blm", "total", "store", "manufacturer"
+            "main_category_rank", "second_category_rank", "image_url",
+            "blm", "total", "store", "manufacturer", "rating", "review_count"
         ]
 
         for field in fields:
@@ -190,15 +189,21 @@ class Product_Orchestrator:
             new = new_data.get(field, None)
 
             # Debug-Log zum Vergleich der Werte und Typen
-            logging.debug(f"Vergleiche Feld '{field}': OLD={old} ({type(old)}) vs NEW={new} ({type(new)})")
+            #logging.debug(f"Vergleiche Feld '{field}': OLD={old} ({type(old)}) vs NEW={new} ({type(new)})")
 
-            # Typensicher vergleichen – optional beide casten für stringbasierte Gleichheit
-            if new is not None and old != new:
+            if new is None:
+                # Kein Change, wenn neuer Wert None ist – egal, was alt war
+                continue
+            elif old is None:
+                # Alter Wert war None, neuer ist gesetzt → Change
+                changes.append(field)
+                changed_fields[field] = new
+            elif old != new:
+                # Beide gesetzt und unterschiedlich → Change
                 changes.append(field)
                 changed_fields[field] = new
 
         return changes, changed_fields
-
 
     def should_skip_product(self, product):
         if product.last_time_scraped and product.last_time_scraped.date() == date.today():
@@ -364,5 +369,5 @@ class Product_Orchestrator:
 
 
 if __name__ == "__main__":
-    orchestrator = Product_Orchestrator(just_scrape_3_products=False, show_details=False)
+    orchestrator = Product_Orchestrator(just_scrape_3_products=False, show_details=True)
     orchestrator.update_products()

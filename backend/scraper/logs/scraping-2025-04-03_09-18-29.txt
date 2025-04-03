@@ -1,0 +1,3 @@
+2025-04-03 09:18:29,707 [INFO] 🚀 Product Orchestrator gestartet.
+2025-04-03 09:18:29,707 [INFO] ====== WebDriver manager ======
+2025-04-03 09:18:31,602 [INFO] Get LATEST chromedriver version for google-chrome

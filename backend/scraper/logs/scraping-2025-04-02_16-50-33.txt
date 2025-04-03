@@ -1,0 +1,764 @@
+2025-04-02 16:50:33,751 [INFO] 🚀 Product Orchestrator gestartet.
+2025-04-02 16:50:33,752 [INFO] ====== WebDriver manager ======
+2025-04-02 16:50:34,830 [INFO] Get LATEST chromedriver version for google-chrome
+2025-04-02 16:50:35,386 [INFO] Get LATEST chromedriver version for google-chrome
+2025-04-02 16:50:35,712 [INFO] Driver [C:\Users\sebas\.wdm\drivers\chromedriver\win64\135.0.7049.42\chromedriver-win32/chromedriver.exe] found in cache
+2025-04-02 16:50:35,713 [DEBUG] Skipping Selenium Manager; path to chrome driver specified in Service class: C:\Users\sebas\.wdm\drivers\chromedriver\win64\135.0.7049.42\chromedriver-win32/chromedriver.exe
+2025-04-02 16:50:35,822 [DEBUG] Started executable: `C:\Users\sebas\.wdm\drivers\chromedriver\win64\135.0.7049.42\chromedriver-win32/chromedriver.exe` in a child process with pid: 29332 using 0 to output -3
+2025-04-02 16:50:37,050 [INFO] 🔧 Verwende ChromeDriver: C:\Users\sebas\.wdm\drivers\chromedriver\win64\135.0.7049.42\chromedriver-win32/chromedriver.exe
+2025-04-02 16:50:41,648 [ERROR] ❌ Fehler beim Verbinden: Message: unknown error: net::ERR_CONNECTION_CLOSED
+  (Session info: chrome=135.0.7049.41)
+Stacktrace:
+	GetHandleVerifier [0x00CE5413+60691]
+	GetHandleVerifier [0x00CE5454+60756]
+	(No symbol) [0x00B10693]
+	(No symbol) [0x00B0DAF0]
+	(No symbol) [0x00B01458]
+	(No symbol) [0x00B02D40]
+	(No symbol) [0x00B016E8]
+	(No symbol) [0x00B01243]
+	(No symbol) [0x00B00F51]
+	(No symbol) [0x00AFEF30]
+	(No symbol) [0x00AFF8CB]
+	(No symbol) [0x00B1401E]
+	(No symbol) [0x00B9F2F7]
+	(No symbol) [0x00B7D05C]
+	(No symbol) [0x00B9E6FB]
+	(No symbol) [0x00B7CE56]
+	(No symbol) [0x00B4C5F3]
+	(No symbol) [0x00B4D444]
+	GetHandleVerifier [0x00F2BBC3+2446531]
+	GetHandleVerifier [0x00F27198+2427544]
+	GetHandleVerifier [0x00F42D5E+2541150]
+	GetHandleVerifier [0x00CFC3C5+154821]
+	GetHandleVerifier [0x00D02BED+181485]
+	GetHandleVerifier [0x00CECC48+91464]
+	GetHandleVerifier [0x00CECDF0+91888]
+	GetHandleVerifier [0x00CD7980+4736]
+	BaseThreadInitThunk [0x75EB5D49+25]
+	RtlInitializeExceptionChain [0x7723CF0B+107]
+	RtlGetAppContainerNamedObjectPath [0x7723CE91+561]
+
+2025-04-02 16:50:48,425 [INFO] 🍪 Cookies erfolgreich gesetzt.
+2025-04-02 16:50:48,426 [INFO] 📦 Starte Produktscraping...
+2025-04-02 16:50:48,462 [INFO] 
+
+================================================================================
+2025-04-02 16:50:48,462 [INFO] 📦 [1/19] Scrape Produkt: B0DKLD6H2G
+2025-04-02 16:50:48,463 [INFO] ================================================================================
+
+2025-04-02 16:50:48,486 [DEBUG] 🌐 Öffne Produktseite: B0DKLD6H2G (https://www.amazon.com/dp/B0DKLD6H2G?language=en_US)
+2025-04-02 16:50:55,241 [DEBUG] 📦 Extrahiere Produktinformationen...
+2025-04-02 16:50:55,713 [DEBUG] PRODUCT INFORMATION BOX
+2025-04-02 16:50:55,713 [DEBUG] {'Package Dimensions': '5.35 x 2.83 x 2.68 inches; 4.75 ounces', 'Date First Available': 'October 22, 2024', 'Manufacturer': 'Crazy Muscle', 'ASIN': 'B0DKLD6H2G', 'Country of Origin': 'USA', 'Best Sellers Rank': '#27,912 in Health & Household (See Top 100 in Health & Household)\n#148 in Creatine Nutritional Supplements'}
+2025-04-02 16:50:55,713 [DEBUG] 🧾 Extrahiere technische Details...
+2025-04-02 16:50:55,727 [DEBUG] TECHNICAL DETAIL BOX
+2025-04-02 16:50:55,727 [DEBUG] {}
+2025-04-02 16:50:55,727 [DEBUG] 🛑 Prüfe Verfügbarkeit (Out of Stock)
+2025-04-02 16:50:56,004 [DEBUG] 🔍 Prüfe, ob Produktseite existiert
+2025-04-02 16:50:56,249 [DEBUG] 📊 Extrahiere BLM (bought last month)...
+2025-04-02 16:50:56,279 [DEBUG] 💰 Extrahiere Preis...
+2025-04-02 16:50:56,356 [DEBUG] 📈 Extrahiere Bestseller-Rangdaten...
+2025-04-02 16:50:56,426 [DEBUG] 🗣️ Extrahiere Review-Anzahl...
+2025-04-02 16:50:56,458 [DEBUG] 	⚠️ Fehler bei Reviews: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@id="acrCustomerReviewLink"]"}
+  (Session info: chrome=135.0.7049.41); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+	GetHandleVerifier [0x00CE5413+60691]
+	GetHandleVerifier [0x00CE5454+60756]
+	(No symbol) [0x00B10693]
+	(No symbol) [0x00B58660]
+	(No symbol) [0x00B589FB]
+	(No symbol) [0x00BA0EE2]
+	(No symbol) [0x00B7D0A4]
+	(No symbol) [0x00B9E6FB]
+	(No symbol) [0x00B7CE56]
+	(No symbol) [0x00B4C5F3]
+	(No symbol) [0x00B4D444]
+	GetHandleVerifier [0x00F2BBC3+2446531]
+	GetHandleVerifier [0x00F27198+2427544]
+	GetHandleVerifier [0x00F42D5E+2541150]
+	GetHandleVerifier [0x00CFC3C5+154821]
+	GetHandleVerifier [0x00D02BED+181485]
+	GetHandleVerifier [0x00CECC48+91464]
+	GetHandleVerifier [0x00CECDF0+91888]
+	GetHandleVerifier [0x00CD7980+4736]
+	BaseThreadInitThunk [0x75EB5D49+25]
+	RtlInitializeExceptionChain [0x7723CF0B+107]
+	RtlGetAppContainerNamedObjectPath [0x7723CE91+561]
+
+2025-04-02 16:50:56,458 [DEBUG] 📍 Extrahiere Standort...
+2025-04-02 16:50:56,512 [DEBUG] ⭐️ Extrahiere Bewertung...
+2025-04-02 16:50:56,543 [DEBUG] 🎨 Extrahiere Varianten...
+2025-04-02 16:50:56,572 [DEBUG] 🟡 Keine Varianten gefunden.
+2025-04-02 16:50:56,627 [DEBUG] 📍 Extrahiere Standort...
+2025-04-02 16:50:56,644 [DEBUG] Vergleiche Feld 'title': OLD=None (<class 'NoneType'>) vs NEW=Creatine Capsules, 5g Premium 3X ThreeAtine Pre Workout Bulk Muscle Mass Gainer, High Absorption Easy to Take Creatine Monohydrate Pills Alternative Optimum Performance for Men Women, 180 Capsules (<class 'str'>)
+2025-04-02 16:50:56,644 [DEBUG] Vergleiche Feld 'price': OLD=None (<class 'NoneType'>) vs NEW=24.98 (<class 'float'>)
+2025-04-02 16:50:56,644 [DEBUG] Vergleiche Feld 'main_category': OLD=None (<class 'NoneType'>) vs NEW=Health & Household (<class 'str'>)
+2025-04-02 16:50:56,644 [DEBUG] Vergleiche Feld 'second_category': OLD=None (<class 'NoneType'>) vs NEW=Creatine Nutritional Supplements (<class 'str'>)
+2025-04-02 16:50:56,644 [DEBUG] Vergleiche Feld 'main_category_rank': OLD=None (<class 'NoneType'>) vs NEW=27912 (<class 'int'>)
+2025-04-02 16:50:56,644 [DEBUG] Vergleiche Feld 'second_category_rank': OLD=None (<class 'NoneType'>) vs NEW=148 (<class 'int'>)
+2025-04-02 16:50:56,645 [DEBUG] Vergleiche Feld 'img_path': OLD=None (<class 'NoneType'>) vs NEW=None (<class 'NoneType'>)
+2025-04-02 16:50:56,645 [DEBUG] Vergleiche Feld 'blm': OLD=None (<class 'NoneType'>) vs NEW=100 (<class 'int'>)
+2025-04-02 16:50:56,645 [DEBUG] Vergleiche Feld 'total': OLD=None (<class 'NoneType'>) vs NEW=2498.0 (<class 'float'>)
+2025-04-02 16:50:56,645 [DEBUG] Vergleiche Feld 'store': OLD=None (<class 'NoneType'>) vs NEW=Crazy Muscle (<class 'str'>)
+2025-04-02 16:50:56,645 [DEBUG] Vergleiche Feld 'manufacturer': OLD=None (<class 'NoneType'>) vs NEW=Crazy Muscle (<class 'str'>)
+2025-04-02 16:50:56,645 [INFO]  ⚡ Änderungen: title, price, main_category, second_category, main_category_rank, second_category_rank, blm, total, store, manufacturer
+2025-04-02 16:50:56,680 [INFO] 
+
+================================================================================
+2025-04-02 16:50:56,680 [INFO] 📦 [2/19] Scrape Produkt: B0DSVWQLJF
+2025-04-02 16:50:56,680 [INFO] ================================================================================
+
+2025-04-02 16:50:56,683 [DEBUG] 🌐 Öffne Produktseite: B0DSVWQLJF (https://www.amazon.com/dp/B0DSVWQLJF?language=en_US)
+2025-04-02 16:51:02,327 [DEBUG] 📦 Extrahiere Produktinformationen...
+2025-04-02 16:51:02,540 [DEBUG] PRODUCT INFORMATION BOX
+2025-04-02 16:51:02,540 [DEBUG] {'Product Dimensions': '14.57 x 10.63 x 1.57 inches; 1.31 Pounds', 'Date First Available': 'January 13, 2025', 'Manufacturer': 'YESWEL', 'ASIN': 'B0DSVWQLJF', 'Country of Origin': 'China', 'Best Sellers Rank': '#45,720 in Health & Household (See Top 100 in Health & Household)\n#204 in Incontinence Protective Briefs & Underwear', 'Customer Reviews': '4.6\n21 ratings'}
+2025-04-02 16:51:02,541 [DEBUG] 🧾 Extrahiere technische Details...
+2025-04-02 16:51:02,550 [DEBUG] TECHNICAL DETAIL BOX
+2025-04-02 16:51:02,551 [DEBUG] {}
+2025-04-02 16:51:02,551 [DEBUG] 🛑 Prüfe Verfügbarkeit (Out of Stock)
+2025-04-02 16:51:02,788 [DEBUG] 🔍 Prüfe, ob Produktseite existiert
+2025-04-02 16:51:03,016 [DEBUG] 📊 Extrahiere BLM (bought last month)...
+2025-04-02 16:51:03,045 [DEBUG] 	⚠️ Fehler bei BLM: invalid literal for int() with base 10: ''
+2025-04-02 16:51:03,045 [DEBUG] 📍 Extrahiere Standort...
+2025-04-02 16:51:03,075 [DEBUG] 💰 Extrahiere Preis...
+2025-04-02 16:51:03,115 [DEBUG] 📈 Extrahiere Bestseller-Rangdaten...
+2025-04-02 16:51:03,141 [DEBUG] 🗣️ Extrahiere Review-Anzahl...
+2025-04-02 16:51:03,142 [DEBUG] ⭐️ Extrahiere Bewertung...
+2025-04-02 16:51:03,142 [DEBUG] 🎨 Extrahiere Varianten...
+2025-04-02 16:51:03,275 [DEBUG] 📍 Extrahiere Standort...
+2025-04-02 16:51:03,309 [DEBUG] Vergleiche Feld 'title': OLD=None (<class 'NoneType'>) vs NEW=Incontinence Underwear for Men, 150ML Absorbency Washable Reusable Cotton Heavy Flow Bladder Leak Proof Boxer Briefs (Multicolor01, Large) (<class 'str'>)
+2025-04-02 16:51:03,309 [DEBUG] Vergleiche Feld 'price': OLD=None (<class 'NoneType'>) vs NEW=59.99 (<class 'float'>)
+2025-04-02 16:51:03,309 [DEBUG] Vergleiche Feld 'main_category': OLD=None (<class 'NoneType'>) vs NEW=Health & Household (<class 'str'>)
+2025-04-02 16:51:03,310 [DEBUG] Vergleiche Feld 'second_category': OLD=None (<class 'NoneType'>) vs NEW=Incontinence Protective Briefs & Underwear (<class 'str'>)
+2025-04-02 16:51:03,310 [DEBUG] Vergleiche Feld 'main_category_rank': OLD=None (<class 'NoneType'>) vs NEW=45720 (<class 'int'>)
+2025-04-02 16:51:03,310 [DEBUG] Vergleiche Feld 'second_category_rank': OLD=None (<class 'NoneType'>) vs NEW=204 (<class 'int'>)
+2025-04-02 16:51:03,310 [DEBUG] Vergleiche Feld 'img_path': OLD=None (<class 'NoneType'>) vs NEW=None (<class 'NoneType'>)
+2025-04-02 16:51:03,310 [DEBUG] Vergleiche Feld 'blm': OLD=None (<class 'NoneType'>) vs NEW=None (<class 'NoneType'>)
+2025-04-02 16:51:03,310 [DEBUG] Vergleiche Feld 'total': OLD=None (<class 'NoneType'>) vs NEW=None (<class 'NoneType'>)
+2025-04-02 16:51:03,311 [DEBUG] Vergleiche Feld 'store': OLD=None (<class 'NoneType'>) vs NEW=YESWEL (<class 'str'>)
+2025-04-02 16:51:03,311 [DEBUG] Vergleiche Feld 'manufacturer': OLD=None (<class 'NoneType'>) vs NEW=YESWEL (<class 'str'>)
+2025-04-02 16:51:03,311 [INFO]  ⚡ Änderungen: title, price, main_category, second_category, main_category_rank, second_category_rank, store, manufacturer
+2025-04-02 16:51:03,327 [INFO] 
+
+================================================================================
+2025-04-02 16:51:03,327 [INFO] 📦 [3/19] Scrape Produkt: B0CKTZ6R6Q
+2025-04-02 16:51:03,327 [INFO] ================================================================================
+
+2025-04-02 16:51:03,328 [DEBUG] 🌐 Öffne Produktseite: B0CKTZ6R6Q (https://www.amazon.com/dp/B0CKTZ6R6Q?language=en_US)
+2025-04-02 16:51:08,934 [DEBUG] 📦 Extrahiere Produktinformationen...
+2025-04-02 16:51:09,240 [DEBUG] PRODUCT INFORMATION BOX
+2025-04-02 16:51:09,241 [DEBUG] {'Package Dimensions': '5.75 x 3.58 x 2.28 inches; 3.84 ounces', 'Department': 'womens', 'Date First Available': 'December 24, 2024', 'Manufacturer': 'Kimberly-Clark Corp.', 'ASIN': 'B0CKTZ6R6Q', 'Country of Origin': 'Sri Lanka', 'Best Sellers Rank': '#47,580 in Health & Household (See Top 100 in Health & Household)\n#220 in Incontinence Protective Briefs & Underwear', 'Customer Reviews': '4.4\n77 ratings'}
+2025-04-02 16:51:09,241 [DEBUG] 🧾 Extrahiere technische Details...
+2025-04-02 16:51:09,252 [DEBUG] TECHNICAL DETAIL BOX
+2025-04-02 16:51:09,252 [DEBUG] {}
+2025-04-02 16:51:09,252 [DEBUG] 🛑 Prüfe Verfügbarkeit (Out of Stock)
+2025-04-02 16:51:09,513 [DEBUG] 🔍 Prüfe, ob Produktseite existiert
+2025-04-02 16:51:09,811 [DEBUG] 📊 Extrahiere BLM (bought last month)...
+2025-04-02 16:51:09,899 [DEBUG] 💰 Extrahiere Preis...
+2025-04-02 16:51:10,017 [DEBUG] 📈 Extrahiere Bestseller-Rangdaten...
+2025-04-02 16:51:10,048 [DEBUG] 🗣️ Extrahiere Review-Anzahl...
+2025-04-02 16:51:10,052 [DEBUG] ⭐️ Extrahiere Bewertung...
+2025-04-02 16:51:10,055 [DEBUG] 🎨 Extrahiere Varianten...
+2025-04-02 16:51:10,344 [DEBUG] 📍 Extrahiere Standort...
+2025-04-02 16:51:10,374 [DEBUG] Vergleiche Feld 'title': OLD=None (<class 'NoneType'>) vs NEW=Poise Washable Adult Incontinence Underwear for Women, Reusable, Light Absorbency, XL, High Waist, Pink, 1 Count (<class 'str'>)
+2025-04-02 16:51:10,375 [DEBUG] Vergleiche Feld 'price': OLD=None (<class 'NoneType'>) vs NEW=23.99 (<class 'float'>)
+2025-04-02 16:51:10,375 [DEBUG] Vergleiche Feld 'main_category': OLD=None (<class 'NoneType'>) vs NEW=Health & Household (<class 'str'>)
+2025-04-02 16:51:10,375 [DEBUG] Vergleiche Feld 'second_category': OLD=None (<class 'NoneType'>) vs NEW=Incontinence Protective Briefs & Underwear (<class 'str'>)
+2025-04-02 16:51:10,375 [DEBUG] Vergleiche Feld 'main_category_rank': OLD=None (<class 'NoneType'>) vs NEW=47580 (<class 'int'>)
+2025-04-02 16:51:10,375 [DEBUG] Vergleiche Feld 'second_category_rank': OLD=None (<class 'NoneType'>) vs NEW=220 (<class 'int'>)
+2025-04-02 16:51:10,376 [DEBUG] Vergleiche Feld 'img_path': OLD=None (<class 'NoneType'>) vs NEW=None (<class 'NoneType'>)
+2025-04-02 16:51:10,376 [DEBUG] Vergleiche Feld 'blm': OLD=None (<class 'NoneType'>) vs NEW=100 (<class 'int'>)
+2025-04-02 16:51:10,378 [DEBUG] Vergleiche Feld 'total': OLD=None (<class 'NoneType'>) vs NEW=2399.0 (<class 'float'>)
+2025-04-02 16:51:10,378 [DEBUG] Vergleiche Feld 'store': OLD=None (<class 'NoneType'>) vs NEW=Poise (<class 'str'>)
+2025-04-02 16:51:10,378 [DEBUG] Vergleiche Feld 'manufacturer': OLD=None (<class 'NoneType'>) vs NEW=Kimberly-Clark Corp. (<class 'str'>)
+2025-04-02 16:51:10,378 [INFO]  ⚡ Änderungen: title, price, main_category, second_category, main_category_rank, second_category_rank, blm, total, store, manufacturer
+2025-04-02 16:51:10,498 [INFO] 
+
+================================================================================
+2025-04-02 16:51:10,513 [INFO] 📦 [4/19] Scrape Produkt: B0BDJ2FH88
+2025-04-02 16:51:10,513 [INFO] ================================================================================
+
+2025-04-02 16:51:10,519 [DEBUG] 🌐 Öffne Produktseite: B0BDJ2FH88 (https://www.amazon.com/dp/B0BDJ2FH88?language=en_US)
+2025-04-02 16:51:15,046 [DEBUG] 📦 Extrahiere Produktinformationen...
+2025-04-02 16:51:15,469 [DEBUG] PRODUCT INFORMATION BOX
+2025-04-02 16:51:15,469 [DEBUG] {'Is Discontinued By Manufacturer': 'No', 'Product Dimensions': '3.9 x 3.1 x 1.3 inches; 3.74 ounces', 'Department': 'Men/Big Kids', 'Date First Available': 'October 25, 2022', 'Manufacturer': 'AIRCUTE', 'ASIN': 'B0BR74V5QP', 'Best Sellers Rank': '#56,314 in Health & Household (See Top 100 in Health & Household)\n#254 in Incontinence Protective Briefs & Underwear', 'Customer Reviews': '4.3\n148 ratings'}
+2025-04-02 16:51:15,469 [DEBUG] 🧾 Extrahiere technische Details...
+2025-04-02 16:51:15,482 [DEBUG] TECHNICAL DETAIL BOX
+2025-04-02 16:51:15,482 [DEBUG] {}
+2025-04-02 16:51:15,482 [DEBUG] 🛑 Prüfe Verfügbarkeit (Out of Stock)
+2025-04-02 16:51:15,661 [DEBUG] 🔍 Prüfe, ob Produktseite existiert
+2025-04-02 16:51:15,835 [DEBUG] 📊 Extrahiere BLM (bought last month)...
+2025-04-02 16:51:15,870 [DEBUG] 	⚠️ Fehler bei BLM: invalid literal for int() with base 10: ''
+2025-04-02 16:51:15,870 [DEBUG] 📍 Extrahiere Standort...
+2025-04-02 16:51:15,895 [DEBUG] 💰 Extrahiere Preis...
+2025-04-02 16:51:15,965 [DEBUG] 📈 Extrahiere Bestseller-Rangdaten...
+2025-04-02 16:51:15,984 [DEBUG] 🗣️ Extrahiere Review-Anzahl...
+2025-04-02 16:51:15,985 [DEBUG] ⭐️ Extrahiere Bewertung...
+2025-04-02 16:51:15,985 [DEBUG] 🎨 Extrahiere Varianten...
+2025-04-02 16:51:16,152 [DEBUG] 📍 Extrahiere Standort...
+2025-04-02 16:51:16,174 [DEBUG] Vergleiche Feld 'title': OLD=None (<class 'NoneType'>) vs NEW=AIRCUTE Washable Absorbent Urinary Incontinence Underwear for Men, Regular Boxer Briefs for Moderate Bladder Leaks 60ML (<class 'str'>)
+2025-04-02 16:51:16,174 [DEBUG] Vergleiche Feld 'price': OLD=None (<class 'NoneType'>) vs NEW=18.99 (<class 'float'>)
+2025-04-02 16:51:16,174 [DEBUG] Vergleiche Feld 'main_category': OLD=None (<class 'NoneType'>) vs NEW=Health & Household (<class 'str'>)
+2025-04-02 16:51:16,175 [DEBUG] Vergleiche Feld 'second_category': OLD=None (<class 'NoneType'>) vs NEW=Incontinence Protective Briefs & Underwear (<class 'str'>)
+2025-04-02 16:51:16,175 [DEBUG] Vergleiche Feld 'main_category_rank': OLD=None (<class 'NoneType'>) vs NEW=56314 (<class 'int'>)
+2025-04-02 16:51:16,175 [DEBUG] Vergleiche Feld 'second_category_rank': OLD=None (<class 'NoneType'>) vs NEW=254 (<class 'int'>)
+2025-04-02 16:51:16,175 [DEBUG] Vergleiche Feld 'img_path': OLD=None (<class 'NoneType'>) vs NEW=None (<class 'NoneType'>)
+2025-04-02 16:51:16,176 [DEBUG] Vergleiche Feld 'blm': OLD=None (<class 'NoneType'>) vs NEW=None (<class 'NoneType'>)
+2025-04-02 16:51:16,177 [DEBUG] Vergleiche Feld 'total': OLD=None (<class 'NoneType'>) vs NEW=None (<class 'NoneType'>)
+2025-04-02 16:51:16,177 [DEBUG] Vergleiche Feld 'store': OLD=None (<class 'NoneType'>) vs NEW=AIRCUTE (<class 'str'>)
+2025-04-02 16:51:16,178 [DEBUG] Vergleiche Feld 'manufacturer': OLD=None (<class 'NoneType'>) vs NEW=AIRCUTE (<class 'str'>)
+2025-04-02 16:51:16,178 [INFO]  ⚡ Änderungen: title, price, main_category, second_category, main_category_rank, second_category_rank, store, manufacturer
+2025-04-02 16:51:16,197 [INFO] 
+
+================================================================================
+2025-04-02 16:51:16,197 [INFO] 📦 [5/19] Scrape Produkt: B0DNP4V8GW
+2025-04-02 16:51:16,197 [INFO] ================================================================================
+
+2025-04-02 16:51:16,199 [DEBUG] 🌐 Öffne Produktseite: B0DNP4V8GW (https://www.amazon.com/dp/B0DNP4V8GW?language=en_US)
+2025-04-02 16:51:19,835 [DEBUG] 📦 Extrahiere Produktinformationen...
+2025-04-02 16:51:20,095 [DEBUG] PRODUCT INFORMATION BOX
+2025-04-02 16:51:20,095 [DEBUG] {'Package Dimensions': '9.8 x 6.57 x 1.85 inches; 6.38 ounces', 'Item model number': 'A-W1638-V', 'Department': 'womens', 'Date First Available': 'November 21, 2024', 'Manufacturer': 'ALLBASE', 'ASIN': 'B0DNP6WQ6H', 'Best Sellers Rank': '#21,941 in Health & Household (See Top 100 in Health & Household)\n#98 in Incontinence Protective Briefs & Underwear', 'Customer Reviews': '4.3\n105 ratings'}
+2025-04-02 16:51:20,095 [DEBUG] 🧾 Extrahiere technische Details...
+2025-04-02 16:51:20,108 [DEBUG] TECHNICAL DETAIL BOX
+2025-04-02 16:51:20,109 [DEBUG] {}
+2025-04-02 16:51:20,109 [DEBUG] 🛑 Prüfe Verfügbarkeit (Out of Stock)
+2025-04-02 16:51:20,270 [DEBUG] 🔍 Prüfe, ob Produktseite existiert
+2025-04-02 16:51:20,411 [DEBUG] 📊 Extrahiere BLM (bought last month)...
+2025-04-02 16:51:20,429 [DEBUG] 	⚠️ Fehler bei BLM: invalid literal for int() with base 10: ''
+2025-04-02 16:51:20,429 [DEBUG] 📍 Extrahiere Standort...
+2025-04-02 16:51:20,454 [DEBUG] 💰 Extrahiere Preis...
+2025-04-02 16:51:20,502 [DEBUG] 📈 Extrahiere Bestseller-Rangdaten...
+2025-04-02 16:51:20,524 [DEBUG] 🗣️ Extrahiere Review-Anzahl...
+2025-04-02 16:51:20,524 [DEBUG] ⭐️ Extrahiere Bewertung...
+2025-04-02 16:51:20,525 [DEBUG] 🎨 Extrahiere Varianten...
+2025-04-02 16:51:20,600 [DEBUG] 📍 Extrahiere Standort...
+2025-04-02 16:51:20,633 [DEBUG] Vergleiche Feld 'title': OLD=None (<class 'NoneType'>) vs NEW=No Side Leaks Leakproof Incontinence Boxer Briefs Heavy Flow (<class 'str'>)
+2025-04-02 16:51:20,633 [DEBUG] Vergleiche Feld 'price': OLD=None (<class 'NoneType'>) vs NEW=27.29 (<class 'float'>)
+2025-04-02 16:51:20,633 [DEBUG] Vergleiche Feld 'main_category': OLD=None (<class 'NoneType'>) vs NEW=Health & Household (<class 'str'>)
+2025-04-02 16:51:20,633 [DEBUG] Vergleiche Feld 'second_category': OLD=None (<class 'NoneType'>) vs NEW=Incontinence Protective Briefs & Underwear (<class 'str'>)
+2025-04-02 16:51:20,633 [DEBUG] Vergleiche Feld 'main_category_rank': OLD=None (<class 'NoneType'>) vs NEW=21941 (<class 'int'>)
+2025-04-02 16:51:20,633 [DEBUG] Vergleiche Feld 'second_category_rank': OLD=None (<class 'NoneType'>) vs NEW=98 (<class 'int'>)
+2025-04-02 16:51:20,633 [DEBUG] Vergleiche Feld 'img_path': OLD=None (<class 'NoneType'>) vs NEW=None (<class 'NoneType'>)
+2025-04-02 16:51:20,634 [DEBUG] Vergleiche Feld 'blm': OLD=None (<class 'NoneType'>) vs NEW=None (<class 'NoneType'>)
+2025-04-02 16:51:20,634 [DEBUG] Vergleiche Feld 'total': OLD=None (<class 'NoneType'>) vs NEW=None (<class 'NoneType'>)
+2025-04-02 16:51:20,634 [DEBUG] Vergleiche Feld 'store': OLD=None (<class 'NoneType'>) vs NEW=ALLBASE (<class 'str'>)
+2025-04-02 16:51:20,634 [DEBUG] Vergleiche Feld 'manufacturer': OLD=None (<class 'NoneType'>) vs NEW=ALLBASE (<class 'str'>)
+2025-04-02 16:51:20,634 [INFO]  ⚡ Änderungen: title, price, main_category, second_category, main_category_rank, second_category_rank, store, manufacturer
+2025-04-02 16:51:20,652 [INFO] 
+
+================================================================================
+2025-04-02 16:51:20,652 [INFO] 📦 [6/19] Scrape Produkt: B0BK9YG5N5
+2025-04-02 16:51:20,653 [INFO] ================================================================================
+
+2025-04-02 16:51:20,654 [DEBUG] 🌐 Öffne Produktseite: B0BK9YG5N5 (https://www.amazon.com/dp/B0BK9YG5N5?language=en_US)
+2025-04-02 16:51:24,460 [DEBUG] 📦 Extrahiere Produktinformationen...
+2025-04-02 16:51:24,842 [DEBUG] PRODUCT INFORMATION BOX
+2025-04-02 16:51:24,842 [DEBUG] {'Package Dimensions': '7.52 x 7.52 x 2.13 inches; 5.93 ounces', 'Department': 'mens', 'Date First Available': 'January 3, 2024', 'Manufacturer': 'BATTEWA', 'ASIN': 'B0CPL6PMH1', 'Best Sellers Rank': '#29,768 in Health & Household (See Top 100 in Health & Household)\n#127 in Incontinence Protective Briefs & Underwear', 'Customer Reviews': '4.2\n506 ratings'}
+2025-04-02 16:51:24,843 [DEBUG] 🧾 Extrahiere technische Details...
+2025-04-02 16:51:24,863 [DEBUG] TECHNICAL DETAIL BOX
+2025-04-02 16:51:24,864 [DEBUG] {}
+2025-04-02 16:51:24,864 [DEBUG] 🛑 Prüfe Verfügbarkeit (Out of Stock)
+2025-04-02 16:51:25,077 [DEBUG] 🔍 Prüfe, ob Produktseite existiert
+2025-04-02 16:51:25,286 [DEBUG] 📊 Extrahiere BLM (bought last month)...
+2025-04-02 16:51:25,313 [DEBUG] 	⚠️ Fehler bei BLM: invalid literal for int() with base 10: ''
+2025-04-02 16:51:25,313 [DEBUG] 📍 Extrahiere Standort...
+2025-04-02 16:51:25,329 [DEBUG] 💰 Extrahiere Preis...
+2025-04-02 16:51:25,373 [DEBUG] 📈 Extrahiere Bestseller-Rangdaten...
+2025-04-02 16:51:25,390 [DEBUG] 🗣️ Extrahiere Review-Anzahl...
+2025-04-02 16:51:25,390 [DEBUG] ⭐️ Extrahiere Bewertung...
+2025-04-02 16:51:25,391 [DEBUG] 🎨 Extrahiere Varianten...
+2025-04-02 16:51:25,491 [DEBUG] 📍 Extrahiere Standort...
+2025-04-02 16:51:25,503 [DEBUG] Vergleiche Feld 'title': OLD=None (<class 'NoneType'>) vs NEW=Battewa Washable Urine Incontinence Boxer Brief Underwear for Men, with Front Absorbent Area for Bladder Leakage,2 Packs (<class 'str'>)
+2025-04-02 16:51:25,504 [DEBUG] Vergleiche Feld 'price': OLD=None (<class 'NoneType'>) vs NEW=32.22 (<class 'float'>)
+2025-04-02 16:51:25,504 [DEBUG] Vergleiche Feld 'main_category': OLD=None (<class 'NoneType'>) vs NEW=Health & Household (<class 'str'>)
+2025-04-02 16:51:25,504 [DEBUG] Vergleiche Feld 'second_category': OLD=None (<class 'NoneType'>) vs NEW=Incontinence Protective Briefs & Underwear (<class 'str'>)
+2025-04-02 16:51:25,504 [DEBUG] Vergleiche Feld 'main_category_rank': OLD=None (<class 'NoneType'>) vs NEW=29768 (<class 'int'>)
+2025-04-02 16:51:25,504 [DEBUG] Vergleiche Feld 'second_category_rank': OLD=None (<class 'NoneType'>) vs NEW=127 (<class 'int'>)
+2025-04-02 16:51:25,504 [DEBUG] Vergleiche Feld 'img_path': OLD=None (<class 'NoneType'>) vs NEW=None (<class 'NoneType'>)
+2025-04-02 16:51:25,504 [DEBUG] Vergleiche Feld 'blm': OLD=None (<class 'NoneType'>) vs NEW=None (<class 'NoneType'>)
+2025-04-02 16:51:25,504 [DEBUG] Vergleiche Feld 'total': OLD=None (<class 'NoneType'>) vs NEW=None (<class 'NoneType'>)
+2025-04-02 16:51:25,504 [DEBUG] Vergleiche Feld 'store': OLD=None (<class 'NoneType'>) vs NEW=Battewa (<class 'str'>)
+2025-04-02 16:51:25,504 [DEBUG] Vergleiche Feld 'manufacturer': OLD=None (<class 'NoneType'>) vs NEW=BATTEWA (<class 'str'>)
+2025-04-02 16:51:25,504 [INFO]  ⚡ Änderungen: title, price, main_category, second_category, main_category_rank, second_category_rank, store, manufacturer
+2025-04-02 16:51:25,525 [INFO] 
+
+================================================================================
+2025-04-02 16:51:25,525 [INFO] 📦 [7/19] Scrape Produkt: B0DSSQV9QR
+2025-04-02 16:51:25,526 [INFO] ================================================================================
+
+2025-04-02 16:51:25,527 [DEBUG] 🌐 Öffne Produktseite: B0DSSQV9QR (https://www.amazon.com/dp/B0DSSQV9QR?language=en_US)
+2025-04-02 16:51:28,469 [DEBUG] 📦 Extrahiere Produktinformationen...
+2025-04-02 16:51:28,675 [DEBUG] PRODUCT INFORMATION BOX
+2025-04-02 16:51:28,675 [DEBUG] {'Package Dimensions': '8.66 x 7.6 x 2.2 inches; 10.23 ounces', 'Department': 'womens', 'Date First Available': 'January 11, 2025', 'Manufacturer': 'Jade Butterfly', 'ASIN': 'B0DSSQV9QR', 'Best Sellers Rank': "#154,104 in Clothing, Shoes & Jewelry (See Top 100 in Clothing, Shoes & Jewelry)\n#501 in Women's Briefs", 'Customer Reviews': '5.0\n3 ratings'}
+2025-04-02 16:51:28,675 [DEBUG] 🧾 Extrahiere technische Details...
+2025-04-02 16:51:28,683 [DEBUG] TECHNICAL DETAIL BOX
+2025-04-02 16:51:28,684 [DEBUG] {}
+2025-04-02 16:51:28,684 [DEBUG] 🛑 Prüfe Verfügbarkeit (Out of Stock)
+2025-04-02 16:51:28,782 [DEBUG] 🔍 Prüfe, ob Produktseite existiert
+2025-04-02 16:51:28,891 [DEBUG] 📊 Extrahiere BLM (bought last month)...
+2025-04-02 16:51:28,917 [DEBUG] 	⚠️ Fehler bei BLM: invalid literal for int() with base 10: ''
+2025-04-02 16:51:28,917 [DEBUG] 📍 Extrahiere Standort...
+2025-04-02 16:51:28,947 [DEBUG] 💰 Extrahiere Preis...
+2025-04-02 16:51:29,009 [DEBUG] 📈 Extrahiere Bestseller-Rangdaten...
+2025-04-02 16:51:29,027 [DEBUG] 🗣️ Extrahiere Review-Anzahl...
+2025-04-02 16:51:29,027 [DEBUG] ⭐️ Extrahiere Bewertung...
+2025-04-02 16:51:29,027 [DEBUG] 🎨 Extrahiere Varianten...
+2025-04-02 16:51:29,100 [DEBUG] 📍 Extrahiere Standort...
+2025-04-02 16:51:29,112 [DEBUG] Vergleiche Feld 'title': OLD=None (<class 'NoneType'>) vs NEW=Washable Incontinence Underwear for Women, Leakproof Ladies Underwear, Heavy Flow Reusable Absorbent Panties (<class 'str'>)
+2025-04-02 16:51:29,113 [DEBUG] Vergleiche Feld 'price': OLD=None (<class 'NoneType'>) vs NEW=35.99 (<class 'float'>)
+2025-04-02 16:51:29,113 [DEBUG] Vergleiche Feld 'main_category': OLD=None (<class 'NoneType'>) vs NEW=Clothing, Shoes & Jewelry (<class 'str'>)
+2025-04-02 16:51:29,113 [DEBUG] Vergleiche Feld 'second_category': OLD=None (<class 'NoneType'>) vs NEW=Women's Briefs (<class 'str'>)
+2025-04-02 16:51:29,113 [DEBUG] Vergleiche Feld 'main_category_rank': OLD=None (<class 'NoneType'>) vs NEW=154104 (<class 'int'>)
+2025-04-02 16:51:29,113 [DEBUG] Vergleiche Feld 'second_category_rank': OLD=None (<class 'NoneType'>) vs NEW=501 (<class 'int'>)
+2025-04-02 16:51:29,114 [DEBUG] Vergleiche Feld 'img_path': OLD=None (<class 'NoneType'>) vs NEW=None (<class 'NoneType'>)
+2025-04-02 16:51:29,114 [DEBUG] Vergleiche Feld 'blm': OLD=None (<class 'NoneType'>) vs NEW=None (<class 'NoneType'>)
+2025-04-02 16:51:29,114 [DEBUG] Vergleiche Feld 'total': OLD=None (<class 'NoneType'>) vs NEW=None (<class 'NoneType'>)
+2025-04-02 16:51:29,114 [DEBUG] Vergleiche Feld 'store': OLD=None (<class 'NoneType'>) vs NEW=Jade Butterfly (<class 'str'>)
+2025-04-02 16:51:29,114 [DEBUG] Vergleiche Feld 'manufacturer': OLD=None (<class 'NoneType'>) vs NEW=Jade Butterfly (<class 'str'>)
+2025-04-02 16:51:29,115 [INFO]  ⚡ Änderungen: title, price, main_category, second_category, main_category_rank, second_category_rank, store, manufacturer
+2025-04-02 16:51:29,148 [INFO] 
+
+================================================================================
+2025-04-02 16:51:29,148 [INFO] 📦 [8/19] Scrape Produkt: B00ACIGP6S
+2025-04-02 16:51:29,148 [INFO] ================================================================================
+
+2025-04-02 16:51:29,151 [DEBUG] 🌐 Öffne Produktseite: B00ACIGP6S (https://www.amazon.com/dp/B00ACIGP6S?language=en_US)
+2025-04-02 16:51:33,053 [DEBUG] 📦 Extrahiere Produktinformationen...
+2025-04-02 16:51:33,369 [DEBUG] PRODUCT INFORMATION BOX
+2025-04-02 16:51:33,369 [DEBUG] {'Is Discontinued By Manufacturer': 'No', 'Product Dimensions': '13 x 8 x 1 inches; 0.01 ounces', 'Item model number': '7764L7', 'Department': 'mens', 'Date First Available': 'March 15, 2012', 'Manufacturer': "Hanes Men's Underwear", 'ASIN': 'B00ACIGP2W', 'Best Sellers Rank': "#983 in Clothing, Shoes & Jewelry (See Top 100 in Clothing, Shoes & Jewelry)\n#3 in Men's Underwear Briefs", 'Customer Reviews': '4.4\n440 ratings'}
+2025-04-02 16:51:33,369 [DEBUG] 🧾 Extrahiere technische Details...
+2025-04-02 16:51:33,384 [DEBUG] TECHNICAL DETAIL BOX
+2025-04-02 16:51:33,384 [DEBUG] {}
+2025-04-02 16:51:33,385 [DEBUG] 🛑 Prüfe Verfügbarkeit (Out of Stock)
+2025-04-02 16:51:33,513 [DEBUG] 🔍 Prüfe, ob Produktseite existiert
+2025-04-02 16:51:33,666 [DEBUG] 📊 Extrahiere BLM (bought last month)...
+2025-04-02 16:51:33,694 [DEBUG] 	⚠️ Fehler bei BLM: invalid literal for int() with base 10: ''
+2025-04-02 16:51:33,695 [DEBUG] 📍 Extrahiere Standort...
+2025-04-02 16:51:33,722 [DEBUG] 💰 Extrahiere Preis...
+2025-04-02 16:51:33,774 [DEBUG] 📈 Extrahiere Bestseller-Rangdaten...
+2025-04-02 16:51:33,794 [DEBUG] 🗣️ Extrahiere Review-Anzahl...
+2025-04-02 16:51:33,795 [DEBUG] ⭐️ Extrahiere Bewertung...
+2025-04-02 16:51:33,795 [DEBUG] 🎨 Extrahiere Varianten...
+2025-04-02 16:51:33,877 [DEBUG] 📍 Extrahiere Standort...
+2025-04-02 16:51:33,909 [DEBUG] Vergleiche Feld 'title': OLD=None (<class 'NoneType'>) vs NEW=Hanes Men's Tagless Briefs, Soft Moisture Wicking Underwear, Tagless, 7-pack (<class 'str'>)
+2025-04-02 16:51:33,910 [DEBUG] Vergleiche Feld 'price': OLD=None (<class 'NoneType'>) vs NEW=24.0 (<class 'float'>)
+2025-04-02 16:51:33,910 [DEBUG] Vergleiche Feld 'main_category': OLD=None (<class 'NoneType'>) vs NEW=Clothing, Shoes & Jewelry (<class 'str'>)
+2025-04-02 16:51:33,910 [DEBUG] Vergleiche Feld 'second_category': OLD=None (<class 'NoneType'>) vs NEW=Men's Underwear Briefs (<class 'str'>)
+2025-04-02 16:51:33,910 [DEBUG] Vergleiche Feld 'main_category_rank': OLD=None (<class 'NoneType'>) vs NEW=983 (<class 'int'>)
+2025-04-02 16:51:33,911 [DEBUG] Vergleiche Feld 'second_category_rank': OLD=None (<class 'NoneType'>) vs NEW=3 (<class 'int'>)
+2025-04-02 16:51:33,911 [DEBUG] Vergleiche Feld 'img_path': OLD=None (<class 'NoneType'>) vs NEW=None (<class 'NoneType'>)
+2025-04-02 16:51:33,911 [DEBUG] Vergleiche Feld 'blm': OLD=None (<class 'NoneType'>) vs NEW=None (<class 'NoneType'>)
+2025-04-02 16:51:33,911 [DEBUG] Vergleiche Feld 'total': OLD=None (<class 'NoneType'>) vs NEW=None (<class 'NoneType'>)
+2025-04-02 16:51:33,912 [DEBUG] Vergleiche Feld 'store': OLD=None (<class 'NoneType'>) vs NEW=Hanes (<class 'str'>)
+2025-04-02 16:51:33,912 [DEBUG] Vergleiche Feld 'manufacturer': OLD=None (<class 'NoneType'>) vs NEW=Hanes Men's Underwear (<class 'str'>)
+2025-04-02 16:51:33,912 [INFO]  ⚡ Änderungen: title, price, main_category, second_category, main_category_rank, second_category_rank, store, manufacturer
+2025-04-02 16:51:33,945 [INFO] 
+
+================================================================================
+2025-04-02 16:51:33,945 [INFO] 📦 [9/19] Scrape Produkt: B0BWDJVKLZ
+2025-04-02 16:51:33,946 [INFO] ================================================================================
+
+2025-04-02 16:51:33,947 [DEBUG] 🌐 Öffne Produktseite: B0BWDJVKLZ (https://www.amazon.com/dp/B0BWDJVKLZ?language=en_US)
+2025-04-02 16:51:39,920 [DEBUG] 📦 Extrahiere Produktinformationen...
+2025-04-02 16:51:40,500 [DEBUG] PRODUCT INFORMATION BOX
+2025-04-02 16:51:40,501 [DEBUG] {'Package Dimensions': '10.2 x 7.17 x 3.15 inches; 11.36 ounces', 'Date First Available': 'October 9, 2022', 'Manufacturer': 'Auto Time', 'ASIN': 'B0BWDJVKLZ', 'Best Sellers Rank': '#55,629 in Health & Household (See Top 100 in Health & Household)\n#249 in Incontinence Protective Briefs & Underwear', 'Customer Reviews': '3.9\n210 ratings'}
+2025-04-02 16:51:40,501 [DEBUG] 🧾 Extrahiere technische Details...
+2025-04-02 16:51:40,526 [DEBUG] TECHNICAL DETAIL BOX
+2025-04-02 16:51:40,526 [DEBUG] {}
+2025-04-02 16:51:40,527 [DEBUG] 🛑 Prüfe Verfügbarkeit (Out of Stock)
+2025-04-02 16:51:40,907 [DEBUG] 🔍 Prüfe, ob Produktseite existiert
+2025-04-02 16:51:41,263 [DEBUG] 📊 Extrahiere BLM (bought last month)...
+2025-04-02 16:51:41,353 [DEBUG] 	⚠️ Fehler bei BLM: invalid literal for int() with base 10: ''
+2025-04-02 16:51:41,353 [DEBUG] 📍 Extrahiere Standort...
+2025-04-02 16:51:41,445 [DEBUG] 💰 Extrahiere Preis...
+2025-04-02 16:51:41,504 [DEBUG] 📈 Extrahiere Bestseller-Rangdaten...
+2025-04-02 16:51:41,527 [DEBUG] 🗣️ Extrahiere Review-Anzahl...
+2025-04-02 16:51:41,527 [DEBUG] ⭐️ Extrahiere Bewertung...
+2025-04-02 16:51:41,528 [DEBUG] 🎨 Extrahiere Varianten...
+2025-04-02 16:51:41,614 [DEBUG] 📍 Extrahiere Standort...
+2025-04-02 16:51:41,638 [DEBUG] Vergleiche Feld 'title': OLD=None (<class 'NoneType'>) vs NEW=Men's Incontinence Underwear 2PCS Incontinence Boxer Briefs Absorption Protection Washable Incontinence Underwear for Men Leak Proof Underwear with Front & Rear Absorbent Area 280ML (Blue, Medium) (<class 'str'>)
+2025-04-02 16:51:41,639 [DEBUG] Vergleiche Feld 'price': OLD=None (<class 'NoneType'>) vs NEW=45.89 (<class 'float'>)
+2025-04-02 16:51:41,639 [DEBUG] Vergleiche Feld 'main_category': OLD=None (<class 'NoneType'>) vs NEW=Health & Household (<class 'str'>)
+2025-04-02 16:51:41,639 [DEBUG] Vergleiche Feld 'second_category': OLD=None (<class 'NoneType'>) vs NEW=Incontinence Protective Briefs & Underwear (<class 'str'>)
+2025-04-02 16:51:41,639 [DEBUG] Vergleiche Feld 'main_category_rank': OLD=None (<class 'NoneType'>) vs NEW=55629 (<class 'int'>)
+2025-04-02 16:51:41,639 [DEBUG] Vergleiche Feld 'second_category_rank': OLD=None (<class 'NoneType'>) vs NEW=249 (<class 'int'>)
+2025-04-02 16:51:41,639 [DEBUG] Vergleiche Feld 'img_path': OLD=None (<class 'NoneType'>) vs NEW=None (<class 'NoneType'>)
+2025-04-02 16:51:41,639 [DEBUG] Vergleiche Feld 'blm': OLD=None (<class 'NoneType'>) vs NEW=None (<class 'NoneType'>)
+2025-04-02 16:51:41,640 [DEBUG] Vergleiche Feld 'total': OLD=None (<class 'NoneType'>) vs NEW=None (<class 'NoneType'>)
+2025-04-02 16:51:41,640 [DEBUG] Vergleiche Feld 'store': OLD=None (<class 'NoneType'>) vs NEW=AutoTime (<class 'str'>)
+2025-04-02 16:51:41,640 [DEBUG] Vergleiche Feld 'manufacturer': OLD=None (<class 'NoneType'>) vs NEW=Auto Time (<class 'str'>)
+2025-04-02 16:51:41,640 [INFO]  ⚡ Änderungen: title, price, main_category, second_category, main_category_rank, second_category_rank, store, manufacturer
+2025-04-02 16:51:41,654 [INFO] 
+
+================================================================================
+2025-04-02 16:51:41,654 [INFO] 📦 [10/19] Scrape Produkt: B08SXRKHL1
+2025-04-02 16:51:41,654 [INFO] ================================================================================
+
+2025-04-02 16:51:41,656 [DEBUG] 🌐 Öffne Produktseite: B08SXRKHL1 (https://www.amazon.com/dp/B08SXRKHL1?language=en_US)
+2025-04-02 16:51:47,993 [DEBUG] 📦 Extrahiere Produktinformationen...
+2025-04-02 16:51:48,290 [DEBUG] PRODUCT INFORMATION BOX
+2025-04-02 16:51:48,290 [DEBUG] {'Product Dimensions': '36 x 34 x 0.2 inches; 1.96 Pounds', 'Item model number': 'Underpad', 'Date First Available': 'September 8, 2021', 'ASIN': 'B08SXRKHL1', 'Country of Origin': 'China', 'Best Sellers Rank': '#798 in Health & Household (See Top 100 in Health & Household)\n#1 in Reusable Bed Underpads', 'Customer Reviews': '4.7\n22,189 ratings'}
+2025-04-02 16:51:48,291 [DEBUG] 🧾 Extrahiere technische Details...
+2025-04-02 16:51:48,367 [DEBUG] TECHNICAL DETAIL BOX
+2025-04-02 16:51:48,367 [DEBUG] {}
+2025-04-02 16:51:48,367 [DEBUG] 🛑 Prüfe Verfügbarkeit (Out of Stock)
+2025-04-02 16:51:48,659 [DEBUG] 🔍 Prüfe, ob Produktseite existiert
+2025-04-02 16:51:48,833 [DEBUG] 📊 Extrahiere BLM (bought last month)...
+2025-04-02 16:51:48,856 [DEBUG] 💰 Extrahiere Preis...
+2025-04-02 16:51:48,875 [DEBUG] 📈 Extrahiere Bestseller-Rangdaten...
+2025-04-02 16:51:48,896 [DEBUG] 🗣️ Extrahiere Review-Anzahl...
+2025-04-02 16:51:48,896 [DEBUG] ⭐️ Extrahiere Bewertung...
+2025-04-02 16:51:48,896 [DEBUG] 🎨 Extrahiere Varianten...
+2025-04-02 16:51:49,011 [DEBUG] 📍 Extrahiere Standort...
+2025-04-02 16:51:49,026 [DEBUG] Vergleiche Feld 'title': OLD=None (<class 'NoneType'>) vs NEW=IMPROVIA® Washable Underpads, 34" x 36" (Pack of 2) - Heavy Absorbency Reusable Bedwetting Incontinence Pads for Kids, Adults, Elderly, and Pets - Waterproof Protective Pad for Bed, Couch, Sofa, Floor (<class 'str'>)
+2025-04-02 16:51:49,026 [DEBUG] Vergleiche Feld 'price': OLD=None (<class 'NoneType'>) vs NEW=20.98 (<class 'float'>)
+2025-04-02 16:51:49,026 [DEBUG] Vergleiche Feld 'main_category': OLD=None (<class 'NoneType'>) vs NEW=Health & Household (<class 'str'>)
+2025-04-02 16:51:49,026 [DEBUG] Vergleiche Feld 'second_category': OLD=None (<class 'NoneType'>) vs NEW=Reusable Bed Underpads (<class 'str'>)
+2025-04-02 16:51:49,026 [DEBUG] Vergleiche Feld 'main_category_rank': OLD=None (<class 'NoneType'>) vs NEW=798 (<class 'int'>)
+2025-04-02 16:51:49,026 [DEBUG] Vergleiche Feld 'second_category_rank': OLD=None (<class 'NoneType'>) vs NEW=1 (<class 'int'>)
+2025-04-02 16:51:49,026 [DEBUG] Vergleiche Feld 'img_path': OLD=None (<class 'NoneType'>) vs NEW=None (<class 'NoneType'>)
+2025-04-02 16:51:49,027 [DEBUG] Vergleiche Feld 'blm': OLD=None (<class 'NoneType'>) vs NEW=2000 (<class 'int'>)
+2025-04-02 16:51:49,027 [DEBUG] Vergleiche Feld 'total': OLD=None (<class 'NoneType'>) vs NEW=41960.0 (<class 'float'>)
+2025-04-02 16:51:49,027 [DEBUG] Vergleiche Feld 'store': OLD=None (<class 'NoneType'>) vs NEW=IMPROVIA (<class 'str'>)
+2025-04-02 16:51:49,027 [DEBUG] Vergleiche Feld 'manufacturer': OLD=None (<class 'NoneType'>) vs NEW=None (<class 'NoneType'>)
+2025-04-02 16:51:49,027 [INFO]  ⚡ Änderungen: title, price, main_category, second_category, main_category_rank, second_category_rank, blm, total, store
+2025-04-02 16:51:49,049 [INFO] 
+
+================================================================================
+2025-04-02 16:51:49,049 [INFO] 📦 [11/19] Scrape Produkt: B09HSNKTBK
+2025-04-02 16:51:49,049 [INFO] ================================================================================
+
+2025-04-02 16:51:49,051 [DEBUG] 🌐 Öffne Produktseite: B09HSNKTBK (https://www.amazon.com/dp/B09HSNKTBK?language=en_US)
+2025-04-02 16:51:54,512 [DEBUG] 📦 Extrahiere Produktinformationen...
+2025-04-02 16:51:55,714 [DEBUG] PRODUCT INFORMATION BOX
+2025-04-02 16:51:55,715 [DEBUG] {'Product Dimensions': '5.5 x 2 x 8.75 inches; 13 ounces', 'UPC': '810034840868', 'Manufacturer': 'Sunkist Growers, Inc.', 'ASIN': 'B09HSNKTBK', 'Best Sellers Rank': '#62,064 in Grocery & Gourmet Food (See Top 100 in Grocery & Gourmet Food)\n#202 in Snack & Trail Mixes\n#1,718 in Snack Nuts & Seeds', 'Customer Reviews': '4.2\n420 ratings'}
+2025-04-02 16:51:55,715 [DEBUG] 🧾 Extrahiere technische Details...
+2025-04-02 16:51:55,734 [DEBUG] TECHNICAL DETAIL BOX
+2025-04-02 16:51:55,734 [DEBUG] {}
+2025-04-02 16:51:55,734 [DEBUG] 🛑 Prüfe Verfügbarkeit (Out of Stock)
+2025-04-02 16:51:56,008 [DEBUG] 🔍 Prüfe, ob Produktseite existiert
+2025-04-02 16:51:56,210 [DEBUG] 📊 Extrahiere BLM (bought last month)...
+2025-04-02 16:51:56,226 [DEBUG] 	⚠️ Fehler bei BLM: invalid literal for int() with base 10: ''
+2025-04-02 16:51:56,227 [DEBUG] 📍 Extrahiere Standort...
+2025-04-02 16:51:56,243 [DEBUG] 💰 Extrahiere Preis...
+2025-04-02 16:51:56,266 [DEBUG] 📈 Extrahiere Bestseller-Rangdaten...
+2025-04-02 16:51:56,287 [DEBUG] 🗣️ Extrahiere Review-Anzahl...
+2025-04-02 16:51:56,288 [DEBUG] ⭐️ Extrahiere Bewertung...
+2025-04-02 16:51:56,288 [DEBUG] 🎨 Extrahiere Varianten...
+2025-04-02 16:51:56,428 [DEBUG] 📍 Extrahiere Standort...
+2025-04-02 16:51:56,455 [DEBUG] Vergleiche Feld 'title': OLD=None (<class 'NoneType'>) vs NEW=Sunkist® Keto Living Trail Mix - Fruit, Nut and Seeds, Low Sodium, Gluten Free Snack with Sunflower Seeds, Coconut, Almonds, Pumpkin Seeds, and Walnuts | Premium Quality | 13 oz Resealable Bag (<class 'str'>)
+2025-04-02 16:51:56,456 [DEBUG] Vergleiche Feld 'price': OLD=None (<class 'NoneType'>) vs NEW=16.99 (<class 'float'>)
+2025-04-02 16:51:56,456 [DEBUG] Vergleiche Feld 'main_category': OLD=None (<class 'NoneType'>) vs NEW=Grocery & Gourmet Food (<class 'str'>)
+2025-04-02 16:51:56,456 [DEBUG] Vergleiche Feld 'second_category': OLD=None (<class 'NoneType'>) vs NEW=Snack & Trail Mixes (<class 'str'>)
+2025-04-02 16:51:56,456 [DEBUG] Vergleiche Feld 'main_category_rank': OLD=None (<class 'NoneType'>) vs NEW=62064 (<class 'int'>)
+2025-04-02 16:51:56,456 [DEBUG] Vergleiche Feld 'second_category_rank': OLD=None (<class 'NoneType'>) vs NEW=202 (<class 'int'>)
+2025-04-02 16:51:56,457 [DEBUG] Vergleiche Feld 'img_path': OLD=None (<class 'NoneType'>) vs NEW=None (<class 'NoneType'>)
+2025-04-02 16:51:56,457 [DEBUG] Vergleiche Feld 'blm': OLD=None (<class 'NoneType'>) vs NEW=None (<class 'NoneType'>)
+2025-04-02 16:51:56,457 [DEBUG] Vergleiche Feld 'total': OLD=None (<class 'NoneType'>) vs NEW=None (<class 'NoneType'>)
+2025-04-02 16:51:56,457 [DEBUG] Vergleiche Feld 'store': OLD=None (<class 'NoneType'>) vs NEW=Sunkist (<class 'str'>)
+2025-04-02 16:51:56,457 [DEBUG] Vergleiche Feld 'manufacturer': OLD=None (<class 'NoneType'>) vs NEW=Sunkist Growers, Inc. (<class 'str'>)
+2025-04-02 16:51:56,457 [INFO]  ⚡ Änderungen: title, price, main_category, second_category, main_category_rank, second_category_rank, store, manufacturer
+2025-04-02 16:51:56,493 [INFO] 
+
+================================================================================
+2025-04-02 16:51:56,494 [INFO] 📦 [12/19] Scrape Produkt: B0D49GCTQD
+2025-04-02 16:51:56,495 [INFO] ================================================================================
+
+2025-04-02 16:51:56,497 [DEBUG] 🌐 Öffne Produktseite: B0D49GCTQD (https://www.amazon.com/dp/B0D49GCTQD?language=en_US)
+2025-04-02 16:51:59,995 [DEBUG] 📦 Extrahiere Produktinformationen...
+2025-04-02 16:52:00,175 [DEBUG] PRODUCT INFORMATION BOX
+2025-04-02 16:52:00,176 [DEBUG] {'ASIN': 'B0DKX7HD6G', 'Customer Reviews': '4.4\n78 ratings\n4.4 out of 5 stars', 'Best Sellers Rank': '#4,187 in Sports & Outdoors (See Top 100 in Sports & Outdoors)\n#10 in Adult Bike Helmets', 'Date First Available': 'May 16, 2024'}
+2025-04-02 16:52:00,176 [DEBUG] 🧾 Extrahiere technische Details...
+2025-04-02 16:52:01,124 [DEBUG] TECHNICAL DETAIL BOX
+2025-04-02 16:52:01,124 [DEBUG] {'Item Package Dimensions L x W x H': '13.54 x 11.69 x 6.46 inches', 'Package Weight': '0.35 Kilograms', 'Brand Name': 'Favoto', 'Warranty Description': '1 Year Manufacturer', 'Model Name': 'HT-004', 'Color': 'Black', 'Material': 'Polypropylene', 'Suggested Users': 'unisex-adult', 'Manufacturer': 'Favoto', 'Style': 'Functional/Sporty', 'Included Components': 'Bike Helmet', 'Outer Material': 'Polycarbonate (PC)', 'Size': 'Medium'}
+2025-04-02 16:52:01,124 [DEBUG] 🛑 Prüfe Verfügbarkeit (Out of Stock)
+2025-04-02 16:52:01,343 [DEBUG] 🔍 Prüfe, ob Produktseite existiert
+2025-04-02 16:52:01,609 [DEBUG] 📊 Extrahiere BLM (bought last month)...
+2025-04-02 16:52:01,753 [DEBUG] 	⚠️ Fehler bei BLM: invalid literal for int() with base 10: ''
+2025-04-02 16:52:01,757 [DEBUG] 📍 Extrahiere Standort...
+2025-04-02 16:52:01,832 [DEBUG] 💰 Extrahiere Preis...
+2025-04-02 16:52:01,918 [DEBUG] 📈 Extrahiere Bestseller-Rangdaten...
+2025-04-02 16:52:01,958 [DEBUG] 🗣️ Extrahiere Review-Anzahl...
+2025-04-02 16:52:01,959 [DEBUG] ⭐️ Extrahiere Bewertung...
+2025-04-02 16:52:01,959 [DEBUG] 🎨 Extrahiere Varianten...
+2025-04-02 16:52:02,226 [DEBUG] 📍 Extrahiere Standort...
+2025-04-02 16:52:02,344 [DEBUG] Vergleiche Feld 'title': OLD=None (<class 'NoneType'>) vs NEW=Favoto Bike Helmet with Light and Magnetic Goggles - USB Rechargeable Taillight -Mountain and Road Cycling Helmets for Men and Women (<class 'str'>)
+2025-04-02 16:52:02,345 [DEBUG] Vergleiche Feld 'price': OLD=None (<class 'NoneType'>) vs NEW=19.99 (<class 'float'>)
+2025-04-02 16:52:02,345 [DEBUG] Vergleiche Feld 'main_category': OLD=None (<class 'NoneType'>) vs NEW=Sports & Outdoors (<class 'str'>)
+2025-04-02 16:52:02,345 [DEBUG] Vergleiche Feld 'second_category': OLD=None (<class 'NoneType'>) vs NEW=Adult Bike Helmets (<class 'str'>)
+2025-04-02 16:52:02,345 [DEBUG] Vergleiche Feld 'main_category_rank': OLD=None (<class 'NoneType'>) vs NEW=4187 (<class 'int'>)
+2025-04-02 16:52:02,346 [DEBUG] Vergleiche Feld 'second_category_rank': OLD=None (<class 'NoneType'>) vs NEW=10 (<class 'int'>)
+2025-04-02 16:52:02,346 [DEBUG] Vergleiche Feld 'img_path': OLD=None (<class 'NoneType'>) vs NEW=None (<class 'NoneType'>)
+2025-04-02 16:52:02,346 [DEBUG] Vergleiche Feld 'blm': OLD=None (<class 'NoneType'>) vs NEW=None (<class 'NoneType'>)
+2025-04-02 16:52:02,346 [DEBUG] Vergleiche Feld 'total': OLD=None (<class 'NoneType'>) vs NEW=None (<class 'NoneType'>)
+2025-04-02 16:52:02,346 [DEBUG] Vergleiche Feld 'store': OLD=None (<class 'NoneType'>) vs NEW=Favoto (<class 'str'>)
+2025-04-02 16:52:02,346 [DEBUG] Vergleiche Feld 'manufacturer': OLD=None (<class 'NoneType'>) vs NEW=Favoto (<class 'str'>)
+2025-04-02 16:52:02,346 [INFO]  ⚡ Änderungen: title, price, main_category, second_category, main_category_rank, second_category_rank, store, manufacturer
+2025-04-02 16:52:02,364 [INFO] 
+
+================================================================================
+2025-04-02 16:52:02,364 [INFO] 📦 [13/19] Scrape Produkt: B01HEHOCAK
+2025-04-02 16:52:02,365 [INFO] ================================================================================
+
+2025-04-02 16:52:02,366 [DEBUG] 🌐 Öffne Produktseite: B01HEHOCAK (https://www.amazon.com/dp/B01HEHOCAK?language=en_US)
+2025-04-02 16:52:06,586 [DEBUG] 📦 Extrahiere Produktinformationen...
+2025-04-02 16:52:06,955 [DEBUG] PRODUCT INFORMATION BOX
+2025-04-02 16:52:06,955 [DEBUG] {'ASIN': 'B077D6HWC7', 'Customer Reviews': '4.5\n9,034 ratings\n4.5 out of 5 stars', 'Best Sellers Rank': '#2,585 in Automotive (See Top 100 in Automotive)\n#8 in Motorcycle & Powersports Helmets', 'Date First Available': 'June 21, 2016'}
+2025-04-02 16:52:06,956 [DEBUG] 🧾 Extrahiere technische Details...
+2025-04-02 16:52:07,513 [DEBUG] TECHNICAL DETAIL BOX
+2025-04-02 16:52:07,513 [DEBUG] {'Item Package Dimensions L x W x H': '14.49 x 10.79 x 10.55 inches', 'Package Weight': '2.04 Kilograms', 'Item Dimensions LxWxH': '13.78 x 10.24 x 10.24 inches', 'Item Weight': '2.98 Pounds', 'Brand Name': 'ILM', 'Model Name': 'ILM-JK313', 'Color': 'Blue', 'Material': 'Acrylonitrile Butadiene Styrene', 'Suggested Users': 'unisex-adult', 'Manufacturer': 'ILM', 'Part Number': 'ILM-JK313', 'Style': 'snowmobiles', 'Included Components': 'helmet bag', 'Outer Material': 'Acrylonitrile Butadiene Styrene (ABS)', 'Size': 'Small', 'Sport Type': 'Snowmobiling, Motorsport'}
+2025-04-02 16:52:07,513 [DEBUG] 🛑 Prüfe Verfügbarkeit (Out of Stock)
+2025-04-02 16:52:07,789 [DEBUG] 🔍 Prüfe, ob Produktseite existiert
+2025-04-02 16:52:07,959 [DEBUG] 📊 Extrahiere BLM (bought last month)...
+2025-04-02 16:52:07,986 [DEBUG] 	⚠️ Fehler bei BLM: invalid literal for int() with base 10: ''
+2025-04-02 16:52:07,987 [DEBUG] 📍 Extrahiere Standort...
+2025-04-02 16:52:08,013 [DEBUG] 💰 Extrahiere Preis...
+2025-04-02 16:52:08,093 [DEBUG] 📈 Extrahiere Bestseller-Rangdaten...
+2025-04-02 16:52:08,117 [DEBUG] 🗣️ Extrahiere Review-Anzahl...
+2025-04-02 16:52:08,117 [DEBUG] ⭐️ Extrahiere Bewertung...
+2025-04-02 16:52:08,117 [DEBUG] 🎨 Extrahiere Varianten...
+2025-04-02 16:52:08,199 [DEBUG] 📍 Extrahiere Standort...
+2025-04-02 16:52:08,214 [DEBUG] Vergleiche Feld 'title': OLD=None (<class 'NoneType'>) vs NEW=ILM Full Face Motorcycle Street Bike Helmet with Removable Winter Neck Scarf + 2 Visors DOT Model-JK313 (<class 'str'>)
+2025-04-02 16:52:08,215 [DEBUG] Vergleiche Feld 'price': OLD=None (<class 'NoneType'>) vs NEW=69.99 (<class 'float'>)
+2025-04-02 16:52:08,215 [DEBUG] Vergleiche Feld 'main_category': OLD=None (<class 'NoneType'>) vs NEW=Automotive (<class 'str'>)
+2025-04-02 16:52:08,215 [DEBUG] Vergleiche Feld 'second_category': OLD=None (<class 'NoneType'>) vs NEW=Motorcycle & Powersports Helmets (<class 'str'>)
+2025-04-02 16:52:08,215 [DEBUG] Vergleiche Feld 'main_category_rank': OLD=None (<class 'NoneType'>) vs NEW=2585 (<class 'int'>)
+2025-04-02 16:52:08,215 [DEBUG] Vergleiche Feld 'second_category_rank': OLD=None (<class 'NoneType'>) vs NEW=8 (<class 'int'>)
+2025-04-02 16:52:08,215 [DEBUG] Vergleiche Feld 'img_path': OLD=None (<class 'NoneType'>) vs NEW=None (<class 'NoneType'>)
+2025-04-02 16:52:08,215 [DEBUG] Vergleiche Feld 'blm': OLD=None (<class 'NoneType'>) vs NEW=None (<class 'NoneType'>)
+2025-04-02 16:52:08,215 [DEBUG] Vergleiche Feld 'total': OLD=None (<class 'NoneType'>) vs NEW=None (<class 'NoneType'>)
+2025-04-02 16:52:08,215 [DEBUG] Vergleiche Feld 'store': OLD=None (<class 'NoneType'>) vs NEW=ILM (<class 'str'>)
+2025-04-02 16:52:08,215 [DEBUG] Vergleiche Feld 'manufacturer': OLD=None (<class 'NoneType'>) vs NEW=ILM (<class 'str'>)
+2025-04-02 16:52:08,216 [INFO]  ⚡ Änderungen: title, price, main_category, second_category, main_category_rank, second_category_rank, store, manufacturer
+2025-04-02 16:52:08,247 [INFO] 
+
+================================================================================
+2025-04-02 16:52:08,247 [INFO] 📦 [14/19] Scrape Produkt: B01H420JSY
+2025-04-02 16:52:08,247 [INFO] ================================================================================
+
+2025-04-02 16:52:08,249 [DEBUG] 🌐 Öffne Produktseite: B01H420JSY (https://www.amazon.com/dp/B01H420JSY?language=en_US)
+2025-04-02 16:52:12,308 [DEBUG] 📦 Extrahiere Produktinformationen...
+2025-04-02 16:52:12,449 [DEBUG] PRODUCT INFORMATION BOX
+2025-04-02 16:52:12,449 [DEBUG] {'ASIN': 'B01H420HD6', 'Customer Reviews': '4.6\n327 ratings\n4.6 out of 5 stars', 'Best Sellers Rank': '#43,003 in Sports & Outdoors (See Top 100 in Sports & Outdoors)\n#129 in Adult Bike Helmets', 'Date First Available': 'June 15, 2016'}
+2025-04-02 16:52:12,450 [DEBUG] 🧾 Extrahiere technische Details...
+2025-04-02 16:52:13,165 [DEBUG] TECHNICAL DETAIL BOX
+2025-04-02 16:52:13,165 [DEBUG] {'Item Package Dimensions L x W x H': '14.06 x 9.69 x 9.21 inches', 'Package Weight': '0.91 Kilograms', 'Item Dimensions LxWxH': '12 x 10 x 10 inches', 'Item Weight': '0.3 Kilograms', 'Brand Name': 'Giro', 'Warranty Description': "Any Giro helmet determined by Giro to be defective in materials or workmanship within one (1) year from the date of original purchase will be repaired or replaced, at Giro's option, free of charge when received at the factory freight prepaid, together with proof of purchase.", 'Model Name': 'Giro Aerohead MIPS', 'Color': 'Black/Titanium', 'Material': 'Polypropylene', 'Suggested Users': 'unisex-adult', 'Number of Items': '1', 'Manufacturer': 'Giro', 'Part Number': '200170008', 'Model Year': '2018', 'Included Components': 'Bike Helmet', 'Outer Material': 'Polycarbonate (PC)', 'Size': 'Medium', 'Sport Type': 'Cycling'}
+2025-04-02 16:52:13,165 [DEBUG] 🛑 Prüfe Verfügbarkeit (Out of Stock)
+2025-04-02 16:52:13,323 [DEBUG] 🔍 Prüfe, ob Produktseite existiert
+2025-04-02 16:52:13,554 [DEBUG] 📊 Extrahiere BLM (bought last month)...
+2025-04-02 16:52:13,580 [DEBUG] 	⚠️ Fehler bei BLM: invalid literal for int() with base 10: ''
+2025-04-02 16:52:13,580 [DEBUG] 📍 Extrahiere Standort...
+2025-04-02 16:52:13,606 [DEBUG] 💰 Extrahiere Preis...
+2025-04-02 16:52:13,671 [DEBUG] 📈 Extrahiere Bestseller-Rangdaten...
+2025-04-02 16:52:13,696 [DEBUG] 🗣️ Extrahiere Review-Anzahl...
+2025-04-02 16:52:13,696 [DEBUG] ⭐️ Extrahiere Bewertung...
+2025-04-02 16:52:13,696 [DEBUG] 🎨 Extrahiere Varianten...
+2025-04-02 16:52:13,823 [DEBUG] 📍 Extrahiere Standort...
+2025-04-02 16:52:13,841 [DEBUG] Vergleiche Feld 'title': OLD=None (<class 'NoneType'>) vs NEW=Giro Aerohead MIPS Cycling Helmet (<class 'str'>)
+2025-04-02 16:52:13,841 [DEBUG] Vergleiche Feld 'price': OLD=None (<class 'NoneType'>) vs NEW=299.95 (<class 'float'>)
+2025-04-02 16:52:13,841 [DEBUG] Vergleiche Feld 'main_category': OLD=None (<class 'NoneType'>) vs NEW=Sports & Outdoors (<class 'str'>)
+2025-04-02 16:52:13,841 [DEBUG] Vergleiche Feld 'second_category': OLD=None (<class 'NoneType'>) vs NEW=Adult Bike Helmets (<class 'str'>)
+2025-04-02 16:52:13,841 [DEBUG] Vergleiche Feld 'main_category_rank': OLD=None (<class 'NoneType'>) vs NEW=43003 (<class 'int'>)
+2025-04-02 16:52:13,841 [DEBUG] Vergleiche Feld 'second_category_rank': OLD=None (<class 'NoneType'>) vs NEW=129 (<class 'int'>)
+2025-04-02 16:52:13,841 [DEBUG] Vergleiche Feld 'img_path': OLD=None (<class 'NoneType'>) vs NEW=None (<class 'NoneType'>)
+2025-04-02 16:52:13,841 [DEBUG] Vergleiche Feld 'blm': OLD=None (<class 'NoneType'>) vs NEW=None (<class 'NoneType'>)
+2025-04-02 16:52:13,842 [DEBUG] Vergleiche Feld 'total': OLD=None (<class 'NoneType'>) vs NEW=None (<class 'NoneType'>)
+2025-04-02 16:52:13,842 [DEBUG] Vergleiche Feld 'store': OLD=None (<class 'NoneType'>) vs NEW=Giro (<class 'str'>)
+2025-04-02 16:52:13,842 [DEBUG] Vergleiche Feld 'manufacturer': OLD=None (<class 'NoneType'>) vs NEW=Giro (<class 'str'>)
+2025-04-02 16:52:13,842 [INFO]  ⚡ Änderungen: title, price, main_category, second_category, main_category_rank, second_category_rank, store, manufacturer
+2025-04-02 16:52:13,858 [INFO] 
+
+================================================================================
+2025-04-02 16:52:13,858 [INFO] 📦 [15/19] Scrape Produkt: B0C27Y8RV2
+2025-04-02 16:52:13,858 [INFO] ================================================================================
+
+2025-04-02 16:52:13,860 [DEBUG] 🌐 Öffne Produktseite: B0C27Y8RV2 (https://www.amazon.com/dp/B0C27Y8RV2?language=en_US)
+2025-04-02 16:52:17,863 [DEBUG] 📦 Extrahiere Produktinformationen...
+2025-04-02 16:52:18,263 [DEBUG] PRODUCT INFORMATION BOX
+2025-04-02 16:52:18,263 [DEBUG] {'ASIN': 'B0C281JVML', 'Customer Reviews': '4.2\n352 ratings\n4.2 out of 5 stars', 'Best Sellers Rank': '#24,880 in Sports & Outdoors (See Top 100 in Sports & Outdoors)\n#83 in Adult Bike Helmets', 'Date First Available': 'April 12, 2023'}
+2025-04-02 16:52:18,263 [DEBUG] 🧾 Extrahiere technische Details...
+2025-04-02 16:52:18,932 [DEBUG] TECHNICAL DETAIL BOX
+2025-04-02 16:52:18,932 [DEBUG] {'Item Package Dimensions L x W x H': '11.93 x 9.72 x 7.64 inches', 'Package Weight': '0.95 Kilograms', 'Brand Name': 'ILM', 'Warranty Description': 'ILM guarantees that the helmets can be guaranteed free of charge for failures caused by defects in materials and workmanship under normal use.', 'Model Name': 'Model E3-12LS', 'Color': 'Brown', 'Material': 'Plastic', 'Suggested Users': 'unisex-adult', 'Manufacturer': 'ILM', 'Part Number': 'E3-12LS', 'Style': 'Open Face', 'Included Components': '1 Black Visor, 1 Remote Controller, 1 USB type C Charging Cable, 2 Windproof plugs, 1 User Manual', 'Outer Material': 'Polycarbonate (PC)', 'Size': 'Small/Medium', 'Sport Type': 'Cycling'}
+2025-04-02 16:52:18,933 [DEBUG] 🛑 Prüfe Verfügbarkeit (Out of Stock)
+2025-04-02 16:52:19,209 [DEBUG] 🔍 Prüfe, ob Produktseite existiert
+2025-04-02 16:52:19,434 [DEBUG] 📊 Extrahiere BLM (bought last month)...
+2025-04-02 16:52:19,457 [DEBUG] 	⚠️ Fehler bei BLM: invalid literal for int() with base 10: ''
+2025-04-02 16:52:19,457 [DEBUG] 📍 Extrahiere Standort...
+2025-04-02 16:52:19,473 [DEBUG] 💰 Extrahiere Preis...
+2025-04-02 16:52:19,527 [DEBUG] 📈 Extrahiere Bestseller-Rangdaten...
+2025-04-02 16:52:19,549 [DEBUG] 🗣️ Extrahiere Review-Anzahl...
+2025-04-02 16:52:19,550 [DEBUG] ⭐️ Extrahiere Bewertung...
+2025-04-02 16:52:19,550 [DEBUG] 🎨 Extrahiere Varianten...
+2025-04-02 16:52:19,618 [DEBUG] 📍 Extrahiere Standort...
+2025-04-02 16:52:19,631 [DEBUG] Vergleiche Feld 'title': OLD=None (<class 'NoneType'>) vs NEW=ILM Smart Adult Bike Helmet with Automatic G-Sensor Turn Signal & Brake Warning LED Light Control Road Cycling Helmet E3-12LS (<class 'str'>)
+2025-04-02 16:52:19,631 [DEBUG] Vergleiche Feld 'price': OLD=None (<class 'NoneType'>) vs NEW=64.99 (<class 'float'>)
+2025-04-02 16:52:19,631 [DEBUG] Vergleiche Feld 'main_category': OLD=None (<class 'NoneType'>) vs NEW=Sports & Outdoors (<class 'str'>)
+2025-04-02 16:52:19,632 [DEBUG] Vergleiche Feld 'second_category': OLD=None (<class 'NoneType'>) vs NEW=Adult Bike Helmets (<class 'str'>)
+2025-04-02 16:52:19,632 [DEBUG] Vergleiche Feld 'main_category_rank': OLD=None (<class 'NoneType'>) vs NEW=24880 (<class 'int'>)
+2025-04-02 16:52:19,632 [DEBUG] Vergleiche Feld 'second_category_rank': OLD=None (<class 'NoneType'>) vs NEW=83 (<class 'int'>)
+2025-04-02 16:52:19,632 [DEBUG] Vergleiche Feld 'img_path': OLD=None (<class 'NoneType'>) vs NEW=None (<class 'NoneType'>)
+2025-04-02 16:52:19,632 [DEBUG] Vergleiche Feld 'blm': OLD=None (<class 'NoneType'>) vs NEW=None (<class 'NoneType'>)
+2025-04-02 16:52:19,632 [DEBUG] Vergleiche Feld 'total': OLD=None (<class 'NoneType'>) vs NEW=None (<class 'NoneType'>)
+2025-04-02 16:52:19,632 [DEBUG] Vergleiche Feld 'store': OLD=None (<class 'NoneType'>) vs NEW=ILM (<class 'str'>)
+2025-04-02 16:52:19,632 [DEBUG] Vergleiche Feld 'manufacturer': OLD=None (<class 'NoneType'>) vs NEW=ILM (<class 'str'>)
+2025-04-02 16:52:19,632 [INFO]  ⚡ Änderungen: title, price, main_category, second_category, main_category_rank, second_category_rank, store, manufacturer
+2025-04-02 16:52:19,647 [INFO] 
+
+================================================================================
+2025-04-02 16:52:19,647 [INFO] 📦 [16/19] Scrape Produkt: B07SWRV9HM
+2025-04-02 16:52:19,647 [INFO] ================================================================================
+
+2025-04-02 16:52:19,648 [DEBUG] 🌐 Öffne Produktseite: B07SWRV9HM (https://www.amazon.com/dp/B07SWRV9HM?language=en_US)
+2025-04-02 16:52:25,161 [DEBUG] 📦 Extrahiere Produktinformationen...
+2025-04-02 16:52:25,348 [DEBUG] PRODUCT INFORMATION BOX
+2025-04-02 16:52:25,348 [DEBUG] {'ASIN': 'B07SWRV9HM', 'Customer Reviews': '4.7\n1,992 ratings\n4.7 out of 5 stars', 'Best Sellers Rank': '#5,108 in Automotive (See Top 100 in Automotive)\n#16 in Motorcycle & Powersports Helmets', 'Date First Available': 'June 9, 2019'}
+2025-04-02 16:52:25,348 [DEBUG] 🧾 Extrahiere technische Details...
+2025-04-02 16:52:26,190 [DEBUG] TECHNICAL DETAIL BOX
+2025-04-02 16:52:26,190 [DEBUG] {'Sport': 'Motorcycling, Motocross', 'Certificate Type': 'FMVSS No. 218', 'Finish Type': 'Matte', 'Number Of Vents': '16', 'Shell Type': 'Hard', 'Specification Met': 'DOT', 'Shape': 'Oval', 'Closure Type': 'Buckle', 'Global Trade Identification Number': '00817652019942', 'Manufacturer': 'GLX', 'Model Name': 'GX23', 'UPC': '817652019942', 'Item Weight': '3.15 pounds', 'Package Dimensions': '15 x 11.2 x 11 inches', 'Country of Origin': 'China', 'Item model number': 'GX23', 'Is Discontinued By Manufacturer': 'No', 'Manufacturer Part Number': 'GX23-MB-M', 'Safety Rating': 'DOT Certified'}
+2025-04-02 16:52:26,191 [DEBUG] 🛑 Prüfe Verfügbarkeit (Out of Stock)
+2025-04-02 16:52:26,440 [DEBUG] 🔍 Prüfe, ob Produktseite existiert
+2025-04-02 16:52:26,666 [DEBUG] 📊 Extrahiere BLM (bought last month)...
+2025-04-02 16:52:26,688 [DEBUG] 💰 Extrahiere Preis...
+2025-04-02 16:52:26,710 [DEBUG] 📈 Extrahiere Bestseller-Rangdaten...
+2025-04-02 16:52:26,728 [DEBUG] 🗣️ Extrahiere Review-Anzahl...
+2025-04-02 16:52:26,728 [DEBUG] ⭐️ Extrahiere Bewertung...
+2025-04-02 16:52:26,728 [DEBUG] 🎨 Extrahiere Varianten...
+2025-04-02 16:52:26,804 [DEBUG] 📍 Extrahiere Standort...
+2025-04-02 16:52:26,823 [DEBUG] Vergleiche Feld 'title': OLD=None (<class 'NoneType'>) vs NEW=GLX GX23 Dirt Bike/Motocross Helmet - Matte Black, Medium - DOT Approved (<class 'str'>)
+2025-04-02 16:52:26,823 [DEBUG] Vergleiche Feld 'price': OLD=None (<class 'NoneType'>) vs NEW=72.95 (<class 'float'>)
+2025-04-02 16:52:26,823 [DEBUG] Vergleiche Feld 'main_category': OLD=None (<class 'NoneType'>) vs NEW=Automotive (<class 'str'>)
+2025-04-02 16:52:26,823 [DEBUG] Vergleiche Feld 'second_category': OLD=None (<class 'NoneType'>) vs NEW=Motorcycle & Powersports Helmets (<class 'str'>)
+2025-04-02 16:52:26,823 [DEBUG] Vergleiche Feld 'main_category_rank': OLD=None (<class 'NoneType'>) vs NEW=5108 (<class 'int'>)
+2025-04-02 16:52:26,823 [DEBUG] Vergleiche Feld 'second_category_rank': OLD=None (<class 'NoneType'>) vs NEW=16 (<class 'int'>)
+2025-04-02 16:52:26,823 [DEBUG] Vergleiche Feld 'img_path': OLD=None (<class 'NoneType'>) vs NEW=None (<class 'NoneType'>)
+2025-04-02 16:52:26,824 [DEBUG] Vergleiche Feld 'blm': OLD=None (<class 'NoneType'>) vs NEW=200 (<class 'int'>)
+2025-04-02 16:52:26,824 [DEBUG] Vergleiche Feld 'total': OLD=None (<class 'NoneType'>) vs NEW=14590.0 (<class 'float'>)
+2025-04-02 16:52:26,824 [DEBUG] Vergleiche Feld 'store': OLD=None (<class 'NoneType'>) vs NEW=GLX (<class 'str'>)
+2025-04-02 16:52:26,824 [DEBUG] Vergleiche Feld 'manufacturer': OLD=None (<class 'NoneType'>) vs NEW=GLX (<class 'str'>)
+2025-04-02 16:52:26,824 [INFO]  ⚡ Änderungen: title, price, main_category, second_category, main_category_rank, second_category_rank, blm, total, store, manufacturer
+2025-04-02 16:52:26,840 [INFO] 
+
+================================================================================
+2025-04-02 16:52:26,840 [INFO] 📦 [17/19] Scrape Produkt: B07VQ95J6K
+2025-04-02 16:52:26,840 [INFO] ================================================================================
+
+2025-04-02 16:52:26,842 [DEBUG] 🌐 Öffne Produktseite: B07VQ95J6K (https://www.amazon.com/dp/B07VQ95J6K?language=en_US)
+2025-04-02 16:52:32,472 [DEBUG] 📦 Extrahiere Produktinformationen...
+2025-04-02 16:52:32,696 [DEBUG] PRODUCT INFORMATION BOX
+2025-04-02 16:52:32,696 [DEBUG] {'Package Dimensions': '9.02 x 8.39 x 3.03 inches; 2 Pounds', 'Date First Available': 'July 29, 2019', 'Manufacturer': 'Pure Organic Ingredients', 'ASIN': 'B07VQ95J6K', 'Best Sellers Rank': '#112,163 in Health & Household (See Top 100 in Health & Household)\n#5,068 in Blended Vitamin & Mineral Supplements', 'Customer Reviews': '4.6\n427 ratings'}
+2025-04-02 16:52:32,697 [DEBUG] 🧾 Extrahiere technische Details...
+2025-04-02 16:52:32,713 [DEBUG] TECHNICAL DETAIL BOX
+2025-04-02 16:52:32,713 [DEBUG] {}
+2025-04-02 16:52:32,713 [DEBUG] 🛑 Prüfe Verfügbarkeit (Out of Stock)
+2025-04-02 16:52:32,991 [DEBUG] 🔍 Prüfe, ob Produktseite existiert
+2025-04-02 16:52:33,223 [DEBUG] 📊 Extrahiere BLM (bought last month)...
+2025-04-02 16:52:33,248 [DEBUG] 💰 Extrahiere Preis...
+2025-04-02 16:52:33,272 [DEBUG] 📈 Extrahiere Bestseller-Rangdaten...
+2025-04-02 16:52:33,292 [DEBUG] 🗣️ Extrahiere Review-Anzahl...
+2025-04-02 16:52:33,292 [DEBUG] ⭐️ Extrahiere Bewertung...
+2025-04-02 16:52:33,293 [DEBUG] 🎨 Extrahiere Varianten...
+2025-04-02 16:52:33,352 [DEBUG] 📍 Extrahiere Standort...
+2025-04-02 16:52:33,367 [DEBUG] Vergleiche Feld 'title': OLD=None (<class 'NoneType'>) vs NEW=Pure Original Ingredients Beet Root Powder (2lb) Smoothies, Rich Color, Non-GMO, Folate (<class 'str'>)
+2025-04-02 16:52:33,367 [DEBUG] Vergleiche Feld 'price': OLD=None (<class 'NoneType'>) vs NEW=19.49 (<class 'float'>)
+2025-04-02 16:52:33,367 [DEBUG] Vergleiche Feld 'main_category': OLD=None (<class 'NoneType'>) vs NEW=Health & Household (<class 'str'>)
+2025-04-02 16:52:33,367 [DEBUG] Vergleiche Feld 'second_category': OLD=None (<class 'NoneType'>) vs NEW=Blended Vitamin & Mineral Supplements (<class 'str'>)
+2025-04-02 16:52:33,367 [DEBUG] Vergleiche Feld 'main_category_rank': OLD=None (<class 'NoneType'>) vs NEW=112163 (<class 'int'>)
+2025-04-02 16:52:33,367 [DEBUG] Vergleiche Feld 'second_category_rank': OLD=None (<class 'NoneType'>) vs NEW=5068 (<class 'int'>)
+2025-04-02 16:52:33,367 [DEBUG] Vergleiche Feld 'img_path': OLD=None (<class 'NoneType'>) vs NEW=None (<class 'NoneType'>)
+2025-04-02 16:52:33,368 [DEBUG] Vergleiche Feld 'blm': OLD=None (<class 'NoneType'>) vs NEW=50 (<class 'int'>)
+2025-04-02 16:52:33,368 [DEBUG] Vergleiche Feld 'total': OLD=None (<class 'NoneType'>) vs NEW=974.5 (<class 'float'>)
+2025-04-02 16:52:33,368 [DEBUG] Vergleiche Feld 'store': OLD=None (<class 'NoneType'>) vs NEW=Brand: PURE ORIGINAL INGREDIENTS (<class 'str'>)
+2025-04-02 16:52:33,368 [DEBUG] Vergleiche Feld 'manufacturer': OLD=None (<class 'NoneType'>) vs NEW=Pure Organic Ingredients (<class 'str'>)
+2025-04-02 16:52:33,368 [INFO]  ⚡ Änderungen: title, price, main_category, second_category, main_category_rank, second_category_rank, blm, total, store, manufacturer
+2025-04-02 16:52:33,383 [INFO] 
+
+================================================================================
+2025-04-02 16:52:33,384 [INFO] 📦 [18/19] Scrape Produkt: B0C29GKDWG
+2025-04-02 16:52:33,384 [INFO] ================================================================================
+
+2025-04-02 16:52:33,385 [DEBUG] 🌐 Öffne Produktseite: B0C29GKDWG (https://www.amazon.com/dp/B0C29GKDWG?language=en_US)
+2025-04-02 16:52:37,350 [DEBUG] 📦 Extrahiere Produktinformationen...
+2025-04-02 16:52:37,541 [DEBUG] PRODUCT INFORMATION BOX
+2025-04-02 16:52:37,541 [DEBUG] {'Package Dimensions': '8.5 x 5.5 x 2 inches; 8 ounces', 'UPC': '606024308179', 'Manufacturer': 'Hebhac Herbals LLP', 'ASIN': 'B0C29GKDWG', 'Best Sellers Rank': '#200,495 in Grocery & Gourmet Food (See Top 100 in Grocery & Gourmet Food)\n#202 in Vegetable Juice Beverages', 'Customer Reviews': '4.5\n2 ratings'}
+2025-04-02 16:52:37,541 [DEBUG] 🧾 Extrahiere technische Details...
+2025-04-02 16:52:37,552 [DEBUG] TECHNICAL DETAIL BOX
+2025-04-02 16:52:37,552 [DEBUG] {}
+2025-04-02 16:52:37,552 [DEBUG] 🛑 Prüfe Verfügbarkeit (Out of Stock)
+2025-04-02 16:52:37,733 [DEBUG] 🔍 Prüfe, ob Produktseite existiert
+2025-04-02 16:52:37,925 [DEBUG] 📊 Extrahiere BLM (bought last month)...
+2025-04-02 16:52:37,956 [DEBUG] 	⚠️ Fehler bei BLM: invalid literal for int() with base 10: ''
+2025-04-02 16:52:37,956 [DEBUG] 📍 Extrahiere Standort...
+2025-04-02 16:52:37,979 [DEBUG] 💰 Extrahiere Preis...
+2025-04-02 16:52:38,000 [DEBUG] 📈 Extrahiere Bestseller-Rangdaten...
+2025-04-02 16:52:38,018 [DEBUG] 🗣️ Extrahiere Review-Anzahl...
+2025-04-02 16:52:38,019 [DEBUG] ⭐️ Extrahiere Bewertung...
+2025-04-02 16:52:38,019 [DEBUG] 🎨 Extrahiere Varianten...
+2025-04-02 16:52:38,029 [DEBUG] 🟡 Keine Varianten gefunden.
+2025-04-02 16:52:38,057 [DEBUG] 📍 Extrahiere Standort...
+2025-04-02 16:52:38,072 [DEBUG] Vergleiche Feld 'title': OLD=None (<class 'NoneType'>) vs NEW=Beetroot Powder 227g- | Premium Beet Root Juice Powder 8 Ounces, | 100% Pure Raw Red Beetroot Superfood for Drinks, Juice, Recipes| Vegan, Non GMO, Gluten Free. (<class 'str'>)
+2025-04-02 16:52:38,072 [DEBUG] Vergleiche Feld 'price': OLD=None (<class 'NoneType'>) vs NEW=10.99 (<class 'float'>)
+2025-04-02 16:52:38,072 [DEBUG] Vergleiche Feld 'main_category': OLD=None (<class 'NoneType'>) vs NEW=Grocery & Gourmet Food (<class 'str'>)
+2025-04-02 16:52:38,072 [DEBUG] Vergleiche Feld 'second_category': OLD=None (<class 'NoneType'>) vs NEW=Vegetable Juice Beverages (<class 'str'>)
+2025-04-02 16:52:38,072 [DEBUG] Vergleiche Feld 'main_category_rank': OLD=None (<class 'NoneType'>) vs NEW=200495 (<class 'int'>)
+2025-04-02 16:52:38,072 [DEBUG] Vergleiche Feld 'second_category_rank': OLD=None (<class 'NoneType'>) vs NEW=202 (<class 'int'>)
+2025-04-02 16:52:38,072 [DEBUG] Vergleiche Feld 'img_path': OLD=None (<class 'NoneType'>) vs NEW=None (<class 'NoneType'>)
+2025-04-02 16:52:38,072 [DEBUG] Vergleiche Feld 'blm': OLD=None (<class 'NoneType'>) vs NEW=None (<class 'NoneType'>)
+2025-04-02 16:52:38,072 [DEBUG] Vergleiche Feld 'total': OLD=None (<class 'NoneType'>) vs NEW=None (<class 'NoneType'>)
+2025-04-02 16:52:38,073 [DEBUG] Vergleiche Feld 'store': OLD=None (<class 'NoneType'>) vs NEW=Hebhac Herbs (<class 'str'>)
+2025-04-02 16:52:38,073 [DEBUG] Vergleiche Feld 'manufacturer': OLD=None (<class 'NoneType'>) vs NEW=Hebhac Herbals LLP (<class 'str'>)
+2025-04-02 16:52:38,073 [INFO]  ⚡ Änderungen: title, price, main_category, second_category, main_category_rank, second_category_rank, store, manufacturer
+2025-04-02 16:52:38,107 [INFO] 
+
+================================================================================
+2025-04-02 16:52:38,107 [INFO] 📦 [19/19] Scrape Produkt: B0DHL19TXC
+2025-04-02 16:52:38,108 [INFO] ================================================================================
+
+2025-04-02 16:52:38,110 [DEBUG] 🌐 Öffne Produktseite: B0DHL19TXC (https://www.amazon.com/dp/B0DHL19TXC?language=en_US)
+2025-04-02 16:52:43,116 [DEBUG] 📦 Extrahiere Produktinformationen...
+2025-04-02 16:52:43,400 [DEBUG] PRODUCT INFORMATION BOX
+2025-04-02 16:52:43,400 [DEBUG] {'Product Dimensions': '4.25 x 2.25 x 4.25 inches; 4.4 ounces', 'Date First Available': 'September 20, 2024', 'Manufacturer': 'Nutrafirst', 'ASIN': 'B0DHL19TXC', 'Best Sellers Rank': '#642,511 in Health & Household (See Top 100 in Health & Household)\n#195 in Sports Nutrition Endurance & Energy Herbal Products', 'Customer Reviews': '4.5\n26 ratings'}
+2025-04-02 16:52:43,400 [DEBUG] 🧾 Extrahiere technische Details...
+2025-04-02 16:52:43,415 [DEBUG] TECHNICAL DETAIL BOX
+2025-04-02 16:52:43,416 [DEBUG] {}
+2025-04-02 16:52:43,416 [DEBUG] 🛑 Prüfe Verfügbarkeit (Out of Stock)
+2025-04-02 16:52:43,604 [DEBUG] 🔍 Prüfe, ob Produktseite existiert
+2025-04-02 16:52:43,783 [DEBUG] 📊 Extrahiere BLM (bought last month)...
+2025-04-02 16:52:43,832 [DEBUG] 	⚠️ Fehler bei BLM: invalid literal for int() with base 10: ''
+2025-04-02 16:52:43,833 [DEBUG] 📍 Extrahiere Standort...
+2025-04-02 16:52:43,869 [DEBUG] 💰 Extrahiere Preis...
+2025-04-02 16:52:43,903 [DEBUG] 📈 Extrahiere Bestseller-Rangdaten...
+2025-04-02 16:52:43,938 [DEBUG] 🗣️ Extrahiere Review-Anzahl...
+2025-04-02 16:52:43,939 [DEBUG] ⭐️ Extrahiere Bewertung...
+2025-04-02 16:52:43,939 [DEBUG] 🎨 Extrahiere Varianten...
+2025-04-02 16:52:43,953 [DEBUG] 🟡 Keine Varianten gefunden.
+2025-04-02 16:52:44,000 [DEBUG] 📍 Extrahiere Standort...
+2025-04-02 16:52:44,022 [DEBUG] Vergleiche Feld 'title': OLD=None (<class 'NoneType'>) vs NEW=Beet Root Supplements - Overall Vitality & Energy Supplements for Women & Men with Black Pepper Powder & Beet Root Powder - 120 All Natural Beet Root Pills per Bottle (<class 'str'>)
+2025-04-02 16:52:44,022 [DEBUG] Vergleiche Feld 'price': OLD=None (<class 'NoneType'>) vs NEW=24.95 (<class 'float'>)
+2025-04-02 16:52:44,023 [DEBUG] Vergleiche Feld 'main_category': OLD=None (<class 'NoneType'>) vs NEW=Health & Household (<class 'str'>)
+2025-04-02 16:52:44,023 [DEBUG] Vergleiche Feld 'second_category': OLD=None (<class 'NoneType'>) vs NEW=Sports Nutrition Endurance & Energy Herbal Products (<class 'str'>)
+2025-04-02 16:52:44,023 [DEBUG] Vergleiche Feld 'main_category_rank': OLD=None (<class 'NoneType'>) vs NEW=642511 (<class 'int'>)
+2025-04-02 16:52:44,023 [DEBUG] Vergleiche Feld 'second_category_rank': OLD=None (<class 'NoneType'>) vs NEW=195 (<class 'int'>)
+2025-04-02 16:52:44,024 [DEBUG] Vergleiche Feld 'img_path': OLD=None (<class 'NoneType'>) vs NEW=None (<class 'NoneType'>)
+2025-04-02 16:52:44,024 [DEBUG] Vergleiche Feld 'blm': OLD=None (<class 'NoneType'>) vs NEW=None (<class 'NoneType'>)
+2025-04-02 16:52:44,024 [DEBUG] Vergleiche Feld 'total': OLD=None (<class 'NoneType'>) vs NEW=None (<class 'NoneType'>)
+2025-04-02 16:52:44,024 [DEBUG] Vergleiche Feld 'store': OLD=None (<class 'NoneType'>) vs NEW=Daily Defense (<class 'str'>)
+2025-04-02 16:52:44,024 [DEBUG] Vergleiche Feld 'manufacturer': OLD=None (<class 'NoneType'>) vs NEW=Nutrafirst (<class 'str'>)
+2025-04-02 16:52:44,024 [INFO]  ⚡ Änderungen: title, price, main_category, second_category, main_category_rank, second_category_rank, store, manufacturer
+2025-04-02 16:52:44,039 [INFO] ##############################################################################
+2025-04-02 16:52:44,039 [INFO] ##############################################################################
+2025-04-02 16:52:44,039 [INFO] 
+📊 Scraping abgeschlossen:
+2025-04-02 16:52:44,039 [INFO] ⏱️ Gesamtzeit: 1m 55s
+2025-04-02 16:52:44,039 [INFO] ⏲️ Durchschnitt pro Produkt: 6.05s
+2025-04-02 16:52:44,039 [INFO] 📦 Erfolgreich: 19
+2025-04-02 16:52:44,039 [INFO] ❌ Fehlgeschlagen: 0
+2025-04-02 16:52:44,040 [INFO] 📝 Log-Datei: C:\Users\sebas\Desktop\amascrape\backend\scraper\logs\scraping-2025-04-02_16-50-33.txt
+2025-04-02 16:52:44,040 [INFO] 🧨 Fehlgeschlagene Produkte: C:\Users\sebas\Desktop\amascrape\backend\scraper\logs\fails-2025-04-02_16-50-33.txt
+2025-04-02 16:52:44,040 [INFO] ⚠️ Warnungen: 15 Produkte betroffen
+2025-04-02 16:52:44,040 [INFO] ⚠️ 15 Warnungen insgesamt:
+  • 14 × BLM
+  • 1 × REVIEW_COUNT
+2025-04-02 16:52:44,040 [INFO] 📄 Warnings-Log: C:\Users\sebas\Desktop\amascrape\backend\scraper\logs\warnings-2025-04-02_16-50-33.txt
+2025-04-02 16:52:44,041 [INFO] 🔻 Schließe WebDriver...
+2025-04-02 16:52:46,288 [INFO] ✅ WebDriver beendet.

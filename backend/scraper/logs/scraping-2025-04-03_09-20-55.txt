@@ -1,0 +1,85 @@
+2025-04-03 09:20:55,845 [INFO] 🚀 Product Orchestrator gestartet.
+2025-04-03 09:20:55,846 [INFO] ====== WebDriver manager ======
+2025-04-03 09:20:57,712 [INFO] Get LATEST chromedriver version for google-chrome
+2025-04-03 09:20:58,160 [INFO] Get LATEST chromedriver version for google-chrome
+2025-04-03 09:20:58,530 [INFO] Get LATEST chromedriver version for google-chrome
+2025-04-03 09:20:59,426 [INFO] WebDriver version 135.0.7049.42 selected
+2025-04-03 09:20:59,430 [INFO] Modern chrome version https://storage.googleapis.com/chrome-for-testing-public/135.0.7049.42/win32/chromedriver-win32.zip
+2025-04-03 09:20:59,430 [INFO] About to download new driver from https://storage.googleapis.com/chrome-for-testing-public/135.0.7049.42/win32/chromedriver-win32.zip
+2025-04-03 09:20:59,854 [INFO] Driver downloading response is 200
+2025-04-03 09:21:01,870 [INFO] Get LATEST chromedriver version for google-chrome
+2025-04-03 09:21:03,169 [INFO] Driver has been saved in cache [C:\Users\sebas\.wdm\drivers\chromedriver\win64\135.0.7049.42]
+2025-04-03 09:21:03,171 [DEBUG] Skipping Selenium Manager; path to chrome driver specified in Service class: C:\Users\sebas\.wdm\drivers\chromedriver\win64\135.0.7049.42\chromedriver-win32/chromedriver.exe
+2025-04-03 09:21:03,313 [DEBUG] Started executable: `C:\Users\sebas\.wdm\drivers\chromedriver\win64\135.0.7049.42\chromedriver-win32/chromedriver.exe` in a child process with pid: 7840 using 0 to output -3
+2025-04-03 09:21:04,793 [INFO] 🔧 Verwende ChromeDriver: C:\Users\sebas\.wdm\drivers\chromedriver\win64\135.0.7049.42\chromedriver-win32/chromedriver.exe
+2025-04-03 09:21:10,773 [INFO] ✅ Verbindung zu Amazon erfolgreich!
+2025-04-03 09:21:12,692 [INFO] 🍪 Cookies erfolgreich gesetzt.
+2025-04-03 09:21:12,692 [INFO] 📦 Starte Produktscraping...
+2025-04-03 09:21:12,766 [INFO] 
+
+================================================================================
+2025-04-03 09:21:12,766 [INFO] 📦 [1/1098] Scrape Produkt: B00GL2HMES
+2025-04-03 09:21:12,766 [INFO] ================================================================================
+
+2025-04-03 09:21:12,794 [DEBUG] 🌐 Öffne Produktseite: B00GL2HMES (https://www.amazon.com/dp/B00GL2HMES?language=en_US)
+2025-04-03 09:21:21,830 [DEBUG] 📦 Extrahiere Produktinformationen...
+2025-04-03 09:21:22,521 [DEBUG] 	PRODUCT INFORMATION BOX
+2025-04-03 09:21:22,524 [ERROR] ❌ Fehler bei B00GL2HMES: AmazonProductScraper.log() takes 2 positional arguments but 3 were given
+2025-04-03 09:21:22,546 [INFO] 
+
+================================================================================
+2025-04-03 09:21:22,546 [INFO] 📦 [2/1098] Scrape Produkt: B002DYIZEO
+2025-04-03 09:21:22,547 [INFO] ================================================================================
+
+2025-04-03 09:21:22,548 [DEBUG] 🌐 Öffne Produktseite: B002DYIZEO (https://www.amazon.com/dp/B002DYIZEO?language=en_US)
+2025-04-03 09:21:28,943 [DEBUG] 📦 Extrahiere Produktinformationen...
+2025-04-03 09:21:29,685 [DEBUG] 	PRODUCT INFORMATION BOX
+2025-04-03 09:21:29,685 [ERROR] ❌ Fehler bei B002DYIZEO: AmazonProductScraper.log() takes 2 positional arguments but 3 were given
+2025-04-03 09:21:29,701 [INFO] 
+
+================================================================================
+2025-04-03 09:21:29,701 [INFO] 📦 [3/1098] Scrape Produkt: B07978VPPH
+2025-04-03 09:21:29,701 [INFO] ================================================================================
+
+2025-04-03 09:21:29,702 [DEBUG] 🌐 Öffne Produktseite: B07978VPPH (https://www.amazon.com/dp/B07978VPPH?language=en_US)
+2025-04-03 09:21:39,872 [DEBUG] 📦 Extrahiere Produktinformationen...
+2025-04-03 09:21:40,622 [DEBUG] 	PRODUCT INFORMATION BOX
+2025-04-03 09:21:40,622 [ERROR] ❌ Fehler bei B07978VPPH: AmazonProductScraper.log() takes 2 positional arguments but 3 were given
+2025-04-03 09:21:40,639 [INFO] 
+
+================================================================================
+2025-04-03 09:21:40,639 [INFO] 📦 [4/1098] Scrape Produkt: B00E9M4XEE
+2025-04-03 09:21:40,640 [INFO] ================================================================================
+
+2025-04-03 09:21:40,642 [DEBUG] 🌐 Öffne Produktseite: B00E9M4XEE (https://www.amazon.com/dp/B00E9M4XEE?language=en_US)
+2025-04-03 09:21:47,582 [DEBUG] 📦 Extrahiere Produktinformationen...
+2025-04-03 09:21:48,174 [DEBUG] 	PRODUCT INFORMATION BOX
+2025-04-03 09:21:48,175 [ERROR] ❌ Fehler bei B00E9M4XEE: AmazonProductScraper.log() takes 2 positional arguments but 3 were given
+2025-04-03 09:21:48,191 [INFO] 
+
+================================================================================
+2025-04-03 09:21:48,191 [INFO] 📦 [5/1098] Scrape Produkt: B000GIQS0W
+2025-04-03 09:21:48,192 [INFO] ================================================================================
+
+2025-04-03 09:21:48,193 [DEBUG] 🌐 Öffne Produktseite: B000GIQS0W (https://www.amazon.com/dp/B000GIQS0W?language=en_US)
+2025-04-03 09:21:54,293 [DEBUG] 📦 Extrahiere Produktinformationen...
+2025-04-03 09:21:54,808 [DEBUG] 	PRODUCT INFORMATION BOX
+2025-04-03 09:21:54,809 [ERROR] ❌ Fehler bei B000GIQS0W: AmazonProductScraper.log() takes 2 positional arguments but 3 were given
+2025-04-03 09:21:54,824 [INFO] 
+
+================================================================================
+2025-04-03 09:21:54,824 [INFO] 📦 [6/1098] Scrape Produkt: B0B9YMNYWK
+2025-04-03 09:21:54,825 [INFO] ================================================================================
+
+2025-04-03 09:21:54,827 [DEBUG] 🌐 Öffne Produktseite: B0B9YMNYWK (https://www.amazon.com/dp/B0B9YMNYWK?language=en_US)
+2025-04-03 09:21:56,854 [INFO] ##############################################################################
+2025-04-03 09:21:56,854 [INFO] ##############################################################################
+2025-04-03 09:21:56,855 [INFO] 
+📊 Scraping abgeschlossen:
+2025-04-03 09:21:56,855 [INFO] ⏱️ Gesamtzeit: 0m 44s
+2025-04-03 09:21:56,855 [INFO] ⏲️ Durchschnitt pro Produkt: 0.00s
+2025-04-03 09:21:56,855 [INFO] 📦 Erfolgreich: 0
+2025-04-03 09:21:56,855 [INFO] ❌ Fehlgeschlagen: 5
+2025-04-03 09:21:56,855 [INFO] 📝 Log-Datei: C:\Users\sebas\Desktop\amascrape\backend\scraper\logs\scraping-2025-04-03_09-20-55.txt
+2025-04-03 09:21:56,855 [INFO] 🧨 Fehlgeschlagene Produkte: C:\Users\sebas\Desktop\amascrape\backend\scraper\logs\fails-2025-04-03_09-20-55.txt
+2025-04-03 09:21:56,856 [INFO] 🔻 Schließe WebDriver...

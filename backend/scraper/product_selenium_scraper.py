@@ -321,6 +321,7 @@ class AmazonProductScraper:
     def get_technical_details_box_content(self):
         self.log("🧾 Extrahiere technische Details...")
         info = {}
+
         try:
             tech_sections = self.driver.find_elements(By.XPATH, "//*[contains(text(), 'Technical Details')]")
             for section in tech_sections:
@@ -332,29 +333,73 @@ class AmazonProductScraper:
                         value = row.find_element(By.TAG_NAME, 'td').text.strip()
                         if key and value:
                             info[key] = value
-                except:
+                except Exception as e:
+                    self.log(f"\t⚠️ Fehler innerhalb einer technischen Tabelle: {e}")
                     continue
-
 
         except Exception as e:
             self.log(f"\t⚠️ Fehler bei technischen Details: {e}")
             return None
+
+        if len(info) > 0:
+            self.log("\tTECHNICAL DETAIL BOX")
+            self.log(info)
+        else:
+            # Keine technischen Details gefunden → Warnung
+            if self.warning_callback:
+                self.warning_callback(
+                    self.asin,
+                    self.url,
+                    "\t⚠️ Keine technischen Details gefunden.",
+                    self.get_location(),
+                    warning_type="technical_info_missing"
+                )
+
         return info
+
 
     def get_product_infos_box_content(self):
         self.log("📦 Extrahiere Produktinformationen...")
         info = {}
+        ul_failed = False
+        table_failed = False
+
         try:
             items = self.driver.find_elements(By.XPATH, self.web_elements["product_infos_ul"] + "//li")
-            info.update({item.text.split(":")[0].strip(): item.text.split(":")[1].strip() for item in items if ":" in item.text})
-        except:
-            pass
+            info.update({
+                item.text.split(":")[0].strip(): item.text.split(":")[1].strip()
+                for item in items if ":" in item.text
+            })
+        except Exception as e:
+            ul_failed = True
+            self.log(f"\t⚠️ Fehler beim Auslesen der UL-Infos: {e}")
+
         try:
             rows = self.driver.find_elements(By.XPATH, self.web_elements["product_infos_table"] + "//tr")
-            info.update({row.find_element(By.TAG_NAME, 'th').text.strip(): row.find_element(By.TAG_NAME, 'td').text.strip() for row in rows})
-        except:
-            pass
+            info.update({
+                row.find_element(By.TAG_NAME, 'th').text.strip(): row.find_element(By.TAG_NAME, 'td').text.strip()
+                for row in rows
+            })
+        except Exception as e:
+            table_failed = True
+            self.log(f"\t⚠️ Fehler beim Auslesen der Tabellen-Infos: {e}")
+
+        if len(info) > 0:
+            self.log("\tPRODUCT INFORMATION BOX")
+            self.log(info)
+        elif ul_failed and table_failed:
+            # Beide Methoden fehlgeschlagen → Warnung auslösen
+            if self.warning_callback:
+                self.warning_callback(
+                    self.asin,
+                    self.url,
+                    "\t⚠️ Produktinformationen konnten weder aus UL noch Tabelle extrahiert werden.",
+                    self.get_location(),
+                    warning_type="product_info_missing"
+                )
+
         return info
+
 
     def remove_parentheses(self, text: str) -> str:
         return re.sub(r"\s*\([^)]*\)", "", text).strip()
