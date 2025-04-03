@@ -109,9 +109,9 @@ class AmazonProductScraper:
 
             main_category = self.remove_parentheses(main_category).strip()
             dict = {
-                "rank_main_category": main_rank,
+                "main_category_rank": main_rank,
                 "main_category": main_category,
-                "rank_second_category": second_rank,
+                "second_category_rank": second_rank,
                 "second_category": second_category
             }
           
@@ -208,7 +208,7 @@ class AmazonProductScraper:
                     self.get_location(),
                      warning_type="blm"
                 )
-            return None
+            return 0
 
 
 
@@ -451,7 +451,7 @@ class AmazonProductScraper:
 
         blm = self.get_blm()
         price = self.get_price()
-        total = round(blm * price, 2) if blm and price else None
+        total = round(blm * price, 2) if blm and price else 0.0
 
         self.bs_and_rank_data = self.getting_bs_and_rank_data() or {}
         main_category = self.bs_and_rank_data.get("main_category")
@@ -493,8 +493,8 @@ class AmazonProductScraper:
             "title": title,
             "price": price,
             "manufacturer": manufacturer,
-            "main_category_rank": self.bs_and_rank_data.get("rank_main_category"),
-            "second_category_rank": self.bs_and_rank_data.get("rank_second_category"),
+            "main_category_rank": self.bs_and_rank_data.get("main_category_rank"),
+            "second_category_rank": self.bs_and_rank_data.get("second_category_rank"),
             "review_count": reviews,
             "rating": rating,
             "main_category": main_category,
