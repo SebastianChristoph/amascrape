@@ -224,7 +224,7 @@ class MarketOrchestrator:
                                 new_products=",".join(added_asins),
                                 removed_products=",".join(removed_asins),
                                 top_suggestions=",".join(new_suggestions),
-                                changes=" | ".join(
+                                changes=",".join(
                                     changes) if changes else "Kein Total Revenue Change, aber andere Änderungen"
                         )
                         db.add(new_market_change)

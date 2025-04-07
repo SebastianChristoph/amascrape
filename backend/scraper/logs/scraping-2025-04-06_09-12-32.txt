@@ -1,0 +1,29 @@
+2025-04-06 09:12:32,727 [INFO] 🚀 Product Orchestrator gestartet.
+2025-04-06 09:12:32,728 [INFO] ====== WebDriver manager ======
+2025-04-06 09:12:34,410 [INFO] Get LATEST chromedriver version for google-chrome
+2025-04-06 09:12:34,873 [INFO] Get LATEST chromedriver version for google-chrome
+2025-04-06 09:12:35,220 [INFO] Driver [C:\Users\sebas\.wdm\drivers\chromedriver\win64\135.0.7049.42\chromedriver-win32/chromedriver.exe] found in cache
+2025-04-06 09:12:35,222 [DEBUG] Skipping Selenium Manager; path to chrome driver specified in Service class: C:\Users\sebas\.wdm\drivers\chromedriver\win64\135.0.7049.42\chromedriver-win32/chromedriver.exe
+2025-04-06 09:12:35,344 [DEBUG] Started executable: `C:\Users\sebas\.wdm\drivers\chromedriver\win64\135.0.7049.42\chromedriver-win32/chromedriver.exe` in a child process with pid: 12428 using 0 to output -3
+2025-04-06 09:12:36,690 [INFO] 🔧 Verwende ChromeDriver: C:\Users\sebas\.wdm\drivers\chromedriver\win64\135.0.7049.42\chromedriver-win32/chromedriver.exe
+2025-04-06 09:12:44,103 [INFO] ✅ Verbindung zu Amazon erfolgreich!
+2025-04-06 09:12:45,820 [INFO] 🍪 Cookies erfolgreich gesetzt.
+2025-04-06 09:12:45,821 [INFO] 📦 Starte Produktscraping...
+2025-04-06 09:12:45,853 [INFO] 🔻 Schließe WebDriver...
+2025-04-06 09:12:48,059 [INFO] ✅ WebDriver beendet.
+2025-04-06 09:12:48,059 [WARNING] ALL PRODUCTS ARE SCRAPED TODAY
+2025-04-06 09:12:48,060 [INFO] ##############################################################################
+2025-04-06 09:12:48,060 [INFO] ##############################################################################
+2025-04-06 09:12:48,060 [INFO] 
+📊 Scraping abgeschlossen:
+2025-04-06 09:12:48,061 [INFO] ⏱️ Gesamtzeit: 0m 2s
+2025-04-06 09:12:48,061 [INFO] ⏲️ Durchschnitt pro Produkt: 0.00s
+2025-04-06 09:12:48,062 [INFO] 📦 Erfolgreich: 0
+2025-04-06 09:12:48,062 [INFO] ❌ Fehlgeschlagen: 0
+2025-04-06 09:12:48,063 [INFO] 📝 Log-Datei: C:\Users\sebas\Desktop\amascrape\backend\scraper\logs\scraping-2025-04-06_09-12-32.txt
+2025-04-06 09:12:48,064 [INFO] 🧨 Fehlgeschlagene Produkte: C:\Users\sebas\Desktop\amascrape\backend\scraper\logs\fails-2025-04-06_09-12-32.txt
+2025-04-06 09:12:48,065 [INFO] 🔻 Schließe WebDriver...
+2025-04-06 09:12:52,187 [WARNING] Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000002D35A979BD0>: Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte')': /session/4f9ae6c31b61bc5f856e80d4cbc427b2
+2025-04-06 09:12:56,271 [WARNING] Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000002D35A979D10>: Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte')': /session/4f9ae6c31b61bc5f856e80d4cbc427b2
+2025-04-06 09:13:00,378 [WARNING] Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000002D35AD609D0>: Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte')': /session/4f9ae6c31b61bc5f856e80d4cbc427b2
+2025-04-06 09:13:08,536 [INFO] ✅ WebDriver beendet.
