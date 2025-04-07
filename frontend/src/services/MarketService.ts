@@ -192,64 +192,37 @@ class MarketService {
   }
 
   static async getLoadingClusters(): Promise<
-  {
-    id: number;
-    title: string;
-    status: string;
-    cluster_type: string;
-  }[]
-> {
-  try {
-    const token = localStorage.getItem(this.TOKEN_KEY);
-    if (!token) throw new Error("Kein Token vorhanden. Bitte einloggen.");
-
-    const response = await fetch(`${API_URL}/scraping/get-loading-clusters`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    });
-
-    if (!response.ok)
-      throw new Error("Fehler beim Abrufen der laufenden Scraping-Cluster.");
-
-    const data = await response.json();
-
-    if (!Array.isArray(data)) {
-      return [];
-    }
-
-    return data;
-  } catch (error) {
-    console.error(
-      "[MarketService] Fehler bei getLoadingClusters:",
-      formatError(error)
-    );
-    return [];
-  }
-}
-
-
-  static async getProductChanges(asin: string): Promise<any[]> {
+    {
+      id: number;
+      title: string;
+      status: string;
+      cluster_type: string;
+    }[]
+  > {
     try {
-      const response = await fetch(
-        `${API_URL}/products/product-changes/${asin}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const token = localStorage.getItem(this.TOKEN_KEY);
+      if (!token) throw new Error("Kein Token vorhanden. Bitte einloggen.");
 
-      if (!response.ok) {
-        throw new Error("Fehler beim Abrufen der Produktänderungen.");
+      const response = await fetch(`${API_URL}/scraping/get-loading-clusters`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok)
+        throw new Error("Fehler beim Abrufen der laufenden Scraping-Cluster.");
+
+      const data = await response.json();
+
+      if (!Array.isArray(data)) {
+        return [];
       }
 
-      return await response.json();
+      return data;
     } catch (error) {
       console.error(
-        "[MarketService] Product changes error:",
+        "[MarketService] Fehler bei getLoadingClusters:",
         formatError(error)
       );
       return [];
@@ -270,12 +243,12 @@ class MarketService {
         },
         body: JSON.stringify({ asin, market_id: marketId }),
       });
-  
+
       if (!response.ok) {
         const errText = await response.text();
         throw new Error(`Failed to add ASIN: ${errText}`);
       }
-  
+
       const data = await response.json();
       return { success: true, message: data.message };
     } catch (error) {
@@ -283,7 +256,6 @@ class MarketService {
       return { success: false, message: formatError(error) };
     }
   }
-  
 }
 
 export default MarketService;

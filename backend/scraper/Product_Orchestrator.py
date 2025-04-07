@@ -295,7 +295,7 @@ class Product_Orchestrator:
                                 store=data.get("store"),
                                 manufacturer=data.get("manufacturer"),
                                 change_date=datetime.now(timezone.utc),
-                                changes=" | ".join(changes)
+                                changes=",".join(changes)
                             )
                             db.add(pc)
                             product.product_changes.append(pc)

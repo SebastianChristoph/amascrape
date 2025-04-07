@@ -89,7 +89,7 @@ class AmazonProductScraper:
                 self.warning_callback(
                     self.asin,
                     self.url,
-                    "\t⚠️ Keine Rank-Informationen in Product-Info-Box vorhanden.",
+                    f"\t⚠️ Keine Rank-Informationen in Product-Info-Box vorhanden. (Product Info Box: {self.product_info_box_content})",
                     self.get_location(),
                     warning_type="rank_in_product_box_missing"
                 )
@@ -344,16 +344,16 @@ class AmazonProductScraper:
         if len(info) > 0:
             self.log("\tTECHNICAL DETAIL BOX")
             self.log(info)
-        else:
-            # Keine technischen Details gefunden → Warnung
-            if self.warning_callback:
-                self.warning_callback(
-                    self.asin,
-                    self.url,
-                    "\t⚠️ Keine technischen Details gefunden.",
-                    self.get_location(),
-                    warning_type="technical_info_missing"
-                )
+        # else:
+        #     # Keine technischen Details gefunden → Warnung
+        #     if self.warning_callback:
+        #         self.warning_callback(
+        #             self.asin,
+        #             self.url,
+        #             "\t⚠️ Keine technischen Details gefunden.",
+        #             self.get_location(),
+        #             warning_type="technical_info_missing"
+        #         )
 
         return info
 

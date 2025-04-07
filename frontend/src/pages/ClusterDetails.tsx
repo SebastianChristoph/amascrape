@@ -23,8 +23,9 @@ import TopSuggestions from "../components/details/TopSuggestions";
 import PrimaryLineDivider from "../components/PrimaryLineDivider";
 import { useSnackbar } from "../providers/SnackbarProvider";
 import ChartDataService from "../services/ChartDataService";
-import MarketService from "../services/MarketService";
+import ProductService from "../services/ProductService";
 import { fallbackIcon, iconMap } from "../utils/iconUtils";
+import MarketService from "../services/MarketService";
 
 interface ProductType {
   asin: string; // ✅ Ändere 'id' zu 'asin'
@@ -87,9 +88,9 @@ export default function ClusterDetails() {
   const handleShowDetails = async (asin: string) => {
     setSelectedAsin(asin);
     setOpenBackdrop(true);
-
+  
     try {
-      const changes = await MarketService.getProductChanges(asin);
+      const changes = await ProductService.getProductChanges(asin); // ✅ neue Methode
       setProductChanges(changes);
     } catch (error) {
       console.error("Fehler beim Laden der Produktänderungen:", error);
@@ -395,14 +396,33 @@ export default function ClusterDetails() {
         </Box>
       </Box>
       <Backdrop
+        sx={{ 
+          zIndex: 1300,  // Niedrigerer z-index als der Standard-Tooltip
+          color: '#fff',
+          backgroundColor: 'rgba(0, 0, 0, 0.85)'
+        }}
         open={openBackdrop}
         onClick={handleCloseBackdrop}
-        sx={{ zIndex: 9999, color: "#fff" }}
       >
-        <ProductDetailTable
-          productChanges={productChanges}
-          formatCurrency={formatCurrency}
-        />
+        <Box
+          onClick={(e) => e.stopPropagation()}
+          sx={{
+            width: "100%",
+            maxWidth: "100%",
+            maxHeight: "90vh",
+            overflow: "auto",
+            backgroundColor: "background.paper",
+            borderRadius: 2,
+            p: 2,
+          }}
+        >
+          <ProductDetailTable
+            productChanges={productChanges}
+            formatCurrency={formatCurrency}
+            asin={selectedAsin || ""}
+            onClose={handleCloseBackdrop}
+          />
+        </Box>
       </Backdrop>
 
       {addAsinDialogOpen && (

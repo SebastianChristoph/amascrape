@@ -1,441 +1,452 @@
 import {
   Box,
-  styled,
+  Paper,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
   TableRow,
-  Tooltip,
   Typography,
+  Tooltip,
+  ToggleButton,
+  ToggleButtonGroup,
+  IconButton,
 } from "@mui/material";
-import { FiCircle, FiTrendingDown, FiTrendingUp } from "react-icons/fi";
+import { useTheme } from "@mui/material/styles";
+import { useEffect, useState } from "react";
+import ProductService from "../../services/ProductService";
+import CustomLineChart from "../charts/CustomLineChart";
+import { IoClose } from "react-icons/io5";
 
 interface ProductChange {
+  id: number;
+  asin: string;
+  title: string | null;
+  price: number | null;
+  main_category: string | null;
+  second_category: string | null;
+  main_category_rank: number | null;
+  second_category_rank: number | null;
   change_date: string;
-  title: string;
-  price: number;
-  main_category: string;
-  second_category: string;
-  main_category_rank: number;
-  second_category_rank: number;
-  blm: number;
-  total: number;
   changes: string;
-  store: string;
-  manufacturer: string;
+  blm: number | null;
+  total: number | null;
+  img_path: string | null;
+  store: string | null;
+  manufacturer: string | null;
 }
 
 interface ProductDetailTableProps {
   productChanges: ProductChange[];
   formatCurrency: (value: number | null) => string;
+  asin: string;
+  onClose?: () => void;
 }
 
-const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
-  maxWidth: "80vw",
-  maxHeight: "80vh",
-  overflowY: "auto",
-  backgroundColor: theme.palette.background.paper,
-  boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-  borderRadius: "12px",
-  "& .MuiTable-root": {
-    borderCollapse: "separate",
-    borderSpacing: "0",
-  },
-}));
-
-const StyledTableHead = styled(TableHead)(({ theme }) => ({
-  position: "sticky",
-  top: 0,
-  zIndex: 1,
-  "& .MuiTableCell-head": {
-    backgroundColor: theme.palette.primary.main,
-    color: theme.palette.primary.contrastText,
-    fontWeight: 600,
-    padding: "16px",
-    whiteSpace: "nowrap",
-  },
-}));
-
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  "&:nth-of-type(odd)": {
-    backgroundColor: theme.palette.action.hover,
-  },
-  "&:hover": {
-    backgroundColor: theme.palette.action.selected,
-    transition: "background-color 0.2s ease",
-  },
-  "& .MuiTableCell-root": {
-    padding: "12px 16px",
-    borderBottom: `1px solid ${theme.palette.divider}`,
-  },
-}));
-
-const EmptyCell = styled(Typography)(({ theme }) => ({
-  color: theme.palette.text.disabled,
-  fontStyle: "italic",
-}));
-
-const ChangedCell = styled(TableCell)<{ waschanged?: number }>(
-  ({ theme, waschanged }) => ({
-    position: "relative",
-    backgroundColor: waschanged
-      ? `${theme.palette.action.selected}40`
-      : "transparent",
-  })
-);
-
-const ChangeIndicator = styled(Box)(({ theme }) => ({
-  position: "absolute",
-  top: 2,
-  right: 2,
-  padding: "2px",
-  borderRadius: "0 0 0 4px",
-  backgroundColor: theme.palette.background.paper,
-  border: `1px solid ${theme.palette.primary.main}`,
-  color: theme.palette.primary.main,
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  opacity: 0.85,
-  "& svg": {
-    fontSize: "0.8rem",
-  },
-}));
-
-const Legend = styled(Box)(({ theme }) => ({
-  display: "flex",
-  alignItems: "center",
-  gap: theme.spacing(3),
-  padding: theme.spacing(2),
-  marginBottom: theme.spacing(2),
-  backgroundColor: theme.palette.background.paper,
-  borderRadius: theme.shape.borderRadius,
-  boxShadow: "0 1px 3px rgba(0, 0, 0, 0.1)",
-  "& .legend-item": {
-    display: "flex",
-    alignItems: "center",
-    gap: theme.spacing(0.5),
-    color: theme.palette.text.secondary,
-    fontSize: "0.875rem",
-  },
-}));
-
-interface ValueWithChangeProps {
-  current: number;
-  previous: number | undefined;
-  formatValue?: (value: number) => string;
-  isInverseLogic?: boolean;
+interface ChartData {
+  x_axis: string[];
+  series: { name: string; data: number[] }[];
 }
+
+const ChangeIndicator = ({ current, previous }: { current: number | null, previous: number | null | undefined }) => {
+  if (!current || !previous || current === previous) {
+    return (
+      <Box
+        component="span"
+        sx={{
+          display: 'inline-block',
+          width: '8px',
+          height: '8px',
+          ml: 1,
+          visibility: 'hidden' // Hide but keep space
+        }}
+      />
+    );
+  }
+  
+  const increased = current > previous;
+  return (
+    <Box
+      component="span"
+      sx={{
+        display: 'inline-block',
+        width: '8px',
+        height: '8px',
+        borderRadius: '50%',
+        backgroundColor: increased ? 'success.main' : 'error.main',
+        ml: 1,
+      }}
+    />
+  );
+};
 
 const ValueWithChange = ({
   current,
   previous,
-  formatValue = (v) => v.toString(),
+  formatValue = (v: number | null) => v?.toString() ?? '-',
   isInverseLogic = false,
-}: ValueWithChangeProps) => {
-  const hasChanged = previous !== undefined && current !== previous;
-  const increased = previous !== undefined && current > previous;
-  const isPositiveChange = isInverseLogic ? !increased : increased;
+}: {
+  current: number | null;
+  previous: number | null | undefined;
+  formatValue?: (value: number | null) => string;
+  isInverseLogic?: boolean;
+}) => {
+  if (current === null) {
+    return (
+      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', minWidth: '80px' }}>
+        <Typography sx={{ fontSize: 'inherit' }}>-</Typography>
+        <ChangeIndicator current={null} previous={null} />
+      </Box>
+    );
+  }
 
   return (
-    <Box
-      sx={{
-        display: "grid",
-        gridTemplateColumns: "auto 16px", // Fixed width for value and icon
-        gap: 1,
-        justifyContent: "end",
-        alignItems: "center",
-        minWidth: "100px",
-      }}
-    >
-      <Typography
-        sx={{
-          color: hasChanged
-            ? isPositiveChange
-              ? "success.main"
-              : "error.main"
-            : "text.primary",
-          textAlign: "right",
-        }}
-      >
+    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', minWidth: '80px' }}>
+      <Typography sx={{ fontSize: 'inherit' }}>
         {formatValue(current)}
       </Typography>
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          width: "16px",
-          height: "16px",
+      <ChangeIndicator 
+        current={isInverseLogic ? (current ? -current : null) : current} 
+        previous={isInverseLogic ? (previous ? -previous : null) : previous} 
+      />
+    </Box>
+  );
+};
+
+const displayValue = (value: string | null | undefined): string => {
+  if (value === null || value === undefined) return '-';
+  const strValue = String(value);
+  return strValue.trim() === '' ? '-' : strValue;
+};
+
+const TruncatedText = ({ text }: { text: string | null }) => {
+  if (!text) return <Typography sx={{ fontSize: 'inherit' }}>-</Typography>;
+  
+  const truncated = text.length > 20 ? `${text.substring(0, 20)}...` : text;
+  
+  return text.length > 20 ? (
+    <Tooltip 
+      title={text} 
+      arrow
+      PopperProps={{
+        sx: {
+          zIndex: 99999
+        }
+      }}
+    >
+      <Typography sx={{ fontSize: 'inherit' }}>{truncated}</Typography>
+    </Tooltip>
+  ) : (
+    <Typography sx={{ fontSize: 'inherit' }}>{text}</Typography>
+  );
+};
+
+const CategoryText = ({ text }: { text: string | null }) => {
+  if (!text) return <Typography sx={{ fontSize: 'inherit' }}>-</Typography>;
+  
+  return text.length > 30 ? (
+    <Box sx={{ 
+      maxWidth: '200px',
+      whiteSpace: 'normal',
+      wordBreak: 'break-word'
+    }}>
+      <Tooltip 
+        title={text} 
+        arrow
+        PopperProps={{
+          sx: {
+            zIndex: 99999
+          }
         }}
       >
-        {hasChanged && (
-          <Box
-            component="span"
-            sx={{
-              color: isPositiveChange ? "success.main" : "error.main",
-              display: "flex",
-              alignItems: "center",
-            }}
-          >
-            {increased ? (
-              <FiTrendingUp size={16} />
-            ) : (
-              <FiTrendingDown size={16} />
-            )}
-          </Box>
-        )}
-      </Box>
+        <Typography sx={{ fontSize: 'inherit' }}>{text}</Typography>
+      </Tooltip>
     </Box>
+  ) : (
+    <Typography sx={{ fontSize: 'inherit' }}>{text}</Typography>
   );
 };
 
 export default function ProductDetailTable({
   productChanges,
   formatCurrency,
+  asin,
+  onClose,
 }: ProductDetailTableProps) {
+  const theme = useTheme();
+  const [chartData, setChartData] = useState<ChartData | null>(null);
+  const [selectedSeries, setSelectedSeries] = useState<string>('price');
+
+  useEffect(() => {
+    const fetchChartData = async () => {
+      try {
+        const data = await ProductService.getProductChartData(asin);
+        setChartData(data);
+        console.log('Product Chart Data:', data);
+      } catch (error) {
+        console.error('Error fetching chart data:', error);
+      }
+    };
+
+    if (asin) {
+      fetchChartData();
+    }
+  }, [asin]);
+
+  const handleSeriesChange = (event: React.MouseEvent<HTMLElement>, newSeries: string) => {
+    if (newSeries !== null) {
+      setSelectedSeries(newSeries);
+    }
+  };
+
+  const getSelectedSeriesData = () => {
+    if (!chartData) return [];
+    
+    if (selectedSeries === 'price_vs_rank') {
+      const priceData = chartData.series.find(s => s.name === 'price');
+      const rankData = chartData.series.find(s => s.name === 'main_category_rank');
+      
+      return [
+        {
+          ...priceData!,
+          yAxisKey: 'price'
+        },
+        {
+          ...rankData!,
+          yAxisKey: 'rank'
+        }
+      ];
+    }
+    
+    return [{
+      ...chartData.series.find(s => s.name === selectedSeries)!,
+      yAxisKey: 'price'
+    }];
+  };
+
+  // Debug: Log the product changes
+  console.log('Product Changes:', {
+    length: productChanges.length,
+    firstChange: productChanges[0],
+    allChanges: productChanges
+  });
+
   return (
-    <Box>
-      <Legend>
-        <Box className="legend-item">
-          <FiCircle size={8} color="currentColor" /> Value changed
+    <Paper 
+      elevation={1}
+      sx={{
+        backgroundColor: 'background.paper',
+        borderRadius: 2,
+        border: '1px solid rgba(255, 255, 255, 0.25)',
+        maxWidth: '100%',
+        width: '100%',
+        position: 'relative',
+        '& .MuiTableCell-root': {
+          fontSize: '0.75rem',
+          padding: '4px 8px',
+        },
+        '& .MuiTableCell-head': {
+          fontWeight: 600,
+          backgroundColor: theme.palette.background.paper,
+          whiteSpace: 'nowrap',
+        },
+        '& .table-cell-changes': {
+          minWidth: '400px',
+          maxWidth: '600px',
+          whiteSpace: 'normal',
+          wordBreak: 'break-word',
+        },
+        '& .table-cell-nowrap': {
+          whiteSpace: 'nowrap',
+        },
+        '& .table-cell-category': {
+          minWidth: '150px',
+          maxWidth: '200px',
+        }
+      }}
+    >
+      {/* Close Button */}
+      {onClose && (
+        <IconButton
+          onClick={onClose}
+          sx={{
+            position: 'absolute',
+            right: 8,
+            top: 8,
+            zIndex: 2,
+            color: theme.palette.text.secondary,
+            '&:hover': {
+              color: theme.palette.text.primary,
+            },
+          }}
+        >
+          <IoClose size={24} />
+        </IconButton>
+      )}
+
+      {/* Chart Section */}
+      {chartData && (
+        <Box sx={{ p: 2 }}>
+          <Box sx={{ mb: 2, display: 'flex', justifyContent: 'center' }}>
+            <ToggleButtonGroup
+              value={selectedSeries}
+              exclusive
+              onChange={handleSeriesChange}
+              aria-label="chart data selection"
+            >
+              {chartData.series.map((series) => (
+                <ToggleButton 
+                  key={series.name} 
+                  value={series.name}
+                  sx={{
+                    textTransform: 'none',
+                    '&.Mui-selected': {
+                      backgroundColor: theme.palette.primary.main,
+                      color: 'white',
+                      '&:hover': {
+                        backgroundColor: theme.palette.primary.dark,
+                      },
+                    },
+                  }}
+                >
+                  {series.name === 'blm' ? 'Bought Last Month' :
+                   series.name === 'main_category_rank' ? 'Main Category Rank' :
+                   series.name === 'second_category_rank' ? 'Second Category Rank' :
+                   'Price'}
+                </ToggleButton>
+              ))}
+              <ToggleButton 
+                value="price_vs_rank"
+                sx={{
+                  textTransform: 'none',
+                  '&.Mui-selected': {
+                    backgroundColor: theme.palette.primary.main,
+                    color: 'white',
+                    '&:hover': {
+                      backgroundColor: theme.palette.primary.dark,
+                    },
+                  },
+                }}
+              >
+                Price vs Rank
+              </ToggleButton>
+            </ToggleButtonGroup>
+          </Box>
+          <CustomLineChart
+            x_axis={chartData.x_axis.map(date => new Date(date).getTime())}
+            series={getSelectedSeriesData()}
+            showDualAxis={selectedSeries === 'price_vs_rank'}
+          />
         </Box>
-        <Box className="legend-item">
-          <FiTrendingUp size={14} color="currentColor" /> Value increased
-        </Box>
-        <Box className="legend-item">
-          <FiTrendingDown size={14} color="currentColor" /> Value decreased
-        </Box>
-        <Box className="legend-item" sx={{ fontStyle: "italic" }}>
-          * For ranks, a lower value means a better position
-        </Box>
-      </Legend>
-      <StyledTableContainer>
-        <Table>
-          <StyledTableHead>
+      )}
+
+      <TableContainer sx={{ maxHeight: '80vh' }}>
+        <Table stickyHeader size="small">
+          <TableHead>
             <TableRow>
-              <TableCell>Change Date</TableCell>
-              <TableCell>Title</TableCell>
-              <TableCell>Price</TableCell>
-              <TableCell>Store</TableCell>
-              <TableCell>Manufacturer</TableCell>
-              <TableCell>Main Category</TableCell>
-              <TableCell>Sub Category</TableCell>
-              <TableCell align="right">Rank (Main)</TableCell>
-              <TableCell align="right">Rank (Sub)</TableCell>
-              <TableCell align="right">BLM</TableCell>
-              <TableCell align="right">Total Revenue</TableCell>
-              <TableCell>Changes</TableCell>
+              <TableCell className="table-cell-nowrap">Change Date</TableCell>
+              <TableCell className="table-cell-nowrap">ID</TableCell>
+              <TableCell className="table-cell-nowrap">Title</TableCell>
+              <TableCell className="table-cell-nowrap">Image</TableCell>
+              <TableCell className="table-cell-nowrap" align="right">Price</TableCell>
+              <TableCell className="table-cell-category">Main Category</TableCell>
+              <TableCell className="table-cell-category">Second Category</TableCell>
+              <TableCell className="table-cell-nowrap" align="right">Main Rank</TableCell>
+              <TableCell className="table-cell-nowrap" align="right">Second Rank</TableCell>
+              <TableCell className="table-cell-nowrap" align="right">BLM</TableCell>
+              <TableCell className="table-cell-nowrap" align="right">Total</TableCell>
+              <TableCell className="table-cell-nowrap">Store</TableCell>
+              <TableCell className="table-cell-nowrap">Manufacturer</TableCell>
+              <TableCell className="table-cell-changes">Changes</TableCell>
             </TableRow>
-          </StyledTableHead>
+          </TableHead>
           <TableBody>
-            {productChanges.length > 0 ? (
-              productChanges.map((change, index) => {
-                const previousChange =
-                  index < productChanges.length - 1
-                    ? productChanges[index + 1]
-                    : undefined;
-                const changedFields = change.changes
-                  ? change.changes.split(", ")
-                  : [];
-                {console.log("change:", change)}
+            {productChanges.map((change, index) => {
+              const previousChange = index < productChanges.length - 1 ? productChanges[index + 1] : undefined;
+              
                 return (
-                  <StyledTableRow key={index}>
-                    <ChangedCell>{change.change_date}</ChangedCell>
-                    <ChangedCell
-                      waschanged={changedFields.includes("title") ? 1 : 0}
-                    >
-                      {change.title || <EmptyCell>No title</EmptyCell>}
-                      {changedFields.includes("title") && (
-                        <Tooltip title="Wert wurde geändert">
-                          <ChangeIndicator>
-                            <FiCircle size={10} />
-                          </ChangeIndicator>
-                        </Tooltip>
-                      )}
-                    </ChangedCell>
-                    <ChangedCell
-                      waschanged={changedFields.includes("price") ? 1 : 0}
-                    >
-                      {change.price ? (
+                <TableRow 
+                  key={`${change.id}-${change.change_date}`}
+                  sx={{
+                    '&:nth-of-type(odd)': {
+                      backgroundColor: 'action.hover',
+                    },
+                    '&:hover': {
+                      backgroundColor: 'action.selected',
+                    },
+                  }}
+                >
+                  <TableCell className="table-cell-nowrap">{change.change_date}</TableCell>
+                  <TableCell className="table-cell-nowrap">{change.id}</TableCell>
+                  <TableCell className="table-cell-nowrap">
+                    <TruncatedText text={change.title} />
+                  </TableCell>
+                  <TableCell className="table-cell-nowrap">
+                    {change.img_path ? (
+                      <Box
+                        component="img"
+                        src={change.img_path}
+                        alt={change.title || 'Product image'}
+                        sx={{
+                          width: '25px',
+                          height: '25px',
+                          objectFit: 'contain',
+                        }}
+                      />
+                    ) : (
+                      '-'
+                    )}
+                  </TableCell>
+                  <TableCell className="table-cell-nowrap" align="right">
                         <ValueWithChange
                           current={change.price}
                           previous={previousChange?.price}
                           formatValue={formatCurrency}
                         />
-                      ) : (
-                        <EmptyCell>-</EmptyCell>
-                      )}
-                      {changedFields.includes("price") && (
-                        <Tooltip title="Wert wurde geändert">
-                          <ChangeIndicator>
-                            <FiCircle size={10} />
-                          </ChangeIndicator>
-                        </Tooltip>
-                      )}
-                    </ChangedCell>
-                    <ChangedCell
-                      waschanged={changedFields.includes("store") ? 1 : 0}
-                      
-                    >
-                      {change.store || <EmptyCell>No title</EmptyCell>}
-                      {changedFields.includes("store") && (
-                        <Tooltip title="Wert wurde geändert">
-                          <ChangeIndicator>
-                            <FiCircle size={10} />
-                          </ChangeIndicator>
-                        </Tooltip>
-                      )}
-                    </ChangedCell>
-                    <ChangedCell
-                      waschanged={
-                        changedFields.includes("manufacturer") ? 1 : 0
-                      }
-                    >
-                      {change.manufacturer || <EmptyCell>No title</EmptyCell>}
-                      {changedFields.includes("manufacturer") && (
-                        <Tooltip title="Wert wurde geändert">
-                          <ChangeIndicator>
-                            <FiCircle size={10} />
-                          </ChangeIndicator>
-                        </Tooltip>
-                      )}
-                    </ChangedCell>
-                    <ChangedCell
-                      waschanged={
-                        changedFields.includes("main_category") ? 1 : 0
-                      }
-                    >
-                      {change.main_category || <EmptyCell>-</EmptyCell>}
-                      {changedFields.includes("main_category") && (
-                        <Tooltip title="Wert wurde geändert">
-                          <ChangeIndicator>
-                            <FiCircle size={10} />
-                          </ChangeIndicator>
-                        </Tooltip>
-                      )}
-                    </ChangedCell>
-                    <ChangedCell
-                      waschanged={
-                        changedFields.includes("second_category") ? 1 : 0
-                      }
-                    >
-                      {change.second_category || <EmptyCell>-</EmptyCell>}
-                      {changedFields.includes("second_category") && (
-                        <Tooltip title="Wert wurde geändert">
-                          <ChangeIndicator>
-                            <FiCircle size={10} />
-                          </ChangeIndicator>
-                        </Tooltip>
-                      )}
-                    </ChangedCell>
-                    <ChangedCell
-                      align="right"
-                      waschanged={
-                        changedFields.includes("main_category_rank") ? 1 : 0
-                      }
-                    >
-                      {change.main_category_rank ? (
+                  </TableCell>
+                  <TableCell className="table-cell-category">
+                    <CategoryText text={change.main_category} />
+                  </TableCell>
+                  <TableCell className="table-cell-category">
+                    <CategoryText text={change.second_category} />
+                  </TableCell>
+                  <TableCell className="table-cell-nowrap" align="right">
                         <ValueWithChange
                           current={change.main_category_rank}
                           previous={previousChange?.main_category_rank}
                           isInverseLogic={true}
                         />
-                      ) : (
-                        <EmptyCell>-</EmptyCell>
-                      )}
-                      {changedFields.includes("main_category_rank") && (
-                        <Tooltip title="Wert wurde geändert">
-                          <ChangeIndicator>
-                            <FiCircle size={10} />
-                          </ChangeIndicator>
-                        </Tooltip>
-                      )}
-                    </ChangedCell>
-                    <ChangedCell
-                      align="right"
-                      waschanged={
-                        changedFields.includes("second_category_rank") ? 1 : 0
-                      }
-                    >
-                      {change.second_category_rank ? (
+                  </TableCell>
+                  <TableCell className="table-cell-nowrap" align="right">
                         <ValueWithChange
                           current={change.second_category_rank}
                           previous={previousChange?.second_category_rank}
                           isInverseLogic={true}
                         />
-                      ) : (
-                        <EmptyCell>-</EmptyCell>
-                      )}
-                      {changedFields.includes("second_category_rank") && (
-                        <Tooltip title="Wert wurde geändert">
-                          <ChangeIndicator>
-                            <FiCircle size={10} />
-                          </ChangeIndicator>
-                        </Tooltip>
-                      )}
-                    </ChangedCell>
-                    <ChangedCell
-                      align="right"
-                      waschanged={changedFields.includes("blm") ? 1 : 0}
-                    >
-                      {change.blm ? (
+                  </TableCell>
+                  <TableCell className="table-cell-nowrap" align="right">
                         <ValueWithChange
                           current={change.blm}
                           previous={previousChange?.blm}
                         />
-                      ) : (
-                        <EmptyCell>-</EmptyCell>
-                      )}
-                      {changedFields.includes("blm") && (
-                        <Tooltip title="Wert wurde geändert">
-                          <ChangeIndicator>
-                            <FiCircle size={10} />
-                          </ChangeIndicator>
-                        </Tooltip>
-                      )}
-                    </ChangedCell>
-                    <ChangedCell
-                      align="right"
-                      waschanged={changedFields.includes("total") ? 1 : 0}
-                    >
-                      {change.total ? (
+                  </TableCell>
+                  <TableCell className="table-cell-nowrap" align="right">
                         <ValueWithChange
                           current={change.total}
                           previous={previousChange?.total}
                           formatValue={formatCurrency}
                         />
-                      ) : (
-                        <EmptyCell>-</EmptyCell>
-                      )}
-                      {changedFields.includes("total") && (
-                        <Tooltip title="Wert wurde geändert">
-                          <ChangeIndicator>
-                            <FiCircle size={10} />
-                          </ChangeIndicator>
-                        </Tooltip>
-                      )}
-                    </ChangedCell>
-                    <ChangedCell>
-                      {change.changes || <EmptyCell>No changes</EmptyCell>}
-                    </ChangedCell>
-                  </StyledTableRow>
-                );
-              })
-            ) : (
-              <StyledTableRow>
-                <TableCell colSpan={10} align="center">
-                  <Typography variant="body1" color="text.secondary" py={4}>
-                    No Product Changes Found
-                  </Typography>
-                </TableCell>
-              </StyledTableRow>
-            )}
+                  </TableCell>
+                  <TableCell className="table-cell-nowrap">{displayValue(change.store)}</TableCell>
+                  <TableCell className="table-cell-nowrap">{displayValue(change.manufacturer)}</TableCell>
+                  <TableCell className="table-cell-changes">{change.changes}</TableCell>
+                </TableRow>
+              );
+            })}
           </TableBody>
         </Table>
-      </StyledTableContainer>
-    </Box>
+      </TableContainer>
+    </Paper>
   );
 }
