@@ -89,7 +89,10 @@ class Product_Orchestrator:
         chrome_options.add_argument(f'--user-data-dir=/tmp/chrome-user-data-{cluster_to_scrape}-{unique_id}')
 
         if platform.system() == "Windows":
-            service = Service(ChromeDriverManager().install())
+            chromedriver_path = ChromeDriverManager().install()
+            if not chromedriver_path.endswith("chromedriver.exe"):
+                chromedriver_path = str(Path(chromedriver_path).parent / "chromedriver.exe")
+            service = Service(executable_path=chromedriver_path)
         else:
             chromedriver_path = shutil.which("chromedriver")
             if not chromedriver_path:

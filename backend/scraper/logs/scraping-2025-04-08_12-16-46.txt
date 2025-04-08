@@ -1,0 +1,4 @@
+2025-04-08 12:16:46,602 [INFO] 🚀 Product Orchestrator gestartet.
+2025-04-08 12:16:46,603 [INFO] ====== WebDriver manager ======
+2025-04-08 12:16:47,556 [INFO] Driver [C:\Users\sebas\.wdm\drivers\chromedriver\win32\135.0.7049.41\chromedriver-win32/THIRD_PARTY_NOTICES.chromedriver] found in cache
+2025-04-08 12:16:47,557 [DEBUG] Skipping Selenium Manager; path to chrome driver specified in Service class: C:\Users\sebas\.wdm\drivers\chromedriver\win32\135.0.7049.41\chromedriver-win32/THIRD_PARTY_NOTICES.chromedriver
