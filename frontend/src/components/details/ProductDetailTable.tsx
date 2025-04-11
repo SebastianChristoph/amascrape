@@ -278,23 +278,24 @@ export default function ProductDetailTable({
         }
       }}
     >
-      {/* Close Button */}
+      {/* Close Button and ASIN */}
       {onClose && (
-        <IconButton
-          onClick={onClose}
-          sx={{
-            position: 'absolute',
-            right: 8,
-            top: 8,
-            zIndex: 2,
-            color: theme.palette.text.secondary,
-            '&:hover': {
-              color: theme.palette.text.primary,
-            },
-          }}
-        >
-          <IoClose size={24} />
-        </IconButton>
+        <Box sx={{ position: 'absolute', right: 8, top: 8, zIndex: 2, display: 'flex', alignItems: 'center' }}>
+          <Typography sx={{ mr: 1, color: theme.palette.text.secondary, fontSize: '0.875rem' }}>
+            ASIN: {asin}
+          </Typography>
+          <IconButton
+            onClick={onClose}
+            sx={{
+              color: theme.palette.text.secondary,
+              '&:hover': {
+                color: theme.palette.text.primary,
+              },
+            }}
+          >
+            <IoClose size={24} />
+          </IconButton>
+        </Box>
       )}
 
       {/* Chart Section */}
