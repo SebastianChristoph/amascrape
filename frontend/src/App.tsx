@@ -65,7 +65,7 @@ function App() {
               }
             >
               <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/cluster/:clusterId" element={<ClusterDetails />} />
+              <Route path="/cluster/:clusterId" element={<ClusterDetails mode={mode} />} />
               <Route path="/add-market-cluster" element={<AddMarketCluster />} />
               <Route path="/cluster-info" element={<ClusterInfo />} />
               <Route path="/admin/logs/:filename" element={<LogViewer />} />
