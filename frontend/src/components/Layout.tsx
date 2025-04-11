@@ -198,7 +198,7 @@ export default function Layout({
                 </Box>
               </Tooltip>
 
-              <Tooltip
+              {/* <Tooltip
                 title="My Wallet"
                 placement="right"
                 disableHoverListener={drawerOpen}
@@ -226,7 +226,7 @@ export default function Layout({
                     <Typography variant="body2" sx={{ color: "#FFFFFF" }}>My Wallet</Typography>
                   )}
                 </Box>
-              </Tooltip>
+              </Tooltip> */}
             </Box>
           )}
         </Box>

@@ -28,7 +28,9 @@ const StatCardLarge: React.FC<StatCardProps> = ({
   const formattedValue = isCurrency
     ? new Intl.NumberFormat("en-US", {
         style: "currency",
-        currency: "USD",
+      currency: "USD",
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
       }).format(Number(value))
     : value;
   return (
