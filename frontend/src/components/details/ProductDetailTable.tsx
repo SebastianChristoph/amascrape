@@ -120,6 +120,16 @@ const displayValue = (value: string | null | undefined): string => {
   return strValue.trim() === '' ? '-' : strValue;
 };
 
+const formatDate = (dateString: string): string => {
+  if (!dateString) return '-';
+  try {
+    const date = new Date(dateString);
+    return date.toISOString().split('T')[0];
+  } catch (error) {
+    return dateString;
+  }
+};
+
 const TruncatedText = ({ text }: { text: string | null }) => {
   if (!text) return <Typography sx={{ fontSize: 'inherit' }}>-</Typography>;
   
@@ -346,7 +356,6 @@ export default function ProductDetailTable({
           <TableHead>
             <TableRow>
               <TableCell className="table-cell-nowrap">Change Date</TableCell>
-              <TableCell className="table-cell-nowrap">ID</TableCell>
               <TableCell className="table-cell-nowrap">Title</TableCell>
               <TableCell className="table-cell-nowrap">Image</TableCell>
               <TableCell className="table-cell-nowrap" align="right">Price</TableCell>
@@ -357,8 +366,6 @@ export default function ProductDetailTable({
               <TableCell className="table-cell-nowrap" align="right">BLM</TableCell>
               <TableCell className="table-cell-nowrap" align="right">Total</TableCell>
               <TableCell className="table-cell-nowrap">Store</TableCell>
-              <TableCell className="table-cell-nowrap">Manufacturer</TableCell>
-              <TableCell className="table-cell-changes">Changes</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -377,8 +384,7 @@ export default function ProductDetailTable({
                     },
                   }}
                 >
-                  <TableCell className="table-cell-nowrap">{change.change_date}</TableCell>
-                  <TableCell className="table-cell-nowrap">{change.id}</TableCell>
+                  <TableCell className="table-cell-nowrap">{formatDate(change.change_date)}</TableCell>
                   <TableCell className="table-cell-nowrap">
                     <TruncatedText text={change.title} />
                   </TableCell>
@@ -438,9 +444,19 @@ export default function ProductDetailTable({
                           formatValue={formatCurrency}
                         />
                   </TableCell>
-                  <TableCell className="table-cell-nowrap">{displayValue(change.store)}</TableCell>
-                  <TableCell className="table-cell-nowrap">{displayValue(change.manufacturer)}</TableCell>
-                  <TableCell className="table-cell-changes">{change.changes}</TableCell>
+                  <TableCell className="table-cell-nowrap">
+                    <Tooltip 
+                      title={change.manufacturer ? `Manufacturer: ${change.manufacturer}` : 'No manufacturer information'} 
+                      arrow
+                      PopperProps={{
+                        sx: {
+                          zIndex: 99999
+                        }
+                      }}
+                    >
+                      <Typography sx={{ fontSize: 'inherit' }}>{displayValue(change.store)}</Typography>
+                    </Tooltip>
+                  </TableCell>
                 </TableRow>
               );
             })}
