@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import {
   CategoryScale,
   Chart as ChartJS,
@@ -97,6 +97,7 @@ const Dashboard: React.FC = () => {
   }
 
   return (
+    <Container maxWidth="xl" sx={{ position: "relative", zIndex: 1, py: 4 }}>
     <Box
       sx={{
         minHeight: "100vh",
@@ -141,7 +142,8 @@ const Dashboard: React.FC = () => {
           )}
         </Box>
       )}
-    </Box>
+      </Box>
+      </Container>
   );
 };
 

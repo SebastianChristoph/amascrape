@@ -101,7 +101,7 @@ export default function Layout({
             )}
             {drawerOpen && (
               <Typography variant="h6" fontWeight="bold" sx={{ color: "#FFFFFF" }}>
-                MarketScope
+                MarktZone
               </Typography>
             )}
           </Box>
@@ -351,7 +351,7 @@ export default function Layout({
           }}
         >
           <Typography variant="body2">
-            © {new Date().getFullYear()} MarketScope
+            © {new Date().getFullYear()} MarktZone.io
           </Typography>
         </Box>
       </Box>
