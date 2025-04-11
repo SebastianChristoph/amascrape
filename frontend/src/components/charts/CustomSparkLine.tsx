@@ -32,18 +32,23 @@ export default function CustomSparkLine({ data }: CustomSparkLineProps) {
 
   const tooltipTitle = isProvided ? "Valid Data" : "No Data, generated with random data"
   return (
-    <Stack direction="row" sx={{ width: "100%", minWidth: 80, height: 50 }}>
-      <Tooltip title={tooltipTitle}>
-      <Box sx={{ flexGrow: 1 }}>
+    <Stack direction="row" sx={{ width: "100%", minWidth: 60, height: 40 }}>
+    <Tooltip title={tooltipTitle}>
+      <Box sx={{ flexGrow: 1, mt: 2 }}>
         <SparkLineChart
           data={sparklineData}
-          height={50}
+          height={30}
           showTooltip={false}
           curve="linear"
           colors={[sparklineColor]}
+          slotProps={{
+            line: {
+              strokeWidth: 1, // dünnere Linie
+            },
+          }}
         />
-        </Box>
-        </Tooltip>
-    </Stack>
+      </Box>
+    </Tooltip>
+  </Stack>
   );
 }

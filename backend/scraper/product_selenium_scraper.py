@@ -469,7 +469,7 @@ class AmazonProductScraper:
         manufacturer = self.product_info_box_content.get("Manufacturer") or \
                        self.technical_details_box_content.get("Manufacturer")
         store = self.get_store() or self.technical_details_box_content.get("Brand")
-        image_path = self.get_image_path()
+        img_path = self.get_image_path()
         location = self.get_location()
 
         if not title or price is None:
@@ -504,7 +504,7 @@ class AmazonProductScraper:
             "variants": variants,
             "variants_count": len(variants) if variants else 0,
             "store": store,
-            "image_url": image_path,
+            "img_path": img_path,
         }
         
         return data

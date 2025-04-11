@@ -183,7 +183,7 @@ class Product_Orchestrator:
 
         fields = [
             "title", "price", "main_category", "second_category",
-            "main_category_rank", "second_category_rank", "image_url",
+            "main_category_rank", "second_category_rank", "img_path",
             "blm", "total", "store", "manufacturer", "rating", "review_count"
         ]
 
@@ -292,7 +292,7 @@ class Product_Orchestrator:
                                 second_category=data.get("second_category"),
                                 main_category_rank=data.get("main_category_rank"),
                                 second_category_rank=data.get("second_category_rank"),
-                                img_path=data.get("image_url"),
+                                img_path=data.get("img_path"),
                                 blm=data.get("blm"),
                                 total=data.get("total"),
                                 store=data.get("store"),

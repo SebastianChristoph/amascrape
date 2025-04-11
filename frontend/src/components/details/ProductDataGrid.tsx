@@ -4,6 +4,7 @@ import {
   IconButton,
   Link,
   Tooltip,
+  Typography,
 } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { FaExternalLinkAlt, FaRegEye } from "react-icons/fa";
@@ -161,10 +162,18 @@ export default function ProductDataGrid({
       renderCell: (params) => renderWithNoData(params.value, formatCurrency),
     },
     {
-      field: "store",
-      headerName: "Store",
+      field: "brand",
+      headerName: "Brand",
       width: 120,
-      renderCell: (params) => renderWithNoData(params.value),
+      renderCell: (params) => {
+        return (
+        
+          <Tooltip title={`Manufacturer: ${params.row.manufacturer || "No Manufacturer"}`}>
+          <Typography>{params.value}</Typography>
+        </Tooltip>
+        
+        );
+      },
     },
     {
       field: "manufacturer",
@@ -273,7 +282,7 @@ export default function ProductDataGrid({
           title: product.title,
           price: product.price,
           manufacturer: product.manufacturer,
-          store: product.store,
+          brand: product.store,
           mainCategory: product.main_category,
           mainCategoryRank: product.main_category_rank,
           secondCategory: product.second_category,
