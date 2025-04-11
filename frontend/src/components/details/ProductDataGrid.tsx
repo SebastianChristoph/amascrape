@@ -51,7 +51,7 @@ export default function ProductDataGrid({
   const columns: GridColDef[] = [
     {
       field: "details",
-      headerName: "Details",
+      headerName: "",
       width: 30,
       renderCell: (params) => (
         <Tooltip title="Get Product Insights">
@@ -66,7 +66,7 @@ export default function ProductDataGrid({
     },
     {
       field: "myProduct",
-      headerName: "My Product",
+      headerName: "",
       width: 50,
       renderCell: (params) => {
         return (
@@ -104,7 +104,7 @@ export default function ProductDataGrid({
     },
     {
       field: "image",
-      headerName: "Image",
+      headerName: "",
       width: 40,
       renderCell: (params) =>
         params.value ? (
@@ -143,7 +143,26 @@ export default function ProductDataGrid({
           <Chip label="No ASIN" color="default" size="small" />
         ),
     },
-    { field: "title", headerName: "Title", width: 400 },
+    {
+      field: "title",
+      headerName: "Title",
+      width: 200,
+      renderCell: (params) => (
+        <Box sx={{ 
+          width: '100%',
+          whiteSpace: 'normal',
+          wordBreak: 'break-word',
+          lineHeight: '1.2',
+          maxHeight: '100px',
+          overflow: 'hidden',
+          display: '-webkit-box',
+          WebkitLineClamp: 3,
+          WebkitBoxOrient: 'vertical'
+        }}>
+          {params.value}
+        </Box>
+      )
+    },
     {
       field: "chart_price",
       headerName: "Price Trend",
