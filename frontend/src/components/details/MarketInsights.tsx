@@ -20,7 +20,7 @@ export default function MarketInsights({ market, userProducts, index }: MarketIn
             value={market.revenue_total}
             cardId="DDM1"
             isCurrency
-            hasSparkline
+            
           />
         </Box>
       </Grid>
@@ -62,7 +62,7 @@ export default function MarketInsights({ market, userProducts, index }: MarketIn
             }
             cardId="DDM4"
             isCurrency
-            hasSparkline
+            
           />
         </Box>
       </Grid>
@@ -74,7 +74,7 @@ export default function MarketInsights({ market, userProducts, index }: MarketIn
             value={userProducts["markets"][index]["marketshare"]}
             cardId="DDM5"
             isCurrency
-            hasSparkline
+            
           />
         </Box>
       </Grid>

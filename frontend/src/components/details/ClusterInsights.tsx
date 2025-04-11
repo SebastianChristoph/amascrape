@@ -159,7 +159,7 @@ export default function ClusterInsights({
             value={userProducts.total_revenue_user_products}
             cardId="CD2"
             isCurrency
-            hasSparkline
+            
           />
 
           <Box sx={{ display: "flex", gap: 1, width: "100%" }}>
