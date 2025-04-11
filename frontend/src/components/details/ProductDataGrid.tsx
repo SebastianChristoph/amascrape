@@ -149,7 +149,8 @@ export default function ProductDataGrid({
       renderCell: (params) => {
         return (
           <Box sx={{ mt: 0 }}>
-            <CustomSparkLine data={params.row.sparkline_price} />
+            <CustomSparkLine data={params.row.sparkline_price}
+            onClick={() => onShowDetails(params.row.id)}/>
           </Box>
         );
       },
@@ -176,12 +177,6 @@ export default function ProductDataGrid({
       },
     },
     {
-      field: "manufacturer",
-      headerName: "Manufacturer/Brand",
-      width: 120,
-      renderCell: (params) => renderWithNoData(params.value),
-    },
-    {
       field: "mainCategory",
       headerName: "Main Category",
       width: 200,
@@ -194,7 +189,8 @@ export default function ProductDataGrid({
       renderCell: (params) => {
         return (
           <Box sx={{ mt: 0 }}>
-              <CustomSparkLine data={params.row.sparkline_main_category_rank} />
+            <CustomSparkLine data={params.row.sparkline_main_category_rank}
+            onClick={() => onShowDetails(params.row.id)}/>
           </Box>
         );
       },
@@ -218,7 +214,8 @@ export default function ProductDataGrid({
       renderCell: (params) => {
         return (
           <Box sx={{ mt: 0 }}>
-              <CustomSparkLine data={params.row.sparkline_second_category_rank} />
+            <CustomSparkLine data={params.row.sparkline_second_category_rank}
+            onClick={() => onShowDetails(params.row.id)}/>
           </Box>
         );
       },
@@ -251,7 +248,8 @@ export default function ProductDataGrid({
       renderCell: (params) => {
         return (
           <Box sx={{ mt: 0 }}>
-             <CustomSparkLine data={params.row.sparkline_total} />
+            <CustomSparkLine data={params.row.sparkline_total}
+            onClick={() => onShowDetails(params.row.id)}/>
           </Box>
         );
       },
