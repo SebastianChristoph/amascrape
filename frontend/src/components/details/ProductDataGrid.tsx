@@ -168,11 +168,9 @@ export default function ProductDataGrid({
       width: 120,
       renderCell: (params) => {
         return (
-        
           <Tooltip title={`Manufacturer: ${params.row.manufacturer || "No Manufacturer"}`}>
-          <Typography>{params.value}</Typography>
-        </Tooltip>
-        
+            <Typography variant="body2">{params.value}</Typography>
+          </Tooltip>
         );
       },
     },
@@ -272,8 +270,9 @@ export default function ProductDataGrid({
 
  
   return (
-    <Box sx={{ width: "100%", mt:4 }}>
+    <Box className="data-grid-container" sx={{ position: 'relative', height: 800, overflow: 'auto' }}>
       <DataGrid
+        className="data-grid"
         rows={products.map((product: any) => ({
           id: product.asin,
           image: product.image,
