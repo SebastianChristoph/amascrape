@@ -12,6 +12,7 @@ import {
   ToggleButton,
   ToggleButtonGroup,
   IconButton,
+  CircularProgress,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { useEffect, useState } from "react";
@@ -189,6 +190,7 @@ export default function ProductDetailTable({
   const [selectedSeries, setSelectedSeries] = useState<string>('price');
 
   useEffect(() => {
+    setChartData(null); // Clear chart data on open
     const fetchChartData = async () => {
       try {
         const data = await ProductService.getProductChartData(asin);
@@ -296,7 +298,7 @@ export default function ProductDetailTable({
       )}
 
       {/* Chart Section */}
-      {chartData && (
+      {chartData ? (
         <Box sx={{ p: 2 }}>
           <Box sx={{ mb: 2, display: 'flex', justifyContent: 'center' }}>
             <ToggleButtonGroup
@@ -348,6 +350,10 @@ export default function ProductDetailTable({
             series={getSelectedSeriesData()}
             showDualAxis={selectedSeries === 'price_vs_rank'}
           />
+        </Box>
+      ) : (
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '200px' }}>
+          <CircularProgress />
         </Box>
       )}
 
