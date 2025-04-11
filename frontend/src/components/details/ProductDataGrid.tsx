@@ -165,11 +165,11 @@ export default function ProductDataGrid({
     },
     {
       field: "chart_price",
-      headerName: "Price Trend",
-      width: 120,
+      headerName: "",
+      width: 40,
       renderCell: (params) => {
         return (
-          <Box sx={{ mt: 0 }}>
+          <Box sx={{ mt: 0}}>
             <CustomSparkLine data={params.row.sparkline_price}
             onClick={() => onShowDetails(params.row.id)}/>
           </Box>
@@ -180,19 +180,12 @@ export default function ProductDataGrid({
       field: "price",
       headerName: "Price",
       type: "number",
-      width: 120,
+      width: 90,
       renderCell: (params) => renderWithNoData(params.value, formatCurrency),
     },
-    {
-      field: "brand",
-      headerName: "Brand",
-      width: 120,
-      renderCell: (params) =>
-        <Tooltip title={`Manufacturer: ${params.row.manufacturer || "No Manufacturer"}`}>
-          <Box>{renderWithNoData(params.value)}</Box>
-        </Tooltip>,
-  
-    },
+    
+    
+
     {
       field: "mainCategory",
       headerName: "Main Category",
@@ -201,8 +194,8 @@ export default function ProductDataGrid({
     },
     {
       field: "chart_main_rank",
-      headerName: "Main Rank Trend",
-      width: 100,
+      headerName: "",
+      width: 40,
       renderCell: (params) => {
         return (
           <Box sx={{ mt: 0 }}>
@@ -215,7 +208,7 @@ export default function ProductDataGrid({
     {
       field: "mainCategoryRank",
       headerName: "Rank Main",
-      width: 100,
+      width: 50,
       renderCell: (params) => renderWithNoData(params.value, formatNumber),
     },
     {
@@ -226,8 +219,8 @@ export default function ProductDataGrid({
     },
     {
       field: "chart_second_rank",
-      headerName: "Second Rank Trend",
-      width: 100,
+      headerName: "",
+      width: 40,
       renderCell: (params) => {
         return (
           <Box sx={{ mt: 0 }}>
@@ -248,7 +241,7 @@ export default function ProductDataGrid({
       field: "blm",
       headerName: "Bought Last Month",
       type: "number",
-      width: 130,
+      width: 70,
       renderCell: (params) => {
         const value = params.value;
         if (value === 0) {
@@ -260,8 +253,8 @@ export default function ProductDataGrid({
     
     {
       field: "chart_total",
-      headerName: "Total Trend",
-      width: 100,
+      headerName: "",
+      width: 40,
       renderCell: (params) => {
         return (
           <Box sx={{ mt: 0 }}>
@@ -283,6 +276,16 @@ export default function ProductDataGrid({
         }
         return renderWithNoData(value, formatCurrency);
       },
+    },
+    {
+      field: "brand",
+      headerName: "Brand",
+      width: 120,
+      renderCell: (params) =>
+        <Tooltip title={`Manufacturer: ${params.row.manufacturer || "No Manufacturer"}`}>
+          <Box>{renderWithNoData(params.value)}</Box>
+        </Tooltip>,
+  
     },
     
   ];
@@ -319,6 +322,15 @@ export default function ProductDataGrid({
         getRowClassName={(params) =>
           params.row.isMyProduct ? "my-product-row" : "product-row"
         }
+        sx={{
+          '& .MuiDataGrid-columnHeaders': {
+            fontSize: '0.75rem',
+          },
+          '& .MuiDataGrid-columnHeaderTitle': {
+            fontSize: '0.75rem',
+            fontWeight: 500,
+          }
+        }}
       />
     </Box>
   );

@@ -37,7 +37,7 @@ export default function CustomSparkLine({ data, onClick }: CustomSparkLineProps)
       direction="row"
       sx={{
         width: "100%",
-        minWidth: 60,
+        minWidth: 40,
         height: 40,
         cursor: onClick ? "pointer" : "default",
       }}
