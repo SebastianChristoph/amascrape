@@ -117,9 +117,9 @@ const MetricCardLarge: React.FC<StatCardProps> = ({
 
         {hasSparkline && (
           <Grid size={{ xs: 12, md: 5 }}>
-            <Typography variant="body2" color="text.secondary">
+            <Box>
               <CustomSparkLine />
-            </Typography>
+            </Box>
           </Grid>
         )}
       </Grid>
