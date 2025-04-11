@@ -204,11 +204,15 @@ export default function ClusterDetails() {
         sx={{
           height: "80vh",
           display: "flex",
+          flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
         }}
       >
         <CircularProgress size={80} color="primary" />
+        <Typography variant="h6" sx={{ mt: 2, color: "text.secondary" }}>
+          Getting Data for your MarketCluster. This might take a second.
+        </Typography>
       </Box>
     );
   }
