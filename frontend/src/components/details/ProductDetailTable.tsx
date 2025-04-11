@@ -36,6 +36,8 @@ interface ProductChange {
   img_path: string | null;
   store: string | null;
   manufacturer: string | null;
+  review_count: number | null;
+  rating: number | null;
 }
 
 interface ProductDetailTableProps {
@@ -372,6 +374,8 @@ export default function ProductDetailTable({
               <TableCell className="table-cell-nowrap" align="right">Second Rank</TableCell>
               <TableCell className="table-cell-nowrap" align="right">BLM</TableCell>
               <TableCell className="table-cell-nowrap" align="right">Total</TableCell>
+              <TableCell className="table-cell-nowrap" align="right">Reviews</TableCell>
+              <TableCell className="table-cell-nowrap" align="right">Rating</TableCell>
               <TableCell className="table-cell-nowrap">Store</TableCell>
             </TableRow>
           </TableHead>
@@ -449,6 +453,18 @@ export default function ProductDetailTable({
                           current={change.total}
                           previous={previousChange?.total}
                           formatValue={formatCurrency}
+                        />
+                  </TableCell>
+                  <TableCell className="table-cell-nowrap" align="right">
+                        <ValueWithChange
+                          current={change.review_count}
+                          previous={previousChange?.review_count}
+                        />
+                  </TableCell>
+                  <TableCell className="table-cell-nowrap" align="right">
+                        <ValueWithChange
+                          current={change.rating}
+                          previous={previousChange?.rating}
                         />
                   </TableCell>
                   <TableCell className="table-cell-nowrap">

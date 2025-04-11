@@ -415,12 +415,15 @@ async def get_market_cluster_details(
                 "blm": latest_product_change.blm if latest_product_change else None,
                 "store": latest_product_change.store if latest_product_change else None,
                 "manufacturer": latest_product_change.manufacturer if latest_product_change else None,
+                "review_count": latest_product_change.review_count if latest_product_change else None,
+                "rating": latest_product_change.rating if latest_product_change else None,
                 "sparkline_data_price": get_sparkline_data_for_field(product, "price", db),
-                 "sparkline_data_main_category_rank": get_sparkline_data_for_field(product, "main_category_rank", db),
-                  "sparkline_data_second_category_rank": get_sparkline_data_for_field(product, "second_category_rank", db),
-                   "sparkline_data_blm": get_sparkline_data_for_field(product, "blm", db),
-                    "sparkline_data_total": get_sparkline_data_for_field(product, "total", db),
-             
+                "sparkline_data_main_category_rank": get_sparkline_data_for_field(product, "main_category_rank", db),
+                "sparkline_data_second_category_rank": get_sparkline_data_for_field(product, "second_category_rank", db),
+                 "sparkline_data_rating": get_sparkline_data_for_field(product, "rating", db),
+                  "sparkline_data_review_count": get_sparkline_data_for_field(product, "review_count", db),
+                "sparkline_data_blm": get_sparkline_data_for_field(product, "blm", db),
+                "sparkline_data_total": get_sparkline_data_for_field(product, "total", db),
             }
 
             market_data["products"].append(product_data)

@@ -297,6 +297,8 @@ class Product_Orchestrator:
                                 total=data.get("total"),
                                 store=data.get("store"),
                                 manufacturer=data.get("manufacturer"),
+                                review_count=data.get("review_count"),
+                                rating=data.get("rating"),
                                 change_date=datetime.now(timezone.utc),
                                 changes=",".join(changes)
                             )

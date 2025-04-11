@@ -48,7 +48,9 @@ async def get_product_changes(asin: str, db: Session = Depends(get_db)):
             "changes": change.changes,
             "img_path": change.img_path,
             "store": change.store,
-            "manufacturer": change.manufacturer
+            "manufacturer": change.manufacturer,
+            "review_count": change.review_count,
+            "rating": change.rating
         }
         for change in product_changes
     ]

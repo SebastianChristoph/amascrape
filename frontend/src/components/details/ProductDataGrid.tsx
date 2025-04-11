@@ -278,6 +278,47 @@ export default function ProductDataGrid({
       },
     },
     {
+      field: "chart_review_count",
+      headerName: "",
+      width: 40,
+      renderCell: (params) => {
+        return (
+          <Box sx={{ mt: 0 }}>
+            <CustomSparkLine data={params.row.sparkline_review_count}
+            onClick={() => onShowDetails(params.row.id)}/>
+          </Box>
+        );
+      },
+    },
+    {
+      field: "review_count",
+      headerName: "Reviews",
+      type: "number",
+      width: 100,
+      renderCell: (params) => renderWithNoData(params.value, formatNumber),
+    },
+    {
+      field: "chart_rating",
+      headerName: "",
+      width: 40,
+      renderCell: (params) => {
+        return (
+          <Box sx={{ mt: 0 }}>
+            <CustomSparkLine data={params.row.sparkline_rating}
+            onClick={() => onShowDetails(params.row.id)}/>
+          </Box>
+        );
+      },
+    },
+    {
+      field: "rating",
+      headerName: "Rating",
+      type: "number",
+      width: 100,
+      renderCell: (params) => renderWithNoData(params.value),
+    },
+
+    {
       field: "brand",
       headerName: "Brand",
       width: 120,
@@ -285,14 +326,13 @@ export default function ProductDataGrid({
         <Tooltip title={`Manufacturer: ${params.row.manufacturer || "No Manufacturer"}`}>
           <Box>{renderWithNoData(params.value)}</Box>
         </Tooltip>,
-  
     },
     
   ];
 
  
   return (
-    <Box className={mode === "light" ? "light-mode" : ""} sx={{ position: 'relative', height: 800, overflow: 'auto', mt: 4}}>
+    <Box className={mode === "light" ? "light-mode" : ""} sx={{ position: 'relative', height: 700, overflow: 'auto', mt: 4}}>
       <DataGrid
         className="data-grid"
         rows={products.map((product: any) => ({
@@ -313,6 +353,8 @@ export default function ProductDataGrid({
           sparkline_blm: product.sparkline_data_blm,
           sparkline_main_category_rank: product.sparkline_data_main_category_rank,
           sparkline_second_category_rank: product.sparkline_data_second_category_rank,
+          sparkline_review_count: product.sparkline_data_review_count,
+          sparkline_rating: product.sparkline_data_rating,
           sparkline_total: product.sparkline_data_total,
         }))}
         columns={columns}

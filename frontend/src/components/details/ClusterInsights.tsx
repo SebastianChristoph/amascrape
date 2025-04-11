@@ -173,7 +173,7 @@ export default function ClusterInsights({
           <Box sx={{ display: "flex", gap: 1, width: "100%" }}>
             <MetricCardSmall
               iconKey="products"
-              title="My Products in Cluster"
+              title="My Products"
               value={userProducts.user_products_in_cluster_count}
               cardId="CDD6"
             />
