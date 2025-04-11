@@ -13,4 +13,19 @@
 
 .my-product-row {
   background-color: rgb(48, 47, 47) !important; /* 🌿 Sanftes Grün für eigene Produkte */
+  z-index: 1;
+  position: relative;
+}
+.product-row {
+  background-color: #080F25 !important; /* 🌿 Sanftes Grün für eigene Produkte */
+  z-index: 1;
+  position: relative;
+}
+
+.light-mode .my-product-row {
+  background-color: #f0f0f0 !important; /* Light gray for own products */
+}
+
+.light-mode .product-row {
+  background-color: #ffffff !important; /* White for other products */
 }

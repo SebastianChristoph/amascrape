@@ -41,7 +41,7 @@ interface MarketType {
   products: ProductType[];
 }
 
-export default function ClusterDetails() {
+export default function ClusterDetails({ mode }: { mode: "light" | "dark" }) {
   const { clusterId } = useParams();
   const [marketCluster, setMarketCluster] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -246,7 +246,17 @@ export default function ClusterDetails() {
 
   const renderWithNoData = (value: any, formatter?: (val: any) => any) => {
     if (value === null || value === undefined || value === "") {
-      return <Chip label="No Data" color="default" size="small" />;
+      return (
+        <Chip 
+          label="No Data" 
+          color="default" 
+          size="small" 
+          sx={{ 
+            border: '1px solid rgba(0, 0, 0, 0.12)', 
+            boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.2)', 
+          }} 
+        />
+      );
     }
     return formatter ? formatter(value) : value;
   };
@@ -294,9 +304,17 @@ export default function ClusterDetails() {
   };
 
   return (
-    <>
-      <Box sx={{ display: "flex", flexDirection: "column", gap: 4 }}>
-      
+    <Box className={mode === "light" ? "light-mode" : ""}>
+      <Box 
+        sx={{ 
+          display: "flex", 
+          flexDirection: "column", 
+          gap: 4, 
+          overflow: "hidden", 
+          padding: 2, 
+          margin: 0, 
+        }} 
+      >
         <Box>
         <Button variant="outlined" component="a" href="/dashboard" sx={{ mb: 2, fontSize: "0.6rem" , color: theme.palette.text.primary }}>
         ← Back to Dashboard
@@ -394,6 +412,7 @@ export default function ClusterDetails() {
                 onShowDetails={handleShowDetails}
                 onToggleMyProduct={toggleMyProduct}
                 isInitialScraped={marketCluster.is_initial_scraped}
+                mode={mode}
               />
             </Box>
           ))}
@@ -492,6 +511,6 @@ export default function ClusterDetails() {
           }}
         />
       )}
-    </>
+    </Box>
   );
 }

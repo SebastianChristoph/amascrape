@@ -16,6 +16,7 @@ interface ProductDataGridProps {
   onShowDetails: (asin: string) => void;
   onToggleMyProduct: (asin: string) => void;
   isInitialScraped: boolean;
+  mode: "light" | "dark";
 }
 
 export default function ProductDataGrid({
@@ -23,6 +24,7 @@ export default function ProductDataGrid({
   onShowDetails,
   onToggleMyProduct,
   isInitialScraped,
+  mode,
 }: ProductDataGridProps) {
   const formatCurrency = (value: number | null) => {
     if (value === null || value === undefined) return "-";
@@ -270,7 +272,7 @@ export default function ProductDataGrid({
 
  
   return (
-    <Box className="data-grid-container" sx={{ position: 'relative', height: 800, overflow: 'auto' }}>
+    <Box className={mode === "light" ? "light-mode" : ""} sx={{ position: 'relative', height: 800, overflow: 'auto', mt: 4}}>
       <DataGrid
         className="data-grid"
         rows={products.map((product: any) => ({
@@ -298,7 +300,7 @@ export default function ProductDataGrid({
         pageSizeOptions={[10, 25, 50, 100]}
         checkboxSelection={false}
         getRowClassName={(params) =>
-          params.row.isMyProduct ? "my-product-row" : ""
+          params.row.isMyProduct ? "my-product-row" : "product-row"
         }
       />
     </Box>
