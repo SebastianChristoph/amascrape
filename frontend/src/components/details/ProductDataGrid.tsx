@@ -168,13 +168,11 @@ export default function ProductDataGrid({
       field: "brand",
       headerName: "Brand",
       width: 120,
-      renderCell: (params) => {
-        return (
-          <Tooltip title={`Manufacturer: ${params.row.manufacturer || "No Manufacturer"}`}>
-            <Typography variant="body2">{params.value}</Typography>
-          </Tooltip>
-        );
-      },
+      renderCell: (params) =>
+        <Tooltip title={`Manufacturer: ${params.row.manufacturer || "No Manufacturer"}`}>
+          <Box>{renderWithNoData(params.value)}</Box>
+        </Tooltip>,
+  
     },
     {
       field: "mainCategory",
