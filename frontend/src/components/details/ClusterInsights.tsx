@@ -102,7 +102,7 @@ export default function ClusterInsights({
                 </Box>
               </Box>
             ) : (
-                <Box sx={{width: "80%", ml: 8}}>
+                <Box sx={{ width: '100%' }}>
                 <CustomStackBars data={stackedChartData} />
               </Box>
             )}
