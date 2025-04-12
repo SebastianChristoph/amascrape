@@ -3,3 +3,4 @@ listitem.html
 product_debug.html
 templates/details.html
 *.pyc
+backend/app/routes/__pycache__/users.cpython-313.pyc
