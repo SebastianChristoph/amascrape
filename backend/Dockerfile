@@ -1,35 +1,53 @@
-FROM python:3.10
+FROM python:3.10-slim
 
-# Arbeitsverzeichnis setzen
-WORKDIR /app
-
-# Systempakete & Browser installieren
+# 🔧 System-Abhängigkeiten installieren
 RUN apt-get update && apt-get install -y \
-    wget \
     curl \
-    gnupg \
     unzip \
-    firefox-esr \
+    gnupg \
+    wget \
+    fonts-liberation \
+    libnss3 \
+    libxss1 \
+    libasound2 \
+    libatk-bridge2.0-0 \
+    libgtk-3-0 \
+    libx11-xcb1 \
+    libxcomposite1 \
+    libxdamage1 \
+    libxrandr2 \
+    xdg-utils \
     chromium \
     chromium-driver \
     && rm -rf /var/lib/apt/lists/*
 
-# Geckodriver 0.36.0 installieren (kompatibel mit Firefox 128+)
-RUN wget https://github.com/mozilla/geckodriver/releases/download/v0.36.0/geckodriver-v0.36.0-linux64.tar.gz && \
+# ✅ Optional: Firefox + Geckodriver (falls du auch Firefox nutzt)
+RUN apt-get update && apt-get install -y firefox-esr && \
+    wget https://github.com/mozilla/geckodriver/releases/download/v0.36.0/geckodriver-v0.36.0-linux64.tar.gz && \
     tar -xzf geckodriver-v0.36.0-linux64.tar.gz && \
-    mv geckodriver /usr/local/bin/ && \
+    mv geckodriver /usr/local/bin && \
     chmod +x /usr/local/bin/geckodriver && \
     rm geckodriver-v0.36.0-linux64.tar.gz
 
-# Python requirements installieren
-COPY requirements.txt ./
+# 📦 Python-Abhängigkeiten installieren
+COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Code kopieren
+# 📁 Projektcode kopieren
 COPY . .
 
-# Port für FastAPI
+# ✅ Umgebungsvariablen setzen
+ENV PYTHONUNBUFFERED=1 \
+    CHROME_BIN=/usr/bin/chromium \
+    CHROMEDRIVER_PATH=/usr/bin/chromedriver \
+    INSIDE_DOCKER=1
+
+# 🧪 Debug (optional – kann später raus)
+RUN which chromium && chromium --version && \
+    which chromedriver && chromedriver --version
+
+# 🚪 Port für FastAPI öffnen
 EXPOSE 9000
 
-# Startbefehl
+# 🚀 FastAPI starten
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "9000"]

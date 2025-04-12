@@ -19,6 +19,8 @@ import Register from "./pages/Register";
 import Admin from "./pages/Admin";
 import LogViewer from "./pages/LogViewer";
 import ClusterInfo from "./pages/ClusterInfo";
+import TermsAndConditions from "./pages/Impressum";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 
 
 function App() {
@@ -69,6 +71,8 @@ function App() {
               <Route path="/add-market-cluster" element={<AddMarketCluster />} />
               <Route path="/cluster-info" element={<ClusterInfo />} />
               <Route path="/admin/logs/:filename" element={<LogViewer />} />
+              <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route
                 path="/admin"
                 element={user?.username === "admin" ? <Admin /> : <Navigate to="/dashboard" />}

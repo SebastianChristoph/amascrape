@@ -1,0 +1,26 @@
+2025-04-11 16:45:24,438 [INFO] 🚀 Product Orchestrator gestartet.
+2025-04-11 16:45:24,440 [INFO] 🖥️ Running locally – using local chromedriver.exe
+2025-04-11 16:45:24,444 [DEBUG] Skipping Selenium Manager; path to chrome driver specified in Service class: C:\Users\sebas\Desktop\amascrape\backend\scraper\chromedriver.exe
+2025-04-11 16:45:24,462 [DEBUG] Started executable: `C:\Users\sebas\Desktop\amascrape\backend\scraper\chromedriver.exe` in a child process with pid: 25360 using 0 to output -3
+2025-04-11 16:45:25,867 [INFO] 🔧 Verwende ChromeDriver: C:\Users\sebas\Desktop\amascrape\backend\scraper\chromedriver.exe
+2025-04-11 16:45:43,542 [INFO] ✅ Verbindung zu Amazon erfolgreich!
+2025-04-11 16:47:43,547 [ERROR] ❌ Fehler beim Setzen der Cookies: HTTPConnectionPool(host='localhost', port=53593): Read timed out. (read timeout=120)
+2025-04-11 16:47:43,548 [INFO] 📦 Starte Produktscraping...
+2025-04-11 16:47:43,709 [INFO] 
+
+================================================================================
+2025-04-11 16:47:43,709 [INFO] 📦 [1/1452] Scrape Produkt: B00GL2HMES
+2025-04-11 16:47:43,710 [INFO] ================================================================================
+
+2025-04-11 16:47:43,747 [DEBUG] 🌐 Öffne Produktseite: B00GL2HMES (https://www.amazon.com/dp/B00GL2HMES?language=en_US)
+2025-04-11 16:49:10,508 [INFO] ##############################################################################
+2025-04-11 16:49:10,509 [INFO] ##############################################################################
+2025-04-11 16:49:10,509 [INFO] 
+📊 Scraping abgeschlossen:
+2025-04-11 16:49:10,510 [INFO] ⏱️ Gesamtzeit: 1m 26s
+2025-04-11 16:49:10,510 [INFO] ⏲️ Durchschnitt pro Produkt: 0.00s
+2025-04-11 16:49:10,511 [INFO] 📦 Erfolgreich: 0
+2025-04-11 16:49:10,512 [INFO] ❌ Fehlgeschlagen: 0
+2025-04-11 16:49:10,512 [INFO] 📝 Log-Datei: C:\Users\sebas\Desktop\amascrape\backend\scraper\logs\scraping-2025-04-11_16-45-24.txt
+2025-04-11 16:49:10,513 [INFO] 🧨 Fehlgeschlagene Produkte: C:\Users\sebas\Desktop\amascrape\backend\scraper\logs\fails-2025-04-11_16-45-24.txt
+2025-04-11 16:49:10,516 [INFO] 🔻 Schließe WebDriver...

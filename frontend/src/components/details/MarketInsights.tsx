@@ -91,7 +91,7 @@ export default function MarketInsights({ market, userProducts, index }: MarketIn
         >
           <MetricCardSmall
             iconKey="products"
-            title="My Products in Market"
+            title="My Products"
             value={
               userProducts["markets"][index][
                 "user_products_in_market_count"

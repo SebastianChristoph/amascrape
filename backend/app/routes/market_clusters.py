@@ -232,7 +232,8 @@ async def get_user_market_clusters(
     current_user=Depends(get_current_user),
 ):
     market_clusters = db.query(MarketCluster).filter(
-        MarketCluster.user_id == current_user.id
+        MarketCluster.user_id == current_user.id,
+        MarketCluster.is_initial_scraped == True
     ).options(joinedload(MarketCluster.markets)).all()
 
     return [

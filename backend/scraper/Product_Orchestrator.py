@@ -1,4 +1,5 @@
 import logging
+import os
 from pathlib import Path
 import shutil
 import sys
@@ -88,22 +89,36 @@ class Product_Orchestrator:
         unique_id = uuid.uuid4().hex
         chrome_options.add_argument(f'--user-data-dir=/tmp/chrome-user-data-{cluster_to_scrape}-{unique_id}')
 
-        if platform.system() == "Windows":
-            chromedriver_path = ChromeDriverManager().install()
-            if not chromedriver_path.endswith("chromedriver.exe"):
-                chromedriver_path = str(Path(chromedriver_path).parent / "chromedriver.exe")
+        if os.getenv("INSIDE_DOCKER") == "1":
+            logging.info("🐳 Running inside Docker – using system-installed ChromeDriver")
+
+            chrome_bin = os.getenv("CHROME_BIN", "/usr/bin/chromium")
+            chromedriver_path = os.getenv("CHROMEDRIVER_PATH", "/usr/bin/chromedriver")
+
+            if not Path(chromedriver_path).exists():
+                raise FileNotFoundError(f"❌ ChromeDriver nicht gefunden: {chromedriver_path}")
+
+            chrome_options.binary_location = chrome_bin
             service = Service(executable_path=chromedriver_path)
+
         else:
-            chromedriver_path = shutil.which("chromedriver")
-            if not chromedriver_path:
-                raise FileNotFoundError("❌ Kein chromedriver gefunden.")
-            service = Service(executable_path=chromedriver_path)
+            logging.info("🖥️ Running locally – using local chromedriver.exe")
+
+            if platform.system() == "Windows":
+                chromedriver_path = Path(__file__).resolve().parent / "chromedriver.exe"
+                if not chromedriver_path.exists():
+                    raise FileNotFoundError(f"❌ chromedriver.exe nicht gefunden unter {chromedriver_path}")
+            else:
+                chromedriver_path = shutil.which("chromedriver")
+                if not chromedriver_path:
+                    raise FileNotFoundError("❌ Kein chromedriver gefunden.")
+
+            service = Service(executable_path=str(chromedriver_path))
 
         self.driver = webdriver.Chrome(service=service, options=chrome_options)
         logging.info(f"🔧 Verwende ChromeDriver: {service.path}")
         self.scraper = AmazonProductScraper(self.driver, show_details=show_details)
         self.scraper.warning_callback = self.add_warning
-
 
         self.check_connection()
         self.set_cookies()
@@ -164,11 +179,15 @@ class Product_Orchestrator:
     def set_cookies(self):
         try:
             self.driver.get("https://www.amazon.com")
+            time.sleep(2)  # Warten bis Seite stabil geladen ist
             for cookie in selenium_config.cookies:
                 self.driver.add_cookie(cookie)
             logging.info("🍪 Cookies erfolgreich gesetzt.")
+            logging.debug("Cookies to set: %s", selenium_config.cookies)
+
         except Exception as e:
             logging.error(f"❌ Fehler beim Setzen der Cookies: {e}")
+
 
     def get_latest_product_change(self, db: Session, asin):
         return (

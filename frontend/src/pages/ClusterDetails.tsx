@@ -5,6 +5,7 @@ import {
   Button,
   Chip,
   CircularProgress,
+  Container,
   Link,
   Paper,
   Tab,
@@ -21,6 +22,7 @@ import ProductDataGrid from "../components/details/ProductDataGrid";
 import ProductDetailTable from "../components/details/ProductDetailTable";
 import TopSuggestions from "../components/details/TopSuggestions";
 import PrimaryLineDivider from "../components/PrimaryLineDivider";
+import LoadingAnimation from "../components/LoadingAnimation";
 import { useSnackbar } from "../providers/SnackbarProvider";
 import ChartDataService from "../services/ChartDataService";
 import ProductService from "../services/ProductService";
@@ -213,6 +215,7 @@ export default function ClusterDetails({ mode }: { mode: "light" | "dark" }) {
         <Typography variant="h6" sx={{ mt: 2, color: "text.secondary" }}>
           Getting Data for your MarketCluster. This might take a second.
         </Typography>
+        <LoadingAnimation />
       </Box>
     );
   }
@@ -304,6 +307,7 @@ export default function ClusterDetails({ mode }: { mode: "light" | "dark" }) {
   };
 
   return (
+     <Container maxWidth="xl" sx={{ position: "relative", zIndex: 1, py: 4 }}>
     <Box className={mode === "light" ? "light-mode" : ""}>
       <Box 
         sx={{ 
@@ -512,5 +516,6 @@ export default function ClusterDetails({ mode }: { mode: "light" | "dark" }) {
         />
       )}
     </Box>
+    </Container>
   );
 }

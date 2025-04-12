@@ -1,0 +1,5 @@
+2025-04-11 13:09:20,966 [INFO] 🚀 Product Orchestrator gestartet.
+2025-04-11 13:09:20,967 [INFO] 🖥️ Running locally – using ChromeDriverManager
+2025-04-11 13:09:20,968 [INFO] ====== WebDriver manager ======
+2025-04-11 13:09:21,908 [INFO] There is no [win64] chromedriver "latest" for browser google-chrome "135.0.7049.85" in cache
+2025-04-11 13:09:21,909 [INFO] Get LATEST chromedriver version for google-chrome

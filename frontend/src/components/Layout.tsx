@@ -59,7 +59,7 @@ export default function Layout({
       {/* Sidebar / Drawer */}
       <Box
         sx={{
-          width: drawerOpen ? 240 : 72,
+          width: drawerOpen ? 200 : 72,
           transition: "width 0.3s",
           backgroundColor: "#1E293B",
           display: "flex",
@@ -96,9 +96,7 @@ export default function Layout({
               mb: 4,
             }}
           >
-            {!drawerOpen && (
-              <AiFillAmazonCircle size={20} style={{ minWidth: 24, color: theme.palette.accent.main }} />
-            )}
+            <AiFillAmazonCircle size={20} style={{ minWidth: 24, color: theme.palette.accent.main }} />
             {drawerOpen && (
               <Typography variant="h6" fontWeight="bold" sx={{ color: "#FFFFFF" }}>
                 MarktZone
@@ -345,13 +343,46 @@ export default function Layout({
         <Box
           sx={{
             textAlign: "center",
-            padding: 8,
+            padding: 2,
             paddingLeft: 16,
             backgroundColor: "background.default",
+            width: "90%",
+            ml: 2,
+            display: "flex",
+            justifyContent: "center",
+            gap: 2
           }}
         >
           <Typography variant="body2">
             © {new Date().getFullYear()} MarktZone.io
+          </Typography>
+          <Typography 
+            component={Link} 
+            to="/terms-and-conditions" 
+            variant="body2" 
+            sx={{ 
+              textDecoration: 'none',
+              color: 'text.primary',
+              '&:hover': {
+                color: 'primary.main'
+              }
+            }}
+          >
+            Terms and Conditions
+          </Typography>
+          <Typography 
+            component={Link} 
+            to="/privacy-policy" 
+            variant="body2" 
+            sx={{ 
+              textDecoration: 'none',
+              color: 'text.primary',
+              '&:hover': {
+                color: 'primary.main'
+              }
+            }}
+          >
+            Privacy Policy
           </Typography>
         </Box>
       </Box>
