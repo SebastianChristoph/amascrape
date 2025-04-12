@@ -3,3 +3,6 @@ listitem.html
 product_debug.html
 templates/details.html
 *.pyc
+backend/app/routes/__pycache__/market_clusters.cpython-313.pyc
+backend/app/routes/__pycache__/products.cpython-313.pyc
+backend/app/routes/__pycache__/users.cpython-313.pyc

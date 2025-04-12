@@ -1,26 +1,26 @@
-from datetime import datetime, timezone
 import logging
 import random
+from datetime import datetime, timezone
 from typing import List, Optional
 
+import scraper.selenium_config as selenium_config
 from app.auth import get_current_user
-from app.database import get_db
+from app.database import SessionLocal, get_db
 from app.models import (Market, MarketChange, MarketCluster, Product,
-                        ProductChange, User,market_change_products,
+                        ProductChange, User, market_change_products,
                         market_cluster_markets, market_products)
 from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException
 from pydantic import BaseModel
-from sqlalchemy import delete
-from sqlalchemy.orm import Session, joinedload
-
 # Importiere deinen Scraper
 from scraper.product_selenium_scraper import AmazonProductScraper
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-import scraper.selenium_config as selenium_config
-from app.database import SessionLocal
-from sqlalchemy import func, distinct
+from sqlalchemy import delete, distinct, func
+from sqlalchemy.orm import Session, joinedload
+from datetime import datetime, timedelta
 
+from app.models import ProductChange
+from sqlalchemy.orm import Session
 router = APIRouter()
 
 
@@ -449,66 +449,110 @@ async def get_market_cluster_details(
 
     return response_data
 
-from datetime import datetime, timedelta
-from sqlalchemy.orm import Session
-from app.models import ProductChange
+
+
 
 def get_sparkline_data_for_field(product, field: str, db: Session):
     # Hole alle ProductChanges für das gegebene Produkt und das gewünschte Feld
-    product_changes = db.query(ProductChange).filter(ProductChange.asin == product.asin).order_by(ProductChange.change_date).all()
+    product_changes = (
+        db.query(ProductChange)
+        .filter(ProductChange.asin == product.asin)
+        .order_by(ProductChange.change_date)
+        .all()
+    )
 
     if not product_changes:
         return []
 
-    # Bestimme das heutige Datum
-    today = datetime.now()
+    # Heutiges Datum (nur Datumsteil)
+    today = datetime.now().date()
 
-    # Initialisiere die Liste für die letzten 30 Tage
-    sparkline_data = [None] * 30  # 30 Tage, initial mit None
+    # Erster Change-Zeitpunkt
+    first_change_date = product_changes[0].change_date.date()
+    
+    # Anzahl der Tage seit dem ersten Change bis gestern
+    days_since_first = (today - first_change_date).days
+    num_days = min(days_since_first, 30)
 
-    # Bestimme die letzten 30 Tage
-    last_30_days = [today - timedelta(days=i) for i in range(30)]
+    if num_days <= 0:
+        return []
 
-    # Funktion zum Füllen der Lücken in den Daten
-    def fill_data_for_day(day, value):
-        index = (today - day).days
-        if 0 <= index < 30:
-            sparkline_data[index] = value
+    # Liste mit Platzhaltern
+    sparkline_data = [None] * num_days
+    date_list = [first_change_date + timedelta(days=i) for i in range(num_days)]
 
-    # Variable für den letzten gültigen Wert
+    # Pointer für aktuellen gültigen Wert
     last_valid_value = None
+    change_index = 0
 
-    # Durchlaufe alle ProductChanges und fülle die Daten
-    for change in product_changes:
-        field_value = getattr(change, field)
+    for i, date in enumerate(date_list):
+        # Suche alle Changes bis einschließlich diesem Tag
+        while change_index < len(product_changes) and product_changes[change_index].change_date.date() <= date:
+            value = getattr(product_changes[change_index], field)
+            if value is not None:
+                last_valid_value = value
+            change_index += 1
 
-        # Überspringe null-Werte
-        if field_value is None:
-            continue
-
-        # Wenn der Wert gültig ist, setze den letzten gültigen Wert
-        last_valid_value = field_value
-
-        # Fülle für alle Tage von dem Change-Datum bis heute
-        days_diff = (today - change.change_date).days
-        if days_diff < 30:
-            # Fülle alle Tage, die zwischen diesem Change und heute liegen
-            for i in range(days_diff + 1):
-                fill_data_for_day(today - timedelta(days=i), field_value)
-
-    # Wenn es immer noch null-Werte gibt, fülle sie mit dem letzten gültigen Wert
-    for i in range(30):
-        if sparkline_data[i] is None and last_valid_value is not None:
-            sparkline_data[i] = last_valid_value
-
-    # Falls das Produkt weniger als 30 Tage existiert, fülle die Anfangstage mit dem ersten validen Wert
-    if len(product_changes) > 0 and sparkline_data[0] is None and last_valid_value is not None:
-        first_valid_change = next((change for change in product_changes if getattr(change, field) is not None), None)
-        if first_valid_change:
-            first_valid_value = getattr(first_valid_change, field)
-            for i in range(30):
-                if sparkline_data[i] is None:
-                    sparkline_data[i] = first_valid_value
+        sparkline_data[i] = last_valid_value
 
     return sparkline_data
+
+# def get_sparkline_data_for_field(product, field: str, db: Session):
+#     # Hole alle ProductChanges für das gegebene Produkt und das gewünschte Feld
+#     product_changes = db.query(ProductChange).filter(ProductChange.asin == product.asin).order_by(ProductChange.change_date).all()
+
+#     if not product_changes:
+#         return []
+
+#     # Bestimme das heutige Datum
+#     today = datetime.now()
+
+#     # Initialisiere die Liste für die letzten 30 Tage
+#     sparkline_data = [None] * 30  # 30 Tage, initial mit None
+
+#     # Bestimme die letzten 30 Tage
+#     last_30_days = [today - timedelta(days=i) for i in range(30)]
+
+#     # Funktion zum Füllen der Lücken in den Daten
+#     def fill_data_for_day(day, value):
+#         index = (today - day).days
+#         if 0 <= index < 30:
+#             sparkline_data[index] = value
+
+#     # Variable für den letzten gültigen Wert
+#     last_valid_value = None
+
+#     # Durchlaufe alle ProductChanges und fülle die Daten
+#     for change in product_changes:
+#         field_value = getattr(change, field)
+
+#         # Überspringe null-Werte
+#         if field_value is None:
+#             continue
+
+#         # Wenn der Wert gültig ist, setze den letzten gültigen Wert
+#         last_valid_value = field_value
+
+#         # Fülle für alle Tage von dem Change-Datum bis heute
+#         days_diff = (today - change.change_date).days
+#         if days_diff < 30:
+#             # Fülle alle Tage, die zwischen diesem Change und heute liegen
+#             for i in range(days_diff + 1):
+#                 fill_data_for_day(today - timedelta(days=i), field_value)
+
+#     # Wenn es immer noch null-Werte gibt, fülle sie mit dem letzten gültigen Wert
+#     for i in range(30):
+#         if sparkline_data[i] is None and last_valid_value is not None:
+#             sparkline_data[i] = last_valid_value
+
+#     # Falls das Produkt weniger als 30 Tage existiert, fülle die Anfangstage mit dem ersten validen Wert
+#     if len(product_changes) > 0 and sparkline_data[0] is None and last_valid_value is not None:
+#         first_valid_change = next((change for change in product_changes if getattr(change, field) is not None), None)
+#         if first_valid_change:
+#             first_valid_value = getattr(first_valid_change, field)
+#             for i in range(30):
+#                 if sparkline_data[i] is None:
+#                     sparkline_data[i] = first_valid_value
+
+#     return sparkline_data
 
