@@ -12,6 +12,7 @@ import {
   ToggleButton,
   ToggleButtonGroup,
   IconButton,
+  CircularProgress,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { useEffect, useState } from "react";
@@ -35,6 +36,8 @@ interface ProductChange {
   img_path: string | null;
   store: string | null;
   manufacturer: string | null;
+  review_count: number | null;
+  rating: number | null;
 }
 
 interface ProductDetailTableProps {
@@ -120,6 +123,16 @@ const displayValue = (value: string | null | undefined): string => {
   return strValue.trim() === '' ? '-' : strValue;
 };
 
+const formatDate = (dateString: string): string => {
+  if (!dateString) return '-';
+  try {
+    const date = new Date(dateString);
+    return date.toISOString().split('T')[0];
+  } catch (error) {
+    return dateString;
+  }
+};
+
 const TruncatedText = ({ text }: { text: string | null }) => {
   if (!text) return <Typography sx={{ fontSize: 'inherit' }}>-</Typography>;
   
@@ -179,6 +192,7 @@ export default function ProductDetailTable({
   const [selectedSeries, setSelectedSeries] = useState<string>('price');
 
   useEffect(() => {
+    setChartData(null); // Clear chart data on open
     const fetchChartData = async () => {
       try {
         const data = await ProductService.getProductChartData(asin);
@@ -266,27 +280,28 @@ export default function ProductDetailTable({
         }
       }}
     >
-      {/* Close Button */}
+      {/* Close Button and ASIN */}
       {onClose && (
-        <IconButton
-          onClick={onClose}
-          sx={{
-            position: 'absolute',
-            right: 8,
-            top: 8,
-            zIndex: 2,
-            color: theme.palette.text.secondary,
-            '&:hover': {
-              color: theme.palette.text.primary,
-            },
-          }}
-        >
-          <IoClose size={24} />
-        </IconButton>
+        <Box sx={{ position: 'absolute', right: 8, top: 8, zIndex: 2, display: 'flex', alignItems: 'center' }}>
+          <Typography sx={{ mr: 1, color: theme.palette.text.secondary, fontSize: '0.875rem' }}>
+            ASIN: {asin}
+          </Typography>
+          <IconButton
+            onClick={onClose}
+            sx={{
+              color: theme.palette.text.secondary,
+              '&:hover': {
+                color: theme.palette.text.primary,
+              },
+            }}
+          >
+            <IoClose size={24} />
+          </IconButton>
+        </Box>
       )}
 
       {/* Chart Section */}
-      {chartData && (
+      {chartData ? (
         <Box sx={{ p: 2 }}>
           <Box sx={{ mb: 2, display: 'flex', justifyContent: 'center' }}>
             <ToggleButtonGroup
@@ -339,6 +354,10 @@ export default function ProductDetailTable({
             showDualAxis={selectedSeries === 'price_vs_rank'}
           />
         </Box>
+      ) : (
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '200px' }}>
+          <CircularProgress />
+        </Box>
       )}
 
       <TableContainer sx={{ maxHeight: '80vh' }}>
@@ -346,7 +365,6 @@ export default function ProductDetailTable({
           <TableHead>
             <TableRow>
               <TableCell className="table-cell-nowrap">Change Date</TableCell>
-              <TableCell className="table-cell-nowrap">ID</TableCell>
               <TableCell className="table-cell-nowrap">Title</TableCell>
               <TableCell className="table-cell-nowrap">Image</TableCell>
               <TableCell className="table-cell-nowrap" align="right">Price</TableCell>
@@ -356,9 +374,9 @@ export default function ProductDetailTable({
               <TableCell className="table-cell-nowrap" align="right">Second Rank</TableCell>
               <TableCell className="table-cell-nowrap" align="right">BLM</TableCell>
               <TableCell className="table-cell-nowrap" align="right">Total</TableCell>
+              <TableCell className="table-cell-nowrap" align="right">Reviews</TableCell>
+              <TableCell className="table-cell-nowrap" align="right">Rating</TableCell>
               <TableCell className="table-cell-nowrap">Store</TableCell>
-              <TableCell className="table-cell-nowrap">Manufacturer</TableCell>
-              <TableCell className="table-cell-changes">Changes</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -377,8 +395,7 @@ export default function ProductDetailTable({
                     },
                   }}
                 >
-                  <TableCell className="table-cell-nowrap">{change.change_date}</TableCell>
-                  <TableCell className="table-cell-nowrap">{change.id}</TableCell>
+                  <TableCell className="table-cell-nowrap">{formatDate(change.change_date)}</TableCell>
                   <TableCell className="table-cell-nowrap">
                     <TruncatedText text={change.title} />
                   </TableCell>
@@ -438,9 +455,31 @@ export default function ProductDetailTable({
                           formatValue={formatCurrency}
                         />
                   </TableCell>
-                  <TableCell className="table-cell-nowrap">{displayValue(change.store)}</TableCell>
-                  <TableCell className="table-cell-nowrap">{displayValue(change.manufacturer)}</TableCell>
-                  <TableCell className="table-cell-changes">{change.changes}</TableCell>
+                  <TableCell className="table-cell-nowrap" align="right">
+                        <ValueWithChange
+                          current={change.review_count}
+                          previous={previousChange?.review_count}
+                        />
+                  </TableCell>
+                  <TableCell className="table-cell-nowrap" align="right">
+                        <ValueWithChange
+                          current={change.rating}
+                          previous={previousChange?.rating}
+                        />
+                  </TableCell>
+                  <TableCell className="table-cell-nowrap">
+                    <Tooltip 
+                      title={change.manufacturer ? `Manufacturer: ${change.manufacturer}` : 'No manufacturer information'} 
+                      arrow
+                      PopperProps={{
+                        sx: {
+                          zIndex: 99999
+                        }
+                      }}
+                    >
+                      <Typography sx={{ fontSize: 'inherit' }}>{displayValue(change.store)}</Typography>
+                    </Tooltip>
+                  </TableCell>
                 </TableRow>
               );
             })}

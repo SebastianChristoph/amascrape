@@ -109,6 +109,8 @@ class ProductChange(Base):
     img_path = Column(String, nullable=True)
     store = Column(String, nullable=True)
     manufacturer = Column(String, nullable=True)
+    review_count = Column(Integer, nullable=True)
+    rating = Column(Float, nullable=True)
 
     product = relationship("Product", back_populates="product_changes")
 

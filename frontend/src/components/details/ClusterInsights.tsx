@@ -102,7 +102,7 @@ export default function ClusterInsights({
                 </Box>
               </Box>
             ) : (
-                <Box sx={{width: "80%", ml: 8}}>
+                <Box sx={{ width: '100%' }}>
                 <CustomStackBars data={stackedChartData} />
               </Box>
             )}
@@ -159,7 +159,7 @@ export default function ClusterInsights({
             value={userProducts.total_revenue_user_products}
             cardId="CD2"
             isCurrency
-            hasSparkline
+            
           />
 
           <Box sx={{ display: "flex", gap: 1, width: "100%" }}>
@@ -173,7 +173,7 @@ export default function ClusterInsights({
           <Box sx={{ display: "flex", gap: 1, width: "100%" }}>
             <MetricCardSmall
               iconKey="products"
-              title="My Products in Cluster"
+              title="My Products"
               value={userProducts.user_products_in_cluster_count}
               cardId="CDD6"
             />

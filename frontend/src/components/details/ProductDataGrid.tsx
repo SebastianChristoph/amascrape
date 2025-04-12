@@ -4,6 +4,7 @@ import {
   IconButton,
   Link,
   Tooltip,
+  Typography,
 } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { FaExternalLinkAlt, FaRegEye } from "react-icons/fa";
@@ -15,6 +16,7 @@ interface ProductDataGridProps {
   onShowDetails: (asin: string) => void;
   onToggleMyProduct: (asin: string) => void;
   isInitialScraped: boolean;
+  mode: "light" | "dark";
 }
 
 export default function ProductDataGrid({
@@ -22,6 +24,7 @@ export default function ProductDataGrid({
   onShowDetails,
   onToggleMyProduct,
   isInitialScraped,
+  mode,
 }: ProductDataGridProps) {
   const formatCurrency = (value: number | null) => {
     if (value === null || value === undefined) return "-";
@@ -48,7 +51,7 @@ export default function ProductDataGrid({
   const columns: GridColDef[] = [
     {
       field: "details",
-      headerName: "Details",
+      headerName: "",
       width: 30,
       renderCell: (params) => (
         <Tooltip title="Get Product Insights">
@@ -63,7 +66,7 @@ export default function ProductDataGrid({
     },
     {
       field: "myProduct",
-      headerName: "My Product",
+      headerName: "",
       width: 50,
       renderCell: (params) => {
         return (
@@ -101,7 +104,7 @@ export default function ProductDataGrid({
     },
     {
       field: "image",
-      headerName: "Image",
+      headerName: "",
       width: 40,
       renderCell: (params) =>
         params.value ? (
@@ -140,15 +143,35 @@ export default function ProductDataGrid({
           <Chip label="No ASIN" color="default" size="small" />
         ),
     },
-    { field: "title", headerName: "Title", width: 400 },
+    {
+      field: "title",
+      headerName: "Title",
+      width: 200,
+      renderCell: (params) => (
+        <Box sx={{ 
+          width: '100%',
+          whiteSpace: 'normal',
+          wordBreak: 'break-word',
+          lineHeight: '1.2',
+          maxHeight: '100px',
+          overflow: 'hidden',
+          display: '-webkit-box',
+          WebkitLineClamp: 3,
+          WebkitBoxOrient: 'vertical'
+        }}>
+          {params.value}
+        </Box>
+      )
+    },
     {
       field: "chart_price",
-      headerName: "Price Trend",
-      width: 120,
+      headerName: "",
+      width: 40,
       renderCell: (params) => {
         return (
-          <Box sx={{ mt: 0 }}>
-            <CustomSparkLine data={params.row.sparkline_price} />
+          <Box sx={{ mt: 0}}>
+            <CustomSparkLine data={params.row.sparkline_price}
+            onClick={() => onShowDetails(params.row.id)}/>
           </Box>
         );
       },
@@ -157,21 +180,12 @@ export default function ProductDataGrid({
       field: "price",
       headerName: "Price",
       type: "number",
-      width: 120,
+      width: 90,
       renderCell: (params) => renderWithNoData(params.value, formatCurrency),
     },
-    {
-      field: "store",
-      headerName: "Store",
-      width: 120,
-      renderCell: (params) => renderWithNoData(params.value),
-    },
-    {
-      field: "manufacturer",
-      headerName: "Manufacturer/Brand",
-      width: 120,
-      renderCell: (params) => renderWithNoData(params.value),
-    },
+    
+    
+
     {
       field: "mainCategory",
       headerName: "Main Category",
@@ -180,12 +194,13 @@ export default function ProductDataGrid({
     },
     {
       field: "chart_main_rank",
-      headerName: "Main Rank Trend",
-      width: 100,
+      headerName: "",
+      width: 40,
       renderCell: (params) => {
         return (
           <Box sx={{ mt: 0 }}>
-              <CustomSparkLine data={params.row.sparkline_main_category_rank} />
+            <CustomSparkLine data={params.row.sparkline_main_category_rank}
+            onClick={() => onShowDetails(params.row.id)}/>
           </Box>
         );
       },
@@ -193,7 +208,7 @@ export default function ProductDataGrid({
     {
       field: "mainCategoryRank",
       headerName: "Rank Main",
-      width: 100,
+      width: 50,
       renderCell: (params) => renderWithNoData(params.value, formatNumber),
     },
     {
@@ -204,12 +219,13 @@ export default function ProductDataGrid({
     },
     {
       field: "chart_second_rank",
-      headerName: "Second Rank Trend",
-      width: 100,
+      headerName: "",
+      width: 40,
       renderCell: (params) => {
         return (
           <Box sx={{ mt: 0 }}>
-              <CustomSparkLine data={params.row.sparkline_second_category_rank} />
+            <CustomSparkLine data={params.row.sparkline_second_category_rank}
+            onClick={() => onShowDetails(params.row.id)}/>
           </Box>
         );
       },
@@ -225,7 +241,7 @@ export default function ProductDataGrid({
       field: "blm",
       headerName: "Bought Last Month",
       type: "number",
-      width: 130,
+      width: 70,
       renderCell: (params) => {
         const value = params.value;
         if (value === 0) {
@@ -237,12 +253,13 @@ export default function ProductDataGrid({
     
     {
       field: "chart_total",
-      headerName: "Total Trend",
-      width: 100,
+      headerName: "",
+      width: 40,
       renderCell: (params) => {
         return (
           <Box sx={{ mt: 0 }}>
-             <CustomSparkLine data={params.row.sparkline_total} />
+            <CustomSparkLine data={params.row.sparkline_total}
+            onClick={() => onShowDetails(params.row.id)}/>
           </Box>
         );
       },
@@ -260,20 +277,71 @@ export default function ProductDataGrid({
         return renderWithNoData(value, formatCurrency);
       },
     },
+    {
+      field: "chart_review_count",
+      headerName: "",
+      width: 40,
+      renderCell: (params) => {
+        return (
+          <Box sx={{ mt: 0 }}>
+            <CustomSparkLine data={params.row.sparkline_review_count}
+            onClick={() => onShowDetails(params.row.id)}/>
+          </Box>
+        );
+      },
+    },
+    {
+      field: "review_count",
+      headerName: "Reviews",
+      type: "number",
+      width: 100,
+      renderCell: (params) => renderWithNoData(params.value, formatNumber),
+    },
+    {
+      field: "chart_rating",
+      headerName: "",
+      width: 40,
+      renderCell: (params) => {
+        return (
+          <Box sx={{ mt: 0 }}>
+            <CustomSparkLine data={params.row.sparkline_rating}
+            onClick={() => onShowDetails(params.row.id)}/>
+          </Box>
+        );
+      },
+    },
+    {
+      field: "rating",
+      headerName: "Rating",
+      type: "number",
+      width: 100,
+      renderCell: (params) => renderWithNoData(params.value),
+    },
+
+    {
+      field: "brand",
+      headerName: "Brand",
+      width: 120,
+      renderCell: (params) =>
+        <Tooltip title={`Manufacturer: ${params.row.manufacturer || "No Manufacturer"}`}>
+          <Box>{renderWithNoData(params.value)}</Box>
+        </Tooltip>,
+    },
     
   ];
 
  
   return (
-    <Box sx={{ width: "100%", mt:4 }}>
+    <Box className={mode === "light" ? "light-mode" : ""} sx={{ position: 'relative', height: 700, overflow: 'auto', mt: 4}}>
       <DataGrid
+        className="data-grid"
         rows={products.map((product: any) => ({
           id: product.asin,
           image: product.image,
           title: product.title,
           price: product.price,
           manufacturer: product.manufacturer,
-          store: product.store,
+          brand: product.store,
           mainCategory: product.main_category,
           mainCategoryRank: product.main_category_rank,
           secondCategory: product.second_category,
@@ -285,6 +353,8 @@ export default function ProductDataGrid({
           sparkline_blm: product.sparkline_data_blm,
           sparkline_main_category_rank: product.sparkline_data_main_category_rank,
           sparkline_second_category_rank: product.sparkline_data_second_category_rank,
+          sparkline_review_count: product.sparkline_data_review_count,
+          sparkline_rating: product.sparkline_data_rating,
           sparkline_total: product.sparkline_data_total,
         }))}
         columns={columns}
@@ -292,8 +362,17 @@ export default function ProductDataGrid({
         pageSizeOptions={[10, 25, 50, 100]}
         checkboxSelection={false}
         getRowClassName={(params) =>
-          params.row.isMyProduct ? "my-product-row" : ""
+          params.row.isMyProduct ? "my-product-row" : "product-row"
         }
+        sx={{
+          '& .MuiDataGrid-columnHeaders': {
+            fontSize: '0.75rem',
+          },
+          '& .MuiDataGrid-columnHeaderTitle': {
+            fontSize: '0.75rem',
+            fontWeight: 500,
+          }
+        }}
       />
     </Box>
   );

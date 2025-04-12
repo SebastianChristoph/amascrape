@@ -29,7 +29,9 @@ const MetricCardLarge: React.FC<StatCardProps> = ({
   const formattedValue = isCurrency
     ? new Intl.NumberFormat("en-US", {
         style: "currency",
-        currency: "USD",
+      currency: "USD",
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
       }).format(Number(value))
     : value;
   return (
@@ -115,9 +117,9 @@ const MetricCardLarge: React.FC<StatCardProps> = ({
 
         {hasSparkline && (
           <Grid size={{ xs: 12, md: 5 }}>
-            <Typography variant="body2" color="text.secondary">
+            <Box>
               <CustomSparkLine />
-            </Typography>
+            </Box>
           </Grid>
         )}
       </Grid>

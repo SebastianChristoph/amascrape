@@ -134,6 +134,9 @@ const AddMarketCluster: React.FC = () => {
     event.preventDefault();
     console.clear();
 
+    // Navigate to dashboard immediately
+    navigate("/dashboard");
+
     const nameValidation = validateClusterName(clusterName, existingClusters);
     if (!nameValidation.isValid) {
       showSnackbar(nameValidation.error || "");
@@ -153,7 +156,7 @@ const AddMarketCluster: React.FC = () => {
         clusterType: clusterType,
       });
 
-      navigate("/dashboard");
+      showSnackbar("✅ Market Cluster wurde erfolgreich erstellt!");
     } catch (error) {
       console.error("Fehler beim Starten des Scraping-Prozesses:", error);
       showSnackbar("❌ Fehler beim Starten des Scraping-Prozesses.");
@@ -268,13 +271,9 @@ const AddMarketCluster: React.FC = () => {
                     </Grid>
                   </Grid>
 
-                  <Typography
-                    variant="body2"
-                    color="text.secondary"
-                    sx={{ mt: 2, textAlign: "center" }}
-                  >
+                  <Alert variant="outlined" severity="warning" sx={{ mt: 2 }}>
                     {CLUSTER_CONSTANTS.MESSAGES.CLUSTER_TYPE_NOT_IMPLEMENTED}
-                  </Typography>
+                  </Alert>
                 </Paper>
 
                 {/* Bulk Input Section */}
@@ -367,7 +366,7 @@ const AddMarketCluster: React.FC = () => {
                             <IconButton
                               size="small"
                               onClick={() => handleRemoveKeyword(keyword)}
-                              sx={{ color: "white" }}
+                              sx={{ color: theme.palette.text.primary }}
                             >
                               <MdDelete />
                             </IconButton>

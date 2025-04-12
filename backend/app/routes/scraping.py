@@ -1,7 +1,10 @@
 import asyncio
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
+import os
+import shutil
 from typing import Dict, List, Optional
+import uuid
 
 from fastapi.responses import FileResponse, JSONResponse
 from app.auth import get_current_user
@@ -245,7 +248,7 @@ def list_scraping_logs(current_user: User = Depends(get_current_user)):
         return []
     
     files = sorted([f.name for f in LOGS_DIR.glob("*.txt")], reverse=True)
-    print("files", files)
+    #print("files", files)
     return files
 
 @router.get("/logs/{filename}")
@@ -294,7 +297,16 @@ def run_single_asin_scraper(asin: str, current_user: User = Depends(get_current_
         chrome_options.add_argument("--headless=new")
         chrome_options.add_argument("--disable-gpu")
         chrome_options.add_argument("--window-size=1920,1080")
+        chrome_options.add_argument("--no-sandbox")
+        chrome_options.add_argument("--disable-dev-shm-usage")
         chrome_options.add_argument(f"user-agent={selenium_config.user_agent}")
+
+        # ✅ Temporäres Verzeichnis für Chrome-Profil
+        unique_id = uuid.uuid4().hex
+        tmp_dir = f"/tmp/test-asin-profile-{unique_id}"
+        os.makedirs(tmp_dir, exist_ok=True)
+        chrome_options.add_argument(f"--user-data-dir={tmp_dir}")
+
 
         driver = webdriver.Chrome(options=chrome_options)
         scraper = AmazonProductScraper(driver, show_details=False)
@@ -322,3 +334,8 @@ def run_single_asin_scraper(asin: str, current_user: User = Depends(get_current_
         except:
             pass
         asin_test_logs[asin] += "\n✅ WebDriver geschlossen.\n"
+        
+        try:
+            shutil.rmtree(tmp_dir, ignore_errors=True)
+        except Exception as e:
+            asin_test_logs[asin] += f"⚠️ Konnte temp dir nicht löschen: {e}\n"

@@ -348,7 +348,7 @@ export default function Login() {
               </Button>
             </form>
 
-            <Typography
+            {/* <Typography
               sx={{
                 mt: 2,
                 textAlign: "center",
@@ -366,7 +366,7 @@ export default function Login() {
               >
                 Register now
               </Link>
-            </Typography>
+            </Typography> */}
           </Box>
         </Paper>
       </Container>
