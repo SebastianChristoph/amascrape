@@ -6,3 +6,8 @@ templates/details.html
 backend/app/routes/__pycache__/market_clusters.cpython-313.pyc
 backend/app/routes/__pycache__/products.cpython-313.pyc
 backend/app/routes/__pycache__/users.cpython-313.pyc
+backend/app/routes/__pycache__/chartdata.cpython-313.pyc
+backend/app/routes/__pycache__/market_clusters.cpython-313.pyc
+backend/app/routes/__pycache__/products.cpython-313.pyc
+backend/app/routes/__pycache__/user_products.cpython-313.pyc
+backend/scraper/__pycache__/product_selenium_scraper.cpython-313.pyc

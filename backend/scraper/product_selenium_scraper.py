@@ -140,7 +140,11 @@ class AmazonProductScraper:
 
             rating_element = self.driver.find_element(By.XPATH, self.web_elements["rating"])
             if rating_element:
-                return float(rating_element.text.strip()[:3])
+                text = rating_element.text.strip()
+                # Extrahiere die erste gültige Zahl (z. B. 4.6)
+                match = re.search(r"(\d+(\.\d+)?)", text)
+                if match:
+                    return float(match.group(1))
         except NoSuchElementException:
             pass
         except Exception as e:
@@ -151,9 +155,9 @@ class AmazonProductScraper:
                     self.url,
                     f"⚠️ \tFehler bei ratings: {e}",
                     self.get_location(),
-                     warning_type="ratings"
+                    warning_type="ratings"
                 )
-            return None
+        return None
          
 
     def get_review_count(self) -> int:
