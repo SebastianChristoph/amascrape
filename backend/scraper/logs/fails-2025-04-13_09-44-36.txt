@@ -1,0 +1,722 @@
+❌ Scraping Fehler – 2025-04-13 14:34:10.037018
+============================================================
+🧾 ASIN: B09Z2XPHFQ
+🔗 URL: https://www.amazon.com/dp/B09Z2XPHFQ?language=en_US
+🚫 Grund: Complete scrape failed
+⚠️ Kontext: Scraper returned None
+------------------------------------------------------------
+
+🧾 ASIN: B0088XS44K
+🔗 URL: https://www.amazon.com/dp/B0088XS44K
+🚫 Grund: Out of stock
+⚠️ Kontext: B0088XS44K is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B0CM45VWMW
+🔗 URL: https://www.amazon.com/dp/B0CM45VWMW
+🚫 Grund: Out of stock
+⚠️ Kontext: B0CM45VWMW is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B0D52C7CMM
+🔗 URL: https://www.amazon.com/dp/B0D52C7CMM
+🚫 Grund: Out of stock
+⚠️ Kontext: B0D52C7CMM is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B07SMLVGSZ
+🔗 URL: https://www.amazon.com/dp/B07SMLVGSZ
+🚫 Grund: Out of stock
+⚠️ Kontext: B07SMLVGSZ is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B094JNLR6B
+🔗 URL: https://www.amazon.com/dp/B094JNLR6B
+🚫 Grund: Out of stock
+⚠️ Kontext: B094JNLR6B is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B0C2HYJJB6
+🔗 URL: https://www.amazon.com/dp/B0C2HYJJB6
+🚫 Grund: Out of stock
+⚠️ Kontext: B0C2HYJJB6 is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B000SR5ZEQ
+🔗 URL: https://www.amazon.com/dp/B000SR5ZEQ
+🚫 Grund: Out of stock
+⚠️ Kontext: B000SR5ZEQ is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B0147QJFY4
+🔗 URL: https://www.amazon.com/dp/B0147QJFY4
+🚫 Grund: Out of stock
+⚠️ Kontext: B0147QJFY4 is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B0841RCNRP
+🔗 URL: https://www.amazon.com/dp/B0841RCNRP
+🚫 Grund: Out of stock
+⚠️ Kontext: B0841RCNRP is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B08X14DRC9
+🔗 URL: https://www.amazon.com/dp/B08X14DRC9
+🚫 Grund: Out of stock
+⚠️ Kontext: B08X14DRC9 is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B0BQZZZ15W
+🔗 URL: https://www.amazon.com/dp/B0BQZZZ15W
+🚫 Grund: Out of stock
+⚠️ Kontext: B0BQZZZ15W is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B0BQ2HDBD5
+🔗 URL: https://www.amazon.com/dp/B0BQ2HDBD5
+🚫 Grund: Out of stock
+⚠️ Kontext: B0BQ2HDBD5 is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B083X6MLFG
+🔗 URL: https://www.amazon.com/dp/B083X6MLFG
+🚫 Grund: Out of stock
+⚠️ Kontext: B083X6MLFG is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B01LF729EQ
+🔗 URL: https://www.amazon.com/dp/B01LF729EQ
+🚫 Grund: Out of stock
+⚠️ Kontext: B01LF729EQ is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B0071JHNWG
+🔗 URL: https://www.amazon.com/dp/B0071JHNWG
+🚫 Grund: Out of stock
+⚠️ Kontext: B0071JHNWG is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B00RW5QX8Y
+🔗 URL: https://www.amazon.com/dp/B00RW5QX8Y
+🚫 Grund: Out of stock
+⚠️ Kontext: B00RW5QX8Y is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B0032K1W98
+🔗 URL: https://www.amazon.com/dp/B0032K1W98
+🚫 Grund: Out of stock
+⚠️ Kontext: B0032K1W98 is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B08DFK59MK
+🔗 URL: https://www.amazon.com/dp/B08DFK59MK
+🚫 Grund: Out of stock
+⚠️ Kontext: B08DFK59MK is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B09ZVD8NDP
+🔗 URL: https://www.amazon.com/dp/B09ZVD8NDP
+🚫 Grund: Out of stock
+⚠️ Kontext: B09ZVD8NDP is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B01N16A70T
+🔗 URL: https://www.amazon.com/dp/B01N16A70T
+🚫 Grund: Out of stock
+⚠️ Kontext: B01N16A70T is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B09KQ5QV82
+🔗 URL: https://www.amazon.com/dp/B09KQ5QV82
+🚫 Grund: Out of stock
+⚠️ Kontext: B09KQ5QV82 is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B0DXCH6XSZ
+🔗 URL: https://www.amazon.com/dp/B0DXCH6XSZ
+🚫 Grund: Out of stock
+⚠️ Kontext: B0DXCH6XSZ is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B0DHLXC3N1
+🔗 URL: https://www.amazon.com/dp/B0DHLXC3N1
+🚫 Grund: Out of stock
+⚠️ Kontext: B0DHLXC3N1 is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B0DHQ7J4ZX
+🔗 URL: https://www.amazon.com/dp/B0DHQ7J4ZX
+🚫 Grund: Out of stock
+⚠️ Kontext: B0DHQ7J4ZX is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B09Y2HCJFD
+🔗 URL: https://www.amazon.com/dp/B09Y2HCJFD
+🚫 Grund: Out of stock
+⚠️ Kontext: B09Y2HCJFD is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B0C4B1WCYY
+🔗 URL: https://www.amazon.com/dp/B0C4B1WCYY
+🚫 Grund: Out of stock
+⚠️ Kontext: B0C4B1WCYY is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B0BJY1QXCG
+🔗 URL: https://www.amazon.com/dp/B0BJY1QXCG
+🚫 Grund: Out of stock
+⚠️ Kontext: B0BJY1QXCG is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B09Z38NTSN
+🔗 URL: https://www.amazon.com/dp/B09Z38NTSN
+🚫 Grund: Out of stock
+⚠️ Kontext: B09Z38NTSN is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B01IQ00B04
+🔗 URL: https://www.amazon.com/dp/B01IQ00B04
+🚫 Grund: Out of stock
+⚠️ Kontext: B01IQ00B04 is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B01MRJ7DAJ
+🔗 URL: https://www.amazon.com/dp/B01MRJ7DAJ
+🚫 Grund: Out of stock
+⚠️ Kontext: B01MRJ7DAJ is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B0B2S9J61W
+🔗 URL: https://www.amazon.com/dp/B0B2S9J61W
+🚫 Grund: Out of stock
+⚠️ Kontext: B0B2S9J61W is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B01NC03V2J
+🔗 URL: https://www.amazon.com/dp/B01NC03V2J
+🚫 Grund: Out of stock
+⚠️ Kontext: B01NC03V2J is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B07BS4YGL5
+🔗 URL: https://www.amazon.com/dp/B07BS4YGL5
+🚫 Grund: Out of stock
+⚠️ Kontext: B07BS4YGL5 is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B00MGV01YQ
+🔗 URL: https://www.amazon.com/dp/B00MGV01YQ
+🚫 Grund: Out of stock
+⚠️ Kontext: B00MGV01YQ is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B091MFN5ZH
+🔗 URL: https://www.amazon.com/dp/B091MFN5ZH
+🚫 Grund: Out of stock
+⚠️ Kontext: B091MFN5ZH is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B0175YEALS
+🔗 URL: https://www.amazon.com/dp/B0175YEALS
+🚫 Grund: Out of stock
+⚠️ Kontext: B0175YEALS is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B086LK1ZVW
+🔗 URL: https://www.amazon.com/dp/B086LK1ZVW
+🚫 Grund: Out of stock
+⚠️ Kontext: B086LK1ZVW is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B007NK0P3C
+🔗 URL: https://www.amazon.com/dp/B007NK0P3C
+🚫 Grund: Out of stock
+⚠️ Kontext: B007NK0P3C is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B000V75TQ2
+🔗 URL: https://www.amazon.com/dp/B000V75TQ2
+🚫 Grund: Out of stock
+⚠️ Kontext: B000V75TQ2 is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B01BPHE79G
+🔗 URL: https://www.amazon.com/dp/B01BPHE79G
+🚫 Grund: Out of stock
+⚠️ Kontext: B01BPHE79G is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B000P72UZG
+🔗 URL: https://www.amazon.com/dp/B000P72UZG
+🚫 Grund: Out of stock
+⚠️ Kontext: B000P72UZG is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B01D213HL2
+🔗 URL: https://www.amazon.com/dp/B01D213HL2
+🚫 Grund: Out of stock
+⚠️ Kontext: B01D213HL2 is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B0DPWYKQTK
+🔗 URL: https://www.amazon.com/dp/B0DPWYKQTK
+🚫 Grund: Out of stock
+⚠️ Kontext: B0DPWYKQTK is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B0DP4DMB3K
+🔗 URL: https://www.amazon.com/dp/B0DP4DMB3K
+🚫 Grund: Out of stock
+⚠️ Kontext: B0DP4DMB3K is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B075TCYZYR
+🔗 URL: https://www.amazon.com/dp/B075TCYZYR
+🚫 Grund: Out of stock
+⚠️ Kontext: B075TCYZYR is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B0BLP6LK9D
+🔗 URL: https://www.amazon.com/dp/B0BLP6LK9D
+🚫 Grund: Out of stock
+⚠️ Kontext: B0BLP6LK9D is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B0CRWV8KCX
+🔗 URL: https://www.amazon.com/dp/B0CRWV8KCX
+🚫 Grund: Out of stock
+⚠️ Kontext: B0CRWV8KCX is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B0BVGD7XT2
+🔗 URL: https://www.amazon.com/dp/B0BVGD7XT2
+🚫 Grund: Out of stock
+⚠️ Kontext: B0BVGD7XT2 is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B003ZWUNRK
+🔗 URL: https://www.amazon.com/dp/B003ZWUNRK
+🚫 Grund: Out of stock
+⚠️ Kontext: B003ZWUNRK is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B07FYYKKQK
+🔗 URL: https://www.amazon.com/dp/B07FYYKKQK
+🚫 Grund: Out of stock
+⚠️ Kontext: B07FYYKKQK is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B0CWMHNLQX
+🔗 URL: https://www.amazon.com/dp/B0CWMHNLQX
+🚫 Grund: Out of stock
+⚠️ Kontext: B0CWMHNLQX is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B076CS63W6
+🔗 URL: https://www.amazon.com/dp/B076CS63W6
+🚫 Grund: Out of stock
+⚠️ Kontext: B076CS63W6 is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B0DHLXNVLP
+🔗 URL: https://www.amazon.com/dp/B0DHLXNVLP
+🚫 Grund: Out of stock
+⚠️ Kontext: B0DHLXNVLP is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B07FXSZ49R
+🔗 URL: https://www.amazon.com/dp/B07FXSZ49R
+🚫 Grund: Out of stock
+⚠️ Kontext: B07FXSZ49R is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B09GW5X51Y
+🔗 URL: https://www.amazon.com/dp/B09GW5X51Y
+🚫 Grund: Out of stock
+⚠️ Kontext: B09GW5X51Y is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B0DFWBWWGL
+🔗 URL: https://www.amazon.com/dp/B0DFWBWWGL
+🚫 Grund: Out of stock
+⚠️ Kontext: B0DFWBWWGL is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B0BQC1JK1X
+🔗 URL: https://www.amazon.com/dp/B0BQC1JK1X
+🚫 Grund: Out of stock
+⚠️ Kontext: B0BQC1JK1X is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B0D8MW66CS
+🔗 URL: https://www.amazon.com/dp/B0D8MW66CS
+🚫 Grund: Out of stock
+⚠️ Kontext: B0D8MW66CS is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B0D1DS69V9
+🔗 URL: https://www.amazon.com/dp/B0D1DS69V9
+🚫 Grund: Out of stock
+⚠️ Kontext: B0D1DS69V9 is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B0CYQ4ZZ21
+🔗 URL: https://www.amazon.com/dp/B0CYQ4ZZ21
+🚫 Grund: Out of stock
+⚠️ Kontext: B0CYQ4ZZ21 is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B07HPD4X43
+🔗 URL: https://www.amazon.com/dp/B07HPD4X43
+🚫 Grund: Out of stock
+⚠️ Kontext: B07HPD4X43 is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B07DDMZPL2
+🔗 URL: https://www.amazon.com/dp/B07DDMZPL2
+🚫 Grund: Out of stock
+⚠️ Kontext: B07DDMZPL2 is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B09QRZNQ7F
+🔗 URL: https://www.amazon.com/dp/B09QRZNQ7F
+🚫 Grund: Out of stock
+⚠️ Kontext: B09QRZNQ7F is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B01M7QBXNY
+🔗 URL: https://www.amazon.com/dp/B01M7QBXNY
+🚫 Grund: Out of stock
+⚠️ Kontext: B01M7QBXNY is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B07PSGQH3H
+🔗 URL: https://www.amazon.com/dp/B07PSGQH3H
+🚫 Grund: Out of stock
+⚠️ Kontext: B07PSGQH3H is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B08BLXN4HK
+🔗 URL: https://www.amazon.com/dp/B08BLXN4HK
+🚫 Grund: Out of stock
+⚠️ Kontext: B08BLXN4HK is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B09XZJ3V7V
+🔗 URL: https://www.amazon.com/dp/B09XZJ3V7V
+🚫 Grund: Out of stock
+⚠️ Kontext: B09XZJ3V7V is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B082VZ7VVP
+🔗 URL: https://www.amazon.com/dp/B082VZ7VVP
+🚫 Grund: Out of stock
+⚠️ Kontext: B082VZ7VVP is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B007B4AG1Q
+🔗 URL: https://www.amazon.com/dp/B007B4AG1Q
+🚫 Grund: Out of stock
+⚠️ Kontext: B007B4AG1Q is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B092Q6Y49J
+🔗 URL: https://www.amazon.com/dp/B092Q6Y49J
+🚫 Grund: Out of stock
+⚠️ Kontext: B092Q6Y49J is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B0F22RTWZ5
+🔗 URL: https://www.amazon.com/dp/B0F22RTWZ5
+🚫 Grund: Out of stock
+⚠️ Kontext: B0F22RTWZ5 is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B07KRKYTH4
+🔗 URL: https://www.amazon.com/dp/B07KRKYTH4
+🚫 Grund: Out of stock
+⚠️ Kontext: B07KRKYTH4 is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B09JC9DL9X
+🔗 URL: https://www.amazon.com/dp/B09JC9DL9X
+🚫 Grund: Out of stock
+⚠️ Kontext: B09JC9DL9X is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B0D71K6RW5
+🔗 URL: https://www.amazon.com/dp/B0D71K6RW5
+🚫 Grund: Out of stock
+⚠️ Kontext: B0D71K6RW5 is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B0C49Z2KBM
+🔗 URL: https://www.amazon.com/dp/B0C49Z2KBM
+🚫 Grund: Out of stock
+⚠️ Kontext: B0C49Z2KBM is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B0DSRZXXVT
+🔗 URL: https://www.amazon.com/dp/B0DSRZXXVT
+🚫 Grund: Out of stock
+⚠️ Kontext: B0DSRZXXVT is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B07NSRMRLH
+🔗 URL: https://www.amazon.com/dp/B07NSRMRLH
+🚫 Grund: Out of stock
+⚠️ Kontext: B07NSRMRLH is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B086542525
+🔗 URL: https://www.amazon.com/dp/B086542525
+🚫 Grund: Out of stock
+⚠️ Kontext: B086542525 is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B0DP4FCG51
+🔗 URL: https://www.amazon.com/dp/B0DP4FCG51
+🚫 Grund: Out of stock
+⚠️ Kontext: B0DP4FCG51 is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B00WX1UBH6
+🔗 URL: https://www.amazon.com/dp/B00WX1UBH6
+🚫 Grund: Out of stock
+⚠️ Kontext: B00WX1UBH6 is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B0D98VHYKS
+🔗 URL: https://www.amazon.com/dp/B0D98VHYKS
+🚫 Grund: Out of stock
+⚠️ Kontext: B0D98VHYKS is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B07GST4K1T
+🔗 URL: https://www.amazon.com/dp/B07GST4K1T
+🚫 Grund: Out of stock
+⚠️ Kontext: B07GST4K1T is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B0C1N8RDQ8
+🔗 URL: https://www.amazon.com/dp/B0C1N8RDQ8
+🚫 Grund: Out of stock
+⚠️ Kontext: B0C1N8RDQ8 is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B094TK7DGF
+🔗 URL: https://www.amazon.com/dp/B094TK7DGF
+🚫 Grund: Out of stock
+⚠️ Kontext: B094TK7DGF is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B00MFC29ZK
+🔗 URL: https://www.amazon.com/dp/B00MFC29ZK
+🚫 Grund: Out of stock
+⚠️ Kontext: B00MFC29ZK is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B0CYHJZQ1N
+🔗 URL: https://www.amazon.com/dp/B0CYHJZQ1N
+🚫 Grund: Out of stock
+⚠️ Kontext: B0CYHJZQ1N is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B0D529LKPQ
+🔗 URL: https://www.amazon.com/dp/B0D529LKPQ
+🚫 Grund: Out of stock
+⚠️ Kontext: B0D529LKPQ is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: 1446304841
+🔗 URL: https://www.amazon.com/dp/1446304841?language=en_US
+🚫 Grund: Complete scrape failed
+⚠️ Kontext: Scraper returned None
+------------------------------------------------------------
+
+🧾 ASIN: B000S1CF4U
+🔗 URL: https://www.amazon.com/dp/B000S1CF4U
+🚫 Grund: Out of stock
+⚠️ Kontext: B000S1CF4U is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B09W9NNZGS
+🔗 URL: https://www.amazon.com/dp/B09W9NNZGS
+🚫 Grund: Out of stock
+⚠️ Kontext: B09W9NNZGS is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B08WZCD45P
+🔗 URL: https://www.amazon.com/dp/B08WZCD45P?language=en_US
+🚫 Grund: Complete scrape failed
+⚠️ Kontext: Scraper returned None
+------------------------------------------------------------
+
+🧾 ASIN: 0694006386
+🔗 URL: https://www.amazon.com/dp/0694006386
+🚫 Grund: Out of stock
+⚠️ Kontext: 0694006386 is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: 1935223909
+🔗 URL: https://www.amazon.com/dp/1935223909?language=en_US
+🚫 Grund: Complete scrape failed
+⚠️ Kontext: Scraper returned None
+------------------------------------------------------------
+
+🧾 ASIN: 0486845540
+🔗 URL: https://www.amazon.com/dp/0486845540?language=en_US
+🚫 Grund: Complete scrape failed
+⚠️ Kontext: Scraper returned None
+------------------------------------------------------------
+
+🧾 ASIN: 1923049763
+🔗 URL: https://www.amazon.com/dp/1923049763?language=en_US
+🚫 Grund: Complete scrape failed
+⚠️ Kontext: Scraper returned None
+------------------------------------------------------------
+
+🧾 ASIN: B08JBB19LR
+🔗 URL: https://www.amazon.com/dp/B08JBB19LR?language=en_US
+🚫 Grund: Complete scrape failed
+⚠️ Kontext: Scraper returned None
+------------------------------------------------------------
+
+🧾 ASIN: 1961355132
+🔗 URL: https://www.amazon.com/dp/1961355132?language=en_US
+🚫 Grund: Complete scrape failed
+⚠️ Kontext: Scraper returned None
+------------------------------------------------------------
+
+🧾 ASIN: B0DQLY8ZZC
+🔗 URL: https://www.amazon.com/dp/B0DQLY8ZZC
+🚫 Grund: Out of stock
+⚠️ Kontext: B0DQLY8ZZC is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: 0979505372
+🔗 URL: https://www.amazon.com/dp/0979505372?language=en_US
+🚫 Grund: Complete scrape failed
+⚠️ Kontext: Scraper returned None
+------------------------------------------------------------
+
+🧾 ASIN: 072325432X
+🔗 URL: https://www.amazon.com/dp/072325432X?language=en_US
+🚫 Grund: Complete scrape failed
+⚠️ Kontext: Scraper returned None
+------------------------------------------------------------
+
+🧾 ASIN: 1795219114
+🔗 URL: https://www.amazon.com/dp/1795219114?language=en_US
+🚫 Grund: Complete scrape failed
+⚠️ Kontext: Scraper returned None
+------------------------------------------------------------
+
+🧾 ASIN: 169899429X
+🔗 URL: https://www.amazon.com/dp/169899429X?language=en_US
+🚫 Grund: Complete scrape failed
+⚠️ Kontext: Scraper returned None
+------------------------------------------------------------
+
+🧾 ASIN: B09Y4ZVDV6
+🔗 URL: https://www.amazon.com/dp/B09Y4ZVDV6
+🚫 Grund: Out of stock
+⚠️ Kontext: B09Y4ZVDV6 is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: 0670856010
+🔗 URL: https://www.amazon.com/dp/0670856010?language=en_US
+🚫 Grund: Complete scrape failed
+⚠️ Kontext: Scraper returned None
+------------------------------------------------------------
+
+🧾 ASIN: B0DCP49DTX
+🔗 URL: https://www.amazon.com/dp/B0DCP49DTX?language=en_US
+🚫 Grund: Complete scrape failed
+⚠️ Kontext: Scraper returned None
+------------------------------------------------------------
+
+🧾 ASIN: 1447220145
+🔗 URL: https://www.amazon.com/dp/1447220145?language=en_US
+🚫 Grund: Complete scrape failed
+⚠️ Kontext: Scraper returned None
+------------------------------------------------------------
+
+🧾 ASIN: 1942490836
+🔗 URL: https://www.amazon.com/dp/1942490836?language=en_US
+🚫 Grund: Complete scrape failed
+⚠️ Kontext: Scraper returned None
+------------------------------------------------------------
+
+🧾 ASIN: 1464229899
+🔗 URL: https://www.amazon.com/dp/1464229899?language=en_US
+🚫 Grund: Complete scrape failed
+⚠️ Kontext: Scraper returned None
+------------------------------------------------------------
+
+🧾 ASIN: B0DHJZFKS5
+🔗 URL: https://www.amazon.com/dp/B0DHJZFKS5
+🚫 Grund: Out of stock
+⚠️ Kontext: B0DHJZFKS5 is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B0CJZ3JV3K
+🔗 URL: https://www.amazon.com/dp/B0CJZ3JV3K
+🚫 Grund: Out of stock
+⚠️ Kontext: B0CJZ3JV3K is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B0DFW8SRDX
+🔗 URL: https://www.amazon.com/dp/B0DFW8SRDX
+🚫 Grund: Out of stock
+⚠️ Kontext: B0DFW8SRDX is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B0DFW8L7KQ
+🔗 URL: https://www.amazon.com/dp/B0DFW8L7KQ
+🚫 Grund: Out of stock
+⚠️ Kontext: B0DFW8L7KQ is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B0CKS2VHT1
+🔗 URL: https://www.amazon.com/dp/B0CKS2VHT1
+🚫 Grund: Out of stock
+⚠️ Kontext: B0CKS2VHT1 is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B0149F4H32
+🔗 URL: https://www.amazon.com/dp/B0149F4H32
+🚫 Grund: Out of stock
+⚠️ Kontext: B0149F4H32 is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B0F17GF7WS
+🔗 URL: https://www.amazon.com/dp/B0F17GF7WS
+🚫 Grund: Out of stock
+⚠️ Kontext: B0F17GF7WS is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B000ZGW714
+🔗 URL: https://www.amazon.com/dp/B000ZGW714
+🚫 Grund: Out of stock
+⚠️ Kontext: B000ZGW714 is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B0813K2QD1
+🔗 URL: https://www.amazon.com/dp/B0813K2QD1
+🚫 Grund: Out of stock
+⚠️ Kontext: B0813K2QD1 is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B08LPCGJ76
+🔗 URL: https://www.amazon.com/dp/B08LPCGJ76
+🚫 Grund: Out of stock
+⚠️ Kontext: B08LPCGJ76 is out of stock.
+------------------------------------------------------------
+
+🧾 ASIN: B08MT4W9RG
+🔗 URL: https://www.amazon.com/dp/B08MT4W9RG
+🚫 Grund: Out of stock
+⚠️ Kontext: B08MT4W9RG is out of stock.
+------------------------------------------------------------
+
