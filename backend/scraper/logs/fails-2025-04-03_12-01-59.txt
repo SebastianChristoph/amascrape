@@ -1,8 +1,0 @@
-❌ Scraping Fehler – 2025-04-03 12:04:14.562666
-============================================================
-🧾 ASIN: B00WX1UBH6
-🔗 URL: https://www.amazon.com/dp/B00WX1UBH6
-🚫 Grund: Out of stock
-⚠️ Kontext: B00WX1UBH6 is out of stock.
-------------------------------------------------------------
-

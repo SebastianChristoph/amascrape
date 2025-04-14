@@ -1,8 +1,0 @@
-❌ Scraping Fehler – 2025-04-01 10:57:26.536820
-============================================================
-🧾 ASIN: B09QLKL61K
-🔗 URL: https://www.amazon.com/dp/B09QLKL61K
-🚫 Grund: Out of stock
-⚠️ Kontext: B09QLKL61K is out of stock.
-------------------------------------------------------------
-

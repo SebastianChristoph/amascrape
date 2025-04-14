@@ -1,29 +1,83 @@
-version: "3.8"
-
 services:
-  fastapi-backend:
-    build: ./backend
-    container_name: fastapi-backend
-    ports:
-      - "9000:9000"
-    env_file:
-      - ./backend/.env
-    volumes:
-      - ./backend/marketdata:/app/marketdata
+  traefik:
+    image: traefik:latest
     restart: always
-    command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "9000"]
-    environment:
-      - DATABASE_URL=sqlite:///marketdata.db
+    security_opt:
+      - no-new-privileges:true
+    command:
+      - "--configFile=/etc/traefik/static.yaml"
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./devOps/services/traefik/config/:/etc/traefik:ro
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.traefik.entrypoints=http"
+      - "traefik.http.routers.traefik.rule=Host(`traefik.localhost.local`)"
+      - "traefik.http.routers.traefik.tls=false"
+      - "traefik.docker.network=proxy"
+      - "traefik.http.services.traefik.loadbalancer.server.port=8080"
+    networks:
+      - proxy
+    logging:
+        driver: "json-file"
+        options:
+            max-size: "5m"
 
-  react-frontend:
-    build: ./frontend
-    container_name: react-frontend
-    ports:
-      - "5173:5173"
-    command: ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
+  backend:
+    container_name: api.amascrape.io
+    build:
+        context: ./devOps/applications/backend/docker/dev/
+        dockerfile: Dockerfile
+    env_file:
+      - ./devOps/applications/backend/docker/dev/environment.env
     volumes:
-      - ./frontend:/app
-      - /app/node_modules
-    depends_on:
-      - fastapi-backend
+      - ./app/backend:/app
     restart: always
+    networks:
+        - internal
+        - proxy
+    labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.backend-amascrape-dev.entrypoints=http"
+        - "traefik.http.routers.backend-amascrape-dev.rule=Host(`api.amascrape.io`)"
+        - "traefik.http.routers.backend-amascrape-dev.tls=false"
+        - "traefik.docker.network=proxy"
+    logging:
+        driver: "json-file"
+        options:
+            max-size: "5m"
+
+  frontend:
+    container_name: app.amascrape.io
+    build:
+        context: ./devOps/applications/frontend/docker/dev/
+        dockerfile: Dockerfile
+    volumes:
+      - ./app/frontend:/app
+    depends_on:
+      - backend
+    links:
+        - backend
+    restart: always
+    networks:
+        - internal
+        - proxy
+    labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.frontend-amascrape-dev.entrypoints=http"
+        - "traefik.http.routers.frontend-amascrape-dev.rule=Host(`app.amascrape.io`)"
+        - "traefik.http.routers.frontend-amascrape-dev.tls=false"
+        - "traefik.docker.network=proxy"
+    logging:
+        driver: "json-file"
+        options:
+            max-size: "5m"
+
+networks:
+    proxy:
+        external: true
+    internal:
+        external: false

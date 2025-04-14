@@ -1,0 +1,27 @@
+global:
+  sendAnonymousUsage: false
+
+api:
+  dashboard: true
+  insecure: true
+
+providers:
+  docker:
+    endpoint: "unix:///var/run/docker.sock"
+    watch: true
+    exposedByDefault: false
+
+  file:
+    directory: /etc/traefik
+    watch: true
+
+log:
+  level: WARN
+  format: common
+
+entryPoints:
+  http:
+    address: ":80"
+    http:
+  https:
+    address: ":443"
